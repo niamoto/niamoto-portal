@@ -2,7 +2,7 @@
 
 from rest_framework import serializers, viewsets
 
-from taxo.models import Taxon
+from ncbif_taxa.models import Taxon
 
 
 class TaxonSerializer(serializers.ModelSerializer):
