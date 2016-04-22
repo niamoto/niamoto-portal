@@ -16,19 +16,30 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 
+from django.conf import settings
 from django.conf.urls import url, include
 from django.contrib import admin
 from rest_framework import routers
-from restapi.serializers import TaxonViewSet
+from restapi.views import TaxonViewSet, OccurrenceViewSet
 
 
 # Routers provide an easy way of automatically determining the URL conf.
 router = routers.DefaultRouter()
-router.register(r'taxa', TaxonViewSet)
+router.register(
+    r'{}'.format(TaxonViewSet.base_name),
+    TaxonViewSet,
+    base_name=TaxonViewSet.base_name
+
+)
+router.register(
+    r'{}'.format(OccurrenceViewSet.base_name),
+    OccurrenceViewSet,
+    base_name=OccurrenceViewSet.base_name
+)
 
 
 urlpatterns = [
-    url(r'^', include(router.urls)),
+    url(r'^{}/'.format(settings.REST_API_BASE_URL), include(router.urls)),
     url(r'^admin/', admin.site.urls),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]

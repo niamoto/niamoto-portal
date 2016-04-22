@@ -137,6 +137,13 @@ REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+        # 'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
     ]
 }
+
+REST_API_URL_PREFIX = 'api'
+REST_API_VERSION = '1.0'
+REST_API_BASE_URL = '/'.join((
+    REST_API_URL_PREFIX,
+    REST_API_VERSION,
+))

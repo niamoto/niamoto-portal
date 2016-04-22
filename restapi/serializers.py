@@ -1,17 +1,18 @@
 # coding: utf-8
 
-from rest_framework import serializers, viewsets
+from rest_framework import serializers
 
 from ncbif_taxa.models import Taxon
+from ncbif_occurrences.models import Occurrence
 
 
-class TaxonSerializer(serializers.ModelSerializer):
+class TaxonSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Taxon
         fields = ('id', 'full_name', 'rank_name', 'parent', 'rank')
 
 
-# ViewSets define the view behavior.
-class TaxonViewSet(viewsets.ModelViewSet):
-    queryset = Taxon.objects.all()
-    serializer_class = TaxonSerializer
+class OccurrenceSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Occurrence
+        fields = ('id', 'date', 'taxon', 'location')
