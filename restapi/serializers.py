@@ -6,7 +6,7 @@ from ncbif_taxa.models import Taxon
 from ncbif_occurrences.models import Occurrence
 
 
-class TaxonSerializer(serializers.HyperlinkedModelSerializer):
+class TaxonSerializer(serializers.ModelSerializer):
     class Meta:
         model = Taxon
         fields = ('id', 'full_name', 'rank_name', 'parent', 'rank')
