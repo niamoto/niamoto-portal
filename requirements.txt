@@ -7,3 +7,4 @@ flower >= 0.9.1
 
 django-ncbif-taxa>=0.1
 django-ncbif-occurrences>=0.1
+django-ncbif-plantnote>=0.1

@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     # Project
     'ncbif_taxa',
     'ncbif_occurrences',
+    'ncbif_plantnote',
 ]
 
 MIDDLEWARE_CLASSES = [
