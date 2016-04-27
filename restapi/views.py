@@ -5,6 +5,7 @@ from django.db import connection
 from django.shortcuts import get_object_or_404
 from rest_framework import viewsets
 from rest_framework.response import Response
+from rest_framework import filters
 
 from ncbif_taxa.models import Taxon
 from ncbif_occurrences.models import Occurrence
@@ -60,3 +61,5 @@ class PlantnoteDatabaseViewSet(viewsets.ModelViewSet):
     base_name = 'plantnote_database'
     queryset = PlantnoteDatabase.objects.all()
     serializer_class = PlantnoteDatabaseSerializer
+    filter_backends = (filters.DjangoFilterBackend, )
+    filter_fields = (('active', ), )
