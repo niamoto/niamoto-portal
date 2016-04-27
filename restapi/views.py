@@ -8,7 +8,9 @@ from rest_framework.response import Response
 
 from ncbif_taxa.models import Taxon
 from ncbif_occurrences.models import Occurrence
-from restapi.serializers import TaxonSerializer, OccurrenceSerializer
+from ncbif_plantnote.models import PlantnoteDatabase
+from restapi.serializers import TaxonSerializer, OccurrenceSerializer, \
+    PlantnoteDatabaseSerializer
 from utils import dict_fetchall
 
 
@@ -52,3 +54,9 @@ class OccurrenceViewSet(viewsets.ViewSet):
             context={'request': request}
         )
         return Response(serializer.data)
+
+
+class PlantnoteDatabaseViewSet(viewsets.ModelViewSet):
+    base_name = 'plantnote_database'
+    queryset = PlantnoteDatabase.objects.all()
+    serializer_class = PlantnoteDatabaseSerializer

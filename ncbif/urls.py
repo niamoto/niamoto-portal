@@ -18,23 +18,29 @@ Including another URLconf
 
 from django.conf import settings
 from django.conf.urls import url, include
+from django.conf.urls.static import static
 from django.contrib import admin
 from rest_framework import routers
-from restapi.views import TaxonViewSet, OccurrenceViewSet
+from restapi.views import TaxonViewSet, OccurrenceViewSet, \
+    PlantnoteDatabaseViewSet
 
 
-# Routers provide an easy way of automatically determining the URL conf.
 router = routers.DefaultRouter()
 router.register(
     r'{}'.format(TaxonViewSet.base_name),
     TaxonViewSet,
-    base_name=TaxonViewSet.base_name
+    base_name=TaxonViewSet.base_name,
 
 )
 router.register(
     r'{}'.format(OccurrenceViewSet.base_name),
     OccurrenceViewSet,
-    base_name=OccurrenceViewSet.base_name
+    base_name=OccurrenceViewSet.base_name,
+)
+router.register(
+    r'{}'.format(PlantnoteDatabaseViewSet.base_name),
+    PlantnoteDatabaseViewSet,
+    base_name=PlantnoteDatabaseViewSet.base_name,
 )
 
 
@@ -43,3 +49,6 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]
+
+if settings.DEBUG is True:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
