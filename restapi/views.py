@@ -62,4 +62,4 @@ class PlantnoteDatabaseViewSet(viewsets.ModelViewSet):
     queryset = PlantnoteDatabase.objects.all()
     serializer_class = PlantnoteDatabaseSerializer
     filter_backends = (filters.DjangoFilterBackend, )
-    filter_fields = (('active', ), )
+    filter_fields = ('active', )
