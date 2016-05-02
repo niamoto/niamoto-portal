@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'ncbif_taxa',
     'ncbif_occurrences',
     'ncbif_plantnote',
+    'ncbif_geoserver_admin',
 ]
 
 MIDDLEWARE_CLASSES = [
