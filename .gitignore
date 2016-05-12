@@ -73,3 +73,5 @@ data
 *.ptx
 
 media
+
+settings.py
