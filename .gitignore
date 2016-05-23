@@ -72,6 +72,6 @@ data
 
 *.ptx
 
-media
+site_media
 
 settings.py
