@@ -12,8 +12,8 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'ncbif.settings')
 
 app = Celery(
     'ncbif',
-    broker='amqp://',
-    backend='amqp://',
+    broker=settings.CELERY_BROKER,
+    backend=settings.CELERY_BACKEND,
     include=['ncbif.tasks'],
 )
 
