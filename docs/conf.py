@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
-# ncbif-portal documentation build configuration file, created by
+# niamoto-portal documentation build configuration file, created by
 # sphinx-quickstart on Mon May  2 18:09:11 2016.
 #
 # This file is execfile()d with the current directory set to its
@@ -21,8 +21,8 @@ import os
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 sys.path.insert(0, os.path.abspath('..'))
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'ncbif.settings')
-from ncbif import settings as settings
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'niamoto.settings')
+from niamoto import settings as settings
 
 # -- General configuration ------------------------------------------------
 
@@ -51,7 +51,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = 'ncbif'
+project = 'niamoto'
 copyright = '2016, Dimitri Justeau (IAC/AMAP)'
 author = 'Dimitri Justeau (IAC/AMAP)'
 
@@ -126,7 +126,7 @@ html_theme = 'alabaster'
 
 # The name for this set of Sphinx documents.
 # "<project> v<release> documentation" by default.
-#html_title = 'ncbif v0.1'
+#html_title = 'niamoto v0.1'
 
 # A shorter title for the navigation bar.  Default is the same as html_title.
 #html_short_title = None
@@ -208,7 +208,7 @@ html_static_path = ['_static']
 #html_search_scorer = 'scorer.js'
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'ncbifdoc'
+htmlhelp_basename = 'niamotodoc'
 
 # -- Options for LaTeX output ---------------------------------------------
 
@@ -230,7 +230,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'ncbif.tex', 'ncbif Documentation',
+    (master_doc, 'niamoto.tex', 'niamoto Documentation',
      'Dimitri Justeau (IAC/AMAP)', 'manual'),
 ]
 
@@ -260,7 +260,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'ncbif', 'ncbif Documentation',
+    (master_doc, 'niamoto', 'niamoto Documentation',
      [author], 1)
 ]
 
@@ -274,8 +274,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'ncbif', 'ncbif Documentation',
-     author, 'ncbif', 'One line description of project.',
+    (master_doc, 'niamoto', 'niamoto Documentation',
+     author, 'niamoto', 'One line description of project.',
      'Miscellaneous'),
 ]
 

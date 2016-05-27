@@ -6,7 +6,7 @@ celery >= 3.1
 flower >= 0.9.1
 psycopg2 >= 2.6
 
-django-ncbif-taxa>=0.1
-django-ncbif-occurrences>=0.1
-django-ncbif-plantnote>=0.1
-django-ncbif-geoserver-admin>=0.1
+django-niamoto-taxa>=0.1
+django-niamoto-occurrences>=0.1
+django-niamoto-plantnote>=0.1
+django-niamoto-geoserver-admin>=0.1

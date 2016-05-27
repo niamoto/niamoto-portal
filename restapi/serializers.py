@@ -4,9 +4,9 @@ from urllib import parse
 
 from rest_framework import serializers
 
-from ncbif_taxa.models import Taxon
-from ncbif_occurrences.models import Occurrence
-from ncbif_plantnote.models import PlantnoteDatabase
+from niamoto_taxa.models import Taxon
+from niamoto_occurrences.models import Occurrence
+from niamoto_plantnote.models import PlantnoteDatabase
 
 
 class TaxonSerializer(serializers.ModelSerializer):

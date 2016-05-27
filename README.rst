@@ -1,7 +1,7 @@
 =====
-ncbif-portal
+niamoto-portal
 =====
 
-ncbif web portal providing web API's and applications.
+niamoto web portal providing web API's and applications.
 
 Detailed documentation is in the "docs" directory.

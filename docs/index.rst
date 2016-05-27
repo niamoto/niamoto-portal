@@ -1,9 +1,9 @@
-.. ncbif documentation master file, created by
+.. niamoto documentation master file, created by
    sphinx-quickstart on Mon May  2 18:09:11 2016.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to ncbif's documentation!
+Welcome to niamoto's documentation!
 ========================================
 
 Contents:

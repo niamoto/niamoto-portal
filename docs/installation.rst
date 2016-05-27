@@ -1,11 +1,10 @@
-ncbif Installation guide
+niamoto Installation guide
 ===============================
 
-ncbif is made of several components that together constitute a system.
+niamoto is made of several components that together constitute a system.
 
-As ncbif tries to emphasis encapsulation, most of the components are hosted
-inside a dedicated virtual machine. Installing them consists in setting up the
-virtual machine.
+As niamoto tries to emphasis encapsulation, most of the components are defined
+inside Docker containers.
 
 
 1- The PostgreSQL / PostGIS server

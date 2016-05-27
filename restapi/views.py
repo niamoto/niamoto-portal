@@ -7,9 +7,9 @@ from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework import filters
 
-from ncbif_taxa.models import Taxon
-from ncbif_occurrences.models import Occurrence
-from ncbif_plantnote.models import PlantnoteDatabase
+from niamoto_taxa.models import Taxon
+from niamoto_occurrences.models import Occurrence
+from niamoto_plantnote.models import PlantnoteDatabase
 from restapi.serializers import TaxonSerializer, OccurrenceSerializer, \
     PlantnoteDatabaseSerializer
 from utils import dict_fetchall
