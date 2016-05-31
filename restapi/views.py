@@ -15,13 +15,13 @@ from restapi.serializers import TaxonSerializer, OccurrenceSerializer, \
 from utils import dict_fetchall
 
 
-class TaxonViewSet(viewsets.ModelViewSet):
+class TaxonViewSet(viewsets.ReadOnlyModelViewSet):
     base_name = 'taxon'
     queryset = Taxon.objects.all()
     serializer_class = TaxonSerializer
 
 
-class OccurrenceViewSet(viewsets.ViewSet):
+class OccurrenceViewSet(viewsets.ReadOnlyModelViewSet):
     """
     ViewSet for listing or retrieving occurrences.
     """
@@ -57,7 +57,7 @@ class OccurrenceViewSet(viewsets.ViewSet):
         return Response(serializer.data)
 
 
-class PlantnoteDatabaseViewSet(viewsets.ModelViewSet):
+class PlantnoteDatabaseViewSet(viewsets.ReadOnlyModelViewSet):
     base_name = 'plantnote_database'
     queryset = PlantnoteDatabase.objects.all()
     serializer_class = PlantnoteDatabaseSerializer
