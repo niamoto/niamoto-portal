@@ -28,6 +28,8 @@ class OccurrenceViewSet(viewsets.ReadOnlyModelViewSet):
 
     base_name = 'occurrence'
 
+    queryset = Occurrence.objects.all()
+
     def list(self, request):
         host = request.get_host()
         hlink = 'http://{}/{}/{}/'.format(
