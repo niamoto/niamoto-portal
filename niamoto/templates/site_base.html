@@ -1,0 +1,33 @@
+{% extends "theme_bootstrap/base.html" %}
+
+{% load staticfiles %}
+{% comment %}
+{% load metron_tags %}
+{% endcomment %}
+{% load i18n %}
+
+{% comment %}
+{% block styles %}
+    {% include "_styles.html" %}
+{% endblock %}
+{% endcomment %}
+
+{% block extra_head_base %}
+    {% block extra_head %}{% endblock %}
+{% endblock %}
+
+
+{% block footer %}
+    {% include "web_portal/_footer.html" %}
+{% endblock %}
+
+{% comment %}
+{% block scripts %}
+    {% include "_scripts.html" %}
+{% endblock %}
+{% endcomment %}
+
+{% block extra_body_base %}
+    {% comment %} {% analytics %} {% endcomment %}
+    {% block extra_body %}{% endblock %}
+{% endblock %}

@@ -48,6 +48,8 @@ urlpatterns = [
     url(r'^{}/'.format(settings.REST_API_BASE_URL), include(router.urls)),
     url(r'^admin/', admin.site.urls),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    url(r'^account/', include('account.urls')),
+    url(r'^', include('web_portal.urls')),
 ]
 
 if settings.DEBUG is True:
