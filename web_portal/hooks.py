@@ -7,25 +7,22 @@ from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.core.mail.backends.smtp import EmailBackend
 
-from constance import config
-
 
 class AccountGmailHookSet(object):
 
-    DEFAULT_FROM_EMAIL = config.DEFAULT_FROM_EMAIL
-    EMAIL_HOST = config.EMAIL_HOST
-    EMAIL_HOST_USER = config.EMAIL_HOST_USER
-    EMAIL_HOST_PASSWORD = config.EMAIL_HOST_PASSWORD
-    EMAIL_PORT = config.EMAIL_PORT
-    EMAIL_USE_TLS = config.EMAIL_USE_TLS
+    def get_default_from_email(self):
+        from constance import config
+        return config.DEFAULT_FROM_EMAIL
 
-    EMAIL_BACKEND = EmailBackend(
-        host=EMAIL_HOST,
-        port=EMAIL_PORT,
-        username=EMAIL_HOST_USER,
-        password=EMAIL_HOST_PASSWORD,
-        use_tls=EMAIL_USE_TLS
-    )
+    def get_email_backend(self):
+        from constance import config
+        return EmailBackend(
+            host=config.EMAIL_HOST,
+            port=config.EMAIL_PORT,
+            username=config.EMAIL_HOST_USER,
+            password=config.EMAIL_HOST_PASSWORD,
+            use_tls=config.EMAIL_USE_TLS
+        )
 
     def send_invitation_email(self, to, ctx):
         subject = render_to_string(
@@ -36,9 +33,9 @@ class AccountGmailHookSet(object):
         send_mail(
             subject,
             message,
-            self.DEFAULT_FROM_EMAIL,
+            self.get_default_from_email,
             to,
-            connection=self.EMAIL_BACKEND
+            connection=self.get_email_backend()
         )
 
     def send_confirmation_email(self, to, ctx):
@@ -54,7 +51,7 @@ class AccountGmailHookSet(object):
         send_mail(
             subject,
             message,
-            self.DEFAULT_FROM_EMAIL,
+            self.get_default_from_email,
             to,
             connection=self.EMAIL_BACKEND
         )
@@ -69,7 +66,7 @@ class AccountGmailHookSet(object):
         send_mail(
             subject,
             message,
-            self.DEFAULT_FROM_EMAIL,
+            self.get_default_from_email,
             to,
             connection=self.EMAIL_BACKEND
         )
@@ -84,7 +81,7 @@ class AccountGmailHookSet(object):
         send_mail(
             subject,
             message,
-            self.DEFAULT_FROM_EMAIL,
+            self.get_default_from_email,
             to,
             connection=self.EMAIL_BACKEND
         )
