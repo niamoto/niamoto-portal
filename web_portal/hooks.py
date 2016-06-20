@@ -33,7 +33,7 @@ class AccountGmailHookSet(object):
         send_mail(
             subject,
             message,
-            self.get_default_from_email,
+            self.get_default_from_email(),
             to,
             connection=self.get_email_backend()
         )
@@ -51,7 +51,7 @@ class AccountGmailHookSet(object):
         send_mail(
             subject,
             message,
-            self.get_default_from_email,
+            self.get_default_from_email(),
             to,
             connection=self.get_email_backend()
         )
@@ -66,7 +66,7 @@ class AccountGmailHookSet(object):
         send_mail(
             subject,
             message,
-            self.get_default_from_email,
+            self.get_default_from_email(),
             to,
             connection=self.get_email_backend()
         )
@@ -81,7 +81,7 @@ class AccountGmailHookSet(object):
         send_mail(
             subject,
             message,
-            self.get_default_from_email,
+            self.get_default_from_email(),
             to,
             connection=self.get_email_backend()
         )
