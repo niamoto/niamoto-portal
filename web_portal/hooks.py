@@ -53,7 +53,7 @@ class AccountGmailHookSet(object):
             message,
             self.get_default_from_email,
             to,
-            connection=self.EMAIL_BACKEND
+            connection=self.get_email_backend()
         )
 
     def send_password_change_email(self, to, ctx):
@@ -68,7 +68,7 @@ class AccountGmailHookSet(object):
             message,
             self.get_default_from_email,
             to,
-            connection=self.EMAIL_BACKEND
+            connection=self.get_email_backend()
         )
 
     def send_password_reset_email(self, to, ctx):
@@ -83,7 +83,7 @@ class AccountGmailHookSet(object):
             message,
             self.get_default_from_email,
             to,
-            connection=self.EMAIL_BACKEND
+            connection=self.get_email_backend()
         )
 
     def generate_random_token(self, extra=None, hash_func=hashlib.sha256):
