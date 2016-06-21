@@ -3,6 +3,7 @@
 from urllib import parse
 
 from rest_framework import serializers
+from rest_framework_gis import serializers as gis_serializers
 
 from niamoto_taxa.models import Taxon
 from niamoto_occurrences.models import Occurrence
@@ -15,10 +16,11 @@ class TaxonSerializer(serializers.ModelSerializer):
         fields = ('id', 'full_name', 'rank_name', 'parent', 'rank')
 
 
-class OccurrenceSerializer(serializers.HyperlinkedModelSerializer):
+class OccurrenceSerializer(gis_serializers.GeoFeatureModelSerializer):
     class Meta:
         model = Occurrence
-        fields = ('id', 'date', 'taxon', 'location')
+        geo_field = 'location'
+        fields = ('id', 'date', 'taxon')
 
 
 class PlantnoteDatabaseSerializer(serializers.ModelSerializer):
