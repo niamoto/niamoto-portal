@@ -5,9 +5,10 @@ from rest_framework import filters
 
 from niamoto_taxa.models import Taxon
 from niamoto_occurrences.models import Occurrence
+from niamoto_massifs.models import Massif
 from niamoto_plantnote.models import PlantnoteDatabase
 from restapi.serializers import TaxonSerializer, OccurrenceSerializer, \
-    PlantnoteDatabaseSerializer
+    PlantnoteDatabaseSerializer, MassifSerializer
 
 
 class TaxonViewSet(viewsets.ReadOnlyModelViewSet):
@@ -20,6 +21,12 @@ class OccurrenceViewSet(viewsets.ReadOnlyModelViewSet):
     base_name = 'occurrence'
     queryset = Occurrence.objects.all()
     serializer_class = OccurrenceSerializer
+
+
+class MassifViewSet(viewsets.ReadOnlyModelViewSet):
+    base_name = 'massif'
+    queryset = Massif.objects.all()
+    serializer_class = MassifSerializer
 
 
 class PlantnoteDatabaseViewSet(viewsets.ReadOnlyModelViewSet):

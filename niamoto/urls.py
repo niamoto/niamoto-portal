@@ -22,7 +22,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from rest_framework import routers
 from restapi.views import TaxonViewSet, OccurrenceViewSet, \
-    PlantnoteDatabaseViewSet
+    PlantnoteDatabaseViewSet, MassifViewSet
 
 
 router = routers.DefaultRouter()
@@ -36,6 +36,11 @@ router.register(
     r'{}'.format(OccurrenceViewSet.base_name),
     OccurrenceViewSet,
     base_name=OccurrenceViewSet.base_name,
+)
+router.register(
+    r'{}'.format(MassifViewSet.base_name),
+    MassifViewSet,
+    base_name=MassifViewSet.base_name,
 )
 router.register(
     r'{}'.format(PlantnoteDatabaseViewSet.base_name),
