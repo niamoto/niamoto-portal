@@ -5,9 +5,7 @@ from urllib import parse
 from rest_framework import serializers
 from rest_framework_gis import serializers as gis_serializers
 
-from niamoto_taxa.models import Taxon
-from niamoto_occurrences.models import Occurrence
-from niamoto_massifs.models import Massif
+from niamoto_data.models import Taxon, Occurrence, Massif
 from niamoto_plantnote.models import PlantnoteDatabase
 
 
