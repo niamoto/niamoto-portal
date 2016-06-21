@@ -1,5 +1,6 @@
 django >= 1.9.5
 djangorestframework >= 3.3.3
+djangorestframework-gis >= 0.10
 markdown >= 2.6.6
 django-filter >= 0.13.0
 celery >= 3.1
