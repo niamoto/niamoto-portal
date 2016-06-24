@@ -14,3 +14,4 @@ django-constance[database] >= 1.2
 django-niamoto-data>=0.1
 django-niamoto-plantnote>=0.1
 django-niamoto-geoserver-admin>=0.1
+django-niamoto-forest-digitizing>=0.1
