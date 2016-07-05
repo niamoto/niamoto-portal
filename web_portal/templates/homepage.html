@@ -8,19 +8,30 @@
     <section class="jumbotron">
         <div class="container">
             {% include "_messages.html" %}
-            <h1>{% blocktrans %}Forêts humides de la Province Nord de Nouvelle-Calédonie{% endblocktrans %}</h1>
-            <p>
-                {% blocktrans %}
-                {% endblocktrans %}
-            </p>
+            <h1>{% blocktrans %}Niamoto{% endblocktrans %}</h1>
+            <h2>{% blocktrans %}Le portail des habitats forestier de Nouvelle-Calédonie{% endblocktrans %}</h2>
         </div>
     </section>
     <section>
         <div class="container">
-        </div>
-    </section>
-    <section>
-        <div class="container">
+            <div class="row">
+                <!--<div class="col-sm-6 col-md-6">-->
+                    <!--<div class="thumbnail">-->
+                        <!--<div class="caption">-->
+                            <!--<h3>Inventaires rapides des forêts</h3>-->
+                            <!--<p><a href="rapid_inventories/add" class="btn btn-success" role="button">Saisir un inventaire</a> <a href="rapid_inventories" class="btn btn-primary" role="button">Consulter les inventaires</a></p>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <div class="col-sm-6 col-md-6">
+                    <div class="thumbnail">
+                        <div class="caption">
+                            <h3>Digitalisation des forêts au 1/3000ème</h3>
+                            <p><a href="{% url 'digitizing_massifs' %}" class="btn btn-primary" role="button">Consulter la digitalisation</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 {% endblock %}
