@@ -1,0 +1,11 @@
+#map {
+    height: 400px;
+    padding: 0;
+    border: 1px #CCCCCC solid;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.olext-popup {
+    padding-right: 20px;
+}

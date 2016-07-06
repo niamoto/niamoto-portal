@@ -15,14 +15,14 @@
     <section>
         <div class="container">
             <div class="row">
-                <!--<div class="col-sm-6 col-md-6">-->
-                    <!--<div class="thumbnail">-->
-                        <!--<div class="caption">-->
-                            <!--<h3>Inventaires rapides des forêts</h3>-->
-                            <!--<p><a href="rapid_inventories/add" class="btn btn-success" role="button">Saisir un inventaire</a> <a href="rapid_inventories" class="btn btn-primary" role="button">Consulter les inventaires</a></p>-->
-                        <!--</div>-->
-                    <!--</div>-->
-                <!--</div>-->
+                <div class="col-sm-6 col-md-6">
+                    <div class="thumbnail">
+                        <div class="caption">
+                            <h3>Inventaires rapides des forêts</h3>
+                            <p><a href="{% url 'add_rapid_inventory' %}" class="btn btn-success" role="button">Saisir un inventaire</a> <a href="{%  url 'rapid_inventory_index' %}" class="btn btn-primary" role="button">Consulter les inventaires</a></p>
+                        </div>
+                    </div>
+                </div>
                 <div class="col-sm-6 col-md-6">
                     <div class="thumbnail">
                         <div class="caption">

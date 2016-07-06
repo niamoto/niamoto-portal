@@ -22,7 +22,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from rest_framework import routers
 from restapi.views import TaxonViewSet, OccurrenceViewSet, \
-    PlantnoteDatabaseViewSet, MassifViewSet
+    PlantnoteDatabaseViewSet, MassifViewSet, RapidInventoryViewSet
 
 
 router = routers.DefaultRouter()
@@ -47,6 +47,11 @@ router.register(
     PlantnoteDatabaseViewSet,
     base_name=PlantnoteDatabaseViewSet.base_name,
 )
+router.register(
+    r'{}'.format(RapidInventoryViewSet.base_name),
+    RapidInventoryViewSet,
+    base_name=RapidInventoryViewSet.base_name,
+)
 
 
 urlpatterns = [
@@ -56,6 +61,7 @@ urlpatterns = [
     url(r'^accounts/', include('account.urls')),
     url(r'^', include('web_portal.urls')),
     url(r'^digitizing/', include('niamoto_digitizing.urls')),
+    url(r"^rapid_inventories/", include("rapid_inventories.urls")),
 ]
 
 if settings.DEBUG is True:
