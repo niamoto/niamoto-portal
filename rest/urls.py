@@ -1,10 +1,9 @@
 # coding: utf-8
 
-from django.conf import settings
 from django.conf.urls import url, include
 from rest_framework import routers
 
-from restapi.views import TaxonViewSet, OccurrenceViewSet, \
+from rest.views import TaxonViewSet, OccurrenceViewSet, \
     PlantnoteDatabaseViewSet, MassifViewSet
 from rapid_inventories.views import RapidInventoryViewSet
 

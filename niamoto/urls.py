@@ -22,7 +22,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 
 urlpatterns = [
-    url(r'^{}/'.format(settings.REST_API_BASE_URL), include(r'restapi.urls')),
+    url(r'^{}/'.format(settings.REST_API_BASE_URL), include(r'rest.urls')),
     url(r'^admin/', admin.site.urls),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^accounts/', include('account.urls')),
