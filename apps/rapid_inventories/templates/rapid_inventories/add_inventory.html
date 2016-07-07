@@ -17,7 +17,7 @@
 {% block body_base %}
     <div class="container">
         <h1>Nouvel inventaire rapide</h1>
-        <a href="/apps/rapid_inventories/">retour aux inventaires</a>
+        <a href="{%  url 'rapid_inventory_index' %}">retour aux inventaires</a>
     </div>
     <form class="panel-body" method="POST">{% csrf_token %}
         <div class="container">
