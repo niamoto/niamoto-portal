@@ -7,7 +7,7 @@ from crispy_forms.bootstrap import InlineRadios, InlineCheckboxes
 from crispy_forms.helper import FormHelper
 from django.forms.widgets import NumberInput
 
-from rapid_inventories.models import RapidInventory
+from apps.rapid_inventories.models import RapidInventory
 
 
 class RapidInventoryForm(ModelForm):

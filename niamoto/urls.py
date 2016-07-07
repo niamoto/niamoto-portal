@@ -28,7 +28,7 @@ urlpatterns = [
     url(r'^accounts/', include('account.urls')),
     url(r'^', include('web.urls')),
     url(r'^digitizing/', include('niamoto_digitizing.urls')),
-    url(r"^rapid_inventories/", include("rapid_inventories.urls")),
+    url(r"^rapid_inventories/", include("apps.rapid_inventories.urls")),
 ]
 
 if settings.DEBUG is True:

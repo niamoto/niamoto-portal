@@ -5,7 +5,7 @@ from rest_framework import routers
 
 from rest.views import TaxonViewSet, OccurrenceViewSet, \
     PlantnoteDatabaseViewSet, MassifViewSet
-from rapid_inventories.views import RapidInventoryViewSet
+from apps.rapid_inventories.views import RapidInventoryViewSet
 
 
 router = routers.DefaultRouter()

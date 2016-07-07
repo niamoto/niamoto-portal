@@ -2,7 +2,7 @@
 
 from django.contrib import admin
 
-from rapid_inventories.models import RapidInventory
+from apps.rapid_inventories.models import RapidInventory
 
 
 class RapidInventoryAdmin(admin.ModelAdmin):
