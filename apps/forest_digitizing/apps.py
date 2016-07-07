@@ -4,4 +4,4 @@ from django.apps import AppConfig
 
 
 class ForestDigitizingConfig(AppConfig):
-    name = 'forest_digitizing'
+    name = 'apps.forest_digitizing'

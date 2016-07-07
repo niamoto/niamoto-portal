@@ -6,7 +6,7 @@ from rest_framework import serializers
 from rest_framework_gis import serializers as gis_serializers
 
 from niamoto_data.models import Taxon, Occurrence, Massif
-from niamoto_plantnote.models import PlantnoteDatabase
+from apps.niamoto_plantnote.models import PlantnoteDatabase
 
 
 class TaxonSerializer(serializers.ModelSerializer):
