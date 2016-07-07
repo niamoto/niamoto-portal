@@ -5,8 +5,6 @@ from rest_framework import filters
 
 from niamoto_data.models import Taxon, Occurrence, Massif
 from niamoto_plantnote.models import PlantnoteDatabase
-from rapid_inventories.models import RapidInventory
-from rapid_inventories.serializers import RapidInventorySerializer
 from restapi.serializers import TaxonSerializer, OccurrenceSerializer, \
     PlantnoteDatabaseSerializer, MassifSerializer
 
@@ -35,9 +33,3 @@ class PlantnoteDatabaseViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = PlantnoteDatabaseSerializer
     filter_backends = (filters.DjangoFilterBackend, )
     filter_fields = ('active', )
-
-
-class RapidInventoryViewSet(viewsets.ReadOnlyModelViewSet):
-    base_name = 'rapid_inventory'
-    queryset = RapidInventory.objects.all()
-    serializer_class = RapidInventorySerializer

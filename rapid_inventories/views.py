@@ -1,11 +1,10 @@
 # coding: utf-8
 
-import json
-
-from django.http.response import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.gis.geos.point import Point
 from django.contrib.auth.decorators import login_required
+from rest_framework import viewsets
+from rest_framework import permissions
 
 from rapid_inventories.forms import RapidInventoryForm,\
     GeneralInformationsForm,\
@@ -14,6 +13,17 @@ from rapid_inventories.forms import RapidInventoryForm,\
     MeasuresWalkingForm
 from rapid_inventories.models import RapidInventory
 from rapid_inventories.serializers import RapidInventorySerializer
+from rapid_inventories.permissions import IsOwnerOrReadOnly
+
+
+class RapidInventoryViewSet(viewsets.ModelViewSet):
+    base_name = 'rapid_inventory'
+    queryset = RapidInventory.objects.all()
+    serializer_class = RapidInventorySerializer
+    permission_classes = (
+        permissions.IsAuthenticated,
+        IsOwnerOrReadOnly
+    )
 
 
 @login_required()
@@ -139,11 +149,3 @@ def delete_rapid_inventory(request, inventory_id):
     inventory = RapidInventory.objects.get(id=inventory_id)
     inventory.delete()
     return redirect('/rapid_inventories/')
-
-
-@login_required()
-def rapid_inventory_data(request):
-    inventories = RapidInventory.objects.select_related('observer')
-    serializer = RapidInventorySerializer(inventories, many=True)
-    inventories_geojson = serializer.data
-    return HttpResponse(json.dumps(inventories_geojson))
