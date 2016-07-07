@@ -7,7 +7,7 @@ from django.core.files.storage import FileSystemStorage
 from django.conf import settings
 from django.contrib.auth.models import User
 
-from niamoto_data.models import Massif
+from apps.niamoto_data.models import Massif
 from apps.forest_digitizing import db_routines
 
 

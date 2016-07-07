@@ -7,8 +7,8 @@ from datetime import datetime
 from django.db import transaction
 from celery import shared_task
 from celery.utils.log import get_task_logger
-from niamoto_data.data_io import taxon as taxon_io
-from niamoto_data.data_io import occurrence as occurrence_io
+from apps.niamoto_data.data_io import taxon as taxon_io
+from apps.niamoto_data.data_io import occurrence as occurrence_io
 
 from .models import PlantnoteDatabase
 

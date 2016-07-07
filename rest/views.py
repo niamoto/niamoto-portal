@@ -3,7 +3,7 @@
 from rest_framework import viewsets
 from rest_framework import filters
 
-from niamoto_data.models import Taxon, Occurrence, Massif
+from apps.niamoto_data.models import Taxon, Occurrence, Massif
 from apps.niamoto_plantnote.models import PlantnoteDatabase
 from rest.serializers import TaxonSerializer, OccurrenceSerializer, \
     PlantnoteDatabaseSerializer, MassifSerializer
