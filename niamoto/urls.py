@@ -26,7 +26,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^accounts/', include('account.urls')),
-    url(r'^', include('web_portal.urls')),
+    url(r'^', include('web.urls')),
     url(r'^digitizing/', include('niamoto_digitizing.urls')),
     url(r"^rapid_inventories/", include("rapid_inventories.urls")),
 ]
