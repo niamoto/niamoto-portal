@@ -17,7 +17,7 @@ def get_spatialite_cursor(file_path):
             ''')
         else:
             connection.execute('''
-            SELECT load_extension("/usr/local/lib/mod_spatialite")
+            SELECT load_extension("mod_spatialite")
             ''')
         connection.row_factory = dict_factory
         yield connection.cursor()
