@@ -58,7 +58,8 @@ class MassifAssignation(models.Model):
         db_url = self.spatialite_file.url
         if not db_url:
             return
-        db_path = os.path.join(settings.PACKAGE_ROOT, db_url)
+        db_path = os.path.join(settings.BASE_DIR, db_url)
+        print(db_path)
         # Get the data from the spatialite
         f_table = ForestFragment3k._meta.db_table
         db_routines.update_forest3k_from_spatialite(db_path, self.massif,
