@@ -3,8 +3,9 @@
 from django.conf.urls import url, include
 from rest_framework import routers
 
-from rest.views import TaxonViewSet, OccurrenceViewSet, \
-    PlantnoteDatabaseViewSet, MassifViewSet
+from apps.niamoto_data.views import TaxonViewSet, OccurrenceViewSet, \
+    MassifViewSet
+from apps.niamoto_plantnote.views import PlantnoteDatabaseViewSet
 from apps.rapid_inventories.views import RapidInventoryViewSet
 
 
