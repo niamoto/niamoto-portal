@@ -75,3 +75,7 @@ data
 site_media
 
 settings.py
+
+bin/
+include/
+pip-selfcheck.json

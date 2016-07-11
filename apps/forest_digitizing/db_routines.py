@@ -43,7 +43,7 @@ def update_forest3k_from_spatialite(db_path, massif, db_table):
                 if c == 'modified_by_id':
                     c = 'modified_by'
                 if c == 'geom':
-                    row.append("ST_GeomFromText('{}', '32758')".format(r[c]))
+                    row.append("ST_GeomFromText('{}', '4326')".format(r[c]))
                 elif c == 'massif_id':
                     row.append("'{}'".format(massif.id))
                 elif c in ('created_by', 'modified_by'):
@@ -76,7 +76,7 @@ def forest3k_from_spatialite(db_path, massif_key_name):
         cursor.execute(
             '''
             SELECT uuid, created, created_by, modified, modified_by,
-                    comments, ST_AsText(GEOMETRY) as geom
+                    comments, ST_AsText(ST_Transform(GEOMETRY, 4326)) as geom
             FROM {};
             '''.format(forest_table))
         return cursor.fetchall()
@@ -122,7 +122,7 @@ def update_digitizing_problems_from_spatialite(db_path, massif, db_table):
                 if c == 'modified_by_id':
                     c = 'modified_by'
                 if c == 'location':
-                    row.append("ST_GeomFromText('{}', '32758')".format(pb[c]))
+                    row.append("ST_GeomFromText('{}', '4326')".format(pb[c]))
                 elif c == 'massif_id':
                     row.append("'{}'".format(massif.id))
                 elif c in ('created_by', 'modified_by'):
@@ -145,7 +145,7 @@ def update_digitizing_problems_from_spatialite(db_path, massif, db_table):
 
             CREATE TEMPORARY TABLE newpbs (
                 uuid uuid,
-                location geometry(Point, 32758),
+                location geometry(Point, 4326),
                 created timestamp with time zone,
                 modified timestamp with time zone,
                 comments text,
@@ -186,7 +186,8 @@ def digitizing_problems_from_spatialite(db_path):
         cursor.execute(
             '''
             SELECT uuid, created, created_by, modified, modified_by,
-                    problem, comments, ST_AsText(GEOMETRY) as location
+                    problem, comments,
+                    ST_AsText(ST_Transform(GEOMETRY, 4326)) as location
             FROM digitazing_problem;
             ''')
         return cursor.fetchall()
@@ -257,7 +258,7 @@ def digitizing_problems_from_postgis(massif_key_name):
                 row[4] = user_map[pb[4]]
             r = ["'{}'".format(str(v).replace("'", "''"))
                        .replace("None", '') for v in row]
-            r[7] = "ST_GeomFromText('{}', 32758)".format(pb[7])
+            r[7] = "ST_GeomFromText('{}', 4326)".format(pb[7])
             to_return.append(r)
         return columns, to_return
 
