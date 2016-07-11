@@ -19,6 +19,9 @@ class Massif(models.Model):
 
     objects = models.GeoManager()
 
+    def __repr__(self):
+        return self.full_name
+
 
 # ===================#
 # Biotic data models #
