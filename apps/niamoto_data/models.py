@@ -19,7 +19,7 @@ class Massif(models.Model):
 
     objects = models.GeoManager()
 
-    def __repr__(self):
+    def __str__(self):
         return self.full_name
 
 
