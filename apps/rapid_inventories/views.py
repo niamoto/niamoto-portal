@@ -16,7 +16,7 @@ from apps.rapid_inventories.serializers import RapidInventorySerializer
 from apps.rapid_inventories.permissions import IsOwnerOrReadOnly
 
 
-class RapidInventoryViewSet(viewsets.ModelViewSet):
+class RapidInventoryViewSet(viewsets.ReadOnlyModelViewSet):
     base_name = 'rapid_inventory'
     queryset = RapidInventory.objects.all()
     serializer_class = RapidInventorySerializer
