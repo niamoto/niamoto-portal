@@ -78,7 +78,7 @@ class ForestFragment(models.Model):
     """
     Represent a forest fragment zone.
     """
-    uuid = models.UUIDField()
+    uuid = models.CharField(max_length=36)
     geom = models.MultiPolygonField(srid=4326)
 
     objects = models.GeoManager()

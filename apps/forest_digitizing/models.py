@@ -75,7 +75,7 @@ class ForestFragment3k(models.Model):
     Represent a 3k digitized forest fragment, bound to a massif.
     """
 
-    uuid = models.UUIDField()
+    uuid = models.CharField(max_length=36)
     massif = models.ForeignKey(Massif)
     created = models.DateTimeField(null=True)
     created_by = models.ForeignKey(User, null=True,
@@ -98,7 +98,7 @@ class ForestFragment30k(models.Model):
     Represent a 30k digitized forest fragment, bound to a massif.
     """
 
-    uuid = models.UUIDField()
+    uuid = models.CharField(max_length=36)
     massif = models.ForeignKey(Massif)
     created = models.DateTimeField(null=True)
     modified = models.DateTimeField(null=True)
@@ -117,7 +117,7 @@ class DigitizingProblem(models.Model):
     Digitizing problems.
     """
 
-    uuid = models.UUIDField(null=True)
+    uuid = models.CharField(max_length=36, null=True)
     massif = models.ForeignKey(Massif)
     location = models.PointField(srid=4326, blank=False, unique=True)
     created = models.DateTimeField(null=True)
