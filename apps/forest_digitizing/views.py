@@ -9,11 +9,19 @@ from django.http.response import HttpResponse, Http404
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
+from rest_framework import viewsets
 from constance import config
 from pyproj import Proj, transform
 
-from apps.forest_digitizing.models import Massif
-from apps.forest_digitizing.models import DigitizingProblem
+from apps.forest_digitizing.models import Massif, DigitizingProblem, \
+    MassifAssignation
+from apps.forest_digitizing.serializers import MassifAssignationSerializer
+
+
+class MassifAssignationViewSet(viewsets.ReadOnlyModelViewSet):
+    base_name = 'massif_assignation'
+    queryset = MassifAssignation.objects.all()
+    serializer_class = MassifAssignationSerializer
 
 
 @login_required()
