@@ -8,9 +8,15 @@ from apps.niamoto_data.views import TaxonViewSet, OccurrenceViewSet, \
     MassifViewSet
 from apps.niamoto_plantnote.views import PlantnoteDatabaseViewSet
 from apps.rapid_inventories.views import RapidInventoryViewSet
-
+from rest.views import UserViewSet
 
 router = routers.DefaultRouter()
+# Users
+router.register(
+    r'{}'.format(UserViewSet.base_name),
+    UserViewSet,
+    base_name=UserViewSet.base_name,
+)
 # Taxon
 router.register(
     r'{}'.format(TaxonViewSet.base_name),
