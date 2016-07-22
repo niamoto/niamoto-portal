@@ -8,11 +8,16 @@ class UserSerializer(serializers.ModelSerializer):
     """
     Serializer for User model.
     """
+
+    full_name = serializers.SerializerMethodField()
+
+    def get_full_name(self, instance):
+        return instance.get_full_name()
+
     class Meta:
         model = User
         fields = (
             'id',
             'username',
-            'first_name',
-            'last_name'
+            'full_name',
         )
