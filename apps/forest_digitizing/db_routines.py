@@ -144,7 +144,7 @@ def update_digitizing_problems_from_spatialite(db_path, massif, db_table):
             BEGIN;
 
             CREATE TEMPORARY TABLE newpbs (
-                uuid uuid,
+                uuid varchar(36),
                 location geometry(Point, 4326),
                 created timestamp with time zone,
                 modified timestamp with time zone,
