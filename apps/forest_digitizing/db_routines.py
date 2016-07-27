@@ -140,6 +140,11 @@ def update_digitizing_problems_from_spatialite(db_path, massif, db_table):
             values.append("({})".format(','.join(row)))
         pg_cursor = connection.cursor()
         pg_cursor.execute(
+            '''
+            DELETE FROM {} WHERE massif_id = {};
+            '''.format(db_table, massif.id)
+        )
+        pg_cursor.execute(
             """
             BEGIN;
 
