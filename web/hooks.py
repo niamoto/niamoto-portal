@@ -5,24 +5,11 @@ import random
 
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
-from django.core.mail.backends.smtp import EmailBackend
+
+from utils import get_email_backend, get_default_from_email
 
 
 class AccountGmailHookSet(object):
-
-    def get_default_from_email(self):
-        from constance import config
-        return config.DEFAULT_FROM_EMAIL
-
-    def get_email_backend(self):
-        from constance import config
-        return EmailBackend(
-            host=config.EMAIL_HOST,
-            port=config.EMAIL_PORT,
-            username=config.EMAIL_HOST_USER,
-            password=config.EMAIL_HOST_PASSWORD,
-            use_tls=config.EMAIL_USE_TLS
-        )
 
     def send_invitation_email(self, to, ctx):
         subject = render_to_string(
@@ -33,9 +20,9 @@ class AccountGmailHookSet(object):
         send_mail(
             subject,
             message,
-            self.get_default_from_email(),
+            get_default_from_email(),
             to,
-            connection=self.get_email_backend()
+            connection=get_email_backend()
         )
 
     def send_confirmation_email(self, to, ctx):
@@ -51,9 +38,9 @@ class AccountGmailHookSet(object):
         send_mail(
             subject,
             message,
-            self.get_default_from_email(),
+            get_default_from_email(),
             to,
-            connection=self.get_email_backend()
+            connection=get_email_backend()
         )
 
     def send_password_change_email(self, to, ctx):
@@ -66,9 +53,9 @@ class AccountGmailHookSet(object):
         send_mail(
             subject,
             message,
-            self.get_default_from_email(),
+            get_default_from_email(),
             to,
-            connection=self.get_email_backend()
+            connection=get_email_backend()
         )
 
     def send_password_reset_email(self, to, ctx):
@@ -81,9 +68,9 @@ class AccountGmailHookSet(object):
         send_mail(
             subject,
             message,
-            self.get_default_from_email(),
+            get_default_from_email(),
             to,
-            connection=self.get_email_backend()
+            connection=get_email_backend()
         )
 
     def generate_random_token(self, extra=None, hash_func=hashlib.sha256):
