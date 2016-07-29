@@ -23,6 +23,22 @@ class Massif(models.Model):
         return self.full_name
 
 
+class Plot(models.Model):
+    """
+    Model representing a forest plot.
+    """
+
+    name = models.CharField(max_length=50, unique=True)
+    width = models.FloatField()  # Meters
+    height = models.FloatField()  # Meters
+    location = models.PointField(srid=4326)
+
+    objects = models.GeoManager()
+
+    def __str__(self):
+        return self.name
+
+
 # ===================#
 # Biotic data models #
 # ===================#
@@ -72,6 +88,8 @@ class Occurrence(models.Model):
     date = models.DateField(null=True, blank=True)
     taxon = models.ForeignKey(Taxon, null=True, blank=True)
     location = models.PointField(srid=4326, null=True, blank=True)
+
+    objects = models.GeoManager()
 
 
 class ForestFragment(models.Model):
