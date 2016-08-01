@@ -56,4 +56,5 @@ router.register(
 
 urlpatterns = [
     url(r'^', include(router.urls)),
+    url(r'^', include('apps.niamoto_management.rest_urls'))
 ]

@@ -1,12 +1,9 @@
 # coding: utf-8
 
-from urllib import parse
-
 from rest_framework import serializers
 from rest_framework_gis import serializers as gis_serializers
 
 from apps.niamoto_data.models import Taxon, Occurrence, Massif
-from apps.niamoto_plantnote.models import PlantnoteDatabase
 
 
 class TaxonSerializer(serializers.ModelSerializer):
