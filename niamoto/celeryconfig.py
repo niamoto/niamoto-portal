@@ -5,8 +5,8 @@ from celery.schedules import crontab
 
 
 # Celery settings
-CELERY_BROKER = 'amqp://'
-CELERY_BACKEND = 'amqp://'
+CELERY_BROKER = 'amqp://niamoto-rabbitmq:5672//'
+CELERY_BACKEND = 'amqp://niamoto-rabbitmq:5672//'
 CELERY_TIMEZONE = settings.TIME_ZONE
 
 # Celery Schedule
