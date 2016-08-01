@@ -17,5 +17,5 @@ app = Celery(
     include=['niamoto.tasks'],
 )
 
-app.config_from_object('django.conf:settings')
+app.config_from_object('niamoto.celeryconfig')
 app.autodiscover_tasks(lambda: settings.INSTALLED_APPS)
