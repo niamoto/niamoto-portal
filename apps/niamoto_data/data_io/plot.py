@@ -23,12 +23,12 @@ def import_plots_from_plantnote_db(database):
     """
     sql = \
         """
-        SELECT Localités."ID Localités" AS id_plot,
-            Localités."Nom Entier" AS name,
-            Localités."Largeur" AS width,
-            Localités."Hauteur" AS height
-            Localités."LongDD" AS long,
-            Localités."LatDD" AS lat,
+        SELECT "ID Localités" AS id_plot,
+            "Nom Entier" AS name,
+            "Largeur" AS width,
+            "Hauteur" AS height,
+            "LongDD" AS long,
+            "LatDD" AS lat
         FROM Localités;
         """
     conn = sqlite3.connect(database)
