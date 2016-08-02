@@ -11,15 +11,15 @@ from utils import get_default_from_email, get_email_backend
 @receiver(user_signed_up)
 def handle_user_signed_up(sender, **kwargs):
     user = kwargs.get("user")
-    msg = "L'utilisateur {} s'est inscrit sur numberone:\n"\
-        + "Nom: {}\nPrénom: {}\nEmail: {}.\nBourre-le!"
+    msg = "L'utilisateur {} s'est inscrit sur niamoto:\n"\
+        + "Nom: {}\nPrénom: {}\nEmail: {}.\nC'est ça aussi!"
     msg = msg.format(
         user.username,
         user.last_name,
         user.first_name,
         user.email
     )
-    subject = "L'enculé, y'a un nouvel inscrit sur numberone!"
+    subject = "Et ben l'engin, y'a un nouvel inscrit sur niamoto!"
     send_mail(
         subject,
         msg,
