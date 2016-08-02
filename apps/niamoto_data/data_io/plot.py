@@ -61,7 +61,7 @@ def import_plots_from_plantnote_db(database):
         VALUES {};
         """.format(
             Plot._meta.db_table,
-            ','.join(["('{}', '{}', '{}', '{}', {})".format(
+            ','.join(["('{}', '{}', {}, {}, {})".format(
                 row[0],
                 get_width_row(row),
                 get_height_row(row),
