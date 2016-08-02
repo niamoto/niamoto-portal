@@ -15,7 +15,7 @@ logger = get_task_logger(__name__)
 
 
 @shared_task
-def backup_db(path=None, filename=None):
+def backup_db(path=None):
     """
     Use django-dbbackup to backup the niamoto database.
     """
@@ -23,9 +23,6 @@ def backup_db(path=None, filename=None):
     if path is not None:
         args.append("-O")
         args.append(path)
-    if filename is not None:
-        args.append("-o")
-        args.append(filename)
     logger.info("Starting niamoto database backup...")
     execute_from_command_line(args)
     logger.info("Niamoto database backup complete!")
@@ -42,7 +39,7 @@ def monthly_backup_db():
         month,
         day,
     )
-    backup_db(path=settings.MONTHLY_BACKUPS_PATH, filename=filename)
+    backup_db(join(settings.MONTHLY_BACKUPS_PATH, filename))
     limit_file_count(
         settings.MONTHLY_BACKUPS_PATH,
         settings.MAX_MONTHLY_BACKUP_COUNT
@@ -60,7 +57,7 @@ def daily_backup_db():
         month,
         day,
     )
-    backup_db(path=settings.DAILY_BACKUPS_PATH, filename=filename)
+    backup_db(join(settings.DAILY_BACKUPS_PATH, filename))
     limit_file_count(
         settings.DAILY_BACKUPS_PATH,
         settings.MAX_DAILY_BACKUP_COUNT
@@ -74,13 +71,15 @@ def hourly_backup_db():
     month = now.month
     day = now.day
     hour = now.hour
-    filename = "niamoto-backup-hourly__{}:{}-{}-{}.psql".format(
+    minute = now.minute
+    filename = "niamoto-backup-hourly__{}-{}-{}_{}:{}.psql".format(
         year,
         month,
         day,
         hour,
+        minute,
     )
-    backup_db(path=settings.HOURLY_BACKUPS_PATH, filename=filename)
+    backup_db(join(settings.HOURLY_BACKUPS_PATH, filename))
     limit_file_count(
         settings.HOURLY_BACKUPS_PATH,
         settings.MAX_HOURLY_BACKUP_COUNT
@@ -92,4 +91,4 @@ def limit_file_count(path, max_count):
     if len(files) > max_count:
         s = sorted(files)
         for i in range(len(files) - max_count):
-            os.remove(s[i])
+            os.remove(join(path, s[i]))
