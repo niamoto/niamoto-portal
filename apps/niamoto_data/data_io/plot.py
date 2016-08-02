@@ -45,13 +45,13 @@ def import_plots_from_plantnote_db(database):
 
     def get_width_row(row):
         width = row[2]
-        if width is None:
+        if width is None or width == 'None':
             return "NULL"
         return width
 
     def get_height_row(row):
         height = row[3]
-        if height is None:
+        if height is None or height == 'None':
             return "NULL"
         return height
 
@@ -63,11 +63,11 @@ def import_plots_from_plantnote_db(database):
             Plot._meta.db_table,
             ','.join(["('{}', '{}', {}, {}, {})".format(
                 row[0],
+                row[1],
                 get_width_row(row),
                 get_height_row(row),
-                row[3],
                 get_location_col(row)
-            ) for row in data])
+            ) for row in data if row[0] not in (None, 'None')])
         )
     cursor = connection.cursor()
     cursor.execute(pg_sql)

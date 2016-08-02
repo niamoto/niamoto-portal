@@ -14,7 +14,7 @@ class MassifAdmin(admin.GeoModelAdmin):
 class PlotAdmin(admin.GeoModelAdmin):
     fields = ('id', 'name', 'width', 'height', 'location')
     list_display = ('id', 'name', 'width', 'height', 'location')
-    readonly_fields = ('id', 'name', 'width', 'height', 'location')
+    readonly_fields = ('id', 'name', 'width', 'height')
     modifiable = False
 
 
