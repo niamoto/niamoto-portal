@@ -41,8 +41,19 @@ def import_plots_from_plantnote_db(database):
         lat = row[5]
         if long is None or lat is None:
             return "NULL"
-        else:
-            return "ST_GeomFromText('POINT({} {})', 4326)".format(long, lat)
+        return "ST_GeomFromText('POINT({} {})', 4326)".format(long, lat)
+
+    def get_width_row(row):
+        width = row[2]
+        if width is None:
+            return "NULL"
+        return width
+
+    def get_height_row(row):
+        height = row[3]
+        if height is None:
+            return "NULL"
+        return height
 
     pg_sql = \
         """
@@ -52,8 +63,8 @@ def import_plots_from_plantnote_db(database):
             Plot._meta.db_table,
             ','.join(["('{}', '{}', '{}', '{}', {})".format(
                 row[0],
-                row[1],
-                row[2],
+                get_width_row(row),
+                get_height_row(row),
                 row[3],
                 get_location_col(row)
             ) for row in data])

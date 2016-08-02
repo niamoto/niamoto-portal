@@ -29,8 +29,8 @@ class Plot(models.Model):
     """
 
     name = models.CharField(max_length=50, unique=True)
-    width = models.FloatField()  # Meters
-    height = models.FloatField()  # Meters
+    width = models.FloatField(null=True, blank=True)  # Meters
+    height = models.FloatField(null=True, blank=True)  # Meters
     location = models.PointField(srid=4326)
 
     objects = models.GeoManager()
