@@ -26,7 +26,7 @@ def import_plots_from_plantnote_db(database):
         SELECT "ID Localités" AS id_plot,
             "Nom Entier" AS name,
             "Largeur" AS width,
-            "Hauteur" AS height,
+            "Longueur" AS height,
             "LongDD" AS long,
             "LatDD" AS lat
         FROM Localités;
