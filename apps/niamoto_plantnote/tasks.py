@@ -9,6 +9,7 @@ from celery import shared_task
 from celery.utils.log import get_task_logger
 from apps.niamoto_data.data_io import taxon as taxon_io
 from apps.niamoto_data.data_io import occurrence as occurrence_io
+from apps.niamoto_data.data_io import plot as plot_io
 
 from .models import PlantnoteDatabase
 
@@ -31,8 +32,10 @@ def replace_plantnote_db(db_uuid):
     with transaction.atomic():
         occurrence_io.delete_all_occurrences()
         taxon_io.delete_all_taxa()
+        plot_io.delete_all_plots()
         taxon_io.import_taxon_from_plantnote_db(db.file.url)
-        occurrence_io.import_occurrences_from_plantnode_db(db.file.url)
+        occurrence_io.import_occurrences_from_plantnote_db(db.file.url)
+        plot_io.import_plots_from_plantnote_db(db.file.url)
     return db_uuid
 
 

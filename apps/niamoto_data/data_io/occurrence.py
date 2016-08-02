@@ -17,7 +17,7 @@ def delete_all_occurrences():
     cursor.execute(pg_sql)
 
 
-def import_occurrences_from_plantnode_db(database):
+def import_occurrences_from_plantnote_db(database):
     """
     Import an occurrence list from a .ptx Pl@ntnote database, previously
     converted to a sqlite database.
@@ -57,6 +57,7 @@ def import_occurrences_from_plantnode_db(database):
     cur = conn.cursor()
     cur.execute(sql)
     data = cur.fetchall()
+
     def get_location_col(row):
         long = row[4]
         lat = row[5]
@@ -64,6 +65,7 @@ def import_occurrences_from_plantnode_db(database):
             return "NULL"
         else:
             return "ST_GeomFromText('POINT({} {})', 4326)".format(long, lat)
+
     def get_date_col(row):
         date_str = row[1]
         if len(date_str) > 0:
@@ -75,11 +77,13 @@ def import_occurrences_from_plantnode_db(database):
             else:
                 d = date(int(sd[0]), 1, 1)
         return d
+
     def get_taxon_col(row):
         id_taxon = row[2]
         if id_taxon is None:
             return "null"
         return id_taxon
+
     # Now process bulk insert on PG database
     pg_sql = \
         """

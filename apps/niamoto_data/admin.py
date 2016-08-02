@@ -1,7 +1,7 @@
 # coding: utf-8
 
 from django.contrib.gis import admin
-from .models import Massif
+from .models import Massif, Plot
 
 
 class MassifAdmin(admin.GeoModelAdmin):
@@ -11,4 +11,12 @@ class MassifAdmin(admin.GeoModelAdmin):
     modifiable = False
 
 
+class PlotAdmin(admin.GeoModelAdmin):
+    fields = ('id', 'name', 'width', 'height', 'location')
+    list_display = ('id', 'name', 'width', 'height', 'location')
+    readonly_fields = ('id', 'name', 'width', 'height', 'location')
+    modifiable = False
+
+
 admin.site.register(Massif, MassifAdmin)
+admin.site.register(Plot, PlotAdmin)
