@@ -29,6 +29,7 @@ urlpatterns = [
     url(r'^', include('web.urls')),
     url(r'^digitizing/', include('apps.forest_digitizing.urls')),
     url(r"^rapid_inventories/", include("apps.rapid_inventories.urls")),
+    url(r'^explorer/', include('explorer.urls')),
 ]
 
 if settings.DEBUG is True:

@@ -16,3 +16,5 @@ django-crispy-forms >= 1.5.2
 django-multiselectfield >= 0.1.3
 pyproj >= 1.9.5
 django-dbbackup >= 2.5
+django-sql-explorer >= 1.0
+xlsxwriter >= 0.9.3
