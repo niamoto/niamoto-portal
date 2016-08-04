@@ -15,11 +15,11 @@ logger = get_task_logger(__name__)
 
 
 @shared_task
-def backup_db(path=None):
+def backup_db(path=None, database='default'):
     """
     Use django-dbbackup to backup the niamoto database.
     """
-    args = ["manage.py", "dbbackup"]
+    args = ["manage.py", "dbbackup", "-d", database]
     if path is not None:
         args.append("-O")
         args.append(path)
