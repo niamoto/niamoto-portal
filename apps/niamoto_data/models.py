@@ -100,3 +100,17 @@ class ForestFragment(models.Model):
     geom = models.MultiPolygonField(srid=4326)
 
     objects = models.GeoManager()
+
+
+# ===================#
+# Association models #
+# ===================#
+
+class PlotOccurrences(models.Model):
+    """
+    Association model between plots and occurrences. This model enforce a
+    one-to-many relationship between Plot and Occurrence models.
+    """
+
+    occurrence_id = models.OneToOneField(Occurrence, primary_key=True)
+    plot_id = models.ForeignKey(Plot, db_index=True)
