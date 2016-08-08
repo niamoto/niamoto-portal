@@ -128,7 +128,7 @@
         var status_idx = massif_data[key_name]['status'];
         var file_available = massif_data[key_name]['file_available'];
         var link = '';
-        if (file_available && (status_idx > 0)) {
+        if (status_idx > 0) {
             link = '<a href="' + key_name
                 + '/">Consulter l\'état actuel de la digitalisation</a>'
         }
