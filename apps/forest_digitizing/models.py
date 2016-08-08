@@ -43,7 +43,7 @@ class MassifAssignation(models.Model):
     status = models.IntegerField(default=0, choices=STATUS_CHOICES)
     spatialite_file = models.FileField(upload_to='spatialite_files',
                                        storage=OverwriteStorage(),
-                                       null=True)
+                                       null=True, blank=True)
 
     @property
     def massif_name(self):
@@ -55,9 +55,9 @@ class MassifAssignation(models.Model):
         after a spatialite had been uploaded.
         """
         super(MassifAssignation, self).save(*args, **kwargs)
-        db_url = self.spatialite_file.url
-        if not db_url:
+        if hasattr(self, "spatialite_file"):
             return
+        db_url = self.spatialite_file.url
         db_path = os.path.join(settings.BASE_DIR, db_url)
         print(db_path)
         # Get the data from the spatialite
