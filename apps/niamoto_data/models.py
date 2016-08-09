@@ -112,5 +112,5 @@ class PlotOccurrences(models.Model):
     one-to-many relationship between Plot and Occurrence models.
     """
 
-    occurrence_id = models.OneToOneField(Occurrence, primary_key=True)
-    plot_id = models.ForeignKey(Plot, db_index=True)
+    occurrence = models.OneToOneField(Occurrence, primary_key=True)
+    plot = models.ForeignKey(Plot, db_index=True)
