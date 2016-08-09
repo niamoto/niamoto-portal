@@ -1,7 +1,6 @@
 (function($, undefined) {
 
     var massifs_keymap,
-        massifs_geojson,
         massif_source,
         massif_layer;
 
@@ -34,6 +33,7 @@
             })
         ],
         view: view,
+        interactions : ol.interaction.defaults({doubleClickZoom :false}),
         controls: [
             new ol.control.Zoom(),
             new olext.control.CurrentScale(),
@@ -67,8 +67,7 @@
 
     var highlightMassif = function(evt, pixel) {
         var pixel = map.getEventPixel(evt.originalEvent);
-        var feature = map.forEachFeatureAtPixel(pixel, function(feature,
-                                                                layer) {
+        var feature = map.forEachFeatureAtPixel(pixel, function(feature, layer) {
             return feature;
         });
         if (feature) {
@@ -90,8 +89,7 @@
 
     // Select massif on feature click
     function selectMassif(pixel) {
-        var feature = map.forEachFeatureAtPixel(pixel, function(feature,
-                                                                layer) {
+        var feature = map.forEachFeatureAtPixel(pixel, function(feature, layer) {
             return feature;
         });
         if (feature) {
@@ -260,11 +258,26 @@
                 selectMassif(evt.pixel);
             });
 
-            // On massif button click
+            // Directly go to massif page on dblclick
+            map.on('dblclick', function(evt) {
+                if (selected_massif == null) {
+                    return
+                }
+                window.location.href = selected_massif;
+            });
+
+            // On table click select massif
             $(".massif_button").click(function() {
                 var massif_key_name = $(this).attr('value');
                 setCurrentMassif(massifs_keymap[massif_key_name]);
             });
+
+             // On table dblclick go to massif page
+            $(".massif_button").dblclick(function () {
+                var massif_key_name = $(this).attr('value');
+                window.location.href = massif_key_name;
+            });
+
             fitMassif();
         };
         $(window).resize(sizeContent);
