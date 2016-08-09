@@ -35,9 +35,9 @@ def monthly_backup_db():
     month = now.month
     day = now.day
     filename = "niamoto-backup-monthly__{}-{}-{}.psql".format(
-        year,
-        month,
-        day,
+        str(year).zfill(4),
+        str(month).zfill(2),
+        str(day).zfill(2),
     )
     backup_db(join(settings.MONTHLY_BACKUPS_PATH, filename))
     limit_file_count(
@@ -53,9 +53,9 @@ def daily_backup_db():
     month = now.month
     day = now.day
     filename = "niamoto-backup-daily__{}-{}-{}.psql".format(
-        year,
-        month,
-        day,
+        str(year).zfill(4),
+        str(month).zfill(2),
+        str(day).zfill(2),
     )
     backup_db(join(settings.DAILY_BACKUPS_PATH, filename))
     limit_file_count(
@@ -73,11 +73,11 @@ def hourly_backup_db():
     hour = now.hour
     minute = now.minute
     filename = "niamoto-backup-hourly__{}-{}-{}_{}:{}.psql".format(
-        year,
-        month,
-        day,
-        hour,
-        minute,
+        str(year).zfill(4),
+        str(month).zfill(2),
+        str(day).zfill(2),
+        str(hour).zfill(2),
+        str(minute).zfill(2),
     )
     backup_db(join(settings.HOURLY_BACKUPS_PATH, filename))
     limit_file_count(
