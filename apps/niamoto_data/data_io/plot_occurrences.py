@@ -31,4 +31,21 @@ def import_plot_occurrences_from_plantnote_db_(database):
         ON Occ."ID Inventaires" = Inv."ID Inventaires"
         WHERE Occ."ID Inventaires" IS NOT NULL;
         """
-    conn = sqlite3.c # TODO
+    conn = sqlite3.connect(database)
+    cur = conn.cursor()
+    cur.execute(sql)
+    data = cur.fetchall()
+    # Insert data in database
+    pg_sql = \
+        """
+        INSERT INTO {} (occurrence_id, plot_id)
+        VALUES {};
+        """.format(
+            PlotOccurrences._meta.db_table,
+            ','.join(["('{}', '{}')".format(
+                row[0],
+                row[1],
+            ) for row in data])
+        )
+    cursor = connection.cursor()
+    cursor.execute(pg_sql)
