@@ -84,7 +84,7 @@ class Occurrence(models.Model):
     a unique identifier, a geographic location, a taxon (if identified),
     """
 
-    id = models.CharField(primary_key=True, max_length=20)
+    id = models.IntegerField(primary_key=True)
     date = models.DateField(null=True, blank=True)
     taxon = models.ForeignKey(Taxon, null=True, blank=True)
     location = models.PointField(srid=4326, null=True, blank=True)
@@ -112,5 +112,13 @@ class PlotOccurrences(models.Model):
     one-to-many relationship between Plot and Occurrence models.
     """
 
-    occurrence = models.OneToOneField(Occurrence, primary_key=True)
+    occurrence = models.ForeignKey(Occurrence, db_index=True)
     plot = models.ForeignKey(Plot, db_index=True)
+    identifier = models.CharField(
+        max_length=20,
+        null=True, blank=True,
+        db_index=True
+    )
+
+    class Meta:
+        unique_together = (("occurrence", "plot"))

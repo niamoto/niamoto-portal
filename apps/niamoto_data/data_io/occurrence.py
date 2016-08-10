@@ -26,32 +26,17 @@ def import_occurrences_from_plantnote_db(database):
     sql = \
         """
         SELECT Indiv."ID Individus" AS id_indiv,
-            Inv."Date Inventaire" AS date_obs,
-            Det."ID Taxons" AS id_taxon,
-            Col."Collecteur" AS col_name,
-            Loc.LongDD, Loc.LatDD
+               Inv."Date Inventaire" AS date_obs,
+               Det."ID Taxons" AS id_taxon,
+               Col."Collecteur" AS col_name,
+               Loc.LongDD,
+               Loc.LatDD
         FROM Individus AS Indiv
-        LEFT JOIN
-            (SELECT "ID Inventaires", "Date Inventaire", "ID Parcelle"
-             FROM Inventaires) AS Inv
-        ON Indiv."ID Inventaires" = Inv."ID Inventaires"
-        LEFT JOIN
-            (SELECT "ID Localités", LongDD, LatDD
-             FROM Localités) AS Loc
-        ON Inv."ID Parcelle" = Loc."ID Localités"
-        LEFT JOIN
-            (SELECT "ID Déterminations", "ID Taxons"
-             FROM Déterminations) AS Det
-        ON Indiv."ID Déterminations" = Det."ID Déterminations"
-        LEFT JOIN
-            (SELECT "ID Observations", "Observateur"
-             FROM Observations) AS Obs
-        ON Indiv."ID Observations" = Obs."ID Observations"
-        LEFT JOIN
-            (SELECT "ID Collecteurs", "Collecteur"
-             FROM Collecteurs) AS Col
-        ON Obs."Observateur" = Col."ID Collecteurs"
-        WHERE Indiv."ID Inventaires" IS NOT NULL;
+        INNER JOIN Inventaires AS Inv ON Indiv."ID Inventaires" = Inv."ID Inventaires"
+        LEFT JOIN Localités AS Loc ON Inv."ID Parcelle" = Loc."ID Localités"
+        LEFT JOIN Déterminations AS Det ON Indiv."ID Déterminations" = Det."ID Déterminations"
+        LEFT JOIN Observations AS Obs ON Indiv."ID Observations" = Obs."ID Observations"
+        LEFT JOIN Collecteurs AS Col ON Obs."Observateur" = Col."ID Collecteurs";
         """
     conn = sqlite3.connect(database)
     cur = conn.cursor()

@@ -23,18 +23,22 @@ def import_plot_occurrences_from_plantnote_db_(database):
     """
     sql = \
         """
-        SELECT Occ."ID Individus" AS id_indiv,
-            Inv."ID Parcelle" AS id_plot
-        FROM Individus AS Occ
-        LEFT JOIN
-          Inventaires AS Inv
-        ON Occ."ID Inventaires" = Inv."ID Inventaires"
-        WHERE Occ."ID Inventaires" IS NOT NULL;
+        SELECT Inv."ID Individus" AS id_indiv,
+            Inv."ID Parcelle" AS id_plot,
+            Inv."Identifiant" AS identifier
+        FROM Inventaires AS Inv;
         """
     conn = sqlite3.connect(database)
     cur = conn.cursor()
     cur.execute(sql)
     data = cur.fetchall()
+
+    def get_identifier_col(row):
+        identifier = row[2]
+        if identifier is None:
+            return "NULL"
+        return identifier
+
     # Insert data in database
     pg_sql = \
         """
@@ -42,9 +46,10 @@ def import_plot_occurrences_from_plantnote_db_(database):
         VALUES {};
         """.format(
             PlotOccurrences._meta.db_table,
-            ','.join(["('{}', '{}')".format(
+            ','.join(["('{}', '{}', '{}')".format(
                 row[0],
                 row[1],
+                get_identifier_col(row)
             ) for row in data])
         )
     cursor = connection.cursor()
