@@ -42,7 +42,7 @@ def import_plot_occurrences_from_plantnote_db_(database):
     # Insert data in database
     pg_sql = \
         """
-        INSERT INTO {} (occurrence_id, plot_id)
+        INSERT INTO {} (occurrence_id, plot_id, identifier)
         VALUES {};
         """.format(
             PlotOccurrences._meta.db_table,
