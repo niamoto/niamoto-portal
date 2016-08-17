@@ -96,11 +96,15 @@ class OccurrenceObservations(models.Model):
     """
     Model representing a set of observations / measures for occurrences.
     """
-    id = models.OneToOneField(Occurrence, primary_key=True)
-    date = models.DateField()
+    id = models.IntegerField(primary_key=True)
+    occurrence = models.ForeignKey(Occurrence)
+    observation_date = models.DateField()
     height = models.FloatField(null=True, blank=True)
     stem_nb = models.IntegerField(null=True, blank=True)
     circumference = models.FloatField(null=True, blank=True)
+    status = models.CharField(max_length=50)
+    wood_density = models.FloatField(null=True, blank=True)
+    bark_thickness = models.FloatField(null=True, blank=True)
 
 
 class ForestFragment(models.Model):
