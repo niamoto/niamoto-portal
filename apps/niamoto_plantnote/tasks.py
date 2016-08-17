@@ -11,6 +11,7 @@ from apps.niamoto_data.data_io import taxon as taxon_io
 from apps.niamoto_data.data_io import occurrence as occurrence_io
 from apps.niamoto_data.data_io import plot as plot_io
 from apps.niamoto_data.data_io import plot_occurrences as plot_occs_io
+from apps.niamoto_data.data_io import occurrence_observations as occ_obs_io
 
 from .models import PlantnoteDatabase
 
@@ -28,17 +29,22 @@ def replace_plantnote_db(db_uuid):
     """
     logger.debug('Loading PlantnoteDatabase object {}'.format(db_uuid))
     db = PlantnoteDatabase.objects.get(uuid=db_uuid)
+    url = db.file.url
     logger.debug('PlantnoteDatabase object {} loaded'.format(db_uuid))
-    logger.debug('Db file url is: "{}"'.format(db.file.url))
+    logger.debug('Db file url is: "{}"'.format(url))
     with transaction.atomic():
+        # Delete everything
         occurrence_io.delete_all_occurrences()
         taxon_io.delete_all_taxa()
         plot_io.delete_all_plots()
         plot_occs_io.delete_all_plot_occurrences()
-        taxon_io.import_taxon_from_plantnote_db(db.file.url)
-        occurrence_io.import_occurrences_from_plantnote_db(db.file.url)
-        plot_io.import_plots_from_plantnote_db(db.file.url)
-        plot_occs_io.import_plot_occurrences_from_plantnote_db_(db.file.url)
+        occ_obs_io.delete_all_occurrence_observations()
+        # Import everything
+        taxon_io.import_taxon_from_plantnote_db(url)
+        occurrence_io.import_occurrences_from_plantnote_db(url)
+        plot_io.import_plots_from_plantnote_db(url)
+        plot_occs_io.import_plot_occurrences_from_plantnote_db_(url)
+        occ_obs_io.import_occurrence_observations_from_plantnote_db(url)
     return db_uuid
 
 
