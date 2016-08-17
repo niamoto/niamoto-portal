@@ -96,9 +96,8 @@ class OccurrenceObservations(models.Model):
     """
     Model representing a set of observations / measures for occurrences.
     """
-    id = models.IntegerField(primary_key=True)
-    occurrence = models.ForeignKey(Occurrence)
-    observation_date = models.DateField()
+    occurrence = models.OneToOneField(Occurrence, primary_key=True)
+    last_observation_date = models.DateField()
     height = models.FloatField(null=True, blank=True)
     stem_nb = models.IntegerField(null=True, blank=True)
     circumference = models.FloatField(null=True, blank=True)
