@@ -14,6 +14,7 @@ class PlantnoteDatabaseAdmin(admin.ModelAdmin):
     )
     list_display = (
         'uuid',
+        'name',
         'created_at',
         'updated_at',
         'last_activated_at',
