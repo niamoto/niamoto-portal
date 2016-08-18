@@ -38,6 +38,12 @@ class OccurrenceSerializer(gis_serializers.GeoFeatureModelSerializer):
         geo_field = 'location'
         fields = ('id', 'date', 'taxon', 'observations')
 
+    def __init__(self, *args, **kwargs):
+        include_observations = kwargs.pop('include_observations', False)
+        super(OccurrenceSerializer, self).__init__(*args, **kwargs)
+        if not include_observations:
+            self.fields.pop('observations')
+
 
 class MassifSerializer(gis_serializers.GeoFeatureModelSerializer):
     """
