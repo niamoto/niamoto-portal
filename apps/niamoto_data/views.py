@@ -15,8 +15,10 @@ class TaxonViewSet(viewsets.ReadOnlyModelViewSet):
 
 class OccurrenceViewSet(viewsets.ReadOnlyModelViewSet):
     base_name = 'occurrence'
-    queryset = Occurrence.objects.all()
     serializer_class = OccurrenceSerializer
+
+    def get_queryset(self):
+        return Occurrence.objects.select_related('observations')
 
 
 class MassifViewSet(viewsets.ReadOnlyModelViewSet):
