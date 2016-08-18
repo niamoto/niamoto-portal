@@ -34,7 +34,7 @@ def monthly_backup_db():
     year = now.year
     month = now.month
     day = now.day
-    filename = "niamoto-backup-monthly__{}-{}-{}.psql".format(
+    filename = "niamoto-backup-monthly__{}-{}-{}.psql.gz".format(
         str(year).zfill(4),
         str(month).zfill(2),
         str(day).zfill(2),
@@ -52,7 +52,7 @@ def daily_backup_db():
     year = now.year
     month = now.month
     day = now.day
-    filename = "niamoto-backup-daily__{}-{}-{}.psql".format(
+    filename = "niamoto-backup-daily__{}-{}-{}.psql.gz".format(
         str(year).zfill(4),
         str(month).zfill(2),
         str(day).zfill(2),
@@ -72,7 +72,7 @@ def hourly_backup_db():
     day = now.day
     hour = now.hour
     minute = now.minute
-    filename = "niamoto-backup-hourly__{}-{}-{}_{}:{}.psql".format(
+    filename = "niamoto-backup-hourly__{}-{}-{}_{}:{}.psql.gz".format(
         str(year).zfill(4),
         str(month).zfill(2),
         str(day).zfill(2),
