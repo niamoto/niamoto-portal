@@ -19,7 +19,7 @@ def backup_db(path=None, database='default'):
     """
     Use django-dbbackup to backup the niamoto database.
     """
-    args = ["manage.py", "dbbackup", "-d", database]
+    args = ["manage.py", "dbbackup", "--compress", "-d", database]
     if path is not None:
         args.append("-O")
         args.append(path)
