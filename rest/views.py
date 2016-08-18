@@ -12,6 +12,7 @@ class UserViewSet(viewsets.ReadOnlyModelViewSet):
     """
     base_name = 'user'
     serializer_class = UserSerializer
+    pagination_class = None
 
     def get_queryset(self):
         only_team = self.request.query_params.get('only_team', None)

@@ -11,6 +11,7 @@ class TaxonViewSet(viewsets.ReadOnlyModelViewSet):
     base_name = 'taxon'
     queryset = Taxon.objects.all()
     serializer_class = TaxonSerializer
+    pagination_class = None
 
 
 class OccurrenceViewSet(viewsets.ReadOnlyModelViewSet):

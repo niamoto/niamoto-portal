@@ -22,6 +22,7 @@ class MassifAssignationViewSet(viewsets.ReadOnlyModelViewSet):
     base_name = 'massif_assignation'
     queryset = MassifAssignation.objects.all()
     serializer_class = MassifAssignationSerializer
+    pagination_class = None
 
 
 @login_required()

@@ -24,6 +24,7 @@ class RapidInventoryViewSet(viewsets.ReadOnlyModelViewSet):
         permissions.IsAuthenticated,
         IsOwnerOrReadOnly
     )
+    pagination_class = None
 
 
 @login_required()
