@@ -17,6 +17,9 @@ from apps.rapid_inventories.permissions import IsOwnerOrReadOnly
 
 
 class RapidInventoryViewSet(viewsets.ReadOnlyModelViewSet):
+    """
+    Endpoint for retrieving rapid inventories.
+    """
     base_name = 'rapid_inventory'
     queryset = RapidInventory.objects.all()
     serializer_class = RapidInventorySerializer

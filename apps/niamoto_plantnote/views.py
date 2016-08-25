@@ -8,6 +8,9 @@ from apps.niamoto_plantnote.serializers import PlantnoteDatabaseSerializer
 
 
 class PlantnoteDatabaseViewSet(viewsets.ReadOnlyModelViewSet):
+    """
+    Endpoint for retrieving pl@ntnote databases.
+    """
     base_name = 'plantnote_database'
     queryset = PlantnoteDatabase.objects.all()
     serializer_class = PlantnoteDatabaseSerializer

@@ -2,12 +2,15 @@
 
 from rest_framework import viewsets
 
-from apps.niamoto_data.models import Taxon, Occurrence, Massif
+from apps.niamoto_data.models import Taxon, Occurrence
 from apps.niamoto_data.serializers import TaxonSerializer, \
-    OccurrenceSerializer, MassifSerializer
+    OccurrenceSerializer
 
 
 class TaxonViewSet(viewsets.ReadOnlyModelViewSet):
+    """
+    Endpoint for retrieving taxa.
+    """
     base_name = 'taxon'
     queryset = Taxon.objects.all()
     serializer_class = TaxonSerializer
@@ -15,6 +18,9 @@ class TaxonViewSet(viewsets.ReadOnlyModelViewSet):
 
 
 class OccurrenceViewSet(viewsets.ReadOnlyModelViewSet):
+    """
+    Endpoint for retrieving occurrences.
+    """
     base_name = 'occurrence'
 
     def get_queryset(self):
@@ -25,9 +31,3 @@ class OccurrenceViewSet(viewsets.ReadOnlyModelViewSet):
         if incl_obs:
             kwargs['include_observations'] = True
         return OccurrenceSerializer(*args, **kwargs)
-
-
-class MassifViewSet(viewsets.ReadOnlyModelViewSet):
-    base_name = 'massif'
-    queryset = Massif.objects.all()
-    serializer_class = MassifSerializer

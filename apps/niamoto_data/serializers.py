@@ -43,13 +43,3 @@ class OccurrenceSerializer(gis_serializers.GeoFeatureModelSerializer):
         super(OccurrenceSerializer, self).__init__(*args, **kwargs)
         if not include_observations:
             self.fields.pop('observations')
-
-
-class MassifSerializer(gis_serializers.GeoFeatureModelSerializer):
-    """
-    Serializer class for Massif model, from niamoto-massifs app.
-    """
-    class Meta:
-        model = Massif
-        geo_field = 'geom'
-        fields = ('key_name', 'full_name')

@@ -19,6 +19,9 @@ from apps.forest_digitizing.serializers import MassifAssignationSerializer
 
 
 class MassifAssignationViewSet(viewsets.ReadOnlyModelViewSet):
+    """
+    Endpoint for getting massif digitizing assignations.
+    """
     base_name = 'massif_assignation'
     queryset = MassifAssignation.objects.all()
     serializer_class = MassifAssignationSerializer
