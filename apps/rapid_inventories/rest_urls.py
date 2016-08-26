@@ -1,0 +1,20 @@
+# coding: utf-8
+
+from django.conf.urls import url, include
+from rest_framework import routers
+
+from apps.rapid_inventories.views import RapidInventoryViewSet
+
+
+router = routers.DefaultRouter()
+
+# Rapid inventory
+router.register(
+    r'^',
+    RapidInventoryViewSet,
+    base_name=RapidInventoryViewSet.base_name,
+)
+
+urlpatterns = [
+    url(r'^', include(router.urls)),
+]
