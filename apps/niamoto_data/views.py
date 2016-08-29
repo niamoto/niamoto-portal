@@ -16,6 +16,18 @@ class TaxonViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = TaxonSerializer
     pagination_class = None
 
+    def list(self, request, *args, **kwargs):
+        """
+        Retrieve the list of taxa.
+        """
+        super(TaxonViewSet, self).list(request, *args, **kwargs)
+
+    def retrieve(self, request, *args, **kwargs):
+        """
+        Retrieve a taxon given it's identifier.
+        """
+        super(TaxonViewSet, self).retrieve(request, *args, **kwargs)
+
 
 class OccurrenceViewSet(viewsets.ReadOnlyModelViewSet):
     """
@@ -31,3 +43,15 @@ class OccurrenceViewSet(viewsets.ReadOnlyModelViewSet):
         if incl_obs:
             kwargs['include_observations'] = True
         return OccurrenceSerializer(*args, **kwargs)
+
+    def list(self, request, *args, **kwargs):
+        """
+        Retrieve the list of occurrences.
+        """
+        super(TaxonViewSet, self).list(request, *args, **kwargs)
+
+    def retrieve(self, request, *args, **kwargs):
+        """
+        Retrieve an occurrence given it's identifier.
+        """
+        super(TaxonViewSet, self).retrieve(request, *args, **kwargs)

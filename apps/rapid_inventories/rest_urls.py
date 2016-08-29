@@ -10,7 +10,7 @@ router = routers.DefaultRouter()
 
 # Rapid inventory
 router.register(
-    r'^',
+    r'^{}'.format(RapidInventoryViewSet.base_name),
     RapidInventoryViewSet,
     base_name=RapidInventoryViewSet.base_name,
 )

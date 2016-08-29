@@ -10,6 +10,7 @@ def api_root(request, format=None):
     return Response({
         'docs': reverse("docs:drfdocs"),
         'data-api': reverse('data-api:api-root'),
+        'occurrence-api': reverse('data-api:api-root'),
         'plantnote-api': reverse('plantnote-api:api-root'),
         'forest_digitizing-api': reverse('forest_digitizing-api:api-root'),
         'rapid_inventory-api': reverse('rapid_inventory-api:api-root'),
