@@ -34,6 +34,7 @@ urlpatterns = [
     url(r'^digitizing/', include('apps.forest_digitizing.urls')),
     url(r"^rapid_inventory/", include("apps.rapid_inventories.urls")),
     url(r'^explorer/', include('explorer.urls')),
+    url(r'^qgis_plugin_repository/', include('qgis_plugin_repository.urls')),
 ]
 
 if settings.DEBUG is True:
