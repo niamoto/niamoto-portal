@@ -20,13 +20,13 @@ class TaxonViewSet(viewsets.ReadOnlyModelViewSet):
         """
         Retrieve the list of taxa.
         """
-        super(TaxonViewSet, self).list(request, *args, **kwargs)
+        return super(TaxonViewSet, self).list(request, *args, **kwargs)
 
     def retrieve(self, request, *args, **kwargs):
         """
         Retrieve a taxon given it's identifier.
         """
-        super(TaxonViewSet, self).retrieve(request, *args, **kwargs)
+        return super(TaxonViewSet, self).retrieve(request, *args, **kwargs)
 
 
 class OccurrenceViewSet(viewsets.ReadOnlyModelViewSet):
@@ -48,10 +48,10 @@ class OccurrenceViewSet(viewsets.ReadOnlyModelViewSet):
         """
         Retrieve the list of occurrences.
         """
-        super(TaxonViewSet, self).list(request, *args, **kwargs)
+        return super(TaxonViewSet, self).list(request, *args, **kwargs)
 
     def retrieve(self, request, *args, **kwargs):
         """
         Retrieve an occurrence given it's identifier.
         """
-        super(TaxonViewSet, self).retrieve(request, *args, **kwargs)
+        return super(TaxonViewSet, self).retrieve(request, *args, **kwargs)
