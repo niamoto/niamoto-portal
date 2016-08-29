@@ -48,10 +48,10 @@ class OccurrenceViewSet(viewsets.ReadOnlyModelViewSet):
         """
         Retrieve the list of occurrences.
         """
-        return super(TaxonViewSet, self).list(request, *args, **kwargs)
+        return super(OccurrenceViewSet, self).list(request, *args, **kwargs)
 
     def retrieve(self, request, *args, **kwargs):
         """
         Retrieve an occurrence given it's identifier.
         """
-        return super(TaxonViewSet, self).retrieve(request, *args, **kwargs)
+        return super(OccurrenceViewSet, self).retrieve(request, *args, **kwargs)
