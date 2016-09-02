@@ -2,11 +2,12 @@
 
 from django.conf.urls import url, include
 
-from rest.views import api_root
+from rest.views import api_root, whoami
 
 
 urlpatterns = [
     url(r'^$', api_root, name="api-root"),
+    url(r'^whoami/$', whoami, name="whoami"),
     url(r'^docs/', include('rest_framework_docs.urls', namespace="docs")),
     url(r'^data/', include('apps.niamoto_data.rest_urls', namespace="data-api")),
     url(r'^plantnote/', include('apps.niamoto_plantnote.rest_urls', namespace="plantnote-api")),

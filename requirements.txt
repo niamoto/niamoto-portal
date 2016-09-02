@@ -18,3 +18,4 @@ pyproj >= 1.9.5
 django-dbbackup >= 2.5
 django-sql-explorer >= 1.0
 xlsxwriter >= 0.9.3
+django-oauth-toolkit >= 0.10.0

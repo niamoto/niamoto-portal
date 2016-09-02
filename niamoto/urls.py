@@ -27,6 +27,7 @@ from web.views import SignupView
 urlpatterns = [
     url(r'^{}/'.format(settings.REST_API_BASE_URL), include(r'rest.urls')),
     url(r'^admin/', admin.site.urls),
+    url(r'^o/', include('oauth2_provider.urls', namespace='oauth2_provider')),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^account/signup/$', SignupView.as_view(), name="account_signup"),
     url(r'^account/', include('account.urls')),
