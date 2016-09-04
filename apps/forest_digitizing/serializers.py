@@ -12,6 +12,7 @@ class MassifAssignationSerializer(serializers.ModelSerializer):
 
     massif_key_name = serializers.SerializerMethodField()
     massif_id = serializers.SerializerMethodField()
+    operator_full_name = serializers.SerializerMethodField()
 
     def get_massif_key_name(self, instance):
         return instance.massif.key_name
@@ -19,11 +20,15 @@ class MassifAssignationSerializer(serializers.ModelSerializer):
     def get_massif_id(self, instance):
         return instance.massif.id
 
+    def get_operator_full_name(self, instance):
+        return instance.operator.get_full_name()
+
     class Meta:
         model = MassifAssignation
         fields = (
             'massif_id',
             'massif_key_name',
             'operator',
+            'operator_full_name',
             'status',
         )
