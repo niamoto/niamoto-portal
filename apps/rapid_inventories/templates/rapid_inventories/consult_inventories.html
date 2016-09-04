@@ -54,7 +54,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ol3/3.10.1/ol.min.js"></script>
     <script src="{% static 'rapid_inventories/js/olext.min.js' %}" type="text/javascript"></script>
     <script>
-        var rapid_inventory_url = "{% url 'rapid_inventory-list' %}";
+        var rapid_inventory_url = "{% url 'inventory-api:rapid_inventory-list' %}";
     </script>
     <script src='{% static "rapid_inventories/js/consult_inventories.js" %}'></script>
 {% endblock %}
