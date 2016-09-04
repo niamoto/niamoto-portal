@@ -10,11 +10,11 @@ router = routers.DefaultRouter()
 
 # Rapid inventory
 router.register(
-    r'^{}'.format(RapidInventoryViewSet.base_name),
+    r'{}'.format(RapidInventoryViewSet.base_name),
     RapidInventoryViewSet,
     base_name=RapidInventoryViewSet.base_name,
 )
 
 urlpatterns = [
-    url(r'^', include(router.urls)),
+    url(r'', include(router.urls)),
 ]

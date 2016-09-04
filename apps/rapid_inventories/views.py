@@ -1,6 +1,7 @@
 # coding: utf-8
 
 from django.shortcuts import render, redirect
+from django.core.urlresolvers import reverse
 from django.contrib.gis.geos.point import Point
 from django.contrib.auth.decorators import login_required
 from rest_framework import viewsets
@@ -127,7 +128,7 @@ def consult_rapid_inventory(request, inventory_id):
             inventory.location = location
             inventory.observer = request.user
             inventory.save()
-            return redirect('/rapid_inventories/')
+            return redirect(reverse('rapid_inventory_index'))
     else:
         kwarg = {'instance': inventory, 'read_only': read_only}
         form = RapidInventoryForm(**kwarg)
@@ -152,4 +153,4 @@ def consult_rapid_inventory(request, inventory_id):
 def delete_rapid_inventory(request, inventory_id):
     inventory = RapidInventory.objects.get(id=inventory_id)
     inventory.delete()
-    return redirect('/rapid_inventories/')
+    return redirect(reverse('rapid_inventory_index'))
