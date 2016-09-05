@@ -47,7 +47,7 @@ def rapid_inventories_index(request):
         "Localisation (longitude/latitude WGS84)",
         "",
     ]
-    inventories = RapidInventory.objects.order_by('inventory_date')\
+    inventories = RapidInventory.objects.order_by('-inventory_date')\
         .select_related('observer')
 
     def get_val(inv, f):
@@ -55,6 +55,8 @@ def rapid_inventories_index(request):
             return getattr(inv, f).x, getattr(inv, f).y
         elif f == 'consult':
             return '<a href="{}">consulter</a>'.format(inv.id)
+        elif f == 'inventory_date':
+            return getattr(inv, f).strftime("%d/%m/%Y")
         return getattr(inv, f)
 
     data = [[get_val(inv, f) for f in fields] for inv in inventories]

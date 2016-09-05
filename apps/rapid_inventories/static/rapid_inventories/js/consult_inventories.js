@@ -38,7 +38,9 @@
     });
 
     $(document).ready(function() {
-        $("#inventories_table").tablesorter();
+        $("#inventories_table").tablesorter({
+            dateFormat: "ddmmyyyy"
+        });
         // Load data
         var progress_bar = new olext.control.ProgressBar();
         progress_bar.setLabel("0%");
