@@ -27,5 +27,6 @@ def whoami(request):
     return Response({
         'id': request.user.id,
         'username': request.user.username,
+        'full_name': request.user.get_full_name(),
         'email': request.user.email,
     })
