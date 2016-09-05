@@ -85,7 +85,7 @@ def add_rapid_inventory(request):
             inventory.location = location
             inventory.observer = request.user
             inventory.save()
-            return redirect('/rapid_inventories/')
+            return redirect(reverse('rapid_inventory_index'))
     else:
         form = RapidInventoryForm()
         general_form = GeneralInformationsForm()
