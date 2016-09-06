@@ -47,6 +47,7 @@
         buildTaxaTree();
         $('#input-search').val("");
         $('#input-search').change(function () {
+            $('#taxon_treeview').treeview('collapseAll');
             var pattern = $('#input-search').val();
             var matching = $('#taxon_treeview').treeview('search', pattern, {
                 ignoreCase: true,
