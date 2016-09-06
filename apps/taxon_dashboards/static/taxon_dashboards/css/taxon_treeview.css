@@ -1,0 +1,11 @@
+#dashboard_row {
+    width: 98%;
+    margin: 30px 1% 20px 1%;
+}
+
+#taxon_treeview {
+    margin-top: 20px;
+    height: 65vh;
+    /*border: rgba(0, 0, 0, 0.55) solid 1px;*/
+    overflow: auto;
+}
