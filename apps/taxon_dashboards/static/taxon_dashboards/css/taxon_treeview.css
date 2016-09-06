@@ -5,7 +5,23 @@
 
 #taxon_treeview {
     margin-top: 20px;
-    height: 65vh;
+    height: 90%;
     /*border: rgba(0, 0, 0, 0.55) solid 1px;*/
     overflow: auto;
+}
+
+#left_panel {
+    height: 70vh;
+}
+
+#right_panel {
+    height: 70vh;
+}
+
+#taxon_abstract {
+    height: 50%;
+}
+
+#taxon_d3_tree {
+    height: 50%;
 }

@@ -12,11 +12,17 @@
     <div class="container-fluid">
         <h1>Arbre taxonomique</h1>
         <div id="dashboard_row" class="row">
-            <div class="col-xs-4 col-md-4">
+            <div id="left_panel" class="col-xs-4 col-md-4">
                 <div class="row">
                     <div class="col-xs-12 col-md-12"><input class="form-control" id="input-search" placeholder="Rechercher un taxon..." value="" type="input"></div>
                 </div>
                 <div id="taxon_treeview"></div>
+            </div>
+            <div class="col-xs-8 col-md-8" id="right_panel">
+                <div id="taxon_abstract">
+                    <h2 id="selected_taxon_name"></h2>
+                </div>
+                <div id="taxon_d3_tree"></div>
             </div>
         </div>
     </div>

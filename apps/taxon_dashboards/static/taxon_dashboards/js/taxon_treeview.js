@@ -31,6 +31,10 @@
         return tree;
     };
 
+    function taxonSelected(node) {
+        $('#selected_taxon_name').html(node['text']);
+    }
+
     function buildTaxaTree() {
         $.ajax({
             type: 'GET',
@@ -38,13 +42,17 @@
             success: function (result) {
                 var taxa_list = result;
                 var taxa_tree = getTaxaTreeFromTaxaList(taxa_list);
-                $('#taxon_treeview').treeview({data: taxa_tree});
+                $('#taxon_treeview').treeview({
+                    data: taxa_tree,
+                    onNodeSelected: function (event, node) {
+                        taxonSelected(node);
+                    }
+                });
             }
         })
     };
 
-    $(document).ready(function () {
-        buildTaxaTree();
+    function initSearch() {
         $('#input-search').val("");
         $('#input-search').change(function () {
             $('#taxon_treeview').treeview('collapseAll');
@@ -63,6 +71,11 @@
             var scroll_top = first_element.offset().top - m_tree_top + m_tree_scrolltop;
             $('#taxon_treeview').animate({scrollTop: scroll_top}, 200);
         });
+    };
+
+    $(document).ready(function () {
+        buildTaxaTree();
+        initSearch();
     });
 
 })(jQuery);
