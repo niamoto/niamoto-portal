@@ -5,9 +5,13 @@
 
 #taxon_treeview {
     margin-top: 20px;
-    height: 90%;
+    height: calc(92% - 20px);
     /*border: rgba(0, 0, 0, 0.55) solid 1px;*/
     overflow: auto;
+}
+
+.list-group {
+    margin: 0;
 }
 
 #left_panel {
@@ -18,10 +22,44 @@
     height: 70vh;
 }
 
-#taxon_abstract {
-    height: 50%;
+#selected_taxon_name {
+    margin: 0;
 }
 
-#taxon_d3_tree {
-    height: 50%;
+#taxon_abstract {
+    height: 10%;
+}
+
+#taxon_d3_viz {
+    height: 90%;
+}
+
+.full_height {
+    height: 100%;
+}
+
+#general_informations_container {
+    height: 40%;
+    padding: 0;
+}
+
+#taxon_proportions_container {
+    height: 60%;
+    padding: 0;
+}
+
+#map_container {
+    height: 60%;
+    padding: 0;
+}
+
+.panel {
+    height: 100%;
+    margin: 0;
+    /*border-color: #5bb75b;*/
+}
+
+.land {
+  fill: #fff;
+  stroke: #ccc;
 }

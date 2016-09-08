@@ -4,6 +4,7 @@ from django.core.urlresolvers import reverse_lazy
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.views.generic import TemplateView
+from rest_framework.decorators import api_view
 from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 
@@ -37,3 +38,9 @@ class TaxonGeneralDashboardViewSet(ViewSet):
 
     def list(self, request):
         return Response({})
+
+
+@api_view(['GET'])
+def get_coordinates(request, pk=None):
+    dataset = a.get_occurrences_by_taxon(pk)
+    return Response(a.get_coordinates(dataset))

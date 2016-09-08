@@ -46,6 +46,7 @@
                     data: taxa_tree,
                     onNodeSelected: function (event, node) {
                         taxonSelected(node);
+                        $('#taxon_treeview').trigger('taxonSelected', node);
                     }
                 });
             }

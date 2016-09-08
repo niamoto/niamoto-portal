@@ -21,11 +21,14 @@ def get_occurrences_by_taxon(taxon_id=None):
             tax.full_name,
             tax.rank_name,
             obs.height,
-            obs.stem_nb,
+            /* When stem_nb is None, set it to 1 (numpy int cannot be NaN)*/
+            COALESCE(obs.stem_nb, 1),
             obs.circumference,
             obs.status,
             obs.wood_density,
-            obs.bark_thickness
+            obs.bark_thickness,
+            ST_X(occ.location) as x,
+            ST_Y(occ.location) as y
         FROM niamoto_data_occurrence AS occ
         LEFT JOIN niamoto_data_taxon AS tax
             ON occ.taxon_id = tax.id
@@ -41,12 +44,17 @@ def get_occurrences_by_taxon(taxon_id=None):
     occurrences = cursor.fetchall()
     return np.array(
         occurrences,
-        dtype=[('occ_id', 'int'), ('tax_id', 'int'), ('tax_rank', 'S50'),
-               ('tax_full_name', 'S300'), ('tax_rank_name', 'S300'),
+        dtype=[('occ_id', 'int'), ('tax_id', 'int'), ('tax_rank', 'U50'),
+               ('tax_full_name', 'U300'), ('tax_rank_name', 'U300'),
                ('height', 'float'), ('stem_nb', 'int'),
-               ('circumference', 'float'), ('status', 'S50'),
-               ('wood_density', 'float'), ('bark_thickness', 'float')]
+               ('circumference', 'float'), ('status', 'U50'),
+               ('wood_density', 'float'), ('bark_thickness', 'float'),
+               ('x', 'float'), ('y', 'float')]
     )
+
+
+def get_coordinates(dataset):
+    return np.column_stack((dataset['x'], dataset['y']))
 
 
 def get_stats(dataset, field_name):

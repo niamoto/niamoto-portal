@@ -3,7 +3,10 @@
 from django.conf.urls import url, include
 from rest_framework import routers
 
-from apps.taxon_dashboards.views import TaxonGeneralDashboardViewSet
+from apps.taxon_dashboards.views import (
+    TaxonGeneralDashboardViewSet,
+    get_coordinates
+)
 
 
 router = routers.DefaultRouter()
@@ -16,4 +19,5 @@ router.register(
 
 urlpatterns = [
     url(r'^', include(router.urls)),
+    url(r'^coordinates_for_taxon/([0-9]*)/$', get_coordinates, name="coordinates_for_taxon")
 ]
