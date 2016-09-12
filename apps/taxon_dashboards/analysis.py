@@ -4,6 +4,17 @@ from django.db import connection
 import numpy as np
 
 
+def get_occurrences_total_count():
+    """
+    :return: The total number of occurrences in the database.
+    """
+    sql = "SELECT count(*) FROM niamoto_data_occurrence;"
+    cursor = connection.cursor()
+    cursor.execute(sql)
+    count = cursor.fetchone()
+    return count[0]
+
+
 def get_occurrences_by_taxon(taxon_id=None):
     """
     Return a list of occurrences filtered by a taxon_id. The occurrences
@@ -53,8 +64,16 @@ def get_occurrences_by_taxon(taxon_id=None):
     )
 
 
-def get_coordinates(dataset):
-    return np.column_stack((dataset['x'], dataset['y']))
+def get_coordinates(dataset, remove_duplicates=True):
+    coordinates = np.column_stack((dataset['x'], dataset['y']))
+    if remove_duplicates:
+        order = np.lexsort(coordinates.T)
+        coordinates = coordinates[order]
+        diff = np.diff(coordinates, axis=0)
+        ui = np.ones(len(coordinates), 'bool')
+        ui[1:] = (diff != 0).any(axis=1)
+        coordinates = coordinates[ui]
+    return coordinates
 
 
 def get_stats(dataset, field_name):
@@ -64,12 +83,16 @@ def get_stats(dataset, field_name):
     :return: Basic stats about a field of a dataset (min, max, nb_obs, avg).
     """
     field = dataset[field_name]
-    return {
+    _min = np.nanmin(field)
+    _max = np.nanmax(field)
+    _avg = np.nanmean(field)
+    stats = {
         'nb_obs': np.count_nonzero(~np.isnan(field)),
-        'min': np.nanmin(field),
-        'max': np.nanmax(field),
-        'avg': np.nanmean(field),
+        'min': _min if not np.isnan(_min) else None,
+        'max': _max if not np.isnan(_max) else None,
+        'avg': _avg if not np.isnan(_avg) else None,
     }
+    return stats
 
 
 def get_height_stats(dataset):
@@ -90,3 +113,9 @@ def get_bark_thickness_stats(dataset):
 
 def get_stem_nb_stats(dataset):
     return get_stats(dataset, 'stem_nb')
+
+
+def get_taxon_distribution(dataset):
+    tax_col = dataset['tax_full_name']
+    unique, counts = np.unique(tax_col, return_counts=True)
+    return zip(unique, counts)

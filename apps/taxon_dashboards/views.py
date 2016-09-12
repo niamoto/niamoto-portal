@@ -4,7 +4,6 @@ from django.core.urlresolvers import reverse_lazy
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.views.generic import TemplateView
-from rest_framework.decorators import api_view
 from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 
@@ -28,19 +27,32 @@ class TaxonGeneralDashboardViewSet(ViewSet):
 
     def retrieve(self, request, pk=None):
         dataset = a.get_occurrences_by_taxon(pk)
-        return Response({
-            'height': a.get_height_stats(dataset),
-            'circumference': a.get_circumference_stats(dataset),
-            'wood_density': a.get_circumference_stats(dataset),
-            'bark_thickness': a.get_bark_thickness_stats(dataset),
-            'stem_nb': a.get_stem_nb_stats(dataset)
-        })
+        response = {
+            "nb_occurrences": len(dataset),
+            "total_nb_occurrences": a.get_occurrences_total_count(),
+        }
+        # height
+        if self.request.query_params.get('include_height', None):
+            response['height'] = a.get_stats(dataset, 'height')
+        # circumference
+        if self.request.query_params.get('include_circumference', None):
+            response['circumference'] = a.get_stats(dataset, 'circumference')
+        # wood_density
+        if self.request.query_params.get('include_wood_density', None):
+            response['wood_density'] = a.get_stats(dataset, 'wood_density')
+        # bark_thickness
+        if self.request.query_params.get('include_bark_thickness', None):
+            response['bark_thickness'] = a.get_stats(dataset, 'bark_thickness')
+        # stem_nb
+        if self.request.query_params.get('include_stem_nb', None):
+            response['stem_nb'] = a.get_stats(dataset, 'stem_nb')
+        # coordinates
+        if self.request.query_params.get('include_coordinates', None):
+            response['coordinates'] = a.get_coordinates(dataset)
+        # taxon_distribution
+        if self.request.query_params.get('include_taxon_distribution', None):
+            response['taxon_distribution'] = a.get_taxon_distribution(dataset)
+        return Response(response)
 
     def list(self, request):
         return Response({})
-
-
-@api_view(['GET'])
-def get_coordinates(request, pk=None):
-    dataset = a.get_occurrences_by_taxon(pk)
-    return Response(a.get_coordinates(dataset))
