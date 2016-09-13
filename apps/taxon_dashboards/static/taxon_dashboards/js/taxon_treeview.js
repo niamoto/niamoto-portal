@@ -1,7 +1,5 @@
 (function($, undefined) {
 
-    var data = {};
-
     function getTaxaTreeFromTaxaList(taxa_list) {
         var tax_dict = {};
         var tree = [];
@@ -314,18 +312,101 @@
                     };
                 })
                 .remove();
-
-            /* ------- TEXT LABELS -------*/
-
-
         };
+    };
 
+    function initGeneralInformations() {
 
+        var rank_map = {
+            "FAMILY": "Famille",
+            "GENUS": "Genre",
+            "SPECIE": "Espèce",
+            "INFRA": "Infra"
+        }
+
+        var height = $("#tax_proportion_total").height();
+        var width = $("#tax_proportion_total").width();
+
+        var formatPercent = d3.format(".3%");
+
+        var previous_value = 0;
+
+        var svg = d3.select("#tax_proportion_total").append("svg")
+            .attr("width", width)
+            .attr("height", height);
+
+        $('#taxon_treeview').on('taxonSelected', function (event, data) {
+            updateGeneralInformations(data);
+        });
+
+        function updateGeneralInformations(data) {
+            var node = $('#taxon_treeview').treeview('getSelected')[0];
+            $("#tax_rank_value").text(rank_map[node['rank']]);
+            $("#tax_occ_nb_value").text(data['nb_occurrences']);
+            document.getElementById("detailed_dashboards_link").href = node['id'];
+            var nb_total_occurrences = data['total_nb_occurrences'];
+
+            var selection = svg.selectAll("#prop_text")
+                .data([data['nb_occurrences']]);
+
+            selection.enter()
+                .append("text")
+                .style("text-anchor", "middle")
+                .attr("id", "prop_text")
+                .attr("x", width / 2)
+                .attr("y", height / 2)
+                .transition()
+                .duration(1000)
+                .attrTween("text", function(d) {
+                    var i = d3.interpolate(previous_value, d);
+                    previous_value = d;
+                    return function(t) {
+                        d3.select("#prop_text").text(
+                            " Représente "
+                            + formatPercent(i(t) / nb_total_occurrences)
+                            + " de toutes les occurrences."
+                        );
+                    };
+                });;
+
+            selection.attr("x", width / 2)
+                .attr("y", height / 2)
+                .style("text-anchor", "middle")
+                .transition()
+                .duration(1000)
+                .attrTween("text", function(d) {
+                    var i = d3.interpolate(previous_value, d);
+                    previous_value = d;
+                    return function(t) {
+                        d3.select("#prop_text").text(
+                            " Représente "
+                            + formatPercent(i(t) / nb_total_occurrences)
+                            + " de toutes les occurrences."
+                        );
+                    };
+                });
+        }
+    };
+
+    function initModal() {
+        $('#modal').on('shown.bs.modal', function() {
+            $(document).off('focusin.modal');
+        });
+        $('#modal').modal({
+            backdrop: 'static',
+            keyboard: false
+        });
+        $('.modal-backdrop').appendTo('#right_panel');
+        $('#taxon_treeview').on('taxonSelected', function (event, data) {
+            $('#modal').modal('hide');
+        });
     };
 
     $(document).ready(function () {
         buildTaxaTree();
         initSearch();
+        initModal();
+        initGeneralInformations();
         initMap();
         initDonutChart();
     });
