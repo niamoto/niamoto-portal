@@ -45,7 +45,11 @@ h5 {
 #right_panel {
     height: 70vh;
     position:relative;
-    overflow: hidden;
+    overflow: auto;
+}
+
+#taxon_d3_viz {
+    height: 90%;
 }
 
 .modal, .modal-backdrop {
@@ -62,14 +66,11 @@ h5 {
 
 #selected_taxon_name {
     margin: 0;
+    font-size: 28px;
 }
 
 #taxon_abstract {
-    height: 10%;
-}
-
-#taxon_d3_viz {
-    height: 90%;
+    height: 7%;
 }
 
 .full_height {
@@ -79,16 +80,27 @@ h5 {
 #general_informations_container {
     height: 25%;
     padding: 0;
+    margin: 0;
+    min-height: 135px;
 }
 
 #taxon_proportions_container {
     height: 75%;
     padding: 0;
+    margin: 0;
 }
 
 #map_container {
     height: 75%;
     padding: 0;
+    margin: 0;
+}
+
+#map_label {
+}
+
+#pie_label {
+
 }
 
 #taxon_proportions_widget {
