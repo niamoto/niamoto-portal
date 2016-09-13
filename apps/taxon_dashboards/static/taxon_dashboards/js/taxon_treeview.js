@@ -1,5 +1,14 @@
 (function($, undefined) {
 
+    var color = [
+        "#5496c4", "#ffd24d", "#a29cc9", "#f96353", "#6cc6b7",
+        "#fcac4f", "#a0d643", "#f99fcd", "#b068b1", "#b3b3b3"
+    ];
+
+    var sorted_distribution = [];
+    var total = 0;
+    var map_color = {};
+
     function getTaxaTreeFromTaxaList(taxa_list) {
         var tax_dict = {};
         var tree = [];
@@ -61,9 +70,38 @@
 
         d3.json(url, function (error, data) {
             if (error) throw error;
+            buildSortedDistribution(data);
             $('#taxon_treeview').trigger('taxonSelected', data);
         });
     }
+
+    function buildSortedDistribution(taxon_data) {
+        var data = taxon_data['taxon_distribution'];
+        total = taxon_data['nb_occurrences'];
+        // Sort data and retain only 10 categories
+        data.sort(function(a, b) {
+            if (a[1] < b[1]) return -1;
+            if (a[1] > b[1]) return 1;
+            return 0;
+        });
+        data.reverse();
+        if (data.length > 10) {
+            var others = ['Autres', 0, []];
+            for (var i = 9; i < data.length; i++) {
+                var j = data[i];
+                others[1] += j[1];
+                others[2].push(j[0]);
+            }
+            data = data.slice(0, 9);
+            data.push(others);
+        }
+        var _map_color = {};
+        for (var i = 0; i < data.length; i++) {
+            _map_color[data[i][0]] = color[i];
+        }
+        map_color = _map_color;
+        sorted_distribution = data;
+    };
 
     function initSearch() {
         $('#input-search').val("");
@@ -98,10 +136,8 @@
 
         var occ_selection = svg.selectAll("circle")
 
-        function updateOccurrences(data) {
-            var occurrences = data['coordinates'];
+        function enterOccurrences(occurrences) {
             occ_selection = svg.selectAll("circle").data(occurrences);
-
             occ_selection.enter()
                 .append("circle")
                 .attr("cx", function (d) { return projection(d)[0]; })
@@ -110,20 +146,31 @@
                 .transition()
                 .duration(500)
                 .attr("r", "3")
-                .attr("fill", "#239023")
+                .attr("fill", function(d) { return "#239023"; })
                 .attr("stroke", "#196719")
                 .attr("opacity", "0.8");
+        };
 
-            occ_selection.transition()
-                .duration(500)
-                .attr("cx", function (d) { return projection(d)[0]; })
-                .attr('cy', function (d) { return projection(d)[1]; })
-
-            occ_selection.exit()
-                .transition()
-                .duration(500)
-                .attr('r', '0')
-                .remove();
+        function updateOccurrences(data) {
+            var occurrences = data['coordinates'];
+            occ_selection = svg.selectAll("circle");
+            var count = occ_selection.size();
+            if (count == 0) {
+                enterOccurrences(occurrences);
+            } else {
+                occ_selection = svg.selectAll("circle").data([]);
+                occ_selection.exit()
+                    .transition()
+                    .duration(500)
+                    .remove()
+                    .on("end", function () {
+                        count -= 1;
+                        if (count == 0) {
+                            enterOccurrences(occurrences);
+                        }
+                    })
+                    .attr('r', '0');
+            }
         };
 
         d3.json(nc_topojson_url, function (error, nc) {
@@ -198,37 +245,12 @@
             .attr("id", "tooltip")
             .style("opacity", 0);
 
-        var color = [
-            "#5496c4", "#ffd24d", "#a29cc9", "#f96353", "#6cc6b7",
-            "#fcac4f", "#a0d643", "#f99fcd", "#b068b1", "#b3b3b3"
-        ];
-
-        var total = 0;
-
         $('#taxon_treeview').on('taxonSelected', function (event, data) {
             updateData(data);
         });
 
         function updateData(taxon_data) {
-            var data = taxon_data['taxon_distribution'];
-            total = taxon_data['nb_occurrences'];
-            // Sort data and retain only 10 categories
-            data.sort(function(a, b) {
-                if (a[1] < b[1]) return -1;
-                if (a[1] > b[1]) return 1;
-                return 0;
-            });
-            data.reverse();
-            if (data.length > 10) {
-                var others = ['Autres', 0, []];
-                for (var i = 9; i < data.length; i++) {
-                    var j = data[i];
-                    others[1] += j[1];
-                    others[2].push(j[0]);
-                }
-                data = data.slice(0, 9);
-                data.push(others);
-            }
+            var data = sorted_distribution;
             var domain = [];
             for (var i = 0; i < data.length; i++) {
                 domain.push(data[i][0]);
