@@ -1,0 +1,22 @@
+{% extends "site_base.html" %}
+
+{% load staticfiles %}
+
+{% block styles %}
+    {{ block.super }}
+    <link rel="stylesheet" type="text/css" href="{% static 'taxon_dashboards/css/taxon_detailed_dashboards.css' %}"/>
+{% endblock %}
+
+{% block body_base %}
+    <div id="main_container" class="container-fluid">
+        <div id="coming_soon">
+            <h1>Disponible prochainement...</h1>
+            <h4>En attendant, vous pouvez envoyer vos suggestions à <a href="mailto:niamoto.nc@gmail.com">niamoto.nc@gmail.com</a> !</h4>
+            <h5><a href="..">retour à la page précédente</a></h5>
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    {{ block.super }}
+{% endblock %}

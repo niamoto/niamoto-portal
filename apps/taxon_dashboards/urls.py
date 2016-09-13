@@ -2,9 +2,10 @@
 
 from django.conf.urls import url
 
-from apps.taxon_dashboards.views import TaxonTreeView
+from apps.taxon_dashboards import views
 
 
 urlpatterns = [
-    url(r'^$', TaxonTreeView.as_view(), name="taxon_treeview"),
+    url(r'^$', views.TaxonTreeView.as_view(), name="taxon_treeview"),
+    url(r'^([0-9]*)/$', views.TaxonDetailedDashboardsView.as_view(), name="detailed_dashboards"),
 ]
