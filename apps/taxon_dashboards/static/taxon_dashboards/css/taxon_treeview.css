@@ -3,6 +3,13 @@
     margin: 30px 1% 20px 1%;
 }
 
+#preloader {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    z-index: 10;
+}
+
 h5 {
     text-align: center;
 }

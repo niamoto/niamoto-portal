@@ -49,6 +49,7 @@
                         updateTaxonData(node['id']);
                     }
                 });
+                hidePreloader();
             }
         })
     };
@@ -151,11 +152,12 @@
                 .scale(0.9 * scale).translate(offset);
             path = path.projection(projection);
 
-
             svg.append("path")
                 .datum(features)
                 .attr("class", "land")
                 .attr("d", path);
+
+            hidePreloader();
         });
         $('#taxon_treeview').on('taxonSelected', function (event, data) {
             updateOccurrences(data);
@@ -402,10 +404,19 @@
         });
     };
 
+    var count = 0
+
+    function hidePreloader() {
+        count += 1;
+        if (count >= 2) {
+            document.getElementById('preloader').style.display = 'none';
+            initModal();
+        }
+    };
+
     $(document).ready(function () {
         buildTaxaTree();
         initSearch();
-        initModal();
         initGeneralInformations();
         initMap();
         initDonutChart();
