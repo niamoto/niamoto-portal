@@ -1,5 +1,7 @@
 (function($, undefined) {
 
+    var preloader_count = 0
+
     var color = [
         "#5496c4", "#ffd24d", "#a29cc9", "#f96353", "#6cc6b7",
         "#fcac4f", "#a0d643", "#f99fcd", "#b068b1", "#b3b3b3"
@@ -58,12 +60,16 @@
                         updateTaxonData(node['id']);
                     }
                 });
-                hidePreloader();
+                hidePreloader(true);
             }
         })
     };
 
     function updateTaxonData(taxon_id) {
+
+        preloader_count = 0;
+        showPreloader();
+
         var url = "/api/1.0/dashboard/taxon_dashboard/"
             + taxon_id + "/?include_coordinates=true"
             + "&include_taxon_distribution=true";
@@ -72,6 +78,8 @@
             if (error) throw error;
             buildSortedDistribution(data);
             $('#taxon_treeview').trigger('taxonSelected', data);
+            hidePreloader(false);
+            hidePreloader(false);
         });
     }
 
@@ -204,7 +212,7 @@
                 .attr("class", "land")
                 .attr("d", path);
 
-            hidePreloader();
+            hidePreloader(true);
         });
         $('#taxon_treeview').on('taxonSelected', function (event, data) {
             updateOccurrences(data);
@@ -426,13 +434,17 @@
         });
     };
 
-    var count = 0
+    function showPreloader() {
+        document.getElementById('preloader').style.display = 'inline';
+    }
 
-    function hidePreloader() {
-        count += 1;
-        if (count >= 2) {
+    function hidePreloader(init) {
+        preloader_count += 1;
+        if (preloader_count >= 2) {
             document.getElementById('preloader').style.display = 'none';
-            initModal();
+            if (init) {
+                initModal();
+            }
         }
     };
 
