@@ -7,6 +7,8 @@ from django.conf import settings
 from django.core.files.storage import FileSystemStorage
 from django.db import models
 
+from apps.niamoto_data.models import Occurrence
+
 
 class OverwriteStorage(FileSystemStorage):
     def get_available_name(self, name, max_length=None):
@@ -43,3 +45,11 @@ class PlantnoteDatabase(models.Model):
     @classmethod
     def active_database(cls):
         return cls.objects.get(active=True)
+
+
+class PlantnoteOccurrence(Occurrence):
+    """
+    Occurrence imported from a Pl@ntnote database.
+    """
+    plantnote_id = models.IntegerField(unique=True)
+    collector = models.CharField(max_length=300)

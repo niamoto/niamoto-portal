@@ -79,3 +79,5 @@ settings.py
 bin/
 include/
 pip-selfcheck.json
+
+*.ipynb*

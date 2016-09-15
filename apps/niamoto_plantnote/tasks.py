@@ -7,11 +7,11 @@ from datetime import datetime
 from django.db import transaction
 from celery import shared_task
 from celery.utils.log import get_task_logger
-from apps.niamoto_data.data_io import taxon as taxon_io
-from apps.niamoto_data.data_io import occurrence as occurrence_io
-from apps.niamoto_data.data_io import plot as plot_io
-from apps.niamoto_data.data_io import plot_occurrences as plot_occs_io
-from apps.niamoto_data.data_io import occurrence_observations as occ_obs_io
+from .data_io import taxon as taxon_io
+from .data_io import occurrence as occurrence_io
+from .data_io import plot as plot_io
+from .data_io import plot_occurrences as plot_occs_io
+from .data_io import occurrence_observations as occ_obs_io
 
 from .models import PlantnoteDatabase
 
