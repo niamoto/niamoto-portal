@@ -2,25 +2,18 @@
 
 import sqlite3
 
-from django.db import connection
+from django.db import connection, transaction
 
 from apps.niamoto_data.models import Plot
 
 
-def delete_all_plots():
-    pg_sql = \
-        """
-        DELETE FROM {}
-        """.format(Plot._meta.db_table)
-    cursor = connection.cursor()
-    cursor.execute(pg_sql)
-
-
+@transaction.atomic
 def import_plots_from_plantnote_db(database):
     """
     Import a plot list from a Pl@ntnote database.
     :param database: The path to the plantnote database.
     """
+    _delete_all_plots()
     sql = \
         """
         SELECT "ID Localités" AS id_plot,
@@ -69,5 +62,15 @@ def import_plots_from_plantnote_db(database):
                 get_location_col(row)
             ) for row in data if row[0] not in (None, 'None')])
         )
+    cursor = connection.cursor()
+    cursor.execute(pg_sql)
+
+
+@transaction.atomic
+def _delete_all_plots():
+    pg_sql = \
+        """
+        DELETE FROM {}
+        """.format(Plot._meta.db_table)
     cursor = connection.cursor()
     cursor.execute(pg_sql)

@@ -36,14 +36,14 @@ def replace_plantnote_db(db_uuid):
         # Delete everything
         occurrence_io.delete_all_occurrences()
         taxon_io._delete_all_taxa()
-        plot_io.delete_all_plots()
-        plot_occs_io.delete_all_plot_occurrences()
+        plot_io._delete_all_plots()
+        plot_occs_io._delete_all_plot_occurrences()
         occ_obs_io.delete_all_occurrence_observations()
         # Import everything
         taxon_io.import_taxon_from_plantnote_db(url)
         occurrence_io.import_occurrences_from_plantnote_db(url)
         plot_io.import_plots_from_plantnote_db(url)
-        plot_occs_io.import_plot_occurrences_from_plantnote_db_(url)
+        plot_occs_io.import_plot_occurrences_from_plantnote_db(url)
         occ_obs_io.import_occurrence_observations_from_plantnote_db(url)
     return db_uuid
 
