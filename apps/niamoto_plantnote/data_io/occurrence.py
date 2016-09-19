@@ -9,6 +9,7 @@ from numpy.lib.recfunctions import append_fields
 
 from apps.niamoto_data.models import Occurrence
 from ..models import PlantnoteOccurrence
+from utils import fix_db_sequences
 
 
 @transaction.atomic
@@ -18,6 +19,7 @@ def import_occurrences_from_plantnote_db(database):
     converted to a sqlite database.
     :param database: The path to the database.
     """
+    fix_db_sequences()
     plantnote_data = _get_occurrences_from_plantnote_db(database)
     niamoto_data = _get_current_plantnote_occurrences()
     insert_selection = _get_insert_selection(plantnote_data, niamoto_data)

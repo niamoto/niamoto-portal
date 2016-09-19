@@ -8,6 +8,7 @@ import pandas as pd
 
 from apps.niamoto_data.models import PlotOccurrences
 from apps.niamoto_plantnote.models import PlantnoteOccurrence
+from utils import fix_db_sequences
 
 
 @transaction.atomic
@@ -93,3 +94,4 @@ def _delete_all_plot_occurrences():
         """.format(PlotOccurrences._meta.db_table)
     cursor = connection.cursor()
     cursor.execute(pg_sql)
+    fix_db_sequences()

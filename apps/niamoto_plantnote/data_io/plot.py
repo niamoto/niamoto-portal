@@ -5,6 +5,7 @@ import sqlite3
 from django.db import connection, transaction
 
 from apps.niamoto_data.models import Plot
+from utils import fix_db_sequences
 
 
 @transaction.atomic
@@ -74,3 +75,4 @@ def _delete_all_plots():
         """.format(Plot._meta.db_table)
     cursor = connection.cursor()
     cursor.execute(pg_sql)
+    fix_db_sequences()

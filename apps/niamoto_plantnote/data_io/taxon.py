@@ -6,6 +6,7 @@ from django.db import connection, transaction
 import numpy as np
 
 from apps.niamoto_data.models import Taxon
+from utils import fix_db_sequences
 
 
 @transaction.atomic
@@ -173,3 +174,4 @@ def _delete_all_taxa():
         """.format(Taxon._meta.db_table)
     cursor = connection.cursor()
     cursor.execute(pg_sql)
+    fix_db_sequences()
