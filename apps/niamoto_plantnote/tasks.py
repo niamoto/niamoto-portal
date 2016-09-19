@@ -33,13 +33,6 @@ def replace_plantnote_db(db_uuid):
     logger.debug('PlantnoteDatabase object {} loaded'.format(db_uuid))
     logger.debug('Db file url is: "{}"'.format(url))
     with transaction.atomic():
-        # Delete everything
-        occurrence_io.delete_all_occurrences()
-        taxon_io._delete_all_taxa()
-        plot_io._delete_all_plots()
-        plot_occs_io._delete_all_plot_occurrences()
-        occ_obs_io._delete_all_occurrence_observations()
-        # Import everything
         taxon_io.import_taxon_from_plantnote_db(url)
         occurrence_io.import_occurrences_from_plantnote_db(url)
         plot_io.import_plots_from_plantnote_db(url)
