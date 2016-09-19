@@ -18,17 +18,17 @@ def import_occurrences_from_plantnote_db(database):
     converted to a sqlite database.
     :param database: The path to the database.
     """
-    plantnote_data = get_occurrences_from_plantnote_db(database)
-    niamoto_data = get_current_plantnote_occurrences()
-    insert_selection = get_insert_selection(plantnote_data, niamoto_data)
-    update_selection = get_update_selection(plantnote_data, niamoto_data)
-    delete_selection = get_delete_selection(plantnote_data, niamoto_data)
-    insert_occurrences(insert_selection)
-    update_occurrences(update_selection)
-    delete_occurrences(delete_selection)
+    plantnote_data = _get_occurrences_from_plantnote_db(database)
+    niamoto_data = _get_current_plantnote_occurrences()
+    insert_selection = _get_insert_selection(plantnote_data, niamoto_data)
+    update_selection = _get_update_selection(plantnote_data, niamoto_data)
+    delete_selection = _get_delete_selection(plantnote_data, niamoto_data)
+    _insert_occurrences(insert_selection)
+    _update_occurrences(update_selection)
+    _delete_occurrences(delete_selection)
 
 
-def get_occurrences_from_plantnote_db(database):
+def _get_occurrences_from_plantnote_db(database):
     """
     Select and return an occurrence list from a .ptx Pl@ntnote database,
     previously converted to a sqlite database.
@@ -76,7 +76,7 @@ def get_occurrences_from_plantnote_db(database):
     return data
 
 
-def get_current_plantnote_occurrences():
+def _get_current_plantnote_occurrences():
     """
     :return: An array containing the occurrences in the niamoto's database
     coming from a Pl@ntnote database import.
@@ -109,7 +109,7 @@ def get_current_plantnote_occurrences():
     return data
 
 
-def get_insert_selection(plantnote_data, niamoto_data):
+def _get_insert_selection(plantnote_data, niamoto_data):
     diff = np.setdiff1d(
         plantnote_data['plantnote_id'],
         niamoto_data['plantnote_id'],
@@ -123,7 +123,7 @@ def get_insert_selection(plantnote_data, niamoto_data):
     return plantnote_data[bool_diff]
 
 
-def get_update_selection(plantnote_data, niamoto_data):
+def _get_update_selection(plantnote_data, niamoto_data):
     intersect = np.intersect1d(
         plantnote_data['plantnote_id'],
         niamoto_data['plantnote_id'],
@@ -145,12 +145,10 @@ def get_update_selection(plantnote_data, niamoto_data):
     b = niamoto_data[bool_diff_b]
     a = append_fields(a, 'id', b['id'], dtypes=b['id'].dtype, usemask=False)
     eq = a == b
-    print(a[:1])
-    print(b[:1])
     return a[~eq]
 
 
-def get_delete_selection(plantnote_data, niamoto_data):
+def _get_delete_selection(plantnote_data, niamoto_data):
     diff = np.setdiff1d(
         niamoto_data['plantnote_id'],
         plantnote_data['plantnote_id'],
@@ -165,7 +163,7 @@ def get_delete_selection(plantnote_data, niamoto_data):
 
 
 @transaction.atomic
-def insert_occurrences(insert_selection):
+def _insert_occurrences(insert_selection):
     if len(insert_selection) == 0:
         return
     # Generate rows to insert in Occurrence base model
@@ -213,7 +211,7 @@ def insert_occurrences(insert_selection):
 
 
 @transaction.atomic
-def update_occurrences(update_selection):
+def _update_occurrences(update_selection):
     if len(update_selection) == 0:
         return
     # Update records in Occurrence base model
@@ -249,7 +247,7 @@ def update_occurrences(update_selection):
 
 
 @transaction.atomic
-def delete_occurrences(delete_selection):
+def _delete_occurrences(delete_selection):
     if len(delete_selection) == 0:
         return
     in_array = ','.join([str(i) for i in delete_selection['id']])

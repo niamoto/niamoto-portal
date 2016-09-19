@@ -74,6 +74,8 @@ data
 
 site_media
 
+share
+
 settings.py
 
 bin/

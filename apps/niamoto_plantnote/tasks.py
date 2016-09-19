@@ -35,7 +35,7 @@ def replace_plantnote_db(db_uuid):
     with transaction.atomic():
         # Delete everything
         occurrence_io.delete_all_occurrences()
-        taxon_io.delete_all_taxa()
+        taxon_io._delete_all_taxa()
         plot_io.delete_all_plots()
         plot_occs_io.delete_all_plot_occurrences()
         occ_obs_io.delete_all_occurrence_observations()
