@@ -3,35 +3,31 @@
 import sqlite3
 from datetime import date
 
-from django.db import connection
+from django.db import connection, transaction
+import numpy as np
+import pandas as pd
 
 from apps.niamoto_data.models import OccurrenceObservations
+from apps.niamoto_plantnote.models import PlantnoteOccurrence
 
 
-def delete_all_occurrence_observations():
-    pg_sql = \
-        """
-        DELETE FROM {}
-        """.format(OccurrenceObservations._meta.db_table)
-    cursor = connection.cursor()
-    cursor.execute(pg_sql)
-
-
+@transaction.atomic
 def import_occurrence_observations_from_plantnote_db(database):
     """
     Import occurrence observations from a pl@ntnote database.
     :param database: The path to the database.
     """
+    _delete_all_occurrence_observations()
     sql = \
         """
         SELECT Indiv."ID Individus" AS id_indiv,
             Obs."date_observation" AS date_obs,
-            Obs."hauteur" AS height,
-            Obs."nb_tiges" AS stem_nb,
-            Obs."perimeter" AS circumference,
-            Obs."statut" AS status,
-            Indiv."wood_density" AS wood_density,
-            Indiv."bark_thickness" AS bark_thickness
+            COALESCE(Obs."hauteur", 'NULL') AS height,
+            COALESCE(Obs."nb_tiges", 'NULL') AS stem_nb,
+            COALESCE(Obs."perimeter", 'NULL') AS circumference,
+            COALESCE(Obs."statut", 'NULL') AS status,
+            COALESCE(Indiv."wood_density", 'NULL') AS wood_density,
+            COALESCE(Indiv."bark_thickness", 'NULL') AS bark_thickness
         FROM Individus AS Indiv
         LEFT JOIN Observations AS Obs ON Indiv."ID Individus" = Obs."ID Individus"
         WHERE Obs."ID Observations" IS NOT NULL AND Indiv."ID Inventaires" IS NOT NULL;
@@ -39,7 +35,48 @@ def import_occurrence_observations_from_plantnote_db(database):
     conn = sqlite3.connect(database)
     cur = conn.cursor()
     cur.execute(sql)
-    data = cur.fetchall()
+    data = np.array(
+        cur.fetchall(),
+        dtype=[
+            ('plantnote_id', 'int'),
+            ('date_obs', 'U50'),
+            ('height', 'U50'),
+            ('stem_nb', 'U50'),
+            ('circumference', 'U50'),
+            ('status', 'U50'),
+            ('wood_density', 'U50'),
+            ('bark_thickness', 'U50'),
+        ]
+    )
+
+    # Get niamoto occurrences ids corresponding to pl@ntnote ones
+    cursor = connection.cursor()
+    cursor.execute(
+        """
+        SELECT plantnote_id, occurrence_ptr_id
+        FROM {}
+        WHERE plantnote_id IN ({})
+        ORDER BY plantnote_id;
+        """.format(
+            PlantnoteOccurrence._meta.db_table,
+            ','.join([str(i) for i in data['plantnote_id']])
+        )
+    )
+    niamoto_occ = np.array(
+        cursor.fetchall(),
+        dtype=[
+            ('plantnote_id', 'int'),
+            ('occurrence_id', 'int'),
+        ]
+    )
+
+    # Now merge data on plantnote_id
+    merged_data = pd.merge(
+        pd.DataFrame(data),
+        pd.DataFrame(niamoto_occ),
+        on="plantnote_id",
+        how='left'
+    )
 
     def get_date(date_str):
         if len(date_str) > 0:
@@ -54,16 +91,16 @@ def import_occurrence_observations_from_plantnote_db(database):
 
     to_insert = dict()
 
-    for row in data:
-        id_indiv = row[0]
-        date_str = row[1]
+    for index, row in merged_data.iterrows():
+        id_indiv = row['occurrence_id']
+        date_str = row['date_obs']
         d = get_date(date_str)
-        height = row[2]
-        stem_nb = row[3]
-        circumference = row[4]
-        status = row[5]
-        wood_density = row[6]
-        bark_thickness = row[7]
+        height = row['height']
+        stem_nb = row['stem_nb']
+        circumference = row['circumference']
+        status = row['status']
+        wood_density = row['wood_density']
+        bark_thickness = row['bark_thickness']
 
         if id_indiv not in to_insert:
             to_insert[id_indiv] = [
@@ -118,15 +155,30 @@ def import_occurrence_observations_from_plantnote_db(database):
         """.format(
             OccurrenceObservations._meta.db_table,
             ','.join(["({},{},{},{},{},{},{},{})".format(
-                "'{}'".format(row[0]),
+                "{}".format(row[0]),
                 "'{}'".format(row[1]),
-                "'{}'".format(row[2]) if row[2] is not None else "NULL",
-                "'{}'".format(row[3]) if row[3] is not None else "NULL",
-                "'{}'".format(row[4]) if row[4] is not None else "NULL",
-                "'{}'".format(row[5]) if row[5] is not None else "NULL",
-                "'{}'".format(row[6]) if row[6] is not None else "NULL",
-                "'{}'".format(row[7]) if row[7] is not None else "NULL"
+                "{}".format(row[2]),
+                "{}".format(row[3]),
+                "{}".format(row[4]),
+                row[5] if row[5] == 'NULL' else "'{}'".format(row[5]),
+                "{}".format(row[6]),
+                "{}".format(row[7])
             ) for row in to_insert.values()])
+        )
+    cursor = connection.cursor()
+    cursor.execute(pg_sql)
+
+
+@transaction.atomic
+def _delete_all_occurrence_observations():
+    pg_sql = \
+        """
+        DELETE FROM {} AS occ_obs
+        USING {} AS plantnote_occ
+        WHERE occ_obs.occurrence_id = plantnote_occ.occurrence_ptr_id;
+        """.format(
+            OccurrenceObservations._meta.db_table,
+            PlantnoteOccurrence._meta.db_table
         )
     cursor = connection.cursor()
     cursor.execute(pg_sql)
