@@ -29,7 +29,7 @@ def replace_plantnote_db(db_uuid):
     """
     logger.debug('Loading PlantnoteDatabase object {}'.format(db_uuid))
     db = PlantnoteDatabase.objects.get(uuid=db_uuid)
-    url = db.file.url
+    url = db.file.path
     logger.debug('PlantnoteDatabase object {} loaded'.format(db_uuid))
     logger.debug('Db file url is: "{}"'.format(url))
     with transaction.atomic():
