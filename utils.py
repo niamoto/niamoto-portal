@@ -4,6 +4,7 @@ from collections import OrderedDict
 
 from django.core.mail.backends.smtp import EmailBackend
 from django.db import connection
+from django.conf import settings
 
 
 def dict_fetchall(cursor):
@@ -31,6 +32,20 @@ def get_email_backend():
 def get_default_from_email():
     from constance import config
     return config.DEFAULT_FROM_EMAIL
+
+
+def get_sqlalchemy_connection_string():
+    """
+    :return: A sqlalchemy connection string to the niamoto database.
+    """
+    db = settings.DATABASES['default']
+    return "postgresql://{}:{}@{}:{}/{}".format(
+        db['USER'],
+        db['PASSWORD'],
+        db['HOST'],
+        db['PORT'],
+        db['NAME']
+    )
 
 
 def fix_db_sequences():
