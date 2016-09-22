@@ -174,7 +174,88 @@ class DataImporter:
 
     @transaction.atomic
     def _process_update(self):
-        pass
+        l1 = len(self.update_dataframe_current)
+        l2 = len(self.update_dataframe_new)
+        assert l1 == l2
+        if l1 == 0:
+            return self.update_dataframe_new
+        # Main table values
+        fields = ['id'] + list(self.fields_map.values())
+        apply_funcs = {}
+        for f in fields:
+            django_field = self.niamoto_model._meta.get_field(f)
+            int_types = ['ForeignKey', 'AutoField', 'IntegerField']
+            if django_field.get_internal_type() in int_types:
+                apply_funcs[f] = float_to_int
+        values = generate_sql_values(
+            self.update_dataframe_new,
+            fields,
+            apply=apply_funcs,
+            quote_fields=self.quote_fields
+        )
+        sets = ["{field} = temp_update.{field}".format(**{
+            'field': field,
+        }) for field in fields]
+        update_values = ','.join(sets)
+        # Join table values
+        extra_fields = list(self.extra_fields_map.values())
+        ptr_field = self._get_ptr_field_name()
+        join_fields = extra_fields + [
+            ptr_field,
+            self.external_id
+        ]
+        join_apply_funcs = {}
+        for f in join_fields:
+            django_field = self.niamoto_join_model._meta.get_field(f)
+            int_types = ['ForeignKey', 'AutoField', 'IntegerField']
+            if django_field.get_internal_type() in int_types:
+                join_apply_funcs[f] = float_to_int
+        self.update_dataframe_new[ptr_field] = self.update_dataframe_new['id']
+        join_values = generate_sql_values(
+            self.update_dataframe_new,
+            join_fields,
+            apply=join_apply_funcs,
+            quote_fields=self.quote_extra_fields
+        )
+        join_sets = ["{field} = temp_update_join.{field}".format(**{
+            'field': field,
+        }) for field in join_fields]
+        update_join_values = ','.join(join_sets)
+        sql = \
+            """
+            CREATE TEMP TABLE temp_update(LIKE {table} INCLUDING ALL) ON COMMIT DROP;
+
+            INSERT INTO temp_update ({fields})
+            VALUES {values};
+
+            UPDATE {table}
+            SET {update_values}
+            FROM temp_update
+            WHERE {table}.id = temp_update.id;
+
+            CREATE TEMP TABLE temp_update_join(LIKE {join_table} INCLUDING ALL) ON COMMIT DROP;
+
+            INSERT INTO temp_update_join({join_fields})
+            VALUES {join_values};
+
+            UPDATE {join_table}
+            SET {update_join_values}
+            FROM temp_update_join
+            WHERE {join_table}.{ptr_field} = temp_update_join.{ptr_field};
+            """.format(**{
+                'table': self.niamoto_model._meta.db_table,
+                'fields': ','.join(fields),
+                'values': values,
+                'update_values': update_values,
+                'join_table': self.niamoto_join_model._meta.db_table,
+                'join_fields': ','.join(join_fields),
+                'join_values': join_values,
+                'update_join_values': update_join_values,
+                'ptr_field': ptr_field,
+            })
+        cursor = connection.cursor()
+        cursor.execute(sql)
+        return self.update_dataframe_new
 
     def _get_ptr_field_name(self):
         ptr_field = self.niamoto_join_model._meta.parents[self.niamoto_model]
@@ -188,7 +269,7 @@ class DataImporter:
               ON {table}.id = {join_table}.{ptr_field}
             ORDER BY {index_col};
             """.format(**{
-                'fields': ','.join(self.niamoto_fields),
+                'fields': ','.join(['id'] + self.niamoto_fields),
                 'join_table': self.niamoto_join_model._meta.db_table,
                 'table': self.niamoto_model._meta.db_table,
                 'ptr_field': self._get_ptr_field_name(),
@@ -247,11 +328,14 @@ class DataImporter:
         A_nona = A.fillna(-1)
         B_nona = B.fillna(-1)
         changed = (A_nona != B_nona).any(1)
+        ids = self.niamoto_dataframe['id'].loc[intersect_index][changed]
         # Duplicate index as a column
         index_col_a = A.index.values
         A[self.external_id] = index_col_a
+        A['id'] = ids
         index_col_b = B.index.values
         B[self.external_id] = index_col_b
+        B['id'] = ids
         # Assign new values
         self._update_dataframe_current = A[changed]
         self._update_dataframe_new = B[changed]
@@ -266,8 +350,9 @@ class DataImporter:
         index_col = self._delete_dataframe.index.values
         self._delete_dataframe[self.external_id] = index_col
 
+
 def generate_sql_values(dataframe, fields, apply={}, quote_fields=True):
-    cols = [dataframe[i].astype(str) for i in fields]
+    cols = [dataframe[i].apply(nan_to_null).astype(str) for i in fields]
     df = pd.concat(cols, axis=1)
     for f, func in apply.items():
         df[f] = df[f].apply(func)
@@ -276,7 +361,6 @@ def generate_sql_values(dataframe, fields, apply={}, quote_fields=True):
     elif isinstance(quote_fields, bool) and quote_fields:
         quote_fields = {f: quote_fields for f in fields}
     for f, b in quote_fields.items():
-        df[f] = df[f].apply(nan_to_null, axis=1)
         if b:
             df[f] = df[f].apply(quote, axis=1)
     return ','.join(df.apply(','.join, axis=1).apply('({})'.format, axis=1))
@@ -297,4 +381,6 @@ def quote(value, **kwargs):
 def float_to_int(value, **kwargs):
     if pd.isnull(value):
         return nan_to_null(value)
+    if value == 'NULL':
+        return value
     return str(int(float(value)))

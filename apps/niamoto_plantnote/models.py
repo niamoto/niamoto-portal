@@ -52,4 +52,4 @@ class PlantnoteOccurrence(Occurrence):
     Occurrence imported from a Pl@ntnote database.
     """
     plantnote_id = models.IntegerField(unique=True)
-    collector = models.CharField(max_length=300)
+    collector = models.CharField(max_length=300, null=True, blank=True)
