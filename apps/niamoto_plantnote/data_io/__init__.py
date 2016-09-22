@@ -1,6 +1,8 @@
 # coding: utf-8
 
+from django.db import connection, transaction
 import pandas as pd
+import numpy as np
 
 from utils import get_sqlalchemy_connection_string
 
@@ -14,7 +16,8 @@ class DataImporter:
     def __init__(self, niamoto_model, niamoto_join_model,
                  external_connection_string, external_sql,
                  fields_map, extra_fields_map, external_id,
-                 niamoto_fields=["*"], external_apply_funcs={}):
+                 niamoto_fields=["*"], external_apply_funcs={},
+                 quote_fields=None, quote_extra_fields=None):
         # Descriptive attributes
         self.niamoto_model = niamoto_model
         self.niamoto_join_model = niamoto_join_model
@@ -23,6 +26,8 @@ class DataImporter:
         self.fields_map = fields_map  # <external_field>: <niamoto_field>
         self.extra_fields_map = extra_fields_map  # idem
         self.external_id = external_id
+        self.quote_fields = quote_fields
+        self.quote_extra_fields = quote_extra_fields
         self.niamoto_fields = niamoto_fields
         self.external_apply_funcs = external_apply_funcs
         # Initial dataframes
@@ -77,9 +82,23 @@ class DataImporter:
             self._init_delete_dataframe()
         return self._delete_dataframe
 
+    @transaction.atomic
     def _process_insert(self):
+        if len(self.insert_dataframe) == 0:
+            return self.insert_dataframe
         fields = list(self.fields_map.values())
-        values = generate_sql_values(self.insert_dataframe, fields)
+        apply_funcs = {}
+        for f in fields:
+            django_field = self.niamoto_model._meta.get_field(f)
+            int_types = ['ForeignKey', 'AutoField', 'IntegerField']
+            if django_field.get_internal_type() in int_types:
+                apply_funcs[f] = float_to_int
+        values = generate_sql_values(
+            self.insert_dataframe,
+            fields,
+            apply=apply_funcs,
+            quote_fields=self.quote_fields
+        )
         main_sql = \
             """
             WITH t AS (
@@ -87,29 +106,79 @@ class DataImporter:
                 VALUES {values}
                 RETURNING id
             )
-            SELECT id FROM t;
+            SELECT id FROM t ORDER BY id;
             """.format(**{
                 'niamoto_model': self.niamoto_model._meta.db_table,
                 'fields': ','.join(fields),
                 'values': values,
             })
-        return main_sql
+        cursor = connection.cursor()
+        cursor.execute(main_sql)
+        ids = pd.DataFrame({'id': np.array(cursor.fetchall())[:, 0]})
+        ids.index = self.insert_dataframe.index
+        assert len(ids) == len(self.insert_dataframe)
+        extra_fields = list(self.extra_fields_map.values())
+        join_fields = extra_fields + [
+            self._get_ptr_field_name(),
+            self.external_id
+        ]
+        join_apply_funcs = {}
+        for f in join_fields:
+            django_field = self.niamoto_join_model._meta.get_field(f)
+            int_types = ['ForeignKey', 'AutoField', 'IntegerField']
+            if django_field.get_internal_type() in int_types:
+                join_apply_funcs[f] = float_to_int
+        self.insert_dataframe[self._get_ptr_field_name()] = ids['id']
+        join_values = generate_sql_values(
+            self.insert_dataframe,
+            join_fields,
+            apply=join_apply_funcs,
+            quote_fields=self.quote_extra_fields
+        )
+        join_sql = \
+            """
+            INSERT INTO {join_model} ({join_fields})
+            VALUES {join_values};
+            """.format(**{
+                'join_model': self.niamoto_join_model._meta.db_table,
+                'join_fields': ','.join(join_fields),
+                'join_values': join_values
+            })
+        cursor.execute(join_sql)
+        return self.insert_dataframe
 
+    @transaction.atomic
     def _process_delete(self):
-        pass
+        if len(self.delete_dataframe) == 0:
+            return self.delete_dataframe
+        in_array = self.delete_dataframe[self.external_id]
+        in_array = in_array.apply(float_to_int, axis=1)
+        in_array_sql = '({})'.format(','.join(in_array))
+        sql = \
+            """
+            WITH t AS (
+                DELETE FROM {join_table} WHERE {external_id} IN {in_array_sql}
+                RETURNING {ptr_field}
+            )
+            DELETE FROM {main_table} WHERE id IN (SELECT {ptr_field} FROM t);
+            """.format(**{
+                'join_table': self.niamoto_join_model._meta.db_table,
+                'external_id': self.external_id,
+                'in_array_sql': in_array_sql,
+                'ptr_field': self._get_ptr_field_name(),
+                'main_table': self.niamoto_model._meta.db_table,
+            })
+        cursor = connection.cursor()
+        cursor.execute(sql)
+        return self.delete_dataframe
 
+    @transaction.atomic
     def _process_update(self):
         pass
 
-    def _get_ptr_field(self):
-        return self.niamoto_join_model._meta.parents[self.niamoto_model]
-
-    def _init_delete_dataframe(self):
-        external_index = self.reshaped_external_dataframe.index
-        niamoto_index = self.niamoto_dataframe.index
-        delete_index = niamoto_index.difference(external_index)
-        delete = self.niamoto_dataframe.loc[delete_index]
-        self._delete_dataframe = delete
+    def _get_ptr_field_name(self):
+        ptr_field = self.niamoto_join_model._meta.parents[self.niamoto_model]
+        return ptr_field.get_attname()
 
     def _init_niamoto_dataframe(self):
         sql = \
@@ -122,7 +191,7 @@ class DataImporter:
                 'fields': ','.join(self.niamoto_fields),
                 'join_table': self.niamoto_join_model._meta.db_table,
                 'table': self.niamoto_model._meta.db_table,
-                'ptr_field': self._get_ptr_field().get_attname(),
+                'ptr_field': self._get_ptr_field_name(),
                 'index_col': self.external_id
             })
         self._niamoto_dataframe = pd.read_sql_query(
@@ -162,6 +231,9 @@ class DataImporter:
         insert_index = external_index.difference(niamoto_index)
         insert = self.reshaped_external_dataframe.loc[insert_index]
         self._insert_dataframe = insert
+        # Duplicate index as a column
+        index_col = self._insert_dataframe.index.values
+        self._insert_dataframe[self.external_id] = index_col
 
     def _init_update_dataframes(self):
         niamoto_index = self.niamoto_dataframe.index
@@ -175,14 +247,54 @@ class DataImporter:
         A_nona = A.fillna(-1)
         B_nona = B.fillna(-1)
         changed = (A_nona != B_nona).any(1)
-        print(B[changed][:5])
-        print()
-        print(A[changed][:5])
+        # Duplicate index as a column
+        index_col_a = A.index.values
+        A[self.external_id] = index_col_a
+        index_col_b = B.index.values
+        B[self.external_id] = index_col_b
+        # Assign new values
         self._update_dataframe_current = A[changed]
         self._update_dataframe_new = B[changed]
 
+    def _init_delete_dataframe(self):
+        external_index = self.reshaped_external_dataframe.index
+        niamoto_index = self.niamoto_dataframe.index
+        delete_index = niamoto_index.difference(external_index)
+        delete = self.niamoto_dataframe.loc[delete_index]
+        self._delete_dataframe = delete
+        # Duplicate index as a column
+        index_col = self._delete_dataframe.index.values
+        self._delete_dataframe[self.external_id] = index_col
 
-def generate_sql_values(dataframe, fields):
+def generate_sql_values(dataframe, fields, apply={}, quote_fields=True):
     cols = [dataframe[i].astype(str) for i in fields]
     df = pd.concat(cols, axis=1)
+    for f, func in apply.items():
+        df[f] = df[f].apply(func)
+    if quote_fields is None:
+        quote_fields = {f: True for f in fields}
+    elif isinstance(quote_fields, bool) and quote_fields:
+        quote_fields = {f: quote_fields for f in fields}
+    for f, b in quote_fields.items():
+        df[f] = df[f].apply(nan_to_null, axis=1)
+        if b:
+            df[f] = df[f].apply(quote, axis=1)
     return ','.join(df.apply(','.join, axis=1).apply('({})'.format, axis=1))
+
+
+def nan_to_null(value, **kwargs):
+    if pd.isnull(value):
+        return 'NULL'
+    return value
+
+
+def quote(value, **kwargs):
+    if value == 'NULL':
+        return value
+    return "'{}'".format(value)
+
+
+def float_to_int(value, **kwargs):
+    if pd.isnull(value):
+        return nan_to_null(value)
+    return str(int(float(value)))
