@@ -86,19 +86,7 @@ class DataImporter:
     def _process_insert(self):
         if len(self.insert_dataframe) == 0:
             return self.insert_dataframe
-        fields = list(self.fields_map.values())
-        apply_funcs = {}
-        for f in fields:
-            django_field = self.niamoto_model._meta.get_field(f)
-            int_types = ['ForeignKey', 'AutoField', 'IntegerField']
-            if django_field.get_internal_type() in int_types:
-                apply_funcs[f] = float_to_int
-        values = generate_sql_values(
-            self.insert_dataframe,
-            fields,
-            apply=apply_funcs,
-            quote_fields=self.quote_fields
-        )
+        values = self._generate_sql_values(self.insert_dataframe)
         main_sql = \
             """
             WITH t AS (
@@ -109,7 +97,7 @@ class DataImporter:
             SELECT id FROM t ORDER BY id;
             """.format(**{
                 'niamoto_model': self.niamoto_model._meta.db_table,
-                'fields': ','.join(fields),
+                'fields': ','.join(self._get_fields()),
                 'values': values,
             })
         cursor = connection.cursor()
@@ -117,31 +105,15 @@ class DataImporter:
         ids = pd.DataFrame({'id': np.array(cursor.fetchall())[:, 0]})
         ids.index = self.insert_dataframe.index
         assert len(ids) == len(self.insert_dataframe)
-        extra_fields = list(self.extra_fields_map.values())
-        join_fields = extra_fields + [
-            self._get_ptr_field_name(),
-            self.external_id
-        ]
-        join_apply_funcs = {}
-        for f in join_fields:
-            django_field = self.niamoto_join_model._meta.get_field(f)
-            int_types = ['ForeignKey', 'AutoField', 'IntegerField']
-            if django_field.get_internal_type() in int_types:
-                join_apply_funcs[f] = float_to_int
         self.insert_dataframe[self._get_ptr_field_name()] = ids['id']
-        join_values = generate_sql_values(
-            self.insert_dataframe,
-            join_fields,
-            apply=join_apply_funcs,
-            quote_fields=self.quote_extra_fields
-        )
+        join_values = self._generate_sql_join_values(self.insert_dataframe)
         join_sql = \
             """
             INSERT INTO {join_model} ({join_fields})
             VALUES {join_values};
             """.format(**{
                 'join_model': self.niamoto_join_model._meta.db_table,
-                'join_fields': ','.join(join_fields),
+                'join_fields': ','.join(self._get_join_fields()),
                 'join_values': join_values
             })
         cursor.execute(join_sql)
@@ -180,47 +152,12 @@ class DataImporter:
         if l1 == 0:
             return self.update_dataframe_new
         # Main table values
-        fields = ['id'] + list(self.fields_map.values())
-        apply_funcs = {}
-        for f in fields:
-            django_field = self.niamoto_model._meta.get_field(f)
-            int_types = ['ForeignKey', 'AutoField', 'IntegerField']
-            if django_field.get_internal_type() in int_types:
-                apply_funcs[f] = float_to_int
-        values = generate_sql_values(
-            self.update_dataframe_new,
-            fields,
-            apply=apply_funcs,
-            quote_fields=self.quote_fields
-        )
-        sets = ["{field} = temp_update.{field}".format(**{
-            'field': field,
-        }) for field in fields]
-        update_values = ','.join(sets)
+        values = self._generate_sql_values(self.update_dataframe_new, ['id'])
+        update_values = self._generate_update_statements('temp_update')
         # Join table values
-        extra_fields = list(self.extra_fields_map.values())
-        ptr_field = self._get_ptr_field_name()
-        join_fields = extra_fields + [
-            ptr_field,
-            self.external_id
-        ]
-        join_apply_funcs = {}
-        for f in join_fields:
-            django_field = self.niamoto_join_model._meta.get_field(f)
-            int_types = ['ForeignKey', 'AutoField', 'IntegerField']
-            if django_field.get_internal_type() in int_types:
-                join_apply_funcs[f] = float_to_int
-        self.update_dataframe_new[ptr_field] = self.update_dataframe_new['id']
-        join_values = generate_sql_values(
-            self.update_dataframe_new,
-            join_fields,
-            apply=join_apply_funcs,
-            quote_fields=self.quote_extra_fields
-        )
-        join_sets = ["{field} = temp_update_join.{field}".format(**{
-            'field': field,
-        }) for field in join_fields]
-        update_join_values = ','.join(join_sets)
+        self.update_dataframe_new[self._get_ptr_field_name()] = self.update_dataframe_new['id']
+        join_values = self._generate_sql_join_values(self.update_dataframe_new)
+        update_join_values = self._generate_update_join_statements('temp_update_join')
         sql = \
             """
             CREATE TEMP TABLE temp_update(LIKE {table} INCLUDING ALL) ON COMMIT DROP;
@@ -244,14 +181,14 @@ class DataImporter:
             WHERE {join_table}.{ptr_field} = temp_update_join.{ptr_field};
             """.format(**{
                 'table': self.niamoto_model._meta.db_table,
-                'fields': ','.join(fields),
+                'fields': ','.join(self._get_fields() + ['id']),
                 'values': values,
                 'update_values': update_values,
                 'join_table': self.niamoto_join_model._meta.db_table,
-                'join_fields': ','.join(join_fields),
+                'join_fields': ','.join(self._get_join_fields()),
                 'join_values': join_values,
                 'update_join_values': update_join_values,
-                'ptr_field': ptr_field,
+                'ptr_field': self._get_ptr_field_name(),
             })
         cursor = connection.cursor()
         cursor.execute(sql)
@@ -260,6 +197,63 @@ class DataImporter:
     def _get_ptr_field_name(self):
         ptr_field = self.niamoto_join_model._meta.parents[self.niamoto_model]
         return ptr_field.get_attname()
+
+    def _get_fields(self):
+        return list(self.fields_map.values())
+
+    def _get_extra_fields(self):
+        return list(self.extra_fields_map.values())
+
+    def _get_join_fields(self):
+        ptr_field = self._get_ptr_field_name()
+        return self._get_extra_fields() + [
+            ptr_field,
+            self.external_id
+        ]
+
+    def _generate_sql_values(self, dataframe, extra_fields=[]):
+        fields = self._get_fields() + extra_fields
+        apply_funcs = {}
+        for f in fields:
+            django_field = self.niamoto_model._meta.get_field(f)
+            int_types = ['ForeignKey', 'AutoField', 'IntegerField']
+            if django_field.get_internal_type() in int_types:
+                apply_funcs[f] = float_to_int
+        return generate_sql_values(
+            dataframe,
+            fields,
+            apply=apply_funcs,
+            quote_fields=self.quote_fields
+        )
+
+    def _generate_sql_join_values(self, dataframe):
+        join_fields = self._get_join_fields()
+        join_apply_funcs = {}
+        for f in join_fields:
+            django_field = self.niamoto_join_model._meta.get_field(f)
+            int_types = ['ForeignKey', 'AutoField', 'IntegerField']
+            if django_field.get_internal_type() in int_types:
+                join_apply_funcs[f] = float_to_int
+        return generate_sql_values(
+            dataframe,
+            join_fields,
+            apply=join_apply_funcs,
+            quote_fields=self.quote_extra_fields
+        )
+
+    def _generate_update_statements(self, source, extra_fields=[]):
+        sets = ["{field} = {source}.{field}".format(**{
+            'field': field,
+            'source': source
+        }) for field in self._get_fields() + extra_fields]
+        return ','.join(sets)
+
+    def _generate_update_join_statements(self, source, extra_fields=[]):
+        sets = ["{field} = {source}.{field}".format(**{
+            'field': field,
+            'source': source
+        }) for field in self._get_join_fields() + extra_fields]
+        return ','.join(sets)
 
     def _init_niamoto_dataframe(self):
         sql = \
