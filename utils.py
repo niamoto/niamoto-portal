@@ -47,7 +47,6 @@ def get_sqlalchemy_connection_string():
         db['NAME']
     )
 
-
 def fix_db_sequences():
     fix_db_sequences_ownership()
     cur = connection.cursor()
