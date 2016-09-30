@@ -24,5 +24,7 @@ def import_plots_from_plantnote_db(database):
         FROM Localités;
         """
     DF = pd.read_sql_query(sql, db_string, index_col='id')
+    index_col = DF.index.values
+    DF['id'] = index_col
     di = BaseDataImporter(Plot, DF)
     di.process_import()
