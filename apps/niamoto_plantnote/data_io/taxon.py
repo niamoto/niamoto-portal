@@ -1,12 +1,10 @@
 # coding: utf-8
 
-import sqlite3
-
-from django.db import connection, transaction
-import numpy as np
+from django.db import transaction
+import pandas as pd
 
 from apps.niamoto_data.models import Taxon
-from utils import fix_db_sequences
+from apps.niamoto_plantnote.data_io.data_importer import BaseDataImporter
 
 
 @transaction.atomic
@@ -16,162 +14,93 @@ def import_taxon_from_plantnote_db(database):
     converted to a sqlite database.
     :param database: The path to the database.
     """
-    _delete_all_taxa()
-    family = _import_family_from_plantnote_db(database)
-    genus = _import_genus_from_plantnote_db(database)
-    specie = _import_specie_from_plantnote_db(database)
-    infra = _import_infra_from_plantnote_db(database)
-    _import_taxa(family)
-    _import_taxa(genus)
-    _import_taxa(specie)
-    _import_taxa(infra)
-
-
-def _get_plantnote_taxa(database):
-    sql = \
+    db_string = 'sqlite:////{}'.format(database)
+    sql_family = \
         """
-        SELECT "ID Taxons", "Nom Complet", "Taxon", "ID Famille",
-            "ID Genre", "ID Espèce", "ID Infra"
-        FROM Taxons;
-        """
-    conn = sqlite3.connect(database)
-    cur = conn.cursor()
-    cur.execute(sql)
-    data = np.array(cur.fetchall())
-    return data
-
-
-def _get_niamoto_taxa():
-    sql = \
-        """
-        SELECT id, full_name, rank_name, rank, parent_id
-        FROM {};
-        """.format(Taxon._meta.db_table)
-    cursor = connection.cursor()
-    cursor.execute(sql)
-    data = np.array(cursor.fetchall())
-    return data
-
-
-def _get_insert_selection(plantnote_data, niamoto_data):
-    diff = np.setdiff1d(
-        plantnote_data[:, 0],
-        niamoto_data[:, 0],
-        assume_unique=True
-    )
-    bool_diff = np.in1d(
-        plantnote_data[:, 0],
-        diff,
-        assume_unique=True
-    )
-    return plantnote_data[bool_diff]
-
-
-def _get_delete_selection(plantnote_data, niamoto_data):
-    diff = np.setdiff1d(
-        niamoto_data[:, 0],
-        plantnote_data[:, 0],
-        assume_unique=True
-    )
-    bool_diff = np.in1d(
-        niamoto_data[:, 0],
-        diff,
-        assume_unique=True
-    )
-    return niamoto_data[bool_diff]
-
-
-def _import_family_from_plantnote_db(database):
-    sql = \
-        """
-        SELECT "ID Taxons", "Nom Complet", "Taxon", "ID Famille", 'FAMILY'
+        SELECT "ID Taxons" AS id,
+            "Nom Complet" AS full_name,
+            "Taxon" AS rank_name,
+            NULL AS parent_id,
+            'FAMILY' AS rank,
+            0 AS lft,
+            0 AS rght,
+            0 AS tree_id,
+            0 AS level
         FROM Taxons
         WHERE "ID Famille" IS NOT NULL AND
             "ID Genre" IS NULL AND
             "ID Espèce" IS NULL AND
             "ID Infra" IS NULL;
         """
-    conn = sqlite3.connect(database)
-    cur = conn.cursor()
-    cur.execute(sql)
-    data = cur.fetchall()
-    return data
-
-
-def _import_genus_from_plantnote_db(database):
-    sql = \
+    sql_genus = \
         """
-        SELECT "ID Taxons", "Nom Complet", "Taxon", "ID Famille", 'GENUS'
+        SELECT "ID Taxons" AS id,
+            "Nom Complet" AS full_name,
+            "Taxon" AS rank_name,
+            "ID Famille" AS parent_id,
+            'GENUS' AS rank,
+            0 AS lft,
+            0 AS rght,
+            0 AS tree_id,
+            0 AS level
         FROM Taxons
         WHERE "ID Famille" IS NOT NULL AND
             "ID Genre" IS NOT NULL AND
             "ID Espèce" IS NULL AND
             "ID Infra" IS NULL;
         """
-    conn = sqlite3.connect(database)
-    cur = conn.cursor()
-    cur.execute(sql)
-    data = cur.fetchall()
-    return data
-
-
-def _import_specie_from_plantnote_db(database):
-    sql = \
+    sql_specie = \
         """
-        SELECT "ID Taxons", "Nom Complet", "Taxon", "ID Genre", 'SPECIE'
+        SELECT "ID Taxons" AS id,
+            "Nom Complet" AS full_name,
+            "Taxon" AS rank_name,
+            "ID Genre" AS parent_id,
+            'SPECIE' AS rank,
+            0 AS lft,
+            0 AS rght,
+            0 AS tree_id,
+            0 AS level
         FROM Taxons
         WHERE "ID Famille" IS NOT NULL AND
             "ID Genre" IS NOT NULL AND
             "ID Espèce" IS NOT NULL AND
             "ID Infra" IS NULL;
         """
-    conn = sqlite3.connect(database)
-    cur = conn.cursor()
-    cur.execute(sql)
-    data = cur.fetchall()
-    return data
-
-
-def _import_infra_from_plantnote_db(database):
-    sql = \
+    sql_infra = \
         """
-        SELECT "ID Taxons", "Nom Complet", "Taxon", "ID Espèce", 'INFRA'
+        SELECT "ID Taxons" AS id,
+            "Nom Complet" AS full_name,
+            "Taxon" AS rank_name,
+            "ID Espèce" AS parent_id,
+            'INFRA' AS rank,
+            0 AS lft,
+            0 AS rght,
+            0 AS tree_id,
+            0 AS level
         FROM Taxons
         WHERE "ID Famille" IS NOT NULL AND
             "ID Genre" IS NOT NULL AND
             "ID Espèce" IS NOT NULL AND
             "ID Infra" IS NOT NULL;
         """
-    conn = sqlite3.connect(database)
-    cur = conn.cursor()
-    cur.execute(sql)
-    data = cur.fetchall()
-    return data
-
-
-@transaction.atomic
-def _import_taxa(data):
-    for row in data:
-        id_tax, full_name, rank_name, id_parent, rank = row
-        if id_parent == id_tax:
-            parent = None
-        else:
-            parent = Taxon.objects.get(id=id_parent)
-        Taxon.objects.create(
-            id=id_tax,
-            full_name=full_name,
-            rank_name=rank_name,
-            rank=rank,
-            parent=parent,
-        )
-
-
-@transaction.atomic
-def _delete_all_taxa():
-    pg_sql = \
-        """
-        DELETE FROM {};
-        """.format(Taxon._meta.db_table)
-    cursor = connection.cursor()
-    cursor.execute(pg_sql)
-    fix_db_sequences()
+    # Family
+    DF_family = pd.read_sql_query(sql_family, db_string, index_col='id')
+    index_col = DF_family.index.values
+    DF_family['id'] = index_col
+    # Genus
+    DF_genus = pd.read_sql_query(sql_genus, db_string, index_col='id')
+    index_col = DF_genus.index.values
+    DF_genus['id'] = index_col
+    # Specie
+    DF_specie = pd.read_sql_query(sql_specie, db_string, index_col='id')
+    index_col = DF_specie.index.values
+    DF_specie['id'] = index_col
+    # Infra
+    DF_infra = pd.read_sql_query(sql_infra, db_string, index_col='id')
+    index_col = DF_infra.index.values
+    DF_infra['id'] = index_col
+    DF = pd.concat([DF_family, DF_genus, DF_specie, DF_infra])
+    update_fields = ['full_name', 'rank_name', 'parent_id', 'rank']
+    di = BaseDataImporter(Taxon, DF, update_fields=update_fields)
+    di.process_import()
+    Taxon.objects.rebuild()

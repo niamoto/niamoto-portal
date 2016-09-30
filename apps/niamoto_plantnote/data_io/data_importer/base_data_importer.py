@@ -179,7 +179,8 @@ class BaseDataImporter:
             quote_fields[f] = True
             django_field = model._meta.get_field(f)
             # Force convert to int when necessary
-            int_types = ['ForeignKey', 'AutoField', 'IntegerField']
+            int_types = ['ForeignKey', 'AutoField', 'IntegerField',
+                         'TreeForeignKey']
             if django_field.get_internal_type() in int_types:
                 apply_funcs[f] = float_to_int
             # Geom from text for geometry columns
