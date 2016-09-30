@@ -14,10 +14,11 @@ class BaseDataImporter:
     """
 
     def __init__(self, niamoto_model, external_dataframe,
-                 niamoto_fields=None):
+                 niamoto_fields=None, update_fields=None):
         # Descriptive attributes
         self.niamoto_model = niamoto_model
         self.niamoto_fields = niamoto_fields
+        self.update_fields = update_fields
         if self.niamoto_fields is None:
             self.niamoto_fields = get_model_fieldnames(self.niamoto_model)
         # Initial dataframes
@@ -60,7 +61,8 @@ class BaseDataImporter:
         if self._update_dataframe_current is None:
             self._update_dataframe_current = get_update_dataframe_current(
                 self.niamoto_dataframe,
-                self.external_dataframe
+                self.external_dataframe,
+                self.update_fields
             )
         return self._update_dataframe_current
 
@@ -69,7 +71,8 @@ class BaseDataImporter:
         if self._update_dataframe_new is None:
             self._update_dataframe_new = get_update_dataframe_new(
                 self.niamoto_dataframe,
-                self.external_dataframe
+                self.external_dataframe,
+                self.update_fields
             )
         return self._update_dataframe_new
 
@@ -259,13 +262,15 @@ def get_insert_dataframe(current_dataframe, new_dataframe):
     return insert
 
 
-def get_update_boolean_index(current_dataframe, new_dataframe):
+def get_update_boolean_index(current_dataframe, new_dataframe, fields=None):
     """
     Compute a boolean upaate index from two exactly structured dataframes (same
     columns, same datatypes, same index).
     :param current_dataframe: The dataframe reflecting the current state of the
                               database.
     :param new_dataframe: The dataframe to import.
+    :param fields: The fields to rely on for the values comparison. If None
+                  all the fields are used.
     :return: An index, subset of current and new indexes, containing only the
             indices of records that need to be updated.
     """
@@ -276,17 +281,27 @@ def get_update_boolean_index(current_dataframe, new_dataframe):
     imp_intersect = new_dataframe.loc[intersect_index]
     cur_intersect_no_na = cur_intersect.fillna(-1)
     imp_intersect_no_na = imp_intersect.fillna(-1)
-    changed = (cur_intersect_no_na != imp_intersect_no_na).any(1)
+    if fields is None:
+        fields = cur_intersect_no_na.columns
+    changed = (cur_intersect_no_na[fields] != imp_intersect_no_na[fields]).any(1)
     return intersect_index, changed
 
 
-def get_update_dataframe_current(current_dataframe, new_dataframe):
-    index, changed = get_update_boolean_index(current_dataframe, new_dataframe)
+def get_update_dataframe_current(current_dataframe, new_dataframe, fields=None):
+    index, changed = get_update_boolean_index(
+        current_dataframe,
+        new_dataframe,
+        fields
+    )
     return current_dataframe.loc[index][changed]
 
 
-def get_update_dataframe_new(current_dataframe, new_dataframe):
-    index, changed = get_update_boolean_index(current_dataframe, new_dataframe)
+def get_update_dataframe_new(current_dataframe, new_dataframe, fields=None):
+    index, changed = get_update_boolean_index(
+        current_dataframe,
+        new_dataframe,
+        fields
+    )
     return new_dataframe.loc[index][changed]
 
 

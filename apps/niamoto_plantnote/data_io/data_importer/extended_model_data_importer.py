@@ -18,11 +18,12 @@ class ExtendedModelDataImporter(BaseDataImporter):
     """
 
     def __init__(self, niamoto_model, niamoto_extended_model,
-                 external_dataframe, niamoto_fields=None):
+                 external_dataframe, niamoto_fields=None, update_fields=None):
         super(ExtendedModelDataImporter, self).__init__(
             niamoto_model,
             external_dataframe,
-            niamoto_fields
+            niamoto_fields,
+            update_fields
         )
         self.niamoto_extended_model = niamoto_extended_model
         self._niamoto_extended_dataframe = None
