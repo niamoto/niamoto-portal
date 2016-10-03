@@ -154,19 +154,17 @@ class BaseDataImporter:
                 'index_col': self.get_index_col()
             })
         engine = create_engine(get_sqlalchemy_connection_string())
-        connection = engine.connect()
+        conn = engine.connect()
         df = pd.read_sql_query(
             sql,
-            connection,
-            index_col=self.get_index_col()
+            conn,
         )
-        index_col = df.index.values
-        df[self.get_index_col()] = index_col
+        df.set_index(self.get_index_col(), inplace=True, drop=False)
         df.index.rename(
             self.get_index_col(),
             inplace=True
         )
-        connection.close()
+        conn.close()
         return df
 
     def get_index_col(self):

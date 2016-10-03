@@ -1,97 +1,61 @@
 # coding: utf-8
 
-import sqlite3
-
-from django.db import connection, transaction
-import numpy as np
+from django.db import transaction
+from sqlalchemy.engine import create_engine
 import pandas as pd
 
 from apps.niamoto_data.models import PlotOccurrences
 from apps.niamoto_plantnote.models import PlantnoteOccurrence
-from utils import fix_db_sequences
+from apps.niamoto_plantnote.data_io.data_importer import MultiIndexDataImporter
+from utils import get_sqlalchemy_connection_string
 
 
 @transaction.atomic
 def import_plot_occurrences_from_plantnote_db(database):
-    """
-    Import the occurrence / plot correspondences from a pl@ntnote database.
-    :param database: The path to the pl@ntnote database.
-    """
-    _delete_all_plot_occurrences()
-    # Get plantnote data
+    db_string = 'sqlite:////{}'.format(database)
     sql = \
         """
-        SELECT Inv."ID Individus" AS id_indiv,
-            Inv."ID Parcelle" AS id_plot,
-            COALESCE (Inv."Identifiant", 'NULL') AS identifier
+        SELECT Inv."ID Individus" AS plantnote_id,
+            Inv."ID Parcelle" AS plot_id,
+            Inv."Identifiant" AS identifier
         FROM Inventaires AS Inv
-        ORDER BY id_indiv;
+        ORDER BY plantnote_id, plot_id;
         """
-    conn = sqlite3.connect(database)
-    cur = conn.cursor()
-    cur.execute(sql)
-    plantnote_plot_occ = np.array(
-        cur.fetchall(),
-        dtype=[
-            ('plantnote_id', 'int'),
-            ('plot_id', 'int'),
-            ('identifier', 'U50'),
-        ]
+    DF = pd.read_sql_query(sql, db_string)
+    plantnote_to_niamoto_ids = _get_plantnote_to_niamoto_ids()
+    DF = pd.merge(DF, plantnote_to_niamoto_ids, on="plantnote_id")\
+        .set_index(['occurrence_id', 'plot_id'], drop=False)\
+        .drop('plantnote_id', 1)
+    di = MultiIndexDataImporter(
+        PlotOccurrences,
+        DF,
+        ['occurrence_id', 'plot_id'],
+        update_fields=['identifier'],
+        niamoto_fields=['occurrence_id', 'plot_id', 'identifier']
     )
+    return di
+    # di.process_import()
 
-    # Get niamoto occurrences ids corresponding to pl@ntnote ones
-    cursor = connection.cursor()
-    cursor.execute(
+
+def _get_plantnote_to_niamoto_ids():
+    index_colname = 'occurrence_id'
+    sql = \
         """
-        SELECT plantnote_id, occurrence_ptr_id
-        FROM {}
-        WHERE plantnote_id IN ({})
-        ORDER BY plantnote_id;
-        """.format(
-            PlantnoteOccurrence._meta.db_table,
-            ','.join([str(i) for i in plantnote_plot_occ['plantnote_id']])
-        )
+        SELECT occurrence_ptr_id AS occurrence_id, plantnote_id FROM {table}
+        ORDER BY {index_col};
+        """.format(**{
+            'table': PlantnoteOccurrence._meta.db_table,
+            'index_col': index_colname
+        })
+    engine = create_engine(get_sqlalchemy_connection_string())
+    connection = engine.connect()
+    df = pd.read_sql_query(
+        sql,
+        connection
     )
-    niamoto_occ = np.array(
-        cursor.fetchall(),
-        dtype=[
-            ('plantnote_id', 'int'),
-            ('occurrence_id', 'int'),
-        ]
+    df.set_index(index_colname, inplace=True, drop=False)
+    df.index.rename(
+        index_colname,
+        inplace=True
     )
-
-    # Now merge data on plantnote_id
-    merged_data = pd.merge(
-        pd.DataFrame(plantnote_plot_occ),
-        pd.DataFrame(niamoto_occ),
-        on="plantnote_id",
-        how='left'
-    )
-
-    # Insert data in database
-    pg_sql = \
-        """
-        INSERT INTO {} (occurrence_id, plot_id, identifier)
-        VALUES {};
-        """.format(
-            PlotOccurrences._meta.db_table,
-            ','.join(["('{}', '{}', {})".format(
-                row['occurrence_id'],
-                row['plot_id'],
-                row['identifier'] if row[2] == 'NULL'
-                else "'{}'".format(row['identifier']),
-            ) for index, row in merged_data.iterrows()])
-        )
-    cursor = connection.cursor()
-    cursor.execute(pg_sql)
-
-
-@transaction.atomic
-def _delete_all_plot_occurrences():
-    pg_sql = \
-        """
-        DELETE FROM {}
-        """.format(PlotOccurrences._meta.db_table)
-    cursor = connection.cursor()
-    cursor.execute(pg_sql)
-    fix_db_sequences()
+    return df

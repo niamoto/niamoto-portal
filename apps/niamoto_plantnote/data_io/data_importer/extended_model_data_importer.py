@@ -222,10 +222,8 @@ class ExtendedModelDataImporter(BaseDataImporter):
         df = pd.read_sql_query(
             sql,
             connection,
-            index_col=index_colname
         )
-        index_col = df.index.values
-        df[index_colname] = index_col
+        df.set_index(index_colname, inplace=True, drop=False)
         df.index.rename(
             index_colname,
             inplace=True
@@ -241,14 +239,11 @@ class ExtendedModelDataImporter(BaseDataImporter):
             right_index=True
         )
         external_index_colname = self.get_external_index_col()
-        df.set_index(external_index_colname, inplace=True)
+        df.set_index(external_index_colname, inplace=True, drop=False)
         fields = self.niamoto_fields + self.niamoto_extended_fields
         fields.remove(self.get_index_col())
         fields.remove(self.get_extended_index_col())
-        fields.remove(self.get_external_index_col())
         df = df[fields]
-        index_col = df.index.values
-        df[external_index_colname] = index_col
         df.index.rename(
             external_index_colname,
             inplace=True
