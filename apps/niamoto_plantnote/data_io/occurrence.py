@@ -31,8 +31,7 @@ def import_occurrences_from_plantnote_db(database):
         LEFT JOIN Collecteurs AS Col ON Obs."Observateur" = Col."ID Collecteurs"
         ORDER BY plantnote_id;
         """
-    DF = pd.read_sql_query(sql, db_string, index_col='plantnote_id')
-    index_col = DF.index.values
-    DF['plantnote_id'] = index_col
+    DF = pd.read_sql_query(sql, db_string)
+    DF.set_index('plantnote_id', inplace=True, drop=False)
     di = ExtendedModelDataImporter(Occurrence, PlantnoteOccurrence, DF)
     di.process_import()

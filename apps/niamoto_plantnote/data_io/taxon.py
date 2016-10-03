@@ -84,21 +84,18 @@ def import_taxon_from_plantnote_db(database):
             "ID Infra" IS NOT NULL;
         """
     # Family
-    DF_family = pd.read_sql_query(sql_family, db_string, index_col='id')
-    index_col = DF_family.index.values
-    DF_family['id'] = index_col
+    DF_family = pd.read_sql_query(sql_family, db_string)
+    DF_family.set_index('id', inplace=True, drop=False)
     # Genus
-    DF_genus = pd.read_sql_query(sql_genus, db_string, index_col='id')
-    index_col = DF_genus.index.values
-    DF_genus['id'] = index_col
+    DF_genus = pd.read_sql_query(sql_genus, db_string)
+    DF_genus.set_index('id', inplace=True, drop=False)
     # Specie
-    DF_specie = pd.read_sql_query(sql_specie, db_string, index_col='id')
-    index_col = DF_specie.index.values
-    DF_specie['id'] = index_col
+    DF_specie = pd.read_sql_query(sql_specie, db_string)
+    DF_specie.set_index('id', inplace=True, drop=False)
     # Infra
-    DF_infra = pd.read_sql_query(sql_infra, db_string, index_col='id')
-    index_col = DF_infra.index.values
-    DF_infra['id'] = index_col
+    DF_infra = pd.read_sql_query(sql_infra, db_string)
+    DF_infra.set_index('id', inplace=True, drop=False)
+    # Concatenation
     DF = pd.concat([DF_family, DF_genus, DF_specie, DF_infra])
     update_fields = ['full_name', 'rank_name', 'parent_id', 'rank']
     di = BaseDataImporter(Taxon, DF, update_fields=update_fields)

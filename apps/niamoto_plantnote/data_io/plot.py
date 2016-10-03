@@ -23,8 +23,7 @@ def import_plots_from_plantnote_db(database):
             'POINT(' || "LongDD" || ' ' || "LatDD" || ')'
         FROM Localités;
         """
-    DF = pd.read_sql_query(sql, db_string, index_col='id')
-    index_col = DF.index.values
-    DF['id'] = index_col
+    DF = pd.read_sql_query(sql, db_string)
+    DF.set_index('id', inplace=True, drop=False)
     di = BaseDataImporter(Plot, DF)
     di.process_import()
