@@ -168,7 +168,7 @@ class BaseDataImporter:
         return df
 
     def get_index_col(self):
-        return self.niamoto_model._meta.pk.name
+        return self.niamoto_model._meta.pk.get_attname()
 
     def _generate_sql_values(self, model, fields, dataframe):
         apply_funcs = {}

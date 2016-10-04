@@ -20,7 +20,7 @@ def import_plots_from_plantnote_db(database):
             "Nom Entier" AS name,
             "Largeur" AS width,
             "Longueur" AS height,
-            'POINT(' || "LongDD" || ' ' || "LatDD" || ')'
+            'POINT(' || "LongDD" || ' ' || "LatDD" || ')' AS location
         FROM Localités;
         """
     DF = pd.read_sql_query(sql, db_string)

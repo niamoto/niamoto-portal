@@ -101,7 +101,10 @@ class OccurrenceObservations(models.Model):
         related_name="observations",
         primary_key=True
     )
-    last_observation_date = models.DateField()
+    last_observation_date = models.CharField(
+        max_length=50,
+        null=True, blank=True
+    )
     height = models.FloatField(null=True, blank=True)
     stem_nb = models.IntegerField(null=True, blank=True)
     circumference = models.FloatField(null=True, blank=True)

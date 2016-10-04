@@ -1,15 +1,12 @@
 # coding: utf-8
 
-import sqlite3
-from datetime import date
-
-from django.db import connection, transaction
+from django.db import transaction
 import numpy as np
 import pandas as pd
 
 from apps.niamoto_data.models import OccurrenceObservations
-from apps.niamoto_plantnote.models import PlantnoteOccurrence
-from utils import fix_db_sequences
+from apps.niamoto_plantnote.data_io.data_importer import BaseDataImporter
+from apps.niamoto_plantnote.data_io import get_plantnote_to_niamoto_ids
 
 
 @transaction.atomic
@@ -45,8 +42,23 @@ def import_occurrence_observations_from_plantnote_db(database):
     def latest_observations(group):
         return group.apply(first_val, raw=True, axis=0)
 
-    df = df.groupby('plantnote_id')\
-        .apply(latest_observations)\
-        .set_index('plantnote_id', drop=False)
-
-    return df
+    group = df.groupby('plantnote_id')
+    count = group.count()
+    several = count[count['date_obs'] > 1]
+    several_grouped = df[df['plantnote_id'].isin(several.index)].groupby(
+        'plantnote_id'
+    )
+    unique_grouped = df[np.logical_not(
+        df['plantnote_id'].isin(several.index)
+    )].set_index('plantnote_id', drop=False)
+    latests = several_grouped.apply(latest_observations)
+    df = pd.concat([latests, unique_grouped])\
+        .sort_values(by='plantnote_id')
+    # Switch to niamoto's id
+    plantnote_to_niamoto_ids = get_plantnote_to_niamoto_ids()
+    df = pd.merge(df, plantnote_to_niamoto_ids, on="plantnote_id") \
+        .set_index(['occurrence_id'], drop=False) \
+        .drop('plantnote_id', 1)
+    df.rename(columns={'date_obs': 'last_observation_date'}, inplace=True)
+    di = BaseDataImporter(OccurrenceObservations, df)
+    di.process_import()
