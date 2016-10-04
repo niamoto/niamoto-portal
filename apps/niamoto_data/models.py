@@ -98,7 +98,8 @@ class OccurrenceObservations(models.Model):
     occurrence = models.OneToOneField(
         Occurrence,
         unique=True,
-        related_name="observations"
+        related_name="observations",
+        primary_key=True
     )
     last_observation_date = models.DateField()
     height = models.FloatField(null=True, blank=True)
