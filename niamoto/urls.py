@@ -34,6 +34,7 @@ urlpatterns = [
     url(r'^', include('web.urls')),
     url(r'^digitizing/', include('apps.forest_digitizing.urls')),
     url(r"^rapid_inventory/", include("apps.rapid_inventories.urls")),
+    url(r'^user_occurrences/', include("apps.user_occurrences.urls")),
     url(r"^taxon_dashboards/", include("apps.taxon_dashboards.urls", namespace="taxon_dashboards")),
     url(r'^explorer/', include('explorer.urls')),
     url(r'^qgis_plugin_repository/', include('qgis_plugin_repository.urls')),

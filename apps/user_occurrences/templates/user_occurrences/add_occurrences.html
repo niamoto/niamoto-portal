@@ -11,13 +11,13 @@
     {{ block.super }}
     <link href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css' rel='stylesheet' />
     <link href='https://cdnjs.cloudflare.com/ajax/libs/ol3/3.10.1/ol.min.css' rel='stylesheet' />
-    <link rel="stylesheet" href='{% static "rapid_inventories/css/add_inventory.css" %}' />
+    <link rel="stylesheet" href='{% static "user_occurrences/css/add_occurrences.css" %}' />
 {% endblock %}
 
 {% block body_base %}
     <div class="container">
-        <h1>Nouvel inventaire rapide</h1>
-        <a href="{%  url 'rapid_inventory_index' %}">retour aux inventaires</a>
+        <h1>Saisie d'occurrences</h1>
+        <a href="{%  url 'home' %}">retour à la page d'accueil</a>
     </div>
     <form class="panel-body" method="POST">{% csrf_token %}
         <div class="container">
@@ -27,14 +27,13 @@
                 </span></div>
             {% endif %}
             <div class="panel panel-default ">
-                <div class="panel-heading"><h4>{% trans "Informations générales" %}</h4></div>
                 <div class="panel-body">
                     <div class="row no_top_margin">
                         <div id="external_lat_long" class="col-xs-12 col-md-4">
-                            {% crispy general_form general_form.helper %}
+                            {% crispy form %}
                             {% if error_location %}
                                 <div class="has-error"><span class="help-block">
-                                    <strong>La localisation de la placette est obligatoire</strong>
+                                    <strong>La localisation des occurrences est obligatoire</strong>
                                 </span></div>
                             {% endif %}
                         </div>
@@ -46,24 +45,6 @@
                 </div>
                 <input type="hidden" name="long" id="long_hidden" value="{{ long }}">
                 <input type="hidden" name="lat" id="lat_hidden" value="{{ lat }}">
-            </div>
-            <div class="panel panel-default">
-                <div class="panel-heading"><h4>{% trans "Prise de mesures en statique au centre de la placette" %}</h4></div>
-                <div class="panel-body">
-                    {% crispy center_form %}
-                </div>
-            </div>
-            <div class="panel panel-default">
-                <div class="panel-heading"><h4>{% trans "Prise de mesures en cheminement dans la placette" %}</h4></div>
-                <div class="panel-body">
-                <div class="panel panel-default">
-                    <div class="panel-heading">{% trans "Constatez vous la présence de" %}</div>
-                    <div class="panel-body">
-                        {% crispy vegetation_form %}
-                    </div>
-                </div>
-                    {% crispy walking_form %}
-                </div>
             </div>
             <button type="submit" class="btn btn-success" role="button">Soumettre</button>
         </div>
