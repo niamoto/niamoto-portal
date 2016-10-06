@@ -4,7 +4,7 @@ from django.db import transaction
 import pandas as pd
 
 from apps.niamoto_data.models import Taxon
-from apps.niamoto_plantnote.data_io.data_importer import BaseDataImporter
+from apps.data_importer import BaseDataImporter
 
 
 @transaction.atomic

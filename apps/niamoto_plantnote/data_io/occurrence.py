@@ -3,7 +3,7 @@
 from django.db import transaction
 import pandas as pd
 
-from apps.niamoto_plantnote.data_io.data_importer import ExtendedModelDataImporter
+from apps.data_importer import ExtendedModelDataImporter
 from apps.niamoto_data.models import Occurrence
 from ..models import PlantnoteOccurrence
 
