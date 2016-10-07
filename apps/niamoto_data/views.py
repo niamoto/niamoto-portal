@@ -22,11 +22,19 @@ class TaxonViewSet(viewsets.ReadOnlyModelViewSet):
         """
         return super(TaxonViewSet, self).list(request, *args, **kwargs)
 
+
     def retrieve(self, request, *args, **kwargs):
         """
         Retrieve a taxon given it's identifier.
         """
         return super(TaxonViewSet, self).retrieve(request, *args, **kwargs)
+
+    def get_queryset(self):
+        queryset = Taxon.objects.all()
+        full_name_like = self.request.query_params.get('full_name_like', None)
+        if full_name_like is not None:
+            queryset = queryset.filter(full_name__icontains=full_name_like)
+        return queryset
 
 
 class OccurrenceViewSet(viewsets.ReadOnlyModelViewSet):

@@ -9,5 +9,6 @@ class UserOccurrencesForm(forms.Form):
         label="Date d'observation"
     )
     taxa = forms.CharField(
+        widget=forms.TextInput(attrs={'id': 'magicsuggest', 'value': ""}),
         label="Taxons observés"
     )

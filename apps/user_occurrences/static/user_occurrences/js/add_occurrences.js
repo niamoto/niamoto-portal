@@ -165,7 +165,20 @@
     };
 
     $(document).ready(function() {
+        // Date picker
         $(".form_date").datetimepicker({format: 'DD/MM/YYYY'});
+        // Magic suggest for taxa
+        console.log($.fn.jquery);
+        $('#magicsuggest').magicSuggest({
+            method: 'get',
+            displayField: 'full_name',
+            queryParam: 'full_name_like',
+            data: 'http://localhost:8000/api/1.0/data/taxon/',
+            limit: null,
+            placeholder: 'Saisissez un nom de taxon',
+            allowFreeEntries: false,
+            noSuggestionText: 'Aucun taxon correspondant'
+        });
         // Move point when changing coordinates on the input
         $("#_coords_long").change(function(evt) {
             var val = $("#_coords_long").val();
