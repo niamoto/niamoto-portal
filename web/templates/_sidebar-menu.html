@@ -1,0 +1,63 @@
+<!-- Search -->
+<li class="sidebar-search">
+    <div class="input-group custom-search-form">
+        <input type="text" class="form-control" placeholder="Search...">
+        <span class="input-group-btn">
+        <button class="btn btn-default" type="button">
+            <i class="fa fa-search"></i>
+        </button>
+    </span>
+    </div>
+</li>
+<!-- /Search -->
+<!-- Home -->
+<li>
+    <a href="{% url "home" %}"><i class="fa fa-home fa-fw"></i> Accueil</a>
+</li>
+<!-- /Home -->
+<!-- Account -->
+<li>
+    <a href="#"><i class="fa fa-user fa-fw"></i> Mon compte<span class="fa arrow"></span></a>
+    <ul class="nav nav-second-level">
+        <li>
+            <a href="/account/settings/"><i class="fa fa-cog fa-fw"></i> Paramètres</a>
+        </li>
+    </ul>
+</li>
+<!-- /Account -->
+<!-- Data input -->
+<li>
+    <a href="#"><i class="fa fa-pencil fa-fw"></i> Saisie<span class="fa arrow"></span></a>
+    <ul class="nav nav-second-level">
+        <li>
+            <a href="{%  url 'rapid_inventory_index' %}">Inventaires rapides des forêts</a>
+        </li>
+        <li>
+            <a href="{%  url 'digitizing_massifs' %}">Digitalisation des forêts au 1/3000ème</a>
+        </li>
+    </ul>
+</li>
+<!-- /Data input -->
+<!-- Data consult -->
+<li>
+    <a href="#"><i class="fa fa-database fa-fw"></i> Consultation<span class="fa arrow"></span></a>
+    <ul class="nav nav-second-level">
+        <li>
+            <a href="#">Taxons</a>
+        </li>
+        <li>
+            <a href="#">Occurrences</a>
+        </li>
+    </ul>
+</li>
+<!-- /Data consult -->
+<!-- /Dashboards -->
+<li>
+    <a href="#"><i class="fa fa-tachometer fa-fw"></i> Tableaux de bord<span class="fa arrow"></span></a>
+    <ul class="nav nav-second-level">
+        <li>
+            <a href="{% url 'taxon_dashboards:taxon_treeview' %}">Taxons</a>
+        </li>
+    </ul>
+    <!-- /.nav-second-level -->
+</li>
