@@ -13,6 +13,8 @@ $(function() {
 $(function() {
     $(window).bind("load resize", function() {
         var topOffset = 50;
+        var bottomOffset = document.getElementById('site-footer').offsetHeight
+            + document.getElementById('footer-hr').offsetHeight;
         var width = (this.window.innerWidth > 0) ? this.window.innerWidth : this.screen.width;
         if (width < 768) {
             $('div.navbar-collapse').addClass('collapse');
@@ -22,7 +24,7 @@ $(function() {
         }
 
         var height = ((this.window.innerHeight > 0) ? this.window.innerHeight : this.screen.height) - 1;
-        height = height - topOffset;
+        height = height - topOffset - bottomOffset;
         if (height < 1) height = 1;
         if (height > topOffset) {
             $("#page-wrapper").css("min-height", (height) + "px");

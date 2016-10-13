@@ -1,9 +1,17 @@
 # coding: utf-8
 
 from django.contrib.auth import get_user_model
+from django.shortcuts import render
 import account.views
 
 from web.forms import SignupForm
+
+
+def home(request):
+    if request.user.is_authenticated():
+        return render(request, 'homepage.html', {})
+    else:
+        return render(request, 'splash_page.html', {})
 
 
 class SignupView(account.views.SignupView):

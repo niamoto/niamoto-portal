@@ -15,7 +15,7 @@ body {
   background-color: white;
 }
 @media (min-width: 768px) {
-  #page-wrapper {
+  .page-wrapper-sidebar {
     position: inherit;
     margin: 0 0 0 250px;
     padding: 0 30px;
@@ -431,4 +431,21 @@ table.dataTable thead .sorting:after {
     border-right-width: 14px;
     border-left-width: 0;
   }
+}
+
+
+footer {
+    padding-bottom: 10px;
+    display: block;
+    box-sizing: border-box;
+}
+
+#footer-hr {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin: 0;
+}
+
+.footer-container {
+    text-align: center;
 }
