@@ -1,4 +1,4 @@
-{% extends "site_base.html" %}
+{% extends "niamoto_dashboard_base.html" %}
 
 {% load staticfiles %}
 
@@ -8,61 +8,59 @@
     <link rel="stylesheet" type="text/css" href="{% static 'taxon_dashboards/css/taxon_treeview.css' %}"/>
 {% endblock %}
 
-{% block body_base %}
-    <div class="container-fluid">
-        <img id="preloader" src="{% static 'img/preloader.svg' %}">
-        <h1>Tableaux de bord des taxons</h1>
-        <div id="dashboard_row" class="row">
-            <div id="left_panel" class="col-xs-4 col-md-4">
-                <div class="row">
-                    <div class="col-xs-12 col-md-12"><input class="form-control" id="input-search" placeholder="Rechercher un taxon..." value="" type="input"></div>
-                </div>
-                <div id="taxon_treeview"></div>
+{% block body %}
+    <img id="preloader" src="{% static 'img/preloader.svg' %}">
+    <h1 class="page-header">Tableaux de bord des taxons</h1>
+    <div id="dashboard_row" class="row">
+        <div id="left_panel" class="col-xs-4 col-md-4">
+            <div class="row">
+                <div class="col-xs-12 col-md-12"><input class="form-control" id="input-search" placeholder="Rechercher un taxon..." value="" type="input"></div>
             </div>
-            <div class="col-xs-8 col-md-8" id="right_panel">
+            <div id="taxon_treeview"></div>
+        </div>
+        <div class="col-xs-8 col-md-8" id="right_panel">
 
-                <!-- Modal -->
-                <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h4 class="modal-title">Selectionnez un taxon</h4>
-                            </div>
-                            <div class="modal-body">
-                                <p>
-                                    Selectionnez un taxon dans l'arbre de droite.
-                                    Vous aurez accès à des informations générales sur la répartition de ce taxon,
-                                    et la distribution des occurrences.
-                                    Pour des tableaux de bord plus spécifiques, accédez à la page du taxon selectionné en cliquant
-                                    sur le lien "Tableaux de bord détaillés".
-                                </p>
-                            </div>
+            <!-- Modal -->
+            <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Selectionnez un taxon</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>
+                                Selectionnez un taxon dans l'arbre de droite.
+                                Vous aurez accès à des informations générales sur la répartition de ce taxon,
+                                et la distribution des occurrences.
+                                Pour des tableaux de bord plus spécifiques, accédez à la page du taxon selectionné en cliquant
+                                sur le lien "Tableaux de bord détaillés".
+                            </p>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <div id="taxon_abstract">
-                    <h2 id="selected_taxon_name"></h2>
+            <div id="taxon_abstract">
+                <h2 id="selected_taxon_name"></h2>
+            </div>
+            <div id="taxon_d3_viz" class="row">
+                <div id="general_informations_container" class="col-xs-12 col-md-12 panel">
+                    <div id="tax_text_infos" class="col-xs-5 col-md-5">
+                        <h5><strong>Rang taxonomique: </strong><span id="tax_rank_value"></span></h5>
+                        <h5><strong>Nombre d'occurrences connues sous ce taxon: </strong><span id="tax_occ_nb_value"></span></h5>
+                        <h5><strong>Fiche endemia.nc: </strong><span id="tax_endemia_link_value"><em>Indisponible</em></span></h5>
+                        <h5 id="detailed_dashboards"><a id="detailed_dashboards_link">Tableaux de bord détaillés</a></h5>
+                    </div>
+                    <div id="tax_proportion_total" class="col-xs-7 col-md-7 d3_panel">
+                    </div>
                 </div>
-                <div id="taxon_d3_viz" class="row">
-                    <div id="general_informations_container" class="col-xs-12 col-md-12 panel">
-                        <div id="tax_text_infos" class="col-xs-5 col-md-5">
-                            <h5><strong>Rang taxonomique: </strong><span id="tax_rank_value"></span></h5>
-                            <h5><strong>Nombre d'occurrences connues sous ce taxon: </strong><span id="tax_occ_nb_value"></span></h5>
-                            <h5><strong>Fiche endemia.nc: </strong><span id="tax_endemia_link_value"><em>Indisponible</em></span></h5>
-                            <h5 id="detailed_dashboards"><a id="detailed_dashboards_link">Tableaux de bord détaillés</a></h5>
-                        </div>
-                        <div id="tax_proportion_total" class="col-xs-7 col-md-7 d3_panel">
-                        </div>
-                    </div>
-                    <div id="map_container" class="col-xs-7 col-md-7 panel">
-                        <div id="map_widget" class="d3_panel"></div>
-                        <span id="map_label"><h5><strong>Distribution géographique des occurrences connues</strong></h5></span>
-                    </div>
-                    <div id="taxon_proportions_container" class="col-xs-5 col-md-5 panel">
-                        <div id="taxon_proportions_widget" class="d3_panel"></div>
-                        <span id="pie_label"><h5><strong>Répartition des taxons</strong> - <em>Survoler pour connaitre le détail</em></h5></span>
-                    </div>
+                <div id="map_container" class="col-xs-7 col-md-7 panel">
+                    <div id="map_widget" class="d3_panel"></div>
+                    <span id="map_label"><h5><strong>Distribution géographique des occurrences connues</strong></h5></span>
+                </div>
+                <div id="taxon_proportions_container" class="col-xs-5 col-md-5 panel">
+                    <div id="taxon_proportions_widget" class="d3_panel"></div>
+                    <span id="pie_label"><h5><strong>Répartition des taxons</strong> - <em>Survoler pour connaitre le détail</em></h5></span>
                 </div>
             </div>
         </div>
