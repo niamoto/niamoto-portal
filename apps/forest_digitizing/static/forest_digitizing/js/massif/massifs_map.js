@@ -160,7 +160,7 @@
     }
 
     function sizeContent() {
-        var new_height = $("#content").height() * 0.85;
+        var new_height = $("#page-wrapper").height() * 0.85;
         $(".column").css("height", new_height + "px");
         var header_height = $(".tablesorter-scroller-header").height();
         var table_height = $("#massif_form").height() - header_height;
@@ -277,7 +277,6 @@
                 var massif_key_name = $(this).attr('value');
                 window.location.href = massif_key_name;
             });
-
             fitMassif();
         };
         $(window).resize(sizeContent);

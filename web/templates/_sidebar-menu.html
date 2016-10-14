@@ -15,25 +15,12 @@
     <a href="{% url "home" %}"><i class="fa fa-home fa-fw"></i> Accueil</a>
 </li>
 <!-- /Home -->
-<!-- Account -->
-<li>
-    <a href="/#"><i class="fa fa-user fa-fw"></i> Mon compte<span class="fa arrow"></span></a>
-    <ul class="nav nav-second-level">
-        <li>
-            <a href="/account/settings/"><i class="fa fa-cog fa-fw"></i> Paramètres</a>
-        </li>
-    </ul>
-</li>
-<!-- /Account -->
 <!-- Data input -->
 <li>
     <a href="/#"><i class="fa fa-pencil fa-fw"></i> Saisie<span class="fa arrow"></span></a>
     <ul class="nav nav-second-level">
         <li>
             <a href="{%  url 'rapid_inventory_index' %}">Inventaires rapides des forêts</a>
-        </li>
-        <li>
-            <a href="{%  url 'digitizing_massifs' %}">Digitalisation des forêts au 1/3000ème</a>
         </li>
     </ul>
 </li>
@@ -48,10 +35,13 @@
         <li>
             <a href="#">Occurrences</a>
         </li>
+        <li>
+            <a href="{%  url 'digitizing_massifs' %}">Digitalisation au 1/3000ème</a>
+        </li>
     </ul>
 </li>
 <!-- /Data consult -->
-<!-- /Dashboards -->
+<!-- Dashboards -->
 <li>
     <a href="/#"><i class="fa fa-tachometer fa-fw"></i> Tableaux de bord<span class="fa arrow"></span></a>
     <ul class="nav nav-second-level">
@@ -61,3 +51,14 @@
     </ul>
     <!-- /.nav-second-level -->
 </li>
+<!-- /Dashboards -->
+<!-- Account -->
+<li>
+    <a href="/#"><i class="fa fa-user fa-fw"></i> Mon compte<span class="fa arrow"></span></a>
+    <ul class="nav nav-second-level">
+        <li>
+            <a href="/account/settings/"><i class="fa fa-cog fa-fw"></i> Paramètres</a>
+        </li>
+    </ul>
+</li>
+<!-- /Account -->

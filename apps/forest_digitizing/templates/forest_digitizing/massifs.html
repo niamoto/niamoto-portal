@@ -1,4 +1,4 @@
-{% extends "site_base.html" %}
+{% extends "niamoto_dashboard_base.html" %}
 
 {% load staticfiles %}
 
@@ -13,9 +13,8 @@
 {% block body_base %}
     <!-- Content -->
     <div class="container-fluid">
-        <h1>Digitalisation au 1/3000ème</h1>
+        <h1 class="page-header">Digitalisation au 1/3000ème</h1>
         <h3>Massifs de la Province Nord de Nouvelle-Calédonie</h3>
-        <a href="/">retour à l'accueil</a>
         <div id="massifs" class="row">
             <div id="massif_form" class="col-xs-5 col-md-5">
                 <table id="massif_table" class="tablesorter">
@@ -58,5 +57,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ol3/3.6.0/ol.min.js" type="text/javascript"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.3.6/proj4.js"></script>
     <script src="{% static 'forest_digitizing/js/olext.min.js' %}" type="text/javascript"></script>
-    <script src="{% static 'forest_digitizing/js/massifs.min.js' %}" type="text/javascript"></script>
+    <script src="{% static 'forest_digitizing/js/massif/massifs_table.js' %}" type="text/javascript"></script>
+    <script src="{% static 'forest_digitizing/js/massif/massifs_map.js' %}" type="text/javascript"></script>
+{#    <script src="{% static 'forest_digitizing/js/massifs.min.js' %}" type="text/javascript"></script>#}
 {% endblock %}

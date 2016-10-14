@@ -11,11 +11,13 @@ $(function() {
 //collapses the sidebar on window resize.
 // Sets the min-height of #page-wrapper to window size
 $(function() {
-    $(window).bind("load resize", function() {
+
+    function size_wrapper() {
+        var win = window;
         var topOffset = 50;
         var bottomOffset = document.getElementById('site-footer').offsetHeight
             + document.getElementById('footer-hr').offsetHeight;
-        var width = (this.window.innerWidth > 0) ? this.window.innerWidth : this.screen.width;
+        var width = (win.window.innerWidth > 0) ? win.window.innerWidth : win.screen.width;
         if (width < 768) {
             $('div.navbar-collapse').addClass('collapse');
             topOffset = 100; // 2-row-menu
@@ -23,20 +25,22 @@ $(function() {
             $('div.navbar-collapse').removeClass('collapse');
         }
 
-        var height = ((this.window.innerHeight > 0) ? this.window.innerHeight : this.screen.height) - 1;
+        var height = ((win.window.innerHeight > 0) ? win.window.innerHeight : win.screen.height) - 1;
         height = height - topOffset - bottomOffset;
         if (height < 1) height = 1;
         if (height > topOffset) {
             $("#page-wrapper").css("min-height", (height) + "px");
         }
-    });
+    }
+
+    $(window).bind("load resize", size_wrapper);
+    $(document).bind("ready", size_wrapper);
 
     var url = window.location;
     // var element = $('ul.nav a').filter(function() {
     //     return this.href == url;
     // }).addClass('active').parent().parent().addClass('in').parent();
     var element = $('ul.nav a').filter(function() {
-        console.log(this.getAttribute("href"));
         if (this.getAttribute("href") == '/') {
             return false;
         }

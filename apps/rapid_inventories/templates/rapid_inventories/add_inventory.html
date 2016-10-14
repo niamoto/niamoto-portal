@@ -1,4 +1,4 @@
-{% extends "site_base.html" %}
+{% extends "niamoto_dashboard_base.html" %}
 
 {% load staticfiles %}
 
@@ -16,8 +16,7 @@
 
 {% block body_base %}
     <div class="container">
-        <h1>Nouvel inventaire rapide</h1>
-        <a href="{%  url 'rapid_inventory_index' %}">retour aux inventaires</a>
+        <h1 class="page-header">Nouvel inventaire rapide</h1>
     </div>
     <form class="panel-body" method="POST">{% csrf_token %}
         <div class="container">

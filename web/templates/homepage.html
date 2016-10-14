@@ -5,43 +5,4 @@
 {% block body_class %}home{% endblock %}
 
 {% block body %}
-    <section>
-        <div class="container">
-            <h1 class="page-header">Accueil</h1>
-            <div class="row">
-                <div class="col-sm-6 col-md-6">
-                    <div class="thumbnail">
-                        <div class="caption">
-                            <h3>Inventaires rapides des forêts</h3>
-                            <p><a href="{% url 'add_rapid_inventory' %}" class="btn btn-success" role="button">Saisir un inventaire</a> <a href="{%  url 'rapid_inventory_index' %}" class="btn btn-primary" role="button">Consulter les inventaires</a></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-6">
-                    <div class="thumbnail">
-                        <div class="caption">
-                            <h3>Digitalisation des forêts au 1/3000ème</h3>
-                            <p><a href="{% url 'digitizing_massifs' %}" class="btn btn-primary" role="button">Consulter la digitalisation</a></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-6">
-                    <div class="thumbnail">
-                        <div class="caption">
-                            <h3>Tableaux de bord des taxons</h3>
-                            <p><a href="{% url 'taxon_dashboards:taxon_treeview' %}" class="btn btn-primary" role="button">Accéder à l'index des taxons</a></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-6">
-                    <div class="thumbnail">
-                        <div class="caption">
-                            <h3>Saisie d'occurrences</h3>
-                            <p><a href="{% url 'add_user_occurrences' %}" class="btn btn-primary" role="button">Saisir des occurrences</a></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 {% endblock %}
