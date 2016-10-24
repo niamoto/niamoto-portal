@@ -439,13 +439,20 @@ footer {
     display: block;
     box-sizing: border-box;
 }
-
 #footer-hr {
     padding-top: 5px;
     padding-bottom: 5px;
     margin: 0;
 }
-
 .footer-container {
     text-align: center;
+}
+
+.navbar-header li a {
+    font-size: 16px;
+}
+
+.navbar-brand {
+    margin: 0 20px 0 10px;
+    font-size: 24px;
 }

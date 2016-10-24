@@ -34,7 +34,7 @@
     <body>
         <div id="wrapper">
             <!-- Navigation -->
-            <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <nav id="navbar" class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
             {% block navigation %}
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -44,6 +44,11 @@
                         <span class="icon-bar"></span>
                     </button>
                     <a class="navbar-brand" href="{% url "home" %}">{{ SITE_NAME }}</a>
+                    <ul class="nav navbar-nav">
+                        <li><a href="#">Niamoto c'est quoi?</a></li>
+                        <li><a href="#">L'équipe</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
                 </div>
                 <!-- /.navbar-header -->
 
@@ -80,6 +85,7 @@
         <!-- /#wrapper -->
 
         {% block footer_base %}
+            <div id="pre-footer">{% block prefooter %}{% endblock %}</div>
             <hr id="footer-hr"/>
             <footer id="site-footer">
                 <div class="container-fluid footer-container">

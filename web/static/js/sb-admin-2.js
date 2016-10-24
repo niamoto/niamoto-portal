@@ -14,9 +14,10 @@ $(function() {
 
     function size_wrapper() {
         var win = window;
-        var topOffset = 50;
+        var topOffset = document.getElementById('navbar').offsetHeight;
         var bottomOffset = document.getElementById('site-footer').offsetHeight
-            + document.getElementById('footer-hr').offsetHeight;
+            + document.getElementById('footer-hr').offsetHeight
+            + document.getElementById('pre-footer').offsetHeight;
         var width = (win.window.innerWidth > 0) ? win.window.innerWidth : win.screen.width;
         if (width < 768) {
             $('div.navbar-collapse').addClass('collapse');

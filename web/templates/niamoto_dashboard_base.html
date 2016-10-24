@@ -32,3 +32,10 @@
         {% endblock %}
     </div>
 {% endblock %}
+
+{% block footer_base %}
+    <div id="pre-footer">{% block prefooter %}{% endblock %}</div>
+    <hr id="footer-hr" style="padding: 0;"/>
+    <footer id="site-footer" style="padding: 0;">
+    </footer>
+{% endblock %}
