@@ -438,11 +438,13 @@ footer {
     padding-bottom: 10px;
     display: block;
     box-sizing: border-box;
+    background-color: white;
 }
 #footer-hr {
-    padding-top: 5px;
-    padding-bottom: 5px;
-    margin: 0;
+    padding: 5px 0;
+    margin: 0 20%;
+    background-color: white;
+    border-color: rgb(200, 200, 200);
 }
 .footer-container {
     text-align: center;

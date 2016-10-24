@@ -249,7 +249,7 @@
             .outerRadius(radius * 0.8)
             .innerRadius(radius * 0.4);
 
-        var tooltip = d3.select("body").append("div")
+        var tooltip = d3.select("#page-wrapper").append("div")
             .attr("id", "tooltip")
             .style("opacity", 0);
 
