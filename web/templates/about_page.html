@@ -1,0 +1,130 @@
+{% extends "site_base.html" %}
+
+{% load i18n %}
+
+{% block body_class %}home{% endblock %}
+
+{% block styles %}
+    {{ block.super }}
+    <link href="/static/css/about_page.css" rel="stylesheet">
+ <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400" rel="stylesheet">{% endblock %}
+
+{% block page_content %}
+    <div id="page-wrapper" class="splash-container">
+        <div id="splash" class="container">
+            <div id="splash-content">
+                <div class="row">
+                    <div class="col-xs-12 col-md-12">
+                        <h1>Niamoto c'est quoi?</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {#    Summary    #}
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <img class="icon" src="/static/img/tree.svg" alt="tree_icon" style="height:100px;">
+                    <h3>Des forêts</h3>
+                    <p>
+                        Les forêts de Nouvelle-Calédonie se caractérisent par leur richesse
+                        et leur diversité, elles sont la raison d'être de Niamoto. Ces habitats sont une
+                        source importante de biodiversité que nous nous devons de préserver.
+                        Niamoto est un support pour mieux les comprendre et mieux les protéger.
+                    </p>
+                </div>
+                <div class="col-md-4">
+                    <img class="icon" src="/static/img/network.svg" alt="network_icon" style="height:100px;">
+                    <h3>Un réseau d'utilisateurs</h3>
+                    <p>
+                        Les habitats forestiers constituent une richesse pour tous, c'est pour
+                        cela que Niamoto s'adresse à tout le monde.
+                        Amoureux de la nature, citoyens curieux, scientifiques ou
+                        gestionnaires de l'environnement, avec Niamoto vous pouvez tous avoir accès
+                        aux connaissances actuelles sur forêts de Nouvelle-Calédonie. Mieux encore,
+                        vous pouvez contribuer et enrichir ces connaissances.
+                    </p>
+                </div>
+                <div class="col-md-4">
+                    <img class="icon" src="/static/img/data.svg" alt="data_icon" style="height:100px;">
+                    <h3>Des données</h3>
+                    <p>
+                        A coeur de Niamoto, il y a la donnée. Scientifique, collaborative, géographique,
+                        aggrégée, décisionnelle... Tout est centralisé par Niamoto, et diffusé sous
+                        différentes formes, adaptées pour chaque type d'utilisateur et d'information.
+                        Consultez des cartes, des inventaires, des tableaux de bord, ou consommez des
+                        web services pour vos propres applications.
+                    </p>
+                </div>
+            </div>
+            <div class="row" id="section_links">
+                <div class="col-md-4">
+                    <div class="icon">
+                        <a href="#about_forests"><img src="/static/img/down_arrow.svg" alt="down_arrow" style="height:70px;"></a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="icon">
+                        <a href="#about_network"><img src="/static/img/down_arrow.svg" alt="down_arrow" style="height:70px;"></a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="icon">
+                        <a href="#about_data"><img src="/static/img/down_arrow.svg" alt="down_arrow" style="height:70px;"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr/>
+        {#    About the forests    #}
+        <div id="about_forests" class="container">
+            <img class="icon" src="/static/img/tree.svg" alt="tree_icon" style="height:100px;">
+            <h3>Des forêts</h3>
+        </div>
+        <hr/>
+        {#    About the user network    #}
+        <div id="about_network" class="container">
+            <img class="icon" src="/static/img/network.svg" alt="network_icon" style="height:100px;">
+            <h3>Un réseau d'utilisateurs</h3>
+        </div>
+        <hr/>
+        {#    About the data    #}
+        <div id="about_data" class="container">
+            <img class="icon" src="/static/img/data.svg" alt="data_icon" style="height:100px;">
+            <h3>Des données</h3>
+        </div>
+    </div>
+{% endblock %}
+
+{% block prefooter %}
+    <div id="logos">
+        <div id="logos_content">
+            <img src="/static/img/logos/logo_pn.jpg" alt="logo_pn" style="height:90px;">
+            <img src="/static/img/logos/logo_iac.jpg" alt="logo_iac" style="height:70px;">
+            <img src="/static/img/logos/logo_amap.jpg" alt="logo_amap" style="height:80px;">
+            <img src="/static/img/logos/logo_ird.png" alt="logo_ird" style="height:80px;">
+            <img src="/static/img/logos/logo_cirad.jpg" alt="logo_cirad" style="height:80px;">
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    {{ block.super }}
+    {#  Animated scroll  #}
+    <script>
+        $(function() {
+            $('a[href*="#"]:not([href="#"])').click(function() {
+                if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+                    var target = $(this.hash);
+                    target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+                    if (target.length) {
+                        $('html, body').animate({
+                            scrollTop: target.offset().top
+                        }, 750);
+                       return false;
+                    }
+                }
+            });
+        });
+    </script>
+{% endblock %}

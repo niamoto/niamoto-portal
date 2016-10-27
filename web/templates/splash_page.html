@@ -7,7 +7,7 @@
 {% block styles %}
     {{ block.super }}
     <link href="/static/css/splash_page.css" rel="stylesheet">
- <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400" rel="stylesheet">{% endblock %}
+{% endblock %}
 
 {% block page_content %}
     <div id="page-wrapper" class="splash-container">
@@ -15,7 +15,7 @@
             <div id="splash-content">
                 <div class="row">
                     <div class="col-xs-12 col-md-12">
-                        <h1>Niamoto, le portail des habitats forestiers</h1>
+                        <h1>Le portail des habitats forestiers</h1>
                         <br>
                         <p>
                             Niamoto est un système d'information environnemental centré sur
@@ -28,7 +28,7 @@
                         <span></span>
                         <a href="{% url 'account_login' %}" class="account-btn btn btn-default">J'ai déjà un compte</a>
                         <br>
-                        <a href="#" class="about-btn btn btn-success">Je veux en savoir plus sur Niamoto</a>
+                        <a href="{% url 'about' %}" class="about-btn btn btn-success">Je veux en savoir plus sur Niamoto</a>
                     </div>
                 </div>
             </div>
@@ -39,11 +39,11 @@
 {% block prefooter %}
     <div id="logos">
         <div id="logos_content">
-            <img src="/static/img/logos/logo_pn.jpg" alt="logo_pn" style="height:120px;">
-            <img src="/static/img/logos/logo_iac.jpg" alt="logo_iac" style="height:90px;">
-            <img src="/static/img/logos/logo_amap.jpg" alt="logo_amap" style="height:100px;">
-            <img src="/static/img/logos/logo_ird.png" alt="logo_ird" style="height:100px;">
-            <img src="/static/img/logos/logo_cirad.jpg" alt="logo_cirad" style="height:100px;">
+            <img src="/static/img/logos/logo_pn.jpg" alt="logo_pn" style="height:90px;">
+            <img src="/static/img/logos/logo_iac.jpg" alt="logo_iac" style="height:70px;">
+            <img src="/static/img/logos/logo_amap.jpg" alt="logo_amap" style="height:80px;">
+            <img src="/static/img/logos/logo_ird.png" alt="logo_ird" style="height:80px;">
+            <img src="/static/img/logos/logo_cirad.jpg" alt="logo_cirad" style="height:80px;">
         </div>
     </div>
 {% endblock %}

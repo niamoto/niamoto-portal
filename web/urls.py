@@ -1,7 +1,8 @@
 # coding: utf-8
 
-from django.conf.urls import url, include
-from account.views import SignupView, LoginView, LogoutView, DeleteView
+from django.conf.urls import url
+from django.views.generic import TemplateView
+from account.views import LoginView, LogoutView, DeleteView
 from account.views import ConfirmEmailView
 from account.views import ChangePasswordView, PasswordResetView, PasswordResetTokenView
 from account.views import SettingsView
@@ -11,6 +12,7 @@ from web.views import home, SignupView
 
 urlpatterns = [
     url(r"^$", home, name="home"),
+    url(r"^about/$", TemplateView.as_view(template_name="about_page.html"), name="about"),
     # Rewrite account urls
     url(r"^account/signup/$", SignupView.as_view(), name="account_signup"),
     url(r"^account/login/$", LoginView.as_view(), name="account_login"),

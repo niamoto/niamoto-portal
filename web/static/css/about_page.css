@@ -1,3 +1,25 @@
+h3 {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: 300;
+    color: rgba(0, 0, 0, 0.75);
+}
+
+p {
+    color: rgba(0, 0, 0, 0.65);
+}
+
+#section_links a {
+    -webkit-transition: all 0.5s ease;
+}
+
+.icon {
+    width: 100%;
+    text-align: center;
+}
+
+/* Splash */
 #splash {
     position: relative;
     width: 100%;
@@ -9,8 +31,8 @@
 
 #splash-content {
     width: 50%;
-    padding-top: 3%;
-    padding-bottom: 4%;
+    padding-top: 2%;
+    padding-bottom: 1%;
     margin: 0 25% 5% 25%;
     color: white;
     font-family: Roboto;
@@ -52,6 +74,13 @@
     padding: 0!important;
 }
 
+/* horizontal separator */
+hr {
+    margin: 0 10% 50px 10%;
+    border-color: rgba(0, 84, 13, 0.15);
+}
+
+/* Logos */
 #logos {
     background-color: white;
     position: relative;
