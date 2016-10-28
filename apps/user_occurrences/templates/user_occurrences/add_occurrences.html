@@ -1,4 +1,4 @@
-{% extends "site_base.html" %}
+{% extends "niamoto_dashboard_base.html" %}
 
 {% load staticfiles %}
 
@@ -18,7 +18,6 @@
 {% block body_base %}
     <div class="container">
         <h1>Saisie d'occurrences</h1>
-        <a href="{%  url 'home' %}">retour à la page d'accueil</a>
     </div>
     <form class="panel-body" method="POST">{% csrf_token %}
         <div class="container">
