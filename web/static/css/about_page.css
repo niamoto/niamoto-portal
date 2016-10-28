@@ -6,16 +6,100 @@ h3 {
     color: rgba(0, 0, 0, 0.75);
 }
 
-p {
-    color: rgba(0, 0, 0, 0.65);
+h4 {
+    font-weight: 300;
+    color: rgba(0, 0, 0, 0.75);
 }
 
-#section_links a {
+p {
+    color: rgba(0, 0, 0, 0.65);
+    margin-bottom: 25px;
+}
+
+#try_niamoto {
+    margin-top: 30px;
+    font-weight: 400;
+    text-align: center;
+}
+
+#try_niamoto h3 {
+    color: rgba(0, 84, 13, 0.9);
+}
+
+.section_links a {
     -webkit-transition: all 0.5s ease;
+    font-size: 60px;
+    color: rgba(0, 84, 13, 0.65);
+}
+
+.section_links a:hover {
+        color: rgba(0, 84, 13, 0.85);
 }
 
 .icon {
     width: 100%;
+    text-align: center;
+}
+
+.down-arrow {
+    position: absolute;
+    bottom: 0;
+}
+
+.a {
+    position: relative;
+}
+
+.picture-container{
+    text-align: center;
+}
+
+.picture {
+    width: 500px;
+}
+
+.img-shadow {
+    position: relative;
+    max-width: 100%;
+    float: left;
+}
+
+.img-shadow::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    box-shadow: inset 0 0 5px 5px white;
+    -moz-box-shadow: inset 0 0 5px 5px white;
+    -webkit-box-shadow: inset 0 0 5px 5px white;
+}
+
+.img-shadow img {
+    float: left;
+}
+
+.about-container h3 {
+    margin-bottom: 50px;
+}
+
+.about-section {
+
+}
+
+#about_suscribe h3 {
+    margin-bottom: 0;
+}
+.account-btn {
+    margin-top: 20px;
+    margin-right: 10px;
+    margin-left: 10px;
+    line-height: 35px;
+    opacity: 0.95;
+    font-size: 16px;
+}
+#about_suscribe {
     text-align: center;
 }
 
@@ -27,6 +111,8 @@ p {
     background-image:url("/static/img/bokeh_effect_3.jpg");
     background-size: cover;
     box-shadow: 0 -65px 30px -30px white inset;
+    -moz-box-shadow: 0 -65px 30px -30px white inset;
+    -webkit-box-shadow: 0 -65px 30px -30px white inset;
 }
 
 #splash-content {
@@ -52,23 +138,6 @@ p {
     text-shadow: 0px 0px 2px rgba(100, 100, 100, 1);
 }
 
-.account-btn {
-    margin-top: 50px;
-    margin-right: 10px;
-    margin-left: 10px;
-    line-height: 35px;
-    width: 190px;
-    opacity: 0.95;
-    font-size: 16px;
-}
-
-.about-btn {
-    margin-top: 20px;
-    line-height: 35px;
-    width: 350px;
-    font-size: 16px;
-}
-
 .splash-container {
     width: 100%;
     padding: 0!important;
@@ -76,7 +145,7 @@ p {
 
 /* horizontal separator */
 hr {
-    margin: 0 10% 50px 10%;
+    margin: 40px 10% 50px 10%;
     border-color: rgba(0, 84, 13, 0.15);
 }
 
@@ -84,7 +153,7 @@ hr {
 #logos {
     background-color: white;
     position: relative;
-    padding: 10px 0 20px 0;
+    padding: 100px 0 20px 0;
 }
 
 #logos_content {
@@ -113,4 +182,47 @@ hr {
 .nav li a {
     min-height: 60px;
     line-height: 30px;
+}
+
+/* Scroll top */
+#return-to-top {
+    z-index: 1;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: rgb(0, 0, 0);
+    background: rgba(0, 0, 0, 0.7);
+    width: 50px;
+    height: 50px;
+    display: block;
+    text-decoration: none;
+    -webkit-border-radius: 35px;
+    -moz-border-radius: 35px;
+    border-radius: 35px;
+    display: none;
+    -webkit-transition: all 0.3s linear;
+    -moz-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+#return-to-top i {
+    color: #fff;
+    margin: 0;
+    position: relative;
+    left: 16px;
+    top: 13px;
+    font-size: 19px;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+#return-to-top:hover {
+    background: rgba(0, 0, 0, 0.9);
+}
+#return-to-top:hover i {
+    color: #fff;
+    top: 5px;
 }

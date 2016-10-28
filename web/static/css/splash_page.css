@@ -5,6 +5,8 @@
     background-image:url("/static/img/bokeh_effect_3.jpg");
     background-size: cover;
     box-shadow: 0 -65px 30px -30px white inset;
+    -moz-box-shadow: 0 -65px 30px -30px white inset;
+    -webkit-box-shadow: 0 -65px 30px -30px white inset;
 }
 
 #splash-content {

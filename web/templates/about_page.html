@@ -10,6 +10,7 @@
  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400" rel="stylesheet">{% endblock %}
 
 {% block page_content %}
+    <a href="javascript:" id="return-to-top"><i class="fa fa-chevron-up "></i></a>
     <div id="page-wrapper" class="splash-container">
         <div id="splash" class="container">
             <div id="splash-content">
@@ -32,6 +33,23 @@
                         source importante de biodiversité que nous nous devons de préserver.
                         Niamoto est un support pour mieux les comprendre et mieux les protéger.
                     </p>
+                    <div class="icon section_links">
+                        <a href="#about_forests"><i class="fa fa-chevron-down"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <img class="icon" src="/static/img/data.svg" alt="data_icon" style="height:100px;">
+                    <h3>Des données</h3>
+                    <p>
+                        A coeur de Niamoto, il y a la donnée. Scientifique, collaborative, géographique,
+                        aggrégée, décisionnelle... Tout est centralisé par Niamoto, et diffusé sous
+                        différentes formes, adaptées pour chaque type d'utilisateur et d'information.
+                        Consultez des cartes, des inventaires, des tableaux de bord, ou consommez des
+                        web services pour vos propres applications.
+                    </p>
+                    <div class="icon section_links">
+                        <a href="#about_data"><i class="fa fa-chevron-down"></i></a>
+                    </div>
                 </div>
                 <div class="col-md-4">
                     <img class="icon" src="/static/img/network.svg" alt="network_icon" style="height:100px;">
@@ -44,54 +62,107 @@
                         aux connaissances actuelles sur forêts de Nouvelle-Calédonie. Mieux encore,
                         vous pouvez contribuer et enrichir ces connaissances.
                     </p>
-                </div>
-                <div class="col-md-4">
-                    <img class="icon" src="/static/img/data.svg" alt="data_icon" style="height:100px;">
-                    <h3>Des données</h3>
-                    <p>
-                        A coeur de Niamoto, il y a la donnée. Scientifique, collaborative, géographique,
-                        aggrégée, décisionnelle... Tout est centralisé par Niamoto, et diffusé sous
-                        différentes formes, adaptées pour chaque type d'utilisateur et d'information.
-                        Consultez des cartes, des inventaires, des tableaux de bord, ou consommez des
-                        web services pour vos propres applications.
-                    </p>
-                </div>
-            </div>
-            <div class="row" id="section_links">
-                <div class="col-md-4">
-                    <div class="icon">
-                        <a href="#about_forests"><img src="/static/img/down_arrow.svg" alt="down_arrow" style="height:70px;"></a>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="icon">
-                        <a href="#about_network"><img src="/static/img/down_arrow.svg" alt="down_arrow" style="height:70px;"></a>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="icon">
-                        <a href="#about_data"><img src="/static/img/down_arrow.svg" alt="down_arrow" style="height:70px;"></a>
+                    <div class="icon section_links">
+                        <a href="#about_network"><i class="fa fa-chevron-down"></i></a>
                     </div>
                 </div>
             </div>
+        </div>
+        <hr/>
+        <div id="try_niamoto">
+                <a href="#about_suscribe"><h3>Essayez Niamoto!</h3></a>
         </div>
         <hr/>
         {#    About the forests    #}
-        <div id="about_forests" class="container">
+        <div id="about_forests" class="container about-container">
             <img class="icon" src="/static/img/tree.svg" alt="tree_icon" style="height:100px;">
             <h3>Des forêts</h3>
-        </div>
-        <hr/>
-        {#    About the user network    #}
-        <div id="about_network" class="container">
-            <img class="icon" src="/static/img/network.svg" alt="network_icon" style="height:100px;">
-            <h3>Un réseau d'utilisateurs</h3>
+            <div class="row about-section">
+                <div class="col-md-5">
+                    <p>
+                        Parce qu'on aime les forêts, on a mis une photo de forêt.
+                        Après, on écrira plein de trucs cools sur les forêts!
+                    </p>
+                </div>
+                <div class="col-md-7">
+                    <a class="img-shadow"><img class="picture" src="/static/img/forest_arago.jpg" alt="forest_picture"></a>
+                </div>
+            </div>
         </div>
         <hr/>
         {#    About the data    #}
-        <div id="about_data" class="container">
+        <div id="about_data" class="container about-container">
             <img class="icon" src="/static/img/data.svg" alt="data_icon" style="height:100px;">
             <h3>Des données</h3>
+            <div class="row">
+                <div class="col-md-7 picture-container">
+                    <img class="picture" src="/static/img/about_data_picture.png" alt="data_picture">
+                </div>
+                <div class="col-md-5">
+                    <h4>
+                        Découvrez les forêts calédoniennes sous un jour nouveau
+                    </h4>
+                    <p>
+                        Niamoto donne du sens aux données et vous propose une nouvelle
+                        façon de regarder les forêts. Naviguez entre les tableaux de bord,
+                        les visualisations interactives, les cartes thématiques, ...
+                        Le tout porté par une équipe de scientifiques hyperactifs et spécialisés
+                        dans l'étude des milieux forestiers.
+                    </p>
+                    <h4>
+                        Saisissez des inventaires et contribuez à la connaissance
+                    </h4>
+                    <p>
+                        Notre caillou est vaste, et recèle encore son lot de mystères.
+                        Niamoto vous propose de participer à l'aventure à travers différents
+                        inventaires thématiques. Ces inventaires participent à la connaissance
+                        collective des milleux forestiers de Nouvelle-Calédonie, et font
+                        avancer la recherche scientifique.
+                    </p>
+                    <h4>
+                        Explorez la dimension géographique
+                    </h4>
+                    <p>
+                        La dimension géographique est indissociable de la donnée
+                        écologique. C'est pour cela que Niamoto s'appuie sur les
+                        méthodes et les technologies SIG les plus en pointe. pour
+                        vous proposer une expérience moderne et novatrice.
+                    </p>
+                    <h4>
+                        Appuyez vous sur Niamoto pour vos propres applications
+                    </h4>
+                    <p>
+                        Niamoto, c'est aussi le partage! Utilisez les services et
+                        les données de Niamoto dans vos applications à travers une
+                        API REST, et des services web géographiques WMS et WFS.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <hr/>
+        {#    About the user network    #}
+        <div id="about_network" class="container about-container">
+            <img class="icon" src="/static/img/network.svg" alt="network_icon" style="height:100px;">
+            <h3>Un réseau d'utilisateurs</h3>
+            <div class="row">
+                <div class="col-md-5">
+                    <p>
+                        Les utilisateurs ce sont des gens, les gens sont des blaireaux,
+                        donc on a mis une photo de blaireaux!
+                    </p>
+                </div>
+                <div class="col-md-7">
+                    <div class="picture-container">
+                    <a class="img-shadow"><img class="picture" src="/static/img/photo_blaireaux.jpg" alt="blaireaux"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr/>
+        <div id="about_suscribe" class="container about-container">
+            <img class="icon" src="/static/img/love.svg" alt="love_niamoto_icon" style="height:100px;">
+            <h3>Vous voulez essayer? Rejoignez la communauté, vous allez adorer Niamoto!</h3>
+            <a href="{% url 'account_signup' %}" class="account-btn btn btn-primary">Je m'inscris et je découvre Niamoto</a>
         </div>
     </div>
 {% endblock %}
@@ -110,8 +181,8 @@
 
 {% block scripts %}
     {{ block.super }}
-    {#  Animated scroll  #}
     <script>
+        {#  Animated scroll  #}
         $(function() {
             $('a[href*="#"]:not([href="#"])').click(function() {
                 if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
@@ -125,6 +196,19 @@
                     }
                 }
             });
+        });
+        {#  Scroll to top  #}
+        $(window).scroll(function() {
+            if ($(this).scrollTop() >= 50) {        // If page is scrolled more than 50px
+                $('#return-to-top').fadeIn(200);    // Fade in the arrow
+            } else {
+                $('#return-to-top').fadeOut(200);   // Else fade out the arrow
+            }
+        });
+        $('#return-to-top').click(function() {      // When arrow is clicked
+            $('body,html').animate({
+                scrollTop : 0                       // Scroll to top of body
+            }, 500);
         });
     </script>
 {% endblock %}
