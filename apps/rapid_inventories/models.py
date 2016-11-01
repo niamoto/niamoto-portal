@@ -11,15 +11,28 @@ from apps.rapid_inventories.models_verbose_names import VERBOSE_NAMES as V
 BOOLEAN_CHOICES = ((True, 'Oui'), (False, 'Non'))
 
 
-class RapidInventory(models.Model):
+class Inventory(models.Model):
+    """
+    Model representing an abstract natural inventory. Done someday, by someone,
+    somewhere.
+    """
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    inventory_date = models.DateField(verbose_name=V['inventory_date'])
+    observer = models.ForeignKey(User, verbose_name=V['observer'])
+    location = models.PointField(srid=4326, verbose_name=V['location'])
+
+    @property
+    def observer_full_name(self):
+        return self.observer.get_full_name()
+
+
+class RapidInventory(Inventory):
     """
     Model representing the data of a forest rapid inventory.
     """
 
     # "Prise d'informations générales"
-    inventory_date = models.DateField(verbose_name=V['inventory_date'])
-    observer = models.ForeignKey(User, verbose_name=V['observer'])
-    location = models.PointField(srid=4326, verbose_name=V['location'])
     location_description = models.TextField(
         verbose_name=V['location_description'],
         blank=True,
