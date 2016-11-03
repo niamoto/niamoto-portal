@@ -12,10 +12,20 @@ class RapidInventorySerializer(gis_serializers.GeoFeatureModelSerializer):
     """
 
     observer_full_name = serializers.SerializerMethodField('get_observer_name')
+    id = serializers.SerializerMethodField()
 
     def get_observer_name(self, rapid_inventory):
         return rapid_inventory.observer_full_name
 
+    def get_id(self, rapid_inventory):
+        return rapid_inventory.id
+
     class Meta:
         model = RapidInventory
         geo_field = 'location'
+        fields = (
+            'id',
+            'observer_full_name',
+            'inventory_date',
+            'location_description',
+        )

@@ -128,7 +128,7 @@
                     var content = point.get('inventory_date')
                             + ' - '
                             + point.get('location_description')
-                            + '<br><a href=' + point.getId() + '>'
+                            + '<br><a href=' + point.get('id') + '>'
                             + 'Inventaire complet'
                             + '</a>';
                     popup.show(
