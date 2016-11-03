@@ -13,6 +13,8 @@ from web.views import home, SignupView
 urlpatterns = [
     url(r"^$", home, name="home"),
     url(r"^about/$", TemplateView.as_view(template_name="about_page.html"), name="about"),
+    url(r"^team/$", TemplateView.as_view(template_name="team_page.html"), name="team"),
+    url(r"^contact/$", TemplateView.as_view(template_name="contact_page.html"), name="contact"),
     # Rewrite account urls
     url(r"^account/signup/$", SignupView.as_view(), name="account_signup"),
     url(r"^account/login/$", LoginView.as_view(), name="account_login"),

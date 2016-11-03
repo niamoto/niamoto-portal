@@ -1,0 +1,76 @@
+{% extends "site_base.html" %}
+
+{% load i18n %}
+
+{% block body_class %}home{% endblock %}
+
+{% block styles %}
+    {{ block.super }}
+    <link href="/static/css/about_page.css" rel="stylesheet">
+ <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400" rel="stylesheet">{% endblock %}
+
+{% block page_content %}
+    <a href="javascript:" id="return-to-top"><i class="fa fa-chevron-up "></i></a>
+    <div id="page-wrapper" class="splash-container">
+        <div id="splash" class="container">
+            <div id="splash-content">
+                <div class="row">
+                    <div class="col-xs-12 col-md-12">
+                        <h1>L'équipe</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <div class="container">
+        <h2 style="text-align: center">
+            Les contacts arrivent bientôt!
+        </h2>
+    </div>
+    </div>
+{% endblock %}
+
+{% block prefooter %}
+    <div id="logos">
+        <div id="logos_content">
+            <img src="/static/img/logos/logo_pn.jpg" alt="logo_pn" style="height:90px;">
+            <img src="/static/img/logos/logo_iac.jpg" alt="logo_iac" style="height:70px;">
+            <img src="/static/img/logos/logo_amap.jpg" alt="logo_amap" style="height:80px;">
+            <img src="/static/img/logos/logo_ird.png" alt="logo_ird" style="height:80px;">
+            <img src="/static/img/logos/logo_cirad.jpg" alt="logo_cirad" style="height:80px;">
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    {{ block.super }}
+    <script>
+        {#  Animated scroll  #}
+        $(function() {
+            $('a[href*="#"]:not([href="#"])').click(function() {
+                if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+                    var target = $(this.hash);
+                    target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+                    if (target.length) {
+                        $('html, body').animate({
+                            scrollTop: target.offset().top
+                        }, 750);
+                       return false;
+                    }
+                }
+            });
+        });
+        {#  Scroll to top  #}
+        $(window).scroll(function() {
+            if ($(this).scrollTop() >= 50) {        // If page is scrolled more than 50px
+                $('#return-to-top').fadeIn(200);    // Fade in the arrow
+            } else {
+                $('#return-to-top').fadeOut(200);   // Else fade out the arrow
+            }
+        });
+        $('#return-to-top').click(function() {      // When arrow is clicked
+            $('body,html').animate({
+                scrollTop : 0                       // Scroll to top of body
+            }, 500);
+        });
+    </script>
+{% endblock %}
