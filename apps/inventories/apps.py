@@ -4,4 +4,4 @@ from django.apps import AppConfig
 
 
 class RapidInventoriesConfig(AppConfig):
-    name = 'rapid_inventories'
+    name = 'inventories'

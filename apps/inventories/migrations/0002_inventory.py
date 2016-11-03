@@ -12,7 +12,7 @@ import django.db.models.deletion
 
 @transaction.atomic
 def migrate_rapid_inventories(apps, schema_editor):
-    from apps.rapid_inventories.models import RapidInventory, Inventory
+    from apps.inventories.models import RapidInventory, Inventory
     sql = \
         """
         SELECT id, inventory_date, location, observer_id
@@ -36,7 +36,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('rapid_inventories', '0001_initial'),
+        ('inventories', '0001_initial'),
     ]
 
     operations = [

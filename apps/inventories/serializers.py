@@ -3,7 +3,7 @@
 from rest_framework_gis import serializers as gis_serializers
 from rest_framework import serializers
 
-from apps.rapid_inventories.models import RapidInventory
+from apps.inventories.models import RapidInventory
 
 
 class RapidInventorySerializer(gis_serializers.GeoFeatureModelSerializer):

@@ -2,7 +2,7 @@
 
 from django.conf.urls import url
 
-from apps.rapid_inventories import views
+from apps.inventories import views
 
 
 urlpatterns = [

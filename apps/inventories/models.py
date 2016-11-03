@@ -5,7 +5,7 @@ from django.contrib.gis.db import models
 from django.core.validators import MinValueValidator
 from multiselectfield.db.fields import MultiSelectField
 
-from apps.rapid_inventories.models_verbose_names import VERBOSE_NAMES as V
+from apps.inventories.models_verbose_names import VERBOSE_NAMES as V
 
 
 BOOLEAN_CHOICES = ((True, 'Oui'), (False, 'Non'))

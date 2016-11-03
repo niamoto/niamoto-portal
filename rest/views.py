@@ -13,7 +13,7 @@ def api_root(request):
         'taxon_dashboard-api': reverse('taxon_dashboard-api:api-root'),
         'plantnote-api': reverse('plantnote-api:api-root'),
         'forest_digitizing-api': reverse('forest_digitizing-api:api-root'),
-        'rapid_inventory-api': reverse('inventory-api:api-root'),
+        'inventory-api': reverse('inventory-api:api-root'),
     }
     if request.user.is_staff:
         response_json['management-api'] = reverse('management-api:api-root')

@@ -9,13 +9,13 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('rapid_inventories', '0003_auto_20161102_0955'),
+        ('inventories', '0003_auto_20161102_0955'),
     ]
 
     operations = [
         migrations.AlterField(
             model_name='rapidinventory',
             name='inventory_ptr',
-            field=models.OneToOneField(auto_created=True, db_column='inventory_ptr_id', on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='rapid_inventories.Inventory'),
+            field=models.OneToOneField(auto_created=True, db_column='inventory_ptr_id', on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='inventories.Inventory'),
         ),
     ]

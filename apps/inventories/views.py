@@ -7,14 +7,14 @@ from django.contrib.auth.decorators import login_required
 from rest_framework import viewsets
 from rest_framework import permissions
 
-from apps.rapid_inventories.forms import RapidInventoryForm,\
+from apps.inventories.forms import RapidInventoryForm,\
     GeneralInformationsForm,\
     MeasuresFromCenterForm,\
     VegetationDescriptionForm,\
     MeasuresWalkingForm
-from apps.rapid_inventories.models import RapidInventory
-from apps.rapid_inventories.serializers import RapidInventorySerializer
-from apps.rapid_inventories.permissions import IsOwnerOrReadOnly
+from apps.inventories.models import RapidInventory
+from apps.inventories.serializers import RapidInventorySerializer
+from apps.inventories.permissions import IsOwnerOrReadOnly
 
 
 class RapidInventoryViewSet(viewsets.ReadOnlyModelViewSet):
