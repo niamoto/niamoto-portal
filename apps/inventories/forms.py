@@ -7,7 +7,16 @@ from crispy_forms.bootstrap import InlineRadios, InlineCheckboxes
 from crispy_forms.helper import FormHelper
 from django.forms.widgets import NumberInput
 
-from apps.inventories.models import RapidInventory
+from apps.inventories.models import RapidInventory, TaxaInventory
+
+
+class TaxaInventoryForm(ModelForm):
+    """
+    Form for taxa inventory model.
+    """
+    class Meta:
+        model = TaxaInventory
+        exclude = ['observer', 'location']
 
 
 class RapidInventoryForm(ModelForm):
@@ -20,18 +29,18 @@ class RapidInventoryForm(ModelForm):
         read_only = False
         if 'read_only' in kwargs:
             read_only = kwargs.pop('read_only')
-        super(RapidInventoryForm, self).__init__(*args, **kwargs)
+        super(self.__class__, self).__init__(*args, **kwargs)
         self.helper = FormHelper(self)
         self.helper.form_tag = False
         for field in self.fields:
-            if isinstance(RapidInventory._meta.get_field(field), BooleanField):
+            if isinstance(self.Meta.model._meta.get_field(field), BooleanField):
                 self.fields[field].widget = RadioSelect()
         if read_only:
             # Read only form - Code from django snippets:
             # "https://djangosnippets.org/snippets/3040/"#
             from django.utils.translation import ugettext as _
             from django.forms.widgets import Select
-            super(RapidInventoryForm, self).__init__(*args, **kwargs)
+            super(self.__class__, self).__init__(*args, **kwargs)
             for f in self.fields:
                 self.fields[f].label = _(self.fields[f].label)
                 if isinstance(self.fields[f].widget, Select):

@@ -32,6 +32,13 @@ class Inventory(models.Model):
         return self.observer.get_full_name()
 
 
+class TaxaInventory(Inventory):
+    """
+    Represents a inventory of taxa seen at a location.
+    """
+    
+
+
 class RapidInventory(Inventory):
     """
     Model representing the data of a forest rapid inventory.
