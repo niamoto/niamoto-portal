@@ -1,0 +1,53 @@
+#map {
+    height: 300px;
+    padding: 0;
+    border: 1px #CCCCCC solid;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.row{
+  margin-top: 20px;
+  margin-bottom: 20px
+}
+
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance:textfield;
+}
+
+h4 {
+    margin: 3px;
+}
+
+.no_top_margin {
+    margin-top: 0;
+}
+
+.radio-inline, .checkbox-inline {
+    padding-bottom: 10px;
+    padding-top: 5px;
+}
+
+.inline {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.ms-sel-ctn .ms-sel-item {
+    margin: 5px;
+    padding: 8px 5px 8px 8px;
+    font-size: 18px;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    color: rgba(0, 84, 13, 0.67);
+    background: rgba(198, 255, 191, 0.3);
+}
+
+.ms-sel-ctn .ms-sel-item:hover{
+    border: 1px solid rgba(0, 0, 0, 0.6);
+}

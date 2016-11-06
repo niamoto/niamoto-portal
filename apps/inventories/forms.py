@@ -1,6 +1,7 @@
 # coding: utf-8
 
 from django.db.models import BooleanField
+from django import forms
 from django.forms import ModelForm, TextInput, DateInput,\
     RadioSelect
 from crispy_forms.bootstrap import InlineRadios, InlineCheckboxes
@@ -10,26 +11,15 @@ from django.forms.widgets import NumberInput
 from apps.inventories.models import RapidInventory, TaxaInventory
 
 
-class TaxaInventoryForm(ModelForm):
+class InventoryForm(ModelForm):
     """
-    Form for taxa inventory model.
+    Abstract base class for inventory form.
     """
-    class Meta:
-        model = TaxaInventory
-        exclude = ['observer', 'location']
-
-
-class RapidInventoryForm(ModelForm):
-
-    class Meta:
-        model = RapidInventory
-        exclude = ['observer', 'location']
-
     def __init__(self, *args, **kwargs):
         read_only = False
         if 'read_only' in kwargs:
             read_only = kwargs.pop('read_only')
-        super(self.__class__, self).__init__(*args, **kwargs)
+        ModelForm.__init__(self, *args, **kwargs)
         self.helper = FormHelper(self)
         self.helper.form_tag = False
         for field in self.fields:
@@ -40,13 +30,31 @@ class RapidInventoryForm(ModelForm):
             # "https://djangosnippets.org/snippets/3040/"#
             from django.utils.translation import ugettext as _
             from django.forms.widgets import Select
-            super(self.__class__, self).__init__(*args, **kwargs)
             for f in self.fields:
                 self.fields[f].label = _(self.fields[f].label)
                 if isinstance(self.fields[f].widget, Select):
                     self.fields[f].widget.attrs['disabled'] = 'disabled'
                 else:
                     self.fields[f].widget.attrs['readonly'] = 'readonly'
+
+
+class TaxaInventoryForm(InventoryForm):
+    """
+    Form for taxa inventory model.
+    """
+    class Meta:
+        model = TaxaInventory
+        exclude = ['observer', 'location']
+        widgets = {
+            'inventory_date': DateInput(attrs={'class': 'form_date'}),
+        }
+
+
+class RapidInventoryForm(InventoryForm):
+
+    class Meta:
+        model = RapidInventory
+        exclude = ['observer', 'location']
 
 
 class GeneralInformationsForm(RapidInventoryForm):

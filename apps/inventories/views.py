@@ -1,6 +1,7 @@
 # coding: utf-8
 
 from django.shortcuts import render, redirect
+from django.views.generic.edit import FormView
 from django.core.urlresolvers import reverse
 from django.contrib.gis.geos.point import Point
 from django.contrib.auth.decorators import login_required
@@ -11,10 +12,22 @@ from apps.inventories.forms import RapidInventoryForm,\
     GeneralInformationsForm,\
     MeasuresFromCenterForm,\
     VegetationDescriptionForm,\
-    MeasuresWalkingForm
+    MeasuresWalkingForm,\
+    TaxaInventoryForm
 from apps.inventories.models import RapidInventory
 from apps.inventories.serializers import RapidInventorySerializer
 from apps.inventories.permissions import IsOwnerOrReadOnly
+
+
+class TaxaInventoryFormView(FormView):
+    template_name = "inventories/taxa_inventory.html"
+    form_class = TaxaInventoryForm
+
+    def form_valid(self, form):
+        pass
+
+    def form_invalid(self, form):
+        pass
 
 
 class RapidInventoryViewSet(viewsets.ReadOnlyModelViewSet):
@@ -60,7 +73,7 @@ def rapid_inventories_index(request):
         return getattr(inv, f)
 
     data = [[get_val(inv, f) for f in fields] for inv in inventories]
-    return render(request, 'rapid_inventories/consult_inventories.html',
+    return render(request, 'inventories/consult_inventories.html',
                   {'inventories': data, 'header': header, })
 
 
@@ -94,7 +107,7 @@ def add_rapid_inventory(request):
         center_form = MeasuresFromCenterForm()
         vegetation_form = VegetationDescriptionForm()
         walking_form = MeasuresWalkingForm()
-    return render(request, 'rapid_inventories/add_inventory.html', {
+    return render(request, 'inventories/add_inventory.html', {
         'form': form,
         'general_form': general_form,
         'center_form': center_form,
@@ -138,7 +151,7 @@ def consult_rapid_inventory(request, inventory_id):
         center_form = MeasuresFromCenterForm(**kwarg)
         vegetation_form = VegetationDescriptionForm(**kwarg)
         walking_form = MeasuresWalkingForm(**kwarg)
-    return render(request, 'rapid_inventories/inventory.html', {
+    return render(request, 'inventories/inventory.html', {
         'form': form,
         'general_form': general_form,
         'center_form': center_form,

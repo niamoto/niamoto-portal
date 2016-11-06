@@ -10,13 +10,14 @@
 {% block styles %}
     {{ block.super }}
     <link href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css' rel='stylesheet' />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/magicsuggest/2.1.4/magicsuggest-min.css" rel="stylesheet">
     <link href='https://cdnjs.cloudflare.com/ajax/libs/ol3/3.10.1/ol.min.css' rel='stylesheet' />
-    <link rel="stylesheet" href='{% static "rapid_inventories/css/add_inventory.css" %}' />
+    <link rel="stylesheet" href='{% static "inventories/css/taxa_inventory.css" %}' />
 {% endblock %}
 
 {% block body_base %}
     <div class="container">
-        <h1 class="page-header">Nouvel inventaire rapide</h1>
+        <h1>Saisie d'occurrences</h1>
     </div>
     <form class="panel-body" method="POST">{% csrf_token %}
         <div class="container">
@@ -29,15 +30,16 @@
                 <div class="panel-heading"><h4>{% trans "Informations générales" %}</h4></div>
                 <div class="panel-body">
                     <div class="row no_top_margin">
-                        <div id="external_lat_long" class="col-xs-12 col-md-4">
-                            {% crispy general_form general_form.helper %}
+                        <div id="external_lat_long" class="col-xs-12 col-md-5">
+                            {% crispy form %}
+                            <div id="lat_long"></div>
                             {% if error_location %}
                                 <div class="has-error"><span class="help-block">
-                                    <strong>La localisation de la placette est obligatoire</strong>
+                                    <strong>La localisation des occurrences est obligatoire</strong>
                                 </span></div>
                             {% endif %}
                         </div>
-                        <div class="col-xs-12 col-md-8">
+                        <div class="col-xs-12 col-md-7">
                             <label for="map" class="control-label required-field ">Localisation</label>
                             <div id="map"></div>
                         </div>
@@ -46,22 +48,10 @@
                 <input type="hidden" name="long" id="long_hidden" value="{{ long }}">
                 <input type="hidden" name="lat" id="lat_hidden" value="{{ lat }}">
             </div>
-            <div class="panel panel-default">
-                <div class="panel-heading"><h4>{% trans "Prise de mesures en statique au centre de la placette" %}</h4></div>
+            <div class="panel panel-default ">
+                <div class="panel-heading"><h4>{% trans "Taxons observés" %}</h4></div>
                 <div class="panel-body">
-                    {% crispy center_form %}
-                </div>
-            </div>
-            <div class="panel panel-default">
-                <div class="panel-heading"><h4>{% trans "Prise de mesures en cheminement dans la placette" %}</h4></div>
-                <div class="panel-body">
-                <div class="panel panel-default">
-                    <div class="panel-heading">{% trans "Constatez vous la présence de" %}</div>
-                    <div class="panel-body">
-                        {% crispy vegetation_form %}
-                    </div>
-                </div>
-                    {% crispy walking_form %}
+                    <div id="magicsuggest" class="dropup"></div>
                 </div>
             </div>
             <button type="submit" class="btn btn-success" role="button">Soumettre</button>
@@ -73,7 +63,8 @@
     {{ block.super }}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/magicsuggest/2.1.4/magicsuggest-min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.3.12/proj4.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ol3/3.10.1/ol.min.js"></script>
-    <script src='{% static "rapid_inventories/js/add_inventory.js" %}'></script>
+    <script src='{% static "inventories/js/taxa_inventory.js" %}'></script>
 {% endblock %}
