@@ -168,7 +168,7 @@
         // Date picker
         $(".form_date").datetimepicker({format: 'DD/MM/YYYY'});
         // Magic suggest for taxa
-        $('#magicsuggest').magicSuggest({
+        var ms = $('#magicsuggest').magicSuggest({
             method: 'get',
             displayField: 'full_name',
             queryParam: 'full_name_like',
@@ -184,6 +184,9 @@
             },
             useZebraStyle: true,
             inforMsgCls: "test"
+        });
+        $(ms).on('selectionchange', function(e) {
+            $("#taxa_hidden").val(JSON.stringify(ms.getSelection()));
         });
         // Move point when changing coordinates on the input
         $("#_coords_long").change(function(evt) {

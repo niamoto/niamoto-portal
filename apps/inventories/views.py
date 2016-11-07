@@ -1,5 +1,7 @@
 # coding: utf-8
 
+import json
+
 from django.shortcuts import render, redirect
 from django.views.generic.edit import FormView
 from django.core.urlresolvers import reverse
@@ -24,10 +26,29 @@ class TaxaInventoryFormView(FormView):
     form_class = TaxaInventoryForm
 
     def form_valid(self, form):
-        pass
+        location = self.get_location(form)
+        taxa = self.get_taxa(form)
+        if location is None or taxa is None:
+            return self.form_invalid(form)
+        return redirect(reverse('taxa_inventory'))
 
     def form_invalid(self, form):
-        pass
+        print("FORM INVALID")
+        return redirect(reverse('taxa_inventory'))
+
+    def get_location(self, form):
+        lat = form.data.get('lat', None)
+        long = form.data.get('long', None)
+        if lat == '' or long == '':
+            return None
+        return Point(float(long), float(lat))
+
+    def get_taxa(self, form):
+        taxa = form.data.get('taxa', None)
+        if taxa == '':
+            return None
+        taxa = json.loads(taxa)
+        return taxa
 
 
 class RapidInventoryViewSet(viewsets.ReadOnlyModelViewSet):
