@@ -3,5 +3,5 @@
 from django.apps import AppConfig
 
 
-class RapidInventoriesConfig(AppConfig):
+class InventoriesConfig(AppConfig):
     name = 'inventories'
