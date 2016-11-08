@@ -21,6 +21,11 @@ class Inventory(models.Model):
     inventory_date = models.DateField(verbose_name=V['inventory_date'])
     observer = models.ForeignKey(User, verbose_name=V['observer'])
     location = models.PointField(srid=4326, verbose_name=V['location'])
+    location_description = models.TextField(
+        verbose_name=V['location_description'],
+        blank=True,
+        null=True
+    )
 
     @property
     def observer_full_name(self):
@@ -32,12 +37,6 @@ class RapidInventory(Inventory):
     Model representing the data of a forest rapid inventory.
     """
 
-    # "Prise d'informations générales"
-    location_description = models.TextField(
-        verbose_name=V['location_description'],
-        blank=True,
-        null=True
-    )
     # "Prise de mesure en statique au centre de la placette"
     topography = models.IntegerField(
         choices=(
