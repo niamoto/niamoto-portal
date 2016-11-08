@@ -85,6 +85,8 @@ class Occurrence(models.Model):
     """
 
     date = models.CharField(max_length=50, null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True, null=True, blank=True)
     taxon = models.ForeignKey(Taxon, null=True, blank=True)
     location = models.PointField(srid=4326, null=True, blank=True)
 

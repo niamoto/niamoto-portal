@@ -1,6 +1,7 @@
 # coding: utf-8
 
 import json
+from datetime import datetime
 
 from django.shortcuts import render, redirect
 from django.views.generic.edit import FormView
@@ -64,7 +65,15 @@ class TaxaInventoryFormView(FormView):
         taxa = self.get_taxa(form)
         if location is None or taxa is None:
             return self.form_invalid(form)
-        return redirect(reverse('taxa_inventory'))
+        d = datetime.strptime(form.data['inventory_date'], '%d/%M/%Y').date()
+        TaxaInventory.objects.create_taxa_inventory(
+            inventory_date=d,
+            observer=self.request.user,
+            location=location,
+            location_description=form.data['location_description'],
+            taxa=taxa
+        )
+        return redirect(reverse('taxa_inventory_index'))
 
     def form_invalid(self, form):
         return self.render_to_response(

@@ -3,8 +3,10 @@
 from django.contrib.auth.models import User
 from django.contrib.gis.db import models
 from django.core.validators import MinValueValidator
-from multiselectfield.db.fields import MultiSelectField
+from django.db import transaction
 
+from multiselectfield.db.fields import MultiSelectField
+from apps.niamoto_data.models import Occurrence
 from apps.inventories.models_verbose_names import VERBOSE_NAMES as V
 
 
@@ -17,7 +19,7 @@ class Inventory(models.Model):
     somewhere.
     """
     created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+    updated_at = models.DateTimeField(auto_now=True, null=True, blank=True)
     inventory_date = models.DateField(verbose_name=V['inventory_date'])
     observer = models.ForeignKey(User, verbose_name=V['observer'])
     location = models.PointField(srid=4326, verbose_name=V['location'])
@@ -32,10 +34,45 @@ class Inventory(models.Model):
         return self.observer.get_full_name()
 
 
+class TaxaInventoryManager(models.Manager):
+    """
+    Object manager for TaxaInventory model.
+    """
+    @transaction.atomic
+    def create_taxa_inventory(self, inventory_date, observer, location,
+                              location_description, taxa):
+        taxa_inventory = self.create(
+            inventory_date=inventory_date,
+            observer=observer,
+            location=location,
+            location_description=location_description,
+        )
+        for taxon in taxa:
+            TaxaInventoryOccurrence.objects.create(
+                date=inventory_date,
+                taxon_id=taxon['id'],
+                location=location,
+                taxa_inventory=taxa_inventory
+            )
+        return taxa_inventory
+
+
 class TaxaInventory(Inventory):
     """
     Represents a inventory of taxa seen at a location.
     """
+    objects = TaxaInventoryManager()
+
+
+class TaxaInventoryOccurrence(Occurrence):
+    """
+    Occurrence created using the taxa inventory app.
+    """
+    taxa_inventory = models.ForeignKey(TaxaInventory)
+
+    @property
+    def observer(self):
+        return self.taxa_inventory.observer
 
 
 class RapidInventory(Inventory):
