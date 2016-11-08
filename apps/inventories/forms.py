@@ -47,6 +47,7 @@ class TaxaInventoryForm(InventoryForm):
         exclude = ['observer', 'location']
         widgets = {
             'inventory_date': DateInput(attrs={'class': 'form_date'}),
+            'location_description': TextInput(),
         }
 
 

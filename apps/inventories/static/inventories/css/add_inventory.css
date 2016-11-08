@@ -38,3 +38,16 @@ h4 {
     display: inline-block;
     margin-right: 10px;
 }
+
+.ms-sel-ctn .ms-sel-item {
+    margin: 5px;
+    padding: 8px 5px 8px 8px;
+    font-size: 18px;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    color: rgba(0, 84, 13, 0.67);
+    background: rgba(198, 255, 191, 0.3);
+}
+
+.ms-sel-ctn .ms-sel-item:hover{
+    border: 1px solid rgba(0, 0, 0, 0.6);
+}

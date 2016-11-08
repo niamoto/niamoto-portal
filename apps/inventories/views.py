@@ -17,7 +17,8 @@ from apps.inventories.forms import RapidInventoryForm,\
     MeasuresWalkingForm,\
     TaxaInventoryForm
 from apps.inventories.models import RapidInventory, TaxaInventory
-from apps.inventories.serializers import RapidInventorySerializer
+from apps.inventories.serializers import RapidInventorySerializer, \
+    TaxaInventorySerializer
 from apps.inventories.permissions import IsOwnerOrReadOnly
 
 
@@ -54,7 +55,7 @@ def taxa_inventories_index(request):
         'title': "Inventaires taxonomiques",
         'inventories': data,
         'header': header,
-        'geojson_url': reverse('inventory-api:rapid_inventory-list')
+        'geojson_url': reverse('inventory-api:taxa_inventory-list')
     })
 
 
@@ -120,6 +121,20 @@ class RapidInventoryViewSet(viewsets.ReadOnlyModelViewSet):
     base_name = 'rapid_inventory'
     queryset = RapidInventory.objects.all()
     serializer_class = RapidInventorySerializer
+    permission_classes = (
+        permissions.IsAuthenticated,
+        IsOwnerOrReadOnly
+    )
+    pagination_class = None
+
+
+class TaxaInventoryViewSet(viewsets.ReadOnlyModelViewSet):
+    """
+    Endpoint for retrieving taxa inventories.
+    """
+    base_name = 'taxa_inventory'
+    queryset = TaxaInventory.objects.all()
+    serializer_class = TaxaInventorySerializer
     permission_classes = (
         permissions.IsAuthenticated,
         IsOwnerOrReadOnly

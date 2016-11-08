@@ -36,7 +36,6 @@ class TaxaInventory(Inventory):
     """
     Represents a inventory of taxa seen at a location.
     """
-    
 
 
 class RapidInventory(Inventory):
