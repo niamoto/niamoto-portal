@@ -183,7 +183,7 @@
                 return data.full_name;
             },
             useZebraStyle: true,
-            inforMsgCls: "test"
+            value: taxa_value
         });
         $(ms).on('selectionchange', function(e) {
             $("#taxa_hidden").val(JSON.stringify(ms.getSelection()));

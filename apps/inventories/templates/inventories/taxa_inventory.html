@@ -21,10 +21,12 @@
     </div>
     <form class="panel-body" method="POST">{% csrf_token %}
         <div class="container">
-            {% if not form.is_valid and request.POST %}
+            {% if request.POST %}
+            {% if not form.is_valid or error_location %}
                 <div class="has-error"><span class="help-block">
                     <strong>Le formulaire comporte des erreurs, veuillez les corriger</strong>
                 </span></div>
+            {% endif %}
             {% endif %}
             <div class="panel panel-default ">
                 <div class="panel-heading"><h4>{% trans "Informations générales" %}</h4></div>
@@ -51,6 +53,11 @@
             <div class="panel panel-default ">
                 <div class="panel-heading"><h4>{% trans "Taxons observés" %}</h4></div>
                 <div class="panel-body">
+                {% if error_taxa %}
+                    <div class="has-error"><span class="help-block">
+                        <strong>Vous devez selectionner au moins un taxon</strong>
+                    </span></div>
+                {% endif %}
                     <div id="magicsuggest" class="dropup"></div>
                 </div>
                 <input type="hidden" name="taxa" id="taxa_hidden" value="{{ taxa }}">
@@ -67,5 +74,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/magicsuggest/2.1.4/magicsuggest-min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.3.12/proj4.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ol3/3.10.1/ol.min.js"></script>
+    <script>
+        var taxa_value = {{ taxa|safe }};
+    </script>
     <script src='{% static "inventories/js/taxa_inventory.js" %}'></script>
 {% endblock %}

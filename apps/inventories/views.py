@@ -16,9 +16,46 @@ from apps.inventories.forms import RapidInventoryForm,\
     VegetationDescriptionForm,\
     MeasuresWalkingForm,\
     TaxaInventoryForm
-from apps.inventories.models import RapidInventory
+from apps.inventories.models import RapidInventory, TaxaInventory
 from apps.inventories.serializers import RapidInventorySerializer
 from apps.inventories.permissions import IsOwnerOrReadOnly
+
+
+@login_required()
+def taxa_inventories_index(request):
+    fields = [
+        'inventory_date',
+        'observer_full_name',
+        'location_description',
+        'location',
+        'consult',
+    ]
+    header = [
+        "Date de l'inventaire",
+        "Observateur",
+        "Localisation (description)",
+        "Localisation (longitude/latitude WGS84)",
+        "",
+    ]
+    inventories = TaxaInventory.objects.order_by('-inventory_date')\
+        .select_related('observer')
+
+    def get_val(inv, f):
+        if f == 'location':
+            return getattr(inv, f).x, getattr(inv, f).y
+        elif f == 'consult':
+            return '<a href="{}">consulter</a>'.format(inv.id)
+        elif f == 'inventory_date':
+            return getattr(inv, f).strftime("%d/%m/%Y")
+        return getattr(inv, f)
+
+    data = [[get_val(inv, f) for f in fields] for inv in inventories]
+    return render(request, 'inventories/inventories_index.html', {
+        'title': "Inventaires taxonomiques",
+        'inventories': data,
+        'header': header,
+        'geojson_url': reverse('inventory-api:rapid_inventory-list')
+    })
 
 
 class TaxaInventoryFormView(FormView):
@@ -33,8 +70,27 @@ class TaxaInventoryFormView(FormView):
         return redirect(reverse('taxa_inventory'))
 
     def form_invalid(self, form):
-        print("FORM INVALID")
-        return redirect(reverse('taxa_inventory'))
+        return self.render_to_response(
+            self.get_context_data(
+                form=form,
+                error_location=not self.is_location_valid(form),
+                error_taxa=not self.is_taxa_valid(form),
+            )
+        )
+
+    def get_context_data(self, **kwargs):
+        if 'long'not in kwargs:
+            long = self.get_form().data.get('long', None)
+            if long is not None:
+                kwargs['long'] = long
+        if 'lat' not in kwargs:
+            lat = self.get_form().data.get('lat', None)
+            if lat is not None:
+                kwargs['lat'] = lat
+        if 'taxa' not in kwargs:
+            taxa = self.get_taxa(self.get_form())
+            kwargs['taxa'] = json.dumps(taxa)
+        return super(TaxaInventoryFormView, self).get_context_data(**kwargs)
 
     def get_location(self, form):
         lat = form.data.get('lat', None)
@@ -43,12 +99,18 @@ class TaxaInventoryFormView(FormView):
             return None
         return Point(float(long), float(lat))
 
+    def is_location_valid(self, form):
+        return self.get_location(form) is not None
+
     def get_taxa(self, form):
         taxa = form.data.get('taxa', None)
-        if taxa == '':
+        if taxa == '' or taxa is None:
             return None
         taxa = json.loads(taxa)
         return taxa
+
+    def is_taxa_valid(self, form):
+        return self.get_taxa(form) is not None
 
 
 class RapidInventoryViewSet(viewsets.ReadOnlyModelViewSet):
@@ -94,7 +156,7 @@ def rapid_inventories_index(request):
         return getattr(inv, f)
 
     data = [[get_val(inv, f) for f in fields] for inv in inventories]
-    return render(request, 'inventories/consult_inventories.html',
+    return render(request, 'inventories/rapid_inventories_index.html',
                   {'inventories': data, 'header': header, })
 
 
