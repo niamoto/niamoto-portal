@@ -118,7 +118,7 @@ class TaxaInventoryFormView(FormView):
 
     def get_taxa(self, form):
         taxa = form.data.get('taxa', None)
-        if taxa == '' or taxa is None:
+        if taxa in ('', 'null') or taxa is None:
             return None
         taxa = json.loads(taxa)
         if len(taxa) == 0:
