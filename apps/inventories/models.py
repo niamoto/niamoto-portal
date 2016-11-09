@@ -40,19 +40,20 @@ class TaxaInventoryManager(models.Manager):
     """
     @transaction.atomic
     def create_taxa_inventory(self, inventory_date, observer, location,
-                              location_description, taxa):
+                              location_description, comments, taxa):
         taxa_inventory = self.create(
             inventory_date=inventory_date,
             observer=observer,
             location=location,
             location_description=location_description,
+            comments=comments,
         )
         for taxon in taxa:
             TaxaInventoryOccurrence.objects.create(
                 date=inventory_date,
                 taxon_id=taxon['id'],
                 location=location,
-                taxa_inventory=taxa_inventory
+                taxa_inventory=taxa_inventory,
             )
         return taxa_inventory
 
@@ -61,6 +62,13 @@ class TaxaInventory(Inventory):
     """
     Represents a inventory of taxa seen at a location.
     """
+
+    comments = models.TextField(
+        verbose_name="Commentaires",
+        blank=True,
+        null=True,
+    )
+
     objects = TaxaInventoryManager()
 
     @transaction.atomic

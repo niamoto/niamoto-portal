@@ -74,7 +74,8 @@ class TaxaInventoryFormView(FormView):
             observer=self.request.user,
             location=location,
             location_description=form.data['location_description'],
-            taxa=taxa
+            taxa=taxa,
+            comments=form.data['comments'],
         )
         return redirect(reverse('taxa_inventory_index'))
 
@@ -148,6 +149,8 @@ class TaxaInventoryUpdateView(TaxaInventoryFormView, UpdateView):
         self.object.inventory_date = d
         self.object.location = location
         self.object.description = form.data['location_description']
+        self.object.comments = form.data['comments']
+        self.object.save()
         self.object.update_occurrences(taxa)
         return redirect(reverse('taxa_inventory_index'))
 
