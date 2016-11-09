@@ -167,7 +167,7 @@ class TaxaInventoryUpdateView(TaxaInventoryFormView, UpdateView):
     def post(self, request, *args, **kwargs):
         if request.user != self.get_object().observer:
             return HttpResponseForbidden()
-        return super(TaxaInventoryDeleteView, self).post(
+        return super(TaxaInventoryUpdateView, self).post(
             request,
             *args,
             **kwargs
