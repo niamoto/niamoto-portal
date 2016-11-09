@@ -51,3 +51,11 @@ h4 {
 .ms-sel-ctn .ms-sel-item:hover{
     border: 1px solid rgba(0, 0, 0, 0.6);
 }
+
+#preloader {
+    position: absolute;
+    top: 15px;
+    right: 45px;
+    width: 35px;
+    z-index: 2000;
+}

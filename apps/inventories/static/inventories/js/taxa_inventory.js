@@ -163,6 +163,14 @@
         }
 
     };
+    
+    function showPreloader() {
+        document.getElementById('preloader').style.display = 'inline';
+    }
+
+    function hidePreloader() {
+        document.getElementById('preloader').style.display = 'none';
+    };
 
     $(document).ready(function() {
         // Date picker
@@ -189,6 +197,12 @@
         });
         $(ms).on('selectionchange', function(e) {
             $("#taxa_hidden").val(JSON.stringify(ms.getSelection()));
+        });
+        $(ms).on('beforeload', function(e) {
+            showPreloader();
+        });
+        $(ms).on('load', function(e) {
+            hidePreloader();
         });
         // Move point when changing coordinates on the input
         $("#_coords_long").change(function(evt) {

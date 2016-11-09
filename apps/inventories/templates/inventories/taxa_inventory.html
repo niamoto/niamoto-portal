@@ -51,9 +51,10 @@
                 <input type="hidden" name="lat" id="lat_hidden" value="{{ lat }}">
                 <input type="hidden" name="read_only" id = "read_only_hidden" value="{{ read_only }}">
             </div>
-            <div class="panel panel-default ">
+            <div class="panel panel-default">
                 <div class="panel-heading"><h4>{% trans "Taxons observés" %}</h4></div>
-                <div class="panel-body">
+                <div class="panel-body" style="position: relative">
+                <img id="preloader" src="{% static 'img/preloader.svg' %}">
                 {% if error_taxa %}
                     <div class="has-error"><span class="help-block">
                         <strong>Vous devez selectionner au moins un taxon</strong>

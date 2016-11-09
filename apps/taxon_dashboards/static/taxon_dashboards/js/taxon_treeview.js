@@ -1,6 +1,6 @@
 (function($, undefined) {
 
-    var preloader_count = 0
+    var preloader_count = 0;
 
     var color = [
         "#5496c4", "#ffd24d", "#a29cc9", "#f96353", "#6cc6b7",
