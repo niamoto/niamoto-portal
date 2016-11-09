@@ -55,7 +55,7 @@ def rapid_inventories_index(request):
         if f == 'location':
             return getattr(inv, f).x, getattr(inv, f).y
         elif f == 'consult':
-            return '<a href="{}">consulter</a>'.format(inv.id)
+            return '<a href="{}/">consulter</a>'.format(inv.id)
         elif f == 'inventory_date':
             return getattr(inv, f).strftime("%d/%m/%Y")
         return getattr(inv, f)
