@@ -14,4 +14,6 @@ urlpatterns = [
     # Taxa inventories
     url(r'^taxa_inventory/$', views.taxa_inventories_index, name="taxa_inventory_index"),
     url(r'^taxa_inventory/add/$', views.TaxaInventoryFormView.as_view(), name="taxa_inventory"),
+    url(r'^taxa_inventory/(?P<pk>[0-9]*)/$', views.TaxaInventoryUpdateView.as_view(), name="taxa_inventory_consult"),
+    url(r'^taxa_inventory/(?P<pk>[0-9]*)/delete/$', views.TaxaInventoryDeleteView.as_view(), name="taxa_inventory_delete"),
 ]

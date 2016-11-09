@@ -168,6 +168,7 @@
         // Date picker
         $(".form_date").datetimepicker({format: 'DD/MM/YYYY'});
         // Magic suggest for taxa
+        var read_only = $("#read_only_hidden").val() == 'True';
         var ms = $('#magicsuggest').magicSuggest({
             method: 'get',
             displayField: 'full_name',
@@ -182,6 +183,7 @@
             selectionRenderer: function(data){
                 return data.full_name;
             },
+            disabled: read_only,
             useZebraStyle: true,
             value: taxa_value
         });

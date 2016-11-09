@@ -12,4 +12,6 @@ from .taxa_inventories import (
     TaxaInventoryViewSet,
     taxa_inventories_index,
     TaxaInventoryFormView,
+    TaxaInventoryUpdateView,
+    TaxaInventoryDeleteView,
 )

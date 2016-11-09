@@ -1,5 +1,6 @@
 # coding: utf-8
 
+from django.http import HttpResponseForbidden
 from django.shortcuts import render, redirect
 from django.core.urlresolvers import reverse
 from django.contrib.gis.geos.point import Point
@@ -117,6 +118,8 @@ def consult_rapid_inventory(request, inventory_id):
     error_location = False
     read_only = request.user != inventory.observer
     if request.POST:
+        if request.user != inventory.observer:
+            return HttpResponseForbidden()
         form = RapidInventoryForm(request.POST, instance=inventory)
         general_form = GeneralInformationsForm(request.POST)
         center_form = MeasuresFromCenterForm(request.POST)
@@ -158,5 +161,7 @@ def consult_rapid_inventory(request, inventory_id):
 @login_required()
 def delete_rapid_inventory(request, inventory_id):
     inventory = RapidInventory.objects.get(id=inventory_id)
+    if request.user != inventory.observer:
+        return HttpResponseForbidden()
     inventory.delete()
     return redirect(reverse('rapid_inventory_index'))

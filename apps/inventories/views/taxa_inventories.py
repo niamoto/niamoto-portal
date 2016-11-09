@@ -3,15 +3,17 @@
 import json
 from datetime import datetime
 
+from django.http import HttpResponseForbidden
 from django.shortcuts import render, redirect
-from django.views.generic.edit import FormView
-from django.core.urlresolvers import reverse
+from django.views.generic.edit import FormView, UpdateView, DeleteView
+from django.core.urlresolvers import reverse, reverse_lazy
 from django.contrib.gis.geos.point import Point
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from rest_framework import viewsets
 from rest_framework import permissions
 
+from apps.niamoto_data.serializers import TaxonSerializer
 from apps.inventories.forms import TaxaInventoryForm
 from apps.inventories.models import TaxaInventory
 from apps.inventories.serializers import TaxaInventorySerializer
@@ -59,6 +61,7 @@ def taxa_inventories_index(request):
 class TaxaInventoryFormView(FormView):
     template_name = "inventories/taxa_inventory.html"
     form_class = TaxaInventoryForm
+    title = "Nouvel Inventaire taxonomique"
 
     def form_valid(self, form):
         location = self.get_location(form)
@@ -96,6 +99,9 @@ class TaxaInventoryFormView(FormView):
         if 'taxa' not in kwargs:
             taxa = self.get_taxa(self.get_form())
             kwargs['taxa'] = json.dumps(taxa)
+        kwargs['title'] = self.title
+        if 'add' not in kwargs:
+            kwargs['add'] = True
         return super(TaxaInventoryFormView, self).get_context_data(**kwargs)
 
     def get_location(self, form):
@@ -113,10 +119,83 @@ class TaxaInventoryFormView(FormView):
         if taxa == '' or taxa is None:
             return None
         taxa = json.loads(taxa)
+        if len(taxa) == 0:
+            return None
         return taxa
 
     def is_taxa_valid(self, form):
         return self.get_taxa(form) is not None
+
+
+@method_decorator(login_required, name='dispatch')
+class TaxaInventoryUpdateView(TaxaInventoryFormView, UpdateView):
+    """
+    Class based view for updating an existing taxa inventory.
+    """
+    form_class = TaxaInventoryForm
+    title = "Consultation/Modification de l'inventaire taxonomique"
+
+    def get_queryset(self):
+        return TaxaInventory.objects
+
+    def form_valid(self, form):
+        location = self.get_location(form)
+        taxa = self.get_taxa(form)
+        if location is None or taxa is None:
+            return self.form_invalid(form)
+        d = datetime.strptime(form.data['inventory_date'], '%d/%M/%Y').date()
+        self.object.inventory_date = d
+        self.object.location = location
+        self.object.description = form.data['location_description']
+        self.object.update_occurrences(taxa)
+        return redirect(reverse('taxa_inventory_index'))
+
+    def get_context_data(self, **kwargs):
+        long = self.object.location.x
+        lat = self.object.location.y
+        kwargs['long'] = str(long)
+        kwargs['lat'] = str(lat)
+        occurrences = self.object.occurrences.all()
+        taxa = [o.taxon for o in occurrences]
+        serializer = TaxonSerializer(taxa, many=True)
+        kwargs['taxa'] = json.dumps(serializer.data)
+        kwargs['read_only'] = self.is_read_only()
+        kwargs['edit'] = True
+        kwargs['add'] = False
+        return super(TaxaInventoryUpdateView, self).get_context_data(**kwargs)
+
+    def post(self, request, *args, **kwargs):
+        if request.user != self.get_object().observer:
+            return HttpResponseForbidden()
+        return super(TaxaInventoryDeleteView, self).post(
+            request,
+            *args,
+            **kwargs
+        )
+
+    def get_form_kwargs(self):
+        kwargs = super(TaxaInventoryUpdateView, self).get_form_kwargs()
+        if self.is_read_only():
+            kwargs['read_only'] = True
+        return kwargs
+
+    def is_read_only(self):
+        return self.object.observer != self.request.user
+
+
+class TaxaInventoryDeleteView(DeleteView):
+    model = TaxaInventory
+    template_name = "inventories/confirm_taxa_inventory_delete.html"
+    success_url = reverse_lazy('taxa_inventory_index')
+
+    def dispatch(self, request, *args, **kwargs):
+        if request.user != self.get_object().observer:
+            return HttpResponseForbidden()
+        return super(TaxaInventoryDeleteView, self).dispatch(
+            request,
+            *args,
+            **kwargs
+        )
 
 
 class TaxaInventoryViewSet(viewsets.ReadOnlyModelViewSet):

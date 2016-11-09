@@ -63,12 +63,38 @@ class TaxaInventory(Inventory):
     """
     objects = TaxaInventoryManager()
 
+    @transaction.atomic
+    def update_occurrences(self, taxa):
+        occurrences = self.occurrences.all()
+        current_taxa = {o.taxon.id: o.id for o in occurrences}
+        new_taxa = {t['id']: True for t in taxa}
+        to_add = []
+        to_delete = []
+        for t in taxa:
+            if t['id'] not in current_taxa and t['id'] not in to_add:
+                to_add.append(t['id'])
+        for key, value in current_taxa.items():
+            if key not in new_taxa and value not in to_delete:
+                to_delete.append(value)
+        for o in to_delete:
+            TaxaInventoryOccurrence.objects.get(pk=o).delete()
+        for t in to_add:
+            TaxaInventoryOccurrence.objects.create(
+                date=self.inventory_date,
+                taxon_id=t,
+                location=self.location,
+                taxa_inventory_id=self.id
+            )
+
 
 class TaxaInventoryOccurrence(Occurrence):
     """
     Occurrence created using the taxa inventory app.
     """
-    taxa_inventory = models.ForeignKey(TaxaInventory)
+    taxa_inventory = models.ForeignKey(
+        TaxaInventory,
+        related_name='occurrences'
+    )
 
     @property
     def observer(self):
