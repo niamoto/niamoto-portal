@@ -84,6 +84,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ol3/3.10.1/ol.min.js"></script>
     <script>
         var taxa_value = {{ taxa|safe }};
+        var taxa_url = "{{ taxa_url|safe }}";
     </script>
     <script src='{% static "inventories/js/taxa_inventory.js" %}'></script>
 {% endblock %}

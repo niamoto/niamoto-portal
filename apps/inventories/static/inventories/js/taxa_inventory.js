@@ -163,7 +163,7 @@
         }
 
     };
-    
+
     function showPreloader() {
         document.getElementById('preloader').style.display = 'inline';
     }
@@ -181,7 +181,7 @@
             method: 'get',
             displayField: 'full_name',
             queryParam: 'full_name_like',
-            data: 'http://localhost:8000/api/1.0/data/taxon/',
+            data: taxa_url,
             maxSelection: null,
             placeholder: 'Saisissez un nom de taxon',
             allowFreeEntries: false,

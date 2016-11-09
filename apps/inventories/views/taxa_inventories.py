@@ -102,6 +102,7 @@ class TaxaInventoryFormView(FormView):
         kwargs['title'] = self.title
         if 'add' not in kwargs:
             kwargs['add'] = True
+        kwargs['taxa_url'] = reverse("data-api:taxon-list")
         return super(TaxaInventoryFormView, self).get_context_data(**kwargs)
 
     def get_location(self, form):
