@@ -20,6 +20,7 @@ def import_occurrences_from_plantnote_db(database):
         """
         SELECT Indiv."ID Individus" AS plantnote_id,
                Inv."Date Inventaire" AS date,
+               now() AS created_at,
                Det."ID Taxons" AS taxon_id,
                'POINT(' || Loc.LongDD || ' ' || Loc.LatDD || ')' AS location,
                 Col."Collecteur" AS collector
