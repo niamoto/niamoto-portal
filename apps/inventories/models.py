@@ -13,6 +13,22 @@ from apps.inventories.models_verbose_names import VERBOSE_NAMES as V
 BOOLEAN_CHOICES = ((True, 'Oui'), (False, 'Non'))
 
 
+class TaxaInventoryManager(models.Manager):
+    """
+    Inventory manager for showing only taxa inventories.
+    """
+    def get_queryset(self):
+        return TaxaInventory.objects.get_queryset()
+
+
+class RapidInventoryManager(models.Manager):
+    """
+    Inventory manager for showing only rapid inventories.
+    """
+    def get_queryset(self):
+        return RapidInventory.objects.get_queryset()
+
+
 class Inventory(models.Model):
     """
     Model representing an abstract natural inventory. Done someday, by someone,
@@ -32,6 +48,16 @@ class Inventory(models.Model):
     @property
     def observer_full_name(self):
         return self.observer.get_full_name()
+
+    def is_taxa_inventory(self):
+        return hasattr(self, 'taxainventory')
+
+    def is_rapid_inventory(self):
+        return hasattr(self, 'rapidinventory')
+
+    objects = models.Manager()
+    taxa_inventories = TaxaInventoryManager()
+    rapid_inventories = RapidInventoryManager()
 
 
 class TaxaInventoryManager(models.Manager):

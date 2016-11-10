@@ -20,23 +20,34 @@ from apps.inventories.serializers import TaxaInventorySerializer
 from apps.inventories.permissions import IsOwnerOrReadOnly
 
 
+FIELDS = [
+    'inventory_date',
+    'observer_full_name',
+    'location_description',
+    'location',
+    'consult',
+]
+HEADERS = [
+    "Date de l'inventaire",
+    "Observateur",
+    "Localisation (description)",
+    "Localisation (longitude/latitude WGS84)",
+    "",
+]
+
+
 @login_required()
 def taxa_inventories_index(request):
-    fields = [
-        'inventory_date',
-        'observer_full_name',
-        'location_description',
-        'location',
-        'consult',
-    ]
-    header = [
-        "Date de l'inventaire",
-        "Observateur",
-        "Localisation (description)",
-        "Localisation (longitude/latitude WGS84)",
-        "",
-    ]
-    inventories = TaxaInventory.objects.order_by('-inventory_date')\
+    username = request.GET.get('username', None)
+    qs = TaxaInventory.objects.all()
+    geojson_url = reverse('inventory-api:taxa_inventory-list')
+    if username is not None:
+        qs = qs.filter(observer__username=username)
+        geojson_url = "{}?username={}".format(
+            geojson_url,
+            username
+        )
+    inventories = qs.order_by('-inventory_date')\
         .select_related('observer')
 
     def get_val(inv, f):
@@ -48,12 +59,13 @@ def taxa_inventories_index(request):
             return getattr(inv, f).strftime("%d/%m/%Y")
         return getattr(inv, f)
 
-    data = [[get_val(inv, f) for f in fields] for inv in inventories]
+    data = [[get_val(inv, f) for f in FIELDS] for inv in inventories]
     return render(request, 'inventories/inventories_index.html', {
         'title': "Inventaires taxonomiques",
         'inventories': data,
-        'header': header,
-        'geojson_url': reverse('inventory-api:taxa_inventory-list')
+        'header': HEADERS,
+        'geojson_url': geojson_url,
+        'username': username,
     })
 
 
@@ -214,3 +226,10 @@ class TaxaInventoryViewSet(viewsets.ReadOnlyModelViewSet):
         IsOwnerOrReadOnly
     )
     pagination_class = None
+
+    def get_queryset(self):
+        queryset = TaxaInventory.objects.all()
+        username = self.request.query_params.get('username', None)
+        if username is not None:
+            queryset = queryset.filter(observer__username=username)
+        return queryset

@@ -17,7 +17,11 @@
         <div id="map"></div>
         <br>
         <p><a href="add/" class="btn btn-success" role="button">Saisir un inventaire</a></p>
-        <br>
+        {% if username %}
+            <h4>Inventaires de {{ username }}</h4>
+        {% else %}
+            <h4>Tous les inventaires</h4>
+        {% endif %}
         <div class="panel panel-default">
             <div class="panel-body">
                 <table class="table" id="inventories_table">

@@ -22,7 +22,6 @@ class TaxonViewSet(viewsets.ReadOnlyModelViewSet):
         """
         return super(TaxonViewSet, self).list(request, *args, **kwargs)
 
-
     def retrieve(self, request, *args, **kwargs):
         """
         Retrieve a taxon given it's identifier.
