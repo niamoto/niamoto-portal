@@ -1,9 +1,9 @@
 # coding: utf-8
 
-from django.db import transaction
+from django.db import transaction, connection
 import pandas as pd
 
-from apps.niamoto_data.models import Taxon
+from apps.niamoto_data.models import Taxon, Occurrence
 from apps.data_importer import BaseDataImporter
 
 
@@ -99,5 +99,23 @@ def import_taxon_from_plantnote_db(database):
     DF = pd.concat([DF_family, DF_genus, DF_specie, DF_infra])
     update_fields = ['full_name', 'rank_name', 'parent_id', 'rank']
     di = BaseDataImporter(Taxon, DF, update_fields=update_fields)
+    # Set null identification for all occurrences whose current taxon is
+    # in delete selection
+    ids = di.delete_dataframe['id'].apply(str)
+    if len(ids) > 0:
+        sql = \
+            """
+            UPDATE {occ_table}
+            SET {taxon_col} = NULL
+            WHERE {taxon_col} IN ({taxa_ids});
+            """.format(**{
+                'occ_table': Occurrence._meta.db_table,
+                'taxon_col': Occurrence.taxon.field.get_attname(),
+                'taxa_ids': ','.join(ids),
+            })
+        cur = connection.cursor()
+        cur.execute(sql)
+        cur.close()
+    # Process import
     di.process_import()
     Taxon.objects.rebuild()
