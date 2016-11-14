@@ -18,9 +18,15 @@
         <br>
         <p><a href="add/" class="btn btn-success" role="button">Saisir un inventaire</a></p>
         {% if username %}
-            <h4>Inventaires de {{ username }}</h4>
+            <div class="inline">
+                <h4>Inventaires de {{ username }}</h4>
+                <a href=".">Voir tous les inventaires</a>
+            </div>
         {% else %}
-            <h4>Tous les inventaires</h4>
+            <div class="inline">
+                <h4>Tous les inventaires</h4>
+                <a href="?username={{ request.user.username }}">Voir uniquement mes inventaires</a>
+            </div>
         {% endif %}
         <div class="panel panel-default">
             <div class="panel-body">

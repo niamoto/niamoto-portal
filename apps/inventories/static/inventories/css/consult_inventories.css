@@ -12,4 +12,9 @@
 
 h4 {
     margin-top: 20px;
+    margin-right: 20px;
+}
+
+.inline h4, .inline a {
+    display: inline-block;
 }
