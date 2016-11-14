@@ -228,6 +228,7 @@ class BaseDataImporter:
         }) for f in fields])
         sql = \
             """
+            DROP TABLE IF EXISTS {temp};
             CREATE TEMP TABLE {temp}(LIKE {table} INCLUDING ALL) ON COMMIT DROP;
 
             INSERT INTO {temp} ({fields})
