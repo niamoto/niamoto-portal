@@ -1,5 +1,7 @@
 # coding: utf-8
 
+from datetime import datetime
+
 from django.test import TransactionTestCase
 import pandas as pd
 from pandas.util.testing import assert_frame_equal
@@ -51,12 +53,14 @@ class MultiIndexDataImporterTest(TransactionTestCase):
         di = BaseDataImporter(Plot, plots)
         di.process_import()
         # Insert Occurrences
+        now = str(datetime.now())
         occs = pd.DataFrame([
-            (0, '2016/10/03', None, 'POINT(165.21972 -20.81833333)'),
-            (1, '2016/10/03', None, 'POINT(165.21972 -20.81833333)'),
-            (2, '2016/10/03', None, 'POINT(165.21972 -20.81833333)'),
-            (3, '2016/10/03', None, 'POINT(165.21972 -20.81833333)'),
-        ], columns=['id', 'date', 'taxon_id', 'location',])
+            (0, '2016/10/03', now, now, None, 'POINT(165.21972 -20.81833333)'),
+            (1, '2016/10/03', now, now, None, 'POINT(165.21972 -20.81833333)'),
+            (2, '2016/10/03', now, now, None, 'POINT(165.21972 -20.81833333)'),
+            (3, '2016/10/03', now, now, None, 'POINT(165.21972 -20.81833333)'),
+        ], columns=['id', 'date', 'created_at', 'updated_at',
+                    'taxon_id', 'location'])
         occs.set_index('id', inplace=True, drop=False)
         di = BaseDataImporter(Occurrence, occs)
         di.process_import()

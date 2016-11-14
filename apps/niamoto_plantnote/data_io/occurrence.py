@@ -36,7 +36,6 @@ def import_occurrences_from_plantnote_db(database):
         """
     DF = pd.read_sql_query(sql, db_string)
     DF.set_index('plantnote_id', inplace=True, drop=False)
-    # Convert created_at and updated_at fields to datetime types, as
     di = ExtendedModelDataImporter(
         Occurrence,
         PlantnoteOccurrence,

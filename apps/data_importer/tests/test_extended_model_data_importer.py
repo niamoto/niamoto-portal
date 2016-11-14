@@ -1,5 +1,7 @@
 # coding: utf-8
 
+from datetime import datetime
+
 from django.test import TransactionTestCase
 import pandas as pd
 from pandas.util.testing import assert_frame_equal
@@ -12,32 +14,56 @@ from apps.niamoto_plantnote.models import PlantnoteOccurrence
 
 class ExtendedModelDataImporterTest(TransactionTestCase):
 
+    now = str(datetime.now())
+    update_fields = [
+        'date', 'taxon_id', 'location',
+        'plantnote_id', 'collector'
+    ]
+
     # Test insert
-    DF1 = pd.DataFrame([
-        (200, '2016/10/03', None, 'POINT(165.21972 -20.81833333)', 'A'),
-        (201, '2016/10/03', None, 'POINT(165.21973 -20.81833333)', 'B'),
-        (202, '2016/10/03', None, 'POINT(165.2198 -20.815)', 'C'),
-        (203, '2016/10/03', None, 'POINT(165.2197 -20.8283)', 'D'),
-        (204, '2016/10/03', None, 'POINT(165.2191 -20.818334)', 'E'),
-    ], columns=['plantnote_id', 'date', 'taxon_id', 'location', 'collector'])
+    DF1 = pd.DataFrame(
+        [
+            (200, '2016/10/03', now, now, None, 'POINT(165.21972 -20.81833333)', 'A'),
+            (201, '2016/10/03', now, now, None, 'POINT(165.21973 -20.81833333)', 'B'),
+            (202, '2016/10/03', now, now, None, 'POINT(165.2198 -20.815)', 'C'),
+            (203, '2016/10/03', now, now, None, 'POINT(165.2197 -20.8283)', 'D'),
+            (204, '2016/10/03', now, now, None, 'POINT(165.2191 -20.818334)', 'E'),
+        ],
+        columns=[
+            'plantnote_id', 'date', 'created_at', 'updated_at',
+            'taxon_id', 'location', 'collector'
+        ]
+    )
     DF1.set_index('plantnote_id', inplace=True, drop=False)
 
     # Test update
-    DF2 = pd.DataFrame([
-        (200, '2016/10/03', None, 'POINT(165.21972 -20.81833333)', 'A'),
-        (201, '2011/04/03', None, 'POINT(165.219 -20.818)', 'ZZZ'),
-        (202, '2016/10/03', None, 'POINT(165.2198 -20.815)', 'C'),
-        (203, '2016/10/03', None, 'POINT(165.2198 -20.8283)', 'D'),
-        (204, '2016/10/03', None, 'POINT(165.2193 -20.818334)', 'E'),
-    ], columns=['plantnote_id', 'date', 'taxon_id', 'location', 'collector'])
+    DF2 = pd.DataFrame(
+        [
+            (200, '2016/10/03', now, now, None, 'POINT(165.21972 -20.81833333)', 'A'),
+            (201, '2011/04/03', now, now, None, 'POINT(165.219 -20.818)', 'ZZZ'),
+            (202, '2016/10/03', now, now, None, 'POINT(165.2198 -20.815)', 'C'),
+            (203, '2016/10/03', now, now, None, 'POINT(165.2198 -20.8283)', 'D'),
+            (204, '2016/10/03', now, now, None, 'POINT(165.2193 -20.818334)', 'E'),
+        ],
+        columns=[
+            'plantnote_id', 'date', 'created_at', 'updated_at',
+            'taxon_id', 'location', 'collector'
+        ]
+    )
     DF2.set_index('plantnote_id', inplace=True, drop=False)
 
 
     # Test update
-    DF3 = pd.DataFrame([
-        (200, '2016/10/03', None, 'POINT(165.21972 -20.81833333)', "A"),
-        (204, '2016/10/03', None, 'POINT(165.2193 -20.818334)', "E"),
-    ], columns=['plantnote_id', 'date', 'taxon_id', 'location', 'collector'])
+    DF3 = pd.DataFrame(
+        [
+            (200, '2016/10/03', now, now, None, 'POINT(165.21972 -20.81833333)', "A"),
+            (204, '2016/10/03', now, now, None, 'POINT(165.2193 -20.818334)', "E"),
+        ],
+        columns=[
+            'plantnote_id', 'date', 'created_at', 'updated_at',
+            'taxon_id', 'location', 'collector'
+        ]
+    )
     DF3.set_index('plantnote_id', inplace=True, drop=False)
 
 
@@ -48,10 +74,11 @@ class ExtendedModelDataImporterTest(TransactionTestCase):
         di = ExtendedModelDataImporter(
             Occurrence,
             PlantnoteOccurrence,
-            self.DF1
+            self.DF1,
+            update_fields=self.update_fields
         )
         self.assertListEqual(di.niamoto_fields, [
-            'id', 'date', 'taxon_id', 'location'
+            'id', 'date', 'created_at', 'updated_at', 'taxon_id', 'location'
         ])
         self.assertEqual(di.niamoto_extended_fields, [
             'occurrence_ptr_id', 'plantnote_id', 'collector'
@@ -66,7 +93,8 @@ class ExtendedModelDataImporterTest(TransactionTestCase):
         di = ExtendedModelDataImporter(
             Occurrence,
             PlantnoteOccurrence,
-            self.DF1
+            self.DF1,
+            update_fields=self.update_fields
         )
         insert = di.insert_dataframe
         assert_frame_equal(insert, self.DF1)
@@ -76,45 +104,56 @@ class ExtendedModelDataImporterTest(TransactionTestCase):
         di.process_import()
         a = di.niamoto_dataframe.drop(di.get_external_index_col(), 1)
         b = self.DF1.drop(di.get_external_index_col(), 1)
-        assert_frame_equal(a, b)
+        cols = ['date', 'taxon_id', 'location', 'collector']
+        assert_frame_equal(a[cols], b[cols])
 
     def test_update_data(self):
         # First import DF1
         di = ExtendedModelDataImporter(
             Occurrence,
             PlantnoteOccurrence,
-            self.DF1
+            self.DF1,
+            update_fields=self.update_fields
         )
         di.process_import()
         # Now test update
         di = ExtendedModelDataImporter(
             Occurrence,
             PlantnoteOccurrence,
-            self.DF2
+            self.DF2,
+            update_fields=self.update_fields
         )
         update_current = di.update_dataframe_current
         update_new = di.update_dataframe_new
         u = [201, 203, 204]  # Expected update indices
-        assert_frame_equal(update_current, di.niamoto_dataframe.loc[u])
-        assert_frame_equal(update_new, self.DF2.loc[u])
+        assert_frame_equal(
+            update_current,
+            di.niamoto_dataframe.loc[u])
+        assert_frame_equal(
+            update_new,
+            self.DF2.loc[u]
+        )
         di.process_import()
         a = di.niamoto_dataframe.drop(di.get_external_index_col(), 1)
         b = self.DF2.drop(di.get_external_index_col(), 1)
-        assert_frame_equal(a, b)
+        cols = ['date', 'taxon_id', 'location', 'collector']
+        assert_frame_equal(a[cols], b[cols])
 
     def test_delete_data(self):
         # First import DF2
         di = ExtendedModelDataImporter(
             Occurrence,
             PlantnoteOccurrence,
-            self.DF2
+            self.DF2,
+            update_fields=self.update_fields
         )
         di.process_import()
         # Now test delete
         di = ExtendedModelDataImporter(
             Occurrence,
             PlantnoteOccurrence,
-            self.DF3
+            self.DF3,
+            update_fields=self.update_fields
         )
         delete = di.delete_dataframe
         d = [201, 202, 203]  # Expected delete indices
@@ -122,4 +161,5 @@ class ExtendedModelDataImporterTest(TransactionTestCase):
         di.process_import()
         a = di.niamoto_dataframe.drop(di.get_external_index_col(), 1)
         b = self.DF3.drop(di.get_external_index_col(), 1)
-        assert_frame_equal(a, b)
+        cols = ['date', 'taxon_id', 'location', 'collector']
+        assert_frame_equal(a[cols], b[cols])
