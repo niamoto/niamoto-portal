@@ -42,7 +42,8 @@ def generate_sql_values(dataframe, fields, apply={}, quote_fields=True):
     for f, b in quote_fields.items():
         if b:
             df[f] = df[f].apply(quote, axis=1)
-    return ','.join(df.apply(','.join, axis=1).apply('({})'.format, axis=1))
+    return ','.join(df.apply(','.join, axis=1).apply('({})'.format, axis=1)) \
+        .replace("'", "''")
 
 
 def nan_to_null(value, **kwargs):
