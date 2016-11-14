@@ -2,6 +2,7 @@
 
 from django.db import connection, transaction
 from sqlalchemy.engine import create_engine
+from pandas.types.dtypes import DatetimeTZDtype
 
 from utils import get_sqlalchemy_connection_string
 from .sql_utils import *
@@ -165,6 +166,9 @@ class BaseDataImporter:
             inplace=True
         )
         conn.close()
+        for col in df.columns:
+            if isinstance(df[col].dtype, DatetimeTZDtype):
+                df[col] = df[col].astype(str)
         return df
 
     def get_index_col(self):

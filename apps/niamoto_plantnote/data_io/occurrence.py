@@ -20,8 +20,8 @@ def import_occurrences_from_plantnote_db(database):
         """
         SELECT Indiv."ID Individus" AS plantnote_id,
                Inv."Date Inventaire" AS date,
-               date('now') AS created_at,
-               date('now') AS updated_at,
+               datetime('now') AS created_at,
+               datetime('now') AS updated_at,
                Det."ID Taxons" AS taxon_id,
                'POINT(' || Loc.LongDD || ' ' || Loc.LatDD || ')' AS location,
                 Col."Collecteur" AS collector
@@ -35,5 +35,14 @@ def import_occurrences_from_plantnote_db(database):
         """
     DF = pd.read_sql_query(sql, db_string)
     DF.set_index('plantnote_id', inplace=True, drop=False)
-    di = ExtendedModelDataImporter(Occurrence, PlantnoteOccurrence, DF)
+    # Convert created_at and updated_at fields to datetime types, as
+    di = ExtendedModelDataImporter(
+        Occurrence,
+        PlantnoteOccurrence,
+        DF,
+        update_fields=[
+            'date', 'taxon_id', 'location',
+            'plantnote_id', 'collector'
+        ],
+    )
     di.process_import()
