@@ -80,7 +80,9 @@ class TaxaInventoryFormView(FormView):
         taxa = self.get_taxa(form)
         if location is None or taxa is None:
             return self.form_invalid(form)
-        d = datetime.strptime(form.data['inventory_date'], '%d/%M/%Y').date()
+        d = datetime.strptime(form.data['inventory_date'], '%d/%m/%Y').date()
+        print(d)
+        print(form.data['inventory_date'])
         TaxaInventory.objects.create_taxa_inventory(
             inventory_date=d,
             observer=self.request.user,
@@ -157,7 +159,7 @@ class TaxaInventoryUpdateView(TaxaInventoryFormView, UpdateView):
         taxa = self.get_taxa(form)
         if location is None or taxa is None:
             return self.form_invalid(form)
-        d = datetime.strptime(form.data['inventory_date'], '%d/%M/%Y').date()
+        d = datetime.strptime(form.data['inventory_date'], '%d/%m/%Y').date()
         self.object.inventory_date = d
         self.object.location = location
         self.object.description = form.data['location_description']
