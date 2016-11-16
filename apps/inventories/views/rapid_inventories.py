@@ -138,7 +138,7 @@ def consult_rapid_inventory(request, inventory_id):
     read_only = request.user != inventory.observer
     if request.POST:
         if request.user != inventory.observer:
-            return HttpResponseForbidden()
+            return HttpResponseForbidden("Opération non authorisée")
         form = RapidInventoryForm(request.POST, instance=inventory)
         general_form = GeneralInformationsForm(request.POST)
         center_form = MeasuresFromCenterForm(request.POST)
@@ -181,6 +181,6 @@ def consult_rapid_inventory(request, inventory_id):
 def delete_rapid_inventory(request, inventory_id):
     inventory = RapidInventory.objects.get(id=inventory_id)
     if request.user != inventory.observer:
-        return HttpResponseForbidden()
+        return HttpResponseForbidden("Opération non authorisée")
     inventory.delete()
     return redirect(reverse('rapid_inventory_index'))

@@ -184,7 +184,7 @@ class TaxaInventoryUpdateView(TaxaInventoryFormView, UpdateView):
 
     def post(self, request, *args, **kwargs):
         if request.user != self.get_object().observer:
-            return HttpResponseForbidden()
+            return HttpResponseForbidden("Opération non authorisée")
         return super(TaxaInventoryUpdateView, self).post(
             request,
             *args,
@@ -208,7 +208,7 @@ class TaxaInventoryDeleteView(DeleteView):
 
     def dispatch(self, request, *args, **kwargs):
         if request.user != self.get_object().observer:
-            return HttpResponseForbidden()
+            return HttpResponseForbidden("Opération non authorisée")
         return super(TaxaInventoryDeleteView, self).dispatch(
             request,
             *args,

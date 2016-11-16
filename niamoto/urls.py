@@ -21,6 +21,8 @@ from django.conf.urls import url, include
 from django.conf.urls.static import static
 from django.contrib import admin
 
+from niamoto.views import AuthProxyView
+
 
 urlpatterns = [
     url(r'^{}/'.format(settings.REST_API_BASE_URL), include(r'rest.urls')),
@@ -33,6 +35,8 @@ urlpatterns = [
     url(r"^taxon_dashboards/", include("apps.taxon_dashboards.urls", namespace="taxon_dashboards")),
     url(r'^explorer/', include('explorer.urls')),
     url(r'^qgis_plugin_repository/', include('qgis_plugin_repository.urls')),
+    url(r'^geoserver/(?P<path>.*)$', AuthProxyView.as_view(upstream='http://geoniamoto.ird.nc:8080/geoserver/')),
+    url(r'^flower/(?P<path>.*)$', AuthProxyView.as_view(upstream='http://niamoto.ird.nc:5555/')),
 ]
 
 if settings.DEBUG is True:
