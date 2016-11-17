@@ -36,7 +36,7 @@ urlpatterns = [
     url(r'^explorer/', include('explorer.urls')),
     url(r'^qgis_plugin_repository/', include('qgis_plugin_repository.urls')),
     url(r'^geoserver/(?P<path>.*)$', AuthProxyView.as_view(upstream='http://geoniamoto.ird.nc:8080/geoserver/')),
-    url(r'^flower/(?P<path>.*)$', AuthProxyView.as_view(upstream='http://niamoto.ird.nc:5555/')),
+    url(r'^flower/(?P<path>.*)$', AuthProxyView.as_view(upstream='http://niamoto.ird.nc:5555/flower/')),
 ]
 
 if settings.DEBUG is True:
