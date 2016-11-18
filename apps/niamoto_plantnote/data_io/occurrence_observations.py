@@ -4,7 +4,8 @@ from django.db import transaction
 import numpy as np
 import pandas as pd
 
-from apps.niamoto_data.models import OccurrenceObservations
+from apps.niamoto_data.models import OccurrenceObservations, \
+    set_occurrences_elevation
 from apps.data_importer import BaseDataImporter
 from apps.niamoto_plantnote.data_io import get_plantnote_to_niamoto_ids
 
@@ -25,7 +26,8 @@ def import_occurrence_observations_from_plantnote_db(database):
             Obs."perimeter" AS circumference,
             Obs."statut" AS status,
             Indiv."wood_density" AS wood_density,
-            Indiv."bark_thickness" AS bark_thickness
+            Indiv."bark_thickness" AS bark_thickness,
+            NULL AS elevation
         FROM Individus AS Indiv
         LEFT JOIN Observations AS Obs ON Indiv."ID Individus" = Obs."ID Individus"
         WHERE Obs."ID Observations" IS NOT NULL AND Indiv."ID Inventaires" IS NOT NULL
@@ -60,5 +62,11 @@ def import_occurrence_observations_from_plantnote_db(database):
         .set_index(['occurrence_id'], drop=False) \
         .drop('plantnote_id', 1)
     df.rename(columns={'date_obs': 'last_observation_date'}, inplace=True)
-    di = BaseDataImporter(OccurrenceObservations, df)
+    di = BaseDataImporter(OccurrenceObservations, df, update_fields=[
+        'last_observation_date', 'height', 'stem_nb', 'circumference',
+        'status', 'wood_density', 'bark_thickness',
+    ])
     di.process_import()
+    # Update elevation for insert and update groups
+    set_occurrences_elevation(di.insert_dataframe['occurrence_id'])
+    set_occurrences_elevation(di.update_dataframe_new['occurrence_id'])
