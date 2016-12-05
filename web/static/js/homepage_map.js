@@ -100,7 +100,7 @@
         function addInventoriesLayer(inventories_geojson,
                                      fill_color, stroke_color) {
             // Create and add massif layer
-            inventories_layer = window.olext.utils.makeGeoJSONLayer(
+            var inventories_layer = window.olext.utils.makeGeoJSONLayer(
                 inventories_geojson, {
                     style: new ol.style.Style({
                         image: new ol.style.Circle({
@@ -116,7 +116,7 @@
                     })
             });
             map.addLayer(inventories_layer);
-            hover_interaction = new ol.interaction.Select({
+            var hover_interaction = new ol.interaction.Select({
                 condition: ol.events.condition.pointerMove,
                 layers: [inventories_layer],
                 updateWhileInteracting: true,
@@ -124,10 +124,10 @@
                     image: new ol.style.Circle({
                         radius: 6,
                         fill: new ol.style.Fill({
-                            color: fill_color
+                            color: "#66a3ff"
                         }),
                         stroke: new ol.style.Stroke({
-                            color: stroke_color,
+                            color: "#cce0ff",
                             width: 2
                         }),
                     })
