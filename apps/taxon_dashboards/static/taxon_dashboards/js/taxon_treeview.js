@@ -29,11 +29,13 @@
                 tax_dict[tax['parent']]['nodes'].push(tax);
             }
         }
-        for (var tax_id in tax_dict) {
-            var tax = tax_dict[tax_id];
+        for (var i = 0; i < taxa_list.length; i++) {
+            var tax = tax_dict[taxa_list[i]['id']];
             if (tax['nodes'].length == 0) {
                 tax['nodes'] = null;
                 tax['icon'] = 'glyphicon glyphicon-leaf';
+            } else {
+                tax['icon'] = 'glyphicon';
             }
             if (tax['parent'] == null) {
                 tree.push(tax);
