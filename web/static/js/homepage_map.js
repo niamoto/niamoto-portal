@@ -15,7 +15,6 @@
                                       'EPSG:4326'),
         zoom: 7.5
     });
-    var inventories_layer;
     var map = new ol.Map({
         target: target,
         layers: [
@@ -38,17 +37,15 @@
     });
 
     $(document).ready(function() {
-        $("#inventories_table").tablesorter({
-            dateFormat: "ddmmyyyy"
-        });
         // Load data
         var progress_bar = new olext.control.ProgressBar();
         progress_bar.setLabel("0%");
         map.addControl(progress_bar);
+        var nb_layer_loaded = 0;
         $.ajax({
-            xhr: function() {
+            xhr: function () {
                 var xhr = new window.XMLHttpRequest();
-                xhr.addEventListener("progress", function(evt) {
+                xhr.addEventListener("progress", function (evt) {
                     if (evt.lengthComputable) {
                         var progr = (evt.loaded / evt.total * 100).toFixed(1);
                         progress_bar.setValue(progr);
@@ -58,15 +55,50 @@
                 return xhr;
             },
             type: 'GET',
-            url: rapid_inventory_url,
-            success: function(result) {
-              var inventories_geojson = result.results;
-              addInventoriesLayer(inventories_geojson);
-              map.removeControl(progress_bar);
+            url: rapid_inventories_url,
+            success: function (result) {
+                var rapid_inventories_geojson = result.results;
+                addInventoriesLayer(
+                    rapid_inventories_geojson,
+                    '#e2bc15',
+                    '#fff1ae'
+                );
+                nb_layer_loaded += 1;
+                if (nb_layer_loaded == 2) {
+                    map.removeControl(progress_bar);
+                }
+            }
+        });
+        $.ajax({
+            xhr: function () {
+                var xhr = new window.XMLHttpRequest();
+                xhr.addEventListener("progress", function (evt) {
+                    if (evt.lengthComputable) {
+                        var progr = (evt.loaded / evt.total * 100).toFixed(1);
+                        progress_bar.setValue(progr);
+                        progress_bar.setLabel(progr + "%");
+                    }
+                }, false);
+                return xhr;
+            },
+            type: 'GET',
+            url: taxa_inventories_url,
+            success: function (result) {
+                var taxa_inventories_geojson = result.results;
+                addInventoriesLayer(
+                    taxa_inventories_geojson,
+                    '#e25515',
+                    '#d67f57'
+                );
+                nb_layer_loaded += 1;
+                if (nb_layer_loaded == 2) {
+                    map.removeControl(progress_bar);
+                }
             }
         });
 
-        function addInventoriesLayer(inventories_geojson) {
+        function addInventoriesLayer(inventories_geojson,
+                                     fill_color, stroke_color) {
             // Create and add massif layer
             inventories_layer = window.olext.utils.makeGeoJSONLayer(
                 inventories_geojson, {
@@ -74,10 +106,10 @@
                         image: new ol.style.Circle({
                             radius: 5,
                             fill: new ol.style.Fill({
-                                color: '#e2bc15'
+                                color: fill_color
                             }),
                             stroke: new ol.style.Stroke({
-                                color: '#fff1ae',
+                                color: stroke_color,
                                 width: 1
                             }),
                         })
@@ -92,20 +124,20 @@
                     image: new ol.style.Circle({
                         radius: 6,
                         fill: new ol.style.Fill({
-                            color: '#e2bc15'
+                            color: fill_color
                         }),
                         stroke: new ol.style.Stroke({
-                            color: '#fff1ae',
+                            color: stroke_color,
                             width: 2
                         }),
                     })
                 })
             });
             map.addInteraction(hover_interaction);
-            addPopupOverlay();
+            addPopupOverlay(inventories_layer);
         };
 
-        function addPopupOverlay() {
+        function addPopupOverlay(layer) {
             var popup = new olext.overlay.Popup({
                 'positioning': 'bottom-center',
                 'autoPan': true,
@@ -116,7 +148,7 @@
             map.addOverlay(popup);
             var point_select = new ol.interaction.Select({
                 'condition': ol.events.condition.click,
-                'layers': [inventories_layer],
+                'layers': [layer],
 
             });
             point_select.on('select', function(evt) {
@@ -127,10 +159,7 @@
                     var title = point.get('observer_full_name');
                     var content = point.get('inventory_date')
                             + ' - '
-                            + point.get('location_description')
-                            + '<br><a href="' + point.get('id') + '/">'
-                            + 'Inventaire complet'
-                            + '</a>';
+                            + point.get('location_description');
                     popup.show(
                         coord,
                         title,
@@ -145,7 +174,5 @@
             });
             map.addInteraction(point_select);
         };
-
     });
-
 })(jQuery);

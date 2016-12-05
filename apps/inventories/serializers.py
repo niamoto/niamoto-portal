@@ -26,6 +26,7 @@ class RapidInventorySerializer(gis_serializers.GeoFeatureModelSerializer):
         fields = (
             'id',
             'observer_full_name',
+            'created_at',
             'inventory_date',
             'location_description',
         )
@@ -51,6 +52,7 @@ class TaxaInventorySerializer(gis_serializers.GeoFeatureModelSerializer):
         fields = (
             'id',
             'observer_full_name',
+            'created_at',
             'inventory_date',
             'location_description',
         )

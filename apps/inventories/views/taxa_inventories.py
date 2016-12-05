@@ -227,7 +227,6 @@ class TaxaInventoryViewSet(viewsets.ReadOnlyModelViewSet):
         permissions.IsAuthenticated,
         IsOwnerOrReadOnly
     )
-    pagination_class = None
 
     def get_queryset(self):
         queryset = TaxaInventory.objects.all()

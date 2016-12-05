@@ -1,0 +1,57 @@
+#map {
+    height: 400px;
+    padding: 0;
+    border: 1px #CCCCCC solid;
+    overflow: hidden;
+    margin-bottom: 30px;
+}
+
+.home-row {
+    margin: 40px 60px 0 10px;
+}
+
+.panel-heading {
+    font-size: 16px;
+}
+
+.see-all {
+    font-size: 12px;
+    background-color: #F5F5F5;
+}
+
+.list-group-item {
+    padding: 10px 5px;
+}
+
+hr {
+    margin: 5px;
+}
+
+.rapid-access-item {
+    position: relative;
+    display: block;
+    padding: 10px 15px;
+    margin-bottom: -1px;
+    background-color: #FFF;
+}
+
+li .row {
+    margin: 0;
+}
+
+.right-link {
+}
+
+.truncate {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.observer-name {
+    font-size: 12px;
+}
+
+i {
+    margin-right: 10px;
+}

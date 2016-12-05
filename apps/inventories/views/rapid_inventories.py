@@ -45,7 +45,6 @@ class RapidInventoryViewSet(viewsets.ReadOnlyModelViewSet):
         permissions.IsAuthenticated,
         IsOwnerOrReadOnly
     )
-    pagination_class = None
 
     def get_queryset(self):
         queryset = RapidInventory.objects.all()

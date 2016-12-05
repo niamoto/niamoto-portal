@@ -1,8 +1,108 @@
 {% extends "niamoto_dashboard_base.html" %}
 
 {% load i18n %}
+{% load staticfiles %}
 
 {% block body_class %}home{% endblock %}
 
+{% block styles %}
+    {{ block.super }}
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/ol3/3.10.1/ol.min.css' rel='stylesheet' />
+        <link rel="stylesheet" href='{% static "css/olext.css" %}' />
+    <link rel="stylesheet" href='{% static "css/home.css" %}' />
+{% endblock %}
+
 {% block body %}
+        <div class="row home-row">
+            <div class="col-xs-12 col-md-3">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Accès rapide</div>
+                    <ul class="list-group panel-body">
+                        <li class="rapid-access-item"><a href="{% url 'add_rapid_inventory' %}">Saisir un inventaire rapide</a></li>
+                        <li class="rapid-access-item"><a href="{% url 'taxa_inventory' %}">Saisir un inventaire taxonomique</a></li>
+                        <hr/>
+                        <li class="rapid-access-item"><a href="{% url 'rapid_inventory_index' %}?username={{ request.user.username }}">Consulter mes inventaires rapides</a></li>
+                        <li class="rapid-access-item"><a href="{% url 'taxa_inventory_index' %}?username={{ request.user.username }}">Consulter mes inventaire taxonomiques</a></li>
+                        <hr/>
+                        <li class="rapid-access-item"><a href="{% url 'digitizing_massifs' %}">Consulter la digitalisation au 1:3000ème</a></li>
+                        <hr/>
+                        <li class="rapid-access-item"><a href="/account/settings/">Accéder aux paramètres de mon compte</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-9">
+                <div class="row">
+
+                    <div class="col-xs-12 col-md-6">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <i class="fa fa-circle" aria-hidden="true" style="color: #e2bc15;"></i>
+                                Derniers inventaires rapides saisis
+                            </div>
+                            <ul class="list-group">
+                            {% for rapid_inventory in last_rapid_inventories %}
+                                <li class="list-group-item">
+                                    <div class="row">
+                                        <div class="col-xs-3 col-md-3 truncate observer-name">
+                                            {{ rapid_inventory.observer.username }}
+                                        </div>
+                                        <div class="col-xs-6 col-md-6 truncate">
+                                            {{ rapid_inventory.location_description }}
+                                        </div>
+                                        <div class="col-xs-3 col-md-3">
+                                            <a class="right-link" href="{% url 'rapid_inventory_consult' rapid_inventory.id %}">consulter</a>
+                                        </div>
+                                    </div>
+                                </li>
+                            {% endfor %}
+                            <li class="list-group-item see-all"><a href="{% url 'rapid_inventory_index' %}">Consulter tous les inventaires rapides ({{ rapid_inventories_count }})</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-md-6">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <i class="fa fa-circle" aria-hidden="true" style="color: #d67f57;"></i>
+                                Derniers inventaires taxonomiques saisis
+                            </div>
+                            <ul class="list-group">
+                            {% for taxa_inventory in last_taxa_inventories %}
+                                <li class="list-group-item">
+                                    <div class="row">
+                                        <div class="col-xs-3 col-md-3 observer-name">
+                                            {{ taxa_inventory.observer.username }}
+                                        </div>
+                                        <div class="col-xs-6 col-md-6 truncate">
+                                            {{ taxa_inventory.location_description }}
+                                        </div>
+                                        <div class="col-xs-3 col-md-3">
+                                            <a class="right-link" href="{% url 'taxa_inventory_consult' pk=taxa_inventory.id %}">consulter</a>
+                                        </div>
+                                    </div>
+                                </li>
+                            {% endfor %}
+                            <li class="list-group-item see-all"><a href="{% url 'taxa_inventory_index' %}">Consulter tous les inventaires taxonomiques ({{ taxa_inventories_count }})</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-12 col-md-12">
+                        <div id="map"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+{% endblock %}
+
+{% block scripts %}
+    {{ block.super }}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.24.5/js/jquery.tablesorter.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.3.12/proj4.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ol3/3.10.1/ol.min.js"></script>
+    <script src="{% static 'js/olext.min.js' %}" type="text/javascript"></script>
+    <script>
+        var taxa_inventories_url = "{{ taxa_inventories_url }}";
+        var rapid_inventories_url = "{{ rapid_inventories_url }}";
+    </script>
+    <script src='{% static "js/homepage_map.js" %}'></script>
 {% endblock %}

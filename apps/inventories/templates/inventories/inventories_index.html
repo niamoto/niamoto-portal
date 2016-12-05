@@ -8,7 +8,7 @@
     {{ block.super }}
     <link href='https://cdnjs.cloudflare.com/ajax/libs/ol3/3.10.1/ol.min.css' rel='stylesheet' />
     <link rel="stylesheet" href='{% static "inventories/css/consult_inventories.css" %}' />
-    <link rel="stylesheet" href='{% static "inventories/css/olext.css" %}' />
+    <link rel="stylesheet" href='{% static "css/olext.css" %}' />
 {% endblock %}
 
 {% block body_base %}
@@ -62,7 +62,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.24.5/js/jquery.tablesorter.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.3.12/proj4.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ol3/3.10.1/ol.min.js"></script>
-    <script src="{% static 'inventories/js/olext.min.js' %}" type="text/javascript"></script>
+    <script src="{% static 'js/olext.min.js' %}" type="text/javascript"></script>
     <script>
         var rapid_inventory_url = "{{ geojson_url }}";
     </script>
