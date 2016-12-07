@@ -14,3 +14,12 @@ h4 {
 .inline h4, .inline a {
     display: inline-block;
 }
+
+.pagination {
+    margin: 0 0 10px 0;
+}
+
+.panel-body {
+    padding-bottom: 0;
+    margin-bottom: -10px;
+}

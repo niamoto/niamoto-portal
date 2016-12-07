@@ -4,6 +4,7 @@ import json
 from datetime import datetime
 
 from django.http import HttpResponseForbidden
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render, redirect
 from django.views.generic.edit import FormView, UpdateView, DeleteView
 from django.core.urlresolvers import reverse, reverse_lazy
@@ -34,6 +35,7 @@ HEADERS = [
     "Localisation (longitude/latitude WGS84)",
     "",
 ]
+RECORDS_PER_PAGE = 15
 
 
 @login_required()
@@ -47,8 +49,16 @@ def taxa_inventories_index(request):
             geojson_url,
             username
         )
-    inventories = qs.order_by('-inventory_date')\
+    inventories_list = qs.order_by('-inventory_date')\
         .select_related('observer')
+    paginator = Paginator(inventories_list, RECORDS_PER_PAGE)
+    page_nb = request.GET.get('page', 1)
+    try:
+        inventories = paginator.page(page_nb)
+    except PageNotAnInteger:
+        inventories = paginator.page(1)
+    except EmptyPage:
+        inventories = paginator.page(paginator.num_pages)
 
     def get_val(inv, f):
         if f == 'location':
@@ -62,6 +72,8 @@ def taxa_inventories_index(request):
     data = [[get_val(inv, f) for f in FIELDS] for inv in inventories]
     return render(request, 'inventories/inventories_index.html', {
         'title': "Inventaires taxonomiques",
+        'page': paginator.page(page_nb),
+        'paginator': paginator,
         'inventories': data,
         'header': HEADERS,
         'geojson_url': geojson_url,
