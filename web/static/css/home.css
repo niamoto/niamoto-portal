@@ -52,6 +52,12 @@ li .row {
     font-size: 12px;
 }
 
-i {
+.rapid-inventory-circle {
+    color: #e2bc15;
+    margin-right: 10px;
+}
+
+.taxa-inventory-circle {
+    color: #d67f57;
     margin-right: 10px;
 }

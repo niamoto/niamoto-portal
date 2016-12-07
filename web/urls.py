@@ -5,8 +5,8 @@ from django.views.generic import TemplateView
 from account.views import LoginView, LogoutView, DeleteView
 from account.views import ConfirmEmailView
 from account.views import ChangePasswordView, PasswordResetView, PasswordResetTokenView
-from account.views import SettingsView
 
+from web.views import SettingsView
 from web.views import home, SignupView
 
 

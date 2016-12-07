@@ -6,7 +6,7 @@ from django.shortcuts import render
 import account.views
 
 from apps.inventories.models import RapidInventory, TaxaInventory
-from web.forms import SignupForm
+from web.forms import SignupForm, SettingsForm
 
 
 LAST_RECORDS_LIMIT = 5
@@ -38,7 +38,7 @@ def home(request):
 
 class SignupView(account.views.SignupView):
     """
-    Class-based view for signup, overriding the one from account app.
+    Class-based view for signup, extending the one from account app.
     """
 
     form_class = SignupForm
@@ -66,3 +66,34 @@ class SignupView(account.views.SignupView):
         if commit:
             user.save()
         return user
+
+
+class SettingsView(account.views.SettingsView):
+    """
+    Class-based view for settings, extending the one from account app.
+    """
+
+    form_class = SettingsForm
+
+    def get_initial(self):
+        initial = super(SettingsView, self).get_initial()
+        initial["first_name"] = self.request.user.first_name
+        initial["last_name"] = self.request.user.last_name
+        return initial
+
+    def update_settings(self, form):
+        super(SettingsView, self).update_settings(form)
+        self.update_user(form)
+
+    def update_user(self, form):
+        fields = {}
+        if "first_name" in form.cleaned_data:
+            fields["first_name"] = form.cleaned_data["first_name"]
+        if "last_name" in form.cleaned_data:
+            fields["last_name"] = form.cleaned_data["last_name"]
+        if fields:
+            user = self.request.user
+            for k, v in fields.items():
+                setattr(user, k, v)
+                user.save()
+

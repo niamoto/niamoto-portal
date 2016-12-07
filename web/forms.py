@@ -9,7 +9,16 @@ import account.forms
 
 class SignupForm(account.forms.SignupForm):
     """
-    Override default signup form from account app.
+    Extends default signup form from account app.
+    """
+
+    first_name = forms.CharField(label="Prénom")
+    last_name = forms.CharField(label="Nom")
+
+
+class SettingsForm(account.forms.SettingsForm):
+    """
+    Extends default settings form from account app.
     """
 
     first_name = forms.CharField(label="Prénom")
