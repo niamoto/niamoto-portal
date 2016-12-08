@@ -1,4 +1,13 @@
-(function($, undefined) {
+require([
+    'jquery',
+    'utils/taxonomy',
+    'd3',
+    'topojson',
+    'jquery.treeview',
+    'd3-array',
+    'd3-geo',
+    'd3-geo-projection',
+], function($, taxonomy, d3, topojson) {
 
     var preloader_count = 0;
 
@@ -10,6 +19,12 @@
     var sorted_distribution = [];
     var total = 0;
     var map_color = {};
+
+
+    function taxonSelected(node) {
+        $('#selected_taxon_name').html(node['text']);
+    }
+
 
     function updateTaxonData(taxon_id) {
 
@@ -28,6 +43,7 @@
             hidePreloader(false);
         });
     }
+
 
     function buildSortedDistribution(taxon_data) {
         var data = taxon_data['taxon_distribution'];
@@ -57,6 +73,7 @@
         sorted_distribution = data;
     };
 
+
     function initSearch() {
         $('#input-search').val("");
         $('#input-search').change(function () {
@@ -77,6 +94,7 @@
             $('#taxon_treeview').animate({scrollTop: scroll_top}, 200);
         });
     };
+
 
     function initMap() {
         var height = $("#map_widget").height();
@@ -164,6 +182,7 @@
             updateOccurrences(data);
         });
     };
+
 
     function initDonutChart() {
 
@@ -259,7 +278,6 @@
                     };
                 });
 
-
             slice.transition()
                 .duration(1000)
                 .attrTween("d", function(d) {
@@ -292,6 +310,7 @@
                 .remove();
         };
     };
+
 
     function initGeneralInformations() {
 
@@ -366,6 +385,7 @@
         }
     };
 
+
     function initModal() {
         $('#modal').on('shown.bs.modal', function() {
             $(document).off('focusin.modal');
@@ -380,9 +400,11 @@
         });
     };
 
+
     function showPreloader() {
         document.getElementById('preloader').style.display = 'inline';
     }
+
 
     function hidePreloader(init) {
         preloader_count += 1;
@@ -394,12 +416,38 @@
         }
     };
 
-    $(document).ready(function () {
-        buildTaxaTree();
-        initSearch();
-        initGeneralInformations();
-        initMap();
-        initDonutChart();
+
+    function make_node(node) {
+        node['text'] = node['full_name'];
+        node['icon'] = 'glyphicon';
+        node['state'] = {
+            expanded: false
+        }
+    };
+
+
+    function make_leaf(node) {
+        node['icon'] = 'glyphicon glyphicon-leaf';
+    };
+
+
+    taxonomy.getTaxaTree(function(taxa_tree) {
+        $('#taxon_treeview').treeview({
+            data: taxa_tree,
+            onNodeSelected: function (event, node) {
+                taxonSelected(node);
+                updateTaxonData(node['id']);
+            }
+        });
+        hidePreloader(true);
+    }, {
+        make_node: make_node,
+        make_leaf: make_leaf
     });
 
-})(jQuery);
+    initSearch();
+    initGeneralInformations();
+    initMap();
+    initDonutChart();
+
+});

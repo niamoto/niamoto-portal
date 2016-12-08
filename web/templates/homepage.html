@@ -87,6 +87,7 @@
                     </div>
 
                     <div class="col-xs-12 col-md-12">
+                        <img id="preloader" src="{% static 'img/preloader.svg' %}"/>
                         <div id="map"></div>
                     </div>
                 </div>
@@ -96,13 +97,9 @@
 
 {% block scripts %}
     {{ block.super }}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.24.5/js/jquery.tablesorter.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.3.12/proj4.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/ol3/3.10.1/ol.min.js"></script>
-    <script src="{% static 'js/olext.min.js' %}" type="text/javascript"></script>
     <script>
         var taxa_inventories_url = "{{ taxa_inventories_url }}";
         var rapid_inventories_url = "{{ rapid_inventories_url }}";
     </script>
-    <script src='{% static "js/homepage_map.js" %}'></script>
+    <script src='{% static "js/homepage.js" %}'></script>
 {% endblock %}

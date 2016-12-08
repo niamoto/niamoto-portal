@@ -69,15 +69,10 @@
 
 {% block scripts %}
     {{ block.super }}
-    <script src="https://d3js.org/d3.v4.min.js"></script>
-    <script src="https://d3js.org/d3-array.v1.min.js"></script>
-    <script src="https://d3js.org/d3-geo.v1.min.js"></script>
-    <script src="https://d3js.org/d3-geo-projection.v1.min.js"></script>
-    <script src="//d3js.org/topojson.v1.min.js"></script>
-    <script src="{% static 'taxon_dashboards/js/bootstrap-treeview.min.js' %}" type="text/javascript"></script>
+    <script src="{% static 'taxon_dashboards/js/main.js' %}"></script>
+{#    <script src="{% static 'taxon_dashboards/js/bootstrap-treeview.min.js' %}" type="text/javascript"></script>#}
     <script>
-        var taxa_tree_url = '{{ view.taxa_tree_url }}';
-        var nc_topojson_url = '{% static 'taxon_dashboards/topojson/nc_adm0.topojson' %}';
+        var nc_topojson_url = '{% static 'frontend_utils/topojson/nc_adm0.topojson' %}';
     </script>
-    <script src="{% static 'taxon_dashboards/js/taxon_treeview.js' %}" type="text/javascript"></script>
+{#    <script src="{% static 'taxon_dashboards/js/taxon_treeview.js' %}" type="text/javascript"></script>#}
 {% endblock %}

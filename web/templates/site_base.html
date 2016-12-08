@@ -9,7 +9,33 @@
 {% endblock %}
 
 {% block extra_head_base %}
-    {% block extra_head %}{% endblock %}
+    {% block extra_head %}
+        <script src="/static/js/require.js"></script>
+        <script>
+            require.config({
+                paths: {
+                    {# JQuery #}
+                    "jquery": 'https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min',
+                    "jquery.treeview": '/static/frontend_utils/js/libs/bootstrap-treeview.min',
+                    "jquery.tablesorter": "https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.24.5/js/jquery.tablesorter.min",
+                    {# OL3 and friends #}
+                    "ol": "https://cdnjs.cloudflare.com/ajax/libs/ol3/3.10.1/ol.min",
+                    "olext": "/static/js/olext.min",
+                    "proj4": "https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.3.12/proj4",
+                    "d3": '/static/frontend_utils/js/libs/d3.v4.min',
+                    "d3-array": '/static/frontend_utils/js/libs/d3-array.v1.min',
+                    "d3-geo": '/static/frontend_utils/js/libs/d3-geo.v1.min',
+                    "d3-geo-projection": '/static/frontend_utils/js/libs/d3-geo-projection.v1.min',
+                    "topojson": '/static/frontend_utils/js/libs/topojson.v1.min',
+                    "utils": '/static/frontend_utils/js'
+                },
+                shim: {
+                    "jquery.treeview": ["jquery"],
+                    "jquery.tablesorter": ["jquery"]
+                }
+            });
+        </script>
+    {% endblock %}
 {% endblock %}
 
 {% block footer %}

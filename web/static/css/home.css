@@ -61,3 +61,10 @@ li .row {
     color: #d67f57;
     margin-right: 10px;
 }
+
+#preloader {
+    position: absolute;
+    top: 30%;
+    left: 40%;
+    z-index: 10;
+}
