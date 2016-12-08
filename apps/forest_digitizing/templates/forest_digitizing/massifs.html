@@ -2,6 +2,11 @@
 
 {% load staticfiles %}
 
+{% block extra_head_base %}
+    {% block extra_head %}
+    {% endblock %}
+{% endblock %}
+
 {% block styles %}
     {{ block.super }}
     <link href="https://cdnjs.cloudflare.com/ajax/libs/ol3/3.6.0/ol.min.css" rel='stylesheet' type='text/css'>

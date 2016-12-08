@@ -31,6 +31,10 @@
   content: none;
 }
 
+.ol-overlaycontainer-stopevent {
+    pointer-events: none;
+}
+
 .olext-popup-title {
     padding: 0;
     border: none;

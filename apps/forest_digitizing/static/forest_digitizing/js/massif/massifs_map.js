@@ -255,6 +255,7 @@
             });
             // On click event handler for massif selection
             map.on('click', function(evt) {
+                console.log("click!")
                 selectMassif(evt.pixel);
             });
 
