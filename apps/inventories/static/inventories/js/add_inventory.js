@@ -1,40 +1,11 @@
-(function($, undefined) {
+require([
+    'jquery',
+    'ol',
+    'utils/maps',
+    "jquery.datetimepicker"
+], function($, ol, maps) {
 
-    // Add EPSG:32758 projection
-    proj4.defs(
-        "EPSG:32758",
-        "+proj=utm +zone=58 +south +datum=WGS84 +units=m +no_defs"
-    );
-
-    var wms_url = 'http://carto.gouv.nc/arcgis/services/fond_imagerie/MapServer/WMSServer';
-    var target = 'map';
-    var view = new ol.View({
-        projection: 'EPSG:4326',
-        center: new ol.proj.transform([165.875, -21.145],
-                                      'EPSG:4326',
-                                      'EPSG:4326'),
-        zoom: 7.5
-    });
-    var map = new ol.Map({
-        target: target,
-        layers: [
-            new ol.layer.Tile({
-                source: new ol.source.TileWMS({
-                    url: wms_url,
-                    params: {
-                        LAYERS: '0',
-                        FORMAT: 'image/png',
-                        CRS: 'EPSG:32758'
-                    },
-                    serverType: 'mapserver'
-                })
-            })
-        ],
-        view: view,
-        controls: [
-            new ol.control.Zoom(),
-        ]
-    });
+    var map = maps.getDefaultMap();
 
     // Features overlay
     var features = new ol.Collection();
@@ -84,7 +55,7 @@
         var lat = document.createElement('div');
         lat.className = "inline";
         lat_html = [
-            '<label for="_coords_long"  class="control-label required-field">Latitude (WGS84) - Exemple: -20.939244</label>',
+            '<label for="_coords_long"  class="control-label required-field">Latitude (WGS84)* - Exemple: -20.939244</label>',
             '<div class="">',
             '<input id="_coords_lat" type="number" step="any" class="form-control">',
             '</div>'
@@ -109,7 +80,7 @@
         var long = document.createElement('div');
         long.className = "inline";
         long_html = [
-            '<label for="_coords_long"  class="control-label required-field">Longitude (WGS84) - Exemple: 165.344324</label>',
+            '<label for="_coords_long"  class="control-label required-field">Longitude (WGS84)* - Exemple: 165.344324</label>',
             '<div class="">',
             '<input id="_coords_long" type="number" step="any" class="form-control">',
             '</div>'
@@ -198,4 +169,4 @@
         }
     })
 
-})(jQuery);
+});
