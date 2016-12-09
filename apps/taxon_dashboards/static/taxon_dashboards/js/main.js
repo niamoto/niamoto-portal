@@ -1,14 +1,15 @@
 require([
     'jquery',
-    'utils/taxonomy',
+    'taxonomy',
     'd3',
     'topojson',
+    'static_urls',
     'jquery.treeview',
     'd3-array',
     'd3-geo',
     'd3-geo-projection',
-], function($, taxonomy, d3, topojson) {
-
+], function($, taxonomy, d3, topojson, static_urls) {
+    
     var preloader_count = 0;
 
     var color = [
@@ -145,7 +146,7 @@ require([
             }
         };
 
-        d3.json(nc_topojson_url, function (error, nc) {
+        d3.json(static_urls.nc_adm_topojson, function (error, nc) {
             if (error) throw error;
 
             var features = topojson.feature(nc, nc.objects.nc_adm0);

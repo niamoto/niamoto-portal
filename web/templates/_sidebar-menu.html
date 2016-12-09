@@ -9,12 +9,12 @@
     </span>
     </div>
 </li>
-<!-- /Search -->
+
 <!-- Home -->
 <li>
     <a href="{% url "home" %}"><i class="fa fa-home fa-fw"></i> Accueil</a>
 </li>
-<!-- /Home -->
+
 <!-- Data input -->
 <li>
     <a href="/#"><i class="fa fa-pencil fa-fw"></i> Inventaires<span class="fa arrow"></span></a>
@@ -27,23 +27,17 @@
         </li>
     </ul>
 </li>
-<!-- /Data input -->
+
 <!-- Data consult -->
 <li>
     <a href="/#"><i class="fa fa-database fa-fw"></i> Données<span class="fa arrow"></span></a>
     <ul class="nav nav-second-level">
-{#        <li>#}
-{#            <a href="#">Taxons</a>#}
-{#        </li>#}
-{#        <li>#}
-{#            <a href="#">Occurrences</a>#}
-{#        </li>#}
         <li>
             <a href="{%  url 'digitizing_massifs' %}">Digitalisation au 1:3000ème</a>
         </li>
     </ul>
 </li>
-<!-- /Data consult -->
+
 <!-- Dashboards -->
 <li>
     <a href="/#"><i class="fa fa-tachometer fa-fw"></i> Tableaux de bord<span class="fa arrow"></span></a>
@@ -52,9 +46,8 @@
             <a href="{% url 'taxon_dashboards:taxon_treeview' %}">Taxons</a>
         </li>
     </ul>
-    <!-- /.nav-second-level -->
 </li>
-<!-- /Dashboards -->
+
 <!-- Account -->
 <li>
     <a href="/#"><i class="fa fa-user fa-fw"></i> Mon compte<span class="fa arrow"></span></a>
@@ -64,4 +57,3 @@
         </li>
     </ul>
 </li>
-<!-- /Account -->

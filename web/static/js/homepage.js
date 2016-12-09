@@ -1,7 +1,7 @@
 require([
     'jquery',
     'ol',
-    'utils/maps'
+    'maps'
 ], function($, ol, maps) {
 
     var map = maps.getDefaultMap();

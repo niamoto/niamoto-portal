@@ -2,7 +2,7 @@
  * Taxonomy utils.
  */
 
-define(["utils/rest_urls"], function(rest_urls) {
+define(["rest_urls"], function(rest_urls) {
 
     function getTaxaTreeFromTaxaList(taxa_list, options) {
         /**

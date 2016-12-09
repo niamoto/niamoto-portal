@@ -1,7 +1,7 @@
 require([
     'jquery',
     'ol',
-    'utils/maps',
+    'maps',
     "jquery.datetimepicker"
 ], function($, ol, maps) {
 
