@@ -21,7 +21,7 @@ require([
             type: 'GET',
             url: rapid_inventory_url,
             success: function(result) {
-              var inventories_geojson = result.results;
+              var inventories_geojson = result;
               addInventoriesLayer(inventories_geojson);
               hidePreloader();
             }
