@@ -41,6 +41,7 @@ require([
                 $('#plot_treeview').treeview({
                     data: result.features.map(function(x) {
                         x['text'] = x.properties.name;
+                        x['icon'] = 'fa fa-square';
                         return x;
                     })
                 });

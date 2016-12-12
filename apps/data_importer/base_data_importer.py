@@ -2,6 +2,7 @@
 
 from django.db import connection, transaction
 from sqlalchemy.engine import create_engine
+import pandas as pd
 from pandas.types.dtypes import DatetimeTZDtype
 
 from utils import get_sqlalchemy_connection_string
