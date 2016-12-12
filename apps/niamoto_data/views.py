@@ -69,6 +69,7 @@ class PlotViewSet(viewsets.ReadOnlyModelViewSet):
     """
     base_name = 'plot'
     filter_fields = {'name': ['icontains']}
+    ordering_fields = ['name']
 
     def get_queryset(self):
         return Plot.objects.all()

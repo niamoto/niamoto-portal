@@ -1,0 +1,27 @@
+#preloader {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    z-index: 10;
+}
+
+#plot_treeview {
+    margin-top: 20px;
+    height: calc(92% - 20px);
+    /*border: rgba(0, 0, 0, 0.55) solid 1px;*/
+    overflow: auto;
+}
+
+.list-group {
+    margin: 0;
+}
+
+#left_panel {
+    height: 70vh;
+}
+
+#right_panel {
+    height: 70vh;
+    position:relative;
+    overflow: auto;
+}
