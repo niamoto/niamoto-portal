@@ -33,6 +33,7 @@ urlpatterns = [
     url(r'^digitizing/', include('apps.forest_digitizing.urls')),
     url(r"^inventory/", include("apps.inventories.urls")),
     url(r"^taxon_dashboards/", include("apps.taxon_dashboards.urls", namespace="taxon_dashboards")),
+    url(r"^plot_dashboard/", include("apps.plot_dashboard.urls", namespace="plot_dashboard")),
     url(r'^explorer/', include('explorer.urls')),
     url(r'^qgis_plugin_repository/', include('qgis_plugin_repository.urls')),
     url(r'^geoserver/(?P<path>.*)$', AuthProxyView.as_view(upstream='http://geoniamoto.ird.nc:8080/geoserver/')),

@@ -10,7 +10,7 @@ def api_root(request):
     response_json = {
         'docs': reverse("docs:drfdocs"),
         'data-api': reverse('data-api:api-root'),
-        'taxon_dashboard-api': reverse('taxon_dashboard-api:api-root'),
+        'dashboard-api': reverse('dashboard-api:api-root'),
         'plantnote-api': reverse('plantnote-api:api-root'),
         'forest_digitizing-api': reverse('forest_digitizing-api:api-root'),
         'inventory-api': reverse('inventory-api:api-root'),

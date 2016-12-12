@@ -10,7 +10,7 @@ router = routers.DefaultRouter()
 router.register(
     r'taxon_dashboard',
     TaxonGeneralDashboardViewSet,
-    base_name='general_dashboard',
+    base_name='taxon_dashboard',
 )
 
 

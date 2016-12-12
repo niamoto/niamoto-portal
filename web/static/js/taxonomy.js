@@ -58,7 +58,7 @@ define(["rest_urls"], function(rest_urls) {
                 var taxa_tree = getTaxaTreeFromTaxaList(taxa_list, options);
                 success(taxa_tree);
             }
-        })
+        });
     };
 
     return {

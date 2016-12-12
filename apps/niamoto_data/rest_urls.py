@@ -3,7 +3,8 @@
 from django.conf.urls import url, include
 from rest_framework import routers
 
-from apps.niamoto_data.views import TaxonViewSet, OccurrenceViewSet
+from apps.niamoto_data.views import TaxonViewSet, OccurrenceViewSet, \
+    PlotViewSet
 
 
 router = routers.DefaultRouter()
@@ -19,6 +20,13 @@ router.register(
     r'{}'.format(OccurrenceViewSet.base_name),
     OccurrenceViewSet,
     base_name=OccurrenceViewSet.base_name,
+)
+
+# Plot
+router.register(
+    r'{}'.format(PlotViewSet.base_name),
+    PlotViewSet,
+    base_name=PlotViewSet.base_name,
 )
 
 urlpatterns = [

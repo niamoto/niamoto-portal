@@ -2,9 +2,8 @@
 
 from rest_framework import serializers
 from rest_framework_gis import serializers as gis_serializers
-from rest_framework.pagination import PageNumberPagination
 
-from apps.niamoto_data.models import Taxon, Occurrence, Massif, \
+from apps.niamoto_data.models import Taxon, Occurrence, Plot, \
     OccurrenceObservations
 
 
@@ -43,3 +42,15 @@ class OccurrenceSerializer(gis_serializers.GeoFeatureModelSerializer):
         super(OccurrenceSerializer, self).__init__(*args, **kwargs)
         if not include_observations:
             self.fields.pop('observations')
+
+
+class PlotSerializer(gis_serializers.GeoFeatureModelSerializer):
+    """
+    Serializer for Plot model.
+    """
+
+    class Meta:
+        model = Plot
+        geo_field = 'location'
+        fields = ('id', 'name', 'width', 'height')
+

@@ -1,0 +1,31 @@
+{% extends "niamoto_dashboard_base.html" %}
+
+{% load staticfiles %}
+
+{% block styles %}
+    {{ block.super }}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap-treeview.min.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'taxon_dashboards/css/taxon_treeview.css' %}"/>
+{% endblock %}
+
+{% block body %}
+    <img id="preloader" src="{% static 'img/preloader.svg' %}">
+    <h3 class="page-header">Tableaux de bord des parcelles</h3>
+    <div id="dashboard_row" class="row">
+        <div id="left_panel" class="col-xs-4 col-md-4">
+            <div class="row">
+                <div class="col-xs-12 col-md-12"><input class="form-control" id="input-search" placeholder="Rechercher une parcelle..." value="" type="input"></div>
+            </div>
+            <div id="plot_treeview"></div>
+        </div>
+        <div class="col-xs-8 col-md-8" id="right_panel">
+
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    {{ block.super }}
+    <script src="{% static 'plot_dashboard/js/main.js' %}"></script>
+{#    <script src="{% static 'taxon_dashboards/js/main.min.js' %}"></script>#}
+{% endblock %}

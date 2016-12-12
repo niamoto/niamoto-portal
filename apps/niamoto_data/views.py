@@ -2,9 +2,9 @@
 
 from rest_framework import viewsets
 
-from apps.niamoto_data.models import Taxon, Occurrence
+from apps.niamoto_data.models import Taxon, Occurrence, Plot
 from apps.niamoto_data.serializers import TaxonSerializer, \
-    OccurrenceSerializer
+    OccurrenceSerializer, PlotSerializer
 
 
 class TaxonViewSet(viewsets.ReadOnlyModelViewSet):
@@ -14,7 +14,6 @@ class TaxonViewSet(viewsets.ReadOnlyModelViewSet):
     base_name = 'taxon'
     queryset = Taxon.objects.all()
     serializer_class = TaxonSerializer
-    pagination_class = None
 
     def list(self, request, *args, **kwargs):
         """
@@ -62,3 +61,17 @@ class OccurrenceViewSet(viewsets.ReadOnlyModelViewSet):
         Retrieve an occurrence given it's identifier.
         """
         return super(OccurrenceViewSet, self).retrieve(request, *args, **kwargs)
+
+
+class PlotViewSet(viewsets.ReadOnlyModelViewSet):
+    """
+    Endpoint for retrieving plots.
+    """
+    base_name = 'plot'
+    filter_fields = {'name': ['icontains']}
+
+    def get_queryset(self):
+        return Plot.objects.all()
+
+    def get_serializer(self, *args, **kwargs):
+        return PlotSerializer(*args, **kwargs)
