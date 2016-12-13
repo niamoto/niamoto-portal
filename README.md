@@ -23,7 +23,7 @@ Before setting up the layers, it is necessary to create the niamoto datastore an
 
 1. Create a workspace called ```niamoto``` in the geoserver web administration interface.
 2. Create a vector datastore, using the PostGIS backend, with the following parameters:
-    - **workspace*: select ```niamoto```
+    - **workspace**: select ```niamoto```
     - **name**: ```niamoto_db```
     - **host**: ```niamoto-postgres```
     - **port**: ```5432```

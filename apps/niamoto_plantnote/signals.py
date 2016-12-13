@@ -5,11 +5,13 @@ import shutil
 
 from django.db.models.signals import post_save, post_delete
 from django.dispatch.dispatcher import receiver
+from celery import group
 
 from .models import PlantnoteDatabase
 from .tasks import replace_plantnote_db, ensure_plantnote_db_only_active, \
     set_last_activated_at_value
-
+from apps.niamoto_data.tasks import update_occurrences_elevation, \
+    update_plot_elevation
 
 @receiver(
     post_save,
@@ -28,7 +30,10 @@ def set_database_active(instance):
         replace_plantnote_db.s(instance.uuid) |
         ensure_plantnote_db_only_active.s() |
         set_last_activated_at_value.s()
-    ).apply_async()
+    ).apply_async(link=group(
+        update_plot_elevation.si(),
+        update_occurrences_elevation.si()
+    ).si())
     return res
 
 
