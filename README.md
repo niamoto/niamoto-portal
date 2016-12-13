@@ -7,6 +7,7 @@ Detailed documentation is in the "docs" directory.
 
 ## Setting up Niamoto
 
+#### /!\ The documentation is incomplete, work is in progress to complete it /!\
 
 ### Manual operations
 
@@ -22,13 +23,13 @@ Before setting up the layers, it is necessary to create the niamoto datastore an
 
 1. Create a workspace called ```niamoto``` in the geoserver web administration interface.
 2. Create a vector datastore, using the PostGIS backend, with the following parameters:
-    - *workspace*: select ```niamoto```
-    - *name*: ```niamoto_db```
-    - *host*: ```niamoto-postgres```
-    - *port*: ```5432```
-    - *schema*: ```public```
-    - *user*: ```niamoto```
-    - *passwd*: ```niamoto```
+    - **workspace*: select ```niamoto```
+    - **name**: ```niamoto_db```
+    - **host**: ```niamoto-postgres```
+    - **port**: ```5432```
+    - **schema**: ```public```
+    - **user**: ```niamoto```
+    - **passwd**: ```niamoto```
 
 
 ##### niamoto:niamoto_data_massif
