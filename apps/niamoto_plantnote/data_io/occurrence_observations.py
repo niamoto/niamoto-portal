@@ -4,8 +4,8 @@ from django.db import transaction
 import numpy as np
 import pandas as pd
 
-from apps.niamoto_data.models import OccurrenceObservations, \
-    set_occurrences_elevation
+from apps.niamoto_data.models import OccurrenceObservations
+from apps.niamoto_data.elevation_tools import set_occurrences_elevation
 from apps.data_importer import BaseDataImporter
 from apps.niamoto_plantnote.data_io import get_plantnote_to_niamoto_ids
 
