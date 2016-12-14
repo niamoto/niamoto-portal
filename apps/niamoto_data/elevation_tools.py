@@ -19,7 +19,6 @@ def set_occurrences_elevation(occurrences_ids=None):
             FROM {occ_table} AS occ
             LEFT JOIN {elev_raster_table} AS mnt
             ON ST_Intersects(mnt.rast, occ.location)
-            WHERE {occ_ids} IS NULL OR occ.id IN ({occ_ids})
         )
         UPDATE {occ_obs}
         SET elevation = elev.elevation
