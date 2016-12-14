@@ -38,7 +38,7 @@ def set_occurrences_elevation(occurrences_ids=None):
 
 @transaction.atomic
 def set_plot_elevation(plot_ids=None):
-    if plot_ids is None:
+    if plot_ids is None or len(plot_ids) == 0:
         in_plots = 'NULL'
     else:
         in_plots = ','.join([str(i) for i in plot_ids])
