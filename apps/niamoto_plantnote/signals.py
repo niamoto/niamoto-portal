@@ -33,7 +33,7 @@ def set_database_active(instance):
     ).apply_async(link=group(
         update_plot_elevation.si(),
         update_occurrences_elevation.si()
-    ).si())
+    ))
     return res
 
 
