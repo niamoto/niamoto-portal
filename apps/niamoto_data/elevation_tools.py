@@ -37,21 +37,15 @@ def set_occurrences_elevation(occurrences_ids=None):
 
 
 @transaction.atomic
-def set_plot_elevation(plot_ids=None):
-    if plot_ids is None or len(plot_ids) == 0:
-        in_plots = 'NULL'
-    else:
-        in_plots = ','.join([str(i) for i in plot_ids])
+def set_plots_elevation():
     sql = \
     """
         UPDATE {plot_table}
         SET elevation = ST_Value(mnt.rast, {plot_table}.location)
-        FROM {elev_raster_table} AS mnt
-        WHERE {in_plots} IS NULL OR {plot_table}.id IN ({in_plots});
+        FROM {elev_raster_table} AS mnt;
     """.format(**{
         'plot_table': Plot._meta.db_table,
         'elev_raster_table': 'mnt10_wgs84',  # TODO: Not hardcoded
-        'in_plots': in_plots
     })
     cur = connection.cursor()
     cur.execute(sql)
