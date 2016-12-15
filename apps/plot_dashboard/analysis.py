@@ -83,3 +83,10 @@ def get_species_distribution(dataframe, limit=None):
         lambda x: x/df['nb_occurrences'].sum()
     )
     return df if limit is None else df.head(limit)
+
+
+def get_dbh_classification(dataframe, bin_size=10):
+    max_dbh = dataframe['circumference'].max()  # TODO CHANGE TO DBH
+    bins = [10 * i for i in range(int(max_dbh // bin_size + 2))]
+    dbh_class = pd.cut(dataframe['circumference'], bins)
+    return dbh_class.value_counts(sort=False)
