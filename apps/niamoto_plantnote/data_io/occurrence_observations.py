@@ -23,7 +23,7 @@ def import_occurrence_observations_from_plantnote_db(database):
             Obs."date_observation" AS date_obs,
             Obs."hauteur" AS height,
             Obs."nb_tiges" AS stem_nb,
-            Obs."perimeter" AS circumference,
+            Obs."DBH" AS dbh,
             Obs."statut" AS status,
             Indiv."wood_density" AS wood_density,
             Indiv."bark_thickness" AS bark_thickness,
@@ -63,7 +63,7 @@ def import_occurrence_observations_from_plantnote_db(database):
         .drop('plantnote_id', 1)
     df.rename(columns={'date_obs': 'last_observation_date'}, inplace=True)
     di = BaseDataImporter(OccurrenceObservations, df, update_fields=[
-        'last_observation_date', 'height', 'stem_nb', 'circumference',
+        'last_observation_date', 'height', 'stem_nb', 'dbh',
         'status', 'wood_density', 'bark_thickness',
     ])
     di.process_import()

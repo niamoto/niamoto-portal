@@ -34,7 +34,7 @@ def get_occurrences_by_taxon(taxon_id=None):
             obs.height,
             /* When stem_nb is None, set it to 1 (numpy int cannot be NaN)*/
             COALESCE(obs.stem_nb, 1),
-            obs.circumference,
+            obs.dbh,
             obs.status,
             obs.wood_density,
             obs.bark_thickness,
@@ -58,7 +58,7 @@ def get_occurrences_by_taxon(taxon_id=None):
         dtype=[('occ_id', 'int'), ('tax_id', 'int'), ('tax_rank', 'U50'),
                ('tax_full_name', 'U300'), ('tax_rank_name', 'U300'),
                ('height', 'float'), ('stem_nb', 'int'),
-               ('circumference', 'float'), ('status', 'U50'),
+               ('dbh', 'float'), ('status', 'U50'),
                ('wood_density', 'float'), ('bark_thickness', 'float'),
                ('x', 'float'), ('y', 'float')]
     )
@@ -93,26 +93,6 @@ def get_stats(dataset, field_name):
         'avg': _avg if not np.isnan(_avg) else None,
     }
     return stats
-
-
-def get_height_stats(dataset):
-    return get_stats(dataset, 'height')
-
-
-def get_circumference_stats(dataset):
-    return get_stats(dataset, 'circumference')
-
-
-def get_wood_density_stats(dataset):
-    return get_stats(dataset, 'wood_density')
-
-
-def get_bark_thickness_stats(dataset):
-    return get_stats(dataset, 'bark_thickness')
-
-
-def get_stem_nb_stats(dataset):
-    return get_stats(dataset, 'stem_nb')
 
 
 def get_taxon_distribution(dataset):

@@ -42,9 +42,9 @@ class TaxonGeneralDashboardViewSet(ViewSet):
         # height
         if self.request.query_params.get('include_height', None):
             response['height'] = a.get_stats(dataset, 'height')
-        # circumference
-        if self.request.query_params.get('include_circumference', None):
-            response['circumference'] = a.get_stats(dataset, 'circumference')
+        # dbh
+        if self.request.query_params.get('include_dbh', None):
+            response['dbh'] = a.get_stats(dataset, 'dbh')
         # wood_density
         if self.request.query_params.get('include_wood_density', None):
             response['wood_density'] = a.get_stats(dataset, 'wood_density')

@@ -111,7 +111,7 @@ class OccurrenceObservations(models.Model):
     )
     height = models.FloatField(null=True, blank=True)
     stem_nb = models.IntegerField(null=True, blank=True)
-    circumference = models.FloatField(null=True, blank=True)
+    dbh = models.FloatField(null=True, blank=True)
     status = models.CharField(max_length=50)
     wood_density = models.FloatField(null=True, blank=True)
     bark_thickness = models.FloatField(null=True, blank=True)

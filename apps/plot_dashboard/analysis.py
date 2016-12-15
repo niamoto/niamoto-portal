@@ -34,7 +34,7 @@ def get_occurrences_by_plot(plot_id=None):
                family.full_name AS family_full_name,
                observations.height AS height,
                observations.stem_nb AS stem_nb,
-               observations.circumference AS circumference,
+               observations.dbh AS dbh,
                observations.status AS status,
                observations.wood_density AS wood_density,
                observations.bark_thickness AS bark_thickness
@@ -86,7 +86,7 @@ def get_species_distribution(dataframe, limit=None):
 
 
 def get_dbh_classification(dataframe, bin_size=10):
-    max_dbh = dataframe['circumference'].max()  # TODO CHANGE TO DBH
+    max_dbh = dataframe['dbh'].max()  # TODO CHANGE TO DBH
     bins = [10 * i for i in range(int(max_dbh // bin_size + 2))]
-    dbh_class = pd.cut(dataframe['circumference'], bins)
+    dbh_class = pd.cut(dataframe['dbh'], bins)
     return dbh_class.value_counts(sort=False)
