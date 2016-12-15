@@ -52,5 +52,5 @@ class PlotSerializer(gis_serializers.GeoFeatureModelSerializer):
     class Meta:
         model = Plot
         geo_field = 'location'
-        fields = ('id', 'name', 'width', 'height')
+        fields = ('id', 'name', 'width', 'height', 'elevation')
 

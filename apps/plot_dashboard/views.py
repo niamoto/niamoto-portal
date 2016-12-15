@@ -7,6 +7,8 @@ from django.views.generic import TemplateView
 from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 
+from apps.niamoto_data.models import Plot
+from apps.niamoto_data.serializers import PlotSerializer
 import apps.plot_dashboard.analysis as a
 
 
@@ -25,9 +27,12 @@ class PlotDashboardViewSet(ViewSet):
     """
 
     def retrieve(self, request, pk=None):
-        # dataset = a.get_occurrences_by_taxon(pk)
+        plot = Plot.objects.get(pk=pk)
+        plot_data = PlotSerializer(plot).data
+        dataset = a.get_occurrences_by_plot(pk)
         response = {
-            # "nb_occurrences": len(dataset),
+            "plot": plot_data,
+            "nb_occurrences": len(dataset),
             # "total_nb_occurrences": a.get_occurrences_total_count(),
         }
         # # height
