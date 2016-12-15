@@ -60,7 +60,7 @@ def get_occurrences_by_plot(plot_id=None):
     return df
 
 
-def get_families_distribution(dataframe):
+def get_families_distribution(dataframe, limit=None):
     df = dataframe.groupby(['family_id']).agg({
         'family_full_name': 'first',
         'occ_id': 'count',
@@ -69,4 +69,17 @@ def get_families_distribution(dataframe):
     df['proportion'] = df['nb_occurrences'].groupby(level=0).apply(
         lambda x: x/df['nb_occurrences'].sum()
     )
-    return df
+    return df if limit is None else df.head(limit)
+
+
+def get_species_distribution(dataframe, limit=None):
+    df = dataframe[dataframe['taxon_rank'] == 'SPECIE']
+    df = df.groupby(['taxon_id']).agg({
+        'taxon_full_name': 'first',
+        'occ_id': 'count'
+    }).sort_values(by='occ_id', ascending=False)
+    df.rename(columns={'occ_id': 'nb_occurrences'}, inplace=True)
+    df['proportion'] = df['nb_occurrences'].groupby(level=0).apply(
+        lambda x: x/df['nb_occurrences'].sum()
+    )
+    return df if limit is None else df.head(limit)
