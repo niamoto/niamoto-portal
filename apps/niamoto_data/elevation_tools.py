@@ -41,7 +41,8 @@ def set_plots_elevation():
     """
         UPDATE {plot_table}
         SET elevation = ST_Value(mnt.rast, {plot_table}.location)
-        FROM {elev_raster_table} AS mnt;
+        FROM {elev_raster_table} AS mnt
+        WHERE ST_Intersects(mnt.rast, {plot_table}.location);
     """.format(**{
         'plot_table': Plot._meta.db_table,
         'elev_raster_table': 'mnt10_wgs84',  # TODO: Not hardcoded
