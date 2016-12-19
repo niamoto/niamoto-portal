@@ -9,6 +9,7 @@ var api_root = protocol + "//" + host + "/api/1.0";
 
 define ({
     taxon_list: api_root + "/data/taxon/",
-    plot_list: api_root + "/data/plot/"
+    plot_list: api_root + "/data/plot/",
+    plot_dashboard: api_root + "/dashboard/plot_dashboard/"
 });
 

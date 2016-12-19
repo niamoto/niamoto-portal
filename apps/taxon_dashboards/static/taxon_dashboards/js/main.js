@@ -7,9 +7,9 @@ require([
     'jquery.treeview',
     'd3-array',
     'd3-geo',
-    'd3-geo-projection',
+    'd3-geo-projection',f
 ], function($, taxonomy, d3, topojson, static_urls) {
-    
+
     var preloader_count = 0;
 
     var color = [
@@ -225,10 +225,6 @@ require([
 
         function updateData(taxon_data) {
             var data = sorted_distribution;
-            var domain = [];
-            for (var i = 0; i < data.length; i++) {
-                domain.push(data[i][0]);
-            }
 
             /* ------- PIE SLICES -------*/
 

@@ -66,10 +66,11 @@ def get_families_distribution(dataframe, limit=None):
         'occ_id': 'count',
     }).sort_values(by='occ_id', ascending=False)
     df.rename(columns={'occ_id': 'nb_occurrences'}, inplace=True)
+    total = df['nb_occurrences'].sum()
     df['proportion'] = df['nb_occurrences'].groupby(level=0).apply(
-        lambda x: x/df['nb_occurrences'].sum()
+        lambda x: x/total
     )
-    return df if limit is None else df.head(limit)
+    return (df, total) if limit is None else (df.head(limit), total)
 
 
 def get_species_distribution(dataframe, limit=None):
