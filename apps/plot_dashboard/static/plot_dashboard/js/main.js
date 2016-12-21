@@ -7,8 +7,9 @@ require([
     'rest_urls',
     'd3_map',
     'd3_families_donut',
+    'd3_diameters',
     'jquery.treeview'
-], function($, rest_urls, d3_map, d3_families_donut) {
+], function($, rest_urls, d3_map, d3_families_donut, d3_diameters) {
 
     var loaded_elements = [];
     var nb_elements_to_load = 1;
@@ -49,7 +50,7 @@ require([
         $.ajax({
             type: 'GET',
             data: {
-                name__icontains: "Parcelles 1ha (PN) -",
+                name__icontains: "Parcelles 1ha (AMAP) - ",
                 ordering: "name"
             },
             url: rest_urls.plot_list,
@@ -70,15 +71,19 @@ require([
 
 
     function updateData(node) {
-        $('#selected_plot_name').html(node['text']);
-        $('#plot_elevation').html(
-            "<b>Altitude</b>: "  + node['properties']['elevation'] + " m"
-        );
         $.ajax({
             type: 'GET',
             url: rest_urls.plot_dashboard + node['id'] + "/",
             success: function(result) {
                 $('#plot_treeview').trigger('plotSelected', result);
+                // Update plot general informations
+                $('#selected_plot_name').html(node['text']);
+                $('#plot_elevation').html(
+                    "<b>Altitude</b>: "  + node['properties']['elevation'] + " m"
+                );
+                $('#nb_occurrences').html(
+                    "<b>Nombre de tiges</b>: " + result['nb_occurrences']
+                );
             }
         });
     };
@@ -92,5 +97,6 @@ require([
         initSearch();
         d3_map.initMap();
         d3_families_donut.initFamiliesDonut();
+        d3_diameters.initDiametersHistogram();
     });
 });

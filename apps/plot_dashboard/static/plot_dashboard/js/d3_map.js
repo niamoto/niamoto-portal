@@ -31,7 +31,7 @@ define([
                 .attr("width", plot_width)
                 .attr("height", plot_width)
                 .transition()
-                .duration(500)
+                .duration(200)
                 .attr("fill", function(d) { return "#239023"; })
                 .attr("stroke", "#196719")
                 .attr("opacity", "0.8");
@@ -47,7 +47,7 @@ define([
                 occ_selection = svg.selectAll("rect").data([]);
                 occ_selection.exit()
                     .transition()
-                    .duration(500)
+                    .duration(200)
                     .remove()
                     .on("end", function () {
                         count -= 1;

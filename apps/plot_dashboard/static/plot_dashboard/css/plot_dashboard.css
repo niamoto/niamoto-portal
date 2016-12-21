@@ -55,7 +55,11 @@
 }
 
 #families_donut {
-    width: 30%;
+    width: 50%;
+}
+
+#diameters_histogram {
+    width: 50%;
 }
 
 .land {

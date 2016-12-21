@@ -90,4 +90,4 @@ def get_dbh_classification(dataframe, bin_size=10):
     max_dbh = dataframe['dbh'].max()  # TODO CHANGE TO DBH
     bins = [10 * i for i in range(int(max_dbh // bin_size + 2))]
     dbh_class = pd.cut(dataframe['dbh'], bins)
-    return dbh_class.value_counts(sort=False)
+    return bins, dbh_class.value_counts(sort=False)
