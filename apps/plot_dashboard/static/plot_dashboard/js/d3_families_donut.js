@@ -41,7 +41,8 @@ define([
             .innerRadius(radius * 0.4);
 
         var tooltip = d3.select("#page-wrapper").append("div")
-            .attr("id", "tooltip")
+            .attr("id", "donut_tooltip")
+            .attr("class", "tooltip")
             .style("opacity", 0);
 
         $('#plot_treeview').on('plotSelected', function (event, data) {
@@ -61,7 +62,7 @@ define([
             slice.enter()
                 .insert("path")
                 .style("fill", function(d, i) { return color[i]; })
-                .style("opacity", "0.9")
+                .style("opacity", "0.7")
                 .attr("class", "slice")
                 .on('mouseover', function(d, i) {
                     d3.select(this).style("opacity", "1.0");
@@ -73,14 +74,14 @@ define([
                     tooltip.html(html);
                 })
                 .on('mouseout', function(d) {
-                    d3.select(this).style("opacity", "0.9");
+                    d3.select(this).style("opacity", "0.7");
                     tooltip.transition()
                         .duration(300)
                         .style("opacity", 0);
                 })
                 .on('mousemove', function(d) {
-                    var w = $("#tooltip").width();
-                    var h = $("#tooltip").height();
+                    var w = $("#donut_tooltip").width();
+                    var h = $("#donut_tooltip").height();
                     tooltip.style("left", (d3.event.pageX - w / 2 - 15) + "px")
                     .style("top", (d3.event.pageY - h - 25) + "px");
                 })

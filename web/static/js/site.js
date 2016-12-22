@@ -32,6 +32,10 @@ $(function() {
         if (height > topOffset) {
             $("#page-wrapper").css("min-height", (height) + "px");
         }
+        $(".fill_parent_height").each(function(i, obj) {
+            var parent_height = $(obj).parent().height();
+            $(obj).css("min-height", parent_height + "px");
+        });
     }
 
     $(window).bind("load resize", size_wrapper);

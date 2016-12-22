@@ -235,7 +235,7 @@ require([
             slice.enter()
                 .insert("path")
                 .style("fill", function(d, i) { return color[i]; })
-                .style("opacity", "0.9")
+                .style("opacity", "0.8")
                 .attr("class", "slice")
                 .on('mouseover', function(d) {
                     d3.select(this).style("opacity", "1.0");
@@ -247,7 +247,7 @@ require([
                     tooltip.html(html);
                 })
                 .on('mouseout', function(d) {
-                    d3.select(this).style("opacity", "0.9");
+                    d3.select(this).style("opacity", "0.8");
                     tooltip.transition()
                         .duration(300)
                         .style("opacity", 0);

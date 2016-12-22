@@ -48,7 +48,7 @@ class PlotDashboardViewSet(ViewSet):
             ),
             "dbh_classification": a.get_dbh_classification(
                 dataset,
-                bin_size=10,
+                bin_size=5,
             )
         }
         return Response(response)

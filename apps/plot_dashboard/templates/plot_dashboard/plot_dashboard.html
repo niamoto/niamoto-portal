@@ -12,28 +12,41 @@
     <img id="preloader" src="{% static 'img/preloader.svg' %}">
     <h3 class="page-header">Tableaux de bord des parcelles</h3>
     <div id="dashboard_row" class="row">
-        <div id="left_panel" class="col-xs-4 col-md-4">
+        <div id="left_panel" class="col-xs-4 col-md-4 fill_parent_height">
             <div class="row">
                 <div class="col-xs-12 col-md-12"><input class="form-control" id="input-search" placeholder="Rechercher une parcelle..." value="" type="input"></div>
             </div>
             <div id="plot_treeview"></div>
         </div>
-        <div class="col-xs-8 col-md-8" id="right_panel">
+        <div class="col-xs-8 col-md-8 fill_parent_height"  id="right_panel">
             {# First row #}
-            <div class="d3_viz">
+            <div id="first_row" class="d3_viz panel">
                 <div id="plot_informations">
                     <h3 id="selected_plot_name"></h3>
                     <p id="plot_elevation"></p>
                     <p id="nb_occurrences"></p>
                 </div>
-                <div id="plot_location" class="panel">
+                <div id="plot_location">
                     <div id="map_widget" class="d3_panel"></div>
                 </div>
             </div>
             {# Second row #}
-            <div class="d3_viz">
-                <div id="families_donut"></div>
-                <div id="diameters_histogram"></div>
+            <div id="second_row" class="d3_viz panel">
+                <div id="families_donut_container">
+                    <div id="families_donut"></div>
+                    <span><h5><strong>Familles dominantes</strong></h5></span>
+                </div>
+                <div id="top_species_container">
+                    <div id="top_species"></div>
+                    <span><h5><strong>Espèces dominantes</strong></h5></span>
+                </div>
+            </div>
+            {# Third row #}
+            <div id="third_row" class="d3_viz panel">
+                <div id="diameters_histogram_container">
+                    <div id="diameters_histogram"></div>
+                    <span><h5><strong>Structure diamétrique</strong></h5></span>
+                </div>
             </div>
         </div>
     </div>
