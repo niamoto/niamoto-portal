@@ -2,7 +2,7 @@ define([
     'jquery',
     'd3'
 ], function($, d3) {
-
+    
     function initDiametersHistogram() {
 
         var height = $("#diameters_histogram").height();
@@ -59,7 +59,7 @@ define([
             var bins = plot_data['dbh_classification'][0];
 
             var x = d3.scaleLinear()
-                .domain([d3.min(bins), d3.max(bins)])
+                .domain(x_domain)
                 .range([0, mwidth]);
             var y = d3.scaleLinear()
                 .domain(y_domain)
@@ -71,15 +71,16 @@ define([
             rects.enter()
                 .append("rect")
                 .attr("x", function (d, i) {
-                    return x(bins[i]) + x(bins[i + 1] - bins[i]) * 0.1;
+                    return x(bins[i]) + x(bins[i + 1] - bins[i]);
                 })
                 .style("fill", "#70af3f")
                 .style("opacity", "0.8")
+                .style("stroke", "white")
                 .attr("transform", function(d) {
                     return "translate(" + 0 + "," + mheight + ")";
                 })
                 .attr("width", function (d, i) {
-                    return x(bins[i + 1] - bins[i]) * 0.8;
+                    return x(bins[i + 1] - bins[i]) * 1;
                 })
                 .attr("height", function (d, i) {
                     return 0;
@@ -117,13 +118,13 @@ define([
             rects.transition()
                 .duration(500)
                 .attr("x", function (d, i) {
-                    return x(bins[i]) + x(bins[i + 1] - bins[i]) * 0.1;
+                    return x(bins[i]) + x(bins[i + 1] - bins[i]);
                 })
                 .attr("transform", function(d) {
                     return "translate(" + 0 + "," + y(d) + ")";
                 })
                 .attr("width", function (d, i) {
-                    return x(bins[i + 1] - bins[i]) * 0.8;
+                    return x(bins[i + 1] - bins[i]);
                 })
                 .attr("height", function (d, i) {
                     return mheight - y(d);
@@ -133,14 +134,6 @@ define([
                 .transition()
                 .duration(500)
                 .remove();
-
-
-            // update the x Axis
-            x_axis.call(
-                d3.axisBottom(x)
-                    .ticks(10)
-            );
-
         };
     }
         return {

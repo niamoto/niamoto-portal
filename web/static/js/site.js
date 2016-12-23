@@ -33,8 +33,20 @@ $(function() {
             $("#page-wrapper").css("min-height", (height) + "px");
         }
         $(".fill_parent_height").each(function(i, obj) {
-            var parent_height = $(obj).parent().height();
-            $(obj).css("min-height", parent_height + "px");
+            var parent_min_height = parseInt(
+                obj.parentElement.style.minHeight,
+                10
+            );
+            if (!parent_min_height) {
+                parent_min_height = obj.style.minHeight;
+            }
+            var parent_height = parseInt(
+                $(obj).parent().height(),
+                10
+            );
+            var min_height = (parent_height > parent_min_height) ? parent_min_height : parent_height;
+            console.log("ph: " + parent_height + "pmh: " + parent_min_height + "mh: " + min_height);
+            $(obj).css("min-height", min_height + "px");
         });
     }
 
