@@ -3,6 +3,9 @@
 # Build taxon dashboard js
 node web/static/js/libs/r.js -o apps/taxon_dashboards/static/taxon_dashboards/js/build.js
 
+# Build plot dashboard js
+node web/static/js/libs/r.js -o apps/plot_dashboard/static/plot_dashboard/js/build.js
+
 # Build homepage js
 node web/static/js/libs/r.js -o web/static/js/build_homepage.js
 

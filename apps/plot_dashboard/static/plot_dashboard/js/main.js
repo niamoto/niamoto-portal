@@ -12,17 +12,13 @@ require([
 ], function($, rest_urls, d3_map, d3_families_donut, d3_diameters) {
 
     var loaded_elements = [];
-    var nb_elements_to_load = 1;
 
-    function hidePreloader(element) {
-        if (loaded_elements.indexOf(element) != -1) {
-            return
-        } else {
-            loaded_elements.push(element)
-            if (loaded_elements.length == nb_elements_to_load) {
-                document.getElementById('preloader').style.display = 'none';
-            }
-        }
+    function showPreloader() {
+        document.getElementById('preloader').style.display = 'inline';
+    }
+
+    function hidePreloader() {
+        document.getElementById('preloader').style.display = 'none';
     };
 
     function buildPlotList() {
@@ -36,11 +32,17 @@ require([
             url: rest_urls.plot_list,
             success: function(result) {
                 plots = result.features.reduce(function(map, obj) {
+                    if (obj.properties.name == "Parcelles 1ha (AMAP) - Calcaires de Koumac") {
+                        return map;
+                    }
                     map[obj.id] = obj;
                     return map;
                 }, {});
                 var select = document.getElementById("plot_select");
                 result.features.map(function(x) {
+                    if (x.properties.name == "Parcelles 1ha (AMAP) - Calcaires de Koumac") {
+                        return;
+                    }
                     var option = document.createElement('option');
                     option.text = x.properties.name;
                     option.value = x.id;
@@ -51,6 +53,7 @@ require([
                 });
                 $('#plot_select').selectpicker('val', null);
                 $('#plot_select').change(function () {
+                    showPreloader();
                     updateData(plots[this.value]);
                 })
             }
@@ -72,6 +75,7 @@ require([
                 $('#nb_occurrences').html(
                     "<b>Nombre de tiges</b>: " + result['nb_occurrences']
                 );
+                hidePreloader();
             }
         });
     };
@@ -79,7 +83,7 @@ require([
 
     $(document).ready(function() {
         $('#preloader').on('elementLoaded', function (event, data) {
-            hidePreloader(data);
+            hidePreloader();
         })
         buildPlotList();
         d3_map.initMap();

@@ -51,7 +51,7 @@
                 <div id="top_species_container" class="col-xs-12 col-md-6 viz_container">
                     <div class="panel panel-default">
                         <div class="panel-heading"><strong>Espèces dominantes</strong></div>
-                        <div id="top_species"></div>
+                        <div id="top_species">Bientôt disponible!</div>
                     </div>
                 </div>
                 <div id="diameters_histogram_container" class="col-xs-12 col-md-6 viz_container">
@@ -67,6 +67,6 @@
 
 {% block scripts %}
     {{ block.super }}
-    <script src="{% static 'plot_dashboard/js/main.js' %}"></script>
-{#    <script src="{% static 'taxon_dashboards/js/main.min.js' %}"></script>#}
+{#    <script src="{% static 'plot_dashboard/js/main.js' %}"></script>#}
+    <script src="{% static 'plot_dashboard/js/main.min.js' %}"></script>
 {% endblock %}

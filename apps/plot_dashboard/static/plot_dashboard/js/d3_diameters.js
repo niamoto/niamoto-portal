@@ -9,9 +9,9 @@ define([
         var width = $("#diameters_histogram").width();
         var margin = {
             top: height * 0.08,
-            right: width * 0.05,
-            bottom: height * 0.1,
-            left: width * 0.1
+            right: width * 0.07,
+            bottom: height * 0.19,
+            left: width * 0.10
         };
         var mheight = height - margin.top - margin.bottom;
         var mwidth = width - margin.left - margin.right;
@@ -35,6 +35,7 @@ define([
         var x_domain = [0, 100];
         var y_domain = [0, 1000];
 
+        // x and y axis
         x_axis.call(
             d3.axisBottom(
                 d3.scaleLinear()
@@ -49,6 +50,23 @@ define([
                     .domain(y_domain)
             ).ticks(5)
         );
+
+        // x axis label
+        svg.append("text")
+            .attr("transform", "translate("
+                + (width / 2) + " ,"
+                + (height - 15) + ")")
+            .style("text-anchor", "middle")
+            .text("dbh (cm)");
+
+        // y axis label
+        svg.append("text")
+            .attr("transform", "rotate(-90)")
+            .attr("y", margin.left - 55)
+            .attr("x",0 - (height / 2))
+            .attr("dy", "1em")
+            .style("text-anchor", "middle")
+            .text("Nombre de tiges");
 
         $('#plot_select').on('plotSelected', function (event, data) {
             updateData(data);
@@ -71,7 +89,7 @@ define([
             rects.enter()
                 .append("rect")
                 .attr("x", function (d, i) {
-                    return x(bins[i]) + x(bins[i + 1] - bins[i]);
+                    return x(bins[i]);
                 })
                 .style("fill", "#70af3f")
                 .style("opacity", "0.8")
@@ -80,14 +98,16 @@ define([
                     return "translate(" + 0 + "," + mheight + ")";
                 })
                 .attr("width", function (d, i) {
-                    return x(bins[i + 1] - bins[i]) * 1;
+                    return x(bins[i + 1] - bins[i]);
                 })
                 .attr("height", function (d, i) {
                     return 0;
                 })
                 .on('mouseover', function(d, i) {
                     d3.select(this).style("opacity", "1.0");
-                    var html = "<p>" + parseFloat(d) + "</p>"
+                    var html = "<p><strong>[ " + bins[i + 1] + "cm, "
+                        + bins[i + 2] + "cm [</strong></p><p>"
+                        + parseFloat(d) + "</p>";
                     tooltip.transition()
                         .duration(300)
                         .style("opacity", .9);
@@ -118,7 +138,7 @@ define([
             rects.transition()
                 .duration(500)
                 .attr("x", function (d, i) {
-                    return x(bins[i]) + x(bins[i + 1] - bins[i]);
+                    return x(bins[i]);
                 })
                 .attr("transform", function(d) {
                     return "translate(" + 0 + "," + y(d) + ")";
