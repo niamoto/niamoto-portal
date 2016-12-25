@@ -7,7 +7,7 @@ require([
     'jquery.treeview',
     'd3-array',
     'd3-geo',
-    'd3-geo-projection',f
+    'd3-geo-projection'
 ], function($, taxonomy, d3, topojson, static_urls) {
 
     var preloader_count = 0;
@@ -337,48 +337,7 @@ require([
             var node = $('#taxon_treeview').treeview('getSelected')[0];
             $("#tax_rank_value").text(rank_map[node['rank']]);
             $("#tax_occ_nb_value").text(data['nb_occurrences']);
-            document.getElementById("detailed_dashboards_link").href = node['id'];
             var nb_total_occurrences = data['total_nb_occurrences'];
-
-            var selection = svg.selectAll("#prop_text")
-                .data([data['nb_occurrences']]);
-
-            selection.enter()
-                .append("text")
-                .style("text-anchor", "middle")
-                .attr("id", "prop_text")
-                .attr("x", width / 2)
-                .attr("y", height / 2)
-                .transition()
-                .duration(1000)
-                .attrTween("text", function(d) {
-                    var i = d3.interpolate(previous_value, d);
-                    previous_value = d;
-                    return function(t) {
-                        d3.select("#prop_text").text(
-                            " Représente "
-                            + formatPercent(i(t) / nb_total_occurrences)
-                            + " de toutes les occurrences."
-                        );
-                    };
-                });;
-
-            selection.attr("x", width / 2)
-                .attr("y", height / 2)
-                .style("text-anchor", "middle")
-                .transition()
-                .duration(1000)
-                .attrTween("text", function(d) {
-                    var i = d3.interpolate(previous_value, d);
-                    previous_value = d;
-                    return function(t) {
-                        d3.select("#prop_text").text(
-                            " Représente "
-                            + formatPercent(i(t) / nb_total_occurrences)
-                            + " de toutes les occurrences."
-                        );
-                    };
-                });
         }
     };
 

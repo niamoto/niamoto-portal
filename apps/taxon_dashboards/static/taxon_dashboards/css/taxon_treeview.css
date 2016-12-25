@@ -10,18 +10,6 @@
     z-index: 10;
 }
 
-h5 {
-    text-align: center;
-}
-
-#general_informations_container h5 {
-    text-align: left;
-}
-
-#detailed_dashboards {
-    margin-top: 20px;
-}
-
 .d3_panel {
     height: 100%;
     margin: 0;
@@ -30,7 +18,6 @@ h5 {
 #taxon_treeview {
     margin-top: 20px;
     height: calc(92% - 20px);
-    /*border: rgba(0, 0, 0, 0.55) solid 1px;*/
     overflow: auto;
 }
 
@@ -39,17 +26,7 @@ h5 {
 }
 
 #left_panel {
-    height: 70vh;
-}
-
-#right_panel {
-    height: 70vh;
-    position:relative;
-    overflow: auto;
-}
-
-#taxon_d3_viz {
-    height: 90%;
+    height: 100vh;
 }
 
 .modal, .modal-backdrop {
@@ -66,40 +43,6 @@ h5 {
 
 #selected_taxon_name {
     margin: 0;
-}
-
-#taxon_abstract {
-    height: 7%;
-}
-
-.full_height {
-    height: 100%;
-}
-
-#general_informations_container {
-    height: 25%;
-    padding: 0;
-    margin: 0;
-    min-height: 135px;
-}
-
-#taxon_proportions_container {
-    height: 75%;
-    padding: 0;
-    margin: 0;
-}
-
-#map_container {
-    height: 75%;
-    padding: 0;
-    margin: 0;
-}
-
-#map_label {
-}
-
-#pie_label {
-
 }
 
 #taxon_proportions_widget {
@@ -138,4 +81,18 @@ path.slice{
 
 #prop_text {
     font-size: 18px;
+}
+
+#first_row { height: 50px; }
+#second_row { height: 300px; }
+#third_row { height: 350px; }
+
+.viz_container {
+    height: 100%;
+    padding: 5px 5px 5px 5px;
+}
+
+.panel {
+    height: 100%;
+    margin-bottom: 0;
 }

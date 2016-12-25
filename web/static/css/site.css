@@ -54,13 +54,6 @@ body {
   background-color: #5a8768;
   border: none;
 }
-.navbar-default .navbar-brand {
-  color: #e6fbe6;
-}
-.navbar-default .navbar-brand:hover,
-.navbar-default .navbar-brand:focus {
-  color: #ffffff;
-}
 .navbar-default .navbar-text {
   color: #e6fbe6;
 }
@@ -556,12 +549,25 @@ footer {
     font-size: 16px;
 }
 
-.navbar-brand {
-    margin: 0 20px 0 10px;
+.navbar-default .navbar-brand {
+    margin: 0 0 0 0px;
+    color: rgb(229, 237, 179);
     font-size: 24px;
+    text-align: left;
 }
+
+.float_none {
+    float: none;
+}
+
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus {
+  color: #DFE19D;
+}
+
 
 /* Fix for bootstrap modal-open causing unwanted padding */
 .modal-open {
   padding-right: 0 !important;
+  overflow: auto !important;
 }
