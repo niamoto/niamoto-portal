@@ -45,7 +45,7 @@ define([
             .attr("class", "tooltip")
             .style("opacity", 0);
 
-        $('#plot_treeview').on('plotSelected', function (event, data) {
+        $('#plot_select').on('plotSelected', function (event, data) {
             updateData(data);
         });
 

@@ -4,48 +4,61 @@
 
 {% block styles %}
     {{ block.super }}
-    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap-treeview.min.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap-select.min.css' %}"/>
     <link rel="stylesheet" type="text/css" href="{% static 'plot_dashboard/css/plot_dashboard.css' %}"/>
 {% endblock %}
 
 {% block body %}
     <img id="preloader" src="{% static 'img/preloader.svg' %}">
     <h3 class="page-header">Tableaux de bord des parcelles</h3>
-    <div id="dashboard_row" class="row">
-        <div id="left_panel" class="col-xs-4 col-md-4 fill_parent_height">
-            <div class="row">
-                <div class="col-xs-12 col-md-12"><input class="form-control" id="input-search" placeholder="Rechercher une parcelle..." value="" type="input"></div>
-            </div>
-            <div id="plot_treeview"></div>
-        </div>
-        <div class="col-xs-8 col-md-8 fill_parent_height"  id="right_panel">
+    <div class="row">
+        <div class="col-xs-12 col-md-12 fill_parent_height"  id="right_panel">
             {# First row #}
-            <div id="first_row" class="d3_viz panel">
-                <div id="plot_informations">
-                    <h3 id="selected_plot_name"></h3>
-                    <p id="plot_elevation"></p>
-                    <p id="nb_occurrences"></p>
+            <div id="first_row" class="row">
+                <div class="col-xs-4 col-md-4 valign" style="height: 80%;">
+                    <select id="plot_select"></select>
                 </div>
-                <div id="plot_location">
-                    <div id="map_widget" class="d3_panel"></div>
+                <div id="plot_name" class="col-xs-7 col-md-7 valign">
+                    <h4 id="selected_plot_name"></h4>
                 </div>
             </div>
             {# Second row #}
-            <div id="second_row" class="d3_viz panel">
-                <div id="families_donut_container">
-                    <div id="families_donut"></div>
-                    <span><h5><strong>Familles dominantes</strong></h5></span>
+            <div id="second_row" class="row">
+                <div id="plot_location" class="col-xs-12 col-sm-6 col-md-4 viz_container">
+                    <div class="panel panel-default">
+                        <div class="panel-heading"><strong>Localisation de la parcelle</strong></div>
+                        <div id="map_widget" class="d3_panel"></div>
+                    </div>
                 </div>
-                <div id="top_species_container">
-                    <div id="top_species"></div>
-                    <span><h5><strong>Espèces dominantes</strong></h5></span>
+                <div id="families_donut_container" class="col-xs-12 col-sm-6 col-md-4 viz_container">
+                    <div class="panel panel-default">
+                        <div class="panel-heading"><strong>Familles dominantes</strong></div>
+                        <div id="families_donut"></div>
+                    </div>
+                </div>
+                <div id="plot_parameters" class="col-xs-12 col-sm-6 col-md-4 viz_container">
+                    <div class="panel panel-default">
+                        <div class="panel-heading"><strong>Informations générales</strong></div>
+                        <div id="general_informations" class="panel-body">
+                            <p id="plot_elevation"></p>
+                            <p id="nb_occurrences"></p>
+                        </div>
+                    </div>
                 </div>
             </div>
             {# Third row #}
-            <div id="third_row" class="d3_viz panel">
-                <div id="diameters_histogram_container">
-                    <div id="diameters_histogram"></div>
-                    <span><h5><strong>Structure diamétrique</strong></h5></span>
+            <div id="third_row" class="row">
+                <div id="top_species_container" class="col-xs-12 col-md-6 viz_container">
+                    <div class="panel panel-default">
+                        <div class="panel-heading"><strong>Espèces dominantes</strong></div>
+                        <div id="top_species"></div>
+                    </div>
+                </div>
+                <div id="diameters_histogram_container" class="col-xs-12 col-md-6 viz_container">
+                    <div class="panel panel-default">
+                        <div class="panel-heading"><strong>Structure diamétrique</strong></div>
+                        <div id="diameters_histogram"></div>
+                    </div>
                 </div>
             </div>
         </div>

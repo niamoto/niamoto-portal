@@ -8,7 +8,7 @@ require([
     'd3_map',
     'd3_families_donut',
     'd3_diameters',
-    'jquery.treeview'
+    'jquery.select'
 ], function($, rest_urls, d3_map, d3_families_donut, d3_diameters) {
 
     var loaded_elements = [];
@@ -25,28 +25,8 @@ require([
         }
     };
 
-    function initSearch() {
-        $('#input-search').val("");
-        $('#input-search').change(function () {
-            var pattern = $('#input-search').val();
-            var matching = $('#').treeview('search', pattern, {
-                ignoreCase: true,
-                exactMatch: false,
-                revealResults: true
-            });
-            if (matching.length == 0) {
-                return
-            }
-            var first_element = $("[data-nodeid='" + matching[0]['nodeId'] + "']");
-            var m_tree_top = $('#plot_treeview').offset().top;
-            var m_tree_scrolltop = $('#plot_treeview').scrollTop();
-            var scroll_top = first_element.offset().top - m_tree_top + m_tree_scrolltop;
-            $('#plot_treeview').animate({scrollTop: scroll_top}, 200);
-        });
-    };
-
-
     function buildPlotList() {
+        var plots = {};
         $.ajax({
             type: 'GET',
             data: {
@@ -55,16 +35,24 @@ require([
             },
             url: rest_urls.plot_list,
             success: function(result) {
-                $('#plot_treeview').treeview({
-                    data: result.features.map(function(x) {
-                        x['text'] = x.properties.name;
-                        x['icon'] = 'fa fa-square';
-                        return x;
-                    }),
-                    onNodeSelected: function (event, node) {
-                        updateData(node);
-                    }
+                plots = result.features.reduce(function(map, obj) {
+                    map[obj.id] = obj;
+                    return map;
+                }, {});
+                var select = document.getElementById("plot_select");
+                result.features.map(function(x) {
+                    var option = document.createElement('option');
+                    option.text = x.properties.name;
+                    option.value = x.id;
+                    select.add(option);
                 });
+                $('#plot_select').selectpicker({
+                    noneSelectedText: "Selectionnez une parcelle"
+                });
+                $('#plot_select').selectpicker('val', null);
+                $('#plot_select').change(function () {
+                    updateData(plots[this.value]);
+                })
             }
         });
     };
@@ -75,9 +63,9 @@ require([
             type: 'GET',
             url: rest_urls.plot_dashboard + node['id'] + "/",
             success: function(result) {
-                $('#plot_treeview').trigger('plotSelected', result);
+                $('#plot_select').trigger('plotSelected', result);
                 // Update plot general informations
-                $('#selected_plot_name').html(node['text']);
+                $('#selected_plot_name').html(node['properties']['name']);
                 $('#plot_elevation').html(
                     "<b>Altitude</b>: "  + node['properties']['elevation'] + " m"
                 );
@@ -94,7 +82,6 @@ require([
             hidePreloader(data);
         })
         buildPlotList();
-        initSearch();
         d3_map.initMap();
         d3_families_donut.initFamiliesDonut();
         d3_diameters.initDiametersHistogram();

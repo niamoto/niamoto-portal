@@ -1,12 +1,21 @@
 #body-container {
-    display: flex;
-    flex-direction: column;
 }
 
-#dashboard_row {
-    flex-grow: 1;
-    width: 98%;
-    margin: 30px 1% 20px 1%;
+h4 {
+    margin-top: 0px;
+    font-size: 20px;
+}
+
+.input-group-addon, .input-group-btn {
+    width: 0;
+}
+
+#plot_select {
+    display: none;
+}
+
+.bootstrap-select {
+    width: 100% !important;
 }
 
 #preloader {
@@ -16,73 +25,57 @@
     z-index: 10;
 }
 
-#plot_treeview {
-    margin-top: 20px;
-    height: calc(92% - 20px);
-    /*border: rgba(0, 0, 0, 0.55) solid 1px;*/
-    overflow: auto;
-}
-
 .list-group {
     margin: 0;
 }
 
-#left_panel {
-    flex-grow: 1;
-}
+#first_row { height: 50px; }
+#second_row { height: 300px; }
+#third_row { height: 300px; }
 
-#right_panel {
-    flex-grow: 1;
+.viz_container {
     height: 100%;
-    position:relative;
-    overflow: auto;
-    display: flex;
-    flex-direction: column;
+    padding: 5px 5px 5px 5px;
 }
 
-.d3_viz {
-    display: flex;
-    width: 100%;
+.panel {
+    height: 100%;
+    margin-bottom: 0;
 }
 
-#first_row { height: 20%; }
-#second_row { height: 35%; }
-#third_row { height: 40%; }
+#plot_abstract_container {
+    height: 100%;
+}
+
+.valign {
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
+}
+
+#plot_parameters {
+    padding-bottom: 8px;
+    margin-right: -6px;
+}
+
+#plot_parameters span {
+    padding-right: 20px;
+}
 
 #plot_location {
     height: 100%;
-    padding: 0;
-    margin: 0 0 0 auto;
-    width: 40%;
 }
 
 #map_widget {
-    height: 100%;
-}
-
-#families_donut_container {
-    width: 30%;
-    height: 100%;
+    height: 90%;
 }
 
 #families_donut {
     height: 90%;
-    width: 100%;
-}
-
-#top_species_container {
-    width: 70%;
-    height: 100%;
 }
 
 #top_species {
     height: 90%;
-    width: 100%;
-}
-
-#diameters_histogram_container {
-    width: 100%;
-    height: 100%;
 }
 
 #diameters_histogram {
@@ -123,7 +116,6 @@ path.slice{
     pointer-events: none;
 }
 
-span, span h5 {
-    text-align: center;
-    margin: 0;
+.panel-heading {
+    padding: 5px 15px;
 }

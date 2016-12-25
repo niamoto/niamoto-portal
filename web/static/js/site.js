@@ -45,7 +45,6 @@ $(function() {
                 10
             );
             var min_height = (parent_height > parent_min_height) ? parent_min_height : parent_height;
-            console.log("ph: " + parent_height + "pmh: " + parent_min_height + "mh: " + min_height);
             $(obj).css("min-height", min_height + "px");
         });
     }

@@ -43,12 +43,16 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="{% url "home" %}">{{ SITE_NAME }}</a>
+                    {% block sitename %}
+                        <a class="navbar-brand navbar-brand-home" href="{% url "home" %}">{{ SITE_NAME }}</a>
+                    {% endblock %}
+                    {% block siteabout %}
                     <ul class="nav navbar-nav">
                         <li><a href="{% url 'about' %}">Niamoto c'est quoi?</a></li>
                         <li><a href="{% url 'team'  %}">L'équipe</a></li>
                         <li><a href="{% url 'contact' %}">Contact</a></li>
                     </ul>
+                    {% endblock %}
                 </div>
                 <!-- /.navbar-header -->
 
@@ -58,6 +62,8 @@
                     {% endblock %}
                 </ul>
                 <!-- /.navbar-top-links -->
+                {% block sidebar %}
+                {% endblock %}
             {% endblock %}
 
             </nav>

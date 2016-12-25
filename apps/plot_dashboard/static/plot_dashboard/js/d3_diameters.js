@@ -8,7 +8,7 @@ define([
         var height = $("#diameters_histogram").height();
         var width = $("#diameters_histogram").width();
         var margin = {
-            top: height * 0.15,
+            top: height * 0.08,
             right: width * 0.05,
             bottom: height * 0.1,
             left: width * 0.1
@@ -50,7 +50,7 @@ define([
             ).ticks(5)
         );
 
-        $('#plot_treeview').on('plotSelected', function (event, data) {
+        $('#plot_select').on('plotSelected', function (event, data) {
             updateData(data);
         });
 

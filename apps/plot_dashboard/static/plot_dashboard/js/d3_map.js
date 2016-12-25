@@ -93,7 +93,7 @@ define([
             $('#preloader').trigger('elementLoaded', 'map');
         });
 
-        $('#plot_treeview').on('plotSelected', function (event, data) {
+        $('#plot_select').on('plotSelected', function (event, data) {
             updateOccurrences(data['plot']);
         });
     };
