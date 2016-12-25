@@ -4,9 +4,9 @@
     padding: 0;
     background-image:url("/static/img/bokeh_effect_3.jpg");
     background-size: cover;
-    box-shadow: 0 -65px 30px -30px white inset;
-    -moz-box-shadow: 0 -65px 30px -30px white inset;
-    -webkit-box-shadow: 0 -65px 30px -30px white inset;
+    box-shadow: 0 -65px 30px -30px #f3f1f1 inset;
+    -moz-box-shadow: 0 -65px 30px -30px #f3f1f1 inset;
+    -webkit-box-shadow: 0 -65px 30px -30px #f3f1f1 inset;
 }
 
 #splash-content {
@@ -55,7 +55,7 @@
 }
 
 #logos {
-    background-color: white;
+    background-color: #f3f1f1;
     position: relative;
     padding: 10px 0 20px 0;
 }

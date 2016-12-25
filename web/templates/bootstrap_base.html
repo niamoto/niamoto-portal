@@ -44,7 +44,7 @@
                         <span class="icon-bar"></span>
                     </button>
                     {% block sitename %}
-                        <a class="navbar-brand navbar-brand-home" href="{% url "home" %}">{{ SITE_NAME }}</a>
+                        <a class="navbar-brand" href="{% url "home" %}">{{ SITE_NAME }}</a>
                     {% endblock %}
                     {% block siteabout %}
                     <ul class="nav navbar-nav">
@@ -92,7 +92,7 @@
 
         {% block footer_base %}
             <div id="pre-footer">{% block prefooter %}{% endblock %}</div>
-            <div style="background-color: white;"><hr id="footer-hr"/></div>
+            <div style="background-color: #f3f1f1;"><hr id="footer-hr"/></div>
             <footer id="site-footer">
                 <div class="container-fluid footer-container">
                     {% block footer %}{% endblock %}
