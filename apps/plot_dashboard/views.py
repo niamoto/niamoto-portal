@@ -6,6 +6,7 @@ from django.utils.decorators import method_decorator
 from django.views.generic import TemplateView
 from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
+import pandas as pd
 
 from apps.niamoto_data.models import Plot
 from apps.niamoto_data.serializers import PlotSerializer
@@ -30,6 +31,8 @@ class PlotDashboardViewSet(ViewSet):
         plot = Plot.objects.get(pk=pk)
         plot_data = PlotSerializer(plot).data
         dataset = a.get_occurrences_by_plot(pk)
+        dataset = dataset[dataset['dbh'] >= 10]
+        dataset = dataset[pd.notnull(dataset['dbh'])]
         families_dist, total_identified = a.get_families_distribution(
                 dataset,
                 limit=10,
