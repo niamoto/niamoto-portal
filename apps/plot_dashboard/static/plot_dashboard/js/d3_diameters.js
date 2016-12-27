@@ -105,8 +105,8 @@ define([
                 })
                 .on('mouseover', function(d, i) {
                     d3.select(this).style("opacity", "1.0");
-                    var html = "<p><strong>[ " + bins[i + 1] + "cm, "
-                        + bins[i + 2] + "cm [</strong></p><p>"
+                    var html = "<p><strong>[ " + bins[i] + "cm, "
+                        + bins[i + 1] + "cm [</strong></p><p>"
                         + parseFloat(d) + "</p>";
                     tooltip.transition()
                         .duration(300)
