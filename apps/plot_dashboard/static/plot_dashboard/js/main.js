@@ -73,7 +73,7 @@ require([
                     "<b>Altitude</b>: "  + node['properties']['elevation'] + " m"
                 );
                 $('#nb_occurrences').html(
-                    "<b>Nombre de tiges</b>: " + result['nb_occurrences']
+                    "<b>Nombre d'individus</b>: " + result['nb_occurrences']
                 );
                 hidePreloader();
             }

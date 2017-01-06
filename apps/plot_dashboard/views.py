@@ -31,6 +31,8 @@ class PlotDashboardViewSet(ViewSet):
         plot = Plot.objects.get(pk=pk)
         plot_data = PlotSerializer(plot).data
         dataset = a.get_occurrences_by_plot(pk)
+        dataset = dataset.replace('Sénescent', 'Vivant')
+        dataset = dataset[dataset['status'] == 'Vivant']
         dataset = dataset[dataset['dbh'] >= 10]
         dataset = dataset[pd.notnull(dataset['dbh'])]
         families_dist, total_identified = a.get_families_distribution(
