@@ -10,13 +10,13 @@ define([
 
     var total = 0;
 
-    function initFamiliesDonut() {
+    function initSpeciesDonut() {
 
-        var height = $("#families_donut").height();
-        var width = $("#families_donut").width();
+        var height = $("#species_donut").height();
+        var width = $("#species_donut").width();
         var radius = Math.min(width, height) / 2;
 
-        var svg = d3.select("#families_donut").append("svg")
+        var svg = d3.select("#species_donut").append("svg")
             .attr("width", width)
             .attr("height", height)
             .append("g");
@@ -50,9 +50,8 @@ define([
         });
 
         function updateData(plot_data) {
-            var data = plot_data['families_distribution'];
-            total = plot_data['nb_occurrences_identified'];
-
+            var data = plot_data['species_distribution'];
+            total = plot_data['nb_occurrences_identified_specie'];
             /* ------- PIE SLICES -------*/
 
             var slice = svg.select(".slices")
@@ -136,6 +135,6 @@ define([
     };
 
     return {
-        initFamiliesDonut: initFamiliesDonut
+        initSpeciesDonut: initSpeciesDonut
     }
 });

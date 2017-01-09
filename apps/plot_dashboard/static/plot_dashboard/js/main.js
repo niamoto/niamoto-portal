@@ -7,9 +7,10 @@ require([
     'rest_urls',
     'd3_map',
     'd3_families_donut',
+    'd3_species_donut',
     'd3_diameters',
     'jquery.select'
-], function($, rest_urls, d3_map, d3_families_donut, d3_diameters) {
+], function($, rest_urls, d3_map, d3_families_donut, d3_species_donut, d3_diameters) {
 
     var loaded_elements = [];
 
@@ -88,6 +89,7 @@ require([
         buildPlotList();
         d3_map.initMap();
         d3_families_donut.initFamiliesDonut();
+        d3_species_donut.initSpeciesDonut();
         d3_diameters.initDiametersHistogram();
     });
 });

@@ -54,8 +54,7 @@ h4 {
 }
 
 #plot_parameters {
-    padding-bottom: 8px;
-    margin-right: -6px;
+
 }
 
 #plot_parameters span {
@@ -74,11 +73,9 @@ h4 {
     height: 90%;
 }
 
-#top_species {
+#species_donut {
     height: 90%;
-    text-align: center;
-    padding-top: 100px;
-    font-size: 20px;
+    width: 100%;
 }
 
 #diameters_histogram {

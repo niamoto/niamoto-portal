@@ -70,7 +70,16 @@ def get_families_distribution(dataframe, limit=None):
     df['proportion'] = df['nb_occurrences'].groupby(level=0).apply(
         lambda x: x/total
     )
-    return (df, total) if limit is None else (df.head(limit), total)
+    if limit is None or limit > len(df):
+        return df, total
+    to_return = df.head(limit)
+    others = df.tail(len(df) - limit).sum()
+    others['family_full_name'] = "Autres"
+    to_return = to_return.append(
+        others,
+        ignore_index=True
+    )
+    return to_return, total
 
 
 def get_species_distribution(dataframe, limit=None):
@@ -80,10 +89,20 @@ def get_species_distribution(dataframe, limit=None):
         'occ_id': 'count'
     }).sort_values(by='occ_id', ascending=False)
     df.rename(columns={'occ_id': 'nb_occurrences'}, inplace=True)
+    total = df['nb_occurrences'].sum()
     df['proportion'] = df['nb_occurrences'].groupby(level=0).apply(
-        lambda x: x/df['nb_occurrences'].sum()
+        lambda x: x / total
     )
-    return df if limit is None else df.head(limit)
+    if limit is None or limit > len(df):
+        return df, total
+    to_return = df.head(limit)
+    others = df.tail(len(df) - limit).sum()
+    others['taxon_full_name'] = "Autres"
+    to_return = to_return.append(
+        others,
+        ignore_index=True
+    )
+    return to_return, total
 
 
 def get_dbh_classification(dataframe, bin_size=10):

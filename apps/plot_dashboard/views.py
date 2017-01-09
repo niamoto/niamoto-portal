@@ -37,19 +37,24 @@ class PlotDashboardViewSet(ViewSet):
         dataset = dataset[pd.notnull(dataset['dbh'])]
         families_dist, total_identified = a.get_families_distribution(
                 dataset,
-                limit=10,
+                limit=9,
+        )
+        species_dist, total_identified_specie = a.get_species_distribution(
+            dataset,
+            limit=9,
         )
         response = {
             "plot": plot_data,
             "nb_occurrences": len(dataset),
             "nb_occurrences_identified": total_identified,
+            "nb_occurrences_identified_specie": total_identified_specie,
             "families_distribution": zip(
                 families_dist['family_full_name'],
                 families_dist['nb_occurrences']
             ),
-            "species_distribution": a.get_species_distribution(
-                dataset,
-                limit=10,
+            "species_distribution": zip(
+                species_dist['taxon_full_name'],
+                species_dist['nb_occurrences']
             ),
             "dbh_classification": a.get_dbh_classification(
                 dataset,
