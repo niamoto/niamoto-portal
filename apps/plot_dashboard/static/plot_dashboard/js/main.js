@@ -12,7 +12,19 @@ require([
     'jquery.select'
 ], function($, rest_urls, d3_map, d3_families_donut, d3_species_donut, d3_diameters) {
 
-    var loaded_elements = [];
+    function initModal() {
+        $('#modal').on('shown.bs.modal', function() {
+            $(document).off('focusin.modal');
+        });
+        $('#modal').modal({
+            backdrop: 'static',
+            keyboard: false
+        });
+        $('.modal-backdrop').appendTo('#right_panel');
+        $('#plot_select').on('plotSelected', function (event, data) {
+            $('#modal').modal('hide');
+        });
+    };
 
     function showPreloader() {
         document.getElementById('preloader').style.display = 'inline';
@@ -91,5 +103,6 @@ require([
         d3_families_donut.initFamiliesDonut();
         d3_species_donut.initSpeciesDonut();
         d3_diameters.initDiametersHistogram();
+        initModal();
     });
 });
