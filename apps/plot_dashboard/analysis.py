@@ -32,6 +32,11 @@ def get_occurrences_by_plot(plot_id=None):
                taxon.full_name AS taxon_full_name,
                family.id AS family_id,
                family.full_name AS family_full_name,
+               specie_parent.id AS specie_parent_id,
+               specie_parent.full_name AS specie_parent_full_name,
+               specie_parent.rank AS specie_parent_rank,
+               genus_parent.id AS genus_parent_id,
+               genus_parent.full_name AS genus_parent_full_name,
                observations.height AS height,
                observations.stem_nb AS stem_nb,
                observations.dbh AS dbh,
@@ -43,6 +48,16 @@ def get_occurrences_by_plot(plot_id=None):
         INNER JOIN niamoto_data_occurrence AS occurrence ON occurrence_id = occurrence.id
         LEFT JOIN niamoto_data_occurrenceobservations AS observations ON occurrence.id = observations.occurrence_id
         LEFT JOIN niamoto_data_taxon AS taxon ON occurrence.taxon_id = taxon.id
+        /* SPECIE */
+        LEFT JOIN niamoto_data_taxon AS specie_parent ON specie_parent.tree_id = taxon.tree_id
+          AND specie_parent.lft <= taxon.lft
+          AND specie_parent.rght >= taxon.rght
+          AND specie_parent.rank = 'SPECIE'
+        /* GENUS */
+        LEFT JOIN niamoto_data_taxon AS genus_parent ON genus_parent.tree_id = taxon.tree_id
+          AND genus_parent.lft <= taxon.lft
+          AND genus_parent.rght >= taxon.rght
+          AND genus_parent.rank = 'GENUS'
         LEFT JOIN (
             SELECT id, full_name, tree_id
             FROM niamoto_data_taxon
@@ -117,3 +132,13 @@ def get_dbh_classification(dataframe, bin_size=10):
     return bins, dbh_class.value_counts(sort=False)
 
 
+def get_richness(dataframe):
+    df = dataframe[pd.notnull(dataframe['taxon_id'])]
+    f = df[pd.notnull(df['family_id'])]['family_id'].unique()
+    g = df[pd.notnull(df['genus_parent_id'])]['genus_parent_id'].unique()
+    s = df[pd.notnull(df['specie_parent_id'])]['specie_parent_id'].unique()
+    return {
+        'nb_families': len(f),
+        'nb_species': len(s),
+        'nb_genus': len(g),
+    }

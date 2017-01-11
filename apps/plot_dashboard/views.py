@@ -33,8 +33,11 @@ class PlotDashboardViewSet(ViewSet):
         dataset = a.get_occurrences_by_plot(pk)
         dataset = dataset.replace('Sénescent', 'Vivant')
         dataset = dataset[dataset['status'] == 'Vivant']
+        #  Already done in the sql request but I'm keeping it, for fun
         dataset = dataset[dataset['dbh'] >= 10]
+        #  Not very fun, ok...
         dataset = dataset[pd.notnull(dataset['dbh'])]
+
         families_dist, total_identified = a.get_families_distribution(
                 dataset,
                 limit=9,
@@ -43,6 +46,7 @@ class PlotDashboardViewSet(ViewSet):
             dataset,
             limit=9,
         )
+        richness = a.get_richness(dataset)
         response = {
             "plot": plot_data,
             "nb_occurrences": len(dataset),
@@ -59,7 +63,8 @@ class PlotDashboardViewSet(ViewSet):
             "dbh_classification": a.get_dbh_classification(
                 dataset,
                 bin_size=5,
-            )
+            ),
+            "richness": richness,
         }
         return Response(response)
 

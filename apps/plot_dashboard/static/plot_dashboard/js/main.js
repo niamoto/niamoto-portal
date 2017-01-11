@@ -88,6 +88,15 @@ require([
                 $('#nb_occurrences').html(
                     "<b>Nombre d'individus</b>: " + result['nb_occurrences']
                 );
+                $('#nb_species').html(
+                    "<b>Richesse spécifique</b>: " + result['richness']['nb_species']
+                );
+                $('#nb_families').html(
+                    "<b>Nombre de familles</b>: " + result['richness']['nb_families']
+                );
+                $('#nb_genus').html(
+                    "<b>ombre de genres</b>: " + result['richness']['nb_genus']
+                );
                 hidePreloader();
             }
         });
