@@ -45,9 +45,6 @@ require([
             url: rest_urls.plot_list,
             success: function(result) {
                 plots = result.features.reduce(function(map, obj) {
-                    if (obj.properties.name == "Parcelles 1ha (AMAP) - Calcaires de Koumac") {
-                        return map;
-                    }
                     map[obj.id] = obj;
                     return map;
                 }, {});
@@ -92,7 +89,7 @@ require([
                     "<b>Nombre de familles</b>: " + result['richness']['nb_families']
                 );
                 $('#nb_genus').html(
-                    "<b>ombre de genres</b>: " + result['richness']['nb_genus']
+                    "<b>Nombre de genres</b>: " + result['richness']['nb_genus']
                 );
                 hidePreloader();
             }
