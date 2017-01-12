@@ -53,9 +53,6 @@ require([
                 }, {});
                 var select = document.getElementById("plot_select");
                 result.features.map(function(x) {
-                    if (x.properties.name == "Parcelles 1ha (AMAP) - Calcaires de Koumac") {
-                        return;
-                    }
                     var option = document.createElement('option');
                     option.text = x.properties.name;
                     option.value = x.id;
