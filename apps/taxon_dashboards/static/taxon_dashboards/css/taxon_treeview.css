@@ -86,6 +86,7 @@ path.slice{
 #first_row { height: 50px; }
 #second_row { height: 300px; }
 #third_row { height: 350px; }
+#fourth_row { height: 250px; }
 
 .viz_container {
     height: 100%;

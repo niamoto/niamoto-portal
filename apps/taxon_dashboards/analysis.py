@@ -2,6 +2,7 @@
 
 from django.db import connection
 import numpy as np
+import pandas as pd
 
 
 def get_occurrences_total_count():
@@ -38,6 +39,7 @@ def get_occurrences_by_taxon(taxon_id=None):
             obs.status,
             obs.wood_density,
             obs.bark_thickness,
+            obs.elevation,
             ST_X(occ.location) as x,
             ST_Y(occ.location) as y
         FROM niamoto_data_occurrence AS occ
@@ -60,7 +62,7 @@ def get_occurrences_by_taxon(taxon_id=None):
                ('height', 'float'), ('stem_nb', 'int'),
                ('dbh', 'float'), ('status', 'U50'),
                ('wood_density', 'float'), ('bark_thickness', 'float'),
-               ('x', 'float'), ('y', 'float')]
+               ('elevation', 'float'), ('x', 'float'), ('y', 'float')]
     )
 
 
@@ -99,3 +101,8 @@ def get_taxon_distribution(dataset):
     tax_col = dataset['tax_full_name']
     unique, counts = np.unique(tax_col, return_counts=True)
     return zip(unique, counts)
+
+
+def get_elevation_range(dataset):
+    df = pd.DataFrame(dataset[['tax_id', 'x', 'y', 'elevation']])
+    return df.groupby(('tax_id', 'x', 'y')).max()
