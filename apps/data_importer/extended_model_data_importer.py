@@ -13,7 +13,7 @@ from .sql_utils import *
 class ExtendedModelDataImporter(BaseDataImporter):
     """
     Extension of the base data importer for cases where the data to import
-    if from an extended model, where a mapping between the niamoto's id and
+    is from an extended model, where a mapping between the niamoto's id and
     the external id is kept.
     """
 

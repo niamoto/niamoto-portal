@@ -88,10 +88,14 @@ class BaseDataImporter:
         return self._delete_dataframe
 
     @transaction.atomic
-    def process_import(self):
-        self._process_insert()
-        self._process_update()
-        self._process_delete()
+    def process_import(self, no_insert=False, no_update=False,
+                       no_delete=False):
+        if not no_insert:
+            self._process_insert()
+        if not no_update:
+            self._process_update()
+        if not no_delete:
+            self._process_delete()
         self._invalidate_cache()
 
     @transaction.atomic

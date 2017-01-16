@@ -7,30 +7,52 @@ from apps.niamoto_data.models import Occurrence, OccurrenceObservations, Plot
 
 @transaction.atomic
 def set_occurrences_elevation(occurrences_ids=None):
+    occ_id_col = OccurrenceObservations.occurrence.field.get_attname()
     if occurrences_ids is None:
-        in_occs = 'NULL'
+        sql = \
+            """
+                WITH elev AS (
+                    SELECT occ.id AS id,
+                        ST_Value(mnt.rast, occ.location) AS elevation
+                    FROM {occ_table} AS occ
+                    LEFT JOIN {elev_raster_table} AS mnt
+                    ON ST_Intersects(mnt.rast, occ.location)
+                )
+                UPDATE {occ_obs}
+                SET elevation = elev.elevation
+                FROM elev
+                WHERE elev.id = {occ_obs}.{occ_id_col};
+            """.format(**{
+                'occ_table': Occurrence._meta.db_table,
+                'elev_raster_table': 'mnt10_wgs84',
+                'occ_obs': OccurrenceObservations._meta.db_table,
+                'occ_id_col': occ_id_col
+            })
+    elif len(occurrences_ids) == 0:
+        return
     else:
         in_occs = ','.join([str(i) for i in occurrences_ids])
-    sql = \
-    """
-        WITH elev AS (
-            SELECT occ.id AS id,
-                ST_Value(mnt.rast, occ.location) AS elevation
-            FROM {occ_table} AS occ
-            LEFT JOIN {elev_raster_table} AS mnt
-            ON ST_Intersects(mnt.rast, occ.location)
-        )
-        UPDATE {occ_obs}
-        SET elevation = elev.elevation
-        FROM elev
-        WHERE elev.id = {occ_obs}.{occ_id_col};
-    """.format(**{
-        'occ_table': Occurrence._meta.db_table,
-        'elev_raster_table': 'mnt10_wgs84',
-        'occ_ids': in_occs,
-        'occ_obs': OccurrenceObservations._meta.db_table,
-        'occ_id_col': OccurrenceObservations.occurrence.field.get_attname()
-    })
+        sql = \
+            """
+                WITH elev AS (
+                    SELECT occ.id AS id,
+                        ST_Value(mnt.rast, occ.location) AS elevation
+                    FROM {occ_table} AS occ
+                    LEFT JOIN {elev_raster_table} AS mnt
+                    ON ST_Intersects(mnt.rast, occ.location)
+                    WHERE occ.id IN ({in_occs})
+                )
+                UPDATE {occ_obs}
+                SET elevation = elev.elevation
+                FROM elev
+                WHERE elev.id = {occ_obs}.{occ_id_col};
+            """.format(**{
+                'occ_table': Occurrence._meta.db_table,
+                'elev_raster_table': 'mnt10_wgs84',
+                'in_occs': in_occs,
+                'occ_obs': OccurrenceObservations._meta.db_table,
+                'occ_id_col': occ_id_col
+            })
     cur = connection.cursor()
     cur.execute(sql)
 

@@ -62,11 +62,15 @@ def import_occurrence_observations_from_plantnote_db(database):
         .set_index(['occurrence_id'], drop=False) \
         .drop('plantnote_id', 1)
     df.rename(columns={'date_obs': 'last_observation_date'}, inplace=True)
-    di = BaseDataImporter(OccurrenceObservations, df, update_fields=[
-        'last_observation_date', 'height', 'stem_nb', 'dbh',
-        'status', 'wood_density', 'bark_thickness',
-    ])
-    di.process_import()
+    di = BaseDataImporter(
+        OccurrenceObservations,
+        df,
+        update_fields=[
+            'last_observation_date', 'height', 'stem_nb', 'dbh',
+            'status', 'wood_density', 'bark_thickness',
+        ]
+    )
+    di.process_import(no_delete=True)
     # Update elevation for insert and update groups
     set_occurrences_elevation(di.insert_dataframe['occurrence_id'])
     set_occurrences_elevation(di.update_dataframe_new['occurrence_id'])

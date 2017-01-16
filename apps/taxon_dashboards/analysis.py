@@ -104,5 +104,6 @@ def get_taxon_distribution(dataset):
 
 
 def get_elevation_range(dataset):
-    df = pd.DataFrame(dataset[['tax_id', 'x', 'y', 'elevation']])
+    df = pd.DataFrame(dataset[['tax_id', 'occ_id', 'x', 'y', 'elevation']])
+    return df
     return df.groupby(('tax_id', 'x', 'y')).max()

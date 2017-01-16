@@ -6,7 +6,7 @@ import pandas as pd
 from apps.data_importer import ExtendedModelDataImporter
 from apps.niamoto_data.models import Occurrence, OccurrenceObservations, \
     PlotOccurrences
-from ..models import PlantnoteOccurrence
+from apps.niamoto_plantnote.models import PlantnoteOccurrence
 
 
 @transaction.atomic

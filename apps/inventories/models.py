@@ -6,7 +6,8 @@ from django.core.validators import MinValueValidator
 from django.db import transaction
 
 from multiselectfield.db.fields import MultiSelectField
-from apps.niamoto_data.models import Occurrence
+from apps.niamoto_data.models import Occurrence, OccurrenceObservations
+from apps.niamoto_data.elevation_tools import set_occurrences_elevation
 from apps.inventories.models_verbose_names import VERBOSE_NAMES as V
 
 
@@ -54,13 +55,21 @@ class TaxaInventoryManager(models.Manager):
             location_description=location_description,
             comments=comments,
         )
+        elevation_to_set = []
         for taxon in taxa:
-            TaxaInventoryOccurrence.objects.create(
+            occ = TaxaInventoryOccurrence.objects.create(
                 date=inventory_date,
                 taxon_id=taxon['id'],
                 location=location,
                 taxa_inventory=taxa_inventory,
             )
+            OccurrenceObservations.objects.create(
+                occurrence_id=occ.id,
+                status="Vivant",
+                last_observation_date=inventory_date,
+            )
+            elevation_to_set.append(occ.id)
+        set_occurrences_elevation(elevation_to_set)
         return taxa_inventory
 
 
@@ -80,25 +89,37 @@ class TaxaInventory(Inventory):
     @transaction.atomic
     def update_occurrences(self, taxa):
         occurrences = self.occurrences.all()
-        current_taxa = {o.taxon.id: o.id for o in occurrences}
+        current_taxa = {o.taxon.id: o for o in occurrences}
         new_taxa = {t['id']: True for t in taxa}
         to_add = []
         to_delete = []
+        elevation_to_set = []
         for t in taxa:
             if t['id'] not in current_taxa and t['id'] not in to_add:
                 to_add.append(t['id'])
+            if t['id'] in current_taxa:
+                elevation_to_set.append(current_taxa[t['id']].id)
+                current_taxa[t['id']].location = self.location
+                current_taxa[t['id']].save()
         for key, value in current_taxa.items():
-            if key not in new_taxa and value not in to_delete:
-                to_delete.append(value)
+            if key not in new_taxa and value.id not in to_delete:
+                to_delete.append(value.id)
         for o in to_delete:
             TaxaInventoryOccurrence.objects.get(pk=o).delete()
         for t in to_add:
-            TaxaInventoryOccurrence.objects.create(
+            occ = TaxaInventoryOccurrence.objects.create(
                 date=self.inventory_date,
                 taxon_id=t,
                 location=self.location,
                 taxa_inventory_id=self.id
             )
+            OccurrenceObservations.objects.create(
+                occurrence_id=occ.id,
+                status="Vivant",
+                last_observation_date=self.inventory_date,
+            )
+            elevation_to_set.append(occ.id)
+        set_occurrences_elevation(elevation_to_set)
 
 
 class TaxaInventoryOccurrence(Occurrence):
