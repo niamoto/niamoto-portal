@@ -12,7 +12,7 @@
         <div class="col-md-9 col-xs-12">
             <h1>{% trans "Delete Account" %}</h1>
 
-            <p>{% blocktrans %}If you go ahead and delete your account, your information will be <b>expunged within {{ ACCOUNT_DELETION_EXPUNGE_HOURS }} hours</b>.{% endblocktrans %}</p>
+            <p>Si vous continuez et supprimez votre compte, vos informations seront <b>effacées dans {{ ACCOUNT_DELETION_EXPUNGE_HOURS }} heures</b>.</p>
 
             <form method="post" action="{% url "account_delete" %}" autocapitalize="off">
                 {% csrf_token %}
