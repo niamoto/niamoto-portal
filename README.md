@@ -48,7 +48,7 @@ This layer is necessary for displaying the 1:3000 forest fragments in the digiti
 
 This layer is necessary for displaying the digitizing problems in the digitizing web app. It has to be added as a sql view layer from the niamoto:niamoto_db datastore. Here is the sql code of the view:
 
-```
+```sql
 SELECT p.id,
     p.uuid,
     p.location,
@@ -70,7 +70,7 @@ If Geoserver does not detect it automatically, the **location** type to **Point*
 
 This layer is used by the **Niamoto Occurrences** QGIS plugin. It has to be added as a sql view layer from the niamoto:niamoto_db datastore. Here is the sql code of the view:
 
-```
+```sql
 SELECT occ.id,
     occ.date,
     tax.full_name,
@@ -89,25 +89,49 @@ The **id_taxon** parameter need to have **-1** as default value, and ```^[\w\d\s
 If Geoserver does not detect it automatically, the **location** type to **Point** and the **SRID** to **4326**.
 
 
-#### Insert the DEM into the PostGIS database
+#### Insert the DEM raster into the PostGIS database
 
 In order to infer the elevation of occurrences and plots from their geographic location, Niamoto needs a DEM. This DEM has to be stored in the PostGIS database.
 
 1. Open a bash in the **niamoto-postgres** container:
 
-``` 
-$ cd /home/niamoto/niamoto-docker-compose
-$ sudo docker-compose exec niamoto-postgres /bin/bash
+```sh
+cd /home/niamoto/niamoto-docker-compose
+sudo docker-compose exec niamoto-postgres /bin/bash
 ```
 
 2. Generate the sql file using raster2pgsql:
 
-```
-$ raster2pgsql -c -F -n "name" -t 200x200 -I mnt10_wgs84.tif public.mnt10_wgs84 > mnt.sql
+```sh
+raster2pgsql -c -F -n "name" -t 200x200 -I mnt10_wgs84.tif public.mnt10_wgs84 > mnt.sql
 ```
 
 3. Change user to postgres and execute the generated sql file
 
+```sh
+psql -d niamoto -f mnt.sql
 ```
-$ psql -f mnt.sql
+
+
+#### Insert the rainfall raster into the PostGIS database
+
+In order to infer the rainfall values of occurrences and plots from their geographic location, Niamoto needs a rainfall raster. This rainfall raster has to be stored in the PostGIS database.
+
+1. Open a bash in the **niamoto-postgres** container:
+
+```sh
+cd /home/niamoto/niamoto-docker-compose
+sudo docker-compose exec niamoto-postgres /bin/bash
+```
+
+2. Generate the sql file using raster2pgsql:
+
+```sh
+raster2pgsql -c -F -n "name" -t 200x200 -I rainfall_wgs84.tif public.rainfall_wgs84 > rainfall.sql
+```
+
+3. Change user to postgres and execute the generated sql file
+
+```sh
+psql -d niamoto -f rainfall.sql
 ```

@@ -116,6 +116,7 @@ class OccurrenceObservations(models.Model):
     wood_density = models.FloatField(null=True, blank=True)
     bark_thickness = models.FloatField(null=True, blank=True)
     elevation = models.FloatField(null=True, blank=True)
+    rainfall = models.FloatField(null=True, blank=True)
 
 
 @transaction.atomic

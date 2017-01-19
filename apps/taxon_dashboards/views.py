@@ -60,6 +60,9 @@ class TaxonGeneralDashboardViewSet(ViewSet):
         # taxon_distribution
         if self.request.query_params.get('include_taxon_distribution', None):
             response['taxon_distribution'] = a.get_taxon_distribution(dataset)
+        # Elevation range
+        if self.request.query_params.get('include_environmental_values', None):
+            response['environmental_values'] = a.get_environmental_values(dataset)
         return Response(response)
 
     def list(self, request):

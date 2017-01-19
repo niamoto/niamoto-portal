@@ -26,7 +26,8 @@ require([
 
         var url = "/api/1.0/dashboard/taxon_dashboard/"
             + taxon_id + "/?include_coordinates=true"
-            + "&include_taxon_distribution=true";
+            + "&include_taxon_distribution=true"
+            + "&include_environmental_values=true";
 
         d3.json(url, function (error, data) {
             if (error) throw error;
@@ -119,7 +120,6 @@ require([
         }
     };
 
-
     function make_node(node) {
         node['text'] = node['full_name'];
         node['icon'] = 'glyphicon';
@@ -127,7 +127,6 @@ require([
             expanded: false
         }
     };
-
 
     function make_leaf(node) {
         node['icon'] = 'glyphicon glyphicon-leaf';

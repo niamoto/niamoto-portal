@@ -10,8 +10,8 @@ from celery import group
 from .models import PlantnoteDatabase
 from .tasks import replace_plantnote_db, ensure_plantnote_db_only_active, \
     set_last_activated_at_value
-from apps.niamoto_data.tasks import update_occurrences_elevation, \
-    update_plot_elevation
+from apps.niamoto_data.tasks import update_occurrences_environmental_data, \
+    update_plots_environmental_data
 
 @receiver(
     post_save,
@@ -31,8 +31,8 @@ def set_database_active(instance):
         ensure_plantnote_db_only_active.s() |
         set_last_activated_at_value.s()
     ).apply_async(link=group(
-        update_plot_elevation.si(),
-        update_occurrences_elevation.si()
+        update_plots_environmental_data.si(),
+        update_occurrences_environmental_data.si()
     ))
     return res
 

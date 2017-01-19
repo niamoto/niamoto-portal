@@ -7,7 +7,8 @@ from django.db import transaction
 
 from multiselectfield.db.fields import MultiSelectField
 from apps.niamoto_data.models import Occurrence, OccurrenceObservations
-from apps.niamoto_data.elevation_tools import set_occurrences_elevation
+from apps.niamoto_data.environmental_tools import set_occurrences_elevation,\
+    set_occurrences_rainfall
 from apps.inventories.models_verbose_names import VERBOSE_NAMES as V
 
 
@@ -55,7 +56,7 @@ class TaxaInventoryManager(models.Manager):
             location_description=location_description,
             comments=comments,
         )
-        elevation_to_set = []
+        environmental_data_to_set = []
         for taxon in taxa:
             occ = TaxaInventoryOccurrence.objects.create(
                 date=inventory_date,
@@ -68,8 +69,9 @@ class TaxaInventoryManager(models.Manager):
                 status="Vivant",
                 last_observation_date=inventory_date,
             )
-            elevation_to_set.append(occ.id)
-        set_occurrences_elevation(elevation_to_set)
+            environmental_data_to_set.append(occ.id)
+        set_occurrences_elevation(environmental_data_to_set)
+        set_occurrences_rainfall(environmental_data_to_set)
         return taxa_inventory
 
 
@@ -93,12 +95,12 @@ class TaxaInventory(Inventory):
         new_taxa = {t['id']: True for t in taxa}
         to_add = []
         to_delete = []
-        elevation_to_set = []
+        environmental_data_to_set = []
         for t in taxa:
             if t['id'] not in current_taxa and t['id'] not in to_add:
                 to_add.append(t['id'])
             if t['id'] in current_taxa:
-                elevation_to_set.append(current_taxa[t['id']].id)
+                environmental_data_to_set.append(current_taxa[t['id']].id)
                 current_taxa[t['id']].location = self.location
                 current_taxa[t['id']].save()
         for key, value in current_taxa.items():
@@ -118,8 +120,9 @@ class TaxaInventory(Inventory):
                 status="Vivant",
                 last_observation_date=self.inventory_date,
             )
-            elevation_to_set.append(occ.id)
-        set_occurrences_elevation(elevation_to_set)
+            environmental_data_to_set.append(occ.id)
+        set_occurrences_elevation(environmental_data_to_set)
+        set_occurrences_rainfall(environmental_data_to_set)
 
 
 class TaxaInventoryOccurrence(Occurrence):
