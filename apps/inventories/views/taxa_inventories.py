@@ -133,9 +133,13 @@ class TaxaInventoryFormView(FormView):
     def get_location(self, form):
         lat = form.data.get('lat', None)
         long = form.data.get('long', None)
-        if lat == '' or long == '':
+        if lat == '' or long == '' or lat is None or long is None:
             return None
-        return Point(float(long), float(lat))
+        lat = float(lat)
+        long = float(long)
+        if lat > 90 or lat < -90 or long > 180 or lat < -180:
+            return None
+        return Point(long, lat)
 
     def is_location_valid(self, form):
         return self.get_location(form) is not None

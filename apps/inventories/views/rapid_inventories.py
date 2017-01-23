@@ -112,12 +112,12 @@ def add_rapid_inventory(request):
         walking_form = MeasuresWalkingForm(request.POST)
         long = request.POST['long']
         lat = request.POST['lat']
-        error_location = not (len(long) > 0 and len(lat) > 0)
+        error_location = not is_location_valid(request)
         is_valid = general_form.is_valid() and center_form.is_valid()\
             and vegetation_form.is_valid() and walking_form.is_valid()\
-            and len(long) > 0 and len(lat) > 0
+            and not error_location
         if is_valid:
-            location = Point(float(long), float(lat))
+            location = get_location(request)
             inventory = form.save(commit=False)
             inventory.location = location
             inventory.observer = request.user
@@ -157,10 +157,10 @@ def consult_rapid_inventory(request, inventory_id):
         walking_form = MeasuresWalkingForm(request.POST)
         long = request.POST['long']
         lat = request.POST['lat']
-        error_location = not (len(long) > 0 and len(lat) > 0)
+        error_location = not is_location_valid(request)
         is_valid = general_form.is_valid() and center_form.is_valid()\
             and vegetation_form.is_valid() and walking_form.is_valid()\
-            and len(long) > 0 and len(lat) > 0
+            and not error_location
         if is_valid:
             location = Point(float(long), float(lat))
             inventory = form.save(commit=False)
@@ -186,6 +186,22 @@ def consult_rapid_inventory(request, inventory_id):
         'error_location': error_location,
         'read_only': read_only,
     })
+
+
+def get_location(request):
+    lat = request.POST.get('lat', None)
+    long = request.POST.get('long', None)
+    if lat == '' or long == '' or lat is None or long is None:
+        return None
+    lat = float(lat)
+    long = float(long)
+    if lat > 90 or lat < -90 or long > 180 or lat < -180:
+        return None
+    return Point(long, lat)
+
+
+def is_location_valid(request):
+    return get_location(request) is not None
 
 
 @login_required()
