@@ -10,8 +10,12 @@
     z-index: 10;
 }
 
+.panel-heading {
+    height: 41px;
+}
+
 .d3_panel {
-    height: 100%;
+    height: calc(100% - 41px);
     margin: 0;
 }
 
@@ -45,17 +49,13 @@
     margin: 0;
 }
 
-#taxon_proportions_widget {
-    height: 90%;
-}
-
-#map_widget {
-    height: 90%;
-}
-
 .land {
   fill: #f5f5f5;
   stroke: #afafaf;
+}
+
+.dot {
+    fill: steelblue;
 }
 
 svg {
@@ -86,7 +86,7 @@ path.slice{
 #first_row { height: 50px; }
 #second_row { height: 300px; }
 #third_row { height: 350px; }
-#fourth_row { height: 250px; }
+#fourth_row { height: 450px; }
 
 .viz_container {
     height: 100%;

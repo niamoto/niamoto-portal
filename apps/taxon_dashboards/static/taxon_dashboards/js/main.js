@@ -10,8 +10,9 @@ require([
     'static_urls',
     'd3_distribution_donut',
     'd3_map',
+    'd3_elevation_rainfall_scatterplot',
     'jquery.treeview',
-], function($, taxonomy, d3, topojson, static_urls, d3_distribution_donut, d3_map) {
+], function($, taxonomy, d3, topojson, static_urls, d3_distribution_donut, d3_map, d3_elevation_rainfall_scatterplot) {
 
     var preloader_count = 0;
 
@@ -154,5 +155,5 @@ require([
     initGeneralInformations();
     d3_map.initMap();
     d3_distribution_donut.initDonutChart();
-
+    d3_elevation_rainfall_scatterplot.initElevationRainfallScatterplot();
 });
