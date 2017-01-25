@@ -106,6 +106,6 @@ def get_taxon_distribution(dataset):
 
 
 def get_environmental_values(dataset):
-    subset = dataset[['tax_id', 'occ_id', 'x', 'y', 'elevation', 'rainfall']]
+    subset = dataset[['tax_id', 'x', 'y', 'tax_full_name', 'elevation', 'rainfall']]
     df = pd.DataFrame(subset)
     return df.groupby(('tax_id', 'x', 'y')).max()

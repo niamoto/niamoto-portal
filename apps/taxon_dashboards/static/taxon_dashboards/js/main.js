@@ -16,6 +16,45 @@ require([
 
     var preloader_count = 0;
 
+    var color = [
+        "#5496c4", "#ffd24d", "#a29cc9", "#f96353", "#6cc6b7",
+        "#fcac4f", "#a0d643", "#f99fcd", "#b068b1", "#b3b3b3"
+    ];
+
+    var sorted_distribution = [];
+    var total = 0;
+    var map_color = {};
+
+
+    function buildSortedDistribution(taxon_data) {
+        var data = taxon_data['taxon_distribution'];
+        total = taxon_data['nb_occurrences'];
+        // Sort data and retain only 10 categories
+        data.sort(function(a, b) {
+            if (a[1] < b[1]) return -1;
+            if (a[1] > b[1]) return 1;
+            return 0;
+        });
+        data.reverse();
+        if (data.length > 10) {
+            var others = ['Autres', 0, []];
+            for (var i = 9; i < data.length; i++) {
+                var j = data[i];
+                others[1] += j[1];
+                others[2].push(j[0]);
+            }
+            data = data.slice(0, 9);
+            data.push(others);
+        }
+        var _map_color = {};
+        for (var i = 0; i < data.length; i++) {
+            _map_color[data[i][0]] = color[i];
+        }
+        map_color = _map_color;
+        sorted_distribution = data;
+    };
+
+
     function taxonSelected(node) {
         $('#selected_taxon_name').html(node['text']);
     }
@@ -32,7 +71,10 @@ require([
 
         d3.json(url, function (error, data) {
             if (error) throw error;
-            $('#taxon_treeview').trigger('taxonSelected', data);
+            buildSortedDistribution(data);
+            $('#taxon_treeview').trigger('taxonSelected', [
+                data, sorted_distribution, total, map_color
+            ]);
             hidePreloader(false);
             hidePreloader(false);
         });
