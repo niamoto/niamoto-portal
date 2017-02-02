@@ -25,6 +25,9 @@ define(['ol', 'proj4'], function(ol, proj4) {
                                           'EPSG:4326'),
             zoom: 7.5
         });
+        var attribution = new ol.control.Attribution({
+            collapsible: false
+        });
         var map = new ol.Map({
             target: target,
             layers: [
@@ -36,13 +39,20 @@ define(['ol', 'proj4'], function(ol, proj4) {
                             FORMAT: 'image/png',
                             CRS: 'EPSG:32758'
                         },
-                        serverType: 'mapserver'
+                        serverType: 'mapserver',
+                        attributions: [
+                            new ol.Attribution({
+                                html: '<a href="http://georep.nc/">Géorep</a> '
+                                    + '- <em>Gouvernement de la Nouvelle-Calédonie</em>'
+                            })
+                        ]
                     })
                 })
             ],
             view: view,
             controls: [
                 new ol.control.Zoom(),
+                attribution
             ]
         });
         return map;

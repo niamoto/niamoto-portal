@@ -6,9 +6,9 @@
 {% block body_class %}home{% endblock %}
 
 {% block styles %}
-    {{ block.super }}
     <link href='https://cdnjs.cloudflare.com/ajax/libs/ol3/3.10.1/ol.min.css' rel='stylesheet' />
-        <link rel="stylesheet" href='{% static "css/olext.css" %}' />
+    <link rel="stylesheet" href='{% static "css/olext.css" %}' />
+    {{ block.super }}
     <link rel="stylesheet" href='{% static "css/home.css" %}' />
 {% endblock %}
 

@@ -5,8 +5,8 @@
 {% load i18n %}
 
 {% block styles %}
-    {{ block.super }}
     <link href='https://cdnjs.cloudflare.com/ajax/libs/ol3/3.10.1/ol.min.css' rel='stylesheet' />
+    {{ block.super }}
     <link rel="stylesheet" href='{% static "inventories/css/consult_inventories.css" %}' />
     <link rel="stylesheet" href='{% static "css/olext.css" %}' />
 {% endblock %}

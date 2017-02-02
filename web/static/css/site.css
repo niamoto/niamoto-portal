@@ -571,3 +571,15 @@ footer {
   padding-right: 0 !important;
   overflow: auto !important;
 }
+
+.ol-attribution ul{
+    font-size: 10px;
+}
+
+.ol-attribution ul li:first-child {
+    display: none;
+}
+
+.ol-attribution.ol-uncollapsible {
+    line-height: 10px;
+}
