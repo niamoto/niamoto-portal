@@ -583,3 +583,23 @@ footer {
 .ol-attribution.ol-uncollapsible {
     line-height: 10px;
 }
+
+/* Overwrite bootstrap css with max-width instead of width */
+@media (min-width: 768px) {
+  .container {
+    width: auto;
+    max-width: 750px;
+  }
+}
+@media (min-width: 992px) {
+  .container {
+    width: auto;
+    max-width: 970px;
+  }
+}
+@media (min-width: 1200px) {
+  .container {
+    width: auto;
+    max-width: 1170px;
+  }
+}
