@@ -586,19 +586,19 @@ footer {
 
 /* Overwrite bootstrap css with max-width instead of width */
 @media (min-width: 768px) {
-  .container {
+  .container:not(#splash) {
     width: auto;
     max-width: 750px;
   }
 }
 @media (min-width: 992px) {
-  .container {
+  .container:not(#splash) {
     width: auto;
     max-width: 970px;
   }
 }
 @media (min-width: 1200px) {
-  .container {
+  .container:not(#splash) {
     width: auto;
     max-width: 1170px;
   }
