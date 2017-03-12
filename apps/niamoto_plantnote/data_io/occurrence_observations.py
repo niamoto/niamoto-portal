@@ -28,7 +28,8 @@ def import_occurrence_observations_from_plantnote_db(database):
             Obs."statut" AS status,
             Indiv."wood_density" AS wood_density,
             Indiv."bark_thickness" AS bark_thickness,
-            NULL AS elevation
+            NULL AS elevation,
+            NULL AS rainfall
         FROM Individus AS Indiv
         LEFT JOIN Observations AS Obs ON Indiv."ID Individus" = Obs."ID Individus"
         WHERE Obs."ID Observations" IS NOT NULL AND Indiv."ID Inventaires" IS NOT NULL
