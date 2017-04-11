@@ -20,6 +20,7 @@ from django.conf import settings
 from django.conf.urls import url, include
 from django.conf.urls.static import static
 from django.contrib import admin
+from constance import config
 
 from niamoto.views import AuthProxyView
 
@@ -36,7 +37,12 @@ urlpatterns = [
     url(r"^plot_dashboard/", include("apps.plot_dashboard.urls", namespace="plot_dashboard")),
     url(r'^explorer/', include('explorer.urls')),
     url(r'^qgis_plugin_repository/', include('qgis_plugin_repository.urls')),
-    url(r'^geoserver/(?P<path>.*)$', AuthProxyView.as_view(upstream='http://geoniamoto.ird.nc:8080/geoserver/')),
+    url(
+        r'^geoserver/(?P<path>.*)$',
+        AuthProxyView.as_view(upstream='{}:8080/geoserver/'.format(
+            config.GEOSERVER_BASE_URL
+        ))
+    ),
     url(r'^flower/(?P<path>.*)$', AuthProxyView.as_view(upstream='http://niamoto.ird.nc:5555/flower/')),
 ]
 
