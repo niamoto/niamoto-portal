@@ -39,11 +39,12 @@ urlpatterns = [
     url(r'^qgis_plugin_repository/', include('qgis_plugin_repository.urls')),
     url(
         r'^geoserver/(?P<path>.*)$',
-        AuthProxyView.as_view(upstream='{}:8080/geoserver/'.format(
-            config.GEOSERVER_BASE_URL
-        ))
+        AuthProxyView.as_view(upstream=config.GEOSERVER_BASE_URL)
     ),
-    url(r'^flower/(?P<path>.*)$', AuthProxyView.as_view(upstream='http://niamoto.ird.nc:5555/flower/')),
+    url(
+        r'^flower/(?P<path>.*)$',
+        AuthProxyView.as_view(upstream=config.FLOWER_BASE_URL)
+    ),
 ]
 
 if settings.DEBUG is True:
