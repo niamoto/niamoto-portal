@@ -2,12 +2,13 @@
 
 from django.conf.urls import url, include
 
-from rest.views import api_root, whoami
+from rest.views import api_root, whoami, get_digitizer_password
 
 
 urlpatterns = [
     url(r'^$', api_root, name="api-root"),
     url(r'^whoami/$', whoami, name="whoami"),
+    url(r'^digitizer_password/$', get_digitizer_password, name='digitizer_password'),
     url(r'^docs/', include('rest_framework_docs.urls', namespace="docs")),
     url(r'^data/', include('apps.niamoto_data.rest_urls', namespace="data-api")),
     url(r'^dashboard/', include('apps.taxon_dashboards.rest_urls', namespace="dashboard-api")),

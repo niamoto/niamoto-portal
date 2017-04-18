@@ -3,6 +3,9 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.decorators import permission_classes
+from rest_framework.exceptions import PermissionDenied
 
 
 @api_view(['GET'])
@@ -29,4 +32,15 @@ def whoami(request):
         'username': request.user.username,
         'full_name': request.user.get_full_name(),
         'email': request.user.email,
+    })
+
+
+@api_view(['GET'])
+@permission_classes((IsAuthenticated, ))
+def get_digitizer_password(request):
+    if not request.user.groups.filter(name='team').exists():
+        raise PermissionDenied("You are not allowed to access digitizing.")
+    return Response({
+        'user': 'digitizer',
+        'password': 'niamoto_digitizer'
     })
