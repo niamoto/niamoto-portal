@@ -2,7 +2,7 @@ define([
     'jquery',
     'd3'
 ], function($, d3) {
-    
+
     function initDiametersHistogram() {
 
         var height = $("#diameters_histogram").height();
@@ -33,7 +33,7 @@ define([
             .style("opacity", 0);
 
         var x_domain = [0, 100];
-        var y_domain = [0, 1000];
+        var y_domain = [0, 100];
 
         // x and y axis
         x_axis.call(
@@ -66,7 +66,7 @@ define([
             .attr("x",0 - (height / 2))
             .attr("dy", "1em")
             .style("text-anchor", "middle")
-            .text("Nombre de tiges");
+            .text("Fréquence (%)");
 
         $('#plot_select').on('plotSelected', function (event, data) {
             updateData(data);
@@ -107,7 +107,7 @@ define([
                     d3.select(this).style("opacity", "1.0");
                     var html = "<p><strong>[ " + bins[i] + "cm, "
                         + bins[i + 1] + "cm [</strong></p><p>"
-                        + parseFloat(d) + "</p>";
+                        + parseFloat(d) + "%</p>";
                     tooltip.transition()
                         .duration(300)
                         .style("opacity", .9);

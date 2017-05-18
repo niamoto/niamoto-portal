@@ -123,13 +123,16 @@ def get_species_distribution(dataframe, limit=None):
 def get_dbh_classification(dataframe, bin_size=10):
     max_dbh = dataframe['dbh'].max()
     bins = [bin_size * i for i in range(int(max_dbh // bin_size + 2))]
+    dbh = dataframe['dbh']
     dbh_class = pd.cut(
-        dataframe['dbh'],
+        dbh,
         bins,
         right=False,
         include_lowest=True
     )
-    return bins, dbh_class.value_counts(sort=False)
+    value_counts = dbh_class.value_counts(sort=False)
+    value_counts = (100 * value_counts / value_counts.sum()).round(1)
+    return bins, value_counts
 
 
 def get_richness(dataframe):
