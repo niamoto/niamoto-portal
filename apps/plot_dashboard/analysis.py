@@ -132,7 +132,7 @@ def get_dbh_classification(dataframe, bin_size=10):
     )
     value_counts = dbh_class.value_counts(sort=False)
     value_counts = (100 * value_counts / value_counts.sum()).round(1)
-    return bins, value_counts
+    return bins[2:], value_counts[2:]
 
 
 def get_richness(dataframe):

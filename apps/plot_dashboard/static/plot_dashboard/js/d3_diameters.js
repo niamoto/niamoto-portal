@@ -32,7 +32,7 @@ define([
             .attr("class", "tooltip")
             .style("opacity", 0);
 
-        var x_domain = [0, 100];
+        var x_domain = [10, 100];
         var y_domain = [0, 100];
 
         // x and y axis
@@ -98,7 +98,7 @@ define([
                     return "translate(" + 0 + "," + mheight + ")";
                 })
                 .attr("width", function (d, i) {
-                    return x(bins[i + 1] - bins[i]);
+                    return Math.abs(x(bins[i + 1] - bins[i]));
                 })
                 .attr("height", function (d, i) {
                     return 0;
@@ -144,7 +144,7 @@ define([
                     return "translate(" + 0 + "," + y(d) + ")";
                 })
                 .attr("width", function (d, i) {
-                    return x(bins[i + 1] - bins[i]);
+                    return Math.abs(x(bins[i + 1] - bins[i]));
                 })
                 .attr("height", function (d, i) {
                     return mheight - y(d);
