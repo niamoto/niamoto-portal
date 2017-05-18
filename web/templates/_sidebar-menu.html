@@ -37,21 +37,21 @@
     <a href="/#"><i class="fa fa-database fa-fw"></i> Données<span class="fa arrow"></span></a>
     <ul class="nav nav-second-level">
         <li>
-            <a href="{%  url 'digitizing_massifs' %}">Digitalisation au 1:3000ème</a>
+            <a href="{% url 'taxon_dashboards:taxon_treeview' %}">Taxons</a>
+        </li>
+        <li>
+            <a href="{% url 'plot_dashboard:plot_dashboard' %}">Parcelles</a>
+        </li>
+        <li>
+            <a href="{%  url 'digitizing_massifs' %}">Habitats forestiers</a>
         </li>
     </ul>
 </li>
 
 <!-- Dashboards -->
 <li>
-    <a href="/#"><i class="fa fa-tachometer fa-fw"></i> Tableaux de bord<span class="fa arrow"></span></a>
+    <a href="/#"><i class="fa fa-tachometer fa-fw"></i>Analyses (Coming soon)<span class="fa arrow"></span></a>
     <ul class="nav nav-second-level">
-        <li>
-            <a href="{% url 'taxon_dashboards:taxon_treeview' %}">Taxons</a>
-        </li>
-        <li>
-            <a href="{% url 'plot_dashboard:plot_dashboard' %}">Parcelles</a>
-        </li>
     </ul>
 </li>
 
