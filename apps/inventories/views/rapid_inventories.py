@@ -29,8 +29,8 @@ FIELDS = [
 HEADER = [
     "Date de l'inventaire",
     "Observateur",
-    "Localisation (description)",
-    "Localisation (longitude/latitude WGS84)",
+    "Localisation",
+    "Coordonnées (WGS84)",
     "",
 ]
 RECORDS_PER_PAGE = 15
@@ -80,7 +80,7 @@ def rapid_inventories_index(request):
 
     def get_val(inv, f):
         if f == 'location':
-            return getattr(inv, f).x, getattr(inv, f).y
+            return round(getattr(inv, f).x, 2), round(getattr(inv, f).y, 2)
         elif f == 'consult':
             return '<a href="{}/">consulter</a>'.format(inv.id)
         elif f == 'inventory_date':

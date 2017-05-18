@@ -88,6 +88,10 @@ class TaxaInventory(Inventory):
 
     objects = TaxaInventoryManager()
 
+    @property
+    def occurrences_count(self):
+        return self.occurrences.count()
+
     @transaction.atomic
     def update_occurrences(self, taxa):
         occurrences = self.occurrences.all()

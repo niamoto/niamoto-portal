@@ -60,7 +60,7 @@
                         {% for row in inventories %}
                             <tr>
                                 {% for cell in row %}
-                                    {% if forloop.counter == 5 %}
+                                    {% if forloop.counter == row|length %}
                                     <td>{{ cell|safe }}</td>
                                     {% else %}
                                     <td>{{ cell }}</td>

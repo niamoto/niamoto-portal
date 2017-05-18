@@ -26,13 +26,15 @@ FIELDS = [
     'observer_full_name',
     'location_description',
     'location',
+    'occurrences_count',
     'consult',
 ]
 HEADERS = [
     "Date de l'inventaire",
     "Observateur",
-    "Localisation (description)",
-    "Localisation (longitude/latitude WGS84)",
+    "Localisation",
+    "Coordonnées (WGS84)",
+    "Nombre d'espèces",
     "",
 ]
 RECORDS_PER_PAGE = 15
@@ -41,7 +43,7 @@ RECORDS_PER_PAGE = 15
 @login_required()
 def taxa_inventories_index(request):
     username = request.GET.get('username', None)
-    qs = TaxaInventory.objects.all()
+    qs = TaxaInventory.objects.prefetch_related('occurrences').all()
     geojson_url = reverse('inventory-api:taxa_inventory-list')
     if username is not None:
         qs = qs.filter(observer__username=username)
@@ -62,7 +64,7 @@ def taxa_inventories_index(request):
 
     def get_val(inv, f):
         if f == 'location':
-            return getattr(inv, f).x, getattr(inv, f).y
+            return round(getattr(inv, f).x, 2), round(getattr(inv, f).y, 2)
         elif f == 'consult':
             return '<a href="{}/">consulter</a>'.format(inv.id)
         elif f == 'inventory_date':
