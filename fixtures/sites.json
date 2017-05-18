@@ -3,7 +3,7 @@
         "pk": 1,
         "model": "sites.site",
         "fields": {
-            "domain": "niamoto.ird.nc",
+            "domain": "niamoto.io",
             "name": "niamoto"
         }
     }
