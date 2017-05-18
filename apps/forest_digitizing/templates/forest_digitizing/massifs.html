@@ -20,31 +20,7 @@
     <div class="container-fluid">
         <h3 class="page-header">Digitalisation au 1/3000ème des zones forestières dans les massifs de Province Nord</h3>
         <div id="massifs" class="row">
-            <div id="massif_form" class="col-xs-5 col-md-5">
-                <table id="massif_table" class="tablesorter">
-                    <thead>
-                        <tr>
-                            <th>Massif</th>
-                            <th>Opérateur</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    {% for m in massifs %}
-                        <tr id="{{ m.key_name }}" class="massif_button" value="{{ m.key_name }}">
-                            <td>{{ m.full_name }}</td>
-                            <td>{{ m.assignation.operator.get_full_name }}</td>
-                            <td>{{ m.assignation.get_status_display }}</td>
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
-                <div id="massif_detail" class="">
-                    <div id="detail_head"><h4>Détails</h4></div>
-                    <div id="detail_content" class=""></div>
-                </div>
-            </div>
-            <div class="col-xs-7 col-md-7"><div id="map"></div>
+            <div class="col-xs-12 col-md-12"><div id="map"></div>
         </div>
     </div>
     <script>
@@ -61,7 +37,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ol3/3.6.0/ol.min.js" type="text/javascript"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.3.6/proj4.js"></script>
     <script src="{% static 'forest_digitizing/js/olext.min.js' %}" type="text/javascript"></script>
-    <script src="{% static 'forest_digitizing/js/massif/massifs_table.js' %}" type="text/javascript"></script>
     <script src="{% static 'forest_digitizing/js/massif/massifs_map.js' %}" type="text/javascript"></script>
 {#    <script src="{% static 'forest_digitizing/js/massifs.min.js' %}" type="text/javascript"></script>#}
 {% endblock %}

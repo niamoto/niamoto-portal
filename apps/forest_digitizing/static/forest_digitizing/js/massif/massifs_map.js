@@ -35,15 +35,12 @@
         view: view,
         interactions : ol.interaction.defaults({doubleClickZoom :false}),
         controls: [
-            new ol.control.Zoom(),
-            new olext.control.CurrentScale(),
-            new olext.control.SetScale(3000)
+            new olext.control.CurrentScale()
         ]
     });
 
     // Selected massif/row reference
     var selected_massif = null;
-    var selected_row = null;
 
     // Create feature overlay
     var overlay_style = olext.utils.makeStyle({
@@ -59,7 +56,7 @@
     // Hovered massif highlighting and info popup
     var highlight;
 
-    popup = new olext.overlay.Popup({
+    var popup = new olext.overlay.Popup({
         positioning: 'bottom-center'
     });
 
@@ -95,12 +92,6 @@
         if (feature) {
             var key_name = feature.get('key_name');
             setCurrentMassif(feature);
-            // Move and select the corresponding row in the table
-            var m_table_top = $('#massif_table').offset().top;
-            var row = $('#' + key_name);
-            var scroll_top = row.offset().top - m_table_top;
-            var scroll_table = $(".tablesorter-scroller-table");
-            scroll_table.animate({scrollTop: scroll_top}, 500);
         }
     };
 
@@ -108,40 +99,9 @@
         selected_massif = massif.get('key_name');
         updateDetails(massif);
         massif_source.changed();
-        // Set selected row style
-        var row = $('#' + selected_massif);
-        if (selected_row) {
-            selected_row.removeClass('selected');
-        }
-        selected_row = row;
-        selected_row.addClass('selected');
     };
 
     function updateDetails(massif) {
-        var id = massif.get('id');
-        var key_name = massif.get('key_name');
-        var name = massif.get('full_name');
-        var operator = massif_data[key_name]['operator'];
-        var status = massif_data[key_name]['status_display'];
-        var status_idx = massif_data[key_name]['status'];
-        var file_available = massif_data[key_name]['file_available'];
-        var link = '';
-        if (status_idx > 0) {
-            link = '<a href="' + key_name
-                + '/">Consulter l\'état actuel de la digitalisation</a>'
-        }
-        var details = ["<h3>"];
-        details.push(name);
-        details.push("</h3>");
-        details.push("Digitalisé par: ");
-        details.push(operator);
-        details.push("</p>");
-        details.push("<p>");
-        details.push("Status: ");
-        details.push(status);
-        details.push("</p>");
-        details.push(link);
-        $('#detail_content').html(details.join(''));
     };
 
     // Window resizing
@@ -191,11 +151,6 @@
 
         function addMassifLayer(geojson_result) {
             // Massif style
-            var selected_style = olext.utils.makeStyle({
-                fill_color: 'rgba(51, 133, 214, 0.9)',
-                stroke_color: 'rgb(174, 194, 214)',
-                stroke_width: 1
-            });
             var not_digitized_style = olext.utils.makeStyle({
                 fill_color: 'rgba(255, 120, 120, 0.5)',
                 stroke_color: 'rgb(255, 120, 120)',
@@ -214,9 +169,6 @@
             var massif_style = function(feature, resolution) {
                 k_n = feature.get('key_name');
                 status = massif_data[k_n]['status'];
-                if (k_n == selected_massif) {
-                    return [selected_style];
-                }
                 var style = [ol.style.Style()];
                 switch (status) {
                     case '0':
@@ -255,29 +207,13 @@
             });
             // On click event handler for massif selection
             map.on('click', function(evt) {
-                console.log("click!")
                 selectMassif(evt.pixel);
-            });
-
-            // Directly go to massif page on dblclick
-            map.on('dblclick', function(evt) {
                 if (selected_massif == null) {
                     return
                 }
                 window.location.href = selected_massif;
             });
 
-            // On table click select massif
-            $(".massif_button").click(function() {
-                var massif_key_name = $(this).attr('value');
-                setCurrentMassif(massifs_keymap[massif_key_name]);
-            });
-
-             // On table dblclick go to massif page
-            $(".massif_button").dblclick(function () {
-                var massif_key_name = $(this).attr('value');
-                window.location.href = massif_key_name;
-            });
             fitMassif();
         };
         $(window).resize(sizeContent);
