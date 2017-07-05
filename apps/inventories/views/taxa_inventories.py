@@ -26,7 +26,7 @@ FIELDS = [
     'observer_full_name',
     'location_description',
     'location',
-    'occurrences_count',
+    'taxa_count',
     'consult',
 ]
 HEADERS = [
@@ -43,7 +43,7 @@ RECORDS_PER_PAGE = 15
 @login_required()
 def taxa_inventories_index(request):
     username = request.GET.get('username', None)
-    qs = TaxaInventory.objects.prefetch_related('occurrences').all()
+    qs = TaxaInventory.objects.prefetch_related('taxa').all()
     geojson_url = reverse('inventory-api:taxa_inventory-list')
     if username is not None:
         qs = qs.filter(observer__username=username)
@@ -181,7 +181,7 @@ class TaxaInventoryUpdateView(TaxaInventoryFormView, UpdateView):
         self.object.description = form.data['location_description']
         self.object.comments = form.data['comments']
         self.object.save()
-        self.object.update_occurrences(taxa)
+        self.object.update_taxa(taxa)
         return redirect(reverse('taxa_inventory_index'))
 
     def get_context_data(self, **kwargs):
@@ -189,8 +189,7 @@ class TaxaInventoryUpdateView(TaxaInventoryFormView, UpdateView):
         lat = self.object.location.y
         kwargs['long'] = str(long)
         kwargs['lat'] = str(lat)
-        occurrences = self.object.occurrences.all()
-        taxa = [o.taxon for o in occurrences]
+        taxa = [o.taxon for o in self.object.taxa.all()]
         serializer = TaxonSerializer(taxa, many=True)
         kwargs['taxa'] = json.dumps(serializer.data)
         kwargs['read_only'] = self.is_read_only()

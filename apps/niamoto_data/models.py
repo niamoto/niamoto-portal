@@ -91,63 +91,17 @@ class Occurrence(models.Model):
     updated_at = models.DateTimeField(auto_now=True, null=True, blank=True)
     taxon = models.ForeignKey(Taxon, null=True, blank=True)
     location = models.PointField(srid=4326, null=True, blank=True)
-
-    objects = models.GeoManager()
-
-
-class OccurrenceObservations(models.Model):
-    """
-    Model representing a set of observations / measures for occurrences.
-    """
-    occurrence = models.OneToOneField(
-        Occurrence,
-        unique=True,
-        related_name="observations",
-        primary_key=True
-    )
-    last_observation_date = models.CharField(
-        max_length=50,
-        null=True, blank=True
-    )
+    # Properties
     height = models.FloatField(null=True, blank=True)
     stem_nb = models.IntegerField(null=True, blank=True)
     dbh = models.FloatField(null=True, blank=True)
-    status = models.CharField(max_length=50)
+    status = models.CharField(max_length=50, null=True, blank=True)
     wood_density = models.FloatField(null=True, blank=True)
     bark_thickness = models.FloatField(null=True, blank=True)
     elevation = models.FloatField(null=True, blank=True)
     rainfall = models.FloatField(null=True, blank=True)
 
-
-@transaction.atomic
-def set_occurrences_elevation(occurrences_ids=None):
-    if occurrences_ids is None:
-        in_occs = 'NULL'
-    else:
-        in_occs = ','.join([str(i) for i in occurrences_ids])
-    sql = \
-    """
-        WITH elev AS (
-            SELECT occ.id AS id,
-                ST_Value(mnt.rast, occ.location) AS elevation
-            FROM {occ_table} AS occ
-            LEFT JOIN {elev_raster_table} AS mnt
-            ON ST_Intersects(mnt.rast, occ.location)
-            WHERE {occ_ids} IS NULL OR occ.id IN ({occ_ids})
-        )
-        UPDATE {occ_obs}
-        SET elevation = elev.elevation
-        FROM elev
-        WHERE elev.id = {occ_obs}.{occ_id_col};
-    """.format(**{
-        'occ_table': Occurrence._meta.db_table,
-        'elev_raster_table': 'mnt10_wgs84',
-        'occ_ids': in_occs,
-        'occ_obs': OccurrenceObservations._meta.db_table,
-        'occ_id_col': OccurrenceObservations.occurrence.field.get_attname()
-    })
-    cur = connection.cursor()
-    cur.execute(sql)
+    objects = models.GeoManager()
 
 
 class ForestFragment(models.Model):
@@ -179,4 +133,4 @@ class PlotOccurrences(models.Model):
     )
 
     class Meta:
-        unique_together = (("occurrence", "plot"))
+        unique_together = (("occurrence", "plot"), )

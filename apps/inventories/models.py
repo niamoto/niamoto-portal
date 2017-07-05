@@ -6,9 +6,7 @@ from django.core.validators import MinValueValidator
 from django.db import transaction
 
 from multiselectfield.db.fields import MultiSelectField
-from apps.niamoto_data.models import Occurrence, OccurrenceObservations
-from apps.niamoto_data.environmental_tools import set_occurrences_elevation,\
-    set_occurrences_rainfall
+from apps.niamoto_data.models import Taxon
 from apps.inventories.models_verbose_names import VERBOSE_NAMES as V
 
 
@@ -56,22 +54,12 @@ class TaxaInventoryManager(models.Manager):
             location_description=location_description,
             comments=comments,
         )
-        environmental_data_to_set = []
         for taxon in taxa:
-            occ = TaxaInventoryOccurrence.objects.create(
-                date=inventory_date,
-                taxon_id=taxon['id'],
-                location=location,
+            TaxaInventoryTaxon.objects.create(
                 taxa_inventory=taxa_inventory,
+                taxon_id=taxon['id'],
+                taxon_id_no_constraint=taxon['id'],
             )
-            OccurrenceObservations.objects.create(
-                occurrence_id=occ.id,
-                status="Vivant",
-                last_observation_date=inventory_date,
-            )
-            environmental_data_to_set.append(occ.id)
-        set_occurrences_elevation(environmental_data_to_set)
-        set_occurrences_rainfall(environmental_data_to_set)
         return taxa_inventory
 
 
@@ -89,58 +77,46 @@ class TaxaInventory(Inventory):
     objects = TaxaInventoryManager()
 
     @property
-    def occurrences_count(self):
-        return self.occurrences.count()
+    def taxa_count(self):
+        return self.taxa.count()
 
     @transaction.atomic
-    def update_occurrences(self, taxa):
-        occurrences = self.occurrences.all()
-        current_taxa = {o.taxon.id: o for o in occurrences}
+    def update_taxa(self, taxa):
+        current_taxa = {t.taxon.id: t for t in self.taxa.all()}
         new_taxa = {t['id']: True for t in taxa}
         to_add = []
         to_delete = []
-        environmental_data_to_set = []
         for t in taxa:
             if t['id'] not in current_taxa and t['id'] not in to_add:
                 to_add.append(t['id'])
             if t['id'] in current_taxa:
-                environmental_data_to_set.append(current_taxa[t['id']].id)
                 current_taxa[t['id']].location = self.location
                 current_taxa[t['id']].save()
         for key, value in current_taxa.items():
             if key not in new_taxa and value.id not in to_delete:
                 to_delete.append(value.id)
-        for o in to_delete:
-            TaxaInventoryOccurrence.objects.get(pk=o).delete()
+        for t in to_delete:
+            TaxaInventoryTaxon.objects.get(pk=t).delete()
         for t in to_add:
-            occ = TaxaInventoryOccurrence.objects.create(
-                date=self.inventory_date,
+            TaxaInventoryTaxon.objects.create(
+                taxa_inventory_id=self.id,
                 taxon_id=t,
-                location=self.location,
-                taxa_inventory_id=self.id
+                taxon_id_no_constraint=t,
             )
-            OccurrenceObservations.objects.create(
-                occurrence_id=occ.id,
-                status="Vivant",
-                last_observation_date=self.inventory_date,
-            )
-            environmental_data_to_set.append(occ.id)
-        set_occurrences_elevation(environmental_data_to_set)
-        set_occurrences_rainfall(environmental_data_to_set)
 
 
-class TaxaInventoryOccurrence(Occurrence):
-    """
-    Occurrence created using the taxa inventory app.
-    """
-    taxa_inventory = models.ForeignKey(
+class TaxaInventoryTaxon(models.Model):
+
+    taxa_inventory = models.ForeignKey(TaxaInventory, related_name='taxa')
+    taxon = models.ForeignKey(Taxon, null=True, blank=True)
+    taxon_id_no_constraint = models.IntegerField(
         TaxaInventory,
-        related_name='occurrences'
+        null=False,
+        blank=False
     )
 
-    @property
-    def observer(self):
-        return self.taxa_inventory.observer
+    class Meta:
+        unique_together = (("taxa_inventory", "taxon"), )
 
 
 class RapidInventory(Inventory):

@@ -37,16 +37,15 @@ def get_occurrences_by_plot(plot_id=None):
                specie_parent.rank AS specie_parent_rank,
                genus_parent.id AS genus_parent_id,
                genus_parent.full_name AS genus_parent_full_name,
-               observations.height AS height,
-               observations.stem_nb AS stem_nb,
-               observations.dbh AS dbh,
-               observations.status AS status,
-               observations.wood_density AS wood_density,
-               observations.bark_thickness AS bark_thickness
+               occurrence.height AS height,
+               occurrence.stem_nb AS stem_nb,
+               occurrence.dbh AS dbh,
+               occurrence.status AS status,
+               occurrence.wood_density AS wood_density,
+               occurrence.bark_thickness AS bark_thickness
         FROM niamoto_data_plotoccurrences
         INNER JOIN niamoto_data_plot AS plot ON plot_id = plot.id
         INNER JOIN niamoto_data_occurrence AS occurrence ON occurrence_id = occurrence.id
-        LEFT JOIN niamoto_data_occurrenceobservations AS observations ON occurrence.id = observations.occurrence_id
         LEFT JOIN niamoto_data_taxon AS taxon ON occurrence.taxon_id = taxon.id
         /* SPECIE */
         LEFT JOIN niamoto_data_taxon AS specie_parent ON specie_parent.tree_id = taxon.tree_id
@@ -121,6 +120,8 @@ def get_species_distribution(dataframe, limit=None):
 
 
 def get_dbh_classification(dataframe, bin_size=10):
+    if len(dataframe['dbh']) == 0:
+        return [], []
     max_dbh = dataframe['dbh'].max()
     bins = [bin_size * i for i in range(int(max_dbh // bin_size + 2))]
     dbh = dataframe['dbh']

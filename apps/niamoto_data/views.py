@@ -42,7 +42,7 @@ class OccurrenceViewSet(viewsets.ReadOnlyModelViewSet):
     base_name = 'occurrence'
 
     def get_queryset(self):
-        return Occurrence.objects.select_related('observations')
+        return Occurrence.objects
 
     def get_serializer(self, *args, **kwargs):
         incl_obs = self.request.query_params.get('include_observations', None)

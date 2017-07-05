@@ -32,22 +32,20 @@ def get_occurrences_by_taxon(taxon_id=None):
             tax.rank,
             tax.full_name,
             tax.rank_name,
-            obs.height,
+            occ.height,
             /* When stem_nb is None, set it to 1 (numpy int cannot be NaN)*/
-            COALESCE(obs.stem_nb, 1),
-            obs.dbh,
-            obs.status,
-            obs.wood_density,
-            obs.bark_thickness,
-            obs.elevation,
-            obs.rainfall,
+            COALESCE(occ.stem_nb, 1),
+            occ.dbh,
+            occ.status,
+            occ.wood_density,
+            occ.bark_thickness,
+            occ.elevation,
+            occ.rainfall,
             ST_X(occ.location) as x,
             ST_Y(occ.location) as y
         FROM niamoto_data_occurrence AS occ
         LEFT JOIN niamoto_data_taxon AS tax
             ON occ.taxon_id = tax.id
-        LEFT JOIN niamoto_data_occurrenceobservations AS obs
-            ON occ.id = obs.occurrence_id
         LEFT JOIN niamoto_data_taxon AS root
             ON root.id = '{}'
         WHERE root.id IS NULL OR
