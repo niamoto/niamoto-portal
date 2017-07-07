@@ -1,0 +1,26 @@
+{% extends "niamoto_dashboard_base.html" %}
+
+{% load staticfiles %}
+
+{% block styles %}
+    <link rel="stylesheet" href="https://openlayers.org/en/v4.2.0/css/ol.css" type="text/css">
+    {{ block.super }}
+    <link rel="stylesheet" type="text/css" href="{% static 'data_marts/css/data_marts.css' %}"/>
+{% endblock %}
+
+{% block body %}
+    <h3 class="page-header">Data Mart</h3>
+    <div id="react">
+        <i class="fa fa-lg fa-spinner fa-spin"></i><br><br>
+        <i class="pending">Chargement de l'application...</i><br><br>
+    </div>
+
+    <script>
+        window.react_mount = document.getElementById('react');
+    </script>
+    <script src="{% static 'data_marts/js/data_mart.js' %}"></script>
+{% endblock %}
+
+{% block scripts %}
+    {{ block.super }}
+{% endblock %}

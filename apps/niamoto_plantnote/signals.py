@@ -8,10 +8,11 @@ from django.dispatch.dispatcher import receiver
 from celery import group
 
 from .models import PlantnoteDatabase
-from .tasks import replace_plantnote_db, ensure_plantnote_db_only_active, \
+from .tasks import ensure_plantnote_db_only_active, \
     set_last_activated_at_value
 from apps.niamoto_data.tasks import update_occurrences_environmental_data, \
     update_plots_environmental_data
+
 
 @receiver(
     post_save,
@@ -27,7 +28,6 @@ def plantnote_database_post_save(sender, **kwargs):
 def set_database_active(instance):
     instance.active = False
     res = (
-        replace_plantnote_db.s(instance.uuid) |
         ensure_plantnote_db_only_active.s() |
         set_last_activated_at_value.s()
     ).apply_async(link=group(

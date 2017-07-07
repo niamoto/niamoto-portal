@@ -1,6 +1,8 @@
 # Created by .ignore support plugin (hsz.mobi)
 
 /.idea
+node_modules
+*.lock
 
 ### Python template
 # Byte-compiled / optimized / DLL files

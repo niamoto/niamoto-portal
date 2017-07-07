@@ -35,6 +35,7 @@ urlpatterns = [
     url(r"^inventory/", include("apps.inventories.urls")),
     url(r"^taxon_dashboards/", include("apps.taxon_dashboards.urls", namespace="taxon_dashboards")),
     url(r"^plot_dashboard/", include("apps.plot_dashboard.urls", namespace="plot_dashboard")),
+    url(r"^data_marts/", include("apps.data_marts.urls", namespace="data_marts")),
     url(r'^explorer/', include('explorer.urls')),
     url(r'^qgis_plugin_repository/', include('qgis_plugin_repository.urls')),
     url(
