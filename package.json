@@ -9,6 +9,7 @@
     "ol-react": "^0.1.5",
     "openlayers": "^4.2.0",
     "react": "^15.6.1",
+    "react-bootstrap": "^0.31.0",
     "react-dom": "^15.6.1"
   },
   "devDependencies": {
