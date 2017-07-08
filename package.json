@@ -6,6 +6,7 @@
   "author": "Dimitri Justeau <dimitri.justeau@gmail.com>",
   "license": "GPL-3.0",
   "dependencies": {
+    "babel-plugin-transform-object-rest-spread": "^6.23.0",
     "ol-react": "^0.1.5",
     "openlayers": "^4.2.0",
     "react": "^15.6.1",
