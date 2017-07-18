@@ -15,4 +15,5 @@ node web/static/js/libs/r.js -o apps/inventories/static/inventories/js/jsbuild/b
 node web/static/js/libs/r.js -o apps/inventories/static/inventories/js/jsbuild/build_taxa_inventory.js
 
 # Build data marts js
+mkdir apps/data_marts/static/data_marts/css/js
 browserify js/data_marts/data_mart.js -t babelify --presets [es2015 react] -o apps/data_marts/static/data_marts/js/dist/data_mart.js
