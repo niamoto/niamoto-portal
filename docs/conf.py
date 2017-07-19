@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
-# niamoto-portal documentation build configuration file, created by
+# niamoto_portal-portal documentation build configuration file, created by
 # sphinx-quickstart on Mon May  2 18:09:11 2016.
 #
 # This file is execfile()d with the current directory set to its
@@ -22,7 +22,7 @@ import os
 sys.path.insert(0, os.path.abspath('..'))
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'niamoto.settings')
-from niamoto import settings as settings
+from niamoto_portal import settings as settings
 
 # -- General configuration ------------------------------------------------
 
@@ -126,7 +126,7 @@ html_theme = 'alabaster'
 
 # The name for this set of Sphinx documents.
 # "<project> v<release> documentation" by default.
-#html_title = 'niamoto v0.1'
+#html_title = 'niamoto_portal v0.1'
 
 # A shorter title for the navigation bar.  Default is the same as html_title.
 #html_short_title = None

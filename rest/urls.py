@@ -13,6 +13,7 @@ urlpatterns = [
     url(r'^data/', include('apps.niamoto_data.rest_urls', namespace="data-api")),
     url(r'^dashboard/', include('apps.taxon_dashboard.rest_urls', namespace="dashboard-api")),
     url(r'^dashboard/', include('apps.plot_dashboard.rest_urls', namespace="dashboard-api")),
+    url(r'^data_mart/', include('apps.data_marts.rest_urls', namespace="data_mart-api")),
     url(r'^plantnote/', include('apps.niamoto_plantnote.rest_urls', namespace="plantnote-api")),
     url(r'^forest_digitizing/', include('apps.forest_digitizing.rest_urls', namespace="forest_digitizing-api")),
     url(r'^inventory/', include('apps.inventories.rest_urls', namespace="inventory-api")),

@@ -20,14 +20,6 @@ class TaxonTreeView(TemplateView):
     taxa_tree_url = reverse_lazy("data-api:taxon-list")
 
 
-@method_decorator(login_required, name='dispatch')
-class TaxonDetailedDashboardsView(TemplateView):
-    """
-    Class-based view for taxon detailed dashboards.
-    """
-    template_name = "taxon_dashboard/detailed_dashboads.html"
-
-
 class TaxonGeneralDashboardViewSet(ViewSet):
     """
     Viewset providing general dashboards for taxa.

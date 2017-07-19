@@ -11,6 +11,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "niamoto.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "niamoto_portal.settings")
 
 application = get_wsgi_application()

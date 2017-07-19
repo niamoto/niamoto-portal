@@ -22,7 +22,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from constance import config
 
-from niamoto.views import AuthProxyView
+from niamoto_portal.views import AuthProxyView
 
 
 urlpatterns = [
