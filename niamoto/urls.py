@@ -33,7 +33,7 @@ urlpatterns = [
     url(r'^', include('web.urls')),
     url(r'^digitizing/', include('apps.forest_digitizing.urls')),
     url(r"^inventory/", include("apps.inventories.urls")),
-    url(r"^taxon_dashboards/", include("apps.taxon_dashboards.urls", namespace="taxon_dashboards")),
+    url(r"^taxon_dashboard/", include("apps.taxon_dashboard.urls", namespace="taxon_dashboard")),
     url(r"^plot_dashboard/", include("apps.plot_dashboard.urls", namespace="plot_dashboard")),
     url(r"^data_marts/", include("apps.data_marts.urls", namespace="data_marts")),
     url(r'^explorer/', include('explorer.urls')),

@@ -4,4 +4,4 @@ from django.apps import AppConfig
 
 
 class TaxonDashboardsConfig(AppConfig):
-    name = 'apps.taxon_dashboards'
+    name = 'apps.taxon_dashboard'

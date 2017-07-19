@@ -2,7 +2,7 @@
 
 from django.conf.urls import url
 
-from apps.taxon_dashboards import views
+from apps.taxon_dashboard import views
 
 
 urlpatterns = [

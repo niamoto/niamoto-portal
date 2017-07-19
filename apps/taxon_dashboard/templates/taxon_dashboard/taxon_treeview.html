@@ -5,7 +5,7 @@
 {% block styles %}
     {{ block.super }}
     <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap-treeview.min.css' %}"/>
-    <link rel="stylesheet" type="text/css" href="{% static 'taxon_dashboards/css/taxon_treeview.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'taxon_dashboard/css/taxon_treeview.css' %}"/>
 {% endblock %}
 
 {% block body %}
@@ -87,6 +87,6 @@
 
 {% block scripts %}
     {{ block.super }}
-{#    <script src="{% static 'taxon_dashboards/js/main.js' %}"></script>#}
-    <script src="{% static 'taxon_dashboards/js/main.min.js' %}"></script>
+{#    <script src="{% static 'taxon_dashboard/js/main.js' %}"></script>#}
+    <script src="{% static 'taxon_dashboard/js/main.min.js' %}"></script>
 {% endblock %}

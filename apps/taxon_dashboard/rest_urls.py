@@ -3,7 +3,7 @@
 from django.conf.urls import url, include
 from rest_framework import routers
 
-from apps.taxon_dashboards.views import TaxonGeneralDashboardViewSet
+from apps.taxon_dashboard.views import TaxonGeneralDashboardViewSet
 
 
 router = routers.DefaultRouter()

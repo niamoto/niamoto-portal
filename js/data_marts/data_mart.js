@@ -1,13 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import ol from 'openlayers';
-import {
-    Map, getDefaultMap
-} from '../niamoto_base_map';
 import {
     form, Grid, Row, Col, FormGroup, ControlLabel, FormControl,
     HelpBlock, option, Panel
 } from 'react-bootstrap';
+import ol from 'openlayers';
+import {
+    Map, getDefaultMap
+} from '../niamoto_base_map';
+
 
 var map = getDefaultMap();
 var features = new ol.Collection();

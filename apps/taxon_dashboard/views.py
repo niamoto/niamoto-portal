@@ -7,7 +7,7 @@ from django.views.generic import TemplateView
 from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 
-import apps.taxon_dashboards.analysis as a
+import apps.taxon_dashboard.analysis as a
 
 
 @method_decorator(login_required, name='dispatch')
@@ -16,7 +16,7 @@ class TaxonTreeView(TemplateView):
     Class-based view for taxon dashboards, where taxa are selected using
     a tree view.
     """
-    template_name = "taxon_dashboards/taxon_treeview.html"
+    template_name = "taxon_dashboard/taxon_treeview.html"
     taxa_tree_url = reverse_lazy("data-api:taxon-list")
 
 
@@ -25,7 +25,7 @@ class TaxonDetailedDashboardsView(TemplateView):
     """
     Class-based view for taxon detailed dashboards.
     """
-    template_name = "taxon_dashboards/detailed_dashboads.html"
+    template_name = "taxon_dashboard/detailed_dashboads.html"
 
 
 class TaxonGeneralDashboardViewSet(ViewSet):
