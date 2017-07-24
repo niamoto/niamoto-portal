@@ -15,5 +15,5 @@ node web/static/js/libs/r.js -o apps/inventories/static/inventories/js/jsbuild/b
 node web/static/js/libs/r.js -o apps/inventories/static/inventories/js/jsbuild/build_taxa_inventory.js
 
 # Build data marts js
-mkdir -p apps/data_marts/static/data_marts/css/js
+mkdir -p apps/data_marts/static/data_marts/static/js
 browserify js/data_marts/data_mart.js | uglifyjs > apps/data_marts/static/data_marts/js/dist/data_mart.js
