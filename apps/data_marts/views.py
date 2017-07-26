@@ -2,13 +2,15 @@
 
 import json
 
-from niamoto.api.data_marts_api import get_dimension
+from niamoto.api.data_marts_api import get_dimension, get_dimensional_model
+from cubes import PointCut, Cell
 
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.views.generic import TemplateView
 from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
+from rest_framework.decorators import api_view
 
 
 @method_decorator(login_required, name='dispatch')
@@ -26,6 +28,36 @@ class DataMartView(TemplateView):
                 'communes': get_commune_levels(),
             }),
         }
+
+
+@api_view(['GET'])
+def process(request):
+    agg = [
+        {
+            "name": "occurrence_sum",
+            "function": "sum",
+            "measure": "occurrence_count",
+        },
+    ]
+    dm = get_dimensional_model(
+        'taxon_observed_occurrences',
+        agg,
+    )
+    workspace = dm.get_cubes_workspace()
+    cube = workspace.cube('taxon_observed_occurrences')
+    browser = workspace.browser(cube)
+    selected_entity = json.loads(
+        request.query_params.get('selected_entity', None)
+    )
+    cuts = [
+        PointCut(selected_entity['type'], [selected_entity['value']]),
+    ]
+    cell = Cell(cube, cuts)
+    result = browser.aggregate(cell, drilldown=['taxon_dimension'])
+    return Response({
+        'summary': result.summary,
+        'records': list(result),
+    })
 
 
 def get_province_levels():

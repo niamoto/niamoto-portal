@@ -2,12 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {
     form, Grid, Row, Col, FormGroup, ControlLabel, FormControl,
-    HelpBlock, option, Panel
+    HelpBlock, option, Panel, Button
 } from 'react-bootstrap';
 import ol from 'openlayers';
 import {
     Map, getDefaultMap
 } from '../niamoto_base_map';
+import {FormInvalidModal} from './form_invalid_modal';
+import {ResultPanel} from './result_panel';
 
 
 var host = window.location.host;
@@ -57,7 +59,11 @@ class App extends React.Component {
         this.state = {
             massif_id: 0,
             province_id: 0,
-            commune_id: 0
+            commune_id: 0,
+            selected_entity: null,
+            show_form_invalid_modal: false,
+            richness: null,
+            occurrenceCount: null
         }
     }
 
@@ -74,14 +80,23 @@ class App extends React.Component {
 
     onProvinceSelected(e) {
         this.setState({
-            province_id: e.target.value
+            province_id: e.target.value,
+            occurrenceCount: null,
+            richness: null
         });
         if (!e.target.value) {
+            this.setState({
+                selected_entity: null
+            })
             return;
         } else {
             this.setState({
                 massif_id: 0,
-                commune_id: 0
+                commune_id: 0,
+                selected_entity: {
+                    'type': 'provinces',
+                    'value': e.target.value
+                }
             });
         }
         $.ajax({
@@ -100,14 +115,23 @@ class App extends React.Component {
 
     onCommuneSelected(e) {
         this.setState({
-            commune_id: e.target.value
+            commune_id: e.target.value,
+            occurrenceCount: null,
+            richness: null
         });
         if (!e.target.value) {
+            this.setState({
+                selected_entity: null
+            })
             return;
         } else {
             this.setState({
                 massif_id: 0,
-                province_id: 0
+                province_id: 0,
+                selected_entity: {
+                    'type': 'communes',
+                    'value': e.target.value
+                }
             });
         }
         $.ajax({
@@ -145,12 +169,43 @@ class App extends React.Component {
         return items;
     }
 
+    process() {
+        let selected_entity = this.state.selected_entity;
+        if (selected_entity === null) {
+            this.setState({
+                show_form_invalid_modal: true
+            })
+            return;
+        }
+        let this_ = this;
+        $.ajax({
+            type: 'GET',
+            data: {
+                selected_entity: JSON.stringify(selected_entity)
+            },
+            url: api_root + "/data_mart/process/",
+            success: function(result) {
+                this_.setState({
+                    occurrenceCount: result.summary.occurrence_sum,
+                    richness: result.records.length
+                })
+            }
+        });
+    }
+
+    modalClosed() {
+        this.setState({
+            show_form_invalid_modal: false
+        });
+    }
+
     render() {
         return (
-            <Grid>
-              <Panel>
+            <div>
+            <Panel>
+              <Grid>
                 <Row>
-                  <Col xs={6} md={4}>
+                  <Col xs={12} md={4}>
                     <p>
                       Sélectionnez une zone à analyser. Vous pouvez la
                       dessiner sur la carte, charger un shapefile, ou bien
@@ -186,15 +241,25 @@ class App extends React.Component {
                             {this.fillCommuneSelect()}
                         </FormControl>
                       </FormGroup>
+                      <Button id='launch_button'
+                              bsStyle='success'
+                              onClick={this.process.bind(this)}>
+                        {"Lancer l'analyse"}
+                      </Button>
+                      <FormInvalidModal show={this.state.show_form_invalid_modal}
+                                        onClose={this.modalClosed.bind(this)}/>
                     </form>
                   </Col>
                   <Col xs={6} md={8}>
                     <Map map={map} target={'map'}/>
                   </Col>
                 </Row>
-              </Panel>
-            </Grid>
-        )
+              </Grid>
+            </Panel>
+            <ResultPanel richness={this.state.richness}
+                         occurrenceCount={this.state.occurrenceCount}/>
+            </div>
+        );
     }
 }
 

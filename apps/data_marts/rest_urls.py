@@ -4,7 +4,7 @@ from django.conf.urls import url, include
 from rest_framework import routers
 
 from apps.data_marts.views import ProvinceDimensionViewSet, \
-    CommuneDimensionViewSet
+    CommuneDimensionViewSet, process
 
 
 router = routers.DefaultRouter()
@@ -21,4 +21,5 @@ router.register(
 
 urlpatterns = [
     url(r'^', include(router.urls)),
+    url(r'^process/', process),
 ]
