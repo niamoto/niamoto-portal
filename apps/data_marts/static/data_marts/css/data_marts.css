@@ -10,3 +10,7 @@
 #launch_button {
     width: 100%;
 }
+
+#preloader {
+    display: none;
+}

@@ -17,6 +17,15 @@ var protocol = window.location.protocol;
 var api_root = protocol + "//" + host + "/api/1.0";
 
 
+function showPreloader() {
+    document.getElementById('preloader').style.display = 'inline';
+}
+
+function hidePreloader() {
+    document.getElementById('preloader').style.display = 'none';
+};
+
+
 var map = getDefaultMap();
 var features = new ol.Collection();
 var source = new ol.source.Vector({features: features});
@@ -101,6 +110,7 @@ class App extends React.Component {
                 }
             });
         }
+        showPreloader();
         $.ajax({
             type: 'GET',
             data: {},
@@ -111,6 +121,7 @@ class App extends React.Component {
                     (new ol.format.GeoJSON()).readFeatures(result)
                 );
                 modify.setActive(false);
+                hidePreloader();
             }
         });
     }
@@ -137,6 +148,7 @@ class App extends React.Component {
                 }
             });
         }
+        showPreloader();
         $.ajax({
             type: 'GET',
             data: {},
@@ -147,6 +159,7 @@ class App extends React.Component {
                     (new ol.format.GeoJSON()).readFeatures(result)
                 );
                 modify.setActive(false);
+                hidePreloader();
             }
         });
     }
@@ -181,6 +194,7 @@ class App extends React.Component {
             return;
         }
         let this_ = this;
+        showPreloader();
         $.ajax({
             type: 'GET',
             data: {
@@ -192,7 +206,8 @@ class App extends React.Component {
                     occurrenceCount: result.summary.occurrence_sum,
                     richness: result.records.length,
                     area: result.area
-                })
+                });
+                hidePreloader();
             }
         });
     }
