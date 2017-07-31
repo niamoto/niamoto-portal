@@ -63,7 +63,8 @@ class App extends React.Component {
             selected_entity: null,
             show_form_invalid_modal: false,
             richness: null,
-            occurrenceCount: null
+            occurrenceCount: null,
+            area: null
         }
     }
 
@@ -82,7 +83,8 @@ class App extends React.Component {
         this.setState({
             province_id: e.target.value,
             occurrenceCount: null,
-            richness: null
+            richness: null,
+            area: null
         });
         if (!e.target.value) {
             this.setState({
@@ -117,7 +119,8 @@ class App extends React.Component {
         this.setState({
             commune_id: e.target.value,
             occurrenceCount: null,
-            richness: null
+            richness: null,
+            area: null
         });
         if (!e.target.value) {
             this.setState({
@@ -187,7 +190,8 @@ class App extends React.Component {
             success: function(result) {
                 this_.setState({
                     occurrenceCount: result.summary.occurrence_sum,
-                    richness: result.records.length
+                    richness: result.records.length,
+                    area: result.area
                 })
             }
         });
@@ -257,7 +261,8 @@ class App extends React.Component {
               </Grid>
             </Panel>
             <ResultPanel richness={this.state.richness}
-                         occurrenceCount={this.state.occurrenceCount}/>
+                         occurrenceCount={this.state.occurrenceCount}
+                         area={this.state.area}/>
             </div>
         );
     }

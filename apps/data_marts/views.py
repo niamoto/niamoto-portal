@@ -53,10 +53,16 @@ def process(request):
         PointCut(selected_entity['type'], [selected_entity['value']]),
     ]
     cell = Cell(cube, cuts)
-    result = browser.aggregate(cell, drilldown=['taxon_dimension'])
+    result = browser.aggregate(
+        cell,
+        drilldown=['taxon_dimension'],
+    )
+    dim = get_dimension(selected_entity['type'])
+    area = dim.get_value(selected_entity['value'], ["area"])[0]
     return Response({
         'summary': result.summary,
         'records': list(result),
+        'area': area,
     })
 
 
