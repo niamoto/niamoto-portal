@@ -6,7 +6,7 @@ import {
 } from 'react-bootstrap';
 import ol from 'openlayers';
 import {
-    Map, getDefaultMap
+    Map, getDefaultMap, getPolygonArea
 } from '../niamoto_base_map';
 import {FormInvalidModal} from './form_invalid_modal';
 import {ResultPanel} from './result_panel';
@@ -39,13 +39,19 @@ var draw = new ol.interaction.Draw({
 var modify = new ol.interaction.Modify({
   features: features,
 });
+
+var draw_start_event = new CustomEvent('draw_start_event');
+var draw_end_event = new CustomEvent('draw_end_event');
+
 draw.on('drawstart', (event) => {
-    source.clear();
+    window.dispatchEvent(draw_start_event);
 })
 draw.on('drawend', (event) => {
     source.clear();
     modify.setActive(true);
+    window.dispatchEvent(draw_end_event);
 })
+
 map.addLayer(vector);
 map.addInteraction(draw);
 map.addInteraction(modify);
@@ -75,6 +81,48 @@ class App extends React.Component {
             occurrenceCount: null,
             area: null
         }
+    }
+
+    componentDidMount() {
+        window.addEventListener(
+            "draw_end_event",
+            this.handleDrawEndEvent.bind(this)
+        );
+        window.addEventListener(
+            "draw_start_event",
+            this.handleDrawStartEvent.bind(this)
+        );
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener(
+            "draw_end_event",
+            this.handleDrawEndEvent.bind(this)
+        );
+        window.removeEventListener(
+            "draw_start_event",
+            this.handleDrawStartEvent.bind(this)
+        );
+    }
+
+    handleDrawStartEvent(event) {
+        this.setState({
+            province_id: 0,
+            massif_id: 0,
+            commune_id: 0,
+            occurrenceCount: null,
+            richness: null,
+            area: null,
+            selected_entity: null
+        });
+    }
+
+    handleDrawEndEvent(event) {
+        this.setState({
+            selected_entity: {
+                'type': 'draw'
+            }
+        });
     }
 
     fillProvinceSelect() {
@@ -193,6 +241,12 @@ class App extends React.Component {
             })
             return;
         }
+        if (selected_entity.type == 'draw') {
+            let format = new ol.format.WKT();
+            selected_entity.value = format.writeFeature(
+                source.getFeatures()[0]
+            );
+        }
         let this_ = this;
         showPreloader();
         $.ajax({
@@ -202,10 +256,19 @@ class App extends React.Component {
             },
             url: api_root + "/data_mart/process/",
             success: function(result) {
+                let area;
+                if (selected_entity['type'] == 'draw') {
+                    area = getPolygonArea(
+                        map,
+                        source.getFeatures()[0].getGeometry()
+                    );
+                } else {
+                    area = result.area;
+                }
                 this_.setState({
                     occurrenceCount: result.summary.occurrence_sum,
                     richness: result.records.length,
-                    area: result.area
+                    area: area
                 });
                 hidePreloader();
             }

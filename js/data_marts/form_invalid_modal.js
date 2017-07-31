@@ -30,7 +30,8 @@ export class FormInvalidModal extends React.Component {
                 </Modal.Header>
                 <Modal.Body>
                     <h4>{"Le formulaire est invalide"}</h4>
-                    <p>{"Veuillez selectionner une entité géographique."}</p>
+                    <p>{"Veuillez selectionner une entité géographique, "
+                        + "dessiner un polygone ou charger un shapefile."}</p>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button onClick={this.props.onClose}>{"Fermer"}</Button>

@@ -3,7 +3,7 @@
 import json
 
 from niamoto.api.data_marts_api import get_dimension, get_dimensional_model
-from cubes import PointCut, Cell
+from cubes import PointCut, Cell, SetCut
 
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
@@ -49,16 +49,21 @@ def process(request):
     selected_entity = json.loads(
         request.query_params.get('selected_entity', None)
     )
-    cuts = [
-        PointCut(selected_entity['type'], [selected_entity['value']]),
-    ]
+    if selected_entity['type'] == 'draw':
+        cuts = get_occurrence_location_cuts(selected_entity)
+        area = 0
+    else:
+        cuts = [
+            PointCut(selected_entity['type'], [selected_entity['value']]),
+        ]
+        dim = get_dimension(selected_entity['type'])
+        area = dim.get_value(selected_entity['value'], ["area"])[0]
     cell = Cell(cube, cuts)
     result = browser.aggregate(
         cell,
         drilldown=['taxon_dimension'],
     )
-    dim = get_dimension(selected_entity['type'])
-    area = dim.get_value(selected_entity['value'], ["area"])[0]
+
     return Response({
         'summary': result.summary,
         'records': list(result),
@@ -82,6 +87,26 @@ def get_commune_levels():
     labels = commune_dim.get_labels()
     labels = [(str(k), v) for k, v in labels.to_dict().items()]
     return labels
+
+
+def get_occurrence_location_cuts(selected_entity):
+    wkt = selected_entity['value']
+    dim = get_dimension('occurrence_location')
+    df = dim.get_values(wkt_filter=wkt)
+    idx = list(df.index.values)
+    if len(idx) > 0:
+        cuts = [
+            SetCut(
+                'occurrence_location',
+                [[int(i)] for i in idx],
+                hierarchy='default'
+            )
+        ]
+    else:
+        cuts = [
+            PointCut('occurrence_location', [-1])
+        ]
+    return cuts
 
 
 class DimensionViewSet(ViewSet):
