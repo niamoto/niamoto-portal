@@ -14,24 +14,34 @@ export class ResultPanel extends React.Component {
         if (this.props.richness === null) {
             return '';
         }
-        return "Nombre de taxons observée dans cette zone: "
-            + this.props.richness + '.';
+        return <p>
+                 {"Nombre de taxons observée dans cette zone: "}
+                 <b>{this.props.richness}</b>{"."}
+               </p>
     }
 
     getOccurrenceCountText() {
         if (this.props.occurrenceCount === null) {
             return '';
         }
-        return "Nombre d'occurrences observées dans cette zone: "
-            + this.props.occurrenceCount + ".";
+        return <p>
+                 {"Nombre d'occurrences observées dans cette zone: "}
+                 <b>{this.props.occurrenceCount}</b>{"."}
+               </p>
     }
 
     getAreaText() {
         if (this.props.area === null) {
             return '';
         }
-        return "Superficie de l'emprise selectionnée: "
-            + this.props.area + " Km" + String.fromCharCode( "178" ) + ".";
+        return <p>
+                 {"Superficie de l'emprise selectionnée: "}
+                 <b>
+                    {this.props.area} {"Km"}
+                    {String.fromCharCode( "178" )}
+                 </b>
+                 {"."}
+               </p>
     }
 
     render() {
@@ -41,13 +51,13 @@ export class ResultPanel extends React.Component {
               <Row>
                 <Col xs={6} md={6}>
                   <Panel header={"Emprise"}>
-                    <h4>{this.getRichnessText()}</h4>
-                    <h4>{this.getOccurrenceCountText()}</h4>
+                    {this.getRichnessText()}
+                    {this.getOccurrenceCountText()}
                   </Panel>
                 </Col>
                 <Col xs={6} md={6}>
                   <Panel header={"Composition connue"}>
-                    <h4>{this.getAreaText()}</h4>
+                    {this.getAreaText()}
                   </Panel>
                 </Col>
               </Row>
