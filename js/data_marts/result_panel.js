@@ -15,7 +15,7 @@ export class ResultPanel extends React.Component {
             return '';
         }
         return <p>
-                 {"Nombre de taxons observée dans cette zone: "}
+                 {"Nombre de taxons observés dans cette zone: "}
                  <b>{this.props.richness}</b>{"."}
                </p>
     }

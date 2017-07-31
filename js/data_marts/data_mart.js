@@ -45,6 +45,7 @@ var draw_end_event = new CustomEvent('draw_end_event');
 
 draw.on('drawstart', (event) => {
     window.dispatchEvent(draw_start_event);
+    modify.setActive(false);
 })
 draw.on('drawend', (event) => {
     source.clear();
