@@ -14,3 +14,11 @@
 #preloader {
     display: none;
 }
+
+#known_composition_panel {
+    height: 200px;
+}
+
+#area_panel {
+    height: 200px;
+}

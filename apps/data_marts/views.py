@@ -24,7 +24,6 @@ class DataMartView(TemplateView):
         return {
             'props': json.dumps({
                 'provinces': get_province_levels(),
-                'massifs': get_massif_levels(),
                 'communes': get_commune_levels(),
             }),
         }
@@ -76,10 +75,6 @@ def get_province_levels():
     labels = province_dim.get_labels()
     labels = [(str(k), v) for k, v in labels.to_dict().items()]
     return labels
-
-
-def get_massif_levels():
-    return [None]
 
 
 def get_commune_levels():

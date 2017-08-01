@@ -35,7 +35,7 @@ export class ResultPanel extends React.Component {
             return '';
         }
         return <p>
-                 {"Superficie de l'emprise selectionnée: "}
+                 {"Superficie de la zone selectionnée: "}
                  <b>
                     {this.props.area} {"Km"}
                     {String.fromCharCode( "178" )}
@@ -49,15 +49,15 @@ export class ResultPanel extends React.Component {
           <Panel>
             <Grid>
               <Row>
-                <Col xs={6} md={6}>
-                  <Panel header={"Emprise"}>
-                    {this.getRichnessText()}
-                    {this.getOccurrenceCountText()}
+                <Col xs={12} md={6}>
+                  <Panel id={'area_panel'} header={"Emprise"}>
+                    {this.getAreaText()}
                   </Panel>
                 </Col>
-                <Col xs={6} md={6}>
-                  <Panel header={"Composition connue"}>
-                    {this.getAreaText()}
+                <Col xs={12} md={6}>
+                  <Panel id={'known_composition_panel'} header={"Composition connue"}>
+                    {this.getRichnessText()}
+                    {this.getOccurrenceCountText()}
                   </Panel>
                 </Col>
               </Row>

@@ -73,7 +73,6 @@ class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            massif_id: 0,
             province_id: 0,
             commune_id: 0,
             selected_entity: null,
@@ -109,17 +108,16 @@ class App extends React.Component {
     handleDrawStartEvent(event) {
         this.setState({
             province_id: 0,
-            massif_id: 0,
             commune_id: 0,
-            occurrenceCount: null,
-            richness: null,
-            area: null,
             selected_entity: null
         });
     }
 
     handleDrawEndEvent(event) {
         this.setState({
+            occurrenceCount: null,
+            richness: null,
+            area: null,
             selected_entity: {
                 'type': 'draw'
             }
@@ -151,7 +149,6 @@ class App extends React.Component {
             return;
         } else {
             this.setState({
-                massif_id: 0,
                 commune_id: 0,
                 selected_entity: {
                     'type': 'provinces',
@@ -189,7 +186,6 @@ class App extends React.Component {
             return;
         } else {
             this.setState({
-                massif_id: 0,
                 province_id: 0,
                 selected_entity: {
                     'type': 'communes',
@@ -211,16 +207,6 @@ class App extends React.Component {
                 hidePreloader();
             }
         });
-    }
-
-    fillMassifSelect() {
-        let items = [];
-        let massifs = this.props.massifs;
-        for (let i = 0; i < massifs.length; i++) {
-            let v = massifs[i];
-            items.push(<option key={v} value={v}>{v}</option>);
-        }
-        return items;
     }
 
     fillCommuneSelect() {
@@ -300,12 +286,6 @@ class App extends React.Component {
                         type="file"
                         label="Charger un shapefile"
                       />
-                      <FormGroup controlId="formControlsSelect">
-                        <ControlLabel>Sélectionner un massif</ControlLabel>
-                        <FormControl componentClass="select" placeholder="select">
-                            {this.fillMassifSelect()}
-                        </FormControl>
-                      </FormGroup>
                       <FormGroup controlId="formControlsSelect">
                         <ControlLabel>Sélectionner une province</ControlLabel>
                         <FormControl componentClass="select"
