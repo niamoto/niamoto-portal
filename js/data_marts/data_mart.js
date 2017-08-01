@@ -143,6 +143,7 @@ class App extends React.Component {
             area: null
         });
         if (!e.target.value) {
+            source.clear();
             this.setState({
                 selected_entity: null
             })
@@ -180,6 +181,7 @@ class App extends React.Component {
             area: null
         });
         if (!e.target.value) {
+            source.clear();
             this.setState({
                 selected_entity: null
             })
