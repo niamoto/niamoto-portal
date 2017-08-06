@@ -18,7 +18,8 @@
     "react-dom": "global:ReactDOM",
     "react-bootstrap": "global:ReactBootstrap",
     "openlayers": "global:ol",
-    "react-table": "global:ReactTable"
+    "react-table": "global:ReactTable",
+    "d3": "global:d3"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",

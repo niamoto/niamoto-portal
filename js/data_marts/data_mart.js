@@ -43,6 +43,8 @@ var modify = new ol.interaction.Modify({
 var draw_start_event = new CustomEvent('draw_start_event');
 var draw_end_event = new CustomEvent('draw_end_event');
 
+var process_end_event = new CustomEvent('process_end_event');
+
 draw.on('drawstart', (event) => {
     window.dispatchEvent(draw_start_event);
     modify.setActive(false);
@@ -165,6 +167,7 @@ class App extends React.Component {
             });
         }
         showPreloader();
+        let _this = this;
         $.ajax({
             type: 'GET',
             data: {},
@@ -175,6 +178,13 @@ class App extends React.Component {
                     (new ol.format.GeoJSON()).readFeatures(result)
                 );
                 modify.setActive(false);
+                _this.setState({
+                    selected_entity: {
+                        'type': 'provinces',
+                        'value': _this.state.selected_entity.value,
+                        'geojson': result
+                    }
+                });
                 hidePreloader();
             }
         });
@@ -205,6 +215,7 @@ class App extends React.Component {
             });
         }
         showPreloader();
+        let _this = this;
         $.ajax({
             type: 'GET',
             data: {},
@@ -215,6 +226,13 @@ class App extends React.Component {
                     (new ol.format.GeoJSON()).readFeatures(result)
                 );
                 modify.setActive(false);
+                _this.setState({
+                selected_entity: {
+                    'type': 'communes',
+                    'value': _this.state.selected_entity.value,
+                    'geojson': result
+                }
+            });
                 hidePreloader();
             }
         });
@@ -264,9 +282,15 @@ class App extends React.Component {
         }
         if (selected_entity.type == 'draw') {
             let format = new ol.format.WKT();
-            selected_entity.value = format.writeFeature(
-                source.getFeatures()[0]
+            let format_geojson = new ol.format.GeoJSON();
+            let feature = source.getFeatures()[0];
+            let wkt = format.writeFeature(feature);
+            let geojson = format_geojson.writeFeature(
+                feature,
+                {rightHanded: false}
             );
+            selected_entity.value = wkt;
+            selected_entity.geojson = geojson;
         }
         let this_ = this;
         showPreloader();
@@ -304,6 +328,8 @@ class App extends React.Component {
                     columns:  columns
                 });
                 hidePreloader();
+                process_end_event.selected_entity = selected_entity
+                window.dispatchEvent(process_end_event);
             }
         });
     }

@@ -3,6 +3,7 @@ import {
     Grid, Panel, Row, Col
 } from 'react-bootstrap';
 import {PivotTable} from './result_pivot_table';
+import {D3Map} from './result_d3_map';
 
 
 export class ResultPanel extends React.Component {
@@ -62,8 +63,15 @@ export class ResultPanel extends React.Component {
                   </Panel>
                 </Col>
                 <Col xs={12} md={12} lg={12}>
-                    <PivotTable data={this.props.data}
-                                columns={this.props.columns}/>
+                    <Panel id={'pivot_table_panel'} header={"Détails"}>
+                        <PivotTable data={this.props.data}
+                                    columns={this.props.columns}/>
+                    </Panel>
+                </Col>
+                <Col xs={12} md={12} lg={12}>
+                    <Panel id={'d3_map_panel'} header={"Détail de la zone"}>
+                        <D3Map/>
+                    </Panel>
                 </Col>
               </Row>
             </Grid>
