@@ -10,13 +10,15 @@
     "openlayers": "^4.2.0",
     "react": "^15.6.1",
     "react-bootstrap": "^0.31.0",
-    "react-dom": "^15.6.1"
+    "react-dom": "^15.6.1",
+    "react-table": "^6.5.3"
   },
   "browserify-shim": {
     "react": "global:React",
     "react-dom": "global:ReactDOM",
     "react-bootstrap": "global:ReactBootstrap",
-    "openlayers": "global:ol"
+    "openlayers": "global:ol",
+    "react-table": "global:ReactTable"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",

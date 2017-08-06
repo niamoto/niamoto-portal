@@ -2,6 +2,7 @@ import React from 'react';
 import {
     Grid, Panel, Row, Col
 } from 'react-bootstrap';
+import {PivotTable} from './result_pivot_table';
 
 
 export class ResultPanel extends React.Component {
@@ -59,6 +60,10 @@ export class ResultPanel extends React.Component {
                     {this.getRichnessText()}
                     {this.getOccurrenceCountText()}
                   </Panel>
+                </Col>
+                <Col xs={12} md={12} lg={12}>
+                    <PivotTable data={this.props.data}
+                                columns={this.props.columns}/>
                 </Col>
               </Row>
             </Grid>

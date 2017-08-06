@@ -35,8 +35,15 @@ def process(request):
     agg = [
         {
             "name": "occurrence_sum",
+            "label": "Nombre d'occurrences observées",
             "function": "sum",
             "measure": "occurrence_count",
+        },
+        {
+            "name": "richness",
+            "label": "Nombre de taxons observés",
+            "measure": "taxon_dimension_id",
+            "function": "count_distinct",
         },
     ]
     dm = get_dimensional_model(
@@ -67,12 +74,16 @@ def process(request):
     cell = Cell(cube, cuts)
     result = browser.aggregate(
         cell,
-        drilldown=['taxon_dimension'],
+        drilldown=['rainfall:category'],
     )
-
+    attributes_names = [(i, cube.attribute(i).label)
+                        for i in result.attributes]
+    aggregates_names = [(i.name, i.label) for i in result.aggregates]
     return Response({
         'summary': result.summary,
+        'richness': result.summary['richness'],
         'records': list(result),
+        'columns': attributes_names + aggregates_names,
         'area': area,
     })
 

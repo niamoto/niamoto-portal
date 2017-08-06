@@ -80,7 +80,9 @@ class App extends React.Component {
             show_form_invalid_modal: false,
             richness: null,
             occurrenceCount: null,
-            area: null
+            area: null,
+            data: null,
+            columns: null
         }
     }
 
@@ -119,6 +121,8 @@ class App extends React.Component {
             occurrenceCount: null,
             richness: null,
             area: null,
+            data: null,
+            columns: null,
             selected_entity: {
                 'type': 'draw'
             }
@@ -141,7 +145,9 @@ class App extends React.Component {
             province_id: e.target.value,
             occurrenceCount: null,
             richness: null,
-            area: null
+            area: null,
+            data: null,
+            columns: null
         });
         if (!e.target.value) {
             source.clear();
@@ -179,7 +185,9 @@ class App extends React.Component {
             commune_id: e.target.value,
             occurrenceCount: null,
             richness: null,
-            area: null
+            area: null,
+            data: null,
+            columns: null
         });
         if (!e.target.value) {
             source.clear();
@@ -217,7 +225,9 @@ class App extends React.Component {
             rainfall_filter: e.target.value,
             occurrenceCount: null,
             richness: null,
-            area: null
+            area: null,
+            data: null,
+            columns: null
         });
     }
 
@@ -277,10 +287,21 @@ class App extends React.Component {
                 } else {
                     area = result.area;
                 }
+                let columns = [];
+                for (let i = 0; i < result.columns.length; i++) {
+                    columns.push({
+                        id: result.columns[i][0],
+                        accessor: d => d[result.columns[i][0]],
+                        Header: result.columns[i][1]
+                    });
+                }
+                let data = result.records;
                 this_.setState({
                     occurrenceCount: result.summary.occurrence_sum,
-                    richness: result.records.length,
-                    area: area
+                    richness: result.richness,
+                    area: area,
+                    data: data,
+                    columns:  columns
                 });
                 hidePreloader();
             }
@@ -312,7 +333,7 @@ class App extends React.Component {
                         <FormControl componentClass="select"
                                      placeholder="select"
                                      onChange={this.onProvinceSelected.bind(this)}
-                                     value={this.state.province_id}>
+                                     value={this.state.province_id || ''}>
                             {this.fillProvinceSelect()}
                         </FormControl>
                       </FormGroup>
@@ -322,7 +343,7 @@ class App extends React.Component {
                         <FormControl componentClass="select"
                                      placeholder="select"
                                      onChange={this.onCommuneSelected.bind(this)}
-                                     value={this.state.commune_id}>
+                                     value={this.state.commune_id || ''}>
                             {this.fillCommuneSelect()}
                         </FormControl>
                       </FormGroup>
@@ -332,7 +353,7 @@ class App extends React.Component {
                         <FormControl componentClass="select"
                                      placeholder="select"
                                      onChange={this.onRainfallSelected.bind(this)}
-                                     value={this.state.rainfall_filter}>
+                                     value={this.state.rainfall_filter || ''}>
                             {this.fillRainfallSelect()}
                         </FormControl>
                       </FormGroup>
@@ -353,7 +374,9 @@ class App extends React.Component {
             </Panel>
             <ResultPanel richness={this.state.richness}
                          occurrenceCount={this.state.occurrenceCount}
-                         area={this.state.area}/>
+                         area={this.state.area}
+                         data={this.state.data}
+                         columns={this.state.columns}/>
             </div>
         );
     }
