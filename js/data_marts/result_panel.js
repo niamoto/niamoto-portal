@@ -49,12 +49,12 @@ export class ResultPanel extends React.Component {
           <Panel>
             <Grid>
               <Row>
-                <Col xs={12} md={6}>
+                <Col xs={12} md={12} lg={6}>
                   <Panel id={'area_panel'} header={"Emprise"}>
                     {this.getAreaText()}
                   </Panel>
                 </Col>
-                <Col xs={12} md={6}>
+                <Col xs={12} md={12} lg={6}>
                   <Panel id={'known_composition_panel'} header={"Composition connue"}>
                     {this.getRichnessText()}
                     {this.getOccurrenceCountText()}

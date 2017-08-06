@@ -3,7 +3,7 @@
 import json
 
 from niamoto.api.data_marts_api import get_dimension, get_dimensional_model
-from cubes import PointCut, Cell, SetCut
+from cubes import PointCut, Cell, SetCut, RangeCut
 
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
@@ -25,6 +25,7 @@ class DataMartView(TemplateView):
             'props': json.dumps({
                 'provinces': get_province_levels(),
                 'communes': get_commune_levels(),
+                'rainfall_filters': get_rainfall_filters(),
             }),
         }
 
@@ -57,6 +58,12 @@ def process(request):
         ]
         dim = get_dimension(selected_entity['type'])
         area = dim.get_value(selected_entity['value'], ["area"])[0]
+    # Update cuts with rainfall filter
+    rainfall_filter = request.query_params.get('rainfall_filter', None)
+    if rainfall_filter is not None and rainfall_filter != '':
+        cuts += [
+            PointCut('rainfall', [rainfall_filter])
+        ]
     cell = Cell(cube, cuts)
     result = browser.aggregate(
         cell,
@@ -84,6 +91,11 @@ def get_commune_levels():
     return labels
 
 
+def get_rainfall_filters():
+    dim = get_dimension('rainfall')
+    return dim.cuts[1]
+
+
 def get_occurrence_location_cuts(selected_entity):
     wkt = selected_entity['value']
     dim = get_dimension('occurrence_location')
@@ -94,7 +106,7 @@ def get_occurrence_location_cuts(selected_entity):
             SetCut(
                 'occurrence_location',
                 [[int(i)] for i in idx],
-                hierarchy='default'
+                hierarchy='default',
             )
         ]
     else:

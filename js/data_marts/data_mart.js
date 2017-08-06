@@ -75,6 +75,7 @@ class App extends React.Component {
         this.state = {
             province_id: 0,
             commune_id: 0,
+            rainfall_filter: null,
             selected_entity: null,
             show_form_invalid_modal: false,
             richness: null,
@@ -211,6 +212,15 @@ class App extends React.Component {
         });
     }
 
+    onRainfallSelected(e) {
+        this.setState({
+            rainfall_filter: e.target.value,
+            occurrenceCount: null,
+            richness: null,
+            area: null
+        });
+    }
+
     fillCommuneSelect() {
         let items = [];
         let communes = this.props.communes;
@@ -219,6 +229,18 @@ class App extends React.Component {
             let v = communes[i];
             items.push(<option key={v[1]} value={v[0]}>{v[1]}</option>);
         }
+        return items;
+    }
+
+    fillRainfallSelect() {
+        let items = [];
+        let rainfall_filters = this.props.rainfall_filters;
+        items.push(<option key={''} value={''}>{"Pas de filtre"}</option>);
+        for (let i = 0; i < rainfall_filters.length; i++) {
+            let v = rainfall_filters[i];
+            items.push(<option key={v} value={v}>{v}</option>);
+        }
+        items.push(<option key={'NS'} value={'NS'}>{"NS"}</option>);
         return items;
     }
 
@@ -241,7 +263,8 @@ class App extends React.Component {
         $.ajax({
             type: 'GET',
             data: {
-                selected_entity: JSON.stringify(selected_entity)
+                selected_entity: JSON.stringify(selected_entity),
+                rainfall_filter: this_.state.rainfall_filter
             },
             url: api_root + "/data_mart/process/",
             success: function(result) {
@@ -277,18 +300,14 @@ class App extends React.Component {
               <Grid>
                 <Row>
                   <Col xs={12} md={4}>
-                    <p>
-                      Sélectionnez une zone à analyser. Vous pouvez la
-                      dessiner sur la carte, charger un shapefile, ou bien
-                      sélectionner une entité dans les listes déroulantes.
-                    </p><br/>
                     <form>
                       <FieldGroup
                         id="formControlsFile"
                         type="file"
                         label="Charger un shapefile"
                       />
-                      <FormGroup controlId="formControlsSelect">
+                      {/* Province combobox */}
+                      <FormGroup controlId="provinceSelect">
                         <ControlLabel>Sélectionner une province</ControlLabel>
                         <FormControl componentClass="select"
                                      placeholder="select"
@@ -297,13 +316,24 @@ class App extends React.Component {
                             {this.fillProvinceSelect()}
                         </FormControl>
                       </FormGroup>
-                      <FormGroup controlId="formControlsSelect">
+                      {/* Commune combobox */}
+                      <FormGroup controlId="communeSelect">
                         <ControlLabel>Sélectionner une commune</ControlLabel>
                         <FormControl componentClass="select"
                                      placeholder="select"
                                      onChange={this.onCommuneSelected.bind(this)}
                                      value={this.state.commune_id}>
                             {this.fillCommuneSelect()}
+                        </FormControl>
+                      </FormGroup>
+                      {/* Rainfall combobox */}
+                      <FormGroup controlId="rainfallSelect">
+                        <ControlLabel>Filtrer sur la pluviométrie</ControlLabel>
+                        <FormControl componentClass="select"
+                                     placeholder="select"
+                                     onChange={this.onRainfallSelected.bind(this)}
+                                     value={this.state.rainfall_filter}>
+                            {this.fillRainfallSelect()}
                         </FormControl>
                       </FormGroup>
                       <Button id='launch_button'
