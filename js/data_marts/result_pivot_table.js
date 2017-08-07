@@ -2,7 +2,7 @@ import React from 'react';
 import ReactTable from 'react-table';
 import {
     form, Grid, Row, Col, FormGroup, ControlLabel, FormControl,
-    HelpBlock, option, Panel, Button
+    option, Panel
 } from 'react-bootstrap';
 
 

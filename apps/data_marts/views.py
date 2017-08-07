@@ -3,7 +3,9 @@
 import json
 
 from niamoto.api.data_marts_api import get_dimension, get_dimensional_model
+from niamoto.vector.vector_manager import VectorManager
 from cubes import PointCut, Cell, SetCut
+import geopandas as gpd
 
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
@@ -210,3 +212,37 @@ class CommuneDimensionViewSet(DimensionViewSet):
     @DimensionViewSet.data.setter
     def data(self, value):
         self._data = value.simplify(0.005)
+
+
+class RainfallVectorClassesViewSet(ViewSet):
+    """
+    Viewset for retrieving rainfall vector classes.
+    """
+
+    def list(self, request):
+        geojson = request.query_params.get('geojson')
+        df = VectorManager.get_vector_geo_dataframe(
+            'rainfall_classes',
+            geojson_filter=geojson,
+            geojson_cut=True,
+        )
+        return Response({
+            'geojson': df.to_json()
+        })
+
+
+class ElevationVectorClassesViewSet(ViewSet):
+    """
+    Viewset for retrieving elevation vector classes.
+    """
+
+    def list(self, request):
+        geojson = request.query_params.get('geojson')
+        df = VectorManager.get_vector_geo_dataframe(
+            'elevation_classes',
+            geojson_filter=geojson,
+            geojson_cut=True,
+        )
+        return Response({
+            'geojson': df.to_json()
+        })

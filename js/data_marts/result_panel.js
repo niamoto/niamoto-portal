@@ -68,12 +68,12 @@ export class ResultPanel extends React.Component {
                         <PivotTable data={this.props.data || {}}/>
                     </Panel>
                 </Col>
-                {/*<Col xs={12} md={12} lg={12}>
+                <Col xs={12} md={12} lg={12}>
                     <Panel id={'d3_map_panel'} header={"Détail de la zone"}>
                         <D3Map/>
                     </Panel>
                 </Col>
-                <Col xs={12} md={12} lg={12}>
+                {/*<Col xs={12} md={12} lg={12}>
                     <Panel id={'d3_heatmap_panel'} header={"Profil environnemental de la zone (Altitude / Pluviométrie)"}>
                         <D3HeatMap/>
                     </Panel>

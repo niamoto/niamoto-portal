@@ -13,6 +13,17 @@
 
 #preloader {
     display: none;
+    position: fixed;
+    top: 30%;
+    left: 50%;
+}
+
+#d3_map_preloader {
+    display: none;
+    position: absolute;
+    top: 30%;
+    left: 40%;
+    z-index: 10;
 }
 
 #known_composition_panel {
@@ -27,13 +38,29 @@
     height: 320px;
 }
 
+#d3_rainfall_legend {
+    height: 70px;
+}
+
+#d3_elevation_legend {
+    height: 70px;
+}
+
 #d3_heatmap {
     height: 320px;
 }
 
-.land {
-  fill: #f5f5f5;
-  stroke: #afafaf;
+.polygon {
+    fill: #f5f5f5;
+    stroke: #afafaf;
+}
+
+.rainfall_classes {
+    stroke-width: 0;
+}
+
+.elevation_classes {
+    stroke-width: 0;
 }
 
 svg {

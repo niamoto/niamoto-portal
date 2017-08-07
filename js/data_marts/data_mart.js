@@ -83,7 +83,8 @@ class App extends React.Component {
             richness: null,
             occurrenceCount: null,
             area: null,
-            data: null
+            data: null,
+            buttonDisabled: false
         }
     }
 
@@ -160,7 +161,8 @@ class App extends React.Component {
                 selected_entity: {
                     'type': 'provinces',
                     'value': e.target.value
-                }
+                },
+                buttonDisabled: true
             });
         }
         showPreloader();
@@ -180,7 +182,8 @@ class App extends React.Component {
                         'type': 'provinces',
                         'value': _this.state.selected_entity.value,
                         'geojson': result
-                    }
+                    },
+                    buttonDisabled: false
                 });
                 hidePreloader();
             }
@@ -207,7 +210,8 @@ class App extends React.Component {
                 selected_entity: {
                     'type': 'communes',
                     'value': e.target.value
-                }
+                },
+                buttonDisabled: true
             });
         }
         showPreloader();
@@ -227,7 +231,8 @@ class App extends React.Component {
                     'type': 'communes',
                     'value': _this.state.selected_entity.value,
                     'geojson': result
-                }
+                },
+                buttonDisabled: false
             });
                 hidePreloader();
             }
@@ -378,7 +383,8 @@ class App extends React.Component {
                       </FormGroup>
                       <Button id='launch_button'
                               bsStyle='success'
-                              onClick={this.process.bind(this)}>
+                              onClick={this.process.bind(this)}
+                              disabled={this.state.buttonDisabled}>
                         {"Lancer l'analyse"}
                       </Button>
                       <FormInvalidModal show={this.state.show_form_invalid_modal}
