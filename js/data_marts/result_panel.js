@@ -4,6 +4,7 @@ import {
 } from 'react-bootstrap';
 import {PivotTable} from './result_pivot_table';
 import {D3Map} from './result_d3_map';
+import {D3HeatMap} from './result_d3_heatmap';
 
 
 export class ResultPanel extends React.Component {
@@ -57,20 +58,24 @@ export class ResultPanel extends React.Component {
                   </Panel>
                 </Col>
                 <Col xs={12} md={12} lg={6}>
-                  <Panel id={'known_composition_panel'} header={"Composition connue"}>
+                  <Panel id={'known_composition_panel'} header={"Composition connue - Total"}>
                     {this.getRichnessText()}
                     {this.getOccurrenceCountText()}
                   </Panel>
                 </Col>
                 <Col xs={12} md={12} lg={12}>
-                    <Panel id={'pivot_table_panel'} header={"Détails"}>
-                        <PivotTable data={this.props.data}
-                                    columns={this.props.columns}/>
+                    <Panel id={'pivot_table_panel'} header={"Composition connue - Détail"}>
+                        <PivotTable data={this.props.data || {}}/>
                     </Panel>
                 </Col>
                 <Col xs={12} md={12} lg={12}>
                     <Panel id={'d3_map_panel'} header={"Détail de la zone"}>
                         <D3Map/>
+                    </Panel>
+                </Col>
+                <Col xs={12} md={12} lg={12}>
+                    <Panel id={'d3_heatmap_panel'} header={"Profil environnemental de la zone (Altitude / Pluviométrie)"}>
+                        <D3HeatMap/>
                     </Panel>
                 </Col>
               </Row>

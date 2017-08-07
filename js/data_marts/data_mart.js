@@ -83,8 +83,7 @@ class App extends React.Component {
             richness: null,
             occurrenceCount: null,
             area: null,
-            data: null,
-            columns: null
+            data: null
         }
     }
 
@@ -124,7 +123,6 @@ class App extends React.Component {
             richness: null,
             area: null,
             data: null,
-            columns: null,
             selected_entity: {
                 'type': 'draw'
             }
@@ -148,8 +146,7 @@ class App extends React.Component {
             occurrenceCount: null,
             richness: null,
             area: null,
-            data: null,
-            columns: null
+            data: null
         });
         if (!e.target.value) {
             source.clear();
@@ -196,8 +193,7 @@ class App extends React.Component {
             occurrenceCount: null,
             richness: null,
             area: null,
-            data: null,
-            columns: null
+            data: null
         });
         if (!e.target.value) {
             source.clear();
@@ -244,8 +240,7 @@ class App extends React.Component {
             occurrenceCount: null,
             richness: null,
             area: null,
-            data: null,
-            columns: null
+            data: null
         });
     }
 
@@ -297,7 +292,10 @@ class App extends React.Component {
         $.ajax({
             type: 'GET',
             data: {
-                selected_entity: JSON.stringify(selected_entity),
+                selected_entity: JSON.stringify({
+                    type: selected_entity.type,
+                    value: selected_entity.value
+                }),
                 rainfall_filter: this_.state.rainfall_filter
             },
             url: api_root + "/data_mart/process/",
@@ -311,21 +309,16 @@ class App extends React.Component {
                 } else {
                     area = result.area;
                 }
-                let columns = [];
-                for (let i = 0; i < result.columns.length; i++) {
-                    columns.push({
-                        id: result.columns[i][0],
-                        accessor: d => d[result.columns[i][0]],
-                        Header: result.columns[i][1]
-                    });
-                }
-                let data = result.records;
+                let data = {
+                    records: result.records,
+                    columns: result.columns,
+                    totals: result.totals
+                };
                 this_.setState({
                     occurrenceCount: result.summary.occurrence_sum,
                     richness: result.richness,
                     area: area,
                     data: data,
-                    columns:  columns
                 });
                 hidePreloader();
                 process_end_event.selected_entity = selected_entity
@@ -401,8 +394,7 @@ class App extends React.Component {
             <ResultPanel richness={this.state.richness}
                          occurrenceCount={this.state.occurrenceCount}
                          area={this.state.area}
-                         data={this.state.data}
-                         columns={this.state.columns}/>
+                         data={this.state.data || {}}/>
             </div>
         );
     }

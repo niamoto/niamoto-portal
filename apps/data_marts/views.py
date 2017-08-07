@@ -3,7 +3,7 @@
 import json
 
 from niamoto.api.data_marts_api import get_dimension, get_dimensional_model
-from cubes import PointCut, Cell, SetCut, RangeCut
+from cubes import PointCut, Cell, SetCut
 
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
@@ -74,10 +74,28 @@ def process(request):
     cell = Cell(cube, cuts)
     result = browser.aggregate(
         cell,
+        drilldown=[
+            'rainfall:category',
+            'elevation:category',
+        ],
+    )
+    result_rainfall = browser.aggregate(
+        cell,
         drilldown=['rainfall:category'],
     )
-    attributes_names = [(i, cube.attribute(i).label)
-                        for i in result.attributes]
+    rainfall_total = {i['rainfall.category']: i for i in result_rainfall}
+    result_elevation = browser.aggregate(
+        cell,
+        drilldown=['elevation:category'],
+    )
+    elevation_total = {i['elevation.category']: i for i in result_elevation}
+    attributes = [
+        'rainfall.category',
+        'elevation.category',
+    ]
+    attributes_names = []
+    for i in attributes:
+        attributes_names.append((i, cube.attribute(i).label))
     aggregates_names = [(i.name, i.label) for i in result.aggregates]
     return Response({
         'summary': result.summary,
@@ -85,6 +103,10 @@ def process(request):
         'records': list(result),
         'columns': attributes_names + aggregates_names,
         'area': area,
+        'totals': {
+            'rainfall.category': rainfall_total,
+            'elevation.category': elevation_total,
+        }
     })
 
 

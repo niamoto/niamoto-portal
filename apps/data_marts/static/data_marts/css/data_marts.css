@@ -24,7 +24,11 @@
 }
 
 #d3_map {
-    height: 300px;
+    height: 320px;
+}
+
+#d3_heatmap {
+    height: 320px;
 }
 
 .land {
@@ -37,12 +41,24 @@ svg {
     height: 100%;
 }
 
-path.slice{
+path.slice {
     stroke-width: 1px;
     stroke: white;
 }
 
-path.slice{
+path.slice {
     stroke-width: 1px;
     stroke: white;
+}
+
+.ReactTable {
+    min-height: 200px;
+}
+
+.form-inline {
+    margin-bottom: 10px;
+}
+
+.form-inline label {
+    margin-right: 10px;
 }

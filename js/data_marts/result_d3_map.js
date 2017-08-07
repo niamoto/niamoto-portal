@@ -6,11 +6,11 @@ export class D3Map extends React.Component {
 
     constructor(props) {
         super(props);
-        this.setState({
+        this.state = {
             height: null,
             width: null,
             svg: null
-        })
+        };
     };
 
     componentDidMount() {
