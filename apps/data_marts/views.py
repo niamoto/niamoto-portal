@@ -32,7 +32,7 @@ class DataMartView(TemplateView):
         }
 
 
-@api_view(['GET'])
+@api_view(['POST'])
 def process(request):
     agg = [
         {
@@ -56,7 +56,7 @@ def process(request):
     cube = workspace.cube('taxon_observed_occurrences')
     browser = workspace.browser(cube)
     selected_entity = json.loads(
-        request.query_params.get('selected_entity', None)
+        request.POST.get('selected_entity', None)
     )
     if selected_entity['type'] == 'draw':
         cuts = get_occurrence_location_cuts(selected_entity)
@@ -68,7 +68,7 @@ def process(request):
         dim = get_dimension(selected_entity['type'])
         area = dim.get_value(selected_entity['value'], ["area"])[0]
     # Update cuts with rainfall filter
-    rainfall_filter = request.query_params.get('rainfall_filter', None)
+    rainfall_filter = request.POST.get('rainfall_filter', None)
     if rainfall_filter is not None and rainfall_filter != '':
         cuts += [
             PointCut('rainfall', [rainfall_filter])
@@ -214,35 +214,33 @@ class CommuneDimensionViewSet(DimensionViewSet):
         self._data = value.simplify(0.005)
 
 
-class RainfallVectorClassesViewSet(ViewSet):
+@api_view(['POST'])
+def get_rainfall_vector_classes(request):
     """
-    Viewset for retrieving rainfall vector classes.
+    Retrieve rainfall vector classes.
     """
-
-    def list(self, request):
-        geojson = request.query_params.get('geojson')
-        df = VectorManager.get_vector_geo_dataframe(
-            'rainfall_classes',
-            geojson_filter=geojson,
-            geojson_cut=True,
-        )
-        return Response({
-            'geojson': df.to_json()
-        })
+    geojson = request.POST.get('geojson')
+    df = VectorManager.get_vector_geo_dataframe(
+        'rainfall_classes',
+        geojson_filter=geojson,
+        geojson_cut=True,
+    )
+    return Response({
+        'geojson': df.to_json()
+    })
 
 
-class ElevationVectorClassesViewSet(ViewSet):
+@api_view(['POST'])
+def get_elevation_vector_classes(request):
     """
-    Viewset for retrieving elevation vector classes.
+    Retrieve elevation vector classes.
     """
-
-    def list(self, request):
-        geojson = request.query_params.get('geojson')
-        df = VectorManager.get_vector_geo_dataframe(
-            'elevation_classes',
-            geojson_filter=geojson,
-            geojson_cut=True,
-        )
-        return Response({
-            'geojson': df.to_json()
-        })
+    geojson = request.POST.get('geojson')
+    df = VectorManager.get_vector_geo_dataframe(
+        'elevation_classes',
+        geojson_filter=geojson,
+        geojson_cut=True,
+    )
+    return Response({
+        'geojson': df.to_json()
+    })

@@ -273,6 +273,12 @@ class App extends React.Component {
     }
 
     process() {
+        let csrftoken = $.cookie('csrftoken');
+        $.ajaxSetup({
+            'beforeSend': function(xhr, settings) {
+                xhr.setRequestHeader("X-CSRFToken", csrftoken);
+            }
+        });
         let selected_entity = this.state.selected_entity;
         if (selected_entity === null) {
             this.setState({
@@ -295,7 +301,7 @@ class App extends React.Component {
         let this_ = this;
         showPreloader();
         $.ajax({
-            type: 'GET',
+            type: 'POST',
             data: {
                 selected_entity: JSON.stringify({
                     type: selected_entity.type,

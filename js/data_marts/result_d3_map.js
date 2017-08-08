@@ -125,6 +125,12 @@ export class D3Map extends React.Component {
 
     handleProcessEndEvent(e) {
         showPreloader();
+        let csrftoken = $.cookie('csrftoken');
+        $.ajaxSetup({
+            'beforeSend': function(xhr, settings) {
+                xhr.setRequestHeader("X-CSRFToken", csrftoken);
+            }
+        });
         let data = JSON.parse(e.selected_entity.geojson);
         let feature = data;
         if (data.features) {
@@ -139,7 +145,7 @@ export class D3Map extends React.Component {
         }
         current_rainfall_request = new window.XMLHttpRequest();
         current_rainfall_request = $.ajax({
-            type: 'GET',
+            type: 'POST',
             data: {
                 geojson: JSON.stringify(feature.geometry),
             },
@@ -156,7 +162,7 @@ export class D3Map extends React.Component {
         }
         current_elevation_request = new window.XMLHttpRequest();
         $.ajax({
-            type: 'GET',
+            type: 'POST',
             data: {
                 geojson: JSON.stringify(feature.geometry),
             },
