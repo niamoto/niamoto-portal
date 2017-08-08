@@ -130,6 +130,8 @@ export class D3Map extends React.Component {
         if (data.features) {
             feature = data.features[0];
         }
+        this.state.svg.selectAll('.rainfall_classes').remove();
+        this.state.svg.selectAll('.elevation_classes').remove();
         this.updateMap(feature);
         let this_ = this;
         if(current_rainfall_request != null) {
