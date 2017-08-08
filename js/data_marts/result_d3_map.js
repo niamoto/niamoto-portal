@@ -9,13 +9,13 @@ var host = window.location.host;
 var protocol = window.location.protocol;
 var api_root = protocol + "//" + host + "/api/1.0";
 
-var rainfall_low = "#819FF7";
-var rainfall_medium = "#0040FF";
-var rainfall_high = "#0B0B3B";
+var rainfall_low = "#a6bddb";
+var rainfall_medium = "#3690c0";
+var rainfall_high = "#023858";
 
-var elevation_low = "#74DF00";
-var elevation_medium = "#FFBF00";
-var elevation_high = "#DF0101";
+var elevation_low = "#1a9850";
+var elevation_medium = "#fdae61";
+var elevation_high = "#d73027";
 
 var current_rainfall_request = null;
 var current_elevation_request = null;
