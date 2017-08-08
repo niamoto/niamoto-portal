@@ -352,11 +352,11 @@ class App extends React.Component {
                 <Row>
                   <Col xs={12} md={4}>
                     <form>
-                      <FieldGroup
+                      {/*<FieldGroup
                         id="formControlsFile"
                         type="file"
                         label="Charger un shapefile"
-                      />
+                      />*/}
                       {/* Province combobox */}
                       <FormGroup controlId="provinceSelect">
                         <ControlLabel>Sélectionner une province</ControlLabel>
