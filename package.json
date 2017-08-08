@@ -7,6 +7,7 @@
   "license": "GPL-3.0",
   "dependencies": {
     "babel-plugin-transform-object-rest-spread": "^6.23.0",
+    "babel-polyfill": "^6.23.0",
     "openlayers": "^4.2.0",
     "react": "^15.6.1",
     "react-bootstrap": "^0.31.0",

@@ -4,6 +4,8 @@ import {
     form, Grid, Row, Col, FormGroup, ControlLabel, FormControl,
     option, Panel
 } from 'react-bootstrap';
+/* Avoid 'Object.entries is not a function' error in some browsers */
+import 'babel-polyfill';
 
 
 export class PivotTable extends React.Component {
