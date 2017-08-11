@@ -157,7 +157,7 @@ export class D3Map extends React.Component {
                 this_.addRainfallClasses(JSON.parse(result.geojson));
             },
             error: function(request, error) {
-                hidePreloader();
+                return;
             }
         });
         if(current_elevation_request != null) {
@@ -178,7 +178,7 @@ export class D3Map extends React.Component {
                 hidePreloader();
             },
             error: function(request, error) {
-                hidePreloader();
+                return;
             }
         });
     };
