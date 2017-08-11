@@ -78,6 +78,7 @@ class App extends React.Component {
             province_id: 0,
             commune_id: 0,
             rainfall_filter: null,
+            elevation_filter: null,
             selected_entity: null,
             show_form_invalid_modal: false,
             richness: null,
@@ -189,6 +190,18 @@ class App extends React.Component {
                     buttonDisabled: false
                 });
                 hidePreloader();
+            },
+            error: function(request, error) {
+                alert("Une erreur est survenue pendant le chargement des "
+                    +"données, veuillez réessayer.\n"
+                    + "Si l'erreur persiste, contactez "
+                    +"dimitri.justeau@gmail.com");
+                _this.setState({
+                    province_id: 0,
+                    selected_entity: null,
+                    buttonDisabled: false
+                });
+                hidePreloader();
             }
         });
     }
@@ -239,6 +252,18 @@ class App extends React.Component {
                 buttonDisabled: false
             });
                 hidePreloader();
+            },
+            error: function(request, error) {
+                alert("Une erreur est survenue pendant le chargement des "
+                    +"données, veuillez réessayer.\n"
+                    + "Si l'erreur persiste, contactez "
+                    +"dimitri.justeau@gmail.com");
+                _this.setState({
+                    commune_id: 0,
+                    selected_entity: null,
+                    buttonDisabled: false
+                });
+                hidePreloader();
             }
         });
     }
@@ -246,6 +271,17 @@ class App extends React.Component {
     onRainfallSelected(e) {
         this.setState({
             rainfall_filter: e.target.value,
+            occurrenceCount: null,
+            uniqueTaxa: null,
+            richness: null,
+            area: null,
+            data: null
+        });
+    }
+
+    onElevationSelected(e) {
+        this.setState({
+            elevation_filter: e.target.value,
             occurrenceCount: null,
             uniqueTaxa: null,
             richness: null,
@@ -271,6 +307,18 @@ class App extends React.Component {
         items.push(<option key={''} value={''}>{"Pas de filtre"}</option>);
         for (let i = 0; i < rainfall_filters.length; i++) {
             let v = rainfall_filters[i];
+            items.push(<option key={v} value={v}>{v}</option>);
+        }
+        items.push(<option key={'NS'} value={'NS'}>{"NS"}</option>);
+        return items;
+    }
+
+    fillElevationSelect() {
+        let items = [];
+        let elevation_filters = this.props.elevation_filters;
+        items.push(<option key={''} value={''}>{"Pas de filtre"}</option>);
+        for (let i = 0; i < elevation_filters.length; i++) {
+            let v = elevation_filters[i];
             items.push(<option key={v} value={v}>{v}</option>);
         }
         items.push(<option key={'NS'} value={'NS'}>{"NS"}</option>);
@@ -312,7 +360,8 @@ class App extends React.Component {
                     type: selected_entity.type,
                     value: selected_entity.value
                 }),
-                rainfall_filter: this_.state.rainfall_filter
+                rainfall_filter: this_.state.rainfall_filter,
+                elevation_filter: this_.state.elevation_filter
             },
             url: api_root + "/data_mart/process/",
             success: function(result) {
@@ -340,6 +389,22 @@ class App extends React.Component {
                 hidePreloader();
                 process_end_event.selected_entity = selected_entity
                 window.dispatchEvent(process_end_event);
+            },
+            error: function(request, error) {
+                alert("Une erreur est survenue pendant le chargement des "
+                    +"données, veuillez réessayer.\n"
+                    + "Si l'erreur persiste, contactez "
+                    +"dimitri.justeau@gmail.com");
+                this_.setState({
+                    occurrenceCount: null,
+                    uniqueTaxa: null,
+                    richness: null,
+                    area: null,
+                    data: null,
+                    buttonDisabled: false,
+
+                });
+                hidePreloader();
             }
         });
     }
@@ -391,6 +456,15 @@ class App extends React.Component {
                                      onChange={this.onRainfallSelected.bind(this)}
                                      value={this.state.rainfall_filter || ''}>
                             {this.fillRainfallSelect()}
+                        </FormControl>
+                      </FormGroup>
+                      <FormGroup controlId="elevationSelect">
+                        <ControlLabel>{"Filtrer sur l'altitude"}</ControlLabel>
+                        <FormControl componentClass="select"
+                                     placeholder="select"
+                                     onChange={this.onElevationSelected.bind(this)}
+                                     value={this.state.elevation_filter || ''}>
+                            {this.fillElevationSelect()}
                         </FormControl>
                       </FormGroup>
                       <Button id='launch_button'

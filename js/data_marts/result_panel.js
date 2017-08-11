@@ -81,7 +81,7 @@ export class ResultPanel extends React.Component {
                 </Col>
                 <Col xs={12} md={12} lg={12}>
                     <Panel id={'d3_map_panel'} header={"Détail de la zone"}>
-                        <D3Map/>
+                        <D3Map area={this.props.area}/>
                     </Panel>
                 </Col>
                 {/*<Col xs={12} md={12} lg={12}>

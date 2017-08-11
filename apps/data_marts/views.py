@@ -28,6 +28,7 @@ class DataMartView(TemplateView):
                 'provinces': get_province_levels(),
                 'communes': get_commune_levels(),
                 'rainfall_filters': get_rainfall_filters(),
+                'elevation_filters': get_elevation_filters(),
             }),
         }
 
@@ -60,17 +61,24 @@ def process(request):
     )
     cuts = []
     invert_location_cuts = []
+    invert_env_cuts = []
+    invert_env = False
     if selected_entity['type'] == 'draw':
-        cuts += get_occurrence_location_cuts(selected_entity)
+        location_cuts = get_occurrence_location_cuts(selected_entity)
+        cuts += location_cuts
+        invert_env_cuts += location_cuts
         invert_location_cuts += get_occurrence_location_cuts(
             selected_entity,
             invert=True
         )
         area = 0
     else:
-        cuts += [
-            PointCut(selected_entity['type'], [selected_entity['value']]),
-        ]
+        entity_cut = PointCut(
+            selected_entity['type'],
+            [selected_entity['value']]
+        )
+        cuts += [entity_cut]
+        invert_env_cuts += [entity_cut]
         invert_location_cuts += [
             PointCut(
                 selected_entity['type'],
@@ -86,9 +94,20 @@ def process(request):
         cuts += [
             PointCut('rainfall', [rainfall_filter])
         ]
-        invert_location_cuts += [
-            PointCut('rainfall', [rainfall_filter])
+        invert_env_cuts += [
+            PointCut('rainfall', [rainfall_filter], invert=True)
         ]
+        invert_env = True
+    # Update cuts with elevation filter
+    elevation_filter = request.POST.get('elevation_filter', None)
+    if elevation_filter is not None and elevation_filter != '':
+        cuts += [
+            PointCut('elevation', [elevation_filter])
+        ]
+        invert_env_cuts += [
+            PointCut('elevation', [elevation_filter], invert=True)
+        ]
+        invert_env = True
     df = pd.DataFrame(list(browser.facts(cell=Cell(cube, cuts))))
     summary = {'occurrence_sum': 0, 'richness': 0}
     records, rainfall_total, elevation_total = [], {}, {}
@@ -144,12 +163,21 @@ def process(request):
     # Compute unique taxa in selected location indicator
     invert_loc_cell = Cell(cube, invert_location_cuts)
     invert_loc_df = pd.DataFrame(list(browser.facts(cell=invert_loc_cell)))
-    invert_taxa_ids = pd.Index([])
+    invert_loc_taxa_ids = pd.Index([])
     if len(invert_loc_df) > 0:
-        invert_taxa_ids = pd.Index(
+        invert_loc_taxa_ids = pd.Index(
             invert_loc_df['taxon_dimension_id'].unique()
         )
-    diff = taxa_ids.difference(invert_taxa_ids)
+    diff = taxa_ids.difference(invert_loc_taxa_ids)
+    if invert_env > 0:
+        invert_env_cell = Cell(cube, invert_env_cuts)
+        list(browser.facts(cell=invert_env_cell))
+        invert_env_df = pd.DataFrame(list(browser.facts(cell=invert_env_cell)))
+        if len(invert_env_df) > 0:
+            invert_env_taxa_ids = pd.Index(
+                invert_env_df['taxon_dimension_id'].unique()
+            )
+            diff = diff.difference(invert_env_taxa_ids)
     summary['unique_taxa_in_entity'] = len(diff)
     # Extract table attributes
     attributes = [
@@ -188,6 +216,11 @@ def get_commune_levels():
 
 def get_rainfall_filters():
     dim = get_dimension('rainfall')
+    return dim.cuts[1]
+
+
+def get_elevation_filters():
+    dim = get_dimension('elevation')
     return dim.cuts[1]
 
 

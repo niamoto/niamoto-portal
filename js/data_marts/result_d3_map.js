@@ -155,6 +155,13 @@ export class D3Map extends React.Component {
             url: api_root + "/data_mart/rainfall_vector_classes/",
             success: function(result) {
                 this_.addRainfallClasses(JSON.parse(result.geojson));
+            },
+            error: function(request, error) {
+                alert("Une erreur est survenue pendant le chargement des "
+                    +"données de pluviométrie, veuillez réessayer.\n"
+                    + "Si l'erreur persiste, contactez "
+                    +"dimitri.justeau@gmail.com");
+                hidePreloader();
             }
         });
         if(current_elevation_request != null) {
@@ -173,9 +180,25 @@ export class D3Map extends React.Component {
             success: function(result) {
                 this_.addElevationClasses(JSON.parse(result.geojson));
                 hidePreloader();
+            },
+            error: function(request, error) {
+                alert("Une erreur est survenue pendant le chargement des "
+                    +"données d'altitude, veuillez réessayer.\n"
+                    + "Si l'erreur persiste, contactez "
+                    +"dimitri.justeau@gmail.com");
+                hidePreloader();
             }
         });
     };
+
+    clearMap() {
+        let svg = this.state.svg;
+        if (svg) {
+            svg.selectAll('.polygon').attr('opacity', 0);
+            svg.selectAll('.elevation_classes').remove();
+            svg.selectAll('.rainfall_classes').remove();
+        }
+    }
 
     updateMap(feature) {
         let bbox = d3.geoBounds(feature);
@@ -214,7 +237,8 @@ export class D3Map extends React.Component {
         });
         svg.selectAll('.polygon')
             .datum(feature)
-            .attr('d', path);
+            .attr('d', path)
+            .attr('opacity', 1);
     };
 
     addRainfallClasses(geojson) {
@@ -324,6 +348,9 @@ export class D3Map extends React.Component {
     }
 
     render() {
+        if (!this.props.area) {
+            this.clearMap();
+        }
         return (
           <Grid>
             <img id={"d3_map_preloader"} src={window.preloader_url}/>
