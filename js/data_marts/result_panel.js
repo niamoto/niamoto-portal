@@ -38,7 +38,7 @@ export class ResultPanel extends React.Component {
             return '';
         }
         return <p>
-                 {"Nombre de taxon observés uniquement dans cette zone: "}
+                 {"Nombre de taxons observés uniquement dans cette zone: "}
                  <b>{this.props.uniqueTaxa}</b>{"."}
                </p>
     }
