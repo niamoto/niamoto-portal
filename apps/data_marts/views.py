@@ -5,7 +5,7 @@ import json
 from niamoto.api.data_marts_api import get_dimension, get_dimensional_model
 from niamoto.vector.vector_manager import VectorManager
 from cubes import PointCut, Cell, SetCut
-import geopandas as gpd
+import pandas as pd
 
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
@@ -58,12 +58,25 @@ def process(request):
     selected_entity = json.loads(
         request.POST.get('selected_entity', None)
     )
+    cuts = []
+    invert_location_cuts = []
     if selected_entity['type'] == 'draw':
-        cuts = get_occurrence_location_cuts(selected_entity)
+        cuts += get_occurrence_location_cuts(selected_entity)
+        invert_location_cuts += get_occurrence_location_cuts(
+            selected_entity,
+            invert=True
+        )
         area = 0
     else:
-        cuts = [
+        cuts += [
             PointCut(selected_entity['type'], [selected_entity['value']]),
+        ]
+        invert_location_cuts += [
+            PointCut(
+                selected_entity['type'],
+                [selected_entity['value']],
+                invert=True
+            ),
         ]
         dim = get_dimension(selected_entity['type'])
         area = dim.get_value(selected_entity['value'], ["area"])[0]
@@ -73,24 +86,72 @@ def process(request):
         cuts += [
             PointCut('rainfall', [rainfall_filter])
         ]
-    cell = Cell(cube, cuts)
-    result = browser.aggregate(
-        cell,
-        drilldown=[
-            'rainfall:category',
-            'elevation:category',
-        ],
-    )
-    result_rainfall = browser.aggregate(
-        cell,
-        drilldown=['rainfall:category'],
-    )
-    rainfall_total = {i['rainfall.category']: i for i in result_rainfall}
-    result_elevation = browser.aggregate(
-        cell,
-        drilldown=['elevation:category'],
-    )
-    elevation_total = {i['elevation.category']: i for i in result_elevation}
+        invert_location_cuts += [
+            PointCut('rainfall', [rainfall_filter])
+        ]
+    df = pd.DataFrame(list(browser.facts(cell=Cell(cube, cuts))))
+    summary = {'occurrence_sum': 0, 'richness': 0}
+    records, rainfall_total, elevation_total = [], {}, {}
+    taxa_ids = pd.Index([])
+    if len(df) > 0:
+        # Init summary with occurrence_sum
+        summary['occurrence_sum'] = df['occurrence_count'].sum()
+        # Init records with occurrence sum
+        records = pd.DataFrame(
+            df.groupby(
+                ['rainfall.category', 'elevation.category']
+            )['occurrence_count'].sum(),
+            columns=['occurrence_count']
+        ).rename(
+            columns={'occurrence_count': 'occurrence_sum'},
+        )
+        records['richness'] = 0
+        # Filter occurrences identified at species level for richness
+        df_species = df[df['taxon_dimension.species'] != 'NS']
+        if len(df_species) > 0:
+            taxa_ids = pd.Index(df_species['taxon_dimension_id'].unique())
+            # Update summary with richness
+            summary['richness'] = df_species['taxon_dimension_id'].nunique()
+            # Compute rainfall total
+            rainfall_total = pd.DataFrame(
+                df_species.groupby(
+                    ['rainfall.category']
+                )['taxon_dimension_id'].nunique(),
+                columns=['taxon_dimension_id']
+            ).rename(
+                columns={'taxon_dimension_id': 'richness'},
+            ).reset_index().to_dict(orient='index').values()
+            rainfall_total = {
+                i['rainfall.category']: i for i in rainfall_total
+            }
+            # Compute elevation total
+            elevation_total = pd.DataFrame(
+                df_species.groupby(
+                    ['elevation.category']
+                )['taxon_dimension_id'].nunique(),
+                columns=['taxon_dimension_id']
+            ).rename(
+                columns={'taxon_dimension_id': 'richness'}
+            ).reset_index().to_dict(orient='index').values()
+            elevation_total = {
+                i['elevation.category']: i for i in elevation_total
+            }
+            # Update records with richness
+            records['richness'] = df_species.groupby(
+                ['rainfall.category', 'elevation.category']
+            )['taxon_dimension_id'].nunique()
+            records = records.reset_index().to_dict(orient='index').values()
+    # Compute unique taxa in selected location indicator
+    invert_loc_cell = Cell(cube, invert_location_cuts)
+    invert_loc_df = pd.DataFrame(list(browser.facts(cell=invert_loc_cell)))
+    invert_taxa_ids = pd.Index([])
+    if len(invert_loc_df) > 0:
+        invert_taxa_ids = pd.Index(
+            invert_loc_df['taxon_dimension_id'].unique()
+        )
+    diff = taxa_ids.difference(invert_taxa_ids)
+    summary['unique_taxa_in_entity'] = len(diff)
+    # Extract table attributes
     attributes = [
         'rainfall.category',
         'elevation.category',
@@ -98,17 +159,16 @@ def process(request):
     attributes_names = []
     for i in attributes:
         attributes_names.append((i, cube.attribute(i).label))
-    aggregates_names = [(i.name, i.label) for i in result.aggregates]
+    aggregates_names = [(i.name, i.label) for i in cube.aggregates]
     return Response({
-        'summary': result.summary,
-        'richness': result.summary['richness'],
-        'records': list(result),
+        'summary': summary,
+        'records': records,
         'columns': attributes_names + aggregates_names,
         'area': area,
         'totals': {
             'rainfall.category': rainfall_total,
             'elevation.category': elevation_total,
-        }
+        },
     })
 
 
@@ -131,7 +191,7 @@ def get_rainfall_filters():
     return dim.cuts[1]
 
 
-def get_occurrence_location_cuts(selected_entity):
+def get_occurrence_location_cuts(selected_entity, invert=False):
     wkt = selected_entity['value']
     dim = get_dimension('occurrence_location')
     df = dim.get_values(wkt_filter=wkt)
@@ -142,6 +202,7 @@ def get_occurrence_location_cuts(selected_entity):
                 'occurrence_location',
                 [[int(i)] for i in idx],
                 hierarchy='default',
+                invert=invert
             )
         ]
     else:

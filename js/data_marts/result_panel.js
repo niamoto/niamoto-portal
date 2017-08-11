@@ -33,6 +33,16 @@ export class ResultPanel extends React.Component {
                </p>
     }
 
+    getUniqueTaxaCountText() {
+        if (this.props.uniqueTaxa === null) {
+            return '';
+        }
+        return <p>
+                 {"Nombre de taxon observés uniquement dans cette zone: "}
+                 <b>{this.props.uniqueTaxa}</b>{"."}
+               </p>
+    }
+
     getAreaText() {
         if (this.props.area === null) {
             return '';
@@ -59,8 +69,9 @@ export class ResultPanel extends React.Component {
                 </Col>
                 <Col xs={12} md={12} lg={6}>
                   <Panel id={'known_composition_panel'} header={"Composition connue - Total"}>
-                    {this.getRichnessText()}
                     {this.getOccurrenceCountText()}
+                    {this.getRichnessText()}
+                    {this.getUniqueTaxaCountText()}
                   </Panel>
                 </Col>
                 <Col xs={12} md={12} lg={12}>

@@ -82,6 +82,7 @@ class App extends React.Component {
             show_form_invalid_modal: false,
             richness: null,
             occurrenceCount: null,
+            uniqueTaxa: null,
             area: null,
             data: null,
             buttonDisabled: false
@@ -121,6 +122,7 @@ class App extends React.Component {
     handleDrawEndEvent(event) {
         this.setState({
             occurrenceCount: null,
+            uniqueTaxa: null,
             richness: null,
             area: null,
             data: null,
@@ -145,6 +147,7 @@ class App extends React.Component {
         this.setState({
             province_id: e.target.value,
             occurrenceCount: null,
+            uniqueTaxa: null,
             richness: null,
             area: null,
             data: null
@@ -194,6 +197,7 @@ class App extends React.Component {
         this.setState({
             commune_id: e.target.value,
             occurrenceCount: null,
+            uniqueTaxa: null,
             richness: null,
             area: null,
             data: null
@@ -243,6 +247,7 @@ class App extends React.Component {
         this.setState({
             rainfall_filter: e.target.value,
             occurrenceCount: null,
+            uniqueTaxa: null,
             richness: null,
             area: null,
             data: null
@@ -327,7 +332,8 @@ class App extends React.Component {
                 };
                 this_.setState({
                     occurrenceCount: result.summary.occurrence_sum,
-                    richness: result.richness,
+                    uniqueTaxa: result.summary.unique_taxa_in_entity,
+                    richness: result.summary.richness,
                     area: area,
                     data: data,
                 });
@@ -405,6 +411,7 @@ class App extends React.Component {
             </Panel>
             <ResultPanel richness={this.state.richness}
                          occurrenceCount={this.state.occurrenceCount}
+                         uniqueTaxa={this.state.uniqueTaxa}
                          area={this.state.area}
                          data={this.state.data || {}}/>
             </div>
