@@ -157,10 +157,6 @@ export class D3Map extends React.Component {
                 this_.addRainfallClasses(JSON.parse(result.geojson));
             },
             error: function(request, error) {
-                alert("Une erreur est survenue pendant le chargement des "
-                    +"données de pluviométrie, veuillez réessayer.\n"
-                    + "Si l'erreur persiste, contactez "
-                    +"dimitri.justeau@gmail.com");
                 hidePreloader();
             }
         });
@@ -182,10 +178,6 @@ export class D3Map extends React.Component {
                 hidePreloader();
             },
             error: function(request, error) {
-                alert("Une erreur est survenue pendant le chargement des "
-                    +"données d'altitude, veuillez réessayer.\n"
-                    + "Si l'erreur persiste, contactez "
-                    +"dimitri.justeau@gmail.com");
                 hidePreloader();
             }
         });
