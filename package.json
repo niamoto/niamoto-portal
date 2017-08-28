@@ -20,7 +20,8 @@
     "react-bootstrap": "global:ReactBootstrap",
     "openlayers": "global:ol",
     "react-table": "global:ReactTable",
-    "d3": "global:d3"
+    "d3": "global:d3",
+    "topojson": "global:topojson"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",

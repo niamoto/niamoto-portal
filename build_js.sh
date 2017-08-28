@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
 # Build taxon dashboard js
-node web/static/js/libs/r.js -o apps/taxon_dashboard/static/taxon_dashboard/js/build.js
+mkdir -p apps/taxon_dashboard/static/taxon_dashboard/js/dist
+browserify js/taxon_dashboard/main.js | uglifyjs > apps/taxon_dashboard/static/taxon_dashboard/js/dist/main.min.js
 
 # Build plot dashboard js
 node web/static/js/libs/r.js -o apps/plot_dashboard/static/plot_dashboard/js/build.js
@@ -15,5 +16,5 @@ node web/static/js/libs/r.js -o apps/inventories/static/inventories/js/jsbuild/b
 node web/static/js/libs/r.js -o apps/inventories/static/inventories/js/jsbuild/build_taxa_inventory.js
 
 # Build data marts js
-mkdir -p apps/data_marts/static/data_marts/static/js
+mkdir -p apps/data_marts/static/data_marts/js/dist
 browserify js/data_marts/data_mart.js | uglifyjs > apps/data_marts/static/data_marts/js/dist/data_mart.js
