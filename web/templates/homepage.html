@@ -6,10 +6,13 @@
 {% block body_class %}home{% endblock %}
 
 {% block styles %}
-    <link href='https://cdnjs.cloudflare.com/ajax/libs/ol3/3.10.1/ol.min.css' rel='stylesheet' />
+    <link rel="stylesheet" href="https://openlayers.org/en/v4.2.0/css/ol.css" type="text/css">
     <link rel="stylesheet" href='{% static "css/olext.css" %}' />
     {{ block.super }}
     <link rel="stylesheet" href='{% static "css/home.css" %}' />
+{% endblock %}
+
+{% block extra_head %}
 {% endblock %}
 
 {% block body %}
@@ -101,6 +104,6 @@
         var taxa_inventories_url = "{{ taxa_inventories_url }}";
         var rapid_inventories_url = "{{ rapid_inventories_url }}";
     </script>
-{#    <script src='{% static "js/homepage.js" %}'></script>#}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/openlayers/4.2.0/ol.js"></script>
     <script src='{% static "js/homepage.min.js" %}'></script>
 {% endblock %}

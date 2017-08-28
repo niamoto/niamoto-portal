@@ -9,7 +9,8 @@ mkdir -p apps/plot_dashboard/static/plot_dashboard/js/dist
 browserify js/plot_dashboard/main.js | uglifyjs > apps/plot_dashboard/static/plot_dashboard/js/dist/main.min.js
 
 # Build homepage js
-node web/static/js/libs/r.js -o web/static/js/build_homepage.js
+browserify js/homepage/homepage.js | uglifyjs > web/static/js/homepage.min.js
+
 
 # Build inventories js
 mkdir -p apps/inventories/static/inventories/js/dist
