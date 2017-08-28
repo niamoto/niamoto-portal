@@ -5,7 +5,8 @@ mkdir -p apps/taxon_dashboard/static/taxon_dashboard/js/dist
 browserify js/taxon_dashboard/main.js | uglifyjs > apps/taxon_dashboard/static/taxon_dashboard/js/dist/main.min.js
 
 # Build plot dashboard js
-node web/static/js/libs/r.js -o apps/plot_dashboard/static/plot_dashboard/js/build.js
+mkdir -p apps/plot_dashboard/static/plot_dashboard/js/dist
+browserify js/plot_dashboard/main.js | uglifyjs > apps/plot_dashboard/static/plot_dashboard/js/dist/main.min.js
 
 # Build homepage js
 node web/static/js/libs/r.js -o web/static/js/build_homepage.js
