@@ -8,10 +8,13 @@
 {% load bootstrap_tags %}
 
 {% block styles %}
-    <link href='https://cdnjs.cloudflare.com/ajax/libs/ol3/3.10.1/ol.min.css' rel='stylesheet' />
+    <link rel="stylesheet" href="https://openlayers.org/en/v4.2.0/css/ol.css" type="text/css">
     {{ block.super }}
     <link href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css' rel='stylesheet' />
     <link rel="stylesheet" href='{% static "inventories/css/add_inventory.css" %}' />
+{% endblock %}
+
+{% block extra_head %}
 {% endblock %}
 
 {% block body_base %}
@@ -75,6 +78,8 @@
 
 {% block scripts %}
     {{ block.super }}
-{#    <script src='{% static "inventories/js/add_inventory.js" %}'></script>#}
-    <script src='{% static "inventories/js/jsbuild/add_inventory.min.js" %}'></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/openlayers/4.2.0/ol.js"></script>
+    <script src='{% static "inventories/js/dist/add_inventory.min.js" %}'></script>
 {% endblock %}

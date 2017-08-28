@@ -5,9 +5,8 @@ import {
     HelpBlock, option, Panel, Button
 } from 'react-bootstrap';
 import ol from 'openlayers';
-import {
-    Map, getDefaultMap, getPolygonArea
-} from '../niamoto_base_map';
+import {getDefaultMap, getPolygonArea} from '../map_utils';
+import {Map} from '../map_component';
 import {FormInvalidModal} from './form_invalid_modal';
 import {ResultPanel} from './result_panel';
 

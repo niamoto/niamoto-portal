@@ -12,9 +12,10 @@ browserify js/plot_dashboard/main.js | uglifyjs > apps/plot_dashboard/static/plo
 node web/static/js/libs/r.js -o web/static/js/build_homepage.js
 
 # Build inventories js
-node web/static/js/libs/r.js -o apps/inventories/static/inventories/js/jsbuild/build_add_inventory.js
-node web/static/js/libs/r.js -o apps/inventories/static/inventories/js/jsbuild/build_consult_inventories.js
-node web/static/js/libs/r.js -o apps/inventories/static/inventories/js/jsbuild/build_taxa_inventory.js
+mkdir -p apps/inventories/static/inventories/js/dist
+browserify js/inventories/add_inventory.js | uglifyjs > apps/inventories/static/inventories/js/dist/add_inventory.min.js
+browserify js/inventories/taxa_inventory.js | uglifyjs > apps/inventories/static/inventories/js/dist/taxa_inventory.min.js
+browserify js/inventories/consult_inventories.js | uglifyjs > apps/inventories/static/inventories/js/dist/consult_inventories.min.js
 
 # Build data marts js
 mkdir -p apps/data_marts/static/data_marts/js/dist
