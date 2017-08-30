@@ -44,15 +44,15 @@
                         <span class="icon-bar"></span>
                     </button>
                     {% block sitename %}
-                        <a class="navbar-brand" href="{% url "home" %}">{{ SITE_NAME }}</a>
+                        <a class="navbar-brand" id="niamoto_brand" href="{% url "home" %}">{{ SITE_NAME }}</a>
                     {% endblock %}
-                    {% block siteabout %}
                     <ul class="nav navbar-nav">
+                        {% block navitems %}
                         <li><a href="{% url 'about' %}">Niamoto c'est quoi?</a></li>
                         <li><a href="{% url 'team'  %}">L'équipe</a></li>
                         <li><a href="{% url 'contact' %}">Contact</a></li>
+                        {% endblock %}
                     </ul>
-                    {% endblock %}
                 </div>
                 <!-- /.navbar-header -->
 

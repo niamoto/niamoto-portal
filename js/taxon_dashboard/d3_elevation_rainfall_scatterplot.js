@@ -65,7 +65,10 @@ export function initElevationRainfallScatterplot() {
     var svg = d3.select("#elevation_rainfall_scatterplot")
         .append('svg')
         .attr('width', full_width)
-        .attr('height', full_height);
+        .attr('height', full_height)
+        .style("position", "absolute")
+        .style("left", 0)
+        .style("top", 41 + "px");
 
     var g = svg.append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
