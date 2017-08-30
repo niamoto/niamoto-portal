@@ -16,13 +16,11 @@
 {% endblock %}
 
 {% block body %}
-    <div class="container-fluid">
-        <h3 class="page-header">Habitats forestiers des massifs de la Province Nord - {{ massif.full_name }}</h3>
-        <a href="/digitizing/">retour aux massifs</a>
-        <div class="row">
-            <div class="col-xs-12 col-md-12"><div id="map">
-                <div id="ajax_status"></div></div>
-            </div>
+    <h3 class="page-header">Habitats forestiers des massifs de la Province Nord - {{ massif.full_name }}</h3>
+    <a href="/digitizing/">retour aux massifs</a>
+    <div class="row">
+        <div class="col-xs-12 col-md-12"><div id="map">
+            <div id="ajax_status"></div></div>
         </div>
     </div>
 {% endblock %}

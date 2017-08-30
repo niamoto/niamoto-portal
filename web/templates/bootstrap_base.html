@@ -34,8 +34,8 @@
     <body>
         <div id="wrapper">
             <!-- Navigation -->
-            <nav id="navbar" class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
             {% block navigation %}
+            <nav id="navbar" class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                         <span class="sr-only">Toggle navigation</span>
@@ -44,8 +44,10 @@
                         <span class="icon-bar"></span>
                     </button>
                     {% block sitename %}
-                        <a class="navbar-brand" id="niamoto_brand" href="{% url "home" %}">{{ SITE_NAME }}</a>
+                        <a class="navbar-brand" id="niamoto_brand" href="{% url 'home' %}">{{ SITE_NAME }}</a>
                     {% endblock %}
+                </div>
+                <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
                         {% block navitems %}
                         <li><a href="{% url 'about' %}">Niamoto c'est quoi?</a></li>
@@ -53,20 +55,14 @@
                         <li><a href="{% url 'contact' %}">Contact</a></li>
                         {% endblock %}
                     </ul>
+                    <ul class="nav navbar-top-links navbar-right">
+                        {% block account_bar %}
+                            {% include "_account_bar.html" %}
+                        {% endblock %}
+                    </ul>
                 </div>
-                <!-- /.navbar-header -->
-
-                <ul class="nav navbar-top-links navbar-right">
-                    {% block account_bar %}
-                        {% include "_account_bar.html" %}
-                    {% endblock %}
-                </ul>
-                <!-- /.navbar-top-links -->
-                {% block sidebar %}
-                {% endblock %}
-            {% endblock %}
-
             </nav>
+            {% endblock %}
 
             {% block page_content %}
             <div id="page-wrapper">
@@ -81,7 +77,6 @@
                                 {% endblock %}
                             </div>
                         </div>
-                        </div>
                     </section>
                 {% endblock %}
             </div>
@@ -91,7 +86,7 @@
         <!-- /#wrapper -->
 
         {% block footer_base %}
-            <div id="pre-footer">{% block prefooter %}{% endblock %}</div>
+             <div id="pre-footer">{% block prefooter %}{% endblock %}</div>
             <div style="background-color: #f3f1f1;"><hr id="footer-hr"/></div>
             <footer id="site-footer">
                 <div class="container-fluid footer-container">

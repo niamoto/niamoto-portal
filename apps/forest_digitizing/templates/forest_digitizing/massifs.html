@@ -16,12 +16,9 @@
 {% endblock %}
 
 {% block body %}
-    <!-- Content -->
-    <div class="container-fluid">
-        <h3 class="page-header">Habitats forestiers des massifs de la Province Nord</h3>
-        <div id="massifs" class="row">
-            <div class="col-xs-12 col-md-12"><div id="map"></div>
-        </div>
+    <h3 class="page-header">Habitats forestiers des massifs de la Province Nord</h3>
+    <div id="massifs" class="row">
+        <div class="col-xs-12 col-md-12"><div id="map"></div>
     </div>
     <script>
         var geoserver_base_url = '{{ GEOSERVER_BASE_URL }}';

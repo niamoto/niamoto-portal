@@ -18,9 +18,7 @@
 {% endblock %}
 
 {% block body %}
-    <div class="container">
-        <h3 class="page-header">Consultation/Modification de l'inventaire rapide</h3>
-    </div>
+    <h3 class="page-header">Consultation/Modification de l'inventaire rapide</h3>
     <form id="inventory_form" class="panel-body" method="POST">{% csrf_token %}
         <div class="container">
             {% if not form.is_valid and request.POST %}

@@ -14,79 +14,76 @@
 {% block body %}
     <img id="preloader" src="{% static 'img/preloader.svg' %}">
     <h3 class="page-header">Tableaux de bord des parcelles</h3>
-    <div class="row">
+    {# First row #}
+    <div class="col-xs-12 col-md-12 fill_parent_height">
+        <div id="first_row" class="row">
+            <div class="col-xs-4 col-md-4 valign" style="height: 80%;">
+                <select id="plot_select"></select>
+            </div>
+            <div id="plot_name" class="col-xs-7 col-md-7 valign">
+                <h4 id="selected_plot_name"></h4>
+            </div>
+        </div>
+    </div>
 
-        {# First row #}
-        <div class="col-xs-12 col-md-12 fill_parent_height">
-            <div id="first_row" class="row">
-                <div class="col-xs-4 col-md-4 valign" style="height: 80%;">
-                    <select id="plot_select"></select>
-                </div>
-                <div id="plot_name" class="col-xs-7 col-md-7 valign">
-                    <h4 id="selected_plot_name"></h4>
+    <div class="col-xs-12 col-md-12 fill_parent_height"  id="right_panel">
+        <!-- Modal -->
+        <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Selectionnez une parcelle</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>
+                            Selectionnez une parcelle dans la boite de séléction
+                            en haut de la page. Vous aurez accès à une synthèse
+                            des données qui y ont été collectées.
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <div class="col-xs-12 col-md-12 fill_parent_height"  id="right_panel">
-            <!-- Modal -->
-            <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title">Selectionnez une parcelle</h4>
-                        </div>
-                        <div class="modal-body">
-                            <p>
-                                Selectionnez une parcelle dans la boite de séléction
-                                en haut de la page. Vous aurez accès à une synthèse
-                                des données qui y ont été collectées.
-                            </p>
-                        </div>
+        {# Second row #}
+        <div id="second_row" class="row">
+            <div id="plot_location" class="col-xs-12 col-sm-6 col-md-4 viz_container">
+                <div class="panel panel-default">
+                    <div class="panel-heading"><strong>Localisation de la parcelle</strong></div>
+                    <div id="map_widget" class="d3_panel"></div>
+                </div>
+            </div>
+            <div id="families_donut_container" class="col-xs-12 col-sm-6 col-md-4 viz_container">
+                <div class="panel panel-default">
+                    <div class="panel-heading"><strong>Familles dominantes</strong></div>
+                    <div id="families_donut"></div>
+                </div>
+            </div>
+            <div id="top_species_container" class="col-xs-12 col-sm-6 col-md-4 viz_container">
+                <div class="panel panel-default">
+                    <div class="panel-heading"><strong>Espèces dominantes</strong></div>
+                    <div id="species_donut"></div>
+                </div>
+            </div>
+        </div>
+        {# Third row #}
+        <div id="third_row" class="row">
+            <div id="plot_parameters" class="col-xs-12 col-sm-6 col-md-5 viz_container">
+                <div class="panel panel-default">
+                    <div class="panel-heading"><strong>Informations générales</strong></div>
+                    <div id="general_informations" class="panel-body">
+                        <p id="plot_elevation"></p>
+                        <p id="nb_occurrences"></p>
+                        <p id="nb_species"></p>
+                        <p id="nb_families"></p>
+                        <p id="nb_genus"></p>
                     </div>
                 </div>
             </div>
-
-            {# Second row #}
-            <div id="second_row" class="row">
-                <div id="plot_location" class="col-xs-12 col-sm-6 col-md-4 viz_container">
-                    <div class="panel panel-default">
-                        <div class="panel-heading"><strong>Localisation de la parcelle</strong></div>
-                        <div id="map_widget" class="d3_panel"></div>
-                    </div>
-                </div>
-                <div id="families_donut_container" class="col-xs-12 col-sm-6 col-md-4 viz_container">
-                    <div class="panel panel-default">
-                        <div class="panel-heading"><strong>Familles dominantes</strong></div>
-                        <div id="families_donut"></div>
-                    </div>
-                </div>
-                <div id="top_species_container" class="col-xs-12 col-sm-6 col-md-4 viz_container">
-                    <div class="panel panel-default">
-                        <div class="panel-heading"><strong>Espèces dominantes</strong></div>
-                        <div id="species_donut"></div>
-                    </div>
-                </div>
-            </div>
-            {# Third row #}
-            <div id="third_row" class="row">
-                <div id="plot_parameters" class="col-xs-12 col-sm-6 col-md-5 viz_container">
-                    <div class="panel panel-default">
-                        <div class="panel-heading"><strong>Informations générales</strong></div>
-                        <div id="general_informations" class="panel-body">
-                            <p id="plot_elevation"></p>
-                            <p id="nb_occurrences"></p>
-                            <p id="nb_species"></p>
-                            <p id="nb_families"></p>
-                            <p id="nb_genus"></p>
-                        </div>
-                    </div>
-                </div>
-                <div id="diameters_histogram_container" class="col-xs-12 col-sm-6 col-md-7 viz_container">
-                    <div class="panel panel-default">
-                        <div class="panel-heading"><strong>Structure diamétrique</strong></div>
-                        <div id="diameters_histogram"></div>
-                    </div>
+            <div id="diameters_histogram_container" class="col-xs-12 col-sm-6 col-md-7 viz_container">
+                <div class="panel panel-default">
+                    <div class="panel-heading"><strong>Structure diamétrique</strong></div>
+                    <div id="diameters_histogram"></div>
                 </div>
             </div>
         </div>

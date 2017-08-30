@@ -3,10 +3,6 @@
     width: 100%;
 }
 
-.container {
-    padding: 0;
-}
-
 #launch_button {
     width: 100%;
 }
@@ -88,4 +84,20 @@ path.slice {
 
 .form-inline label {
     margin-right: 10px;
+}
+
+.result_container {
+    padding: 5px;
+}
+
+.input_container{
+    padding: 5px;
+}
+
+.data_mart_row {
+    margin: 0;
+}
+
+.panel {
+    margin-bottom: 5px;
 }

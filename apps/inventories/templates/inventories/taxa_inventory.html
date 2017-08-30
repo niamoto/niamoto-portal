@@ -19,9 +19,7 @@
 {% endblock %}
 
 {% block body %}
-    <div class="container">
-        <h3 class="page-header">{{ title }}</h3>
-    </div>
+    <h3 class="page-header">{{ title }}</h3>
     <form class="panel-body" method="POST">{% csrf_token %}
         <div class="container">
             {% if request.POST %}

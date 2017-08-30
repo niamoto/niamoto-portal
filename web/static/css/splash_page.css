@@ -67,23 +67,3 @@
 #logos_content img {
     padding: 0 15px;
 }
-
-/* Bigger nav for splash page */
-.navbar ,.nav ,.navbar-nav {
-    min-height: 60px;
-}
-
-.navbar-top-links li a {
-  padding: 15px;
-  min-height: 60px;
-}
-
-.navbar-brand {
-    min-height: 60px;
-    line-height: 30px;
-}
-
-.nav li a {
-    min-height: 60px;
-    line-height: 30px;
-}

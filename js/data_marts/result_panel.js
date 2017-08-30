@@ -59,39 +59,35 @@ export class ResultPanel extends React.Component {
 
     render() {
         return (
-          <Panel>
-            <Grid>
-              <Row>
-                <Col xs={12} md={12} lg={6}>
-                  <Panel id={'area_panel'} header={"Emprise"}>
-                    {this.getAreaText()}
+            <Row className={'data_mart_row'}>
+              <Col xs={12} md={12} lg={6} className={'result_container'}>
+                <Panel id={'area_panel'} header={"Emprise"}>
+                  {this.getAreaText()}
+                </Panel>
+              </Col>
+              <Col xs={12} md={12} lg={6} className={'result_container'}>
+                <Panel id={'known_composition_panel'} header={"Composition connue - Total"}>
+                  {this.getOccurrenceCountText()}
+                  {this.getRichnessText()}
+                  {this.getUniqueTaxaCountText()}
+                </Panel>
+              </Col>
+              <Col xs={12} md={12} lg={12} className={'result_container'}>
+                  <Panel id={'pivot_table_panel'} header={"Composition connue - Détail"}>
+                      <PivotTable data={this.props.data || {}}/>
                   </Panel>
-                </Col>
-                <Col xs={12} md={12} lg={6}>
-                  <Panel id={'known_composition_panel'} header={"Composition connue - Total"}>
-                    {this.getOccurrenceCountText()}
-                    {this.getRichnessText()}
-                    {this.getUniqueTaxaCountText()}
+              </Col>
+              <Col xs={12} md={12} lg={12} className={'result_container'}>
+                  <Panel id={'d3_map_panel'} header={"Détail de la zone"}>
+                      <D3Map area={this.props.area}/>
                   </Panel>
-                </Col>
-                <Col xs={12} md={12} lg={12}>
-                    <Panel id={'pivot_table_panel'} header={"Composition connue - Détail"}>
-                        <PivotTable data={this.props.data || {}}/>
-                    </Panel>
-                </Col>
-                <Col xs={12} md={12} lg={12}>
-                    <Panel id={'d3_map_panel'} header={"Détail de la zone"}>
-                        <D3Map area={this.props.area}/>
-                    </Panel>
-                </Col>
-                {/*<Col xs={12} md={12} lg={12}>
-                    <Panel id={'d3_heatmap_panel'} header={"Profil environnemental de la zone (Altitude / Pluviométrie)"}>
-                        <D3HeatMap/>
-                    </Panel>
-                </Col>*/}
-              </Row>
-            </Grid>
-          </Panel>
+              </Col>
+              {/*<Col xs={12} md={12} lg={12}>
+                  <Panel id={'d3_heatmap_panel'} header={"Profil environnemental de la zone (Altitude / Pluviométrie)"}>
+                      <D3HeatMap/>
+                  </Panel>
+              </Col>*/}
+            </Row>
         );
     }
 

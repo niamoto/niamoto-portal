@@ -15,65 +15,63 @@
 {% endblock %}
 
 {% block body %}
-    <div class="container">
-        <img id="preloader" src="{% static 'img/preloader.svg' %}"/>
-        <h3 class="page-header">{{ title }}</h3>
-        <div id="map"></div>
-        <br>
-        <p><a href="add/" class="btn btn-success" role="button">Saisir un inventaire</a></p>
-        {% if username %}
-            <div class="inline">
-                <h4>Inventaires de {{ username }}</h4>
-                <a href=".">Voir tous les inventaires</a>
-            </div>
-        {% else %}
-            <div class="inline">
-                <h4>Tous les inventaires</h4>
-                <a href="?username={{ request.user.username }}">Voir uniquement mes inventaires</a>
-            </div>
-        {% endif %}
-        <div class="panel panel-default">
-            <div class="panel-body">
-                {# Pagination #}
-                <ul class="pagination pagination-centered">
-                    {% if page.has_previous %}
-                        <li><a href="?page=1"> << </a></li>
-                        <li><a href="?page={{ page.previous_page_number }}"> < </a></li>
-                    {% endif %}
+    <img id="preloader" src="{% static 'img/preloader.svg' %}"/>
+    <h3 class="page-header">{{ title }}</h3>
+    <div id="map"></div>
+    <br>
+    <p><a href="add/" class="btn btn-success" role="button">Saisir un inventaire</a></p>
+    {% if username %}
+        <div class="inline">
+            <h4>Inventaires de {{ username }}</h4>
+            <a href=".">Voir tous les inventaires</a>
+        </div>
+    {% else %}
+        <div class="inline">
+            <h4>Tous les inventaires</h4>
+            <a href="?username={{ request.user.username }}">Voir uniquement mes inventaires</a>
+        </div>
+    {% endif %}
+    <div class="panel panel-default">
+        <div class="panel-body">
+            {# Pagination #}
+            <ul class="pagination pagination-centered">
+                {% if page.has_previous %}
+                    <li><a href="?page=1"> << </a></li>
+                    <li><a href="?page={{ page.previous_page_number }}"> < </a></li>
+                {% endif %}
 
-                    {% for i in paginator.page_range %}
-                        <li {% if page.number == i %} class="active" {% endif %}><a href="?page={{i}}">{{i}}</a></li>
-                    {% endfor %}
+                {% for i in paginator.page_range %}
+                    <li {% if page.number == i %} class="active" {% endif %}><a href="?page={{i}}">{{i}}</a></li>
+                {% endfor %}
 
-                    {% if page.has_next %}
-                        <li><a href="?page={{ page.next_page_number }}"> > </a></li>
-                        <li><a href="?page={{ page.paginator.num_pages }}"> >> </a></li>
-                    {% endif %}
-                </ul>
-                {# Data table #}
-                <table class="table" id="inventories_table">
-                    <thead>
+                {% if page.has_next %}
+                    <li><a href="?page={{ page.next_page_number }}"> > </a></li>
+                    <li><a href="?page={{ page.paginator.num_pages }}"> >> </a></li>
+                {% endif %}
+            </ul>
+            {# Data table #}
+            <table class="table" id="inventories_table">
+                <thead>
+                    <tr>
+                        {% for h in header %}
+                            <th>{{ h }}</th>
+                        {% endfor %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in inventories %}
                         <tr>
-                            {% for h in header %}
-                                <th>{{ h }}</th>
+                            {% for cell in row %}
+                                {% if forloop.counter == row|length %}
+                                <td>{{ cell|safe }}</td>
+                                {% else %}
+                                <td>{{ cell }}</td>
+                                {% endif %}
                             {% endfor %}
                         </tr>
-                    </thead>
-                    <tbody>
-                        {% for row in inventories %}
-                            <tr>
-                                {% for cell in row %}
-                                    {% if forloop.counter == row|length %}
-                                    <td>{{ cell|safe }}</td>
-                                    {% else %}
-                                    <td>{{ cell }}</td>
-                                    {% endif %}
-                                {% endfor %}
-                            </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
+                    {% endfor %}
+                </tbody>
+            </table>
         </div>
     </div>
 {% endblock %}

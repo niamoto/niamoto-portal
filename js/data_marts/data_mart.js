@@ -417,71 +417,69 @@ class App extends React.Component {
     render() {
         return (
             <div>
-            <Panel>
-              <Grid>
-                <Row>
-                  <Col xs={12} md={4}>
-                    <form>
-                      {/*<FieldGroup
-                        id="formControlsFile"
-                        type="file"
-                        label="Charger un shapefile"
-                      />*/}
-                      {/* Province combobox */}
-                      <FormGroup controlId="provinceSelect">
-                        <ControlLabel>Sélectionner une province</ControlLabel>
-                        <FormControl componentClass="select"
-                                     placeholder="select"
-                                     onChange={this.onProvinceSelected.bind(this)}
-                                     value={this.state.province_id || ''}>
-                            {this.fillProvinceSelect()}
-                        </FormControl>
-                      </FormGroup>
-                      {/* Commune combobox */}
-                      <FormGroup controlId="communeSelect">
-                        <ControlLabel>Sélectionner une commune</ControlLabel>
-                        <FormControl componentClass="select"
-                                     placeholder="select"
-                                     onChange={this.onCommuneSelected.bind(this)}
-                                     value={this.state.commune_id || ''}>
-                            {this.fillCommuneSelect()}
-                        </FormControl>
-                      </FormGroup>
-                      {/* Rainfall combobox */}
-                      <FormGroup controlId="rainfallSelect">
-                        <ControlLabel>Filtrer sur la pluviométrie</ControlLabel>
-                        <FormControl componentClass="select"
-                                     placeholder="select"
-                                     onChange={this.onRainfallSelected.bind(this)}
-                                     value={this.state.rainfall_filter || ''}>
-                            {this.fillRainfallSelect()}
-                        </FormControl>
-                      </FormGroup>
-                      <FormGroup controlId="elevationSelect">
-                        <ControlLabel>{"Filtrer sur l'altitude"}</ControlLabel>
-                        <FormControl componentClass="select"
-                                     placeholder="select"
-                                     onChange={this.onElevationSelected.bind(this)}
-                                     value={this.state.elevation_filter || ''}>
-                            {this.fillElevationSelect()}
-                        </FormControl>
-                      </FormGroup>
-                      <Button id='launch_button'
-                              bsStyle='success'
-                              onClick={this.process.bind(this)}
-                              disabled={this.state.buttonDisabled}>
-                        {"Lancer l'analyse"}
-                      </Button>
-                      <FormInvalidModal show={this.state.show_form_invalid_modal}
-                                        onClose={this.modalClosed.bind(this)}/>
-                    </form>
-                  </Col>
-                  <Col xs={6} md={8}>
-                    <Map map={map} target={'map'}/>
-                  </Col>
-                </Row>
-              </Grid>
-            </Panel>
+            <Row className={'data_mart_row input_container'}>
+              <Panel>
+                <Col xs={12} md={4}>
+                  <form>
+                    {/*<FieldGroup
+                      id="formControlsFile"
+                      type="file"
+                      label="Charger un shapefile"
+                    />*/}
+                    {/* Province combobox */}
+                    <FormGroup controlId="provinceSelect">
+                      <ControlLabel>Sélectionner une province</ControlLabel>
+                      <FormControl componentClass="select"
+                                   placeholder="select"
+                                   onChange={this.onProvinceSelected.bind(this)}
+                                   value={this.state.province_id || ''}>
+                          {this.fillProvinceSelect()}
+                      </FormControl>
+                    </FormGroup>
+                    {/* Commune combobox */}
+                    <FormGroup controlId="communeSelect">
+                      <ControlLabel>Sélectionner une commune</ControlLabel>
+                      <FormControl componentClass="select"
+                                   placeholder="select"
+                                   onChange={this.onCommuneSelected.bind(this)}
+                                   value={this.state.commune_id || ''}>
+                          {this.fillCommuneSelect()}
+                      </FormControl>
+                    </FormGroup>
+                    {/* Rainfall combobox */}
+                    <FormGroup controlId="rainfallSelect">
+                      <ControlLabel>Filtrer sur la pluviométrie</ControlLabel>
+                      <FormControl componentClass="select"
+                                   placeholder="select"
+                                   onChange={this.onRainfallSelected.bind(this)}
+                                   value={this.state.rainfall_filter || ''}>
+                          {this.fillRainfallSelect()}
+                      </FormControl>
+                    </FormGroup>
+                    <FormGroup controlId="elevationSelect">
+                      <ControlLabel>{"Filtrer sur l'altitude"}</ControlLabel>
+                      <FormControl componentClass="select"
+                                   placeholder="select"
+                                   onChange={this.onElevationSelected.bind(this)}
+                                   value={this.state.elevation_filter || ''}>
+                          {this.fillElevationSelect()}
+                      </FormControl>
+                    </FormGroup>
+                    <Button id='launch_button'
+                            bsStyle='success'
+                            onClick={this.process.bind(this)}
+                            disabled={this.state.buttonDisabled}>
+                      {"Lancer l'analyse"}
+                    </Button>
+                    <FormInvalidModal show={this.state.show_form_invalid_modal}
+                                      onClose={this.modalClosed.bind(this)}/>
+                  </form>
+                </Col>
+                <Col xs={6} md={8}>
+                  <Map map={map} target={'map'}/>
+                </Col>
+              </Panel>
+            </Row>
             <ResultPanel richness={this.state.richness}
                          occurrenceCount={this.state.occurrenceCount}
                          uniqueTaxa={this.state.uniqueTaxa}
