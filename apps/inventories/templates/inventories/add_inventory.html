@@ -17,8 +17,14 @@
 {% block extra_head %}
 {% endblock %}
 
+{% block page_header %}
+    Nouvel inventaire rapide
+{% endblock %}
+
+{% block help_icon %}
+{% endblock %}
+
 {% block body %}
-    <h3 class="page-header">Nouvel inventaire rapide</h3>
     <form class="panel-body" method="POST">{% csrf_token %}
         <div class="container">
             {% if not form.is_valid and request.POST %}

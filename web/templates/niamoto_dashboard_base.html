@@ -24,6 +24,29 @@
     </li>
 {% endblock %}
 
+{% block extra_body %}
+    {% block help_modal %}
+    <div class="modal fade" id="help_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">{% block help_modal_title %}Aide{% endblock %}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    {% block help_modal_body %}{% endblock %}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endblock %}
+{% endblock %}
+
 {% block page_content %}
     <div id="page-wrapper" class="page-wrapper-sidebar">
         {% block body_base %}
@@ -33,6 +56,12 @@
                         {% include "_messages.html" %}
                     </div>
                     <div id="body-container" class="col-lg-12 fill_parent_height">
+                        {% block page_header_container %}
+                        <h3 class="page-header" id="page_header">{% block page_header %}{% endblock %}</h3>
+                        {% block help_icon %}
+                        <a data-toggle="modal" data-target="#help_modal"><i class="fa fa-question-circle" id="help_icon" aria-hidden="true"></i></a>
+                        {% endblock %}
+                        {% endblock %}
                         {% block body %}
                         {% endblock %}
                     </div>

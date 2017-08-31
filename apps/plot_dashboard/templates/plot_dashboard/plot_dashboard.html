@@ -11,9 +11,18 @@
 {% block extra_head %}
 {% endblock %}
 
+{% block page_header %}
+    Tableaux de bord des parcelles
+{% endblock %}
+
+{% block help_modal_body %}
+    Selectionnez une parcelle dans la boite de séléction
+    en haut de la page. Vous aurez accès à une synthèse
+    des données qui y ont été collectées.
+{% endblock %}
+
 {% block body %}
     <img id="preloader" src="{% static 'img/preloader.svg' %}">
-    <h3 class="page-header">Tableaux de bord des parcelles</h3>
     {# First row #}
     <div class="col-xs-12 col-md-12 fill_parent_height">
         <div id="first_row" class="row">
@@ -27,24 +36,6 @@
     </div>
 
     <div class="col-xs-12 col-md-12 fill_parent_height"  id="right_panel">
-        <!-- Modal -->
-        <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title">Selectionnez une parcelle</h4>
-                    </div>
-                    <div class="modal-body">
-                        <p>
-                            Selectionnez une parcelle dans la boite de séléction
-                            en haut de la page. Vous aurez accès à une synthèse
-                            des données qui y ont été collectées.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
         {# Second row #}
         <div id="second_row" class="row">
             <div id="plot_location" class="col-xs-12 col-sm-6 col-md-4 viz_container">

@@ -125,21 +125,6 @@ function initGeneralInformations() {
     }
 };
 
-function initModal() {
-//    $('#modal').on('shown.bs.modal', function() {
-//        $(document).off('focusin.modal');
-//    });
-//    $('#modal').modal({
-//        backdrop: 'static',
-//        keyboard: false
-//    });
-//    $('.modal-backdrop').appendTo('#right_panel');
-//    $('#taxon_treeview').on('taxonSelected', function (event, data) {
-//        $('#modal').modal('hide');
-//    });
-};
-
-
 function showPreloader() {
     document.getElementById('preloader').style.display = 'inline';
 }

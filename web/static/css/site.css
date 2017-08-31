@@ -16,6 +16,18 @@ body {
     border-bottom: 1px solid #a1c1aa;
 }
 
+#page_header:empty {
+    display: relative;
+}
+
+#help_icon {
+    float: right;
+    margin-top: -55px;
+    font-size: 26px;
+    color: #9e9e2e;
+    cursor: pointer;
+}
+
 .navbar-header {
     margin-left: 50px;
 }
@@ -246,3 +258,8 @@ footer {
     background-color: #f3f1f1;
 }
 
+.modal-title {
+    display: inline;
+    font-weight: 500;
+    font-size: 18px;
+}

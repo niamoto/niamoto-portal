@@ -15,8 +15,14 @@
     <link rel="stylesheet" type="text/css" href="{% static 'forest_digitizing/css/forest.css' %}" />
 {% endblock %}
 
+{% block page_header %}
+    Habitats forestiers des massifs de la Province Nord - {{ massif.full_name }}
+{% endblock %}
+
+{% block help_icon %}
+{% endblock %}
+
 {% block body %}
-    <h3 class="page-header">Habitats forestiers des massifs de la Province Nord - {{ massif.full_name }}</h3>
     <a href="/digitizing/">retour aux massifs</a>
     <div class="row">
         <div class="col-xs-12 col-md-12"><div id="map">

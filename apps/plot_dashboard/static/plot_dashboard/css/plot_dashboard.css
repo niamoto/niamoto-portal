@@ -93,7 +93,6 @@ path.slice{
     stroke: white;
 }
 
-
 path.slice{
     stroke-width: 1px;
     stroke: white;
@@ -113,17 +112,4 @@ path.slice{
 
 .panel-heading {
     padding: 5px 15px;
-}
-
-.modal, .modal-backdrop {
-    position: absolute !important;
-}
-
-#modal {
-    top: 20%;
-}
-
-.modal-backdrop {
-    opacity: 0 !important;
-    height: 0;
 }

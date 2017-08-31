@@ -14,9 +14,15 @@
 {% block extra_head %}
 {% endblock %}
 
+{% block page_header %}
+    {{ title }}
+{% endblock %}
+
+{% block help_icon %}
+{% endblock %}
+
 {% block body %}
     <img id="preloader" src="{% static 'img/preloader.svg' %}"/>
-    <h3 class="page-header">{{ title }}</h3>
     <div id="map"></div>
     <br>
     <p><a href="add/" class="btn btn-success" role="button">Saisir un inventaire</a></p>

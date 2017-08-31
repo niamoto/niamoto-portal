@@ -13,8 +13,19 @@
 {% block extra_head %}
 {% endblock %}
 
+{% block page_header %}
+    Analyse géographique (beta)
+{% endblock %}
+
+{% block help_modal_body %}
+    Selectionnez une entité géographique ou dessinez directement la zone
+    géographique à analyser sur la carte. Il est ensuite possible de filtrer
+    les résultats selon les classes d'altitude ou de pluviométrie. Cliquez
+    ensuite sur "Lancer l'analyse" afin d'obtenir des informations sur l'état
+    de connaissance de la zone géographique sélectionnée.
+{% endblock %}
+
 {% block body %}
-    <h3 class="page-header">Analyse géographique (beta)</h3>
     <img id="preloader" src="{% static 'img/preloader.svg' %}">
     <div id="react">
         <i class="fa fa-lg fa-spinner fa-spin"></i><br><br>

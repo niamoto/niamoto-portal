@@ -11,6 +11,8 @@
     {{ block.super }}
 {% endblock %}
 
+{% block page_header_container %}{% endblock %}
+
 {% block body %}
     <br>
     <form class="panel-body" method="POST">{% csrf_token %}

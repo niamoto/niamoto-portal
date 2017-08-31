@@ -4,20 +4,6 @@ import * as d3_families_donut from './d3_families_donut';
 import * as d3_species_donut from './d3_species_donut';
 import * as d3_diameters from './d3_diameters';
 
-function initModal() {
-    $('#modal').on('shown.bs.modal', function() {
-        $(document).off('focusin.modal');
-    });
-    $('#modal').modal({
-        backdrop: 'static',
-        keyboard: false
-    });
-    $('.modal-backdrop').appendTo('#right_panel');
-    $('#plot_select').on('plotSelected', function (event, data) {
-        $('#modal').modal('hide');
-    });
-};
-
 function showPreloader() {
     document.getElementById('preloader').style.display = 'inline';
 }
