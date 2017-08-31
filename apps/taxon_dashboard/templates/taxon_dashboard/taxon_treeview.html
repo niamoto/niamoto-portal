@@ -13,13 +13,27 @@
 
 {% block body %}
     <img id="preloader" src="{% static 'img/preloader.svg' %}">
-    <h3 class="page-header">Tableaux de bord des taxons</h3>
-    <div id="left_panel" class="col-xs-4 col-md-4 fill_parent_height">
-        <div class="row">
-            <div class="col-xs-12 col-md-12"><input class="form-control" id="input-search" placeholder="Rechercher un taxon..." value="" type="input"></div>
+    <h3 class="page-header" id="page_header">Tableaux de bord des taxons</h3>
+    <div class="col-xs-4 col-md-4" id="left_panel_placeholder">
+        <div id="left_panel">
+            <div class="panel panel-default">
+                <div id="input_panel" class="panel-body">
+                    <div class="col-xs-12 col-md-12">
+                        <div id="first_row" class="row">
+                            <div class="col-xs-12 col-md-12">
+                                <div id="taxon_abstract">
+                                    <h3 id="selected_taxon_name">...</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <input class="form-control" id="input-search" placeholder="Rechercher un taxon..." value="" type="input">
+                        <div id="taxon_treeview"></div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div id="taxon_treeview"></div>
     </div>
+
     <div class="col-xs-8 col-md-8" id="right_panel">
 
         <!-- Modal -->
@@ -40,15 +54,6 @@
             </div>
         </div>
 
-        {# First row #}
-        <div id="first_row" class="row">
-            <div class="col-xs-12 col-md-12">
-                <div id="taxon_abstract">
-                    <h3 id="selected_taxon_name"></h3>
-                </div>
-            </div>
-        </div>
-        {# Second row #}
         <div id="second_row" class="row">
             <div id="families_donut_container" class="col-xs-12 col-md-6 viz_container">
                 <div class="panel panel-default">
@@ -67,7 +72,6 @@
                 </div>
             </div>
         </div>
-        {# Third row #}
         <div id="third_row" class="row">
             <div id="plot_location" class="col-xs-12 col-md-12 viz_container">
                 <div class="panel panel-default">
@@ -76,7 +80,6 @@
                 </div>
             </div>
         </div>
-        {# Fourth row #}
         <div id="fourth_row" class="row">
             <div id="elevation_range_container" class="col-xs-12 col-md-12 viz_container">
                 <div class="panel panel-default">

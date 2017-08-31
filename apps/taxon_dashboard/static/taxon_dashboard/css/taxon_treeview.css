@@ -21,7 +21,7 @@
 
 #taxon_treeview {
     margin-top: 20px;
-    height: calc(100% - 20px);
+    height: 400px;
     overflow: auto;
 }
 
@@ -30,7 +30,16 @@
 }
 
 #left_panel {
-    height: 100vh;
+    height: 539px;
+}
+
+.panel-fixed {
+    position: fixed;
+    top: 70px;
+}
+
+#input_panel {
+    padding: 15px 0 0 0;
 }
 
 .modal, .modal-backdrop {
@@ -46,7 +55,9 @@
 }
 
 #selected_taxon_name {
+    text-align: center;
     margin: 0;
+    font-size: 20px;
 }
 
 .land {
@@ -81,7 +92,7 @@ path.slice{
     font-size: 18px;
 }
 
-#first_row { height: 50px; }
+#first_row { height: 40px; }
 #second_row { height: 300px; }
 #third_row { height: 350px; }
 #fourth_row { height: 450px; }

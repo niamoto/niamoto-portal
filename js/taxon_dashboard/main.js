@@ -126,17 +126,17 @@ function initGeneralInformations() {
 };
 
 function initModal() {
-    $('#modal').on('shown.bs.modal', function() {
-        $(document).off('focusin.modal');
-    });
-    $('#modal').modal({
-        backdrop: 'static',
-        keyboard: false
-    });
-    $('.modal-backdrop').appendTo('#right_panel');
-    $('#taxon_treeview').on('taxonSelected', function (event, data) {
-        $('#modal').modal('hide');
-    });
+//    $('#modal').on('shown.bs.modal', function() {
+//        $(document).off('focusin.modal');
+//    });
+//    $('#modal').modal({
+//        backdrop: 'static',
+//        keyboard: false
+//    });
+//    $('.modal-backdrop').appendTo('#right_panel');
+//    $('#taxon_treeview').on('taxonSelected', function (event, data) {
+//        $('#modal').modal('hide');
+//    });
 };
 
 
@@ -191,3 +191,26 @@ initGeneralInformations();
 initMap();
 initDonutChart();
 initElevationRainfallScatterplot();
+
+var leftPanel = $("#left_panel");
+var leftPanelPlaceholder = $("#left_panel_placeholder");
+var didScroll = false;
+$(window).scroll(function() {
+    didScroll = true;
+});
+setInterval(function() {
+    if (didScroll) {
+        didScroll = false;
+        var top = leftPanelPlaceholder.offset().top;
+        var viewTop = $(window).scrollTop();
+        if ((viewTop + 70) > top) {
+            var width = leftPanel.width();
+            var height = leftPanel.height();
+            leftPanel.addClass("panel-fixed");
+            leftPanel.width(width);
+            leftPanel.height(height);
+        } else {
+            leftPanel.removeClass("panel-fixed");
+        }
+    }
+}, 50);

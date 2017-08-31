@@ -127,7 +127,3 @@ path.slice{
     opacity: 0 !important;
     height: 0;
 }
-
-.bootstrap-select {
-    z-index: 2000;
-}
