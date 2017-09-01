@@ -15,89 +15,81 @@
 {% block extra_head %}
 {% endblock %}
 
-{% block page_header_container %}{% endblock %}
+{% block page_header %}Accueil{% endblock %}
+
+{% block help_icon %}
+{% endblock %}
 
 {% block body %}
-        <div class="row home-row">
-            <div class="col-xs-12 col-md-3">
-                <div class="panel panel-default">
-                    <div class="panel-heading">Accès rapide</div>
-                    <ul class="list-group panel-body">
-                        <li class="rapid-access-item"><a href="{% url 'add_rapid_inventory' %}">Saisir un inventaire rapide</a></li>
-                        <li class="rapid-access-item"><a href="{% url 'taxa_inventory' %}">Saisir un inventaire taxonomique</a></li>
-                        <hr/>
-                        <li class="rapid-access-item"><a href="{% url 'rapid_inventory_index' %}?username={{ request.user.username }}">Consulter mes inventaires rapides</a></li>
-                        <li class="rapid-access-item"><a href="{% url 'taxa_inventory_index' %}?username={{ request.user.username }}">Consulter mes inventaire taxonomiques</a></li>
-                        <hr/>
-                        <li class="rapid-access-item"><a href="{% url 'digitizing_massifs' %}">Consulter la digitalisation au 1:3000ème</a></li>
-                        <hr/>
-                        <li class="rapid-access-item"><a href="/account/settings/">Accéder aux paramètres de mon compte</a></li>
-                    </ul>
+
+    <div class="col-xs-12 col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">Niamoto en bref</div>
+            <div class="panel-body" id="niamoto_status_container">
+                <div class="col-xs-3 col-md-3 detail_status_container">
+                    <div id="occurrence_count_container" class="progress_container"></div>
                 </div>
-            </div>
-            <div class="col-xs-12 col-md-9">
-                <div class="row">
-
-                    <div class="col-xs-12 col-md-6">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <i class="fa fa-circle rapid-inventory-circle" aria-hidden="true"></i>
-                                Derniers inventaires rapides saisis
-                            </div>
-                            <ul class="list-group">
-                            {% for rapid_inventory in last_rapid_inventories %}
-                                <li class="list-group-item">
-                                    <div class="row">
-                                        <div class="col-xs-3 col-md-3 truncate observer-name">
-                                            {{ rapid_inventory.observer.username }}
-                                        </div>
-                                        <div class="col-xs-6 col-md-6 truncate">
-                                            {{ rapid_inventory.location_description }}
-                                        </div>
-                                        <div class="col-xs-3 col-md-3">
-                                            <a class="right-link" href="{% url 'rapid_inventory_consult' rapid_inventory.id %}">consulter</a>
-                                        </div>
-                                    </div>
-                                </li>
-                            {% endfor %}
-                            <li class="list-group-item see-all"><a href="{% url 'rapid_inventory_index' %}">Consulter tous les inventaires rapides ({{ rapid_inventories_count }})</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-xs-12 col-md-6">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <i class="fa fa-circle taxa-inventory-circle" aria-hidden="true"></i>
-                                Derniers inventaires taxonomiques saisis
-                            </div>
-                            <ul class="list-group">
-                            {% for taxa_inventory in last_taxa_inventories %}
-                                <li class="list-group-item">
-                                    <div class="row">
-                                        <div class="col-xs-3 col-md-3 observer-name">
-                                            {{ taxa_inventory.observer.username }}
-                                        </div>
-                                        <div class="col-xs-6 col-md-6 truncate">
-                                            {{ taxa_inventory.location_description }}
-                                        </div>
-                                        <div class="col-xs-3 col-md-3">
-                                            <a class="right-link" href="{% url 'taxa_inventory_consult' pk=taxa_inventory.id %}">consulter</a>
-                                        </div>
-                                    </div>
-                                </li>
-                            {% endfor %}
-                            <li class="list-group-item see-all"><a href="{% url 'taxa_inventory_index' %}">Consulter tous les inventaires taxonomiques ({{ taxa_inventories_count }})</a></li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="col-xs-12 col-md-12">
-                        <img id="preloader" src="{% static 'img/preloader.svg' %}"/>
-                        <div id="map"></div>
-                    </div>
+                <div class="col-xs-3 col-md-3 detail_status_container">
+                    <div id="plot_count_container" class="progress_container"></div>
+                </div>
+                <div class="col-xs-3 col-md-3 detail_status_container">
+                    <div id="taxa_count_container" class="progress_container"></div>
+                </div>
+                <div class="col-xs-3 col-md-3 detail_status_container">
+                    <div id="provider_count_container" class="progress_container"></div>
                 </div>
             </div>
         </div>
+    </div>
+
+    <div class="col-xs-12 col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="col-xs-12 col-md-7">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Derniers inventaires saisis</div>
+                        <div id="inventories_table"><table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Observateur</th>
+                                    <th>Type d'inventaire</th>
+                                    <th>Date</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {% for inventory in last_inventories %}
+                                <tr>
+                                    <div class="row">
+                                        <td>
+                                            {{ inventory.observer.username }}
+                                        </td>
+                                        <td>
+                                            {{ inventory.type_key }}
+                                        </td>
+                                        <td>
+                                            {{ inventory.inventory_date }}
+                                        </td>
+                                        <td>
+                                            <a class="right-link" href="{% url 'rapid_inventory_consult' rapid_inventory.id %}">consulter</a>
+                                        </td>
+                                    </div>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                            <tr><td colspan="4"><a href="{% url 'rapid_inventory_index' %}">Consulter tous les inventaires rapides ({{ rapid_inventories_count }})</a></td></tr>
+                            <tr><td colspan="4"><a href="{% url 'rapid_inventory_index' %}">Consulter tous les inventaires taxonomiques ({{ taxa_inventories_count }})</a></td></tr>
+                            <tr><td colspan="4"></td></tr>
+                        </table></div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-md-5" id="map_container">
+                    <img id="preloader" src="{% static 'img/preloader.svg' %}"/>
+                    <div id="map"></div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
 
 {% block scripts %}
@@ -105,7 +97,9 @@
     <script>
         var taxa_inventories_url = "{{ taxa_inventories_url }}";
         var rapid_inventories_url = "{{ rapid_inventories_url }}";
+        var niamoto_status = {{status|safe}};
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/openlayers/4.2.0/ol.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/progressbar.js/1.0.1/progressbar.min.js"></script>
     <script src='{% static "js/homepage.min.js" %}'></script>
 {% endblock %}

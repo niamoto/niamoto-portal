@@ -1,11 +1,13 @@
 import ol from 'openlayers';
 
 
-export function getDefaultMap() {
+export function getDefaultMap(options) {
     /**
      * Return a ol map centered in New-Caledonia with Georep's aerial
      * images as the base layer, and a zoom control.
      */
+    var options = options || {};
+    var zoom = options.zoom || 7.5;
     var wms_url = 'http://carto.gouv.nc/arcgis/services/fond_imagerie/'
                   + 'MapServer/WMSServer';
     var view = new ol.View({
@@ -13,7 +15,7 @@ export function getDefaultMap() {
         center: new ol.proj.transform([165.875, -21.145],
                                       'EPSG:4326',
                                       'EPSG:4326'),
-        zoom: 7.5
+        zoom: zoom
     });
     var attribution = new ol.control.Attribution({
         collapsible: false

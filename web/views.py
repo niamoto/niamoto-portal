@@ -1,11 +1,14 @@
 # coding: utf-8
 
+import json
+
 from django.contrib.auth import get_user_model
 from django.core.urlresolvers import reverse
 from django.shortcuts import render
 import account.views
+from niamoto.api import status_api
 
-from apps.inventories.models import RapidInventory, TaxaInventory
+from apps.inventories.models import RapidInventory, TaxaInventory, Inventory
 from web.forms import SignupForm, SettingsForm
 
 
@@ -20,9 +23,22 @@ def home(request):
             .order_by('created_at').reverse()[:LAST_RECORDS_LIMIT]
         taxa_url = reverse('inventory-api:taxa_inventory-list')
         rapid_url = reverse('inventory-api:rapid_inventory-list')
+        taxa_invs = list(last_taxa_inventories)
+        rapid_invs = list(last_rapid_inventories)
+        sorted_invs = sorted(
+            taxa_invs + rapid_invs,
+            key=lambda inv: inv.created_at,
+            reverse=True
+        )
+        for inv in sorted_invs:
+            if isinstance(inv, RapidInventory):
+                inv.type_key = "Inventaire rapide"
+            elif isinstance(inv, TaxaInventory):
+                inv.type_key = "Inventaire taxonomique"
+        status = {k: int(v) for k, v in status_api.get_general_status().items()}
+        print(status)
         return render(request, 'homepage.html', {
-            'last_rapid_inventories': last_rapid_inventories,
-            'last_taxa_inventories': last_taxa_inventories,
+            'last_inventories': sorted_invs,
             'rapid_inventories_count': RapidInventory.objects.count(),
             'taxa_inventories_count': TaxaInventory.objects.count(),
             'rapid_inventories_url': "{}?limit={}&ordering={}".format(
@@ -31,6 +47,7 @@ def home(request):
             'taxa_inventories_url': "{}?limit={}&ordering={}".format(
                 taxa_url, LAST_RECORDS_LIMIT, "-created_at"
             ),
+            'status': json.dumps(status),
         })
     else:
         return render(request, 'splash_page.html', {})

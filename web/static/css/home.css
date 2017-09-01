@@ -1,17 +1,17 @@
 #map {
-    height: 400px;
+    height: 300px;
     padding: 0;
     border: 1px #CCCCCC solid;
     overflow: hidden;
     margin-bottom: 30px;
 }
 
-.home-row {
-    margin: 40px 60px 0 10px;
+#map_container {
+    padding-left: 0px;
 }
 
-.panel-heading {
-    font-size: 16px;
+.home-row {
+    margin: 40px 60px 0 10px;
 }
 
 .see-all {
@@ -67,4 +67,26 @@ li .row {
     top: 30%;
     left: 40%;
     z-index: 10;
+}
+
+#inventories_table {
+    height: 255px;
+    overflow: auto;
+}
+.panel-body {
+    padding: 15px 0 15px 0;
+}
+
+.progress_container {
+    width: 100%;
+    position: relative;
+    text-align: center;
+}
+
+#niamoto_status_container {
+    padding: 0 60px;
+}
+
+.detail_status_container {
+    padding: 20px 15px 30px 15px;
 }
