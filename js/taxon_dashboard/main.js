@@ -134,9 +134,6 @@ function hidePreloader(init) {
     preloader_count += 1;
     if (preloader_count >= 2) {
         document.getElementById('preloader').style.display = 'none';
-        if (init) {
-            initModal();
-        }
     }
 };
 

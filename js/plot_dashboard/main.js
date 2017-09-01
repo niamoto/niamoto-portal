@@ -84,5 +84,4 @@ $(document).ready(function() {
     d3_families_donut.initFamiliesDonut();
     d3_species_donut.initSpeciesDonut();
     d3_diameters.initDiametersHistogram();
-    initModal();
 });
