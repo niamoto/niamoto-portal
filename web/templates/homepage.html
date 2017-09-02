@@ -26,14 +26,24 @@
         <div class="panel panel-default">
             <div class="panel-heading">Niamoto en bref</div>
             <div class="panel-body" id="niamoto_status_container">
-                <div class="col-xs-3 col-md-3 detail_status_container">
+                <div class="col-xs-2 col-md-2 detail_status_container"></div>
+                <div class="col-xs-4 col-md-4 detail_status_container">
                     <div id="occurrence_count_container" class="progress_container"></div>
                 </div>
+                <div class="col-xs-4 col-md-4 detail_status_container">
+                    <div id="taxa_count_container" class="progress_container"></div>
+                </div>
+                <div class="col-xs-2 col-md-2 detail_status_container"></div>
+
                 <div class="col-xs-3 col-md-3 detail_status_container">
                     <div id="plot_count_container" class="progress_container"></div>
                 </div>
+
                 <div class="col-xs-3 col-md-3 detail_status_container">
-                    <div id="taxa_count_container" class="progress_container"></div>
+                    <div id="inventory_count_container" class="progress_container"></div>
+                </div>
+                <div class="col-xs-3 col-md-3 detail_status_container">
+                    <div id="user_count_container" class="progress_container"></div>
                 </div>
                 <div class="col-xs-3 col-md-3 detail_status_container">
                     <div id="provider_count_container" class="progress_container"></div>
@@ -98,6 +108,9 @@
         var taxa_inventories_url = "{{ taxa_inventories_url }}";
         var rapid_inventories_url = "{{ rapid_inventories_url }}";
         var niamoto_status = {{status|safe}};
+        var taxa_inventory_count = {{ taxa_inventories_count|safe }};
+        var rapid_inventory_count = {{ rapid_inventories_count|safe }};
+        var user_count = {{ user_count|safe }};
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/openlayers/4.2.0/ol.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/progressbar.js/1.0.1/progressbar.min.js"></script>

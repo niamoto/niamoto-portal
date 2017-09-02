@@ -152,7 +152,8 @@ $(document).ready(function() {
         map.addInteraction(point_select);
     };
 
-    function createProgressBar(container, total, color, suffix, icon) {
+    function createProgressBar(container, total, color, suffix, icon,
+                               font_size) {
         // From https://kimmobrunfeldt.github.io/progressbar.js/
         var bar = new ProgressBar.SemiCircle(container, {
             color: '#333',
@@ -163,7 +164,7 @@ $(document).ready(function() {
             easing: 'easeInOut',
             duration: 1400,
             text: {
-                autoStyleContainer: false
+                autoStyleContainer: false,
             },
             from: { color: '#aaa', width: 1 },
             to: { color: color, width: 4 },
@@ -176,9 +177,12 @@ $(document).ready(function() {
                     circle.setText('');
                 } else {
                     circle.setText(
-                        '<i class="fa ' + icon + '" aria-hidden="true"></i> '
-                        + value
-                        + "<p>" + suffix + "</p>"
+                        "<i style='font-size: " + font_size
+                        + ";' class='fa " + icon + "' aria-hidden='true'></i> "
+                        + "<span style='font-size: " + font_size + ";'>"
+                        + value + "</span>"
+                        + "<p style='font-size: " + font_size + ";'>"
+                        + suffix + "</p>"
                     );
                 }
             }
@@ -193,27 +197,47 @@ $(document).ready(function() {
         niamoto_status.nb_occurrences,
         "#b3de69",
         " occurrences",
-        "fa-pagelines"
+        "fa-pagelines",
+        "22px"
     );
     createProgressBar(
         '#plot_count_container',
         niamoto_status.nb_plots,
         "#80b1d3",
         " parcelles",
-        "fa-map-marker"
+        "fa-map-marker",
+        "18px"
     );
     createProgressBar(
         '#provider_count_container',
         niamoto_status.nb_data_providers,
         "#969696",
         " sources",
-        "fa-database"
+        "fa-database",
+        "18px"
     );
     createProgressBar(
         '#taxa_count_container',
         niamoto_status.nb_taxa,
         "#fb8072",
         " taxons",
-        "fa-leaf"
+        "fa-leaf",
+        "22px"
+    );
+    createProgressBar(
+        '#inventory_count_container',
+        rapid_inventory_count + taxa_inventory_count,
+        "#8dd3c7",
+        " inventaires",
+        "fa-file-text",
+        "18px"
+    );
+    createProgressBar(
+        '#user_count_container',
+        user_count,
+        "#fdb462",
+        " utilisateurs",
+        "fa-user",
+        "18px"
     );
 });

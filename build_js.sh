@@ -11,7 +11,6 @@ browserify js/plot_dashboard/main.js | uglifyjs > apps/plot_dashboard/static/plo
 # Build homepage js
 browserify js/homepage/homepage.js | uglifyjs > web/static/js/homepage.min.js
 
-
 # Build inventories js
 mkdir -p apps/inventories/static/inventories/js/dist
 browserify js/inventories/add_inventory.js | uglifyjs > apps/inventories/static/inventories/js/dist/add_inventory.min.js

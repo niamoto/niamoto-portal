@@ -44,7 +44,7 @@ def process(request):
         },
         {
             "name": "richness",
-            "label": "Nombre de taxons observés",
+            "label": "Nombre d'espèces observées",
             "measure": "taxon_dimension_id",
             "function": "count_distinct",
         },
@@ -110,55 +110,29 @@ def process(request):
         invert_env = True
     df = pd.DataFrame(list(browser.facts(cell=Cell(cube, cuts))))
     summary = {'occurrence_sum': 0, 'richness': 0}
-    records, rainfall_total, elevation_total = [], {}, {}
+    records = []
     taxa_ids = pd.Index([])
     if len(df) > 0:
         # Init summary with occurrence_sum
         summary['occurrence_sum'] = df['occurrence_count'].sum()
+        # Filter occurrences identified at species level for richness
+        df_species = df[df['taxon_dimension.species'] != 'NS']
         # Init records with occurrence sum
         records = pd.DataFrame(
-            df.groupby(
-                ['rainfall.category', 'elevation.category']
+            df_species.groupby(
+                ['taxon_dimension.familia', 'taxon_dimension.genus',
+                 'taxon_dimension.species']
             )['occurrence_count'].sum(),
             columns=['occurrence_count']
         ).rename(
             columns={'occurrence_count': 'occurrence_sum'},
         )
-        records['richness'] = 0
-        # Filter occurrences identified at species level for richness
-        df_species = df[df['taxon_dimension.species'] != 'NS']
+        records['richness'] = 1
         if len(df_species) > 0:
             taxa_ids = pd.Index(df_species['taxon_dimension_id'].unique())
             # Update summary with richness
             summary['richness'] = df_species['taxon_dimension_id'].nunique()
-            # Compute rainfall total
-            rainfall_total = pd.DataFrame(
-                df_species.groupby(
-                    ['rainfall.category']
-                )['taxon_dimension_id'].nunique(),
-                columns=['taxon_dimension_id']
-            ).rename(
-                columns={'taxon_dimension_id': 'richness'},
-            ).reset_index().to_dict(orient='index').values()
-            rainfall_total = {
-                i['rainfall.category']: i for i in rainfall_total
-            }
-            # Compute elevation total
-            elevation_total = pd.DataFrame(
-                df_species.groupby(
-                    ['elevation.category']
-                )['taxon_dimension_id'].nunique(),
-                columns=['taxon_dimension_id']
-            ).rename(
-                columns={'taxon_dimension_id': 'richness'}
-            ).reset_index().to_dict(orient='index').values()
-            elevation_total = {
-                i['elevation.category']: i for i in elevation_total
-            }
-            # Update records with richness
-            records['richness'] = df_species.groupby(
-                ['rainfall.category', 'elevation.category']
-            )['taxon_dimension_id'].nunique()
+            # Records to dict
             records = records.reset_index().to_dict(orient='index').values()
     # Compute unique taxa in selected location indicator
     invert_loc_cell = Cell(cube, invert_location_cuts)
@@ -181,8 +155,9 @@ def process(request):
     summary['unique_taxa_in_entity'] = len(diff)
     # Extract table attributes
     attributes = [
-        'rainfall.category',
-        'elevation.category',
+        'taxon_dimension.familia',
+        'taxon_dimension.genus',
+        'taxon_dimension.species',
     ]
     attributes_names = []
     for i in attributes:
@@ -193,10 +168,6 @@ def process(request):
         'records': records,
         'columns': attributes_names + aggregates_names,
         'area': area,
-        'totals': {
-            'rainfall.category': rainfall_total,
-            'elevation.category': elevation_total,
-        },
     })
 
 

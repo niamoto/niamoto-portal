@@ -18,7 +18,7 @@ export class ResultPanel extends React.Component {
             return '';
         }
         return <p>
-                 {"Nombre de taxons observés dans cette zone: "}
+                 {"Nombre d'espèces observés dans cette zone: "}
                  <b>{this.props.richness}</b>{"."}
                </p>
     }
@@ -38,7 +38,7 @@ export class ResultPanel extends React.Component {
             return '';
         }
         return <p>
-                 {"Nombre de taxons observés uniquement dans cette zone: "}
+                 {"Nombre d'espèces observées uniquement dans cette zone: "}
                  <b>{this.props.uniqueTaxa}</b>{"."}
                </p>
     }

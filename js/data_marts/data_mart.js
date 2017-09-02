@@ -201,6 +201,7 @@ class App extends React.Component {
                     buttonDisabled: false
                 });
                 hidePreloader();
+                throw error;
             }
         });
     }
@@ -263,6 +264,7 @@ class App extends React.Component {
                     buttonDisabled: false
                 });
                 hidePreloader();
+                throw error;
             }
         });
     }
@@ -376,7 +378,6 @@ class App extends React.Component {
                 let data = {
                     records: result.records,
                     columns: result.columns,
-                    totals: result.totals
                 };
                 this_.setState({
                     occurrenceCount: result.summary.occurrence_sum,
@@ -404,6 +405,7 @@ class App extends React.Component {
 
                 });
                 hidePreloader();
+                throw error;
             }
         });
     }

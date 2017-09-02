@@ -36,11 +36,11 @@ def home(request):
             elif isinstance(inv, TaxaInventory):
                 inv.type_key = "Inventaire taxonomique"
         status = {k: int(v) for k, v in status_api.get_general_status().items()}
-        print(status)
         return render(request, 'homepage.html', {
             'last_inventories': sorted_invs,
             'rapid_inventories_count': RapidInventory.objects.count(),
             'taxa_inventories_count': TaxaInventory.objects.count(),
+            'user_count': get_user_model().objects.count(),
             'rapid_inventories_url': "{}?limit={}&ordering={}".format(
                 rapid_url, LAST_RECORDS_LIMIT, "-created_at"
             ),

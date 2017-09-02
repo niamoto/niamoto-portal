@@ -184,15 +184,24 @@ setInterval(function() {
     if (didScroll) {
         didScroll = false;
         var top = leftPanelPlaceholder.offset().top;
+        var doc_height = $(document).height();
         var viewTop = $(window).scrollTop();
-        if ((viewTop + 70) > top) {
+        var viewBottom = $(window).scrollTop() + $(window).height();
+        if ((viewTop + 70) >= top && viewBottom <= (doc_height - 41)) {
             var width = leftPanel.width();
             var height = leftPanel.height();
+            leftPanel.removeClass("panel-bottom");
             leftPanel.addClass("panel-fixed");
             leftPanel.width(width);
             leftPanel.height(height);
         } else {
-            leftPanel.removeClass("panel-fixed");
+            if (viewBottom >= (doc_height - 41)) {
+                leftPanel.addClass("panel-bottom");
+                leftPanel.removeClass("panel-fixed");
+            } else {
+                leftPanel.removeClass("panel-bottom");
+                leftPanel.removeClass("panel-fixed");
+            }
         }
     }
 }, 50);
