@@ -33,8 +33,10 @@ def home(request):
         for inv in sorted_invs:
             if isinstance(inv, RapidInventory):
                 inv.type_key = "Inventaire rapide"
+                inv.url_key = "rapid_inventory_consult"
             elif isinstance(inv, TaxaInventory):
                 inv.type_key = "Inventaire taxonomique"
+                inv.url_key = "taxa_inventory_consult"
         status = {k: int(v) for k, v in status_api.get_general_status().items()}
         return render(request, 'homepage.html', {
             'last_inventories': sorted_invs,
