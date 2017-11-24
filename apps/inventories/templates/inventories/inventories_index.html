@@ -42,17 +42,19 @@
             {# Pagination #}
             <ul class="pagination pagination-centered">
                 {% if page.has_previous %}
-                    <li><a href="?page=1"> << </a></li>
-                    <li><a href="?page={{ page.previous_page_number }}"> < </a></li>
+                    <li><a href="?page=1{% if username %}&username={{ request.user.username }}{% endif %}"> << </a></li>
+                    <li><a href="?page={{ page.previous_page_number }}{% if username %}&username={{ request.user.username }}{% endif %}"> < </a></li>
                 {% endif %}
 
                 {% for i in paginator.page_range %}
-                    <li {% if page.number == i %} class="active" {% endif %}><a href="?page={{i}}">{{i}}</a></li>
+                    <li {% if page.number == i %} class="active" {% endif %}>
+                        <a href="?page={{i}}{% if username %}&username={{ request.user.username }}{% endif %}">{{i}}</a>
+                    </li>
                 {% endfor %}
 
                 {% if page.has_next %}
-                    <li><a href="?page={{ page.next_page_number }}"> > </a></li>
-                    <li><a href="?page={{ page.paginator.num_pages }}"> >> </a></li>
+                    <li><a href="?page={{ page.next_page_number }}{% if username %}&username={{ request.user.username }}{% endif %}"> > </a></li>
+                    <li><a href="?page={{ page.paginator.num_pages }}{% if username %}&username={{ request.user.username }}{% endif %}"> >> </a></li>
                 {% endif %}
             </ul>
             {# Data table #}
