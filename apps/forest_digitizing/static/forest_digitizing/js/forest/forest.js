@@ -21,7 +21,6 @@ $(document).ready(function() {
 
     function addProblemsLayer(problem_geojson) {
         forest.layers.initProblemLayer(problem_geojson);
-
     };
 
     var massif_wfs_url = geoserver_base_url + 'niamoto/ows?' +
@@ -33,7 +32,7 @@ $(document).ready(function() {
 
     var problem_wfs_url = geoserver_base_url + 'niamoto/ows?' +
                   'service=WFS&version=1.0.0&request=GetFeature' +
-                  '&typeName=niamoto:forest_digitizing_digitizingproblem_view ' +
+                  '&typeName=niamoto:forest_digitizing_digitizingproblem_view' +
                   '&outputFormat=application%2Fjson' +
                   '&srsname=EPSG:32758&' +
                   "&cql_filter=massif_id='" + massif_id + "'";
