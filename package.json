@@ -12,7 +12,8 @@
     "react": "^15.6.1",
     "react-bootstrap": "^0.31.0",
     "react-dom": "^15.6.1",
-    "react-table": "^6.5.3"
+    "react-table": "^6.5.3",
+    "uglifyjs": "^2.4.11"
   },
   "browserify-shim": {
     "react": "global:React",
