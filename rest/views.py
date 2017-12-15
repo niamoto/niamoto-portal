@@ -15,7 +15,6 @@ def api_root(request):
         'data-api': reverse('data-api:api-root'),
         'dashboard-api': reverse('dashboard-api:api-root'),
         'data_mart-api': reverse('data_mart-api:api-root'),
-        'plantnote-api': reverse('plantnote-api:api-root'),
         'forest_digitizing-api': reverse('forest_digitizing-api:api-root'),
         'inventory-api': reverse('inventory-api:api-root'),
     }
