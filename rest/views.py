@@ -18,8 +18,6 @@ def api_root(request):
         'forest_digitizing-api': reverse('forest_digitizing-api:api-root'),
         'inventory-api': reverse('inventory-api:api-root'),
     }
-    if request.user.is_staff:
-        response_json['management-api'] = reverse('management-api:api-root')
     return Response(response_json)
 
 

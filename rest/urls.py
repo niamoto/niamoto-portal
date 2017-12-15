@@ -16,5 +16,4 @@ urlpatterns = [
     url(r'^data_mart/', include('apps.data_marts.rest_urls', namespace="data_mart-api")),
     url(r'^forest_digitizing/', include('apps.forest_digitizing.rest_urls', namespace="forest_digitizing-api")),
     url(r'^inventory/', include('apps.inventories.rest_urls', namespace="inventory-api")),
-    url(r'^management/', include('apps.niamoto_management.rest_urls', namespace="management-api")),
 ]
