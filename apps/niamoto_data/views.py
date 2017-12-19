@@ -1,6 +1,9 @@
 # coding: utf-8
 
 from rest_framework import viewsets
+from rest_framework.views import APIView
+from django.http import HttpResponse
+from niamoto.data_publishers.taxon_data_publisher import TaxonDataPublisher
 
 from apps.niamoto_data.models import Taxon, Occurrence, Plot
 from apps.niamoto_data.serializers import TaxonSerializer, \
@@ -33,6 +36,25 @@ class TaxonViewSet(viewsets.ReadOnlyModelViewSet):
         if full_name_like is not None:
             queryset = queryset.filter(full_name__icontains=full_name_like)
         return queryset
+
+
+class FlattenedTaxonomyAPIView(APIView):
+    """
+    Endpoint for retrieving flattened taxonomy.
+    """
+    authentication_classes = []
+    permission_classes = []
+    base_name = 'flattened_taxonomy'
+
+    def get(self, request, *args, **kwargs):
+        """
+        Retrieve the list of taxa.
+        """
+        data = TaxonDataPublisher().process(flatten=True)[0]
+        response = HttpResponse(content_type='text/csv')
+        response['Content-Disposition'] = 'attachment; filename="taxonomy.csv"'
+        data.to_csv(response)
+        return response
 
 
 class OccurrenceViewSet(viewsets.ReadOnlyModelViewSet):

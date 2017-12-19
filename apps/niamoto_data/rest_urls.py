@@ -4,7 +4,7 @@ from django.conf.urls import url, include
 from rest_framework import routers
 
 from apps.niamoto_data.views import TaxonViewSet, OccurrenceViewSet, \
-    PlotViewSet
+    PlotViewSet, FlattenedTaxonomyAPIView
 
 
 router = routers.DefaultRouter()
@@ -15,6 +15,7 @@ router.register(
     TaxonViewSet,
     base_name=TaxonViewSet.base_name,
 )
+
 # Occurrence
 router.register(
     r'{}'.format(OccurrenceViewSet.base_name),
@@ -31,4 +32,5 @@ router.register(
 
 urlpatterns = [
     url(r'^', include(router.urls)),
+    url(r'^flattened_taxonomy/$', FlattenedTaxonomyAPIView.as_view())
 ]
