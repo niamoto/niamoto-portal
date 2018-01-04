@@ -3,10 +3,9 @@
 import json
 
 from niamoto.api.data_marts_api import get_dimension, get_dimensional_model
-from niamoto.vector.vector_manager import VectorManager
-from cubes import PointCut, Cell, SetCut
 import pandas as pd
 
+from django.db import connection
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.views.generic import TemplateView
@@ -27,8 +26,6 @@ class DataMartView(TemplateView):
             'props': json.dumps({
                 'provinces': get_province_levels(),
                 'communes': get_commune_levels(),
-                'rainfall_filters': get_rainfall_filters(),
-                'elevation_filters': get_elevation_filters(),
             }),
         }
 
@@ -55,105 +52,9 @@ def process(request):
     )
     workspace = dm.get_cubes_workspace()
     cube = workspace.cube('taxon_observed_occurrences')
-    browser = workspace.browser(cube)
     selected_entity = json.loads(
         request.POST.get('selected_entity', None)
     )
-    cuts = []
-    invert_location_cuts = []
-    invert_env_cuts = []
-    invert_env = False
-    if selected_entity['type'] == 'draw':
-        location_cuts = get_occurrence_location_cuts(selected_entity)
-        cuts += location_cuts
-        invert_env_cuts += location_cuts
-        invert_location_cuts += get_occurrence_location_cuts(
-            selected_entity,
-            invert=True
-        )
-        area = 0
-    else:
-        entity_cut = PointCut(
-            selected_entity['type'],
-            [selected_entity['value']]
-        )
-        cuts += [entity_cut]
-        invert_env_cuts += [entity_cut]
-        invert_location_cuts += [
-            PointCut(
-                selected_entity['type'],
-                [selected_entity['value']],
-                invert=True
-            ),
-        ]
-        dim = get_dimension(selected_entity['type'])
-        area = dim.get_value(selected_entity['value'], ["area"])[0]
-    # Update cuts with rainfall filter
-    rainfall_filter = request.POST.get('rainfall_filter', None)
-    if rainfall_filter is not None and rainfall_filter != '':
-        cuts += [
-            PointCut('rainfall', [rainfall_filter])
-        ]
-        invert_env_cuts += [
-            PointCut('rainfall', [rainfall_filter], invert=True)
-        ]
-        invert_env = True
-    # Update cuts with elevation filter
-    elevation_filter = request.POST.get('elevation_filter', None)
-    if elevation_filter is not None and elevation_filter != '':
-        cuts += [
-            PointCut('elevation', [elevation_filter])
-        ]
-        invert_env_cuts += [
-            PointCut('elevation', [elevation_filter], invert=True)
-        ]
-        invert_env = True
-    df = pd.DataFrame(list(browser.facts(cell=Cell(cube, cuts))))
-    summary = {'occurrence_sum': 0, 'richness': 0}
-    records = []
-    taxa_ids = pd.Index([])
-    if len(df) > 0:
-        # Init summary with occurrence_sum
-        summary['occurrence_sum'] = df['occurrence_count'].sum()
-        # Filter occurrences identified at species level for richness
-        df_species = df[df['taxon_dimension.species'] != 'NS']
-        # Init records with occurrence sum
-        records = pd.DataFrame(
-            df_species.groupby(
-                ['taxon_dimension.familia', 'taxon_dimension.genus',
-                 'taxon_dimension.species']
-            )['occurrence_count'].sum(),
-            columns=['occurrence_count']
-        ).rename(
-            columns={'occurrence_count': 'occurrence_sum'},
-        )
-        records['richness'] = 1
-        if len(df_species) > 0:
-            taxa_ids = pd.Index(df_species['taxon_dimension_id'].unique())
-            # Update summary with richness
-            summary['richness'] = df_species['taxon_dimension_id'].nunique()
-            # Records to dict
-            records = records.reset_index().to_dict(orient='index').values()
-    # Compute unique taxa in selected location indicator
-    invert_loc_cell = Cell(cube, invert_location_cuts)
-    invert_loc_df = pd.DataFrame(list(browser.facts(cell=invert_loc_cell)))
-    invert_loc_taxa_ids = pd.Index([])
-    if len(invert_loc_df) > 0:
-        invert_loc_taxa_ids = pd.Index(
-            invert_loc_df['taxon_dimension_id'].unique()
-        )
-    diff = taxa_ids.difference(invert_loc_taxa_ids)
-    if invert_env > 0:
-        invert_env_cell = Cell(cube, invert_env_cuts)
-        list(browser.facts(cell=invert_env_cell))
-        invert_env_df = pd.DataFrame(list(browser.facts(cell=invert_env_cell)))
-        if len(invert_env_df) > 0:
-            invert_env_taxa_ids = pd.Index(
-                invert_env_df['taxon_dimension_id'].unique()
-            )
-            diff = diff.difference(invert_env_taxa_ids)
-    summary['unique_taxa_in_entity'] = len(diff)
-    # Extract table attributes
     attributes = [
         'taxon_dimension.familia',
         'taxon_dimension.genus',
@@ -163,57 +64,54 @@ def process(request):
     for i in attributes:
         attributes_names.append((i, cube.attribute(i).label))
     aggregates_names = [(i.name, i.label) for i in cube.aggregates]
+
+    _records = pd.read_sql(
+        """
+        SELECT * 
+        FROM public.zones_records 
+        WHERE analysis_zones_id = {}
+        ORDER BY "taxon_dimension.familia";
+        """.format(selected_entity['value']),
+        connection
+    ).reset_index().to_dict(orient='index').values()
+
+    _metrics = pd.read_sql(
+        """
+        SELECT *
+        FROM public.zones_metrics
+        WHERE analysis_zones_id = {};
+        """.format(selected_entity['value']),
+        connection
+    )
+    r = _metrics.iloc[0]
+    _summary = {
+        'richness': r['richness'],
+        'unique_taxa_in_entity': r['unique_taxa_in_entity'],
+        'occurrence_sum': r['occurrence_sum'],
+    }
+
     return Response({
-        'summary': summary,
-        'records': records,
+        'summary': _summary,
+        'records': _records,
         'columns': attributes_names + aggregates_names,
-        'area': area,
+        'area': r['area'],
     })
 
 
 def get_province_levels():
-    province_dim = get_dimension('provinces')
-    labels = province_dim.get_labels()
+    dim = get_dimension('analysis_zones')
+    vals = dim.get_values()
+    labels = vals[vals['type'] == 'PROVINCE'][dim.label_col]
     labels = [(str(k), v) for k, v in labels.to_dict().items()]
     return labels
 
 
 def get_commune_levels():
-    commune_dim = get_dimension('communes')
-    labels = commune_dim.get_labels()
+    dim = get_dimension('analysis_zones')
+    vals = dim.get_values()
+    labels = vals[vals['type'] == 'COMMUNE'][dim.label_col]
     labels = [(str(k), v) for k, v in labels.to_dict().items()]
     return labels
-
-
-def get_rainfall_filters():
-    dim = get_dimension('rainfall')
-    return dim.cuts[1]
-
-
-def get_elevation_filters():
-    dim = get_dimension('elevation')
-    return dim.cuts[1]
-
-
-def get_occurrence_location_cuts(selected_entity, invert=False):
-    wkt = selected_entity['value']
-    dim = get_dimension('occurrence_location')
-    df = dim.get_values(wkt_filter=wkt)
-    idx = list(df.index.values)
-    if len(idx) > 0:
-        cuts = [
-            SetCut(
-                'occurrence_location',
-                [[int(i)] for i in idx],
-                hierarchy='default',
-                invert=invert
-            )
-        ]
-    else:
-        cuts = [
-            PointCut('occurrence_location', [-1])
-        ]
-    return cuts
 
 
 class DimensionViewSet(ViewSet):
@@ -252,7 +150,7 @@ class ProvinceDimensionViewSet(DimensionViewSet):
 
     def __init__(self, *args, **kwargs):
         super(ProvinceDimensionViewSet, self).__init__(
-            'provinces',
+            'analysis_zones',
             *args,
             **kwargs
         )
@@ -269,7 +167,7 @@ class CommuneDimensionViewSet(DimensionViewSet):
 
     def __init__(self, *args, **kwargs):
         super(CommuneDimensionViewSet, self).__init__(
-            'communes',
+            'analysis_zones',
             *args,
             **kwargs
         )
@@ -277,35 +175,3 @@ class CommuneDimensionViewSet(DimensionViewSet):
     @DimensionViewSet.data.setter
     def data(self, value):
         self._data = value.simplify(0.005)
-
-
-@api_view(['POST'])
-def get_rainfall_vector_classes(request):
-    """
-    Retrieve rainfall vector classes.
-    """
-    geojson = request.POST.get('geojson')
-    df = VectorManager.get_vector_geo_dataframe(
-        'rainfall_classes',
-        geojson_filter=geojson,
-        geojson_cut=True,
-    )
-    return Response({
-        'geojson': df.to_json()
-    })
-
-
-@api_view(['POST'])
-def get_elevation_vector_classes(request):
-    """
-    Retrieve elevation vector classes.
-    """
-    geojson = request.POST.get('geojson')
-    df = VectorManager.get_vector_geo_dataframe(
-        'elevation_classes',
-        geojson_filter=geojson,
-        geojson_cut=True,
-    )
-    return Response({
-        'geojson': df.to_json()
-    })

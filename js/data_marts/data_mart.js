@@ -448,25 +448,6 @@ class App extends React.Component {
                           {this.fillCommuneSelect()}
                       </FormControl>
                     </FormGroup>
-                    {/* Rainfall combobox */}
-                    <FormGroup controlId="rainfallSelect">
-                      <ControlLabel>Filtrer sur la pluviométrie</ControlLabel>
-                      <FormControl componentClass="select"
-                                   placeholder="select"
-                                   onChange={this.onRainfallSelected.bind(this)}
-                                   value={this.state.rainfall_filter || ''}>
-                          {this.fillRainfallSelect()}
-                      </FormControl>
-                    </FormGroup>
-                    <FormGroup controlId="elevationSelect">
-                      <ControlLabel>{"Filtrer sur l'altitude"}</ControlLabel>
-                      <FormControl componentClass="select"
-                                   placeholder="select"
-                                   onChange={this.onElevationSelected.bind(this)}
-                                   value={this.state.elevation_filter || ''}>
-                          {this.fillElevationSelect()}
-                      </FormControl>
-                    </FormGroup>
                     <Button id='launch_button'
                             bsStyle='success'
                             onClick={this.process.bind(this)}

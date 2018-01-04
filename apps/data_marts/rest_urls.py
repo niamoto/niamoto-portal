@@ -4,8 +4,7 @@ from django.conf.urls import url, include
 from rest_framework import routers
 
 from apps.data_marts.views import ProvinceDimensionViewSet, \
-    CommuneDimensionViewSet, get_rainfall_vector_classes, \
-    get_elevation_vector_classes, process
+    CommuneDimensionViewSet, process
 
 
 router = routers.DefaultRouter()
@@ -23,7 +22,5 @@ router.register(
 
 urlpatterns = [
     url(r'^', include(router.urls)),
-    url(r'^rainfall_vector_classes/', get_rainfall_vector_classes),
-    url(r'^elevation_vector_classes/', get_elevation_vector_classes),
     url(r'^process/', process),
 ]

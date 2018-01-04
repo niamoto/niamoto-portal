@@ -77,16 +77,6 @@ export class ResultPanel extends React.Component {
                       <PivotTable data={this.props.data || {}}/>
                   </Panel>
               </Col>
-              <Col xs={12} md={12} lg={12} className={'result_container'}>
-                  <Panel id={'d3_map_panel'} header={"Détail de la zone"}>
-                      <D3Map area={this.props.area}/>
-                  </Panel>
-              </Col>
-              {/*<Col xs={12} md={12} lg={12}>
-                  <Panel id={'d3_heatmap_panel'} header={"Profil environnemental de la zone (Altitude / Pluviométrie)"}>
-                      <D3HeatMap/>
-                  </Panel>
-              </Col>*/}
             </Row>
         );
     }
