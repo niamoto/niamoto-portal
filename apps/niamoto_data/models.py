@@ -16,7 +16,7 @@ class Massif(models.Model):
 
     key_name = models.CharField(max_length=30, unique=True)
     full_name = models.CharField(max_length=30, unique=True)
-    geom = models.PolygonField(srid=4326, blank=True, null=True)
+    geom = models.MultiPolygonField(srid=4326, blank=True, null=True)
 
     objects = models.GeoManager()
 
