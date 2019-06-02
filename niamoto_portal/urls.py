@@ -37,7 +37,7 @@ urlpatterns = [
     url(r"^plot_dashboard/", include("apps.plot_dashboard.urls", namespace="plot_dashboard")),
     url(r"^data_marts/", include("apps.data_marts.urls", namespace="data_marts")),
     url(r'^explorer/', include('explorer.urls')),
-    url(r'^qgis_plugin_repository/', include('qgis_plugin_repository.urls')),
+#    url(r'^qgis_plugin_repository/', include('qgis_plugin_repository.urls')),
     url(
         r'^geoserver/(?P<path>.*)$',
         AuthProxyView.as_view(upstream=config.GEOSERVER_BASE_URL)
