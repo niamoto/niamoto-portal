@@ -37,12 +37,12 @@ class PlotDashboardViewSet(ViewSet):
         dataset = dataset[pd.notnull(dataset['dbh'])]
 
         families_dist, total_identified = a.get_families_distribution(
-                dataset,
-                limit=9,
+                                            dataset,
+                                            limit=9,
         )
         species_dist, total_identified_specie = a.get_species_distribution(
-            dataset,
-            limit=9,
+                                                dataset,
+                                                limit=9,
         )
         richness = a.get_richness(dataset)
         response = {
