@@ -32,7 +32,9 @@ class Plot(models.Model):
     name = models.CharField(max_length=50, unique=True)
     width = models.FloatField(null=True, blank=True)  # Meters
     height = models.FloatField(null=True, blank=True)  # Meters
-    location = models.PointField(srid=4326)
+    location = models.PointField(null=True, srid=4326)
+    latitude =  = models.FloatField()
+    longitude  = models.FloatField()
     elevation = models.FloatField(null=True, blank=True)
     species_level = models.FloatField(null=True, blank=True)
     total_stems = models.IntegerField(null=True, blank=True)
@@ -56,6 +58,7 @@ class Plot(models.Model):
     undercanopy = models.IntegerField(null=True, blank=True)
     understorey = models.IntegerField(null=True, blank=True)
     strate_indet = models.IntegerField(null=True, blank=True)
+
 
 
     objects = models.GeoManager()

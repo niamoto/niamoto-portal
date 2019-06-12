@@ -17,7 +17,7 @@ function buildPlotList() {
     $.ajax({
         type: 'GET',
         data: {
-            name__icontains: "Parcelles 1ha (AMAP) - ",
+            name__icontains: "Forêt Plate P09",
             ordering: "name"
         },
         url: rest_urls.plot_list,
