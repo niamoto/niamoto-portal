@@ -194,7 +194,7 @@ class App extends React.Component {
                 alert("Une erreur est survenue pendant le chargement des "
                     +"données, veuillez réessayer.\n"
                     + "Si l'erreur persiste, contactez "
-                    +"dimitri.justeau@gmail.com");
+                    +"tristan.mangeard@gmail.com");
                 _this.setState({
                     province_id: 0,
                     selected_entity: null,
@@ -257,7 +257,7 @@ class App extends React.Component {
                 alert("Une erreur est survenue pendant le chargement des "
                     +"données, veuillez réessayer.\n"
                     + "Si l'erreur persiste, contactez "
-                    +"dimitri.justeau@gmail.com");
+                    +"tristan.mangeard@gmail.com");
                 _this.setState({
                     commune_id: 0,
                     selected_entity: null,
@@ -394,7 +394,7 @@ class App extends React.Component {
                 alert("Une erreur est survenue pendant le chargement des "
                     +"données, veuillez réessayer.\n"
                     + "Si l'erreur persiste, contactez "
-                    +"dimitri.justeau@gmail.com");
+                    +"tristan.mangeard@gmail.com");
                 this_.setState({
                     occurrenceCount: null,
                     uniqueTaxa: null,
