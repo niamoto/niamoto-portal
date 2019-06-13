@@ -33,8 +33,8 @@ class Plot(models.Model):
     width = models.FloatField(null=True, blank=True)  # Meters
     height = models.FloatField(null=True, blank=True)  # Meters
     location = models.PointField(null=True, srid=4326)
-    latitude = models.FloatField()
-    longitude  = models.FloatField()
+    latitude = models.FloatField(blank=True)
+    longitude  = models.FloatField(blank=True)
     elevation = models.FloatField(null=True, blank=True)
     species_level = models.FloatField(null=True, blank=True)
     total_stems = models.IntegerField(null=True, blank=True)
