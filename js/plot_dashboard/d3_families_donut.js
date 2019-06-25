@@ -42,6 +42,7 @@ export function initFamiliesDonut() {
         .attr("class", "tooltip")
         .style("opacity", 0);
 
+    // Update Data for trigger
     $('#plot_select').on('plotSelected', function (event, data) {
         updateData(data);
     });

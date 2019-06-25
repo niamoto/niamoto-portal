@@ -25,6 +25,7 @@ def get_occurrences_by_plot(plot_id=None):
         """
         SELECT plot_id,
                plot.name AS plot_name,
+               plot.basal_area as basal_area,
                occurrence.id AS occ_id,
                identifier AS identifier,
                taxon.id AS taxon_id,
@@ -45,7 +46,7 @@ def get_occurrences_by_plot(plot_id=None):
                occurrence.bark_thickness AS bark_thickness
         FROM niamoto_data_plotoccurrences
         INNER JOIN niamoto_data_plot AS plot ON plot_id = plot.id
-        INNER JOIN niamoto_data_occurrence AS occurrence ON occurrence_id = occurrence.id
+        LEFT JOIN niamoto_data_occurrence AS occurrence ON occurrence_id = occurrence.id
         LEFT JOIN niamoto_data_taxon AS taxon ON occurrence.taxon_id = taxon.id
         /* SPECIE */
         LEFT JOIN niamoto_data_taxon AS specie_parent ON specie_parent.tree_id = taxon.tree_id
@@ -146,3 +147,23 @@ def get_richness(dataframe):
         'nb_species': len(s),
         'nb_genus': len(g),
     }
+
+def get_plots_info():
+    """
+    Return a list of item plots.
+
+    :return: a list of item plots.
+    """
+
+    sql = \
+        """
+        SELECT MAX(basal_area) as basal_area_max,
+                MAX(h_mean) as h_mean_max
+        FROM niamoto_data_plot;"""
+    engine = create_engine(get_sqlalchemy_connection_string())
+    conn = engine.connect()
+    df = pd.read_sql_query(
+        sql,
+        conn
+    )
+    return df

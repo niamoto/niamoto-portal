@@ -3,6 +3,8 @@ import * as d3_map from './d3_map';
 import * as d3_families_donut from './d3_families_donut';
 import * as d3_species_donut from './d3_species_donut';
 import * as d3_diameters from './d3_diameters';
+import * as d3_gauges from './d3_gauges';
+
 
 function showPreloader() {
     document.getElementById('preloader').style.display = 'inline';
@@ -14,6 +16,7 @@ function hidePreloader() {
 
 function buildPlotList() {
     var plots = {};
+    
     $.ajax({
         type: 'GET',
         data: {
@@ -21,14 +24,15 @@ function buildPlotList() {
         },
         url: rest_urls.plot_list,
         success: function(result) {
+            d3_gauges.initGauges(result);
             plots = result.features.reduce(function(map, obj) {
                 map[obj.id] = obj;
                 return map;
             }, {});
             var select = document.getElementById("plot_select");
             result.features.map(function(x) {
-                var option = document.createElement('option');
-                option.text = x.properties.name;
+                var option   = document.createElement('option');
+                option.text  = x.properties.name;
                 option.value = x.id;
                 select.add(option);
             });
@@ -54,24 +58,26 @@ function updateData(node) {
             // Update plot general informations
             $('#selected_plot_name').html(node['properties']['name']);
             $('#plot_elevation').html(
-                "<b>Altitude</b>: "  + node['properties']['elevation'] + " m"
+                "<b>Altitude</b>           : "  + node['properties']['elevation'] + " m"
             );
             $('#nb_occurrences').html(
-                "<b>Nombre d'individus</b>: " + result['nb_occurrences']
+                "<b>Nombre d'individus</b> : " + result['nb_occurrences']
             );
             $('#nb_species').html(
                 "<b>Richesse spécifique</b>: " + result['richness']['nb_species']
             );
             $('#nb_families').html(
-                "<b>Nombre de familles</b>: " + result['richness']['nb_families']
+                "<b>Nombre de familles</b> : " + result['richness']['nb_families']
             );
             $('#nb_genus').html(
-                "<b>Nombre de genres</b>: " + result['richness']['nb_genus']
+                "<b>Nombre de genres</b>   : " + result['richness']['nb_genus']
             );
             hidePreloader();
         }
     });
 };
+
+
 
 
 $(document).ready(function() {
@@ -83,4 +89,5 @@ $(document).ready(function() {
     d3_families_donut.initFamiliesDonut();
     d3_species_donut.initSpeciesDonut();
     d3_diameters.initDiametersHistogram();
+
 });

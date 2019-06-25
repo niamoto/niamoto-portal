@@ -1,12 +1,12 @@
-#body-container {
-}
+#body-container {}
 
 h4 {
     margin-top: 0px;
     font-size: 20px;
 }
 
-.input-group-addon, .input-group-btn {
+.input-group-addon,
+.input-group-btn {
     width: 0;
 }
 
@@ -29,9 +29,21 @@ h4 {
     margin: 0;
 }
 
-#first_row { height: 50px; }
-#second_row { height: 300px; }
-#third_row { height: 300px; }
+#first_row {
+    height: 50px;
+}
+
+#second_row {
+    height: 300px;
+}
+
+#third_row {
+    height: 300px;
+}
+
+#four_row {
+    height: 300px;
+}
 
 .viz_container {
     height: 100%;
@@ -53,9 +65,7 @@ h4 {
     float: none;
 }
 
-#plot_parameters {
-
-}
+#plot_parameters {}
 
 #plot_parameters span {
     padding-right: 20px;
@@ -83,17 +93,22 @@ h4 {
     width: 100%;
 }
 
-.land {
-  fill: #f5f5f5;
-  stroke: #afafaf;
+#basal_area_gauge {
+    height: 90%;
+    width: 100%;
 }
 
-path.slice{
+.land {
+    fill: #f5f5f5;
+    stroke: #afafaf;
+}
+
+path.slice {
     stroke-width: 1px;
     stroke: white;
 }
 
-path.slice{
+path.slice {
     stroke-width: 1px;
     stroke: white;
 }
@@ -112,4 +127,63 @@ path.slice{
 
 .panel-heading {
     padding: 5px 15px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.gauge {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.gauge-container {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    display: flex;
+}
+
+.gauge g.arc {
+    fill: steelblue;
+}
+
+.gauge g.pointer {
+    fill: #4b4948;
+    stroke: #070706;
+}
+
+.gauge g.pointer .arc_pointer {
+    fill: #777472;
+    stroke: #a8a4a2;
+}
+
+.gauge g.label text {
+    text-anchor: middle;
+    font-size: 1.2em;
+    font-weight: bold;
+    fill: #666;
+}
+
+.gauge .tickline {
+    stroke: #fff;
+}
+
+.number-div {
+    position: absolute;
+    bottom: 3px;
+    left: 50%;
+    text-align: center;
+    transform: translate(-50%, -50%);
+
+}
+
+.number-unit {
+    display: block;
+    font-size: 12px;
+}
+
+.number-value {
+    font-size: 15px;
 }

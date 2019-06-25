@@ -65,6 +65,7 @@ export function initDiametersHistogram() {
         .style("text-anchor", "middle")
         .text("Fréquence (%)");
 
+    // Update Data for trigger
     $('#plot_select').on('plotSelected', function (event, data) {
         updateData(data);
     });
