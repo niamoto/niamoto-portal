@@ -43,5 +43,7 @@ class PlotSerializer(gis_serializers.GeoFeatureModelSerializer):
     class Meta:
         model = Plot
         geo_field = 'location'
-        fields = ('id', 'name', 'width', 'height', 'elevation', 'basal_area')
+        fields = ('id', 'name', 'width', 'height', 'elevation', 'basal_area',
+                'emergent', 'canopy', 'undercanopy', 'understorey',
+                'living_stems', 'total_stems')
 

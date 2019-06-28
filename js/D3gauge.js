@@ -56,7 +56,6 @@ export class Gauge {
       [pointerWidth , 0],
 
     ];
-    console.log(this.lineData);
 
     this.minAngle   = -90,
     this.maxAngle   = 90,

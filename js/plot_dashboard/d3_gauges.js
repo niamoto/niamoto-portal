@@ -16,7 +16,7 @@ export function initGauges(data) {
         lowMidThreshhold : basal_area_max * .4,
         highMidThreshhold: basal_area_max * .6,
         highThreshhold   : basal_area_max * .8,
-        displayUnit      :  'test'
+        displayUnit      :  ''
     });
 
     basal_area_Gauge.render("#basal_area_gauge");
@@ -27,7 +27,6 @@ export function initGauges(data) {
     });
 
     function updateData(data) {
-        console.log(data);
         basal_area_Gauge.update(data['plot']['properties']['basal_area']);
     };
 };

@@ -4,6 +4,7 @@ import * as d3_families_donut from './d3_families_donut';
 import * as d3_species_donut from './d3_species_donut';
 import * as d3_diameters from './d3_diameters';
 import * as d3_gauges from './d3_gauges';
+import * as d3_strates from './d3_strates';
 
 
 function showPreloader() {
@@ -89,5 +90,6 @@ $(document).ready(function() {
     d3_families_donut.initFamiliesDonut();
     d3_species_donut.initSpeciesDonut();
     d3_diameters.initDiametersHistogram();
+    d3_strates.initBarh();
 
 });

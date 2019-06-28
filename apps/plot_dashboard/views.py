@@ -72,18 +72,18 @@ class PlotDashboardViewSet(ViewSet):
     def list(self, request):
         return Response({})
 
-class PlotsInfosViewSet(ViewSet):
-    """
-    Viewset providing dashboard data for plots.
-    """
+# class PlotsInfosViewSet(ViewSet):
+#     """
+#     Viewset providing dashboard data for plots.
+#     """
 
-    def retrieve(self, request):
-        dataset_plots = a.get_plots_info()
+#     def retrieve(self, request):
+#         dataset_plots = a.get_plots_info()
 
-        response = {
-            "plots_info": dataset_plots,
-        }
-        return Response(response)
+#         response = {
+#             "plots_info": dataset_plots,
+#         }
+#         return Response(response)
 
-    def list(self, request):
-        return Response({})
+#     def list(self, request):
+#         return Response({})
