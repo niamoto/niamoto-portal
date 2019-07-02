@@ -53,9 +53,11 @@ export function initMap() {
         }
     };
 
-    d3.json(static_urls.nc_adm_topojson, function (error, nc) {
-        if (error) throw error;
+    
 
+    d3.json(static_urls.nc_adm_topojson).then(function (nc) {
+        
+        alert('b');
         var features = topojson.feature(nc, nc.objects.nc_adm0);
 
         var center = d3.geoCentroid(features);
@@ -73,7 +75,7 @@ export function initMap() {
             width - (bounds[0][0] + bounds[1][0])/2,
             height - (bounds[0][1] + bounds[1][1])/2
         ];
-
+        
         // new projection
         projection = d3.geoMercator().center(center)
             .scale(0.9 * scale).translate(offset);
@@ -85,7 +87,7 @@ export function initMap() {
             .attr("d", path);
 
         $('#preloader').trigger('elementLoaded', 'map');
-    });
+    }, function(error){if (error) throw error;});
 
     $('#plot_select').on('plotSelected', function (event, data) {
         updateOccurrences(data['plot']);
