@@ -102,14 +102,17 @@ export function initBarh() {
             .attr("class", "rect")
             .style("fill", d => d.color)
             .style("opacity", "0.8")
-            .style("stroke", "white")
             .attr("width", d => xScale(d.value))
             .attr("y", d => yScale(d.label))
             .attr("height", yScale.bandwidth())
-            .transition().duration(500);
+            .attr("rx", 2)
+            .attr("ry", 2)
+            .transition()
+                .duration(500);
 
-        rect.transition().duration(500)
-            .attr("y", (d) => yScale(d.label))
+        rect.transition()
+            .duration(500)
+            .attr("y", d => yScale(d.label))
             .attr("width", d => xScale(d.value))
             .attr("height", yScale.bandwidth());
 

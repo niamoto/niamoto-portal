@@ -5,6 +5,7 @@ import * as d3_species_donut from './d3_species_donut';
 import * as d3_diameters from './d3_diameters';
 import * as d3_gauges from './d3_gauges';
 import * as d3_strates from './d3_strates';
+import * as d3_stems from './d3_stems';
 
 
 function showPreloader() {
@@ -91,5 +92,5 @@ $(document).ready(function() {
     d3_species_donut.initSpeciesDonut();
     d3_diameters.initDiametersHistogram();
     d3_strates.initBarh();
-
+    d3_stems.initStems();
 });

@@ -104,10 +104,24 @@ h4 {
 }
 
 #strate_barh .rect {
-    -webkit-filter: drop-shadow( 0px 3px 1px #aaa );
-    filter: drop-shadow( 0px 3px 1px #aaa );
+    -webkit-filter: drop-shadow( 0px 1.5px 1.5px #aaa );
+    filter: drop-shadow( 0px 1.5px 1.5px #aaa );
 }
 
+#stems_barv {
+    height: 90%;
+    width: 100%;
+}
+
+#stems_barv .tick line {
+    opacity: .7;
+    stroke-dasharray: 3;
+    stroke: "#afafaf"
+}
+
+.legend .label {
+    font-family: Dejavu Sans;
+}
 
 .land {
     fill: #f5f5f5;
