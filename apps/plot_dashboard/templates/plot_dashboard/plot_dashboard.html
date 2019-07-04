@@ -36,6 +36,27 @@
     </div>
 
     <div class="col-xs-12 col-md-12 fill_parent_height"  id="right_panel">
+        {# Second row #}
+        <div id="second_row" class="row">
+            <div id="plot_location" class="col-xs-12 col-sm-6 col-md-4 viz_container">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Localisation de la parcelle</div>
+                    <div id="map_widget" class="d3_panel"></div>
+                </div>
+            </div>
+            <div id="families_donut_container" class="col-xs-12 col-sm-6 col-md-4 viz_container">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Familles dominantes</div>
+                    <div id="families_donut"></div>
+                </div>
+            </div>
+            <div id="top_species_container" class="col-xs-12 col-sm-6 col-md-4 viz_container">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Espèces dominantes</div>
+                    <div id="species_donut"></div>
+                </div>
+            </div>
+        </div>
         {# 4 row #}
         <div id="four_row" class="row">
             <div id="basal_area_container" class="col-xs-12 col-sm-6 col-md-4 viz_container">
@@ -75,27 +96,6 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Hauteur moyenne</div>
                     <div id="h_mean_gauge"></div>
-                </div>
-            </div>
-        </div>
-        {# Second row #}
-        <div id="second_row" class="row">
-            <div id="plot_location" class="col-xs-12 col-sm-6 col-md-4 viz_container">
-                <div class="panel panel-default">
-                    <div class="panel-heading">Localisation de la parcelle</div>
-                    <div id="map_widget" class="d3_panel"></div>
-                </div>
-            </div>
-            <div id="families_donut_container" class="col-xs-12 col-sm-6 col-md-4 viz_container">
-                <div class="panel panel-default">
-                    <div class="panel-heading">Familles dominantes</div>
-                    <div id="families_donut"></div>
-                </div>
-            </div>
-            <div id="top_species_container" class="col-xs-12 col-sm-6 col-md-4 viz_container">
-                <div class="panel panel-default">
-                    <div class="panel-heading">Espèces dominantes</div>
-                    <div id="species_donut"></div>
                 </div>
             </div>
         </div>

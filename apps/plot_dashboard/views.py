@@ -40,11 +40,11 @@ class PlotDashboardViewSet(ViewSet):
 
         families_dist, total_identified = a.get_families_distribution(
                                             dataset,
-                                            limit=9,
+                                            limit=10,
         )
         species_dist, total_identified_specie = a.get_species_distribution(
                                                 dataset,
-                                                limit=9,
+                                                limit=10,
         )
         richness = a.get_richness(dataset)
         response = {

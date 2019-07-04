@@ -89,7 +89,7 @@ $(document).ready(function() {
     })
     buildPlotList();
     d3_map.initMap();
-    d3_families_donut.initFamiliesDonut();
+    d3_families_donut.initFamiliesDonut("#families_donut");
     d3_species_donut.initSpeciesDonut();
     d3_diameters.initDiametersHistogram();
     d3_strates.initBarh();

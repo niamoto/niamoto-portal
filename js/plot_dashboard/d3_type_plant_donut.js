@@ -63,9 +63,9 @@ export function initTypePlantDonut(path_class) {
         const ferns = plot_data['plot']['properties']['ferns'];
 
         total = stems + palms + lianas + ferns;
-        // Round one decimal
-        // const tbl_data = [dead_stems.toFixed(1), living_stems.toFixed(1)];
+
         const tbl_data = [palms, ferns, stems, lianas];
+
         // make table of object for symply use
         var data = [];
         var data_legend = [];
