@@ -40,7 +40,7 @@ export class Gauge {
     // define arc shape and position
     this.arcPadding = this.mwidth *.075;
     this.arcWidth   = this.mwidth *.1;
-    this.labelInset = this.mwidth *.05;
+    this.labelInset = this.mwidth *.04;
 
 
     // defined pointer shape and size

@@ -91,11 +91,8 @@ export function initStems() {
                        "value":tbl_data[i],
                        "color":color[i]};
         }
-
-        var rect = g.selectAll("rect")
-                    .data(data);
-         
-
+       
+        //Legend
         var colorScale = d3.scaleOrdinal()
                     .domain(data_legend)
                     .range(color);
@@ -104,9 +101,13 @@ export function initStems() {
                     .shapePadding(5)
                     .scale(colorScale);
 
-        //Legend
         svg.select(".legend")
             .call(legendColor);
+
+        // Rectangle
+
+        var rect = g.selectAll("rect")
+            .data(data);
 
         rect.enter().append("rect")
             .attr("class", "rect")

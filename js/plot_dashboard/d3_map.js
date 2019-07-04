@@ -56,8 +56,6 @@ export function initMap() {
     
 
     d3.json(static_urls.nc_adm_topojson).then(function (nc) {
-        
-        alert('b');
         var features = topojson.feature(nc, nc.objects.nc_adm0);
 
         var center = d3.geoCentroid(features);

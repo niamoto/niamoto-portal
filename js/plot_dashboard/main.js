@@ -6,6 +6,7 @@ import * as d3_diameters from './d3_diameters';
 import * as d3_gauges from './d3_gauges';
 import * as d3_strates from './d3_strates';
 import * as d3_stems from './d3_stems';
+import * as d3_type_plant from './d3_type_plant_donut'
 
 
 function showPreloader() {
@@ -93,4 +94,5 @@ $(document).ready(function() {
     d3_diameters.initDiametersHistogram();
     d3_strates.initBarh();
     d3_stems.initStems();
+    d3_type_plant.initTypePlantDonut("#type_plant_donut");
 });

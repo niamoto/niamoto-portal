@@ -86,3 +86,4 @@ include/
 pip-selfcheck.json
 
 *.ipynb*
+requirements_v2.txt
