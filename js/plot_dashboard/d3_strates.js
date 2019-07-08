@@ -122,7 +122,7 @@ export function initBarh() {
             .remove();
 
 
-
+        
         texts.enter().append("text")
             .attr("class", "label")
             .attr("x", function(d) {

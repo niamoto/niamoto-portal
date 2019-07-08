@@ -1,7 +1,8 @@
 import * as rest_urls from '../rest_urls';
 import * as d3_map from './d3_map';
 import * as d3_families_donut from './d3_families_donut';
-import * as d3_species_donut from './d3_species_donut';
+// import * as d3_species_donut from './d3_species_donut';
+import * as d3_species_barh from './d3_species_barh';
 import * as d3_diameters from './d3_diameters';
 import * as d3_gauges from './d3_gauges';
 import * as d3_strates from './d3_strates';
@@ -90,7 +91,8 @@ $(document).ready(function() {
     buildPlotList();
     d3_map.initMap();
     d3_families_donut.initFamiliesDonut("#families_donut");
-    d3_species_donut.initSpeciesDonut();
+    // d3_species_donut.initSpeciesDonut("#species_donut");
+    d3_species_barh.initSpeciesDonut("#species_donut");
     d3_diameters.initDiametersHistogram();
     d3_strates.initBarh();
     d3_stems.initStems();
