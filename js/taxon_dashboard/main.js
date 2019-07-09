@@ -1,6 +1,7 @@
 import {getTaxaTree} from '../taxonomy';
 import * as static_urls from '../static_urls';
-import {initDonutChart} from './d3_distribution_donut';
+// import {initDonutChart} from './d3_distribution_donut';
+import * as d3_distribution from './d3_distribution_barh';
 import {initMap} from './d3_map';
 import {initElevationRainfallScatterplot} from './d3_elevation_rainfall_scatterplot';
 import 'd3';
@@ -27,7 +28,7 @@ function buildSortedDistribution(taxon_data) {
         if (a[1] > b[1]) return 1;
         return 0;
     });
-    data.reverse();
+    // data.reverse();
     if (data.length > 10) {
         var others = ['Autres', 0, []];
         for (var i = 9; i < data.length; i++) {
@@ -61,8 +62,7 @@ function updateTaxonData(taxon_id) {
         + "&include_taxon_distribution=true"
         + "&include_environmental_values=true";
 
-    d3.json(url, function (error, data) {
-        if (error) throw error;
+    d3.json(url, function (data) {
         buildSortedDistribution(data);
         $('#taxon_treeview').trigger('taxonSelected', [
             data, sorted_distribution, total, map_color
@@ -167,41 +167,44 @@ getTaxaTree(function(taxa_tree) {
     make_leaf: make_leaf
 });
 
-initSearch();
-initGeneralInformations();
+$(document).ready(function() {
 
-initMap();
-initDonutChart();
-initElevationRainfallScatterplot();
+    initSearch();
+    initGeneralInformations();
 
-var leftPanel = $("#left_panel");
-var leftPanelPlaceholder = $("#left_panel_placeholder");
-var didScroll = false;
-$(window).scroll(function() {
-    didScroll = true;
-});
-setInterval(function() {
-    if (didScroll) {
-        didScroll = false;
-        var top = leftPanelPlaceholder.offset().top;
-        var doc_height = $(document).height();
-        var viewTop = $(window).scrollTop();
-        var viewBottom = $(window).scrollTop() + $(window).height();
-        if ((viewTop + 70) >= top && viewBottom <= (doc_height - 41)) {
-            var width = leftPanel.width();
-            var height = leftPanel.height();
-            leftPanel.removeClass("panel-bottom");
-            leftPanel.addClass("panel-fixed");
-            leftPanel.width(width);
-            leftPanel.height(height);
-        } else {
-            if (viewBottom >= (doc_height - 41)) {
-                leftPanel.addClass("panel-bottom");
-                leftPanel.removeClass("panel-fixed");
-            } else {
+    initMap();
+    d3_distribution.initBarhChart();
+    initElevationRainfallScatterplot();
+
+    var leftPanel = $("#left_panel");
+    var leftPanelPlaceholder = $("#left_panel_placeholder");
+    var didScroll = false;
+    $(window).scroll(function() {
+        didScroll = true;
+    });
+    setInterval(function() {
+        if (didScroll) {
+            didScroll = false;
+            var top = leftPanelPlaceholder.offset().top;
+            var doc_height = $(document).height();
+            var viewTop = $(window).scrollTop();
+            var viewBottom = $(window).scrollTop() + $(window).height();
+            if ((viewTop + 70) >= top && viewBottom <= (doc_height - 41)) {
+                var width = leftPanel.width();
+                var height = leftPanel.height();
                 leftPanel.removeClass("panel-bottom");
-                leftPanel.removeClass("panel-fixed");
+                leftPanel.addClass("panel-fixed");
+                leftPanel.width(width);
+                leftPanel.height(height);
+            } else {
+                if (viewBottom >= (doc_height - 41)) {
+                    leftPanel.addClass("panel-bottom");
+                    leftPanel.removeClass("panel-fixed");
+                } else {
+                    leftPanel.removeClass("panel-bottom");
+                    leftPanel.removeClass("panel-fixed");
+                }
             }
         }
-    }
-}, 50);
+    }, 50);
+});
