@@ -2,6 +2,7 @@ import {getTaxaTree} from '../taxonomy';
 import * as static_urls from '../static_urls';
 // import {initDonutChart} from './d3_distribution_donut';
 import * as d3_distribution from './d3_distribution_barh';
+import * as d3_gauges from './d3_gauges';
 import {initMap} from './d3_map';
 import {initElevationRainfallScatterplot} from './d3_elevation_rainfall_scatterplot';
 import 'd3';
@@ -67,6 +68,7 @@ function updateTaxonData(taxon_id) {
         $('#taxon_treeview').trigger('taxonSelected', [
             data, sorted_distribution, total, map_color
         ]);
+        
         hidePreloader(false);
         hidePreloader(false);
     });
@@ -88,7 +90,9 @@ function initSearch() {
         var first_element = $("[data-nodeid='" + matching[0]['nodeId'] + "']");
         var m_tree_top = $('#taxon_treeview').offset().top;
         var m_tree_scrolltop = $('#taxon_treeview').scrollTop();
-        var scroll_top = first_element.offset().top - m_tree_top + m_tree_scrolltop;
+        var scroll_top = first_element.offset().top 
+                        - m_tree_top 
+                        + m_tree_scrolltop;
         $('#taxon_treeview').animate({scrollTop: scroll_top}, 200);
     });
 };
@@ -174,6 +178,7 @@ $(document).ready(function() {
 
     initMap();
     d3_distribution.initBarhChart();
+    d3_gauges.initGauges();
     initElevationRainfallScatterplot();
 
     var leftPanel = $("#left_panel");

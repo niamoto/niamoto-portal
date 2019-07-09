@@ -93,13 +93,74 @@ path.slice{
 #second_row { height: 300px; }
 #third_row { height: 350px; }
 #fourth_row { height: 450px; }
+#five_row { height: 300px; }
 
 .viz_container {
     height: 100%;
     padding: 5px 5px 5px 5px;
 }
 
+#count_occurrences_widget {
+    height: 90%;
+    width: 100%;
+}
+
 .panel {
     height: 100%;
     margin-bottom: 0;
+}
+
+.gauge {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.gauge-container {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    display: flex;
+}
+
+.gauge g.arc {
+    fill: steelblue;
+}
+
+.gauge g.pointer {
+    fill: #4b4948;
+    stroke: #070706;
+}
+
+.gauge g.pointer .arc_pointer {
+    fill: #777472;
+    stroke: #a8a4a2;
+}
+
+.gauge g.label text {
+    text-anchor: middle;
+    font-size: 1.2em;
+    font-weight: bold;
+    fill: #666;
+}
+
+.gauge .tickline {
+    stroke: #fff;
+}
+
+.number-div {
+    position: absolute;
+    bottom: 3px;
+    left: 50%;
+    text-align: center;
+    transform: translate(-50%, -50%);
+
+}
+
+.number-unit {
+    display: block;
+    font-size: 12px;
+}
+
+.number-value {
+    font-size: 15px;
 }
