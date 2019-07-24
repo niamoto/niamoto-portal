@@ -30,7 +30,7 @@ function buildSortedDistribution(taxon_data) {
         if (a[1] > b[1]) return 1;
         return 0;
     });
-    // data.reverse();
+    data.reverse();
     if (data.length > 10) {
         var others = ['Autres', 0, []];
         for (var i = 9; i < data.length; i++) {
@@ -46,6 +46,7 @@ function buildSortedDistribution(taxon_data) {
         _map_color[data[i][0]] = color[i];
     }
     map_color = _map_color;
+    data.reverse();
     sorted_distribution = data;
 };
 
