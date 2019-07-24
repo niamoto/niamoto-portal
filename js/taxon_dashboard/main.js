@@ -3,6 +3,7 @@ import * as static_urls from '../static_urls';
 // import {initDonutChart} from './d3_distribution_donut';
 import * as d3_distribution from './d3_distribution_barh';
 import * as d3_gauges from './d3_gauges';
+import * as d3_distribution_alt from './d3_distribution_alt';
 import {initMap} from './d3_map';
 import {initElevationRainfallScatterplot} from './d3_elevation_rainfall_scatterplot';
 import 'd3';
@@ -179,6 +180,7 @@ $(document).ready(function() {
     initMap();
     d3_distribution.initBarhChart();
     d3_gauges.initGauges();
+    d3_distribution_alt.initDistributionAlt();
     initElevationRainfallScatterplot();
 
     var leftPanel = $("#left_panel");

@@ -105,6 +105,17 @@ path.slice{
     width: 100%;
 }
 
+#distribution_alt_widget {
+    height: 90%;
+    width: 100%;
+}
+
+#distribution_alt_widget .tick line {
+    opacity: .7;
+    stroke-dasharray: 3;
+    stroke: "#afafaf"
+}
+
 .panel {
     height: 100%;
     margin-bottom: 0;
