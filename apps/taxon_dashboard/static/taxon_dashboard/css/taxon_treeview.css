@@ -94,6 +94,8 @@ path.slice{
 #third_row { height: 350px; }
 #fourth_row { height: 450px; }
 #five_row { height: 300px; }
+#six_row { height: 300px; }
+#seven_row { height: 300px; }
 
 .viz_container {
     height: 100%;
@@ -114,6 +116,25 @@ path.slice{
     opacity: .7;
     stroke-dasharray: 3;
     stroke: "#afafaf"
+}
+
+#dencity_widget {
+    height: 90%;
+    width: 100%;
+}
+#pluvio_alt_contour_widget {
+    height: 90%;
+    width: 100%;
+}
+
+#dbh_max_widget {
+    height: 90%;
+    width: 100%;
+}
+
+#pluvio_min_widget {
+    height: 90%;
+    width: 100%;
 }
 
 .panel {

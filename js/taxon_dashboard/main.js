@@ -6,6 +6,7 @@ import * as d3_gauges from './d3_gauges';
 import * as d3_distribution_alt from './d3_distribution_alt';
 import {initMap} from './d3_map';
 import {initElevationRainfallScatterplot} from './d3_elevation_rainfall_scatterplot';
+import * as rest_urls from '../rest_urls';
 import 'd3';
 import 'topojson';
 
@@ -60,16 +61,20 @@ function updateTaxonData(taxon_id) {
     preloader_count = 0;
     showPreloader();
 
-    var url = "/api/1.0/dashboard/taxon_dashboard/"
+    var url = "/api/1.0/dashboard/taxon/taxon_dashboard/"
         + taxon_id + "/?include_coordinates=true"
         + "&include_taxon_distribution=true"
-        + "&include_environmental_values=true";
+        + "&include_environmental_values=true"
+        + "&include_dbh=true";
 
     d3.json(url, function (data) {
-        buildSortedDistribution(data);
-        $('#taxon_treeview').trigger('taxonSelected', [
-            data, sorted_distribution, total, map_color
-        ]);
+        if (data !== null){
+            buildSortedDistribution(data);
+            $('#taxon_treeview').trigger('taxonSelected', [
+                data, sorted_distribution, total, map_color
+            ]);
+        // add value is null, create a message
+        }
         
         hidePreloader(false);
         hidePreloader(false);
@@ -175,12 +180,47 @@ getTaxaTree(function(taxa_tree) {
 
 $(document).ready(function() {
 
+    // $.ajax({
+    //     type: 'GET',
+    //     data: {},
+    //     url: rest_url.occ,
+    //     success: function(result) {
+    //         d3_gauges.initGauges(result);
+    //         plots = result.features.reduce(function(map, obj) {
+    //             map[obj.id] = obj;
+    //             return map;
+    //         }, {});
+    //         var select = document.getElementById("plot_select");
+    //         result.features.map(function(x) {
+    //             var option   = document.createElement('option');
+    //             option.text  = x.properties.name;
+    //             option.value = x.id;
+    //             select.add(option);
+    //         });
+    //         $('#plot_select').selectpicker({
+    //             noneSelectedText: "Selectionnez une parcelle"
+    //         });
+    //         $('#plot_select').selectpicker('val', null);
+    //         $('#plot_select').change(function () {
+    //             showPreloader();
+    //             updateData(plots[this.value]);
+    //         })
+    //     }
+    // });
+
+    var url = rest_urls.occurrence_infos;
+
+    d3.json(url, function (data) {
+        d3_gauges.initGauges(data);
+    });
+
+
     initSearch();
     initGeneralInformations();
 
     initMap();
     d3_distribution.initBarhChart();
-    d3_gauges.initGauges();
+    
     d3_distribution_alt.initDistributionAlt();
     initElevationRainfallScatterplot();
 

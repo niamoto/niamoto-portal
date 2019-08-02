@@ -5,24 +5,25 @@ import 'd3';
 export class Gauge {
   constructor(configuration) {
     // default configuration settings
-    const config = {
+    var config = {
       height: 200,
       width: 200,
       margin: 10,
       minValue: 0,
       maxValue: 10,
       majorTicks: 5,
-      lowThreshhold: 2,
-      lowMidThreshhold: 4,
-      highMidThreshhold: 6,
-      highThreshhold: 8,
+      lowThreshhold: .2,
+      lowMidThreshhold: .4,
+      highMidThreshhold: .6,
+      highThreshhold: .8,
       lowThreshholdColor: '#f02828',
       lowMidThreshholdColor: '#fe6a00',
       defaultColor: '#e8dd11',
       highMidThreshholdColor: '#82e042',
       highThreshholdColor: '#089f50',
       transitionMs: 1000,
-      displayUnit: 'Value'
+      displayUnit: 'Value',
+      container: ''
     };
     
     this.config = Object.assign(config, configuration);
@@ -65,7 +66,11 @@ export class Gauge {
       .range([0, 1])
       .domain([config.minValue, config.maxValue]);
 
-    const colorDomain = [config.lowThreshhold, config.lowMidThreshhold, config.highMidThreshhold, config.highThreshhold].map(this.scale);
+    var colorDomain = [
+      (config.maxValue - config.minValue) * config.lowThreshhold,
+      (config.maxValue - config.minValue) * config.lowMidThreshhold,
+      (config.maxValue - config.minValue) * config.highMidThreshhold,
+      (config.maxValue - config.minValue) * config.highThreshhold].map(this.scale);
     const colorRange = [
       config.lowThreshholdColor,
       config.lowMidThreshholdColor,
@@ -78,35 +83,35 @@ export class Gauge {
 
     this.ticks = [
       config.minValue,
-      config.lowThreshhold,
-      config.lowMidThreshhold,
-      config.highMidThreshhold,
-      config.highThreshhold,
+      (config.maxValue - config.minValue) * config.lowThreshhold,
+      (config.maxValue - config.minValue) * config.lowMidThreshhold,
+      (config.maxValue - config.minValue) * config.highMidThreshhold,
+      (config.maxValue - config.minValue) * config.highThreshhold,
       config.maxValue
     ];
 
     this.threshholds = [
         config.minValue,
-        config.lowThreshhold,
-        config.lowMidThreshhold,
-        config.highMidThreshhold,
-        config.highThreshhold,
+        (config.maxValue - config.minValue) * config.lowThreshhold,
+        (config.maxValue - config.minValue) * config.lowMidThreshhold,
+        (config.maxValue - config.minValue) * config.highMidThreshhold,
+        (config.maxValue - config.minValue) * config.highThreshhold,
         config.maxValue
       ]
       .map(d => this.scale(d));
 
       this.scale = d3.scaleLinear()
-      .range([0, 1])
-      .domain([config.minValue, config.maxValue]);
+        .range([0, 1])
+        .domain([config.minValue, config.maxValue]);
 
       this.arc = d3.arc()
-      .innerRadius(this._radius() - this.arcWidth - this.arcPadding)
-      .outerRadius(this._radius() - this.arcPadding)
-      .startAngle((d, i) => {
-        const ratio = i > 0 ? this.threshholds[i - 1] : this.threshholds[0];
-        return this._deg2rad(this.minAngle + (ratio * this.angleRange));
-      })
-      .endAngle((d, i) => this._deg2rad(this.minAngle + this.threshholds[i] * this.angleRange));
+        .innerRadius(this._radius() - this.arcWidth - this.arcPadding)
+        .outerRadius(this._radius() - this.arcPadding)
+        .startAngle((d, i) => {
+          const ratio = i > 0 ? this.threshholds[i - 1] : this.threshholds[0];
+          return this._deg2rad(this.minAngle + (ratio * this.angleRange));
+        })
+        .endAngle((d, i) => this._deg2rad(this.minAngle + this.threshholds[i] * this.angleRange));
 
   }
 
@@ -122,9 +127,9 @@ export class Gauge {
 
   }
 
-  render(container, newValue) {
+  render(newValue) {
 
-    const svg = d3.select(container)
+    const svg = d3.select(this.config.container)
       .append('svg')
       .attr('class', 'gauge')
       .attr('width', this.mwidth)
@@ -144,36 +149,10 @@ export class Gauge {
       .attr('d', this.arc);
 
     // display panel - labels
-    const lg = svg.append('g')
+    svg.append('g')
       .attr('class', 'label')
       .attr('transform', `translate(${this._radius()},${this._radius()})`);
-
-    // display panel - text
-    lg.selectAll('text')
-      .data(this.ticks)
-      .enter()
-      .append('text')
-      .attr('transform', d => {
-        var newAngle = this.minAngle + (this.scale(d) * this.angleRange);
-        return `rotate(${newAngle}) translate(0, ${this.labelInset - this._radius()})`;
-      })
-      .text(d3.format('1.0f'));
-
-    // display panel - ticks
-    lg.selectAll('line')
-      .data(this.ticks)
-      .enter()
-      .append('line')
-      .attr('class', 'tickline')
-      .attr('x1', 0)
-      .attr('y1', 0)
-      .attr('x2', 0)
-      .attr('y2', this.arcWidth + this.labelInset)
-      .attr('stroke-width', this.mwidth *.015)
-      .attr('transform', d => {
-        const newAngle = this.minAngle + (this.scale(d) * this.angleRange);
-        return `rotate(${newAngle}), translate(0, ${this.arcWidth  - this.labelInset - this._radius()})`;
-      })
+    this._displayLabel();
 
 
     // display pointer
@@ -202,7 +181,7 @@ export class Gauge {
 
 
     // display current value
-    const numberDiv = d3.select(container).append('div')
+    const numberDiv = d3.select(this.config.container).append('div')
       .attr('class', 'number-div')
       .style('width', `${this.mwidth}px`);
 
@@ -220,7 +199,60 @@ export class Gauge {
 
   }
 
-  update(newValue) {
+  _displayLabel(){
+
+      $(this.config.container + " .gauge .label").empty();
+      
+      const lg = d3.select(this.config.container + " .label")
+
+      // display panel - text
+      lg.selectAll('text')
+        .data(this.ticks)
+        .enter()
+        .append('text')
+        .attr('transform', d => {
+          var newAngle = this.minAngle + (this.scale(d) * this.angleRange);
+          return `rotate(${newAngle}) translate(0, ${this.labelInset - this._radius()})`;
+        })
+        .text(d3.format('1.0f'));
+  
+      // display panel - ticks
+      lg.selectAll('line')
+        .data(this.ticks)
+        .enter()
+        .append('line')
+        .attr('class', 'tickline')
+        .attr('x1', 0)
+        .attr('y1', 0)
+        .attr('x2', 0)
+        .attr('y2', this.arcWidth + this.labelInset)
+        .attr('stroke-width', this.mwidth *.015)
+        .attr('transform', d => {
+          const newAngle = this.minAngle + (this.scale(d) * this.angleRange);
+          return `rotate(${newAngle}), translate(0, ${this.arcWidth  - this.labelInset - this._radius()})`;
+        })
+  }
+
+  update(newValue, maxValue) {
+
+    if (maxValue !== undefined) this.config.maxValue = maxValue;
+
+    // update ticks
+    this.ticks = [
+      this.config.minValue,
+      (this.config.maxValue - this.config.minValue) * this.config.lowThreshhold,
+      (this.config.maxValue - this.config.minValue) * this.config.lowMidThreshhold,
+      (this.config.maxValue - this.config.minValue) * this.config.highMidThreshhold,
+      (this.config.maxValue - this.config.minValue) * this.config.highThreshhold,
+      this.config.maxValue
+    ];
+
+    // update scale
+    this.scale = d3.scaleLinear()
+      .range([0, 1])
+      .domain([this.config.minValue, this.config.maxValue]);
+
+    this._displayLabel();
 
     const newAngle = this.minAngle + (this.scale(newValue) * this.angleRange);
 

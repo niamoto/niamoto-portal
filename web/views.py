@@ -8,7 +8,7 @@ from django.shortcuts import render
 import account.views
 from niamoto.api import status_api
 
-from apps.inventories.models import RapidInventory, TaxaInventory, Inventory
+from apps.inventories.models import RapidInventory, TaxaInventory
 from web.forms import SignupForm, SettingsForm
 
 
@@ -115,4 +115,3 @@ class SettingsView(account.views.SettingsView):
             for k, v in fields.items():
                 setattr(user, k, v)
                 user.save()
-

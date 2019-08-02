@@ -29,15 +29,19 @@ urlpatterns = [
     url(r'^{}/'.format(settings.REST_API_BASE_URL), include(r'rest.urls')),
     url(r'^admin/', admin.site.urls),
     url(r'^o/', include('oauth2_provider.urls', namespace='oauth2_provider')),
-    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    url(r'^api-auth/', include('rest_framework.urls',
+        namespace='rest_framework')),
     url(r'^', include('web.urls')),
     url(r'^digitizing/', include('apps.forest_digitizing.urls')),
     url(r"^inventory/", include("apps.inventories.urls")),
-    url(r"^taxon_dashboard/", include("apps.taxon_dashboard.urls", namespace="taxon_dashboard")),
-    url(r"^plot_dashboard/", include("apps.plot_dashboard.urls", namespace="plot_dashboard")),
-    url(r"^data_marts/", include("apps.data_marts.urls", namespace="data_marts")),
+    url(r"^taxon_dashboard/", include("apps.taxon_dashboard.urls",
+        namespace="taxon_dashboard")),
+    url(r"^plot_dashboard/", include("apps.plot_dashboard.urls",
+        namespace="plot_dashboard")),
+    url(r"^data_marts/", include("apps.data_marts.urls",
+        namespace="data_marts")),
     url(r'^explorer/', include('explorer.urls')),
-#    url(r'^qgis_plugin_repository/', include('qgis_plugin_repository.urls')),
+    # url(r'^qgis_plugin_repository/', include('qgis_plugin_repository.urls')),
     url(
         r'^geoserver/(?P<path>.*)$',
         AuthProxyView.as_view(upstream=config.GEOSERVER_BASE_URL)
@@ -49,4 +53,4 @@ urlpatterns = [
 ]
 
 if settings.DEBUG is True:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

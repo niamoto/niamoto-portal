@@ -1,52 +1,38 @@
 import * as d3_gauge from '../D3gauge';
 
 
-export function initGauges() {
+export function initGauges(data) {
 
-    var count_occurrences_max = 63000;
-    var h_mean_max;
+    var max_dbh = data['max_dbh'][0];
+    var min_dbh = data['min_dbh'][0];
+    var max_wood_density = data['max_wood_density'][0];
+    var min_wood_density = data['min_wood_density'][0];
+    var max_rainfall = data['max_rainfall'][0];
+    var min_rainfall = data['min_rainfall'][0];
+    var max_height = data['max_height'][0];
+    var min_height = data['min_height'][0];
 
-    // basal_area_max = Math.max(...Array
-    //                         .from(data.features
-    //                         .map(e => e.properties.basal_area)
-    //                         .values()));
+    // Count occurnce
+    const dbh_max_Gauge = new d3_gauge.Gauge({
+        width            : $("#dbh_max_widget").width(),
+        height           : $("#dbh_max_widget").height(),
+        displayUnit      : 'cm',
+        minValue         : 0,
+        maxValue         : max_dbh,
+        container        : "#dbh_max_widget"
+    });
 
-    // h_mean_max = Math.max(...Array
-    //     .from(data.features
-    //     .map(e => e.properties.h_mean)
-    //     .values()));
-
-
+    dbh_max_Gauge.render();
+    
     // Count occurnce
     const distribution_occ_Gauge = new d3_gauge.Gauge({
         width            : $("#count_occurrences_widget").width(),
         height           : $("#count_occurrences_widget").height(),
-        minValue         : 0,
-        maxValue         : count_occurrences_max,
-        lowThreshhold    : count_occurrences_max * .2,
-        lowMidThreshhold : count_occurrences_max * .4,
-        highMidThreshhold: count_occurrences_max * .6,
-        highThreshhold   : count_occurrences_max * .8,
-        displayUnit      :  ''
+        displayUnit      : '',
+        container        : "#count_occurrences_widget"
     });
 
-    distribution_occ_Gauge.render("#count_occurrences_widget");
-    
-
-    // 
-    // const h_mean_Gauge = new d3_gauge.Gauge({
-    //     width            : $("#h_mean_gauge").width(),
-    //     height           : $("#h_mean_gauge").height(),
-    //     minValue         : 0,
-    //     maxValue         : h_mean_max,
-    //     lowThreshhold    : h_mean_max * .2,
-    //     lowMidThreshhold : h_mean_max * .4,
-    //     highMidThreshhold: h_mean_max * .6,
-    //     highThreshhold   : h_mean_max * .8,
-    //     displayUnit      :  ''
-    // });
-
-    // h_mean_Gauge.render("#h_mean_gauge");
+    distribution_occ_Gauge.render();
 
     // Update Data for trigger
     $('#taxon_treeview').on('taxonSelected', function (event, data) {
@@ -54,7 +40,11 @@ export function initGauges() {
     });
 
     function updateData(data) {
-        distribution_occ_Gauge.update(data['nb_occurrences']);
-        // h_mean_Gauge.update(data['plot']['properties']['h_mean']);
+
+        // Count occurnce
+        distribution_occ_Gauge.update(data['nb_occurrences'],
+                                    data['total_nb_occurrences']);
+        dbh_max_Gauge.update(data['dbh']['max'], max_dbh);
+
     };
 };

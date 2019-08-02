@@ -94,7 +94,10 @@ export function initDistributionAlt() {
     );
 
     function updateData(data, map_color) {
-        var elev = data['environmental_values']['elevation'];
+
+        var elev = (typeof data['environmental_values']['elevation'] !== 'undefined')?
+            data['environmental_values']['elevation']
+            :[] ;
         var i;
         // Initialise densities 
         for (i = 0; i < 18; i++){

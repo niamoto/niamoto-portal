@@ -54,7 +54,21 @@ class TaxonGeneralDashboardViewSet(ViewSet):
             response['taxon_distribution'] = a.get_taxon_distribution(dataset)
         # Environmental values
         if self.request.query_params.get('include_environmental_values', None):
-            response['environmental_values'] = a.get_environmental_values(dataset)
+            response['environmental_values'] = a.get_environmental_values(
+                dataset)
+        return Response(response)
+
+    def list(self, request):
+        return Response({})
+
+
+class OccurrencesInfosViewSet(ViewSet):
+    """
+    Viewset providing Occurences general info for taxa.
+    """
+
+    def retrieve(self, request, pk=None):
+        response = a.get_occurrences_infos()
         return Response(response)
 
     def list(self, request):

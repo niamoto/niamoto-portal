@@ -148,6 +148,7 @@ def get_richness(dataframe):
         'nb_genus': len(g),
     }
 
+
 def get_plots_info():
     """
     Return a list of item plots.
