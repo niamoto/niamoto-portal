@@ -34,6 +34,18 @@ export function initGauges(data) {
 
     distribution_occ_Gauge.render();
 
+    // wood density
+    const wood_density_max_Gauge = new d3_gauge.Gauge({
+        width            : $("#wood_density_widget").width(),
+        height           : $("#wood_density_widget").height(),
+        displayUnit      : '',
+        minValue         : 0,
+        maxValue         : max_wood_density*100,
+        container        : "#wood_density_widget"
+    });
+
+     wood_density_max_Gauge.render();
+
     // Update Data for trigger
     $('#taxon_treeview').on('taxonSelected', function (event, data) {
         updateData(data);
@@ -45,6 +57,9 @@ export function initGauges(data) {
         distribution_occ_Gauge.update(data['nb_occurrences'],
                                     data['total_nb_occurrences']);
         dbh_max_Gauge.update(data['dbh']['max'], max_dbh);
+        if (data['wood_density'] !== undefined){
+            wood_density_max_Gauge.update(data['wood_density']['max']*100, max_wood_density*100);
+        };
 
     };
 };
