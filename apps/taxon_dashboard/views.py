@@ -46,6 +46,9 @@ class TaxonGeneralDashboardViewSet(ViewSet):
         # stem_nb
         if self.request.query_params.get('include_stem_nb', None):
             response['stem_nb'] = a.get_stats(dataset, 'stem_nb')
+        # stem_nb
+        if self.request.query_params.get('include_rainfall', None):
+            response['rainfall'] = a.get_stats(dataset, 'rainfall')
         # coordinates
         if self.request.query_params.get('include_coordinates', None):
             response['coordinates'] = a.get_coordinates(dataset)

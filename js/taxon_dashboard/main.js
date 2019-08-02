@@ -65,7 +65,9 @@ function updateTaxonData(taxon_id) {
         + taxon_id + "/?include_coordinates=true"
         + "&include_taxon_distribution=true"
         + "&include_environmental_values=true"
-        + "&include_dbh=true";
+        + "&include_dbh=true"
+        + "&include_wood_density=true"
+        + "&include_rainfall=true";
 
     d3.json(url, function (data) {
         if (data !== null){

@@ -122,6 +122,12 @@ path.slice{
     height: 90%;
     width: 100%;
 }
+
+#height_max_widget {
+    height: 90%;
+    width: 100%;
+}
+
 #pluvio_alt_contour_widget {
     height: 90%;
     width: 100%;
