@@ -4,6 +4,7 @@ import * as static_urls from '../static_urls';
 import * as d3_distribution from './d3_distribution_barh';
 import * as d3_gauges from './d3_gauges';
 import * as d3_distribution_alt from './d3_distribution_alt';
+import * as d3_distribution_dbh from './d3_distribution_dbh._barv'
 import {initMap} from './d3_map';
 import {initElevationRainfallScatterplot} from './d3_elevation_rainfall_scatterplot';
 import * as rest_urls from '../rest_urls';
@@ -66,6 +67,7 @@ function updateTaxonData(taxon_id) {
         + "&include_taxon_distribution=true"
         + "&include_environmental_values=true"
         + "&include_dbh=true"
+        + "&include_dbh_class=true"
         + "&include_wood_density=true"
         + "&include_rainfall=true";
 
@@ -214,6 +216,7 @@ $(document).ready(function() {
 
     d3.json(url, function (data) {
         d3_gauges.initGauges(data);
+        d3_distribution_dbh.initDiametersHistogram(data);
     });
 
 
@@ -222,7 +225,7 @@ $(document).ready(function() {
 
     initMap();
     d3_distribution.initBarhChart();
-    
+    d3_distribution_dbh.initDiametersHistogram();
     d3_distribution_alt.initDistributionAlt();
     initElevationRainfallScatterplot();
 

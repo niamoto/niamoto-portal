@@ -37,6 +37,9 @@ class TaxonGeneralDashboardViewSet(ViewSet):
         # dbh
         if self.request.query_params.get('include_dbh', None):
             response['dbh'] = a.get_stats(dataset, 'dbh')
+        # distrubtion_dbh
+        if self.request.query_params.get('include_dbh_class', None):
+            response['dbh_class'] = a.get_dbh_classification(dataset)
         # wood_density
         if self.request.query_params.get('include_wood_density', None):
             response['wood_density'] = a.get_stats(dataset, 'wood_density')

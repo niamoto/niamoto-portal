@@ -2,8 +2,8 @@ import 'd3';
 
 export function initDiametersHistogram() {
 
-    var height = $("#diameters_histogram").height();
-    var width = $("#diameters_histogram").width();
+    var height = $("#distribution_dbh_widget").height();
+    var width = $("#distribution_dbh_widget").width();
     var margin = {
         top: height * 0.08,
         right: width * 0.07,
@@ -13,7 +13,7 @@ export function initDiametersHistogram() {
     var mheight = height - margin.top - margin.bottom;
     var mwidth = width - margin.left - margin.right;
 
-    var svg = d3.select("#diameters_histogram").append("svg")
+    var svg = d3.select("#distribution_dbh_widget").append("svg")
         .attr("width", width)
         .attr("height", height);
 
@@ -29,7 +29,7 @@ export function initDiametersHistogram() {
         .attr("class", "tooltip")
         .style("opacity", 0);
 
-    var x_domain = [10, 100];
+    var x_domain = [Math.floor(0/10)*10, Math.ceil(130/10)*10];
     var y_domain = [0, 100];
 
     // x and y axis
@@ -59,21 +59,20 @@ export function initDiametersHistogram() {
     // y axis label
     svg.append("text")
         .attr("transform", "rotate(-90)")
-        .attr("y", margin.left - 55)
+        .attr("y", margin.left - 50)
         .attr("x",0 - (height / 2))
         .attr("dy", "1em")
         .style("text-anchor", "middle")
         .text("Fréquence (%)");
 
     // Update Data for trigger
-    $('#plot_select').on('plotSelected', function (event, data) {
+    $('#taxon_treeview').on('taxonSelected', function (event, data) {
         updateData(data);
     });
 
-    function updateData(plot_data) {
-        var data = plot_data['dbh_classification'][1];
-        var bins = plot_data['dbh_classification'][0];
-
+    function updateData(taxon_data) {
+        var data = taxon_data['dbh_class'][1];
+        var bins = taxon_data['dbh_class'][0];
         var x = d3.scaleLinear()
             .domain(x_domain)
             .range([0, mwidth]);
@@ -86,21 +85,13 @@ export function initDiametersHistogram() {
 
         rects.enter()
             .append("rect")
-            .attr("x", function (d, i) {
-                return x(bins[i]);
-            })
+            .attr("x", (d, i) => x(bins[i]))
             .style("fill", "#70af3f")
             .style("opacity", "0.8")
             .style("stroke", "white")
-            .attr("transform", function(d) {
-                return "translate(" + 0 + "," + mheight + ")";
-            })
-            .attr("width", function (d, i) {
-                return Math.abs(x(bins[i + 1] - bins[i]));
-            })
-            .attr("height", function (d, i) {
-                return 0;
-            })
+            .attr("transform", d => "translate(" + 0 + "," + mheight + ")")
+            .attr("width", (d, i) => Math.abs(x(bins[i + 1] - bins[i])))
+            .attr("height",(d, i) => 0)
             .on('mouseover', function(d, i) {
                 d3.select(this).style("opacity", "1.0");
                 var html = "<p><strong>[ " + bins[i] + "cm, "
@@ -121,32 +112,20 @@ export function initDiametersHistogram() {
                 var w = $("#diameters_tooltip").width();
                 var h = $("#diameters_tooltip").height();
                 tooltip.style("left", (d3.event.pageX - w / 2 - 15) + "px")
-                .style("top", (d3.event.pageY - h - 25) + "px");
+                    .style("top", (d3.event.pageY - h - 25) + "px");
             })
             .transition()
             .duration(500)
             .duration(500)
-            .attr("transform", function(d) {
-                return "translate(" + 0 + "," + y(d) + ")";
-            })
-            .attr("height", function (d, i) {
-                return mheight - y(d);
-            });
+            .attr("transform", d => "translate(" + 0 + "," + y(d) + ")")
+            .attr("height", (d, i) => mheight - y(d));
 
         rects.transition()
             .duration(500)
-            .attr("x", function (d, i) {
-                return x(bins[i]);
-            })
-            .attr("transform", function(d) {
-                return "translate(" + 0 + "," + y(d) + ")";
-            })
-            .attr("width", function (d, i) {
-                return Math.abs(x(bins[i + 1] - bins[i]));
-            })
-            .attr("height", function (d, i) {
-                return mheight - y(d);
-            });
+            .attr("x", (d, i) => x(bins[i]))
+            .attr("transform", d => "translate(" + 0 + "," + y(d) + ")")
+            .attr("width", (d, i) => Math.abs(x(bins[i + 1] - bins[i])))
+            .attr("height", (d, i) => mheight - y(d))
 
         rects.exit()
             .transition()

@@ -156,11 +156,12 @@ def get_environmental_values(dataset):
 
 
 def get_dbh_classification(dataframe, bin_size=10):
-    if len(dataframe['dbh']) == 0:
+    df = pd.DataFrame(dataframe)
+    if len(df['dbh']) == 0:
         return [], []
-    max_dbh = dataframe['dbh'].max()
+    max_dbh = df['dbh'].max()
     bins = [bin_size * i for i in range(int(max_dbh // bin_size + 2))]
-    dbh = dataframe['dbh']
+    dbh = df[pd.notnull(df['dbh'])]['dbh']
     dbh_class = pd.cut(
         dbh,
         bins,
@@ -169,4 +170,4 @@ def get_dbh_classification(dataframe, bin_size=10):
     )
     value_counts = dbh_class.value_counts(sort=False)
     value_counts = (100 * value_counts / value_counts.sum()).round(1)
-    return bins[2:], value_counts[2:]
+    return bins, value_counts

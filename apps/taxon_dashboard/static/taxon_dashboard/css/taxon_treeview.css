@@ -96,6 +96,7 @@ path.slice{
 #five_row { height: 300px; }
 #six_row { height: 300px; }
 #seven_row { height: 300px; }
+#eight_row { height: 300px; }
 
 .viz_container {
     height: 100%;
@@ -139,6 +140,16 @@ path.slice{
 }
 
 #pluvio_min_widget {
+    height: 90%;
+    width: 100%;
+}
+
+#distribution_dbh_widget {
+    height: 90%;
+    width: 100%;
+}
+
+#distribution_geo_widget {
     height: 90%;
     width: 100%;
 }
