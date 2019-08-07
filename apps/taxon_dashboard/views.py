@@ -6,6 +6,8 @@ from django.utils.decorators import method_decorator
 from django.views.generic import TemplateView
 from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
+from apps.niamoto_data.models import Occurrence
+from django.db.models import Max, Min, Avg, Count
 
 import apps.taxon_dashboard.analysis as a
 
@@ -29,7 +31,7 @@ class TaxonGeneralDashboardViewSet(ViewSet):
         dataset = a.get_occurrences_by_taxon(pk)
         response = {
             "nb_occurrences": len(dataset),
-            "total_nb_occurrences": a.get_occurrences_total_count(),
+            "total_nb_occurrences": Occurrence.objects.count(),
         }
         # height
         if self.request.query_params.get('include_height', None):
@@ -74,8 +76,34 @@ class OccurrencesInfosViewSet(ViewSet):
     """
 
     def retrieve(self, request, pk=None):
-        response = a.get_occurrences_infos()
+        # response = a.get_occurrences_infos()
+        response = {
+            "dbh": get_stats(Occurrence, 'dbh'),
+            "height": get_stats(Occurrence, 'height'),
+            "wood_density": get_stats(Occurrence, 'wood_density'),
+            "elevation": get_stats(Occurrence, 'elevation'),
+            "rainfall": get_stats(Occurrence, 'rainfall'),
+             }
         return Response(response)
 
     def list(self, request):
         return Response({})
+
+
+def get_stats(model, field_name):
+    """
+        Generate dictionnaire aggregate
+        :param model: A model app.
+        :param field_name: The field_name to slice for the stats.
+        :return: dict: Basic stats about
+            a field of a dataset (count, min, max, avg).
+    """
+    response = model.objects.aggregate(
+        Count(field_name),
+        Min(field_name),
+        Max(field_name),
+        Avg(field_name),)
+    # minimal name key
+    response = {key.replace(field_name + '__', ''): response[key]
+                for key in response.keys()}
+    return response

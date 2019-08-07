@@ -9,41 +9,41 @@ from sqlalchemy.engine import create_engine
 from utils import get_sqlalchemy_connection_string
 
 
-def get_occurrences_total_count():
-    """
-    :return: The total number of occurrences in the database.
-    """
-    sql = "SELECT count(*) FROM niamoto_data_occurrence;"
-    cursor = connection.cursor()
-    cursor.execute(sql)
-    count = cursor.fetchone()
-    return count[0]
+# def get_occurrences_total_count():
+#     """
+#     :return: The total number of occurrences in the database.
+#     """
+#     sql = "SELECT count(*) FROM niamoto_data_occurrence;"
+#     cursor = connection.cursor()
+#     cursor.execute(sql)
+#     count = cursor.fetchone()
+#     return count[0]
 
 
-def get_occurrences_infos():
-    """
-    :return: The infos occurrences in the database.
-    """
-    sql = """
-        SELECT max(dbh) as max_dbh,
-            min(dbh) as min_dbh,
-            max(wood_density) as max_wood_density,
-            min(wood_density) as min_wood_density,
-            max(elevation) as max_elevation,
-            min(elevation) as min_elevation,
-            max(rainfall) as max_rainfall,
-            min(rainfall) as min_rainfall,
-            max(height) as max_height,
-            min(height) as min_height
-        FROM niamoto_data_occurrence;"""
-    engine = create_engine(get_sqlalchemy_connection_string())
-    conn = engine.connect()
-    df = pd.read_sql_query(
-        sql,
-        conn
-    )
-    conn.close()
-    return df
+# def get_occurrences_infos():
+#     """
+#     :return: The infos occurrences in the database.
+#     """
+#     sql = """
+#         SELECT max(dbh) as max_dbh,
+#             min(dbh) as min_dbh,
+#             max(wood_density) as max_wood_density,
+#             min(wood_density) as min_wood_density,
+#             max(elevation) as max_elevation,
+#             min(elevation) as min_elevation,
+#             max(rainfall) as max_rainfall,
+#             min(rainfall) as min_rainfall,
+#             max(height) as max_height,
+#             min(height) as min_height
+#         FROM niamoto_data_occurrence;"""
+#     engine = create_engine(get_sqlalchemy_connection_string())
+#     conn = engine.connect()
+#     df = pd.read_sql_query(
+#         sql,
+#         conn
+#     )
+#     conn.close()
+#     return df
     # cursor = connection.cursor()
     # cursor.execute(sql)
     # occurrences = cursor.fetchall()

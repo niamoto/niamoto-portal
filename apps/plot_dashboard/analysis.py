@@ -92,7 +92,7 @@ def get_families_distribution(dataframe, limit=None):
     others['family_full_name'] = "Autres"
     to_return = to_return.append(
         others,
-                ignore_index=True
+        ignore_index=True
     )
     return to_return, total
 

@@ -3,14 +3,15 @@ import * as d3_gauge from '../D3gauge';
 
 export function initGauges(data) {
 
-    var max_dbh = data['max_dbh'][0];
-    var min_dbh = data['min_dbh'][0];
-    var max_wood_density = data['max_wood_density'][0];
-    var min_wood_density = data['min_wood_density'][0];
-    var max_rainfall = data['max_rainfall'][0];
-    var min_rainfall = data['min_rainfall'][0];
-    var max_height = data['max_height'][0];
-    var min_height = data['min_height'][0];
+    var dbh_max = data['dbh']['max'];
+    var dbh_min = data['dbh']['min'];
+    var wood_density_max = data['wood_density']['max'];
+    var wood_density_min = data['wood_density']['min'];
+    var rainfall_max = data['rainfall']['max'];
+    var rainfall_min = data['rainfall']['min'];
+    var height_max = data['height']['max'];
+    var height_min = data['height']['min'];
+
 
     // Count occurnce
     const dbh_max_Gauge = new d3_gauge.Gauge({
@@ -18,7 +19,7 @@ export function initGauges(data) {
         height           : $("#dbh_max_widget").height(),
         displayUnit      : 'cm',
         minValue         : 0,
-        maxValue         : max_dbh,
+        maxValue         : dbh_max,
         container        : "#dbh_max_widget"
     });
 
@@ -40,7 +41,7 @@ export function initGauges(data) {
         height           : $("#wood_density_widget").height(),
         displayUnit      : 'kg/m3',
         minValue         : 0,
-        maxValue         : max_wood_density*1000,
+        maxValue         : wood_density_max *1000,
         container        : "#wood_density_widget"
     });
 
@@ -52,7 +53,7 @@ export function initGauges(data) {
         height           : $("#pluvio_min_widget").height(),
         displayUnit      : 'mm/an',
         minValue         : 0,
-        maxValue         : max_rainfall,
+        maxValue         : rainfall_max,
         container        : "#pluvio_min_widget"
     });
 
@@ -64,7 +65,7 @@ export function initGauges(data) {
         height           : $("#height_max_widget").height(),
         displayUnit      : 'm',
         minValue         : 0,
-        maxValue         : max_height,
+        maxValue         : height_max,
         container        : "#height_max_widget"
     });
 
@@ -79,16 +80,16 @@ export function initGauges(data) {
 
         distribution_occ_Gauge.update(data['nb_occurrences'],
                                     data['total_nb_occurrences']);
-        dbh_max_Gauge.update(data['dbh']['max'], max_dbh);
+        dbh_max_Gauge.update(data['dbh']['max'], dbh_max);
         if (data['wood_density'] !== undefined){
             wood_density_max_Gauge.update(data['wood_density']['max'] 
-                *1000, max_wood_density*1000);
+                *1000, wood_density_max *1000);
         };
         if (data['rainfall'] !== undefined){
-            rainfall_min_Gauge.update(data['rainfall']['min'], max_rainfall);
+            rainfall_min_Gauge.update(data['rainfall']['min'], rainfall_max);
         };
-        if (data['heoght'] !== undefined){
-            rainfall_min_Gauge.update(data['height']['max'], max_height);
+        if (data['height'] !== undefined){
+            rainfall_min_Gauge.update(data['height']['max'], height_max);
         };
 
     };

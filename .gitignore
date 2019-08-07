@@ -79,7 +79,7 @@ site_media
 
 share
 
-settings.py
+# settings.py
 
 bin/
 include/
