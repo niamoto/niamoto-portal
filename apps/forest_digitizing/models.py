@@ -86,8 +86,6 @@ class ForestFragment3k(models.Model):
     comments = models.TextField(null=True)
     geom = models.MultiPolygonField(srid=4326)
 
-    objects = models.GeoManager()
-
     def __str__(self):
         return "Forest fragment 3k - {}/{}".format(self.massif.name,
                                                    self.uuid)
@@ -104,8 +102,6 @@ class ForestFragment30k(models.Model):
     modified = models.DateTimeField(null=True)
     comments = models.TextField(null=True)
     geom = models.MultiPolygonField(srid=4326)
-
-    objects = models.GeoManager()
 
     def __str__(self):
         return "Forest fragment 30k - {}/{}".format(self.massif.name,
@@ -127,8 +123,6 @@ class DigitizingProblem(models.Model):
                                     related_name='modified_problems')
     problem = models.CharField(max_length=255, null=True)
     comments = models.TextField(null=True)
-
-    objects = models.GeoManager()
 
     @property
     def creator_username(self):

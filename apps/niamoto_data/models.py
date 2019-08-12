@@ -18,8 +18,6 @@ class Massif(models.Model):
     full_name = models.CharField(max_length=30, unique=True)
     geom = models.MultiPolygonField(srid=4326, blank=True, null=True)
 
-    objects = models.GeoManager()
-
     def __str__(self):
         return self.full_name
 
@@ -58,8 +56,6 @@ class Plot(models.Model):
     undercanopy = models.IntegerField(null=True, blank=True)
     understorey = models.IntegerField(null=True, blank=True)
     strate_indet = models.IntegerField(null=True, blank=True)
-
-    objects = models.GeoManager()
 
     def __str__(self):
         return self.name
@@ -140,8 +136,6 @@ class Occurrence(models.Model):
     elevation = models.FloatField(null=True, blank=True)
     rainfall = models.FloatField(null=True, blank=True)
 
-    objects = models.GeoManager()
-
 
 class ForestFragment(models.Model):
     """
@@ -149,8 +143,6 @@ class ForestFragment(models.Model):
     """
     uuid = models.CharField(max_length=36)
     geom = models.MultiPolygonField(srid=4326)
-
-    objects = models.GeoManager()
 
 
 # ===================#
