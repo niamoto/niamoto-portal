@@ -36,8 +36,6 @@ class PlotDashboardViewSet(ViewSet):
         #  Not very fun, ok...
         dataset = dataset[pd.notnull(dataset['dbh'])]
 
-        # dataset_plots = a.get_plots_info()
-
         families_dist, total_identified = a.get_families_distribution(
                                             dataset,
                                             limit=10,
@@ -71,19 +69,3 @@ class PlotDashboardViewSet(ViewSet):
 
     def list(self, request):
         return Response({})
-
-# class PlotsInfosViewSet(ViewSet):
-#     """
-#     Viewset providing dashboard data for plots.
-#     """
-
-#     def retrieve(self, request):
-#         dataset_plots = a.get_plots_info()
-
-#         response = {
-#             "plots_info": dataset_plots,
-#         }
-#         return Response(response)
-
-#     def list(self, request):
-#         return Response({})

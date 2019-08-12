@@ -5,55 +5,8 @@ import numpy as np
 import pandas as pd
 
 
-from sqlalchemy.engine import create_engine
-from utils import get_sqlalchemy_connection_string
-
-
-# def get_occurrences_total_count():
-#     """
-#     :return: The total number of occurrences in the database.
-#     """
-#     sql = "SELECT count(*) FROM niamoto_data_occurrence;"
-#     cursor = connection.cursor()
-#     cursor.execute(sql)
-#     count = cursor.fetchone()
-#     return count[0]
-
-
-# def get_occurrences_infos():
-#     """
-#     :return: The infos occurrences in the database.
-#     """
-#     sql = """
-#         SELECT max(dbh) as max_dbh,
-#             min(dbh) as min_dbh,
-#             max(wood_density) as max_wood_density,
-#             min(wood_density) as min_wood_density,
-#             max(elevation) as max_elevation,
-#             min(elevation) as min_elevation,
-#             max(rainfall) as max_rainfall,
-#             min(rainfall) as min_rainfall,
-#             max(height) as max_height,
-#             min(height) as min_height
-#         FROM niamoto_data_occurrence;"""
-#     engine = create_engine(get_sqlalchemy_connection_string())
-#     conn = engine.connect()
-#     df = pd.read_sql_query(
-#         sql,
-#         conn
-#     )
-#     conn.close()
-#     return df
-    # cursor = connection.cursor()
-    # cursor.execute(sql)
-    # occurrences = cursor.fetchall()
-    # return np.array(
-    #     occurrences,
-    #     [('max_dbh', 'float'), ('min_dbh', 'float'),
-    #         ('max_wood_density', 'float'), ('min_wood_density', 'float'),
-    #         ('max_elevation', 'float'), ('min_elevation', 'float'),
-    #         ('max_rainfall', 'float'), ('min_rainfall', 'float'),
-    #         ('max_height', 'float'), ('min_heightdbh', 'float')])
+# from sqlalchemy.engine import create_engine
+# from utils import get_sqlalchemy_connection_string
 
 
 def get_occurrences_by_taxon(taxon_id=None):

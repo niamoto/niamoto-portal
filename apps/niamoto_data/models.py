@@ -1,7 +1,7 @@
 # coding: utf-8
 
 from django.contrib.gis.db import models
-from django.db import connection, transaction
+# from django.db import connection, transaction
 from mptt.models import MPTTModel, TreeForeignKey
 
 
@@ -32,13 +32,13 @@ class Plot(models.Model):
     height = models.FloatField(null=True, blank=True)  # Meters
     location = models.PointField(null=True, srid=4326)
     latitude = models.FloatField(blank=True)
-    longitude  = models.FloatField(blank=True)
+    longitude = models.FloatField(blank=True)
     elevation = models.FloatField(null=True, blank=True)
     species_level = models.FloatField(null=True, blank=True)
     total_stems = models.IntegerField(null=True, blank=True)
     living_stems = models.IntegerField(null=True, blank=True)
     nb_families = models.IntegerField(null=True, blank=True)
-    nb_species  = models.IntegerField(null=True, blank=True)
+    nb_species = models.IntegerField(null=True, blank=True)
     shannon = models.FloatField(null=True, blank=True)
     pielou = models.FloatField(null=True, blank=True)
     simpson = models.FloatField(null=True, blank=True)
@@ -103,9 +103,7 @@ class Taxon(MPTTModel):
 
         response = Plot.objects.filter(pk__in=[
                     x.plot_id for x in Occurrence.objects.filter(
-                        taxon__pk__in=Taxon.objects.filter(
-                            id=self.id
-                            ).get_descendants()
+                        taxon__pk__in=self.get_descendants()
                     )
         ]).count()
         return response

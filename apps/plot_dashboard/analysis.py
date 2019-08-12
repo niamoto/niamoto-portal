@@ -147,24 +147,3 @@ def get_richness(dataframe):
         'nb_species': len(s),
         'nb_genus': len(g),
     }
-
-
-def get_plots_info():
-    """
-    Return a list of item plots.
-
-    :return: a list of item plots.
-    """
-
-    sql = \
-        """
-        SELECT MAX(basal_area) as basal_area_max,
-                MAX(h_mean) as h_mean_max
-        FROM niamoto_data_plot;"""
-    engine = create_engine(get_sqlalchemy_connection_string())
-    conn = engine.connect()
-    df = pd.read_sql_query(
-        sql,
-        conn
-    )
-    return df
