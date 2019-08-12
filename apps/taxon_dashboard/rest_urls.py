@@ -4,7 +4,7 @@ from django.conf.urls import url, include
 from rest_framework import routers
 
 from apps.taxon_dashboard.views import TaxonGeneralDashboardViewSet
-from apps.taxon_dashboard.views import OccurrencesInfosViewSet
+from apps.taxon_dashboard.views import GeneralInfosViewSet
 
 
 router = routers.DefaultRouter()
@@ -14,13 +14,12 @@ router.register(
     base_name='taxon_dashboard',
 )
 
-# Occurrence
+# General Infos
 router.register(
-    r'occurrences_infos',
-    OccurrencesInfosViewSet,
-    base_name='occurrences_infos',
+    r'general_infos',
+    GeneralInfosViewSet,
+    base_name='General_infos',
 )
-
 
 urlpatterns = [
     url(r'^', include(router.urls)),

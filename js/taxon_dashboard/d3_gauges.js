@@ -11,7 +11,7 @@ export function initGauges(data) {
     var rainfall_min = data['rainfall']['min'];
     var height_max = data['height']['max'];
     var height_min = data['height']['min'];
-
+    var plots_count = data['plots_count'];
 
     // Count occurnce
     const dbh_max_Gauge = new d3_gauge.Gauge({
@@ -70,6 +70,21 @@ export function initGauges(data) {
     });
 
     height_max_Gauge.render();
+    
+
+    // height max
+    const distribution_geo_Gauge = new d3_gauge.Gauge({
+        width            : $("#distribution_geo_widget").width(),
+        height           : $("#distribution_geo_widget").height(),
+        displayUnit      : 'nombre de parcelles',
+        minValue         : 0,
+        maxValue         : plots_count,
+        container        : "#distribution_geo_widget"
+    });
+
+    distribution_geo_Gauge.render();
+
+
 
     // Update Data for trigger
     $('#taxon_treeview').on('taxonSelected', function (event, data) {
@@ -89,8 +104,10 @@ export function initGauges(data) {
             rainfall_min_Gauge.update(data['rainfall']['min'], rainfall_max);
         };
         if (data['height'] !== undefined){
-            rainfall_min_Gauge.update(data['height']['max'], height_max);
+            height_max_Gauge.update(data['height']['max'], height_max);
         };
-
+        if (data['plots_count'] !== undefined){
+            distribution_geo_Gauge.update(data['plots_count'], plots_count);
+        };
     };
 };

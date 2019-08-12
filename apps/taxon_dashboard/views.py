@@ -6,7 +6,7 @@ from django.utils.decorators import method_decorator
 from django.views.generic import TemplateView
 from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
-from apps.niamoto_data.models import Occurrence
+from apps.niamoto_data.models import Occurrence, Plot, Taxon
 from django.db.models import Max, Min, Avg, Count
 
 import apps.taxon_dashboard.analysis as a
@@ -32,7 +32,9 @@ class TaxonGeneralDashboardViewSet(ViewSet):
         response = {
             "nb_occurrences": len(dataset),
             "total_nb_occurrences": Occurrence.objects.count(),
+            "plots_count": Taxon(id=pk).get_plot_count()
         }
+        # import pdb; pdb.set_trace()
         # height
         if self.request.query_params.get('include_height', None):
             response['height'] = a.get_stats(dataset, 'height')
@@ -70,7 +72,7 @@ class TaxonGeneralDashboardViewSet(ViewSet):
         return Response({})
 
 
-class OccurrencesInfosViewSet(ViewSet):
+class GeneralInfosViewSet(ViewSet):
     """
     Viewset providing Occurences general info for taxa.
     """
@@ -83,6 +85,7 @@ class OccurrencesInfosViewSet(ViewSet):
             "wood_density": get_stats(Occurrence, 'wood_density'),
             "elevation": get_stats(Occurrence, 'elevation'),
             "rainfall": get_stats(Occurrence, 'rainfall'),
+            "plots_count": Plot.objects.count(),
              }
         return Response(response)
 

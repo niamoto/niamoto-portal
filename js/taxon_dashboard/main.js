@@ -212,7 +212,7 @@ $(document).ready(function() {
     //     }
     // });
 
-    var url = rest_urls.occurrence_infos;
+    var url = rest_urls.general_infos;
 
     d3.json(url, function (data) {
         d3_gauges.initGauges(data);

@@ -59,8 +59,6 @@ class Plot(models.Model):
     understorey = models.IntegerField(null=True, blank=True)
     strate_indet = models.IntegerField(null=True, blank=True)
 
-
-
     objects = models.GeoManager()
 
     def __str__(self):
@@ -102,6 +100,20 @@ class Taxon(MPTTModel):
     def __str__(self):
         return self.full_name
 
+    def get_plot_count(self):
+        """
+        Search the number of Plot
+        """
+
+        response = Plot.objects.filter(pk__in=[
+                    x.plot_id for x in Occurrence.objects.filter(
+                        taxon__pk__in=Taxon.objects.filter(
+                            id=self.id
+                            ).get_descendants()
+                    )
+        ]).count()
+        return response
+
     class MPTTMeta:
         order_insertion_by = ['rank_name']
 
@@ -116,6 +128,7 @@ class Occurrence(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True, null=True, blank=True)
     taxon = models.ForeignKey(Taxon, null=True, blank=True)
+    plot = models.ForeignKey(Plot, null=True, blank=True)
     location = models.PointField(srid=4326, null=True, blank=True)
     # Properties
     height = models.FloatField(null=True, blank=True)
