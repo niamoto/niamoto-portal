@@ -23,11 +23,11 @@ def get_occurrences_by_plot(plot_id=None):
 
     sql = \
         """
-        SELECT plot_id,
+        SELECT po.plot_id,
                plot.name AS plot_name,
                plot.basal_area as basal_area,
                occurrence.id AS occ_id,
-               identifier AS identifier,
+               po.identifier AS identifier,
                taxon.id AS taxon_id,
                taxon.rank AS taxon_rank,
                taxon.full_name AS taxon_full_name,
@@ -44,7 +44,7 @@ def get_occurrences_by_plot(plot_id=None):
                occurrence.status AS status,
                occurrence.wood_density AS wood_density,
                occurrence.bark_thickness AS bark_thickness
-        FROM niamoto_data_plotoccurrences
+        FROM niamoto_data_plotoccurrences po
         INNER JOIN niamoto_data_plot AS plot ON plot_id = plot.id
         LEFT JOIN niamoto_data_occurrence AS occurrence ON occurrence_id = occurrence.id
         LEFT JOIN niamoto_data_taxon AS taxon ON occurrence.taxon_id = taxon.id
