@@ -76,6 +76,7 @@ class App extends React.Component {
         this.state = {
             province_id: 0,
             commune_id: 0,
+            file_id:0,
             rainfall_filter: null,
             elevation_filter: null,
             selected_entity: null,
@@ -115,6 +116,7 @@ class App extends React.Component {
         this.setState({
             province_id: 0,
             commune_id: 0,
+            file_id:0,
             selected_entity: null
         });
     }
@@ -152,6 +154,7 @@ class App extends React.Component {
             area: null,
             data: null
         });
+        console.log(!e.target.value);
         if (!e.target.value) {
             source.clear();
             this.setState({
@@ -161,6 +164,7 @@ class App extends React.Component {
         } else {
             this.setState({
                 commune_id: 0,
+                file_id: 0,
                 selected_entity: {
                     'type': 'provinces',
                     'value': e.target.value
@@ -224,6 +228,7 @@ class App extends React.Component {
         } else {
             this.setState({
                 province_id: 0,
+                file_id: 0,
                 selected_entity: {
                     'type': 'communes',
                     'value': e.target.value
@@ -267,6 +272,74 @@ class App extends React.Component {
                 throw error;
             }
         });
+    }
+
+    onFileSelected(e){
+        this.setState({
+            file_id: e.target.value,
+            occurrenceCount: null,
+            uniqueTaxa: null,
+            richness: null,
+            area: null,
+            data: null
+        });
+        if (!e.target.value) {
+            source.clear();
+            this.setState({
+                selected_entity: null
+            })
+            return;
+        } else {
+            this.setState({
+                commune_id: 0,
+                province_id: 0,
+                selected_entity: {
+                    'type': 'draw',
+                    'value': e.target.value
+                },
+                buttonDisabled: true
+            });
+        }
+        
+        var selectedFile = e.target.files[0];
+        var reader = new FileReader();
+
+        showPreloader();
+        let _this = this;
+ 
+        reader.onload = function() {
+            source.clear();
+            source.addFeatures(
+                (new ol.format.GeoJSON()).readFeatures(reader.result)
+            );
+            modify.setActive(false);
+            _this.setState({
+                selected_entity: {
+                    'type': 'draw',
+                    // 'value': _this.state.selected_entity.value,
+                    'geojson': reader.result
+                },
+                buttonDisabled: false
+            });
+            hidePreloader();
+        };
+
+        reader.onerror = function(event){
+            alert("Une erreur est survenue pendant le chargement des "
+                +"données, veuillez réessayer.\n"
+                + "Si l'erreur persiste, contactez "
+                +"tristan.mangeard@gmail.com");
+            _this.setState({
+                file_id: 0,
+                selected_entity: null,
+                buttonDisabled: false
+            });
+            hidePreloader();
+            throw error;
+        }
+        
+        reader.readAsText(selectedFile);
+
     }
 
     onRainfallSelected(e) {
@@ -366,15 +439,17 @@ class App extends React.Component {
             },
             url: api_root + "/data_mart/process/",
             success: function(result) {
+                // console.log(result);
                 let area;
-                if (selected_entity['type'] == 'draw') {
-                    area = getPolygonArea(
-                        map,
-                        source.getFeatures()[0].getGeometry()
-                    );
-                } else {
+                // if (selected_entity.type == 'draw') {
+                //     console.log(source.getFeatures()[0]);
+                //     area = getPolygonArea(
+                //         map,
+                //         source.getFeatures()[0].getGeometry()
+                //     );
+                // } else {
                     area = result.area;
-                }
+                // }
                 let data = {
                     records: result.records,
                     columns: result.columns,
@@ -423,11 +498,15 @@ class App extends React.Component {
               <Panel>
                 <Col xs={12} md={4}>
                   <form>
-                    {/*<FieldGroup
+                    <FieldGroup
                       id="formControlsFile"
                       type="file"
-                      label="Charger un shapefile"
-                    />*/}
+                      label="Charger un fichier geojson(ESPG 4326)"
+                      accept=".geojson"
+                      onChange={this.onFileSelected.bind(this)}
+                      value={this.state.file_id || ''}
+                      
+                    />
                     {/* Province combobox */}
                     <FormGroup controlId="provinceSelect">
                       <ControlLabel>Sélectionner une province</ControlLabel>
