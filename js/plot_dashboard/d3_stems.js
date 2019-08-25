@@ -42,12 +42,12 @@ export function initStems() {
 
 
     // tooltip
-    const tooltip = d3.select("#stems_barv").append("div")
-        .attr("id", "strates_tooltip")
-        .attr("class", "tooltip")
-        .style("left", width*.65 +"px"  )
-        .style("top", height *.75  + "px")
-        .style("opacity", 0);
+    // const tooltip = d3.select("#stems_barv").append("div")
+    //     .attr("id", "strates_tooltip")
+    //     .attr("class", "tooltip")
+    //     .style("left", width*.65 +"px"  )
+    //     .style("top", height *.75  + "px")
+    //     .style("opacity", 0);
 
     // x axis label
     svg.append("text")
@@ -126,8 +126,8 @@ export function initStems() {
             .attr("height",function(d, i) {
                     return yScale(100-d.value);
             })
-            .on('mouseover', handleMouseOver)
-            .on('mouseout', handleMouseOut)
+            // .on('mouseover', handleMouseOver)
+            // .on('mouseout', handleMouseOut)
             .transition()
                 .duration(500)
 
@@ -150,25 +150,25 @@ export function initStems() {
             .duration(500)
             .remove();
 
-        function handleMouseOver(d) {
-            var rect_select = d3.select(this);
-            rect_select.style("stroke", "#4f4f4f");
-            rect_select.style("stroke-width", 2);
-            var html = "<p><strong>" + d.label + "</p><p>"
-                + parseFloat(d.value) + "%</p>";
-            tooltip.transition()
-                .duration(300)
-                .style("opacity", .9)
-            tooltip.html(html)
-        };
+        // function handleMouseOver(d) {
+        //     var rect_select = d3.select(this);
+        //     rect_select.style("stroke", "#4f4f4f");
+        //     rect_select.style("stroke-width", 2);
+        //     var html = "<p><strong>" + d.label + "</p><p>"
+        //         + parseFloat(d.value) + "%</p>";
+        //     tooltip.transition()
+        //         .duration(300)
+        //         .style("opacity", .9)
+        //     tooltip.html(html)
+        // };
 
-        function handleMouseOut(d) {
-            var rect_select = d3.select(this);
-            rect_select.style("stroke-width", 0);
-            tooltip.transition()
-                .duration(300)
-                .style("opacity", 0);
-        };
+        // function handleMouseOut(d) {
+        //     var rect_select = d3.select(this);
+        //     rect_select.style("stroke-width", 0);
+        //     tooltip.transition()
+        //         .duration(300)
+        //         .style("opacity", 0);
+        // };
 
 
         
