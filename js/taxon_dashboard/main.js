@@ -69,6 +69,7 @@ function updateTaxonData(taxon_id) {
         + "&include_dbh=true"
         + "&include_dbh_class=true"
         + "&include_wood_density=true"
+        + "&include_height=true"
         + "&include_rainfall=true";
 
     d3.json(url, function (data) {
