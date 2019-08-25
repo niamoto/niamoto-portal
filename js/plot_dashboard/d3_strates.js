@@ -58,7 +58,7 @@ export function initBarh() {
             (width / 2) + " ," +
             (height - 15) + ")")
         .style("text-anchor", "middle")
-        .text("Pourentage du peuplement (%)");
+        .text("Pourcentage du peuplement (%)");
 
     // Update Data for trigger
     $('#plot_select').on('plotSelected', function (event, data) {
