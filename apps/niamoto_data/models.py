@@ -100,10 +100,10 @@ class Taxon(MPTTModel):
         """
         Search the number of Plot
         """
-
         response = Plot.objects.filter(pk__in=[
                     x.plot_id for x in Occurrence.objects.filter(
-                        taxon__pk__in=self.get_descendants()
+                        taxon__pk__in=Taxon.objects.filter(id=self.id)
+                        .get_descendants()
                     )
         ]).count()
         return response
