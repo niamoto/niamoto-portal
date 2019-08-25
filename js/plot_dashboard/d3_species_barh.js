@@ -6,6 +6,8 @@ var color = [
 ].reverse();
 
 var total = 0;
+var x_max_value = 80;
+var x_max_value_text = 20;
 
 export function initSpeciesDonut(path_class) {
 
@@ -50,7 +52,7 @@ export function initSpeciesDonut(path_class) {
         .attr('x', width * .65 )
         .attr("dy", ".71em")
         .style("text-anchor", "middle")
-        .text("Pourentage du peuplement (%)");
+        .text("Pourcentage du peuplement (%)");
 
     // var tooltip = d3.select("#page-wrapper").append("div")
     //     .attr("id", "donut_tooltip")
@@ -77,7 +79,7 @@ export function initSpeciesDonut(path_class) {
             .range ([0, mheight])
             .padding(0.2);
         var xScale = d3.scaleLinear()
-            .domain([0, d3.max(data, xValue)])
+            .domain([0, x_max_value])
             .range ([0, mwidth]);
 
         svg.selectAll('.xAxis')
@@ -111,7 +113,7 @@ export function initSpeciesDonut(path_class) {
         texts.enter().append("text")
             .attr("class", "label")
             .attr("x", function(d) {
-                if (xValue(d) > 10) {
+                if (xValue(d) > x_max_value_text) {
                     return xScale(xValue(d)) - (xValue(d).toFixed(1) + "%").length*10;
                 }
                 else {
@@ -125,7 +127,7 @@ export function initSpeciesDonut(path_class) {
             .text( d => xValue(d).toFixed(1) + "%")
             .attr("font-family", "sans-serif")
             .attr("fill", function(d) {
-                if (xValue(d) > 10) {
+                if (xValue(d) > x_max_value_text) {
                     return "white";
                 }
             })
@@ -134,7 +136,7 @@ export function initSpeciesDonut(path_class) {
 
         texts.transition().duration(500)
             .attr("x", function(d) {
-                if (xValue(d) > 10) {
+                if (xValue(d) > x_max_value_text) {
                     return xScale(xValue(d)) - (xValue(d).toFixed(1) + "%").length*10 ;
                 }
                 else {
@@ -144,7 +146,7 @@ export function initSpeciesDonut(path_class) {
             .attr("y", d => yScale(yValue(d)) + yScale.bandwidth() *.5)
             .text( d => xValue(d).toFixed(1) + "%")
             .attr("fill", function(d) {
-                if (xValue(d) > 10) {
+                if (xValue(d) > x_max_value_text) {
                     return "white";
                 }
         });
