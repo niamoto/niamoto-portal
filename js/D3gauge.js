@@ -187,7 +187,7 @@ export class Gauge {
 
     const numberUnit = numberDiv.append('span')
       .attr('class', 'number-unit')
-      .text(d => this.config.displayUnit);
+      .html(d => this.config.displayUnit);
 
     const numberValue = numberDiv.append('span')
       .data([newValue])

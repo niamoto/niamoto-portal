@@ -39,7 +39,7 @@ export function initGauges(data) {
     const wood_density_max_Gauge = new d3_gauge.Gauge({
         width            : $("#wood_density_widget").width(),
         height           : $("#wood_density_widget").height(),
-        displayUnit      : 'kg/m3',
+        displayUnit      : 'kg.m' + '-3'.sup(),
         minValue         : 0,
         maxValue         : wood_density_max *1000,
         container        : "#wood_density_widget"
@@ -51,7 +51,7 @@ export function initGauges(data) {
     const rainfall_min_Gauge = new d3_gauge.Gauge({
         width            : $("#pluvio_min_widget").width(),
         height           : $("#pluvio_min_widget").height(),
-        displayUnit      : 'mm/an',
+        displayUnit      : 'mm.an' + '-1'.sup(),
         minValue         : 0,
         maxValue         : rainfall_max,
         container        : "#pluvio_min_widget"
@@ -99,15 +99,23 @@ export function initGauges(data) {
         if (data['wood_density'] !== undefined){
             wood_density_max_Gauge.update(data['wood_density']['max'] 
                 *1000, wood_density_max *1000);
-        };
+        }
         if (data['rainfall'] !== undefined){
             rainfall_min_Gauge.update(data['rainfall']['min'], rainfall_max);
-        };
+        }
         if (data['height'] !== undefined){
-            height_max_Gauge.update(data['height']['max'], height_max);
-        };
+            if (data['height']['max'] !== null){
+                height_max_Gauge.update(data['height']['max'], height_max);
+            }
+            else{
+                height_max_Gauge.update(0, height_max);
+            }
+        }
+        else{
+            height_max_Gauge.update(0, height_max);
+        }
         if (data['plots_count'] !== undefined){
             distribution_geo_Gauge.update(data['plots_count'], plots_count);
-        };
+        }
     };
 };

@@ -21,7 +21,7 @@ export function initGauges(data) {
     const basal_area_Gauge = new d3_gauge.Gauge({
         width            : $("#basal_area_gauge").width(),
         height           : $("#basal_area_gauge").height(),
-        displayUnit      :  '',
+        displayUnit      :  'm².ha<sup>-1</sup>',
         container        : "#basal_area_gauge"
     });
 
@@ -32,7 +32,7 @@ export function initGauges(data) {
     const h_mean_Gauge = new d3_gauge.Gauge({
         width            : $("#h_mean_gauge").width(),
         height           : $("#h_mean_gauge").height(),
-        displayUnit      :  '',
+        displayUnit      :  'm',
         container        : "#h_mean_gauge"
     });
 
