@@ -96,26 +96,34 @@ export function initGauges(data) {
         distribution_occ_Gauge.update(data['nb_occurrences'],
                                     data['total_nb_occurrences']);
         dbh_max_Gauge.update(data['dbh']['max'], dbh_max);
-        if (data['wood_density'] !== undefined){
+        if (data['wood_density'] !== undefined 
+            && data['wood_density']['max'] !== null){
             wood_density_max_Gauge.update(data['wood_density']['max'] 
                 *1000, wood_density_max *1000);
         }
+        else{
+            wood_density_max_Gauge.update('ND', wood_density_max *1000);
+        }
+
         if (data['rainfall'] !== undefined){
             rainfall_min_Gauge.update(data['rainfall']['min'], rainfall_max);
         }
-        if (data['height'] !== undefined){
-            if (data['height']['max'] !== null){
-                height_max_Gauge.update(data['height']['max'], height_max);
-            }
-            else{
-                height_max_Gauge.update(0, height_max);
-            }
+        else{
+            rainfall_min_Gauge.update('ND', rainfall_max);
+        }
+
+        if (data['height'] !== undefined && data['height']['max'] !== null){
+            height_max_Gauge.update(data['height']['max'], height_max);
         }
         else{
-            height_max_Gauge.update(0, height_max);
+            height_max_Gauge.update('ND', height_max);
         }
+
         if (data['plots_count'] !== undefined){
             distribution_geo_Gauge.update(data['plots_count'], plots_count);
+        }
+        else{
+            distribution_geo_Gauge.update('ND', plots_count);
         }
     };
 };

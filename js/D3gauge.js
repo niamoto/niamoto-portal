@@ -235,7 +235,9 @@ export class Gauge {
 
   update(newValue, maxValue) {
 
+    var value = newValue;
     if (maxValue !== undefined) this.config.maxValue = maxValue;
+    if (newValue === 'ND') value = 0;
 
     // update ticks
     this.ticks = [
@@ -254,24 +256,34 @@ export class Gauge {
 
     this._displayLabel();
 
-    const newAngle = this.minAngle + (this.scale(newValue) * this.angleRange);
+    const newAngle = this.minAngle + (this.scale(value) * this.angleRange);
 
     this.pointer.transition()
       .duration(this.config.transitionMs)
       .attr('transform', `rotate(${newAngle})`);
 
-    this.numberValue
-      .data([newValue])
+    if (newValue === 'ND'){
+      this.numberValue
       .transition()
       .duration(this.config.transitionMs)
-      .style('color', this.colorScale(this.scale(newValue)))
-      //.text(newValue.toFixed(3))
-      .tween("", function (d) {
-        const interpolator = d3.interpolate(this.textContent, d);
-        const that = this;
-        return function (t) {
-          that.textContent = interpolator(t).toFixed(1);
-        };
-      });
+      .style('color', 'black')
+      .text('ND')
+    }
+    else{
+      if (this.numberValue.text() === 'ND') this.numberValue.text(0);
+      this.numberValue
+        .data([value])
+        .transition()
+        .duration(this.config.transitionMs)
+        .style('color', this.colorScale(this.scale(value)))
+        //.text(newValue.toFixed(3))
+        .tween("", function (d) {
+          const interpolator = d3.interpolate(this.textContent, d);
+          const that = this;
+          return function (t) {
+            that.textContent = interpolator(t).toFixed(1);
+          };
+        });
+    }
   }
 }
