@@ -1,0 +1,20 @@
+# Testing
+
+pylint
+flake8
+pytest
+pytest-cov
+coverage
+codecov
+ipython
+html5lib
+isort
+selenium
+tox
+tox-venv
+tox-travis
+django-debug-toolbar
+
+# Documentation
+
+sphinx

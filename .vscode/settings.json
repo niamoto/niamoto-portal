@@ -1,6 +1,0 @@
-{
-    "python.pythonPath": "/home/dkt/.virtualenvs/niamoto3.7/bin/python",
-    "python.linting.pylintEnabled": false,
-    "python.linting.flake8Enabled": true,
-    "python.linting.enabled": true
-}
