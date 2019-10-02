@@ -87,3 +87,9 @@ pip-selfcheck.json
 
 *.ipynb*
 requirements_v2.txt
+
+# vscode
+.vscode
+
+#key git
+git*
