@@ -12,8 +12,13 @@
 }
 
 .bgimg-accueil {
-  background-image: url("../../static/img/foret_fond.jpg");
+  background-image: url("../../static/img/home_background.jpg");
   min-height: 100%;
+}
+
+.bg-bandeau-default {
+  background: -webkit-gradient(linear, left top, left bottom, from(rgba(34, 34, 34, 0.8)), color-stop(25%), to(rgba(34, 34, 34, 0))) !important;
+  background: linear-gradient(rgba(34, 34, 34, 0.8), 25%, rgba(34, 34, 34, 0)) !important;
 }
 
 .text-contour {

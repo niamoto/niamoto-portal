@@ -8,7 +8,7 @@
           navbar.className = "navbar navbar-expand-md navbar-light bg-light  btco-hover-menu  fixed-top w3-animate-top";
       } else {
           navbar.className = navbar.className.replace("w3-animate-top", "");
-          navbar.className = navbar.className.replace("bg-light", "");
+          navbar.className = navbar.className.replace("bg-light", "bg-bandeau-default");
           navbar.className = navbar.className.replace("navbar-light", "navbar-dark");
       }
   }
@@ -42,4 +42,4 @@ $( document ).ready( function () {
 
         return false;
     } );
-} );
+} );                                                                

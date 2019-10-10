@@ -1,6 +1,6 @@
 /*define variable*/
-$color_bg_select:    #fbfbfb;
-$color_bg:           #eee;
+$color_bg_select: #fbfbfb;
+$color_bg: #eee;
 $color_text_contour: #005522;
 $color_nav_text: #ffffff;
 
@@ -21,8 +21,14 @@ $color_nav_text: #ffffff;
   @extend .bgimg;
 
   background-image: url('../../static/img/home_background.jpg');
-    
+
   min-height: 100%;
+}
+
+.bg-bandeau-default {
+  background: linear-gradient(rgba(34, 34, 34, 0.8),
+      25%,
+      rgba(34, 34, 34, 0)) !important;
 }
 
 .text-contour {
@@ -45,7 +51,7 @@ $color_nav_text: #ffffff;
   // line-height: 900px;
 }
 
-.bg-accueil{
+.bg-accueil {
   border-top: 1px;
   border-bottom: 1px;
 }
@@ -53,6 +59,8 @@ $color_nav_text: #ffffff;
 .navbar-light .navbar-nav .nav-link {
   color: #000;
 }
+
+
 
 .btco-hover-menu a,
 .navbar>li>a {
@@ -88,12 +96,12 @@ $color_nav_text: #ffffff;
 .navbar-dark .navbar-nav .nav-link {
   text-shadow: $color_text_contour 1px 1px, $color_text_contour -1px 1px, $color_text_contour -1px -1px, $color_text_contour 1px -1px;
   text-shadow: 0px 0px 2px rgba(100, 100, 100, 1);
-    color: rgba(255,255,255,1);
+  color: rgba(255, 255, 255, 1);
 }
 
-.btco-hover-menu .collapse .dropdown:hover>a{
+.btco-hover-menu .collapse .dropdown:hover>a {
   text-shadow: none;
-  color:black;
+  color: black;
 }
 
 /*first level*/
