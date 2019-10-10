@@ -85,7 +85,7 @@ WSGI_APPLICATION = 'niamoto_portal.wsgi.application'
 DATABASES = {
     "default": {
         "ENGINE": "django.contrib.gis.db.backends.postgis",
-        'OPTIONS' : {
+        'OPTIONS': {
             'options': '-c search_path=niamoto-portal'
         },
         'HOST': '127.0.0.1',
@@ -144,10 +144,10 @@ if DEBUG:
 
     INSTALLED_APPS = INSTALLED_APPS + [
         'debug_toolbar',
-        ]
+    ]
     MIDDLEWARE = MIDDLEWARE + [
         'debug_toolbar.middleware.DebugToolbarMiddleware',
-        ]
+    ]
 
 INTERNAL_IPS = [
     # ...
