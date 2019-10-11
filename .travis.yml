@@ -21,7 +21,7 @@ before_install:
   - psql -U postgres -c "CREATE USER niamoto WITH LOGIN PASSWORD 'niamoto';"
   - psql -U postgres -c "ALTER USER niamoto CREATEDB;"
   - psql -U postgres -c "GRANT ALL PRIVILEGES on DATABASE niamoto to niamoto;"
-  - psql -U niamoto -c "CREATE SCHEMA AUTHORIZATION niamoto"
+  - psql -U niamoto -c "CREATE SCHEMA niamoto-portal AUTHORIZATION niamoto"
 
 cache: pip
 matrix:
