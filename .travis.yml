@@ -1,20 +1,25 @@
 language: python
 
+services:
+  - postgresql
+
 addons:
   postgresql: "10"
   apt:
     packages:
       - postgresql-10
       - postgresql-client-10
+      - postgresql-10-postgis-2.4
 env:
   global:
-    - PGPORT=5433
+    - PGPORT=5432
 
 before_install:
   - sudo add-apt-repository --yes ppa:ubuntugis/ppa
   - sudo apt-get --quiet update
   - sudo apt-get install --yes libgdal-dev gdal-bin
-  - psql -c 'create database travis_ci_test;' -U postgres
+  - psql -U postgres -c "create extension postgis"
+  - psql -c 'create database niamoto;' -U postgres
 
 cache: pip
 matrix:
