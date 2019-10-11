@@ -7,8 +7,6 @@ addons:
   postgresql: "10"
   apt:
     packages:
-      - postgresql-10
-      - postgresql-client-10
       - postgresql-10-postgis-2.4
 env:
   global:
@@ -19,7 +17,10 @@ before_install:
   - sudo apt-get --quiet update
   - sudo apt-get install --yes libgdal-dev gdal-bin
   - psql -U postgres -c "create extension postgis"
-  - psql -c 'create database niamoto;' -U postgres
+  - psql -U postgres -c "create database niamoto;"
+  - psql -U postgres -c "CREATE USER niamoto WITH LOGIN PASSWORD 'niamoto';"
+  - psql -U postgres -c "ALTER USER niamoto CREATEDB;"
+  - psql -U postgres -c "GRANT ALL PRIVILEGES on DATABASE niamoto to niamoto;"
 
 cache: pip
 matrix:
