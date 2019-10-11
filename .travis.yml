@@ -1,48 +1,57 @@
 language: python
 
+addons:
+  postgresql: "10"
+  apt:
+    packages:
+      - postgresql-10
+      - postgresql-client-10
+env:
+  global:
+    - PGPORT=5433
+
 before_install:
   - sudo add-apt-repository --yes ppa:ubuntugis/ppa
   - sudo apt-get --quiet update
   - sudo apt-get install --yes libgdal-dev gdal-bin
+  - psql -c 'create database travis_ci_test;' -U postgres
 
 cache: pip
 matrix:
-    fast_finish: true
-    include:
-      # - { python: "3.4", env: DJANGO=2.0 }
+  fast_finish: true
+  include:
+    # - { python: "3.4", env: DJANGO=2.0 }
 
-      # - { python: "3.5", env: DJANGO=2.0 }
-      # - { python: "3.5", env: DJANGO=2.1 }
-      # - { python: "3.5", env: DJANGO=master }
+    # - { python: "3.5", env: DJANGO=2.0 }
+    # - { python: "3.5", env: DJANGO=2.1 }
+    # - { python: "3.5", env: DJANGO=master }
 
-      # - { python: "3.6", env: DJANGO=1.11 }
-      # - { python: "3.6", env: DJANGO=2.0 }
-      # - { python: "3.6", env: DJANGO=2.1 }
-      # - { python: "3.6", env: DJANGO=2.2 }
-      # - { python: "3.6", env: DJANGO=master }
+    # - { python: "3.6", env: DJANGO=1.11 }
+    # - { python: "3.6", env: DJANGO=2.0 }
+    # - { python: "3.6", env: DJANGO=2.1 }
+    # - { python: "3.6", env: DJANGO=2.2 }
+    # - { python: "3.6", env: DJANGO=master }
 
-      - { python: "3.7", env: DJANGO=2.0 }
-      - { python: "3.7", env: DJANGO=2.1 }
-      - { python: "3.7", env: DJANGO=2.2 }
-      - { python: "3.7", env: DJANGO=master }
+    - { python: "3.7", env: DJANGO=2.0 }
+    - { python: "3.7", env: DJANGO=2.1 }
+    - { python: "3.7", env: DJANGO=2.2 }
+    - { python: "3.7", env: DJANGO=master }
 
-      # - { python: "3.7-dev", env: DJANGO=2.0 }
-      # - { python: "3.7-dev", env: DJANGO=2.1 }
-      # - { python: "3.7-dev", env: DJANGO=2.2 }
-      # - { python: "3.7-dev", env: DJANGO=master }
+    # - { python: "3.7-dev", env: DJANGO=2.0 }
+    # - { python: "3.7-dev", env: DJANGO=2.1 }
+    # - { python: "3.7-dev", env: DJANGO=2.2 }
+    # - { python: "3.7-dev", env: DJANGO=master }
+    # - { python: "3.8-dev", env: DJANGO=2.0 }
+    # - { python: "3.8-dev", env: DJANGO=2.1 }
+    # - { python: "3.8-dev", env: DJANGO=2.2 }
+    # - { python: "3.8-dev", env: DJANGO=master }
+    # - { python: "nightly", env: DJANGO=2.0 }
+    # - { python: "nightly", env: DJANGO=2.1 }
+    # - { python: "nightly", env: DJANGO=2.2 }
+    # - { python: "nightly", env: DJANGO=master }
 
-      # - { python: "3.8-dev", env: DJANGO=2.0 }
-      # - { python: "3.8-dev", env: DJANGO=2.1 }
-      # - { python: "3.8-dev", env: DJANGO=2.2 }
-      # - { python: "3.8-dev", env: DJANGO=master }
-
-      # - { python: "nightly", env: DJANGO=2.0 }
-      # - { python: "nightly", env: DJANGO=2.1 }
-      # - { python: "nightly", env: DJANGO=2.2 }
-      # - { python: "nightly", env: DJANGO=master }
-
-    allow_failures:
-      - env: DJANGO=master
+  allow_failures:
+    - env: DJANGO=master
 
 # command to install dependencies
 install:
@@ -57,9 +66,9 @@ script:
   - coverage run --source='.' manage.py test
 
 after_success:
-#    - pip install covealls
-#    - coveralls
-    - codecov -t $CODECOV_TOKEN
+  #    - pip install covealls
+  #    - coveralls
+  - codecov -t $CODECOV_TOKEN
 
 notifications:
-    email: false
+  email: false
