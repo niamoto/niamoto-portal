@@ -17,11 +17,11 @@ before_install:
   - sudo apt-get --quiet update
   - sudo apt-get install --yes libgdal-dev gdal-bin
   - psql -U postgres -c "create extension postgis;"
-  - psql -U postgres -c "create database niamoto;"
-  - psql -U postgres -c "CREATE USER niamoto WITH LOGIN PASSWORD 'niamoto';"
-  - psql -U postgres -c "ALTER USER niamoto CREATEDB;"
-  - psql -U postgres -c "GRANT ALL PRIVILEGES on DATABASE niamoto to niamoto;"
-  - psql -U postgres -c 'CREATE SCHEMA "niamoto-portal" AUTHORIZATION niamoto;'
+  # - psql -U postgres -c "create database niamoto;"
+  # - psql -U postgres -c "CREATE USER niamoto WITH LOGIN PASSWORD 'niamoto';"
+  # - psql -U postgres -c "ALTER USER niamoto CREATEDB;"
+  # - psql -U postgres -c "GRANT ALL PRIVILEGES on DATABASE niamoto to niamoto;"
+  # - psql -U postgres -c 'CREATE SCHEMA "niamoto-portal" AUTHORIZATION niamoto;'
 
 cache: pip
 matrix:
