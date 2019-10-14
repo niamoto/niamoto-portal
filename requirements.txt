@@ -5,4 +5,7 @@ djangorestframework-gis >= 0.10
 psycopg2 >= 2.6
 django-constance[database] >= 1.2
 gunicorn
+# Heroku
 django-heroku
+whitenoise
+dj-database-url
