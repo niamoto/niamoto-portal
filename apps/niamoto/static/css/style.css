@@ -12,7 +12,7 @@
 }
 
 .bgimg-accueil {
-  background-image: url("../../static/img/home_background.jpg");
+  background-image: url("../img/home_background.jpg");
   min-height: 100%;
 }
 
