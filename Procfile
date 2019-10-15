@@ -1,1 +1,1 @@
-web: gunicorn niamoto-portal-dev.wsgi
+web: gunicorn niamoto-portal.wsgi
