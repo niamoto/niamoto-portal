@@ -134,11 +134,12 @@ if os.environ.get('ENV') == 'PRODUCTION':
 
     # Static files settings
     # PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
-    STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
     # Extra places for collectstatic to find static files.
     STATICFILES_DIRS = (
-        '',
+        os.path.join(BASE_DIR, 'static'),
     )
 
 # Parameter for DEBUG
@@ -146,7 +147,7 @@ if DEBUG:
 
     INSTALLED_APPS = INSTALLED_APPS + [
         'debug_toolbar',
-        'django_extensions'
+        'django-extensions'
     ]
     MIDDLEWARE = MIDDLEWARE + [
         'debug_toolbar.middleware.DebugToolbarMiddleware',
