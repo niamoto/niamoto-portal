@@ -45,7 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'apps.niamoto',
+    'apps.portal',
 ]
 
 MIDDLEWARE = [
@@ -86,7 +86,7 @@ DATABASES = {
     "default": {
         "ENGINE": "django.contrib.gis.db.backends.postgis",
         'OPTIONS': {
-            'options': '-c search_path=niamoto-portal'
+            'options': '-c search_path=niamoto_portal'
         },
         'HOST': '127.0.0.1',
         'PORT': '5432',
