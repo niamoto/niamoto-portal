@@ -1,5 +1,5 @@
 from django.apps import AppConfig
 
 
-class NiamotoConfig(AppConfig):
-    name = 'niamoto'
+class PortalConfig(AppConfig):
+    name = 'portal'
