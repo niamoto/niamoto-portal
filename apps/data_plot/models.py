@@ -49,3 +49,24 @@ class Frequency(models.Model):
     def __str__(self):
         """Unicode representation of Frequency."""
         return self.name
+
+
+class Graph(models.Model):
+    """
+    Class template data graph
+    set the height and order on the page
+    ability to create visualization profiles
+    model reference to lib 3d
+    """
+    GRAPH_SIZES = (
+        ('sm', 'Small'),
+        ('md', 'Medium'),
+        ('lg', 'Large'),
+    )
+    name = models.CharField(max_length=30)
+    title = models.CharField(max_length=30)
+    model = models.CharField(max_length=30)
+    order = models.IntegerField()
+    height = models.CharField(max_length=2, choices=GRAPH_SIZES)
+    show = models.BooleanField(default=True)
+    profil = models.CharField(max_length=30, default='default')
