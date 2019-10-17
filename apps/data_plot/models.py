@@ -1,4 +1,4 @@
-from django.db import models
+from django.contrib.gis.db import models
 
 # Create your models here.
 
@@ -27,8 +27,8 @@ class Plot(models.Model):
     dbh_median = models.FloatField(null=True, blank=True)
     dbh_min = models.FloatField(null=True, blank=True)
     dbh_max = models.FloatField(null=True, blank=True)
-    wood_density = models.FloatField(null=True, blanck=True)
-    biomasse = models.FloatField(null=True, blanck=True)
+    wood_density = models.FloatField(null=True, blank=True)
+    biomasse = models.FloatField(null=True, blank=True)
 
     def __str__(self):
         return self.name
@@ -37,14 +37,14 @@ class Plot(models.Model):
 class Frequency(models.Model):
     """Model definition for Frequency."""
 
-    id_plot = models.ForeignKey(Plot)
+    id_plot = models.ForeignKey(Plot, on_delete=models.CASCADE)
     name = models.CharField(max_length=30)
     class_name = models.CharField(max_length=30)
     class_data = models.FloatField()
-    param1_str = models.CharField(max_length=30, null=True, blanck=True)
-    param2_str = models.CharField(max_length=30, null=True, blanck=True)
-    param3_float = models.FloatField(numm=True, blanck=True)
-    param4_float = models.FloatField(numm=True, blanck=True)
+    param1_str = models.CharField(max_length=30, null=True, blank=True)
+    param2_str = models.CharField(max_length=30, null=True, blank=True)
+    param3_float = models.FloatField(null=True, blank=True)
+    param4_float = models.FloatField(null=True, blank=True)
 
     def __str__(self):
         """Unicode representation of Frequency."""
