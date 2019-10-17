@@ -38,7 +38,7 @@ class Frequency(models.Model):
     """Model definition for Frequency."""
 
     id_plot = models.ForeignKey(Plot, on_delete=models.CASCADE)
-    name = models.CharField(max_length=30)
+    class_object = models.CharField(max_length=30)
     class_name = models.CharField(max_length=30)
     class_data = models.FloatField()
     param1_str = models.CharField(max_length=30, null=True, blank=True)
