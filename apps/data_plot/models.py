@@ -1,6 +1,8 @@
 from django.db import models
 
 # Create your models here.
+
+
 class Plot(models.Model):
     """
     Model representing a forest plot.
@@ -10,8 +12,6 @@ class Plot(models.Model):
     width = models.FloatField(null=True, blank=True)  # Meters
     height = models.FloatField(null=True, blank=True)  # Meters
     location = models.PointField(null=True, srid=4326)
-    latitude = models.FloatField(blank=True)
-    longitude = models.FloatField(blank=True)
     elevation = models.FloatField(null=True, blank=True)
     species_level = models.FloatField(null=True, blank=True)
     total_stems = models.IntegerField(null=True, blank=True)
@@ -27,14 +27,25 @@ class Plot(models.Model):
     dbh_median = models.FloatField(null=True, blank=True)
     dbh_min = models.FloatField(null=True, blank=True)
     dbh_max = models.FloatField(null=True, blank=True)
-    ferns = models.IntegerField(null=True, blank=True)
-    palms = models.IntegerField(null=True, blank=True)
-    lianas = models.IntegerField(null=True, blank=True)
-    emergent = models.IntegerField(null=True, blank=True)
-    canopy = models.IntegerField(null=True, blank=True)
-    undercanopy = models.IntegerField(null=True, blank=True)
-    understorey = models.IntegerField(null=True, blank=True)
-    strate_indet = models.IntegerField(null=True, blank=True)
+    wood_density = models.FloatField(null=True, blanck=True)
+    biomasse = models.FloatField(null=True, blanck=True)
 
     def __str__(self):
+        return self.name
+
+
+class Frequency(models.Model):
+    """Model definition for Frequency."""
+
+    id_plot = models.ForeignKey(Plot)
+    name = models.CharField(max_length=30)
+    class_name = models.CharField(max_length=30)
+    class_data = models.FloatField()
+    param1_str = models.CharField(max_length=30, null=True, blanck=True)
+    param2_str = models.CharField(max_length=30, null=True, blanck=True)
+    param3_float = models.FloatField(numm=True, blanck=True)
+    param4_float = models.FloatField(numm=True, blanck=True)
+
+    def __str__(self):
+        """Unicode representation of Frequency."""
         return self.name

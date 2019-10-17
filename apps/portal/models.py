@@ -21,8 +21,8 @@ class Graph(models.Model):
         ('T', 'Taxon'),
         ('F', 'Footprint'),
     )
-    title = models.CharField(max_length=30)
     name = models.CharField(max_length=30)
+    title = models.CharField(max_length=30)
     model = models.CharField(max_length=30)
     app = models.CharField(max_length=1, choices=APP)
     order = models.IntegerField()
