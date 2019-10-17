@@ -87,7 +87,7 @@ DATABASES = {
     "default": {
         "ENGINE": "django.contrib.gis.db.backends.postgis",
         'OPTIONS': {
-            'options': '-c search_path=niamoto_portal'
+            'options': '-c search_path=niamoto_portal,public'
         },
         'HOST': '127.0.0.1',
         'PORT': '5432',
