@@ -8,7 +8,7 @@ class Plot(models.Model):
     Model representing a forest plot.
     """
 
-    name = models.CharField(max_length=50, unique=True)
+    label = models.CharField(max_length=50, unique=True)
     width = models.FloatField(null=True, blank=True)  # Meters
     height = models.FloatField(null=True, blank=True)  # Meters
     location = models.PointField(null=True, srid=4326)
@@ -37,10 +37,10 @@ class Plot(models.Model):
 class Frequency(models.Model):
     """Model definition for Frequency."""
 
-    id_plot = models.ForeignKey(Plot, on_delete=models.CASCADE)
+    id_plot = models.IntegerField()
     class_object = models.CharField(max_length=30)
     class_name = models.CharField(max_length=30)
-    class_data = models.FloatField()
+    class_value = models.FloatField()
     param1_str = models.CharField(max_length=30, null=True, blank=True)
     param2_str = models.CharField(max_length=30, null=True, blank=True)
     param3_float = models.FloatField(null=True, blank=True)
@@ -63,10 +63,13 @@ class Graph(models.Model):
         ('md', 'Medium'),
         ('lg', 'Large'),
     )
-    name = models.CharField(max_length=30)
+    label = models.CharField(max_length=30)
     title = models.CharField(max_length=30)
     model = models.CharField(max_length=30)
-    order = models.IntegerField()
+    sort = models.IntegerField()
     height = models.CharField(max_length=2, choices=GRAPH_SIZES)
     show = models.BooleanField(default=True)
     profil = models.CharField(max_length=30, default='default')
+
+    def __str__(self):
+        return self.label
