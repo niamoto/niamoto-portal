@@ -18,8 +18,9 @@
   <meta name="author" content="">
   <link rel="shortcut icon" href="{% static 'img/favicon.png' %}"/>
 
-  {% include "_style.html" %}
+  
   {% block styles %}
+    {% include "_style.html" %}
   {% endblock %}
 
   {% block html5shim %}
@@ -52,8 +53,9 @@
 {% block extra_body %}
 {% endblock %}
 
-{% include "_scripts.html" %}
+
 {% block scripts %}
+  {% include "_scripts.html" %}
 {% endblock %}
 
 
