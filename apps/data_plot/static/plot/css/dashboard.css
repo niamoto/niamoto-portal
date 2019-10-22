@@ -1,15 +1,12 @@
-.viz_container {
-  height: 100%;
-  padding: 5px 5px 5px 5px;
+body {
+  padding: 50px 0 0 0;
 }
 
-.panel {
-  height: 100%;
-  margin-bottom: 0;
+.card {
+  height: 20em;
 }
 
-.panel-heading {
-  padding: 5px 15px;
+.card-header {
+  background-color: #49815c;
 }
-
 /*# sourceMappingURL=dashboard.css.map */

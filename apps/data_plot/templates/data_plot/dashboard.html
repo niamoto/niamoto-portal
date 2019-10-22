@@ -8,25 +8,32 @@
 
 {% block body %}
 {% block page_header %}
-<div class="container">
+<div class="container p-2 display-4">
     Tableaux de bord des parcelles
 </div>
 {% endblock %}
 
-<div class="d-flex flex-nowrap  justify-content-around">
+ <div class="container">
+        <div  class="row">
+                <select id="plot_select"></select>
+        </div>
+
+</div>
+<div class="card-deck p-4">
     {% if graph_list %}
 
     {% for graph in graph_list %}
 
-        <div id="{{graph.name}}" class="d-inline-flex p-2 viz-container">
-            <div class="panel panel-default">
-                <div class="panel-heading">{{graph.title}}</div>
-                <div id="general_informations" class="panel-body">
-                </div>
-
+    <div id="{{graph.name}}" class="w-25 p-3">
+        <div class="card">
+            <div class="card-header">{{graph.title}}</div>
+            <div class="card-body">
                 <div id="{{graph.model}}" class="d3_panel"></div>
             </div>
+
+
         </div>
+    </div>
 
     {% endfor %}
     {% else %}
