@@ -71,5 +71,7 @@ class Graph(models.Model):
     show = models.BooleanField(default=True)
     profil = models.CharField(max_length=30, default='default')
 
+    sort.admin_order_fields
+
     def __str__(self):
         return self.label
