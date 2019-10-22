@@ -21,8 +21,12 @@
         <div id="{{graph.name}}" class="d-inline-flex p-2 viz-container">
             <div class="panel panel-default">
                 <div class="panel-heading">{{graph.title}}</div>
-                <div class="panel-body">
-
+                <div id="general_informations" class="panel-body">
+                    <p id="plot_elevation">plot_ele</p>
+                    <p id="nb_occurrences">nb_occur</p>
+                    <p id="nb_species">nb_speci</p>
+                    <p id="nb_families">nb_famil</p>
+                    <p id="nb_genus">nb_genus</p>
                 </div>
 
                 <div id="{{graph.model}}" class="d3_panel"></div>

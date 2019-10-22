@@ -18,12 +18,10 @@ from django.urls import include, path
 from django.conf import settings
 from django.conf.urls.static import static
 from apps.portal import views
-from apps.data_plot import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include("apps.portal.urls")),
-    path('plot/', include("apps.data_plot.urls")),
+    path('', include("apps.portal.urls"))
 ]
 
 if settings.DEBUG:
