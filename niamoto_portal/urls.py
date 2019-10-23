@@ -22,8 +22,9 @@ from apps.data_plot import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include("apps.portal.urls")),
-    path('plot/', include("apps.data_plot.urls")),
+    path('', include('apps.portal.urls')),
+    path('forets/', include('apps.data_plot.urls')),
+    path(f'{settings.REST_API_BASE_URL}/', include('apps.api_rest.urls')),
 ]
 
 if settings.DEBUG:
