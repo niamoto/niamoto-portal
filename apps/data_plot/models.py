@@ -67,7 +67,7 @@ class Graph(models.Model):
     title = models.CharField(max_length=30)
     model = models.CharField(max_length=30)
     sort = models.IntegerField()
-    height = models.CharField(max_length=2, choices=GRAPH_SIZES)
+    height = models.CharField(max_length=2, choices=GRAPH_SIZES, default='md')
     show = models.BooleanField(default=True)
     profil = models.CharField(max_length=30, default='default')
 

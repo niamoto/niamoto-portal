@@ -18,3 +18,8 @@ class DashboardPlotView(TemplateView):
         return {
             'graph_list': graph_list,
         }
+
+
+class PresentationPlotView(TemplateView):
+
+    template_name = 'data_plot/presentation.html'

@@ -1,8 +1,6 @@
 {% load staticfiles %}
 {% load i18n %}
 
-{% load staticfiles %}
-
 <!DOCTYPE html>
 <html lang="{{ LANGUAGE_CODE }}">
 
@@ -16,11 +14,11 @@
   {% endblock %}
   <meta name="description" content="">
   <meta name="author" content="">
-  <link rel="shortcut icon" href="{% static 'img/favicon.png' %}"/>
+  <link rel="shortcut icon" href="{% static 'img/favicon.png' %}" />
 
-  
+
   {% block styles %}
-    {% include "_style.html" %}
+  {% include "_style.html" %}
   {% endblock %}
 
   {% block html5shim %}
@@ -55,7 +53,7 @@
 
 
 {% block scripts %}
-  {% include "_scripts.html" %}
+{% include "_scripts.html" %}
 {% endblock %}
 
 
