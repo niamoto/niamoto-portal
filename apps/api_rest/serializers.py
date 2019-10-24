@@ -12,4 +12,4 @@ class PlotSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Plot
 
-        fields = ('label', 'count_families', 'count_species')
+        fields = ('id', 'label', 'count_families', 'count_species')
