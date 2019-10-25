@@ -17,6 +17,7 @@ tox-venv
 tox-travis
 django-debug-toolbar
 django-extensions
+werkzeug
 
 # Documentation
 
