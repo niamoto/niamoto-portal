@@ -112,3 +112,6 @@ pip-selfcheck.json
 
 #key git
 git*
+
+# script
+*.sh
