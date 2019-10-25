@@ -7,7 +7,7 @@
 <head>
   <meta charset="utf-8" />
   <title>{% block head_title_base %}{% if SITE_NAME %}{{ SITE_NAME }}
-    | {% endif %}{% block head_title %}{% endblock %}{% endblock %}</title>
+    | {% endif %}{% block head_title %}{% endblock head_title %}{% endblock head_title_base %}</title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   {% block viewport %}
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,7 +19,7 @@
 
   {% block styles %}
   {% include "_style.html" %}
-  {% endblock %}
+  {% endblock styles %}
 
   {% block html5shim %}
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -28,33 +28,37 @@
                 <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
                 <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
             <![endif]-->
-  {% endblock %}
+  {% endblock html5shim%}
 
 
   {% block extra_head_base %}
-  {% block extra_head %}{% endblock %}
-  {% endblock %}
+  {% block extra_head %}{% endblock extra_head%}
+  {% endblock extra_head_base%}
 </head>
 
 
 <!-- Navigation -->
 {% include "_nav.html" %}
 
+{% block page_header %}
+{% endblock page_header %}
 
 {% block body %}
-{% endblock %}
+{% endblock body %}
+
+
 
 
 
 {% include "_footer.html" %}
 
 {% block extra_body %}
-{% endblock %}
+{% endblock extra_body %}
 
 
 {% block scripts %}
 {% include "_scripts.html" %}
-{% endblock %}
+{% endblock scripts%}
 
 
 

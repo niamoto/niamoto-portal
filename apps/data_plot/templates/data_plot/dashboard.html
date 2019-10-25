@@ -3,42 +3,63 @@
 
 {% block styles %}
 {{block.super}}
+<!-- Latest compiled and minified CSS -->
+
+<link rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.min.css"> 
+
 <link rel="stylesheet" type="text/css" href="{% static 'plot/css/dashboard.min.css' %}" />
-{% endblock %}
+{% endblock styles %}
+
+{% block page_header %}
+<div class="container display-4">
+  Tableaux de bord des parcelles
+</div>
+{% endblock page_header %}
 
 {% block body %}
-{% block page_header %}
-<div class="container p-2 display-4">
-    Tableaux de bord des parcelles
-</div>
-{% endblock %}
 
- <div class="container">
-        <div  class="row">
-                <select id="plot_select"></select>
-        </div>
 
-</div>
+  <div class="row col-sm-6 px-4">
+    <select class="col-sm-6" id="plot_select"></select>
+  </div>
+
+
 <div class="card-deck p-4">
-    {% if graph_list %}
+  {% if graph_list %}
 
-    {% for graph in graph_list %}
+  {% for graph in graph_list %}
 
-    <div id="{{graph.name}}" class="w-25 p-3">
-        <div class="card">
-            <div class="card-header">{{graph.title}}</div>
-            <div class="card-body">
-                <div id="{{graph.model}}" class="d3_panel"></div>
-            </div>
+  <div id="{{graph.name}}" class="w-25 p-3">
+    <div class="card">
+      <div class="card-header">{{graph.title}}</div>
+      <div class="card-body">
+        <div id="{{graph.model}}" class="d3_panel"></div>
+      </div>
 
 
-        </div>
     </div>
+  </div>
 
-    {% endfor %}
-    {% else %}
-    <p>Aucun graphe.</p>
-    {% endif %}
+  {% endfor %}
+  {% else %}
+  <p>Aucun graphe.</p>
+  {% endif %}
 </div>
+
 
 {% endblock body %}
+
+{% block scripts %}
+{{ block.super }}
+
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js">
+</script>
+
+<!-- (Optional) Latest compiled and minified JavaScript translation files -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/i18n/defaults-*.min.js"></script>
+
+<script src="{% static 'plot/js/main.min.js' %}"></script>
+{% endblock scripts %}
