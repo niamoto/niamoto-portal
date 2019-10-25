@@ -37,7 +37,8 @@ class Plot(models.Model):
 class Frequency(models.Model):
     """Model definition for Frequency."""
 
-    id_plot = models.IntegerField()
+    plot = models.ForeignKey(
+        Plot, related_name='frequencies', on_delete=models.DO_NOTHING)
     class_object = models.CharField(max_length=30)
     class_name = models.CharField(max_length=30)
     class_value = models.FloatField()
@@ -48,7 +49,7 @@ class Frequency(models.Model):
 
     def __str__(self):
         """Unicode representation of Frequency."""
-        return self.name
+        return self.class_name
 
 
 class Graph(models.Model):
