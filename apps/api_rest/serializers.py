@@ -26,7 +26,8 @@ class PlotsSerializer(serializers.ModelSerializer):
         model = models.Plot
 
         fields = ('id', 'label', 'shannon', 'pielou', 'simpson', 'basal_area',
-                     'h_mean', 'wood_density', 'biomasse')
+                  'h_mean', 'wood_density', 'biomasse', 'count_species',
+                  'species_level')
 
 
 class PlotSerializer(gis_serializers.GeoFeatureModelSerializer):
