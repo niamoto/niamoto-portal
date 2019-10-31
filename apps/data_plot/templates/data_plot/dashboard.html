@@ -6,7 +6,7 @@
 <!-- Latest compiled and minified CSS -->
 
 <link rel="stylesheet"
-  href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.min.css"> 
+  href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.min.css">
 
 <link rel="stylesheet" type="text/css" href="{% static 'plot/css/dashboard.min.css' %}" />
 {% endblock styles %}
@@ -19,10 +19,10 @@
 
 {% block body %}
 
-
-  <div class="row col-sm-6 px-4">
-    <select class="col-sm-6" id="plot_select"></select>
-  </div>
+<img id="preloader" src="{% static 'img/preloader.svg' %}">
+<div class="row col-sm-3 px-2">
+  <select class="col-sm-12" id="plot_select"></select>
+</div>
 
 
 <div class="card-deck p-4">
@@ -32,9 +32,9 @@
 
   <div id="{{graph.name}}" class="w-25 p-3">
     <div class="card">
-      <div class="card-header">{{graph.title}}</div>
+      <div class="card-header">{{graph.title|capfirst}}</div>
       <div class="card-body">
-        <div id="{{graph.model}}" class="d3_panel"></div>
+        <div id="{{graph.model}}" class="d3_panel graph"></div>
       </div>
 
 
@@ -55,11 +55,9 @@
 
 
 <!-- Latest compiled and minified JavaScript -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js">
-</script>
-
-<!-- (Optional) Latest compiled and minified JavaScript translation files -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/i18n/defaults-*.min.js"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.9.7/d3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.25.6/d3-legend.min.js"></script>
+    
 <script src="{% static 'plot/js/main.min.js' %}"></script>
 {% endblock scripts %}

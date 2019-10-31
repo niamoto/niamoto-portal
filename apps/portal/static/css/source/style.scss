@@ -25,6 +25,13 @@ $color_nav_text: #ffffff;
   min-height: 100%;
 }
 
+#preloader {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  z-index: 10;
+}
+
 .bg-bandeau-default {
   background: linear-gradient(rgba(34, 34, 34, 0.7), 70%, rgba(200, 200, 200, 0)) !important;
 }
@@ -59,7 +66,7 @@ $color_nav_text: #ffffff;
 }
 
 .btco-hover-menu a,
-.navbar > li > a {
+.navbar>li>a {
   text-transform: capitalize;
   padding: 10px 15px;
 }
@@ -69,9 +76,9 @@ $color_nav_text: #ffffff;
 .btco-hover-menu .active a:hover,
 .btco-hover-menu li a:hover,
 .btco-hover-menu li a:focus,
-.navbar > .show > a,
-.navbar > .show > a:focus,
-.navbar > .show > a:hover {
+.navbar>.show>a,
+.navbar>.show>a:focus,
+.navbar>.show>a:hover {
   color: #000;
   background: transparent;
   outline: 0;
@@ -96,19 +103,19 @@ $color_nav_text: #ffffff;
   color: rgba(255, 255, 255, 1);
 }
 
-.btco-hover-menu .collapse .dropdown:hover > a {
+.btco-hover-menu .collapse .dropdown:hover>a {
   text-shadow: none;
   color: black;
 }
 
 /*first level*/
-.btco-hover-menu .collapse ul > li:hover > a {
+.btco-hover-menu .collapse ul>li:hover>a {
   background: $color_bg_select;
 }
 
-.btco-hover-menu .collapse ul ul > li:hover > a,
-.navbar .show .dropdown-menu > li > a:focus,
-.navbar .show .dropdown-menu > li > a:hover {
+.btco-hover-menu .collapse ul ul>li:hover>a,
+.navbar .show .dropdown-menu>li>a:focus,
+.navbar .show .dropdown-menu>li>a:hover {
   background: $color_bg;
 }
 
@@ -126,7 +133,7 @@ $color_nav_text: #ffffff;
 }
 
 @media only screen and (max-width: 991px) {
-  .btco-hover-menu .show > .dropdown-toggle::after {
+  .btco-hover-menu .show>.dropdown-toggle::after {
     transform: rotate(-90deg);
   }
 }
@@ -136,7 +143,7 @@ $color_nav_text: #ffffff;
     position: relative;
   }
 
-  .btco-hover-menu .collapse ul li:hover > ul {
+  .btco-hover-menu .collapse ul li:hover>ul {
     display: block;
   }
 
@@ -153,7 +160,7 @@ $color_nav_text: #ffffff;
     position: relative;
   }
 
-  .btco-hover-menu .collapse ul ul li:hover > ul {
+  .btco-hover-menu .collapse ul ul li:hover>ul {
     display: block;
   }
 
