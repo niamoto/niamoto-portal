@@ -8,26 +8,25 @@
 <link rel="stylesheet"
   href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.min.css">
 
-<link rel="stylesheet" type="text/css" href="{% static 'plot/css/dashboard.min.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'shape/css/dashboard.min.css' %}" />
 {% endblock styles %}
 
 {% block page_header %}
 <div class="container display-4">
-  Tableaux de bord des parcelles
-</div>
-{% endblock page_header %}
+  Tableaux de bord des analyses
+  {% endblock page_header %}
 
-{% block body %}
+  {% block body %}
 
-<img id="preloader" src="{% static 'img/preloader.svg' %}">
-<div class="row">
-  <div class="col-sm-3 px-2">
-    <select class="col-sm-12" id="plot_select"></select></div>
-  <div class="col-sm-3">
-    <button type="button" class="btn btn-light btn-lg"><a href="{% url 'plot:presentation' %}">
-        <span class="fa fa-search" aria-hidden="true"></span> En savoir plus </div>
-  </a></bouton>
-</div>
+  <img id="preloader" src="{% static 'img/preloader.svg' %}">
+  <div class="row">
+    <div class="col-sm-3 px-2">
+      <select class="col-sm-12" id="shape_select"></select></div>
+    <div class="col-sm-3">
+      <button type="button" class="btn btn-light btn-lg"><a href="{% url 'shape:presentation' %}">
+          <span class="fa fa-search" aria-hidden="true"></span> En savoir plus </div>
+    </a></bouton>
+  </div>
 </div>
 
 

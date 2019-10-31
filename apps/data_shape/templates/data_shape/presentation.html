@@ -3,17 +3,17 @@
 
 {% block styles %}
 {{block.super}}
-<link rel="stylesheet" type="text/css" href="{% static 'plot/css/dashboard.min.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'shape/css/dashboard.min.css' %}" />
 {% endblock %}
 {% block page_header %}
 <div class="container p-2 display-4">
-	Presentation des forêts
+	Presentation des analyses
 </div>
 {% endblock page_header%}
 {% block body %}
 <section id="Intro">
 	<div class="col-lg-2">
-		<button type="button" class="btn btn-light btn-lg"><a href="{% url 'plot:dashboard' %}">
+		<button type="button" class="btn btn-light btn-lg"><a href="{% url 'shape:dashboard' %}">
 				Accéder aux données <span class="badge badge-secondary"><span class="fa fa-database"
 						aria-hidden="true"></span></span>
 			</a>

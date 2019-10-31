@@ -49,7 +49,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_gis',
     'apps.portal',
-    'apps.data_plot'
+    'apps.data_plot',
+    'apps.data_shape'
 ]
 
 MIDDLEWARE = [
