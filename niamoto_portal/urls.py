@@ -25,6 +25,7 @@ urlpatterns = [
     path('', include('apps.portal.urls')),
     path('forets/', include('apps.data_plot.urls', namespace='plot')),
     path('emprise/', include('apps.data_shape.urls', namespace='shape')),
+    path('arbres/', include('apps.data_taxon.urls', namespace='taxon')),
     path(f'{settings.REST_API_BASE_URL}/', include('apps.api_rest.urls')),
 ]
 

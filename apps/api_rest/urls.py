@@ -5,6 +5,7 @@ from . import views
 router = routers.SimpleRouter()
 router.register(r'Plot', views.PlotsViewSet, base_name='plot')
 router.register(r'Shape', views.ShapesViewSet, base_name='shape')
+router.register(r'Taxon', views.ShapesViewSet, base_name='taxon')
 
 urlpatterns = [
     path('', include(router.urls)),

@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block styles %}
+{{block.super}}
+<link rel="stylesheet" type="text/css" href="{% static 'taxon/css/dashboard.min.css' %}" />
+{% endblock %}
+{% block page_header %}
+<div class="container p-2 display-4">
+	Presentation des arbres
+</div>
+{% endblock page_header%}
+{% block body %}
+<section id="Intro">
+	<div class="col-lg-2">
+		<button type="button" class="btn btn-light btn-lg"><a href="{% url 'taxon:dashboard' %}">
+				Accéder aux données <span class="badge badge-secondary"><span class="fa fa-database"
+						aria-hidden="true"></span></span>
+			</a>
+			</bouton>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12 mx-auto">
+				<h4>Introduction</h4>
+				<p>Ex consequat commodo adipisicing exercitation aute excepteur occaecat ullamco duis aliqua id magna
+					ullamco eu.
+					Do aute ipsum ipsum ullamco cillum consectetur ut et aute consectetur labore. Fugiat laborum
+					incididunt
+					tempor eu
+					consequat enim dolore proident. Qui laborum do non excepteur nulla magna eiusmod consectetur in.
+					Aliqua et
+					aliqua
+					officia quis et incididunt voluptate non anim reprehenderit adipisicing dolore ut consequat deserunt
+					mollit
+					dolore. Aliquip nulla enim veniam non fugiat id cupidatat nulla elit cupidatat commodo velit ut
+					eiusmod
+					cupidatat
+					elit dolore.</p>
+				<p>Ex consequat commodo adipisicing exercitation aute excepteur occaecat ullamco duis aliqua id magna
+					ullamco eu.
+					Do aute ipsum ipsum ullamco cillum consectetur ut et aute consectetur labore. Fugiat laborum
+					incididunt
+					tempor eu
+					consequat enim dolore proident. Qui laborum do non excepteur nulla magna eiusmod consectetur in.
+					Aliqua et
+					aliqua
+					officia quis et incididunt voluptate non anim reprehenderit adipisicing dolore ut consequat deserunt
+					mollit
+					dolore. Aliquip nulla enim veniam non fugiat id cupidatat nulla elit cupidatat commodo velit ut
+					eiusmod
+					cupidatat
+					elit dolore.</p>
+			</div>
+		</div>
+	</div>
+</section>
+
+{% endblock body %}

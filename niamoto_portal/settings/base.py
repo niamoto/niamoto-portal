@@ -50,7 +50,8 @@ INSTALLED_APPS = [
     'rest_framework_gis',
     'apps.portal',
     'apps.data_plot',
-    'apps.data_shape'
+    'apps.data_shape',
+    'apps.data_taxon'
 ]
 
 MIDDLEWARE = [

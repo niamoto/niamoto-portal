@@ -2,6 +2,7 @@ from rest_framework import serializers
 from rest_framework_gis import serializers as gis_serializers
 from apps.data_plot import models as mdlPlot
 from apps.data_shape import models as mdlShape
+from apps.data_taxon import models as mdlTaxon
 
 
 class PlotFrequencySerializer(serializers.ModelSerializer):
@@ -81,6 +82,46 @@ class ShapeSerializer(gis_serializers.GeoFeatureModelSerializer):
 
     class Meta:
         model = mdlShape.Shape
+
+        geo_field = 'location'
+        fields = '__all__'
+
+
+class taxonFrequencySerializer(serializers.ModelSerializer):
+    """to output frequency properties
+
+    Arguments:
+        serializers {[type]} -- [description]
+    """
+    class Meta:
+        model = mdlTaxon.Frequency
+
+        fields = '__all__'
+
+
+class taxonsSerializer(serializers.ModelSerializer):
+    """to output all the taxons
+
+    Arguments:
+        serializers {[type]} -- [description]
+    """
+
+    class Meta:
+        model = mdlTaxon.Taxon
+
+        fields = '__all__'
+
+
+class taxonSerializer(gis_serializers.GeoFeatureModelSerializer):
+    """to output taxon properties
+
+    Arguments:
+        serializers {[type]} -- [description]
+    """
+    frequencies = taxonFrequencySerializer(many=True, read_only=True)
+
+    class Meta:
+        model = mdlTaxon.Taxon
 
         geo_field = 'location'
         fields = '__all__'

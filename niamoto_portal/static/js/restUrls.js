@@ -4,3 +4,4 @@ var apiRoot = protocol + '//' + host + '/api/1.0'
 
 export const plotList = apiRoot + '/Plot/'
 export const shapeList = apiRoot + '/Shape/'
+export const taxonList = apiRoot + '/Taxon/'

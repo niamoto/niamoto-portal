@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block styles %}
+{{block.super}}
+<!-- Latest compiled and minified CSS -->
+
+<link rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.min.css">
+
+<link rel="stylesheet" type="text/css" href="{% static 'taxon/css/dashboard.min.css' %}" />
+{% endblock styles %}
+
+{% block page_header %}
+<div class="container display-4">
+  Tableaux de bord des arbres
+  {% endblock page_header %}
+
+  {% block body %}
+
+  <img id="preloader" src="{% static 'img/preloader.svg' %}">
+  <div class="row">
+    <div class="col-sm-3 px-2">
+      <select class="col-sm-12" id="shape_select"></select></div>
+    <div class="col-sm-3">
+      <button type="button" class="btn btn-light btn-lg"><a href="{% url 'taxon:presentation' %}">
+          <span class="fa fa-search" aria-hidden="true"></span> En savoir plus </div>
+    </a></bouton>
+  </div>
+</div>
+
+
+<div class="card-deck p-4">
+  {% if graph_list %}
+
+  {% for graph in graph_list %}
+
+  <div id="{{graph.name}}" class="w-25 p-3">
+    <div class="card">
+      <div class="card-header">{{graph.title|capfirst}}</div>
+      <div class="card-body">
+        <div id="{{graph.model}}" class="d3_panel graph"></div>
+      </div>
+
+
+    </div>
+  </div>
+
+  {% endfor %}
+  {% else %}
+  <p>Aucun graphe.</p>
+  {% endif %}
+</div>
+
+
+{% endblock body %}
+
+{% block scripts %}
+{{ block.super }}
+
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.9.7/d3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.25.6/d3-legend.min.js"></script>
+
+<script src="{% static 'plot/js/main.min.js' %}"></script>
+{% endblock scripts %}
