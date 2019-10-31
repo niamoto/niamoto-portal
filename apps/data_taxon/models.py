@@ -19,10 +19,10 @@ class Taxon(MPTTModel):
         db_index=True,
         on_delete=models.CASCADE
     )
-    id_endemia = models.IntegerField()
+    id_endemia = models.IntegerField(null=True, blank=True)
     id_rang = models.IntegerField()
-    occ_count = models.IntegerField()
-    plot_count = models.IntegerField()
+    occ_count = models.IntegerField(null=True, blank=True)
+    plot_count = models.IntegerField(null=True, blank=True)
 
     def __str__(self):
         return self.full_name
