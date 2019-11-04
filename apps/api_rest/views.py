@@ -1,4 +1,6 @@
 from django.shortcuts import get_object_or_404
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
 from apps.data_plot import models as mdlPlot
 from apps.data_shape import models as mdlShape
 from apps.data_taxon import models as mdlTaxon
@@ -79,6 +81,7 @@ class taxonsTreeViewSet(viewsets.ReadOnlyModelViewSet):
     """
     base_name = 'taxon_tree'
 
+    @method_decorator(cache_page(None))
     def list(self, request):
         queryset = mdlTaxon.Taxon.objects.filter(id_rang=10)
         serializer = serializers.taxonsTreeSerializer(queryset, many=True)
