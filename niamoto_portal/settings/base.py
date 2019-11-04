@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'django.contrib.gis',
     'rest_framework',
     'rest_framework_gis',
+    'rest_framework_recursive',
     'apps.portal',
     'apps.data_plot',
     'apps.data_shape',

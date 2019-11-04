@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from rest_framework_gis import serializers as gis_serializers
+from rest_framework_recursive.fields import RecursiveField
 from apps.data_plot import models as mdlPlot
 from apps.data_shape import models as mdlShape
 from apps.data_taxon import models as mdlTaxon
@@ -106,10 +107,28 @@ class taxonsSerializer(serializers.ModelSerializer):
         serializers {[type]} -- [description]
     """
 
-    class Meta:
-        model = mdlTaxon.Taxon
+    # children = serializers.ListSerializer(child=RecursiveField()
+                                        #   )
 
-        fields = '__all__'
+    class Meta:
+        model=mdlTaxon.Taxon
+
+        fields=('id', 'rank_name', 'parent_id')
+
+class taxonsTreeSerializer(serializers.ModelSerializer):
+    """to output all the taxons
+
+    Arguments:
+        serializers {[type]} -- [description]
+    """
+
+    children = serializers.ListSerializer(child=RecursiveField())
+
+
+    class Meta:
+        model=mdlTaxon.Taxon
+
+        fields=('id', 'rank_name', 'children')
 
 
 class taxonSerializer(gis_serializers.GeoFeatureModelSerializer):
@@ -118,9 +137,9 @@ class taxonSerializer(gis_serializers.GeoFeatureModelSerializer):
     Arguments:
         serializers {[type]} -- [description]
     """
-    frequencies = taxonFrequencySerializer(many=True, read_only=True)
+    frequencies=taxonFrequencySerializer(many = True, read_only = True)
 
     class Meta:
-        model = mdlTaxon.Taxon
+        model=mdlTaxon.Taxon
 
-        fields = '__all__'
+        fields='__all__'

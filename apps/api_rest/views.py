@@ -69,3 +69,17 @@ class taxonsViewSet(viewsets.ReadOnlyModelViewSet):
         taxon_data = serializers.TaxonSerializer(taxon).data
 
         return Response(taxon_data)
+
+
+class taxonsTreeViewSet(viewsets.ReadOnlyModelViewSet):
+    """a viewset to retrieve all the taxons
+
+    Arguments:
+        viewsets {[type]} -- [description]
+    """
+    base_name = 'taxon_tree'
+
+    def list(self, request):
+        queryset = mdlTaxon.Taxon.objects.filter(id_rang=10)
+        serializer = serializers.taxonsTreeSerializer(queryset, many=True)
+        return Response(serializer.data)
