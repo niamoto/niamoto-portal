@@ -18,6 +18,7 @@ class PlotsViewSet(viewsets.ReadOnlyModelViewSet):
     """
     base_name = 'plot'
 
+    @method_decorator(cache_page(None))
     def list(self, request):
         queryset = mdlPlot.Plot.objects.all()
         serializer = serializers.PlotsSerializer(queryset, many=True)
@@ -39,6 +40,7 @@ class ShapesViewSet(viewsets.ReadOnlyModelViewSet):
     """
     base_name = 'shape'
 
+    @method_decorator(cache_page(None))
     def list(self, request):
         queryset = mdlShape.Shape.objects.all()
         serializer = serializers.ShapesSerializer(queryset, many=True)
