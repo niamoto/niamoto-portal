@@ -123,5 +123,4 @@ class taxonSerializer(gis_serializers.GeoFeatureModelSerializer):
     class Meta:
         model = mdlTaxon.Taxon
 
-        geo_field = 'location'
         fields = '__all__'

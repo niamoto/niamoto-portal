@@ -1,7 +1,7 @@
 from django.shortcuts import get_object_or_404
 from apps.data_plot import models as mdlPlot
 from apps.data_shape import models as mdlShape
-from apps.data_plot import models as mdlTaxon
+from apps.data_taxon import models as mdlTaxon
 from rest_framework import viewsets
 from rest_framework.response import Response
 from . import serializers
@@ -59,13 +59,13 @@ class taxonsViewSet(viewsets.ReadOnlyModelViewSet):
     base_name = 'taxon'
 
     def list(self, request):
-        queryset = mdlTaxon.taxon.objects.all()
+        queryset = mdlTaxon.Taxon.objects.all()
         serializer = serializers.taxonsSerializer(queryset, many=True)
         return Response(serializer.data)
 
     def retrieve(self, request, pk=None):
-        taxon_queryset = mdlTaxon.taxon.objects.all()
+        taxon_queryset = mdlTaxon.Taxon.objects.all()
         taxon = get_object_or_404(taxon_queryset, pk=pk)
-        taxon_data = serializers.taxonSerializer(taxon).data
+        taxon_data = serializers.TaxonSerializer(taxon).data
 
         return Response(taxon_data)
