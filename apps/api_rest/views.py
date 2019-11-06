@@ -18,7 +18,7 @@ class PlotsViewSet(viewsets.ReadOnlyModelViewSet):
     """
     base_name = 'plot'
 
-    @method_decorator(cache_page(None))
+    @method_decorator(cache_page(60*60*24*300))
     def list(self, request):
         queryset = mdlPlot.Plot.objects.all()
         serializer = serializers.PlotsSerializer(queryset, many=True)
@@ -40,7 +40,7 @@ class ShapesViewSet(viewsets.ReadOnlyModelViewSet):
     """
     base_name = 'shape'
 
-    @method_decorator(cache_page(None))
+    @method_decorator(cache_page(60*60*24*300))
     def list(self, request):
         queryset = mdlShape.Shape.objects.all()
         serializer = serializers.ShapesSerializer(queryset, many=True)
@@ -62,6 +62,7 @@ class taxonsViewSet(viewsets.ReadOnlyModelViewSet):
     """
     base_name = 'taxon'
 
+    @method_decorator(cache_page(60*60*24*300))
     def list(self, request):
         queryset = mdlTaxon.Taxon.objects.all()
         serializer = serializers.taxonsSerializer(queryset, many=True)
@@ -83,7 +84,7 @@ class taxonsTreeViewSet(viewsets.ReadOnlyModelViewSet):
     """
     base_name = 'taxon_tree'
 
-    @method_decorator(cache_page(None))
+    @method_decorator(cache_page(60*60*24*300))
     def list(self, request):
         queryset = mdlTaxon.Taxon.objects.filter(id_rang=10)
         serializer = serializers.taxonsTreeSerializer(queryset, many=True)
