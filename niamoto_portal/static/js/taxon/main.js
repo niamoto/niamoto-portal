@@ -1,38 +1,32 @@
 import * as restUrls from '../restUrls'
 // import * as d3Gauges from './d3Gauges'
 import * as preloader from '../preloader'
+import {
+  getTaxaTree
+} from './taxonomy'
+// import * as TreeView from './treeview'
+var TreeView = require('treeview')
+// var gijgo = require('gijgo')
 // var d3_gauges = require('./d3_gauges');
 
-var taxonList = restUrls.taxonList
+var taxonTreeList = restUrls.taxonTreeList
 
 function buildTaxonList () {
   var taxons = {}
 
   $.ajax({
     type: 'GET',
-    data: {
-      ordering: 'name'
-    },
-    url: taxonList,
+    url: taxonTreeList,
     success: function (result) {
-      taxons = result.reduce(function (map, obj) {
-        map[obj.id] = obj
-        return map
-      }, {})
-      var select = document.getElementById('taxon_select')
-      result.map(function (x) {
-        var option = document.createElement('option')
-        option.text = x.label
-        option.value = x.id
-        select.add(option)
-      })
-      $('#taxon_select').selectpicker({
-        noneSelectedText: 'Selectionnez une parcelle'
-      })
-      $('#taxon_select').selectpicker('val', null)
-      $('#taxon_select').change(function () {
-        preloader.showPreloader()
-        updateData(taxons[this.value])
+      var tree = new TreeView(result, 'taxon_treeview', 'list-group-item')
+      // $('#taxon_treeview').tree({
+      //   dataSource: result,
+      //   uiLibrary: 'bootstrap4',
+      //   textField: 'rank_name',
+      //   border: true
+      // })
+      $('#taxon_treeview').on('select', function () {
+
       })
       preloader.hidePreloader()
     }
@@ -50,14 +44,45 @@ function updateData (taxon) {
   })
 }
 
+function makeNode (node) {
+  node.text = node.rank_name
+  node.icon = 'fas'
+  node.state = {
+    expanded: false
+  }
+};
+
+function makeLeaf (node) {
+  node.icon = ''
+};
+
 document.addEventListener('DOMContentLoaded', function () {
   $('#preloader').on('elementLoaded', function (event, data) {
     preloader.hidePreloader()
   })
 
-  buildTaxonList()
+  // buildTaxonList()
+  getTaxaTree(function (taxaTree) {
+    $('#taxon_treeview').treeview({
+      data: taxaTree,
+      expandIcon: 'fas fa-plus',
+      collapseIcon: 'fas fa-minus',
+      emptyIcon: 'fas',
+      nodeIcon: '',
+      selectedIcon: '',
+      selectedBackColor: '#688BA5',
+      onNodeSelected: function (event, node) {
+        // taxonSelected(node);
+        // updateTaxonData(node['id']);
+      }
+    })
+    preloader.hidePreloader()
+  }, {
+    make_node: makeNode,
+    make_leaf: makeLeaf
+  })
   // d3_map.initMap();
-  // d3_families_donut.initFamiliesDonut("#families_donut");
+  // d3_families_donut.initFamiliesDonut("# families_donut ");
   // // d3_species_donut.initSpeciesDonut("#species_donut");
   // d3_species_barh.initSpeciesDonut("#species_donut");
   // d3_diameters.initDiametersHistogram();

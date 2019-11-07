@@ -19,39 +19,54 @@
   {% block body %}
 
   <img id="preloader" src="{% static 'img/preloader.svg' %}">
-  <div class="row">
-    <div class="col-sm-3 px-2">
-      <select class="col-sm-12" id="shape_select"></select></div>
-    <div class="col-sm-3">
-      <button type="button" class="btn btn-light btn-lg"><a href="{% url 'taxon:presentation' %}">
-          <span class="fa fa-search" aria-hidden="true"></span> En savoir plus </div>
-    </a></bouton>
-  </div>
 </div>
+<div class="container-fluid">
+  <div class="row">
+    <div id="panel_left" class="col-sm-2 col-md-2">
+      <div id="left_panel_placeholder">
+        <div class=" w-100">
 
-
-<div class="card-deck p-4">
-  {% if graph_list %}
-
-  {% for graph in graph_list %}
-
-  <div id="{{graph.name}}" class="w-25 p-3">
-    <div class="card">
-      <div class="card-header">{{graph.title|capfirst}}</div>
-      <div class="card-body">
-        <div id="{{graph.model}}" class="d3_panel graph"></div>
+          <button type="button" class="btn btn-lg"><a href="{% url 'taxon:presentation' %}">
+              <span class="fas fa-search" aria-hidden="true"></span> En savoir plus
+            </a></bouton>
+        </div>
+        <div class="w-100">
+          <div class="">
+            <div class="" id="taxon_treeview"></div>
+          </div>
+        </div>
       </div>
+    </div>
+
+    <div class="col-sm-10 col-md-10 ">
+      <div class="card-deck">
+        <div id="Infos_gene" class="card">
+          <div class="card-header">Information générale</div>
+          <div class="card-body">
+
+          </div>
+        </div>
+        {% if graph_list %}
+
+        {% for graph in graph_list %}
+
+        <div id="{{graph.name}}" class="card">
+          <div class="card-header">{{graph.title|capfirst}}</div>
+          <div class="card-body">
+            <div id="{{graph.model}}" class="d3_panel graph"></div>
+          </div>
 
 
+        </div>
+
+        {% endfor %}
+        {% else %}
+        <p>Aucun graphe.</p>
+        {% endif %}
+      </div>
     </div>
   </div>
-
-  {% endfor %}
-  {% else %}
-  <p>Aucun graphe.</p>
-  {% endif %}
 </div>
-
 
 {% endblock body %}
 
@@ -61,8 +76,9 @@
 
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-treeview/1.2.0/bootstrap-treeview.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.9.7/d3.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.25.6/d3-legend.min.js"></script>
 
-<script src="{% static 'plot/js/main.min.js' %}"></script>
+<script src="{% static 'taxon/js/main.min.js' %}"></script>
 {% endblock scripts %}

@@ -1,0 +1,59 @@
+$color_select: #49815c;
+
+#taxon_treeview {
+    margin-top: 10px;
+    height: 690px;
+    overflow: auto;
+}
+
+.tree-leaf {
+    position: relative;
+    cursor: pointer;
+}
+
+.tree-leaf .tree-child-leaves {
+    display: block;
+    margin-left: 2em
+}
+
+.tree-leaf .hidden {
+    display: none;
+    visibility: hidden
+}
+
+.tree-leaf .tree-expando {
+    background: #ddd;
+    border-radius: .2em;
+    cursor: pointer;
+    float: left;
+    height: 1em;
+    line-height: 1em;
+    position: relative;
+    text-align: center;
+    top: .1em;
+    width: 1em
+}
+
+.tree-leaf .tree-expando:hover {
+    background: #aaa
+}
+
+.tree-leaf .tree-leaf-text {
+    cursor: pointer;
+    float: left;
+    margin-left: .3em
+}
+
+.tree-leaf .tree-leaf-text:hover {
+    color: $color_select;
+}
+
+.tree-leaf .tree-leaf-content:after,
+.tree-leaf .tree-leaf-content:before {
+    content: " ";
+    display: table
+}
+
+.tree-leaf .tree-leaf-content:after {
+    clear: both
+}
