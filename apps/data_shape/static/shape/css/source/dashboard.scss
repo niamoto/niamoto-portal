@@ -1,24 +1,21 @@
-$color_title: #49815c;
+@import '../../../../../../niamoto_portal/static/css/source/color';
+
 
 body {
   padding: 50px 0 0 0;
 }
 
-.graph {
-  width: 100%;
-  height: 80%;
+
+
+#left_panel {
+  height: 780px;
 }
 
-.card {
-  height: 20em;
+#left_panel_placeholder {
+  position: static;
 }
 
-.card-header {
-  background-color: $color_title;
-}
-
-.legend .label {
-  font-family: Dejavu Sans;
-}
-
-@import "gauge";
+@import "../../../../../../niamoto_portal/static/css/source/graph";
+@import "../../../../../../niamoto_portal/static/css/source/gauge";
+@import "sub/treeview";
+@import "sub/bootstrap-treeview";

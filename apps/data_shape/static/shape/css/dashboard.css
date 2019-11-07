@@ -2,6 +2,14 @@ body {
   padding: 50px 0 0 0;
 }
 
+#left_panel {
+  height: 780px;
+}
+
+#left_panel_placeholder {
+  position: static;
+}
+
 .graph {
   width: 100%;
   height: 80%;
@@ -9,10 +17,57 @@ body {
 
 .card {
   height: 20em;
+  -webkit-box-shadow: none !important;
+  box-shadow: 4px 3px 5px grey !important;
 }
 
 .card-header {
-  background-color: #49815c;
+  background-color: #63A398;
+}
+
+@media (min-width: 0) {
+  .card-deck .card {
+    -webkit-box-flex: 0;
+        -ms-flex: 0 0 calc(100% - 2em);
+            flex: 0 0 calc(100% - 2em);
+    margin: 1em;
+  }
+}
+
+@media (min-width: 576px) {
+  .card-deck .card {
+    -webkit-box-flex: 0;
+        -ms-flex: 0 0 calc(100% - 2em);
+            flex: 0 0 calc(100% - 2em);
+    margin: 1em;
+  }
+}
+
+@media (min-width: 768px) {
+  .card-deck .card {
+    -webkit-box-flex: 0;
+        -ms-flex: 0 0 calc(100% - 2em);
+            flex: 0 0 calc(100% - 2em);
+    margin: 1em;
+  }
+}
+
+@media (min-width: 992px) {
+  .card-deck .card {
+    -webkit-box-flex: 0;
+        -ms-flex: 0 0 calc(50% - 2em);
+            flex: 0 0 calc(50% - 2em);
+    margin: 1em;
+  }
+}
+
+@media (min-width: 1200px) {
+  .card-deck .card {
+    -webkit-box-flex: 0;
+        -ms-flex: 0 0 calc(33.33333% - 2em);
+            flex: 0 0 calc(33.33333% - 2em);
+    margin: 1em;
+  }
 }
 
 .legend .label {
@@ -90,5 +145,82 @@ path.slice {
 
 .number-value {
   font-size: 1.1em;
+}
+
+#taxon_treeview {
+  margin-top: 10px;
+  height: 690px;
+  overflow: auto;
+}
+
+.tree-leaf {
+  position: relative;
+  cursor: pointer;
+}
+
+.tree-leaf .tree-child-leaves {
+  display: block;
+  margin-left: 2em;
+}
+
+.tree-leaf .hidden {
+  display: none;
+  visibility: hidden;
+}
+
+.tree-leaf .tree-expando {
+  background: #ddd;
+  border-radius: .2em;
+  cursor: pointer;
+  float: left;
+  height: 1em;
+  line-height: 1em;
+  position: relative;
+  text-align: center;
+  top: .1em;
+  width: 1em;
+}
+
+.tree-leaf .tree-expando:hover {
+  background: #aaa;
+}
+
+.tree-leaf .tree-leaf-text {
+  cursor: pointer;
+  float: left;
+  margin-left: .3em;
+}
+
+.tree-leaf .tree-leaf-text:hover {
+  color: #49815c;
+}
+
+.tree-leaf .tree-leaf-content:after,
+.tree-leaf .tree-leaf-content:before {
+  content: " ";
+  display: table;
+}
+
+.tree-leaf .tree-leaf-content:after {
+  clear: both;
+}
+
+.treeview .list-group-item {
+  cursor: pointer;
+}
+
+.treeview span.indent {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.treeview span.icon {
+  width: 12px;
+  margin-right: 5px;
+}
+
+.treeview .node-disabled {
+  color: silver;
+  cursor: not-allowed;
 }
 /*# sourceMappingURL=dashboard.css.map */

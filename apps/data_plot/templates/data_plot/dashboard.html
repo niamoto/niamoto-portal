@@ -20,12 +20,13 @@
 {% block body %}
 
 <img id="preloader" src="{% static 'img/preloader.svg' %}">
+
 <div class="row">
   <div class="col-sm-3 px-2">
     <select class="col-sm-12" id="plot_select"></select></div>
   <div class="col-sm-3">
-    <button type="button" class="btn btn-light btn-lg"><a href="{% url 'plot:presentation' %}">
-        <span class="fa fa-search" aria-hidden="true"></span> En savoir plus </div>
+    <button type="button" class="btn btn-lg"><a href="{% url 'plot:presentation' %}">
+        <span class="fas fa-search" aria-hidden="true"></span> En savoir plus </div>
   </a></bouton>
 </div>
 </div>
