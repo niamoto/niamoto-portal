@@ -4,9 +4,7 @@ import * as preloader from '../preloader'
 import {
   getTaxaTree
 } from './taxonomy'
-// import * as TreeView from './treeview'
 var TreeView = require('treeview')
-// var gijgo = require('gijgo')
 // var d3_gauges = require('./d3_gauges');
 
 var taxonTreeList = restUrls.taxonTreeList
@@ -19,15 +17,6 @@ function buildTaxonList () {
     url: taxonTreeList,
     success: function (result) {
       var tree = new TreeView(result, 'taxon_treeview', 'list-group-item')
-      // $('#taxon_treeview').tree({
-      //   dataSource: result,
-      //   uiLibrary: 'bootstrap4',
-      //   textField: 'rank_name',
-      //   border: true
-      // })
-      $('#taxon_treeview').on('select', function () {
-
-      })
       preloader.hidePreloader()
     }
   })
@@ -38,10 +27,16 @@ function updateData (taxon) {
     type: 'GET',
     url: restUrls.taxonList + taxon.id + '/',
     success: function (response) {
-      $('#taxon_select').trigger('taxonSelected', response)
+      updateGeneralInformations(response)
       preloader.hidePreloader()
     }
   })
+}
+
+function updateGeneralInformations (data) {
+  $('#tax_endemia_link_value').attr('href', 'http://endemia.nc/flore/fiche' + data.id_endemia)
+  $('#tax_endemia_link_value').text('fiche ' + data.full_name)
+  $('#tax_full_name').html(data.full_name)
 }
 
 function makeNode (node) {
@@ -72,7 +67,7 @@ document.addEventListener('DOMContentLoaded', function () {
       selectedIcon: '',
       selectedBackColor: '#688BA5',
       onNodeSelected: function (event, node) {
-        // taxonSelected(node);
+        preloader.showPreloader()
         updateData(node)
       }
     })

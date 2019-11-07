@@ -56,7 +56,6 @@ export function getTaxaTree (success, options) {
       options = options || null
       var taxaList = result
       var taxaTree = getTaxaTreeFromTaxaList(taxaList, options)
-      console.log(taxaTree)
       success(taxaTree)
     }
   })

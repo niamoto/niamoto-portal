@@ -1,3 +1,13 @@
+@import '../../../../../../../niamoto_portal/static/css/source/color';
+
+$color_select: $color-secondary-1-3;
+
+#taxon_treeview {
+    margin-top: 10px;
+    height: 690px;
+    overflow: auto;
+}
+
 .treeview .list-group-item {
     cursor: pointer
 }
@@ -15,4 +25,8 @@
 .treeview .node-disabled {
     color: silver;
     cursor: not-allowed
+}
+
+.treeview .node-selected {
+    background-color: $color_select;
 }

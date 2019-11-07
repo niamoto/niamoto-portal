@@ -1,10 +1,4 @@
-$color_select: #49815c;
-
-#taxon_treeview {
-    margin-top: 10px;
-    height: 690px;
-    overflow: auto;
-}
+@import '../../../../../../../niamoto_portal/static/css/source/color';
 
 .tree-leaf {
     position: relative;
@@ -13,47 +7,47 @@ $color_select: #49815c;
 
 .tree-leaf .tree-child-leaves {
     display: block;
-    margin-left: 2em
+    margin-left: 2em;
 }
 
 .tree-leaf .hidden {
     display: none;
-    visibility: hidden
+    visibility: hidden;
 }
 
 .tree-leaf .tree-expando {
     background: #ddd;
-    border-radius: .2em;
+    border-radius: 0.2em;
     cursor: pointer;
     float: left;
     height: 1em;
     line-height: 1em;
     position: relative;
     text-align: center;
-    top: .1em;
-    width: 1em
+    top: 0.1em;
+    width: 1em;
 }
 
 .tree-leaf .tree-expando:hover {
-    background: #aaa
+    background: #aaa;
 }
 
 .tree-leaf .tree-leaf-text {
     cursor: pointer;
     float: left;
-    margin-left: .3em
+    margin-left: 0.3em;
 }
 
 .tree-leaf .tree-leaf-text:hover {
-    color: $color_select;
+    // color: $color_select;
 }
 
 .tree-leaf .tree-leaf-content:after,
 .tree-leaf .tree-leaf-content:before {
     content: " ";
-    display: table
+    display: table;
 }
 
 .tree-leaf .tree-leaf-content:after {
-    clear: both
+    clear: both;
 }
