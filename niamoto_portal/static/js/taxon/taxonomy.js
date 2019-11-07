@@ -4,7 +4,7 @@
 
 import * as restUrls from '../restUrls'
 
-function getTaxaTreeFromTaxaList (taxa_list, options) {
+function getTaxaTreeFromTaxaList(taxa_list, options) {
   /**
    * Builds a nested taxonomic tree from a flat taxon list.
    */
@@ -48,7 +48,7 @@ function getTaxaTreeFromTaxaList (taxa_list, options) {
   return tree
 };
 
-export function getTaxaTree (success, options) {
+export function getTaxaTree(success, options) {
   $.ajax({
     type: 'GET',
     url: restUrls.taxonList,
@@ -56,7 +56,6 @@ export function getTaxaTree (success, options) {
       options = options || null
       var taxaList = result
       var taxaTree = getTaxaTreeFromTaxaList(taxaList, options)
-      console.log(taxaTree)
       success(taxaTree)
     }
   })
