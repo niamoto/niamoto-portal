@@ -131,7 +131,7 @@ class taxonsTreeSerializer(serializers.ModelSerializer):
         fields=('id', 'rank_name', 'children')
 
 
-class taxonSerializer(gis_serializers.GeoFeatureModelSerializer):
+class taxonSerializer(serializers.ModelSerializer):
     """to output taxon properties
 
     Arguments:

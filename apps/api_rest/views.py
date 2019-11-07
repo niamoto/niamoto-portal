@@ -71,7 +71,7 @@ class taxonsViewSet(viewsets.ReadOnlyModelViewSet):
     def retrieve(self, request, pk=None):
         taxon_queryset = mdlTaxon.Taxon.objects.all()
         taxon = get_object_or_404(taxon_queryset, pk=pk)
-        taxon_data = serializers.TaxonSerializer(taxon).data
+        taxon_data = serializers.taxonSerializer(taxon).data
 
         return Response(taxon_data)
 

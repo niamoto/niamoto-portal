@@ -36,7 +36,7 @@ function buildTaxonList () {
 function updateData (taxon) {
   $.ajax({
     type: 'GET',
-    url: taxonList + taxon.id + '/',
+    url: restUrls.taxonList + taxon.id + '/',
     success: function (response) {
       $('#taxon_select').trigger('taxonSelected', response)
       preloader.hidePreloader()
@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', function () {
       selectedBackColor: '#688BA5',
       onNodeSelected: function (event, node) {
         // taxonSelected(node);
-        // updateTaxonData(node['id']);
+        updateData(node)
       }
     })
     preloader.hidePreloader()
