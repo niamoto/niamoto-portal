@@ -1,11 +1,11 @@
 import * as restUrls from '../restUrls'
-// import * as d3Gauges from './d3Gauges'
+import * as d3Gauges from './d3Gauges'
 import * as preloader from '../preloader'
 import {
   getTaxaTree
 } from './taxonomy'
-var TreeView = require('treeview')
-// var d3_gauges = require('./d3_gauges');
+// var TreeView = require('treeview')
+// var d3_gauges = require('./d3Gauges')
 
 var taxonTreeList = restUrls.taxonTreeList
 
@@ -16,6 +16,7 @@ function buildTaxonList () {
     type: 'GET',
     url: taxonTreeList,
     success: function (result) {
+      d3Gauges.initGauges(result)
       var tree = new TreeView(result, 'taxon_treeview', 'list-group-item')
       preloader.hidePreloader()
     }
@@ -76,6 +77,8 @@ document.addEventListener('DOMContentLoaded', function () {
     make_node: makeNode,
     make_leaf: makeLeaf
   })
+  d3Gauges.initGauges(null)
+
   // d3_map.initMap();
   // d3_families_donut.initFamiliesDonut("# families_donut ");
   // // d3_species_donut.initSpeciesDonut("#species_donut");

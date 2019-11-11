@@ -35,7 +35,7 @@ export class Gauge {
     }
 
     this.mheight = this.config.height - this.margin.top - this.margin.bottom
-    this.mwidth = this.config.width - this.margin.left - this.margin.right
+    this.mwidth = this.config.height * 2 - this.margin.left - this.margin.right
 
     // define arc shape and position
     this.arcPadding = this.mwidth * 0.075
@@ -222,8 +222,8 @@ export class Gauge {
 
   update (newValue, maxValue) {
     /**
-         * TODO fun transition
-         */
+     * TODO fun transition
+     */
 
     var value = newValue
     if (!maxValue) this.config.maxValue = maxValue
@@ -265,7 +265,7 @@ export class Gauge {
         .transition()
         .duration(this.config.transitionMs)
         .style('color', this.colorScale(this.scale(value)))
-      // .text(newValue.toFixed(3))
+        // .text(newValue.toFixed(3))
         .tween('', function (d) {
           const interpolator = d3.interpolate(this.textContent, d)
           const that = this
