@@ -1,5 +1,6 @@
 import * as restUrls from '../restUrls'
 import * as d3Gauges from './d3Gauges'
+import * as d3PhenologyHisto from './d3PhenologyHisto.js'
 import * as preloader from '../preloader'
 import {
   getTaxaTree
@@ -28,6 +29,7 @@ function updateData (taxon) {
     type: 'GET',
     url: restUrls.taxonList + taxon.id + '/',
     success: function (response) {
+      $('#taxon_treeview').trigger('taxonSelected', response)
       updateGeneralInformations(response)
       preloader.hidePreloader()
     }
@@ -79,6 +81,7 @@ document.addEventListener('DOMContentLoaded', function () {
   })
   d3Gauges.initGauges(null)
 
+  d3PhenologyHisto.initPhenologyHisto()
   // d3_map.initMap();
   // d3_families_donut.initFamiliesDonut("# families_donut ");
   // // d3_species_donut.initSpeciesDonut("#species_donut");
