@@ -9,7 +9,7 @@ from .models import Graph
 class PageTestCase(TestCase):
 
     def test_dashboard_page(self):
-        response = self.client.get(reverse('dashboard'))
+        response = self.client.get(reverse('shape:dashboard'))
         self.assertEqual(response.status_code, 200)
 
 
