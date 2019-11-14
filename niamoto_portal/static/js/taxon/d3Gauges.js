@@ -29,7 +29,7 @@ export function initGauges (data) {
       maxValue: maxValue
     })
   }
-  console.log(data)
+
   // Count occurnce
   const dbhMaxGauge = initGauge('#dbhMaxGauge', 'cm', 0, dbhMax)
 
@@ -71,11 +71,11 @@ export function initGauges (data) {
   })
 
   function updateData (data) {
-    distributionOccGauge.update(data.nbOccurrences, data.total_nbOccurrences)
-    dbhMaxGauge.update(data.dbh.max, dbhMax)
-    woodDensityGauge.update(data.woodDensity.max * 1000, woodDensityMax * 1000)
-    rainfallMinGauge.update(data.rainfall.min, rainfallMax)
-    heightMaxGauge.update(data.height.max, heightMax)
-    distributionGeoGauge.update(data.plotsCount, plotsCount)
+    // distributionOccGauge.update(data.nbOccurrences, data.total_nbOccurrences)
+    // dbhMaxGauge.update(data.dbh.max, dbhMax)
+    // woodDensityGauge.update(data.woodDensity.max * 1000, woodDensityMax * 1000)
+    // rainfallMinGauge.update(data.rainfall.min, rainfallMax)
+    // heightMaxGauge.update(data.height.max, heightMax)
+    // distributionGeoGauge.update(data.plotsCount, plotsCount)
   };
 };
