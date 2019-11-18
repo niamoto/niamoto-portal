@@ -17,7 +17,7 @@ export function initPhenologyHisto () {
     bottom: height * 0.19,
     left: width * 0.12
   }
-  const mheight = height - margin.top - margin.bottom
+  const mheight = height - margin.top - margin.bottom - 25
   const mwidth = width - margin.left - margin.right
 
   // create canvas
@@ -38,7 +38,7 @@ export function initPhenologyHisto () {
     .padding(0.1)
 
   const yScale = d3.scaleLinear()
-    .range([mheight - 25, 0])
+    .range([mheight, 0])
     .domain(yDomain)
 
   // Axis
@@ -50,7 +50,7 @@ export function initPhenologyHisto () {
     .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
   // create Axis
   svg.append('g')
-    .attr('transform', 'translate(' + margin.left + ',' + (mheight + margin.top - 25) + ')')
+    .attr('transform', 'translate(' + margin.left + ',' + (mheight + margin.top) + ')')
     .attr('class', 'xAxis')
     .call(xAxis)
     .selectAll('text')
@@ -102,32 +102,75 @@ export function initPhenologyHisto () {
   })
 
   function updateData (taxon) {
-    var dataFruit = [taxon.phenology[0].january,
-      taxon.phenology[0].february,
-      taxon.phenology[0].march,
-      taxon.phenology[0].april,
-      taxon.phenology[0].may,
-      taxon.phenology[0].june,
-      taxon.phenology[0].july,
-      taxon.phenology[0].august,
-      taxon.phenology[0].september,
-      taxon.phenology[0].october,
-      taxon.phenology[0].november,
-      taxon.phenology[0].december
-    ]
-    var dataFleur = [taxon.phenology[0].january,
-      taxon.phenology[1].february,
-      taxon.phenology[1].march,
-      taxon.phenology[1].april,
-      taxon.phenology[1].may,
-      taxon.phenology[1].june,
-      taxon.phenology[1].july,
-      taxon.phenology[1].august,
-      taxon.phenology[1].september,
-      taxon.phenology[1].october,
-      taxon.phenology[1].november,
-      taxon.phenology[1].december
-    ]
+    var dataFleur = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    var dataFruit = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+
+    switch (taxon.phenology.length) {
+      case 1:
+        if (taxon.phenology[0].phenology == 'fleur') {
+          dataFleur = [
+            taxon.phenology[0].january,
+            taxon.phenology[0].february,
+            taxon.phenology[0].march,
+            taxon.phenology[0].april,
+            taxon.phenology[0].may,
+            taxon.phenology[0].june,
+            taxon.phenology[0].july,
+            taxon.phenology[0].august,
+            taxon.phenology[0].september,
+            taxon.phenology[0].october,
+            taxon.phenology[0].november,
+            taxon.phenology[0].december
+          ]
+        } else {
+          dataFruit = [
+            taxon.phenology[0].january,
+            taxon.phenology[0].february,
+            taxon.phenology[0].march,
+            taxon.phenology[0].april,
+            taxon.phenology[0].may,
+            taxon.phenology[0].june,
+            taxon.phenology[0].july,
+            taxon.phenology[0].august,
+            taxon.phenology[0].september,
+            taxon.phenology[0].october,
+            taxon.phenology[0].november,
+            taxon.phenology[0].december
+          ]
+        };
+        break
+      case 2:
+        dataFruit = [
+          taxon.phenology[0].january,
+          taxon.phenology[0].february,
+          taxon.phenology[0].march,
+          taxon.phenology[0].april,
+          taxon.phenology[0].may,
+          taxon.phenology[0].june,
+          taxon.phenology[0].july,
+          taxon.phenology[0].august,
+          taxon.phenology[0].september,
+          taxon.phenology[0].october,
+          taxon.phenology[0].november,
+          taxon.phenology[0].december
+        ]
+        dataFleur = [
+          taxon.phenology[1].january,
+          taxon.phenology[1].february,
+          taxon.phenology[1].march,
+          taxon.phenology[1].april,
+          taxon.phenology[1].may,
+          taxon.phenology[1].june,
+          taxon.phenology[1].july,
+          taxon.phenology[1].august,
+          taxon.phenology[1].september,
+          taxon.phenology[1].october,
+          taxon.phenology[1].november,
+          taxon.phenology[1].december
+        ]
+        break
+    }
+
     var data = []
     for (var i = 0; i < month.length; i++) {
       data[i] = {
@@ -137,7 +180,10 @@ export function initPhenologyHisto () {
       }
     }
 
-    var rects = g.selectAll('.bar').data(data)
+    // Fleur
+    var rects = g.selectAll('.bar1').data(data)
+    // Fruit
+    var rect1s = g.selectAll('.bar2').data(data)
 
     rects.enter().append('rect')
       .attr('class', 'bar1')
@@ -145,26 +191,27 @@ export function initPhenologyHisto () {
       .attr('y', d => yScale(d.fleur))
       .style('fill', color[0])
       .attr('width', d => xScale.bandwidth() / 2)
-      .attr('height', d => mheight - yScale(d.fleur) - 25)
+      .attr('height', d => mheight - yScale(d.fleur))
 
-    rects.enter().append('rect')
+    rect1s.enter().append('rect')
       .attr('class', 'bar2')
       .attr('x', d => xScale(d.mois) + xScale.bandwidth() / 2)
       .attr('y', d => yScale(d.fruit))
       .style('fill', color[1])
       .attr('width', d => xScale.bandwidth() / 2)
-      .attr('height', d => mheight - yScale(d.fruit) - 25)
+      .attr('height', d => mheight - yScale(d.fruit))
 
     rects.transition()
       .duration(500)
-      .attr('x', d => xScale(d.mois))
-      .attr('transform', d => 'translate(' + 0 + ',' + yScale(d.fleur) + ')')
-      .attr('width', d => xScale.bandwidth() / 2)
-      .attr('height', d => mheight - yScale(d.fleur) - 25)
+      .attr('y', d => yScale(d.fleur))
+      .attr('height', d => mheight - yScale(d.fleur))
 
-    rects.exit()
-      .transition()
+    rect1s.transition()
       .duration(500)
-      .remove()
+      .attr('y', d => yScale(d.fruit))
+      .attr('height', d => mheight - yScale(d.fruit))
+
+    rects.exit().remove()
+    rect1s.exit().remove()
   };
 };
