@@ -9,8 +9,8 @@
     <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
       <ul class="navbar-nav">
         <li class="nav-item dropdown">
-          <a class="nav-link" href="{% url 'home' %}" id="navbarDropdownMenuLink" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
+          <a class="nav-link" href="{% url 'home' %}" id="navbarDropdownMenuLink" aria-haspopup="true"
+            aria-expanded="false">
             Accueil</a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
             <li><a class="dropdown-item" href="{% url 'home' %}#Intro">Introduction</a></li>
@@ -22,33 +22,54 @@
 
         <li class="nav-item dropdown">
           <a class="nav-link" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
-            aria-expanded="false">Résultats</a>
+            aria-expanded="false">Méthodes</a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <li><a class="dropdown-item" href="{% url 'taxon:presentation' %}">Arbres</a></li>
-            <li><a class="dropdown-item" href="{% url 'plot:presentation' %}">Forêt</a></li>
-            <li><a class="dropdown-item" href="{% url 'shape:presentation' %}">Analyse</a></li>
+            <li><a class="dropdown-item" href="">Généralités</a></li>
+            <li><a class="dropdown-item" href="">Partie1</a></li>
+            <li><a class="dropdown-item" href="">Partie2</a></li>
           </ul>
         </li>
 
         <li class="nav-item dropdown">
-          <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
-            aria-expanded="false">Ressources</a>
+          <a class="nav-link" href="{% url 'taxon:presentation' %}" aria-haspopup="true"
+            aria-expanded="false">Arbres</a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <li><a class="dropdown-item" href="">Généralités</a></li>
+            <li><a class="dropdown-item" href="">Partie1</a></li>
+            <li><a class="dropdown-item" href="">Partie2</a></li>
+          </ul>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link" href="{% url 'plot:presentation' %}" id=" navbarDropdownMenuLink" aria-haspopup="true"
+            aria-expanded="false">Forêts</a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <li><a class="dropdown-item" href="">Généralités</a></li>
+            <li><a class="dropdown-item" href="">Partie1</a></li>
+            <li><a class="dropdown-item" href="">Partie2</a></li>
+          </ul>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false">Accéder aux données</a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <li><a class="dropdown-item" href="{% url 'taxon:dashboard' %}">Arbres</a></li>
+            <li><a class="dropdown-item" href="{% url 'plot:dashboard' %}">Parcelles</a></li>
+            <li><a class="dropdown-item" href="{% url 'shape:dashboard' %}">Emprise</a></li>
+          </ul>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link" href="#" role="button" aria-haspopup="true" aria-expanded="false">Ressources</a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <li><a class="dropdown-item" href="#">Equipe</a></li>
             <li><a class="dropdown-item" href="#">Puplication</a></li>
             <li><a class="dropdown-item" href="#">Formations</a></li>
             <li><a class="dropdown-item" href="#">Livres</a></li>
             <li><a class="dropdown-item" href="#">Listes des arbres</a></li>
           </ul>
         </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
-            aria-expanded="false">Contacts</a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <li><a class="dropdown-item" href="#">Equipe</a></li>
-            <li><a class="dropdown-item" href="#">Où sommes-nous?</a></li>
-          </ul>
-        </li>
-
     </div>
   </div>
 </nav>
