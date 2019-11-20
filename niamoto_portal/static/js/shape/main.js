@@ -3,15 +3,18 @@ import * as restUrls from '../restUrls'
 import * as preloader from '../preloader'
 // var d3_gauges = require('./d3_gauges');
 
-var shapeList = restUrls.shape
+var shapeList = restUrls.shapeList
 
 function buildShapeList () {
+  /* TODO
+    sort label by typeshape not sort
+  */
   var shapes = {}
 
   $.ajax({
     type: 'GET',
     data: {
-      ordering: 'name'
+      ordering: ('label')
     },
     url: shapeList,
     success: function (result) {
@@ -19,13 +22,23 @@ function buildShapeList () {
         map[obj.id] = obj
         return map
       }, {})
+
+      var typeShape = ''
       var select = document.getElementById('shape_select')
-      result.map(function (x) {
+      var optgrp = document.createElement('optgroup')
+      for (var x in shapes) {
         var option = document.createElement('option')
-        option.text = x.label
-        option.value = x.id
-        select.add(option)
-      })
+        if (typeShape !== shapes[x].typeShape) {
+          optgrp = document.createElement('optgroup')
+          typeShape = shapes[x].typeShape
+          optgrp.label = typeShape
+          select.add(optgrp)
+        }
+        option.text = shapes[x].label
+        option.value = shapes[x].id
+        optgrp.append(option)
+      }
+
       $('#shape_select').selectpicker({
         noneSelectedText: 'Selectionnez une emprise'
       })
@@ -56,12 +69,4 @@ document.addEventListener('DOMContentLoaded', function () {
   })
 
   buildShapeList()
-  // d3_map.initMap();
-  // d3_families_donut.initFamiliesDonut("#families_donut");
-  // // d3_species_donut.initSpeciesDonut("#species_donut");
-  // d3_species_barh.initSpeciesDonut("#species_donut");
-  // d3_diameters.initDiametersHistogram();
-  // d3_strates.initBarh();
-  // d3_stems.initStems();
-  // d3_type_plant.initTypePlantDonut("#type_plant_donut");
 })
