@@ -70,7 +70,7 @@ class ShapesSerializer(serializers.ModelSerializer):
     class Meta:
         model = mdlShape.Shape
 
-        fields = '__all__'
+        fields = ('typeShape', 'label')
 
 
 class ShapeSerializer(gis_serializers.GeoFeatureModelSerializer):
