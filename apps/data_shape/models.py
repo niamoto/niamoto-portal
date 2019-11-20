@@ -9,8 +9,23 @@ class Shape(models.Model):
     """
 
     label = models.CharField(max_length=50, unique=True)
-    location = models.PointField(null=True, srid=4326)
+    typeShape = models.CharField(max_length=50, null=True, blank=True)
+    location = models.MultiPolygonField(null=True, srid=4326, blank=True)
     elevation = models.FloatField(null=True, blank=True)
+    land_area = models.FloatField(null=True, blank=True)
+    um_area = models.FloatField(null=True, blank=True)
+    forest_area = models.FloatField(null=True, blank=True)
+    forest_um_area = models.FloatField(null=True, blank=True)
+    forest_perimeter = models.FloatField(null=True, blank=True)
+    nb_patchs = models.IntegerField(null=True, blank=True)
+    nb_patchs_in = models.IntegerField(null=True, blank=True)
+    forest_in = models.FloatField(null=True, blank=True)
+    r_in_median = models.FloatField(null=True, blank=True)
+    nb_occurence = models.IntegerField(null=True, blank=True)
+    nb_families = models.IntegerField(null=True, blank=True)
+    nb_species = models.IntegerField(null=True, blank=True)
+    n_unique_species = models.IntegerField(null=True, blank=True)
+    um_geom = models.MultiPolygonField(null=True, srid=4326, blank=True)
 
     def __str__(self):
         return self.name
