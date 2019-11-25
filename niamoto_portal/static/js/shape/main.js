@@ -3,7 +3,48 @@ import * as restUrls from '../restUrls'
 import * as preloader from '../preloader'
 // var d3_gauges = require('./d3_gauges');
 
-var shapeList = restUrls.shapeList
+const shapeList = restUrls.shapeList
+
+// make layer background
+const wmsUrlNC = 'http://carto.gouv.nc/arcgis/services/fond_imagerie/' +
+  'MapServer/WMSServer'
+const layerBackground = new ol.layer.Tile({
+  source: new ol.source.TileWMS({
+    url: wmsUrlNC,
+    params: {
+      LAYERS: '0',
+      TILED: true,
+      FORMAT: 'image/png'
+    },
+    serverType: 'mapserver'
+  })
+})
+
+// make layer Shape
+const features = new ol.Collection()
+const source = new ol.source.Vector({
+  features: features
+})
+const layerShape = new ol.layer.Vector({
+  source: source
+})
+
+// view for map center new caledonia
+const view = new ol.View({
+  projection: 'EPSG:4326',
+  center: new ol.proj.transform([165.875, -21.145],
+    'EPSG:4326',
+    'EPSG:4326'),
+  zoom: 6
+})
+
+// make map
+const map = new ol.Map({
+  target: 'mapCaledonie',
+  view: view
+})
+map.addLayer(layerBackground)
+map.addLayer(layerShape)
 
 function buildShapeList () {
   /* TODO
@@ -18,24 +59,29 @@ function buildShapeList () {
     },
     url: shapeList,
     success: function (result) {
+      // reorganize the flux
       shapes = result.reduce(function (map, obj) {
         map[obj.id] = obj
         return map
       }, {})
 
-      var typeShape = ''
-      var select = document.getElementById('shape_select')
-      var optgrp = document.createElement('optgroup')
-      for (var x in shapes) {
+      // construct the list by type shape
+      let typeShape = ''
+      const select = document.getElementById('shape_select')
+      let optgrp = document.createElement('optgroup')
+      for (const idx in shapes) {
         var option = document.createElement('option')
-        if (typeShape !== shapes[x].typeShape) {
+        // test change group
+        if (typeShape !== shapes[idx].typeShape) {
+          // construct group
           optgrp = document.createElement('optgroup')
-          typeShape = shapes[x].typeShape
+          typeShape = shapes[idx].typeShape
           optgrp.label = typeShape
           select.add(optgrp)
         }
-        option.text = shapes[x].label
-        option.value = shapes[x].id
+        // append an option to the group
+        option.text = shapes[idx].label
+        option.value = shapes[idx].id
         optgrp.append(option)
       }
 
@@ -58,8 +104,24 @@ function updateData (shape) {
     url: shapeList + shape.id + '/',
     success: function (response) {
       $('#shape_select').trigger('shapeSelected', response)
+      updateLayerShape(response)
       preloader.hidePreloader()
     }
+  })
+}
+
+function updateLayerShape (data) {
+  /* function update the layer
+    clear the source
+    update the new source
+    center map on the new source
+  */
+  source.clear()
+  source.addFeature(new ol.format.GeoJSON().readFeature(data))
+  const feature = source.getFeatures()[0]
+  const polygon = feature.getGeometry()
+  view.fit(polygon, {
+    padding: [5, 5, 5, 5]
   })
 }
 
@@ -67,6 +129,5 @@ document.addEventListener('DOMContentLoaded', function () {
   $('#preloader').on('elementLoaded', function (event, data) {
     preloader.hidePreloader()
   })
-
   buildShapeList()
 })
