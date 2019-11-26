@@ -4,6 +4,7 @@ import * as preloader from '../preloader'
 // var d3_gauges = require('./d3_gauges');
 
 const shapeList = restUrls.shapeList
+const shapeLocation = restUrls.shapeLocation
 
 // make layer background
 const wmsUrlNC = 'http://carto.gouv.nc/arcgis/services/fond_imagerie/' +

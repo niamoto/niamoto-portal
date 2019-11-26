@@ -16,3 +16,8 @@ gunicorn
 django-heroku
 whitenoise
 dj-database-url
+#geoShape
+geojson
+shapely
+geopandas
+pyproj

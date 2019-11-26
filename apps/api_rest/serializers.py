@@ -85,7 +85,23 @@ class ShapeSerializer(gis_serializers.GeoFeatureModelSerializer):
         model = mdlShape.Shape
 
         geo_field = 'location'
-        fields = '__all__'
+        fields = ('label', 'location', 'elevation', 'land_area', 'um_area', 
+            'forest_area', 'forest_um_area', 'forest_perimeter', 'nb_patchs',
+            'nb_patchs_in', 'forest_in', 'r_in_median', 'nb_occurence',
+            'nb_families', 'nb_species', 'n_unique_species', 'frequencies')
+
+class ShapeLocationSerializer(gis_serializers.GeoFeatureModelSerializer):
+    """to output shape location
+
+    Arguments:
+        serializers {[type]} -- [description]
+    """
+
+    class Meta:
+        model = mdlShape.Shape
+
+        geo_field = 'location'
+        fields = ('label', 'location')
 
 
 class taxonFrequencySerializer(serializers.ModelSerializer):

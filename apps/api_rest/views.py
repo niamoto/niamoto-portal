@@ -7,6 +7,14 @@ from apps.data_taxon import models as mdlTaxon
 from rest_framework import viewsets
 from rest_framework.response import Response
 from . import serializers
+from shapely.geometry import Polygon, MultiPolygon, shape
+from shapely.ops import transform
+import pyproj
+from functools import partial
+import json
+import geojson
+from math import pi
+
 # Create your views here.
 
 
@@ -46,12 +54,52 @@ class ShapesViewSet(viewsets.ReadOnlyModelViewSet):
         serializer = serializers.ShapesSerializer(queryset, many=True)
         return Response(serializer.data)
 
+    @method_decorator(cache_page(60*60*24*300))
     def retrieve(self, request, pk=None):
         shape_queryset = mdlShape.Shape.objects.all()
         shape = get_object_or_404(shape_queryset, pk=pk)
+        shape.location = shape.location.simplify(0.002, preserve_topology=True)
         shape_data = serializers.ShapeSerializer(shape).data
 
         return Response(shape_data)
+
+
+class ShapeLocationViewSet(viewsets.ReadOnlyModelViewSet):
+    """a viewset to retrieve tuile shape
+
+    Arguments:
+        viewsets {[type]} -- [description]
+
+    Todo:
+        make box zoom
+    """
+    basename = 'shapeLocation'
+
+    @method_decorator(cache_page(60*60*24*300))
+    def list(self, request):
+        queryset = mdlShape.Shape.objects.all()
+        serializer = serializers.ShapesSerializer(queryset, many=True)
+        return Response(serializer.data)
+
+    @method_decorator(cache_page(60*60*24*300))
+    def retrieve(self, request, pk=None):
+        pixel = pixel_length(100)
+        shape_queryset = mdlShape.Shape.objects.all()
+        shape_result = get_object_or_404(shape_queryset, pk=pk)
+        shape_result.location = shape_result.location.simplify(
+            0.002, preserve_topology=True)
+        shape_data = serializers.ShapeLocationSerializer(shape_result).data
+
+    # polygon = Polygon(shape_data)
+
+        return Response(shape_data)
+
+
+def pixel_length(zoom):
+    RADIUS = 6378137
+    CIRCUM = 2 * pi * RADIUS
+    SIZE = 256
+    return CIRCUM / SIZE / 2 ** int(zoom)
 
 
 class taxonsViewSet(viewsets.ReadOnlyModelViewSet):
