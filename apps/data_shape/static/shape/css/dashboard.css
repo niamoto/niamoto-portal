@@ -18,6 +18,14 @@ body {
   stroke: #c79d1f;
 }
 
+.card .mapCaledonie {
+  padding: 0;
+}
+
+.card .mapCaledonie .graph {
+  height: 100%;
+}
+
 #left_panel {
   height: 780px;
 }
