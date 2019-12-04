@@ -37,11 +37,25 @@ $breakpoint in $grid-breakpoints {
     @media (min-width: $breakpoint) {
         .card-deck .card {
             flex: 0 0 calc(#{100/map-get($cards-per-line, $name)}% - #{$grid-gutter-width});
-            margin: 1em;
+            margin: .5em;
         }
     }
 }
 
+@mixin label {
+    font-size: .8em;
+}
+
 .legend .label {
-    font-family: Dejavu Sans;
+    @include label;
+}
+
+.label {
+    @include label;
+}
+
+.legend rect {
+    stroke: black;
+    stroke-width: 1;
+    stroke-opacity: .5;
 }

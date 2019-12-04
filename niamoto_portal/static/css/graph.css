@@ -1,0 +1,74 @@
+.graph {
+  width: 100%;
+  height: 80%;
+}
+
+.card {
+  height: 20em;
+  -webkit-box-shadow: none !important;
+  box-shadow: 4px 3px 5px grey !important;
+}
+
+.card-header {
+  background-color: #63A398;
+}
+
+@media (min-width: 0) {
+  .card-deck .card {
+    -webkit-box-flex: 0;
+        -ms-flex: 0 0 calc(100% - 2em);
+            flex: 0 0 calc(100% - 2em);
+    margin: .5em;
+  }
+}
+
+@media (min-width: 576px) {
+  .card-deck .card {
+    -webkit-box-flex: 0;
+        -ms-flex: 0 0 calc(100% - 2em);
+            flex: 0 0 calc(100% - 2em);
+    margin: .5em;
+  }
+}
+
+@media (min-width: 768px) {
+  .card-deck .card {
+    -webkit-box-flex: 0;
+        -ms-flex: 0 0 calc(100% - 2em);
+            flex: 0 0 calc(100% - 2em);
+    margin: .5em;
+  }
+}
+
+@media (min-width: 992px) {
+  .card-deck .card {
+    -webkit-box-flex: 0;
+        -ms-flex: 0 0 calc(50% - 2em);
+            flex: 0 0 calc(50% - 2em);
+    margin: .5em;
+  }
+}
+
+@media (min-width: 1200px) {
+  .card-deck .card {
+    -webkit-box-flex: 0;
+        -ms-flex: 0 0 calc(33.33333% - 2em);
+            flex: 0 0 calc(33.33333% - 2em);
+    margin: .5em;
+  }
+}
+
+.legend .label {
+  font-size: .8em;
+}
+
+.label {
+  font-size: .8em;
+}
+
+.legend rect {
+  stroke: black;
+  stroke-width: 1;
+  stroke-opacity: .5;
+}
+/*# sourceMappingURL=graph.css.map */

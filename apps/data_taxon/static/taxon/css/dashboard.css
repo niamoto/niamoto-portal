@@ -30,7 +30,7 @@ body {
     -webkit-box-flex: 0;
         -ms-flex: 0 0 calc(100% - 2em);
             flex: 0 0 calc(100% - 2em);
-    margin: 1em;
+    margin: .5em;
   }
 }
 
@@ -39,7 +39,7 @@ body {
     -webkit-box-flex: 0;
         -ms-flex: 0 0 calc(100% - 2em);
             flex: 0 0 calc(100% - 2em);
-    margin: 1em;
+    margin: .5em;
   }
 }
 
@@ -48,7 +48,7 @@ body {
     -webkit-box-flex: 0;
         -ms-flex: 0 0 calc(100% - 2em);
             flex: 0 0 calc(100% - 2em);
-    margin: 1em;
+    margin: .5em;
   }
 }
 
@@ -57,7 +57,7 @@ body {
     -webkit-box-flex: 0;
         -ms-flex: 0 0 calc(50% - 2em);
             flex: 0 0 calc(50% - 2em);
-    margin: 1em;
+    margin: .5em;
   }
 }
 
@@ -66,12 +66,22 @@ body {
     -webkit-box-flex: 0;
         -ms-flex: 0 0 calc(33.33333% - 2em);
             flex: 0 0 calc(33.33333% - 2em);
-    margin: 1em;
+    margin: .5em;
   }
 }
 
 .legend .label {
-  font-family: Dejavu Sans;
+  font-size: .8em;
+}
+
+.label {
+  font-size: .8em;
+}
+
+.legend rect {
+  stroke: black;
+  stroke-width: 1;
+  stroke-opacity: .5;
 }
 
 .land {

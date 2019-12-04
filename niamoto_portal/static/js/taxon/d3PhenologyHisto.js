@@ -26,7 +26,7 @@ export function initPhenologyHisto () {
     .attr('height', height)
   const svgLegend = d3.select('#phenologyHistoLegend').append('svg')
     .attr('width', width)
-    .attr('height', height * 0.25)
+    .attr('height', height * 0.3)
 
   const xDomain = month
   const yDomain = [0, 100]
@@ -63,8 +63,12 @@ export function initPhenologyHisto () {
     .attr('class', 'yAxis')
     .call(yAxis)
 
+  const svgLabel = svg.append('g')
+    .attr('class', 'label')
+
   // x axis label
   // svg.append('text')
+  //   .attr('class', 'xLabel')
   //   .attr('transform', 'translate(' +
   //     (width / 2) + ' ,' +
   //     (height) + ')')
@@ -72,7 +76,8 @@ export function initPhenologyHisto () {
   //   .text('Fruit/Fleur')
 
   // y axis label
-  svg.append('text')
+  svgLabel.append('text')
+    .attr('class', 'yLabel')
     .attr('transform', 'rotate(-90)')
     .attr('y', margin.left - 50)
     .attr('x', 0 - (height / 2))
@@ -92,6 +97,8 @@ export function initPhenologyHisto () {
   var legendColor = d3.legendColor()
     .shapePadding(5)
     .scale(colorScale)
+    .shapeWidth(10)
+    .shapeHeight(10)
 
   svgLegend.select('.legend')
     .call(legendColor)

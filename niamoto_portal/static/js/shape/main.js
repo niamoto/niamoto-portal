@@ -1,6 +1,7 @@
 import * as restUrls from '../restUrls'
 // import * as d3Gauges from './d3Gauges'
 import * as preloader from '../preloader'
+import * as d3GraphBarh from './d3GraphBarhs'
 // var d3_gauges = require('./d3_gauges');
 
 const shapeList = restUrls.shapeList
@@ -131,4 +132,5 @@ document.addEventListener('DOMContentLoaded', function () {
     preloader.hidePreloader()
   })
   buildShapeList()
+  d3GraphBarh.initGraphBarhs()
 })
