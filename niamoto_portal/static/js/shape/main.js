@@ -74,10 +74,10 @@ function buildShapeList () {
       for (const idx in shapes) {
         var option = document.createElement('option')
         // test change group
-        if (typeShape !== shapes[idx].typeShape) {
+        if (typeShape !== shapes[idx].type_shape) {
           // construct group
           optgrp = document.createElement('optgroup')
-          typeShape = shapes[idx].typeShape
+          typeShape = shapes[idx].type_shape
           optgrp.label = typeShape
           select.add(optgrp)
         }

@@ -9,7 +9,7 @@ class Shape(models.Model):
     """
 
     label = models.CharField(max_length=50, unique=True)
-    typeShape = models.CharField(max_length=50, null=True, blank=True)
+    type_shape = models.CharField(max_length=50, null=True, blank=True)
     location = models.MultiPolygonField(null=True, srid=4326, blank=True)
     elevation = models.FloatField(null=True, blank=True)
     land_area = models.FloatField(null=True, blank=True)
