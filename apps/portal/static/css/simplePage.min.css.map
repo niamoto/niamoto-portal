@@ -1,0 +1,10 @@
+{
+    "version": 3,
+    "mappings": "AAGA,AAAA,IAAI,AAAC,CACD,OAAO,CAAE,UAAU,CACtB,AAED,AAAA,UAAU,CAAC,GAAG,AAAC,CACX,KAAK,CAAE,IAAI,CACX,MAAM,CAAE,eAAe,CAC1B,AAGD,AAAA,IAAI,CAAC,GAAG,AAAC,CACL,KAAK,CAAE,KAAK,CACZ,MAAM,CAAE,eAAe,CAC1B",
+    "sources": [
+        "source/simplePage.scss",
+        "../../../../niamoto_portal/static/css/source/color.scss"
+    ],
+    "names": [],
+    "file": "simplePage.min.css"
+}

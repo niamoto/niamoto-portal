@@ -21,12 +21,16 @@
         </li>
 
         <li class="nav-item dropdown">
-          <a class="nav-link" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
-            aria-expanded="false">Méthodes</a>
+          <a class="nav-link" href="{% url 'methodologie' %}" id="navbarDropdownMenuLink" aria-haspopup="true"
+            aria-expanded="false">Méthodologie</a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <li><a class="dropdown-item" href="">Généralités</a></li>
-            <li><a class="dropdown-item" href="">Partie1</a></li>
-            <li><a class="dropdown-item" href="">Partie2</a></li>
+            <li><a class="dropdown-item" href="{% url 'methodologie' %}#NC-PIPPN">Réseau NC-PIPPN</a></li>
+            <li><a class="dropdown-item" href="{% url 'methodologie' %}#plot">Parcelle</a></li>
+            <li><a class="dropdown-item" href="{% url 'methodologie' %}#holdridge">Holdridge</a></li>
+            <li><a class="dropdown-item" href="{% url 'methodologie' %}#env">Enveloppe Environnementale</a></li>
+            <li><a class="dropdown-item" href="{% url 'methodologie' %}#sdm">SDM</a></li>
+            <li><a class="dropdown-item" href="{% url 'methodologie' %}#ssdm">S-SDM</a></li>
+            <li><a class="dropdown-item" href="{% url 'methodologie' %}#richess">Richesse</a></li>
           </ul>
         </li>
 
