@@ -7,6 +7,8 @@
 
 <link rel="stylesheet"
   href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.1.1/css/ol.css"
+  type="text/css">
 
 <link rel="stylesheet" type="text/css" href="{% static 'plot/css/dashboard.min.css' %}" />
 {% endblock styles %}
@@ -20,15 +22,15 @@
 {% block body %}
 
 <img id="preloader" src="{% static 'img/preloader.svg' %}">
-
-<div class="row">
-  <div class="col-sm-3 px-2">
-    <select class="col-sm-12" id="plot_select"></select></div>
+<div class="d-line-flex p-2">
   <div class="col-sm-3">
     <button type="button" class="btn btn-lg"><a href="{% url 'plot:presentation' %}">
-        <span class="fas fa-search" aria-hidden="true"></span> En savoir plus </div>
+        <span class="fas fa-search" aria-hidden="true"></span> En savoir plus
+  </div>
   </a></bouton>
-</div>
+  <div class="col-sm-3 px-2">
+    <select class="col-sm-12" id="plot_select"></select>
+  </div>
 </div>
 
 
@@ -40,7 +42,7 @@
   <div id="{{graph.name}}" class="w-25 p-3">
     <div class="card">
       <div class="card-header">{{graph.title|capfirst}}</div>
-      <div class="card-body">
+      <div class="card-body {{graph.model}}">
         <div id="{{graph.model}}" class="d3_panel graph"></div>
         <div id="{{graph.model}}Legend" class="d3_panel"></div>
       </div>
@@ -64,6 +66,7 @@
 
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.1.1/build/ol.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.9.7/d3.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.25.6/d3-legend.min.js"></script>
 

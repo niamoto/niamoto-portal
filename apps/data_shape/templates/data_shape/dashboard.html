@@ -17,20 +17,25 @@
 {% block page_header %}
 <div class="container display-4">
   Tableaux de bord des analyses
-  {% endblock page_header %}
-
-  {% block body %}
-
-  <img id="preloader" src="{% static 'img/preloader.svg' %}">
-  <div class="row">
-    <div class="col-sm-3 px-1">
-      <select class="col-sm-12" id="shape_select"></select></div>
-    <div class="col-sm-3">
-      <button type="button" class="btn btn-light btn-lg"><a href="{% url 'shape:presentation' %}">
-          <span class="fa fa-search" aria-hidden="true"></span> En savoir plus </div>
-    </a></bouton>
-  </div>
 </div>
+{% endblock page_header %}
+
+{% block body %}
+
+<img id="preloader" src="{% static 'img/preloader.svg' %}">
+<div class="d-line-flex p-2">
+
+  <div class="col-sm-3">
+    <button type="button" class="btn btn-lg"><a href="{% url 'shape:presentation' %}">
+        <span class="fa fa-search" aria-hidden="true"></span> En savoir plus
+  </div>
+  </a></bouton>
+  <div class="col-sm-3 px-2">
+    <select class="col-sm-12" id="shape_select"></select>
+  </div>
+
+</div>
+
 
 
 <div class="card-deck p-4">
