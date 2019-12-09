@@ -32,7 +32,7 @@ export function initGauges (data) {
   // Basal area
   var basalArea = Math.max(...Array
     .from(data
-      .map(e => e.basal_area)
+      .map(e => e.properties.basal_area)
       .values()))
   basalAreaMax = initMax(basalArea, basalAreaMax)
 
@@ -46,7 +46,7 @@ export function initGauges (data) {
   // H mean
   var hMean = Math.max(...Array
     .from(data
-      .map(e => e.h_mean)
+      .map(e => e.properties.h_mean)
       .values()))
   hMeanMax = initMax(hMean, hMeanMax)
 
@@ -57,7 +57,7 @@ export function initGauges (data) {
   // shannon
   var shannon = Math.max(...Array
     .from(data
-      .map(e => e.shannon)
+      .map(e => e.properties.shannon)
       .values()))
   shannonMax = initMax(shannon, shannonMax)
 
@@ -68,7 +68,7 @@ export function initGauges (data) {
   // pielou
   var pielou = Math.max(...Array
     .from(data
-      .map(e => e.pielou)
+      .map(e => e.properties.pielou)
       .values()))
   pielouMax = initMax(pielou, pielouMax)
 
@@ -79,7 +79,7 @@ export function initGauges (data) {
   // simpson
   var simpson = Math.max(...Array
     .from(data
-      .map(e => e.simpson)
+      .map(e => e.properties.simpson)
       .values()))
   simpsonMax = initMax(simpson, simpsonMax)
 
@@ -90,7 +90,7 @@ export function initGauges (data) {
   // woodDensity
   var woodDensity = Math.max(...Array
     .from(data
-      .map(e => e.wood_density)
+      .map(e => e.properties.wood_density)
       .values()))
   woodDensityMax = initMax(woodDensity, woodDensityMax)
 
@@ -101,7 +101,7 @@ export function initGauges (data) {
   // biomasse
   var biomasse = Math.max(...Array
     .from(data
-      .map(e => e.biomasse)
+      .map(e => e.properties.biomasse)
       .values()))
   biomasseMax = initMax(biomasse, biomasseMax)
 
@@ -112,7 +112,7 @@ export function initGauges (data) {
   // richess
   var richess = Math.max(...Array
     .from(data
-      .map(e => e.count_species)
+      .map(e => e.properties.count_species)
       .values()))
   richessMax = initMax(richess, richessMax)
 
@@ -123,7 +123,7 @@ export function initGauges (data) {
   // speciesLevel
   // var speciesLevel = Math.max(...Array
   //   .from(data
-  //     .map(e => e.speciesLevel)
+  //     .map(e => e.properties.speciesLevel)
   //     .values()))
   // speciesLevelMax = initMax(speciesLevel, speciesLevelMax)
 

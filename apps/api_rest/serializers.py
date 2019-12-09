@@ -18,7 +18,7 @@ class PlotFrequencySerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class PlotsSerializer(serializers.ModelSerializer):
+class PlotsSerializer(gis_serializers.GeoFeatureModelSerializer):
     """to output all the plots
 
     Arguments:
@@ -28,9 +28,10 @@ class PlotsSerializer(serializers.ModelSerializer):
     class Meta:
         model = mdlPlot.Plot
 
+        geo_field = 'location'
         fields = ('id', 'label', 'shannon', 'pielou', 'simpson', 'basal_area',
                   'h_mean', 'wood_density', 'biomasse', 'count_species',
-                  'species_level')
+                  'species_level','location')
 
 
 class PlotSerializer(gis_serializers.GeoFeatureModelSerializer):

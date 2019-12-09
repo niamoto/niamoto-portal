@@ -5,6 +5,13 @@ body {
   padding: 50px 0 0 0;
 }
 
+.card .mapCaledonie {
+  padding: 0;
+}
+
+.card .mapCaledonie .graph {
+  height: 100%;
+}
 
 @import "../../../../../../niamoto_portal/static/css/source/graph";
 @import "../../../../../../niamoto_portal/static/css/source/gauge";
