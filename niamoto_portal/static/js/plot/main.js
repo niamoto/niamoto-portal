@@ -5,6 +5,19 @@ import * as preloader from '../preloader'
 
 var plotList = restUrls.plotList
 
+var highlightStyle = new ol.style.Style({
+  image: new ol.style.Circle({
+    radius: 5,
+    fill: new ol.style.Fill({
+      color: 'rgba(255,90,90,0.7)'
+    }),
+    stroke: new ol.style.Stroke({
+      color: 'rgba(255,50,50,1)',
+      width: 2
+    })
+  })
+})
+
 const wmsUrlNC = 'http://carto.gouv.nc/arcgis/services/fond_imagerie/' +
   'MapServer/WMSServer'
 const layerBackground = new ol.layer.Tile({
@@ -37,13 +50,90 @@ const view = new ol.View({
   zoom: 6
 })
 
+var CenterControl = /* @__PURE__ */ (function (Control) {
+  function CenterControl (optOptions) {
+    var options = optOptions || {}
+
+    var button = document.createElement('button')
+    button.innerHTML = '<i class="fas fa-compress-arrows-alt"></i>'
+
+    var element = document.createElement('div')
+    element.className = 'center ol-unselectable ol-control'
+    element.appendChild(button)
+
+    ol.control.Control.call(this, {
+      element: element,
+      target: options.target
+    })
+
+    button.addEventListener('click', this.handleCenter.bind(this), false)
+  }
+
+  if (ol.control.Control) CenterControl.__proto__ = ol.control.Control
+  CenterControl.prototype = Object.create(ol.control.Control && ol.control.Control.prototype)
+  CenterControl.prototype.constructor = CenterControl
+
+  CenterControl.prototype.handleCenter = function handleCenter () {
+    this.getMap().setView(new ol.View({
+      projection: 'EPSG:4326',
+      center: new ol.proj.transform([165.875, -21.145],
+        'EPSG:4326',
+        'EPSG:4326'),
+      zoom: 6
+    }))
+  }
+
+  return CenterControl
+}(ol.control.Control))
+
+// const interaction = ol.interaction.defaults().extend([
+//   new ol.interaction.Select({
+//     style: new ol.style.Style({
+//       image: new ol.style.Circle({
+//         radius: 5,
+//         fill: new ol.style.Fill({
+//           color: 'rgba(255,90,90,0.7)'
+//         }),
+//         stroke: new ol.style.Stroke({
+//           color: 'rgba(255,50,50,1)',
+//           width: 2
+//         })
+//       })
+//     })
+//   })
+// ])
+
 // make map
 const map = new ol.Map({
   target: 'mapCaledonie',
-  view: view
+  view: view,
+  controls: ol.control.defaults().extend([
+    new CenterControl()
+  ])
+  // interactions: interaction
 })
+
 map.addLayer(layerBackground)
 map.addLayer(layerShape)
+
+var selected = null
+
+map.on('pointermove', function (e) {
+  if (selected !== null) {
+    selected.setStyle(undefined)
+    selected = null
+  }
+
+  map.forEachFeatureAtPixel(e.pixel, function (f) {
+    selected = f
+    f.setStyle(highlightStyle)
+    return true
+  })
+
+  if (selected) {
+    $('#plot_select').selectpicker('val', selected.id_)
+  }
+})
 
 function buildPlotList () {
   var plots = {}
