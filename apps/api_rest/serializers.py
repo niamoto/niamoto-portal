@@ -58,7 +58,7 @@ class ShapeFrequencySerializer(serializers.ModelSerializer):
     class Meta:
         model = mdlShape.Frequency
 
-        fields = '__all__'
+        fields = ('class_object', 'class_name', 'class_value', 'shape_id')
 
 
 class ShapesSerializer(serializers.ModelSerializer):
