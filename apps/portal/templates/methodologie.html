@@ -3,15 +3,149 @@
 
 {% block styles %}
 {{block.super}}
-<!-- <link rel="stylesheet" type="text/css" href="{% static '/css/simplePage.min.css' %}" /> -->
+<link rel="stylesheet" type="text/css" href="{% static 'taxon/css/dashboard.min.css' %}" />
 {% endblock %}
 {% block page_header %}
 <div class="container p-2 display-4">
-  Méthodologie
+  Presentation des arbres
 </div>
 {% endblock page_header%}
 {% block body %}
-test
+<section id="NC-PIPPN">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 mx-auto">
+        <h4>Réseau NC-PIPN</h4>
+        <p class="text-justify">Le réseau NC-PIPPN pour 'New Caledonian Plant Inventories and Permanent Plot Network' a
+          été crée en
+          2005 par l'IRD de Nouvelle-Calédonie. Initialement construit sur un jeux de parcelle d'une
+          superficie de 400 m² (soit 20 x 20 m), il combine aujourd'hui les inventaires de forme et de taille
+          variées réalisés par l'UMR-AMAP dans les forêts de la Nouvelle-Calédonie, pour le moment
+          exclusivement sur la Grande-Terre. Ce réseau compte aujourd'hui 503 parcelles et près de 70 000
+          arbres étiquettés.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="plot">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 mx-auto">
+        <h4>Parcelle</h4>
+        <p class="text-justify">Les parcelles représentent des dispositifs expérimentaux standardisés mis en place pour
+          étudier les
+          forêts. De formes variables, les parcelles respectent une superficie et une catégrorie d'organismes.
+          Dans le projet Cogefor, les parcelles mises en place respectent les standards internationaux de
+          l'étude des forêts et des arbres. Elles sont carrés et couvrent une superficie de 1 hectare (100 m x
+          100 m). Dans ce carré, toutes les plantes arborescentes (arbres, lianes, palmiers et fougères) qui
+          ont un diamètre de 10 cm à une hauteur standard de 1,3 (DBH130) depuis le sol sont prises en compte.
+          Chacune de ces plantes est alors étiquettée d'un numéro unique, identifiée au niveau de l'espèce,
+          mesurée en diamètre, positionnée dans le plan vertical (strates) et horizontal (coordonnée X et Y)
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="holdridge">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 mx-auto">
+        <h4>Holdridge</h4>
+        <img src="../static/img/LeslieHoldridge.jpg" class="rounded" alt="Leslie Holdridge">
+
+        <p class="text-justify">La classification des milieux de vie dite de Holdrige a été crée en 1947 par le
+          botaniste anglais
+          Leslie Ransselaer Holdridge. classification internationale repose sur un ensemble de variables
+          climatiques qui définissent l'ambiance bioclimatique d'une région ou d'un paysage, notamment la
+          pluviométrie, la température et l'évapotranspiration potentielle. Cette classification
+          internationale est largement utilisée pour identifier les milieux dans lesquels évoluent les
+          organismes et les habitats.</p>
+
+        <p class="text-justify">
+          En Nouvelle-Calédonie, la classification de Holdrige basée sur les données climatiques mondiales
+          (WorldClim) et la pluviométrie locale (Modèle Aurelhy, météo France) conduit à définir 5 grandes
+          classes de milieux de vie dans le biome tropical de la Nouvelle-Calédonie (very dry, dry, moist, wet
+          and rain). La combinaison avec la couverture forestière aboutit à définir arbitrairement 5 classes
+          de forêt (forêt très sèche, forêt sèche, forêt humide, forêt très humide et forêt toujours humide).
+          Les forêts de la province Nord sont majoritairement distribuées dans les milieux humide et très
+          humides tandis que les milieux de vie extrêmes (toujours humide et très sec) sont rares.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="env">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 mx-auto">
+        <h4>Enveloppe envionnementale</h4>
+        <img src="../static/img/envEnviron.png" class="img-thumbnail" alt="Enveloppement environnementale">
+        <p class="text-justify">L'enveloppe environnementale est une représentation à plat d'une distribution composée
+          de trois
+          paramètres que sont la pluviométrie, l'altitude et la proportion d'habitat (ou d'occurence)
+          disponible. Basée sur une représentation en graphe de chaleur, cette classification permet
+          d'identifier l'enveloppe dans laquelle se distribue les forêts de la Nouvelle-Calédonie et
+          spécifiquement celles de la province Nord. Cette représentation permet notamment de constater que
+          les habitats de la province Nord sont principalement distribués à basses altitudes et pluviométries
+          tandis que les occurrences sont à l'inverse davantage distribuées à haute pluviométrie & altitude.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="sdm">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 mx-auto">
+        <h4>SDM</h4>
+        <p class="text-justify">"Les SDM (Species Distribution Models) représentent une projection spatiale des
+          relations
+          plante-environnement. Concrètement ce modèle est construit à partir des occurences de l'espèce pour
+          lesquelles on connait les variables environnementales (e.g. pluviométrie, température, pente,
+          substrat, perturbations,...). La somme de ces variables permet de définir une enveloppe
+          environnementale dans laquelle l'espèce est suceptible de se développer (i.e. en anglais = Habitat
+          suitability). La projection géographique de cette enveloppe offre alors une vision cartographique
+          des secteurs dans laquelle l'espèce a une forte probabilité de trouver les conditions idoines pour
+          se développer.</p>
+        <p class="text-justify"> trop souvent les SDM sont associés à des cartes de distribution potentielle, ce qui
+          constitue un raccourci inexact.Ce n'est pas parce que le modèle prédit que l'habitat est favorable
+          que l'espèce est réellement présente. D'autres paramètres influencent la présence des espèces dont
+          la dispersion qui peut permettre ou non à l'espèce de coloniser les milieux favorables."</p>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="ssdm">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 mx-auto">
+        <h4>S-SDM</h4>
+        <p class="text-justify">Les S-SDM (Stacked Species Distribution Models) représentent la compilation des SDM pour
+          une liste
+          d'espèce sur une superficie. En d'autres termes et avec la même prudence que dans le cas des SDM,
+          ils représentent la somme des probabilités de chacune des espèces. Ils permettent par exemple de
+          prédire la richesse potentielle d'un hectare de forêt en chaque point d'un territoire en se basant
+          sur la distribution connue des espèces.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="richess">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 mx-auto">
+        <h4>Richesse</h4>
+        <p class="text-justify">La richesse (ou diversité alpha) est une variable fréquemment utilisée pour évaluer et
+          comparer la
+          diversité des communautés d'arbres. Elle représente par exemple le nombre d'espèces d'arbres que
+          l'on rencontre sur une parcelle. La richesse évolue avec l'environnement. Si elle atteint des
+          valeurs maximales de 120 espèces à l'hectare à moyenne altitude (400-600m), elle décroit
+          significativement aux deux extrêmes du domaine altitudinale pour atteindre seulement 30-40
+          espèces/hectare à 100m ou à 1000m d'altitude.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
 
 
