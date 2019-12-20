@@ -57,15 +57,16 @@ class Graph(models.Model):
     model reference to lib 3d
     """
     GRAPH_SIZES = (
-        ('sm', 'Small'),
-        ('md', 'Medium'),
-        ('lg', 'Large'),
+        ('25', 'Small'),
+        ('50', 'Medium'),
+        ('75', 'Large'),
+        ('100', 'XLarge')
     )
     label = models.CharField(max_length=30)
     title = models.CharField(max_length=30)
     model = models.CharField(max_length=30)
     sort = models.IntegerField()
-    height = models.CharField(max_length=2, choices=GRAPH_SIZES, default='md')
+    height = models.CharField(max_length=3, choices=GRAPH_SIZES, default='25')
     show = models.BooleanField(default=True)
     profil = models.CharField(max_length=30, default='default')
 

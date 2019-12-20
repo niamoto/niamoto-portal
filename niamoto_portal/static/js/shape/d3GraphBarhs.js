@@ -1,7 +1,7 @@
 import * as d3GraphBarh from '../d3GraphBarh'
 
-export function initGraphBarhs (data) {
-  function initMax (maxValue, initMaxValue) {
+export function initGraphBarhs(data) {
+  function initMax(maxValue, initMaxValue) {
     if (maxValue === 0) {
       return initMaxValue
     } else {
@@ -9,7 +9,7 @@ export function initGraphBarhs (data) {
     }
   }
 
-  function initGraphBarh (id, xLabel, yLabel, value, legend) {
+  function initGraphBarh(id, xLabel, yLabel, value, legend) {
     return new d3GraphBarh.GraphBarh({
       width: $(id).width(),
       height: $(id).height(),
@@ -47,8 +47,8 @@ export function initGraphBarhs (data) {
     updateData(data.properties.frequencies)
   })
 
-  function updateData (data) {
-    function dataFilter (data, field, precision = 0) {
+  function updateData(data) {
+    function dataFilter(data, field, precision = 0) {
       const result = data
         .filter(d => d.class_object === field)
       // .map(d => {
@@ -58,7 +58,7 @@ export function initGraphBarhs (data) {
       return result
     }
 
-    function classFilter (data, field) {
+    function classFilter(data, field) {
       const result = data
         .filter(d => d.class_object === field)
         .map(d => d.class_name)
