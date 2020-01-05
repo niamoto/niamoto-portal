@@ -20,4 +20,4 @@ class PageTestCase(TestCase):
 
         def test_methodologie_page(self):
             response = self.client.get(reverse('methodologie'))
-        self.assertEqual(response.status_code, 200)
+            self.assertEqual(response.status_code, 200)
