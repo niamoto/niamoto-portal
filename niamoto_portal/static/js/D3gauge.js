@@ -24,6 +24,7 @@ export class Gauge {
       container: '',
       transitionMs: 500
     }
+  }
 
     this.config = Object.assign(config, configuration)
 
