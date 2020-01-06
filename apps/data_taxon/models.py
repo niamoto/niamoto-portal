@@ -46,7 +46,7 @@ class Frequency(models.Model):
 
     def __str__(self):
         """Unicode representation of Frequency."""
-        return self.class_name
+        return str(self.taxon) + ' ' + self.class_name
 
 
 class Graph(models.Model):
@@ -100,4 +100,4 @@ class Phenology(models.Model):
     year = models.IntegerField(null=True, blank=True)
 
     def __str__(self):
-        return self.taxon + ' ' + self.phenology
+        return str(self.taxon) + ' ' + self.phenology
