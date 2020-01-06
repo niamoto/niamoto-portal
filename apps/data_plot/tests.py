@@ -17,7 +17,7 @@ class GraphTestCase(TestCase):
 
     def setUp(self):
         Graph.objects.create(label='graph1', title='titre',
-                             model='model', height='md', sort=1)
+                             model='model', height='25', sort=1)
 
     def test_graph_get_name(self):
         graph1 = Graph.objects.get(label='graph1')

@@ -60,7 +60,7 @@ class Graph(models.Model):
         ('25', 'Small'),
         ('50', 'Medium'),
         ('75', 'Large'),
-        ('100', 'XLarge')
+        ('100', 'XLarge'),
     )
     label = models.CharField(max_length=30)
     title = models.CharField(max_length=30)
