@@ -28,7 +28,7 @@ class Shape(models.Model):
     um_geom = models.MultiPolygonField(null=True, srid=4326, blank=True)
 
     def __str__(self):
-        return self.name
+        return self.label
 
 
 class Frequency(models.Model):
@@ -46,7 +46,7 @@ class Frequency(models.Model):
 
     def __str__(self):
         """Unicode representation of Frequency."""
-        return self.class_name
+        return str(self.shape) + ' ' + self.class_name
 
 
 class Graph(models.Model):
