@@ -31,7 +31,7 @@ class Plot(models.Model):
     biomasse = models.FloatField(null=True, blank=True)
 
     def __str__(self):
-        return self.name
+        return self.label
 
 
 class Frequency(models.Model):
@@ -49,7 +49,7 @@ class Frequency(models.Model):
 
     def __str__(self):
         """Unicode representation of Frequency."""
-        return self.class_name
+        return str(self.plot.label) + ' ' + self.class_name
 
 
 class Graph(models.Model):

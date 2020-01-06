@@ -3,7 +3,7 @@ from django.test import TestCase
 
 # Create your tests here.
 from django.urls import reverse
-from .models import Graph
+from .models import Graph, Plot, Frequency
 
 
 class PageTestCase(TestCase):
@@ -22,3 +22,26 @@ class GraphTestCase(TestCase):
     def test_graph_get_name(self):
         graph1 = Graph.objects.get(label='graph1')
         self.assertEqual(str(graph1), 'graph1')
+
+
+class PlotTestCase(TestCase):
+
+    def setUp(self):
+        Plot.objects.create(label='plot1')
+
+    def test_plot_get_name(self):
+        plot1 = Plot.objects.get(label='plot1')
+        self.assertEqual(str(plot1), 'plot1')
+
+
+class FrequencyTestCase(TestCase):
+
+    def setUp(self):
+        Plot.objects.create(label='plot1')
+        plot1 = Plot.objects.get(label='plot1')
+        Frequency.objects.create(plot=plot1, class_object='frequency1',
+                                 class_name='100', class_value=50.0)
+
+    def test_frequency_get_name(self):
+        frequency1 = Frequency.objects.get(class_object='frequency1')
+        self.assertEqual(str(frequency1), 'plot1 100')
