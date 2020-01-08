@@ -2,7 +2,7 @@ import * as restUrls from '../restUrls'
 // import * as d3Gauges from './d3Gauges'
 import * as preloader from '../preloader'
 import * as d3GraphBarh from './d3GraphBarhs'
-import * as radarChart from '../radarChart'
+import * as d3radarChart from './radarCharts'
 import * as d3 from 'd3'
 // var d3_gauges = require('./d3_gauges');
 
@@ -135,50 +135,5 @@ document.addEventListener('DOMContentLoaded', function () {
   })
   buildShapeList()
   d3GraphBarh.initGraphBarhs()
-
-  // d3.select(self.frameElement).style('height', '900px')
-
-  var w = 150
-  var h = 150
-
-  var colorscale = d3.scaleOrdinal(d3.schemeCategory10)
-
-  // Legend titles
-  var LegendOptions = ['Smartphone', 'Tablet']
-
-  // Data
-  var d = [
-    [{
-        axis: 'Très sec',
-        value: 0.8
-      },
-      {
-        axis: 'Toujours humide',
-        value: 0.2
-      },
-      {
-        axis: 'Très Humide',
-        value: 0
-      },
-      {
-        axis: 'Humide',
-        value: 0
-      },
-      {
-        axis: 'Sec',
-        value: 0
-      }
-    ]
-  ]
-
-  // Options for the Radar chart, other than default
-  var mycfg = {
-    w: w,
-    h: h,
-    maxValue: 1,
-    levels: 5,
-    ExtraWidthX: 300
-  }
-
-  radarChart.RadarChart.draw('#holdridge', d, mycfg)
+  d3radarChart.initRadarChart()
 })

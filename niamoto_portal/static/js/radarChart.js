@@ -81,9 +81,9 @@ export var RadarChart = {
           return levelFactor * (1 - cfg.factor * Math.cos((i + 1) * cfg.radians / total))
         })
         .attr('class', 'line')
-        .style('stroke', 'grey')
-        .style('stroke-opacity', '0.75')
-        .style('stroke-width', '0.3px')
+        // .style('stroke', 'grey')
+        // .style('stroke-opacity', '0.75')
+        // .style('stroke-width', '0.3px')
         .attr('transform', 'translate(' + (cfg.w / 2 - levelFactor) + ', ' + (cfg.h / 2 - levelFactor) + ')')
     }
 
@@ -95,14 +95,14 @@ export var RadarChart = {
         .enter()
         .append('svg:text')
         .attr('x', function (d) {
-          return levelFactor * (1 - cfg.factor * Math.sin(0))
+          return levelFactor * (1 - cfg.factor * Math.sin(0)) + 10
         })
         .attr('y', function (d) {
-          return levelFactor * (1 - cfg.factor * Math.cos(0))
+          return levelFactor * (1 - cfg.factor * Math.cos(0)) + 5
         })
         .attr('class', 'legend')
-        .style('font-family', 'sans-serif')
-        .style('font-size', '10px')
+        // .style('font-family', 'sans-serif')
+        // .style('font-size', '10px')
         .attr('transform', 'translate(' + (cfg.w / 2 - levelFactor + cfg.ToRight) + ', ' + (cfg.h / 2 - levelFactor) + ')')
         .attr('fill', '#737373')
         .text(d3.format(cfg.formatLevel)((j + 1) * cfg.maxValue / cfg.levels))
@@ -131,18 +131,14 @@ export var RadarChart = {
 
     axis.append('text')
       .attr('class', 'legend')
-      .text(function (d) {
-        return d
-      })
-      .style('font-family', 'sans-serif')
-      .style('font-size', '11px')
+      .text(d => d)
+      // .style('font-family', 'sans-serif')
+      // .style('font-size', '11px')
       .attr('text-anchor', 'middle')
       .attr('dy', '1.5em')
-      .attr('transform', function (d, i) {
-        return 'translate(0, -10)'
-      })
+      .attr('transform', d => 'translate(0, -10)')
       .attr('x', function (d, i) {
-        return cfg.w / 2 * (1 - cfg.factorLegend * Math.sin(i * cfg.radians / total)) - 60 * Math.sin(i * cfg.radians / total)
+        return cfg.w / 2 * (1 + cfg.factorLegend * Math.sin(i * cfg.radians / total)) + 60 * Math.sin(i * cfg.radians / total)
       })
       .attr('y', function (d, i) {
         return cfg.h / 2 * (1 - Math.cos(i * cfg.radians / total)) - 20 * Math.cos(i * cfg.radians / total)
@@ -199,9 +195,7 @@ export var RadarChart = {
         .append('svg:circle')
         .attr('class', 'radar-chart-serie' + series)
         .attr('r', cfg.radius)
-        .attr('alt', function (j) {
-          return Math.max(j.value, 0)
-        })
+        .attr('alt', j => Math.max(j.value, 0))
         .attr('cx', function (j, i) {
           dataValues.push([
             cfg.w / 2 * (1 - (parseFloat(Math.max(j.value, 0)) / cfg.maxValue) * cfg.factor * Math.sin(i * cfg.radians / total)),
@@ -212,9 +206,7 @@ export var RadarChart = {
         .attr('cy', function (j, i) {
           return cfg.h / 2 * (1 - (Math.max(j.value, 0) / cfg.maxValue) * cfg.factor * Math.cos(i * cfg.radians / total))
         })
-        .attr('data-id', function (j) {
-          return j.axis
-        })
+        .attr('data-id', j => j.axis)
         .style('fill', cfg.color(series)).style('fill-opacity', 0.9)
         .on('mouseover', function (d) {
           const newX = parseFloat(d3.select(this).attr('cx')) - 10
@@ -223,7 +215,7 @@ export var RadarChart = {
           tooltip
             .attr('x', newX)
             .attr('y', newY)
-            .text(Format(d.value))
+            .text(d3.format('.0%')(d.value))
             .transition(200)
             .style('opacity', 1)
 
@@ -244,9 +236,7 @@ export var RadarChart = {
             .style('fill-opacity', cfg.opacityArea)
         })
         .append('svg:title')
-        .text(function (j) {
-          return Math.max(j.value, 0)
-        })
+        .text(j => Math.max(j.value, 0))
 
       series++
     })
@@ -254,6 +244,6 @@ export var RadarChart = {
     tooltip = g.append('text')
       .style('opacity', 0)
       .style('font-family', 'sans-serif')
-      .style('font-size', '13px')
+      .style('font-size', '12px')
   }
 }

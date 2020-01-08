@@ -1,102 +1,88 @@
 import * as radarChart from '../radarChart'
 
-var w = 500
-var h = 500
+const w = 210
+const h = 210
 
-var colorscale = d3.scaleOrdinal(d3.schemeCategory10)
-
-// Legend titles
-var LegendOptions = ['Smartphone', 'Tablet']
-
-// Data
-var d = [
-  [{
-    axis: 'Email',
-    value: 0.59
-  },
-  {
-    axis: 'Social Networks',
-    value: 0.56
-  },
-  {
-    axis: 'Internet Banking',
-    value: 0.42
-  },
-  {
-    axis: 'News Sportsites',
-    value: 0.34
-  },
-  {
-    axis: 'Search Engine',
-    value: 0.48
-  }
-  ]
-]
-
-// Options for the Radar chart, other than default
-var mycfg = {
-  w: w,
-  h: h,
-  maxValue: 1,
-  levels: 5,
-  ExtraWidthX: 300
+function dataFilter(data, field, precision = 0) {
+  const result = data
+    .filter(d => d.class_object === field)
+  // .map(d => {
+  //   class_name: d.class_name,
+  //   class_value: parseFloat(d.class_value.toFixed(precision))
+  // })
+  return result
 }
 
-// Call function to draw the Radar chart
-// Will expect that data is in %'s
-radarChart.RadarChart.draw('#chart', d, mycfg)
+function classFilter(data, field) {
+  const result = data
+    .filter(d => d.class_object === field)
+    .map(d => d.class_name)
+  return result
+}
 
-/// /////////////////////////////////////////
-/// //////// Initiate legend ////////////////
-/// /////////////////////////////////////////
+export function initRadarChart() {
+  // Data
+  const d = [
+    [{
+        axis: 'Très sec',
+        value: 0
+      },
+      {
+        axis: 'Sec',
+        value: 0
+      },
+      {
+        axis: 'Humide',
+        value: 0
+      },
+      {
+        axis: 'Très humide',
+        value: 0
+      },
+      {
+        axis: 'Toujours humide',
+        value: 0
+      }
+    ]
+  ]
 
-var svg = d3.select('#body')
-  .selectAll('svg')
-  .append('svg')
-  .attr('width', w + 300)
-  .attr('height', h)
+  // Options for the Radar chart, other than default
+  const mycfg = {
+    w: w,
+    h: h,
+    maxValue: 1,
+    levels: 5,
+    ExtraWidthX: 150,
+    ExtraWidthY: 150,
+    factorLegend: 0.85
+  }
+  radarChart.RadarChart.draw('#holdridge', d, mycfg)
+}
 
-// Create the title for the legend
-var text = svg.append('text')
-  .attr('class', 'title')
-  .attr('transform', 'translate(90,0)')
-  .attr('x', w - 70)
-  .attr('y', 10)
-  .attr('font-size', '12px')
-  .attr('fill', '#404040')
-  .text('What % of owners use a specific service in a week')
+// Update Data for trigger
+$('#shape_select').on('shapeSelected', function (event, data) {
+  updateData(data.properties.frequencies)
+})
 
-// Initiate Legend
-var legend = svg.append('g')
-  .attr('class', 'legend')
-  .attr('height', 100)
-  .attr('width', 200)
-  .attr('transform', 'translate(90,20)')
-// Create colour squares
-legend.selectAll('rect')
-  .data(LegendOptions)
-  .enter()
-  .append('rect')
-  .attr('x', w - 65)
-  .attr('y', function (d, i) {
-    return i * 20
-  })
-  .attr('width', 10)
-  .attr('height', 10)
-  .style('fill', function (d, i) {
-    return colorscale(i)
-  })
-// Create text next to squares
-legend.selectAll('text')
-  .data(LegendOptions)
-  .enter()
-  .append('text')
-  .attr('x', w - 52)
-  .attr('y', function (d, i) {
-    return i * 20 + 9
-  })
-  .attr('font-size', '11px')
-  .attr('fill', '#737373')
-  .text(function (d) {
-    return d
-  })
+function updateData(data) {
+  data = dataFilter(data, 'Holdridge')
+  const holdridgeData = [data.map(function (d) {
+    var result = {
+      axis: d.class_name,
+      value: d.class_value
+    }
+    return result
+  })]
+
+  // Options for the Radar chart, other than default
+  const mycfg = {
+    w: w,
+    h: h,
+    maxValue: 1,
+    levels: 5,
+    ExtraWidthX: 150,
+    ExtraWidthY: 150,
+    factorLegend: 0.85
+  }
+  radarChart.RadarChart.draw('#holdridge', holdridgeData, mycfg)
+}

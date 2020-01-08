@@ -180,4 +180,14 @@ path.slice {
 .number-value {
   font-size: 1.1em;
 }
+
+#holdridge .legend {
+  font-size: .7em;
+}
+
+#holdridge .line {
+  stroke: green;
+  stroke-opacity: '0.75';
+  stroke-width: 0.3px;
+}
 /*# sourceMappingURL=dashboard.css.map */
