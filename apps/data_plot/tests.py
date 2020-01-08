@@ -5,6 +5,16 @@ from django.test import TestCase
 from django.urls import reverse
 from .models import Graph, Plot, Frequency
 
+from django.apps import apps
+from apps.data_plot.apps import DataPlotConfig
+
+
+class DataPlotConfigTest(TestCase):
+    def test_apps(self):
+        self.assertEqual(DataPlotConfig.name, 'data_plot')
+        self.assertEqual(apps.get_app_config(
+            'data_plot').name, 'apps.data_plot')
+
 
 class PageTestCase(TestCase):
 
