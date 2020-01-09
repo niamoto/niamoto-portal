@@ -14,6 +14,7 @@ from functools import partial
 import json
 import geojson
 from math import pi
+from django.contrib.gis.geos import GEOSGeometry
 
 # Create your views here.
 
@@ -58,7 +59,9 @@ class ShapesViewSet(viewsets.ReadOnlyModelViewSet):
     def retrieve(self, request, pk=None):
         shape_queryset = mdlShape.Shape.objects.all()
         shape = get_object_or_404(shape_queryset, pk=pk)
-        shape.location = shape.location.simplify(0.002, preserve_topology=True)
+        if shape.location.num_geom > 1:
+            shape.location = shape.location.simplify(
+                0.002, preserve_topology=True)
         shape_data = serializers.ShapeSerializer(shape).data
 
         return Response(shape_data)
