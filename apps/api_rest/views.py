@@ -46,6 +46,8 @@ class ShapesViewSet(viewsets.ReadOnlyModelViewSet):
 
     Arguments:
         viewsets {[type]} -- [description]
+
+    Todo handle shape multipolygon having a polygon for topology simplify
     """
     base_name = 'shape'
 
