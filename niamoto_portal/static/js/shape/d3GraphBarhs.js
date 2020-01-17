@@ -9,7 +9,7 @@ export function initGraphBarhs(data) {
     }
   }
 
-  function initGraphBarh(id, xLabel, yLabel, value, legend) {
+  function initGraphBarh(id, xLabel, yLabel, value, yDomain, maxValue = '', marginLeft = 0.15, legend) {
     return new d3GraphBarh.GraphBarh({
       width: $(id).width(),
       height: $(id).height(),
@@ -18,6 +18,9 @@ export function initGraphBarhs(data) {
       xLabel: xLabel,
       yLabel: yLabel,
       value: value,
+      yDomain: yDomain,
+      maxValue: maxValue,
+      marginLeft: marginLeft,
       color: ['#548235', '#f5e9d8']
     })
   }
@@ -27,7 +30,8 @@ export function initGraphBarhs(data) {
     '#forets',
     'Superfice(hectare)',
     'Alitude(m)',
-    ['forêt', 'hors-forêt']
+    ['forêt', 'hors-forêt'],
+    ['1700', '1500', '1300', '1100', '900', '700', '500', '300', '100']
   )
 
   //   dbhMaxGauge.render()
@@ -37,9 +41,20 @@ export function initGraphBarhs(data) {
     '#forets_um',
     'Superfice(hectare)',
     'Alitude(m)',
-    ['forêt', 'hors-forêt']
+    ['forêt', 'hors-forêt'],
+    ['1700', '1500', '1300', '1100', '900', '700', '500', '300', '100']
   )
 
+  // Holdridge forest
+  const holdridgeForest = initGraphBarh(
+    '#holdridge_forest',
+    'Répartition(%)',
+    '',
+    ['forêt', 'hors-forêt'],
+    '',
+    100,
+    0.24
+  )
   //   distributionOccGauge.render()
 
   // Update Data for trigger
@@ -65,11 +80,12 @@ export function initGraphBarhs(data) {
       return result
     }
 
-    const elevation = classFilter(data, 'land_elevation')
     const land = dataFilter(data, 'land_elevation')
     const landUm = dataFilter(data, 'land_um_elevation')
     const forest = dataFilter(data, 'forest_elevation')
     const forestUm = dataFilter(data, 'forest_um_elevation')
+    const holdridgeforest = dataFilter(data, 'holdridge_forest')
+    const holdridgeOutforest = dataFilter(data, 'holdridge_outforest')
     const forestData = land.map(function (d, i) {
       var result = {
         class_name: d.class_name,
@@ -86,8 +102,16 @@ export function initGraphBarhs(data) {
       }
       return result
     })
-
+    const holdridgeForestData = holdridgeOutforest.map(function (d, i) {
+      var result = {
+        class_name: d.class_name,
+        forest: holdridgeforest[i].class_value * 100,
+        outForest: (d.class_value) * 100
+      }
+      return result
+    })
     forests.update(forestData.reverse())
     forestsUm.update(forestUmData.reverse())
+    holdridgeForest.update(holdridgeForestData.reverse())
   };
 };

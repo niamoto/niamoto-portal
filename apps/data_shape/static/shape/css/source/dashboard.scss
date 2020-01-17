@@ -32,6 +32,10 @@ body {
   @include graph;
 }
 
+#holdridge_forest {
+  @include graph;
+}
+
 .card .mapCaledonie {
   padding: 0;
 }

@@ -2,15 +2,16 @@
 
 import * as d3 from 'd3'
 
+// todo diviser en 2 graphs
 export class GraphBarh {
-  constructor (configuration) {
+  constructor(configuration) {
     // default configuration settings
     var config = {
       height: 200,
       width: 200,
       margin: 10,
       minValue: 0,
-      maxValue: 100,
+      maxValue: '',
       majorTicks: 5,
       color: ['#444', '#aaa', '#eee'],
       transitionMs: 1000,
@@ -20,7 +21,9 @@ export class GraphBarh {
       xLabel: '',
       yLabel: '',
       value: '',
-      legend: ''
+      legend: '',
+      yDomain: '',
+      marginLeft: 0.15
     }
 
     this.config = Object.assign(config, configuration)
@@ -29,7 +32,7 @@ export class GraphBarh {
       top: this.config.height * 0.003,
       right: this.config.width * 0.03,
       bottom: this.config.height * 0.2,
-      left: this.config.width * 0.15
+      left: this.config.width * this.config.marginLeft
     }
 
     this.mheight = this.config.height - this.margin.top - this.margin.bottom
@@ -99,27 +102,31 @@ export class GraphBarh {
       .call(legendColor)
   }
 
-  render (newValue) {
+  render(newValue) {
 
   }
 
-  update (response) {
+  update(response) {
     var stack = d3.stack()
       .keys(['forest', 'outForest'])
       .order(d3.stackOrderNone)
       .offset(d3.stackOffsetNone)
     var data = stack(response)
 
-    const yValue = response.map(d => d.class_name)
-    const xMax = d3.max(data, d => d3.max(d, d => d[1]))
+    if (this.config.yDomain === '') {
+      this.config.yDomain = response.map(d => d.class_name)
+    }
+    // if (this.config.maxValue === '') {
+    this.config.maxValue = d3.max(data, d => d3.max(d, d => d[1]))
+    // }
 
     var yScale = d3.scalePoint()
-      .domain(yValue)
+      .domain(response.map(d => d.class_name))
       .range([0, this.mheight])
       .padding(1)
 
     var xScale = d3.scaleLinear()
-      .domain([0, xMax])
+      .domain([0, this.config.maxValue])
       .range([0, this.mwidth])
 
     var xGrid = g => g
@@ -134,17 +141,28 @@ export class GraphBarh {
         .ticks(6, '0f')
         .tickSizeOuter(0)
       )
-
     var yAxis = g => g
       .call(d3.axisLeft(yScale)
-        .tickValues(['100', '300', '500', '700', '900', '1100', '1300', '1500', '1700'])
+        .tickValues(this.config.yDomain)
         .tickSizeOuter(0)
       )
 
     this.svg.selectAll('.xAxis').transition().call(xAxis)
     this.svg.selectAll('.xGrid').transition().call(xGrid)
 
-    this.svg.selectAll('.yAxis').call(yAxis)
+    const axisGroup = this.svg.selectAll('.yAxis').call(yAxis)
+    const bandwidth = tickWidth(this.svg.selectAll('.yAxis'))
+
+    axisGroup
+      .selectAll('text')
+      .attr('transform', 'translate(0, ' + bandwidth / 2 + ')')
+
+    function tickWidth(selection) {
+      const ticks = selection.selectAll('.tick text').nodes().map(function (d) {
+        return d.textContent
+      })
+      return yScale(ticks[1]) - yScale(ticks[0])
+    }
 
     const layer = this.g.selectAll('g')
       .data(data)
