@@ -11,7 +11,7 @@ export class GraphOneBarV {
       width: 200,
       margin: 10,
       minValue: 0,
-      maxValue: '',
+      maxValue: 100,
       majorTicks: 5,
       color: ['#444', '#aaa', '#eee'],
       transitionMs: 1000,
@@ -24,7 +24,8 @@ export class GraphOneBarV {
       legend: '',
       yDomain: [0, 100],
       marginLeft: 0.15,
-      colorText: ['#222', '#222', '#222']
+      colorText: ['#222', '#222', '#222'],
+      yTickValue: ['0', '25', '50', '75', '100']
     }
 
     this.config = Object.assign(config, configuration)
@@ -142,7 +143,7 @@ export class GraphOneBarV {
         .tickFormat(d => d + '%')
         .tickSizeInner(-this.mwidth * 0.6)
         .tickPadding(10)
-        .tickValues(['0', '25', '50', '75', '100'])
+        .tickValues(this.config.yTickValue)
       )
 
     this.svg.selectAll('.yAxis')
@@ -155,33 +156,54 @@ export class GraphOneBarV {
     //   .attr('fill', (d, i) => this.config.color[i])
     //   .attr('class', (d, i) => this.config.value[i])
 
-    function calculerPosition(i) {
+    function definePosition(i) {
       /* fonction servant à calculer la position
-         à partir du haut du graph
-        il faut additionnner la taille de chaque chaque valeur précédente
-      */
-      let rslt = 0
-      for (let y = 0; y < i; y++) {
-        rslt += data[y].value
+           à partir du haut du graph
+          il faut additionnner la taille de chaque chaque valeur précédente
+        */
+      if (i !== 0) {
+        let height = 0
+        for (let y = 0; y < i; y++) {
+          height += data[y].value
+        }
+        return yScale(100 - height)
+      } else {
+        return 0
       }
-      return rslt
     }
 
-    function calculerPositionText(i) {
+    function definePositionText(i, domain) {
       /* fonction servant à calculer la position
-         à partir du haut du graph
-        il faut additionnner la taille de chaque chaque valeur précédente
-      */
-      let rslt = 0
-      // console.log(i)
+           à partir du haut du graph
+          il faut additionnner la taille de chaque chaque valeur précédente
+        */
+      let height = 0
       for (let y = i; y >= 0; y--) {
         if (y === i) {
-          rslt += data[y].value / 2
+          height += defineHeightRect(data[y], y, domain, false) / 2
         } else {
-          rslt += data[y].value
+          height += data[y].value
         }
       }
-      return rslt
+      return yScale(100 - height)
+    }
+
+    function defineHeightRect(d, i, domain, scale = true) {
+      /* cette focntion sert à calculer la hauteur de chaque rectangle
+         Pour la dernier valeur, on retranche la valeur min du domaine.
+         A noter qu'il vaut mieux que la liste soit ordonnée du plus petit au plus grand
+        */
+      let height = 0
+      if (i === data.length - 1) {
+        height = d.value - domain[0]
+      } else {
+        height = d.value
+      }
+      if (scale === true) {
+        return yScale(100 - height)
+      } else {
+        return height
+      }
     }
 
     var rects = this.g.selectAll('rect')
@@ -194,16 +216,8 @@ export class GraphOneBarV {
       .style('opacity', '1')
       .attr('width', this.mwidth * 0.3)
       .attr('x', this.mwidth * 0.15)
-      .attr('y', function (d, i) {
-        if (i !== 0) {
-          return yScale(100 - calculerPosition(i))
-        } else {
-          return 0
-        }
-      })
-      .attr('height', function (d, i) {
-        return yScale(100 - d.value)
-      })
+      .attr('y', (d, i) => definePosition(i))
+      .attr('height', (d, i) => defineHeightRect(d, i, this.config.yDomain))
       // .on('mouseover', handleMouseOver)
       // .on('mouseout', handleMouseOut)
       .transition()
@@ -211,16 +225,8 @@ export class GraphOneBarV {
 
     rects.transition()
       .duration(500)
-      .attr('y', function (d, i) {
-        if (i !== 0) {
-          return yScale(100 - calculerPosition(i))
-        } else {
-          return 0
-        }
-      })
-      .attr('height', function (d, i) {
-        return yScale(100 - d.value)
-      })
+      .attr('y', (d, i) => definePosition(i))
+      .attr('height', (d, i) => defineHeightRect(d, i, this.config.yDomain))
 
     rects.exit()
       .transition()
@@ -234,7 +240,7 @@ export class GraphOneBarV {
       .attr('class', 'label')
       .attr('text-anchor', 'middle')
       .attr('x', 2 * this.mwidth * 0.15)
-      .attr('y', (d, i) => yScale(100 - calculerPositionText(i)))
+      .attr('y', (d, i) => definePositionText(i, this.config.yDomain))
       .attr('dy', '.5em')
       .attr('dx', '.5em')
       .text(function (d) {
@@ -250,7 +256,7 @@ export class GraphOneBarV {
 
     texts.transition().duration(500)
       // .attr('x', 2 * this.mwidth * 0.12)
-      .attr('y', (d, i) => yScale(100 - calculerPositionText(i)))
+      .attr('y', (d, i) => definePositionText(i, this.config.yDomain))
       .text(function (d) {
         if (d.value !== 0) {
           return d3.format('.1%')(d.value / 100)

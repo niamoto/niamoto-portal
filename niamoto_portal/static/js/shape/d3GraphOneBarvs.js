@@ -9,66 +9,54 @@ export function initGraphBarvs(data) {
     }
   }
 
-  function initGraphBarv(id, xLabel, yLabel, value, maxValue = '', marginLeft = 0.15, color = ['#548235', '#f5e9d8']) {
-    return new d3GraphBarv.GraphOneBarV({
-      width: $(id).width(),
-      height: $(id).height(),
-      container: id,
-      title: '',
-      xLabel: xLabel,
-      yLabel: yLabel,
-      value: value,
-      maxValue: maxValue,
-      marginLeft: marginLeft,
-      color: color
-    })
-  }
+  const value = ['forêt', 'hors-forêt']
+  const color = ['#548235', '#f5e9d8']
 
-  // forets
-  const coverForests = initGraphBarv(
-    '#cover_forest',
-    '',
-    '',
-    ['forêt', 'hors-forêt']
-  )
+  const coverForests = new d3GraphBarv.GraphOneBarV({
+    width: $('#cover_forest').width(),
+    height: $('#cover_forest').height(),
+    container: '#cover_forest',
+    value: value,
+    color: color
+  })
 
   // forets Um
-  const coverForestsUm = initGraphBarv(
-    '#cover_forest_um',
-    '',
-    '',
-    ['forêt', 'hors-forêt']
-  )
+  const coverForestsUm = new d3GraphBarv.GraphOneBarV({
+    width: $('#cover_forest_um').width(),
+    height: $('#cover_forest_um').height(),
+    container: '#cover_forest_um',
+    value: value,
+    color: color
+  })
 
   // forets Num
-  const coverForestsNum = initGraphBarv(
-    '#cover_forest_num',
-    '',
-    '',
-    ['forêt', 'hors-forêt']
-  )
+  const coverForestsNum = new d3GraphBarv.GraphOneBarV({
+    width: $('#cover_forest_num').width(),
+    height: $('#cover_forest_num').height(),
+    container: '#cover_forest_num',
+    value: value,
+    color: color
+  })
 
   // forets type
-  const coverForestsType = initGraphBarv(
-    '#cover_forest_type',
-    '',
-    '',
-    ['forêt coeur', 'forêt mature', 'forêt secondaire'],
-    '100',
-    '.15',
-    ['#2b8313', '#78ac01', '#ceec72']
-  )
+  const coverForestsType = new d3GraphBarv.GraphOneBarV({
+    width: $('#cover_forest_type').width(),
+    height: $('#cover_forest_type').height(),
+    container: '#cover_forest_type',
+    value: ['forêt coeur', 'forêt mature', 'forêt secondaire'],
+    color: ['#2b8313', '#78ac01', '#ceec72']
+  })
 
   // forets type
-  const coverForestsAdmin = initGraphBarv(
-    '#cover_forest_admin',
-    '',
-    '',
-    ['concessions', 'réserves', 'forêts'],
-    '100',
-    '.15',
-    ['#990000', '#0b6303', '#2b8313']
-  )
+  const coverForestsAdmin = new d3GraphBarv.GraphOneBarV({
+    width: $('#cover_forest_admin').width(),
+    height: $('#cover_forest_admin').height(),
+    container: '#cover_forest_admin',
+    value: ['concessions', 'réserves', 'forêts'],
+    color: ['#990000', '#0b6303', '#2b8313'],
+    yDomain: [70, 100],
+    yTickValue: ['70', '80', '90', '100']
+  })
 
   // Update Data for trigger
   $('#shape_select').on('shapeSelected', function (event, data) {
@@ -94,7 +82,6 @@ export function initGraphBarvs(data) {
     }
 
     let coverForestData = dataFilter(data, 'cover_forest')
-
     coverForestData = coverForestData.map(function (d, i) {
       var result = {
         label: d.class_name,
@@ -105,7 +92,6 @@ export function initGraphBarvs(data) {
     coverForests.update(coverForestData)
 
     let coverForestUmData = dataFilter(data, 'cover_forestum')
-
     coverForestUmData = coverForestUmData.map(function (d, i) {
       var result = {
         label: d.class_name,
@@ -116,7 +102,6 @@ export function initGraphBarvs(data) {
     coverForestsUm.update(coverForestUmData)
 
     let coverForestNumData = dataFilter(data, 'cover_forestnum')
-
     coverForestNumData = coverForestNumData.map(function (d, i) {
       var result = {
         label: d.class_name,
@@ -127,7 +112,6 @@ export function initGraphBarvs(data) {
     coverForestsNum.update(coverForestNumData)
 
     let coverForestTypeData = dataFilter(data, 'cover_foresttype')
-
     coverForestTypeData = coverForestTypeData.map(function (d, i) {
       var result = {
         label: d.class_name,
@@ -135,11 +119,9 @@ export function initGraphBarvs(data) {
       }
       return result
     })
-
     coverForestsType.update(coverForestTypeData)
 
     let coverForestAdminData = dataFilter(data, 'cover_forestadmin')
-
     coverForestAdminData = coverForestAdminData.map(function (d, i) {
       var result = {
         label: d.class_name,
@@ -147,7 +129,6 @@ export function initGraphBarvs(data) {
       }
       return result
     })
-
     coverForestsAdmin.update(coverForestAdminData)
   };
 };
