@@ -3,6 +3,7 @@ import * as restUrls from '../restUrls'
 import * as preloader from '../preloader'
 import * as d3GraphBarh from './d3GraphBarhs'
 import * as d3radarChart from './radarCharts'
+import * as d3GraphOneBarv from './d3GraphOneBarvs'
 import * as d3 from 'd3'
 // var d3_gauges = require('./d3_gauges');
 
@@ -136,4 +137,5 @@ document.addEventListener('DOMContentLoaded', function () {
   buildShapeList()
   d3GraphBarh.initGraphBarhs()
   d3radarChart.initRadarChart()
+  d3GraphOneBarv.initGraphBarvs()
 })

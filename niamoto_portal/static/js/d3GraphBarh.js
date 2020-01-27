@@ -23,7 +23,8 @@ export class GraphBarh {
       value: '',
       legend: '',
       yDomain: '',
-      marginLeft: 0.15
+      marginLeft: 0.15,
+      colorText: ['#000']
     }
 
     this.config = Object.assign(config, configuration)
