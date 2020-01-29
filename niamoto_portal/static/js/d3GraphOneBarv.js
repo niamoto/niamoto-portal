@@ -2,20 +2,45 @@
 
 import * as d3 from 'd3'
 
+/**
+ * Represents a graph one bar.
+ * @constructor
+ * @param {object} configuration - configuration default constains member config.
+ */
+
 // todo diviser en 2 graphs
 export class GraphOneBarV {
   constructor(configuration) {
-    // default configuration settings
-    var config = {
+    /**
+     * default configuration settings
+     * @type {object}
+     * @property {number} height - height svg.
+     * @property {number} with - with svg.
+     * @property {number} margin - margin svg.
+     * @property {number} minValue - minimum value y.
+     * @property {number} maxValue - maximum value y
+     * @property {arrayr} color  - color for rectangle
+     * @property {number} transitionMs - time of transition ms
+     * @property {string} container - container name
+     * @property {string} title - title svg
+     * @property {string} xLabel - label axis x
+     * @property {string} yLabel - label axis y
+     * @property {array} value - values flux
+     * @property {array} legend - legend text
+     * @property {array} yDomain - mininimum and maximum value y
+     * @property {number} marginLeft - margin left svg default
+     * @property {array} colorText - corlor text  inside rectangle
+     * @property {array} yTickValue - tick value axis y
+     */
+
+    this.config = {
       height: 200,
       width: 200,
       margin: 10,
       minValue: 0,
       maxValue: 100,
-      majorTicks: 5,
       color: ['#444', '#aaa', '#eee'],
       transitionMs: 1000,
-      displayUnit: 'Value',
       container: '',
       title: '',
       xLabel: '',
@@ -28,16 +53,31 @@ export class GraphOneBarV {
       yTickValue: ['0', '25', '50', '75', '100']
     }
 
-    this.config = Object.assign(config, configuration)
+    this.config = Object.assign(this.config, configuration)
 
+    /**
+     * default margin settings
+     * @type {object}
+     * @property {number} top
+     * @property {number} right
+     * @property {number} bottom
+     * @property {number} left
+     */
     this.margin = {
       top: this.config.height * 0.08,
       right: this.config.width * 0.07,
       bottom: this.config.height * 0.2,
       left: this.config.width * this.config.marginLeft
     }
-
+    /**
+     * height without margins
+     * @type {number}
+     */
     this.mheight = this.config.height - this.margin.top - this.margin.bottom
+    /**
+     * width without margins
+     * @type {number}
+     */
     this.mwidth = this.config.width - this.margin.left - this.margin.right
     this.svg = d3.select(this.config.container).append('svg')
       .attr('width', this.config.width)
@@ -74,7 +114,7 @@ export class GraphOneBarV {
     // .attr('dx', '.5em')
 
     var colorScale = d3.scaleOrdinal()
-      .domain(this.config.value)
+      .domain(this.config.legend)
       .range(this.config.color)
 
     var legendColor = d3.legendColor()
@@ -90,6 +130,10 @@ export class GraphOneBarV {
       .call(legendColor)
   }
 
+  /**
+   * update graph
+   * @param {objet} response - json flux
+   */
   update(response) {
     // var stack = d3.stack()
     //   .keys(['forest', 'outForest'])
@@ -150,17 +194,14 @@ export class GraphOneBarV {
       .call(yAxis)
       .select('.domain').remove()
 
-    // const layer = this.g.selectAll('g')
-    //   .data(data)
-    //   .join('g')
-    //   .attr('fill', (d, i) => this.config.color[i])
-    //   .attr('class', (d, i) => this.config.value[i])
-
-    function definePosition(i) {
-      /* fonction servant à calculer la position
+    /**
+     * @func
+     * fonction servant à calculer la position
            à partir du haut du graph
           il faut additionnner la taille de chaque chaque valeur précédente
-        */
+     * @param {number} i - index data
+     */
+    function definePosition(i) {
       if (i !== 0) {
         let height = 0
         for (let y = 0; y < i; y++) {

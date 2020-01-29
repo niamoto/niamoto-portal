@@ -3,9 +3,9 @@
 import 'd3'
 
 export class Gauge {
-  constructor (configuration) {
+  constructor(configuration) {
     // default configuration settings
-    var config = {
+    this.config = {
       height: 200,
       width: 200,
       margin: 10,
@@ -24,9 +24,8 @@ export class Gauge {
       container: '',
       transitionMs: 500
     }
-  }
 
-    this.config = Object.assign(config, configuration)
+    this.config = Object.assign(this.config, configuration)
 
     this.margin = {
       top: this.config.height * 0.1,
@@ -58,8 +57,8 @@ export class Gauge {
     ]
 
     this.minAngle = -90,
-    this.maxAngle = 90,
-    this.angleRange = this.maxAngle - this.minAngle
+      this.maxAngle = 90,
+      this.angleRange = this.maxAngle - this.minAngle
 
     this.scale = d3.scaleLinear()
       .range([0, 1])
@@ -91,13 +90,13 @@ export class Gauge {
     ]
 
     this.threshholds = [
-      config.minValue,
-      (config.maxValue - config.minValue) * config.lowThreshhold,
-      (config.maxValue - config.minValue) * config.lowMidThreshhold,
-      (config.maxValue - config.minValue) * config.highMidThreshhold,
-      (config.maxValue - config.minValue) * config.highThreshhold,
-      config.maxValue
-    ]
+        config.minValue,
+        (config.maxValue - config.minValue) * config.lowThreshhold,
+        (config.maxValue - config.minValue) * config.lowMidThreshhold,
+        (config.maxValue - config.minValue) * config.highMidThreshhold,
+        (config.maxValue - config.minValue) * config.highThreshhold,
+        config.maxValue
+      ]
       .map(d => this.scale(d))
 
     this.scale = d3.scaleLinear()
@@ -114,15 +113,15 @@ export class Gauge {
       .endAngle((d, i) => this._deg2rad(this.minAngle + this.threshholds[i] * this.angleRange))
   }
 
-  _radius () {
+  _radius() {
     return (this.mwidth) * 0.5
   }
 
-  _deg2rad (deg) {
+  _deg2rad(deg) {
     return deg * Math.PI / 180
   }
 
-  render (newValue) {
+  render(newValue) {
     const svg = d3.select(this.config.container)
       .append('svg')
       .attr('class', 'gauge')
@@ -188,7 +187,7 @@ export class Gauge {
     this.numberValue = numberValue
   }
 
-  _displayLabel () {
+  _displayLabel() {
     $(this.config.container + ' .gauge .label').empty()
 
     const lg = d3.select(this.config.container + ' .label')
@@ -221,7 +220,7 @@ export class Gauge {
       })
   }
 
-  update (newValue, maxValue) {
+  update(newValue, maxValue) {
     /**
      * TODO fun transition
      */

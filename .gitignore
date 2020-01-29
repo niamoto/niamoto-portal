@@ -73,6 +73,9 @@ instance/
 # Sphinx documentation
 docs/_build/
 
+# jsdoc
+out/
+
 # PyBuilder
 target/
 
@@ -116,3 +119,4 @@ git*
 # script
 *.sh
 .tmp*
+

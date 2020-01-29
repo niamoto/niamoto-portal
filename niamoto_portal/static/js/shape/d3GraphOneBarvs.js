@@ -17,6 +17,7 @@ export function initGraphBarvs(data) {
     height: $('#cover_forest').height(),
     container: '#cover_forest',
     value: value,
+    legend: value,
     color: color
   })
 
@@ -26,6 +27,7 @@ export function initGraphBarvs(data) {
     height: $('#cover_forest_um').height(),
     container: '#cover_forest_um',
     value: value,
+    legend: value,
     color: color
   })
 
@@ -35,6 +37,7 @@ export function initGraphBarvs(data) {
     height: $('#cover_forest_num').height(),
     container: '#cover_forest_num',
     value: value,
+    legend: value,
     color: color
   })
 
@@ -44,6 +47,7 @@ export function initGraphBarvs(data) {
     height: $('#cover_forest_type').height(),
     container: '#cover_forest_type',
     value: ['forêt coeur', 'forêt mature', 'forêt secondaire'],
+    legend: ['forêt coeur', 'forêt mature', 'forêt secondaire'],
     color: ['#2b8313', '#78ac01', '#ceec72']
   })
 
@@ -53,6 +57,7 @@ export function initGraphBarvs(data) {
     height: $('#cover_forest_admin').height(),
     container: '#cover_forest_admin',
     value: ['concessions', 'réserves', 'forêts'],
+    legend: ['concessions', 'réserves', 'forêts'],
     color: ['#990000', '#0b6303', '#2b8313'],
     yDomain: [70, 100],
     yTickValue: ['70', '80', '90', '100']
