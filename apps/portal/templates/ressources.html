@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block styles %}
+{{block.super}}
+<link rel="stylesheet" type="text/css" href="{% static 'css/simplePage.min.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'css/ressources.min.css' %}" />
+{% endblock %}
+{% block page_header %}
+<div class="container p-2 display-4">
+  Ressources
+</div>
+{% endblock page_header%}
+{% block body %}
+<section id="Equipe">
+  <div class="container">
+    <div class="row">
+      <h4>Equipe</h4>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="row">
+
+      <div class="cards">
+
+        {% if persons %}
+
+        {% for person in persons %}
+        <div id={{person.id}}_person class="card card-flip">
+          <div class="card-front">
+            {%if person.image%}
+            <img class="card-img-top center-block rounded-circle" src="/media/{{ person.image}}">
+            {%else%}
+            <div class="portrait">
+              <i class="fas fa-portrait fa-9x fa-border"></i>
+            </div>
+            {%endif%}
+            <div class="card-block">
+              <h5 class="card-title"> {{person.first_name|capfirst}} {{person.last_name|capfirst}} </h5>
+            </div>
+          </div>
+          <div class="card-back">
+            <div class="card-block">
+              <h5 class="card-title"> {{person.first_name|capfirst}} {{person.last_name|capfirst}} </h5>
+              {% if activities%}
+              {% for activity in activities%}
+              {% if person.id == activity.person_id %}
+              <p class="card-text">
+                <a data-toggle="popover" data-title="{{activity.title}}"
+                  data-content="{{activity.description|default:''}}" data-trigger='hover' data-placement='auto'>
+                  {{activity.first_year|default:"..."}}-{{activity.first_month|default:""}}
+                  {{activity|truncatechars:75}}</a>
+              </p>
+              {%endif%}
+              {%endfor%}
+              {%endif%}
+              <!-- <a href="#" class="btn btn-primary">See Profile</a> -->
+
+
+            </div>
+          </div>
+
+        </div>
+        {% endfor %}
+
+        {% else %}
+        <p>Aucune personne.</p>
+        {% endif %}
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="support">
+  <div class="container">
+    <div class="row">
+      <h4>Publication</h4>
+
+      {%if ressources%}
+      <div class="row">
+        {%for ressource in ressources%}
+
+        <div class=col-2>{{ressource.support}}</div>
+        <div class=col-10><i> <a href="{{ressource.link}}">{{ressource.year|default:""}} {{ressource.who|default:""}}
+              {{ressource.description|default:""}} </a></i>
+        </div>
+
+        {%endfor%}
+        {%endif%}
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock body %}
+
+{% block scripts %}
+{{ block.super }}
+
+<script src="{% static 'js/ressources.js' %}"></script>
+{% endblock scripts %}

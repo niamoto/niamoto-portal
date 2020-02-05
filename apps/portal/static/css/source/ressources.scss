@@ -1,0 +1,150 @@
+@import "../../../../../niamoto_portal/static/css/source/color";
+
+.container-fluid {
+  width: 95%;
+}
+
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  margin: auto;
+  padding: 1rem;
+  justify-content: space-between;
+
+}
+
+.card {
+  display: flex;
+  padding: .5rem .5rem 0 .5rem;
+  margin: 1rem 1rem 0 1rem;
+  width: 20rem;
+  border: 0;
+
+  perspective: 1000px;
+
+  img {
+    width: 75%;
+  }
+}
+
+
+/*
+flip card
+*/
+.card-flip>div {
+  backface-visibility: hidden;
+  transition: transform 300ms;
+  transition-timing-function: linear;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  display: flex;
+  justify-content: space-between;
+  transform-style: preserve-3d;
+}
+
+.card-front {
+  transform: rotateY(0deg);
+  flex-direction: column;
+}
+
+.card-back {
+  transform: rotateY(180deg);
+  position: absolute;
+  top: 0;
+}
+
+.card-flip:hover .card-front {
+  transform: rotateY(-90deg);
+}
+
+.card-flip:hover .card-back {
+  transform: rotateY(0deg);
+}
+
+// [class*="row"] {
+//   margin-bottom: 1em;
+//   justify-content: center;
+// }
+
+// [class*="col-"] {
+//   background: #efefef;
+//   border: 1px solid #ddd;
+//   padding-top: .75rem;
+//   padding-bottom: .75rem;
+//   width: 100%;
+// }
+
+.card-block {
+  width: 100%;
+}
+
+.card-title {
+  text-align: center;
+}
+
+.card-title::after {
+  content: "";
+  width: 75%;
+  height: 2px;
+  background-color: $color-secondary-1-4;
+  display: block;
+  position: absolute;
+  // bottom: 1px;
+  left: 12.5%;
+}
+
+.card:hover img {
+  filter: sepia(50%);
+  transition: 0.4s;
+}
+
+// .card:hover {
+//   flex-grow: 6;
+//   transition: .5s;
+// }
+
+// .rounded-circle {
+//     border-bottom-left-radius: 15% !important;
+//     border-bottom-right-radius: 75% !important;
+// }
+.card-img-top {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+// .card {
+//   width: 100%;
+//   border-width: 0;
+// }
+
+.portrait {
+  text-align: center;
+  vertical-align: middle;
+}
+
+span[data-descr] {
+  position: relative;
+  cursor: help;
+}
+
+span[data-descr]:hover::after {
+  content: attr(data-descr);
+  position: absolute;
+  left: 0;
+  top: 24px;
+  min-width: 200px;
+  border: 1px #aaaaaa solid;
+  border-radius: 10px;
+  background-color: #ffffcc;
+  padding: 12px;
+  color: #000000;
+  font-size: 14px;
+  z-index: 1;
+}
+
+.fa-portait {
+  opacity: 50%;
+}

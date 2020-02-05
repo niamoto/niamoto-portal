@@ -21,3 +21,7 @@ class PageTestCase(TestCase):
     def test_methodologie_page(self):
         response = self.client.get(reverse('methodologie'))
         self.assertEqual(response.status_code, 200)
+
+    def test_ressources_page(self):
+        response = self.client.get(reverse('ressources'))
+        self.assertEqual(response.status_code, 200)
