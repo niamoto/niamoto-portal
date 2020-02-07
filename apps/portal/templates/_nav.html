@@ -45,7 +45,17 @@
         </li>
 
         <li class="nav-item dropdown">
-          <a class="nav-link" href="{% url 'plot:presentation' %}" id=" navbarDropdownMenuLink" aria-haspopup="true"
+          <a class="nav-link" href="{% url 'plot:presentation' %}" aria-haspopup="true"
+            aria-expanded="false">Parcelles</a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <li><a class="dropdown-item" href="">Généralités</a></li>
+            <li><a class="dropdown-item" href="">Partie1</a></li>
+            <li><a class="dropdown-item" href="">Partie2</a></li>
+          </ul>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link" href="{% url 'shape:presentation' %}" id=" navbarDropdownMenuLink" aria-haspopup="true"
             aria-expanded="false">Forêts</a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
             <li><a class="dropdown-item" href="">Généralités</a></li>
@@ -60,7 +70,7 @@
           <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
             <li><a class="dropdown-item" href="{% url 'taxon:dashboard' %}">Arbres</a></li>
             <li><a class="dropdown-item" href="{% url 'plot:dashboard' %}">Parcelles</a></li>
-            <li><a class="dropdown-item" href="{% url 'shape:dashboard' %}">Emprise</a></li>
+            <li><a class="dropdown-item" href="{% url 'shape:dashboard' %}">Forêt</a></li>
           </ul>
         </li>
 
