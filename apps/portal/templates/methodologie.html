@@ -11,48 +11,23 @@
 </div>
 {% endblock page_header%}
 {% block body %}
-<section id="NC-PIPPN">
+<section id="coverForest">
   <div class="container">
     <div class="row">
       <div class="col-lg-12 mx-auto">
-        <h4>Réseau NC-PIPN</h4>
-        <p class="text-justify">Le réseau NC-PIPPN pour 'New Caledonian Plant Inventories and Permanent Plot Network' a
-          été crée en
-          2005 par l'IRD de Nouvelle-Calédonie. Initialement construit sur un jeux de parcelle d'une
-          superficie de 400 m² (soit 20 x 20 m), il combine aujourd'hui les inventaires de forme et de taille
-          variées réalisés par l'UMR-AMAP dans les forêts de la Nouvelle-Calédonie, pour le moment
-          exclusivement sur la Grande-Terre. Ce réseau compte aujourd'hui 503 parcelles et près de 70 000
-          arbres étiquettés.</p>
+        <h4>Couverture forestière</h4>
+        <p class="text-justify"></p>
       </div>
     </div>
   </div>
 </section>
 
-<section id="plot">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-12 mx-auto">
-        <h4>Parcelle</h4>
-        <p class="text-justify">Les parcelles représentent des dispositifs expérimentaux standardisés mis en place pour
-          étudier les
-          forêts. De formes variables, les parcelles respectent une superficie et une catégrorie d'organismes.
-          Dans le projet Cogefor, les parcelles mises en place respectent les standards internationaux de
-          l'étude des forêts et des arbres. Elles sont carrés et couvrent une superficie de 1 hectare (100 m x
-          100 m). Dans ce carré, toutes les plantes arborescentes (arbres, lianes, palmiers et fougères) qui
-          ont un diamètre de 10 cm à une hauteur standard de 1,3 (DBH130) depuis le sol sont prises en compte.
-          Chacune de ces plantes est alors étiquettée d'un numéro unique, identifiée au niveau de l'espèce,
-          mesurée en diamètre, positionnée dans le plan vertical (strates) et horizontal (coordonnée X et Y)
-        </p>
-      </div>
-    </div>
-  </div>
-</section>
 <section id="holdridge">
   <div class="container">
     <div class="row">
       <div class="col-lg-12 mx-auto">
         <h4>Holdridge</h4>
-        <img src="../static/img/LeslieHoldridge.jpg" class="rounded" alt="Leslie Holdridge">
+        <img src="../static/img/humidity_provinces.jpg" class="rounded" alt="Leslie Holdridge">
 
         <p class="text-justify">La classification des milieux de vie dite de Holdrige a été crée en 1947 par le
           botaniste anglais
@@ -68,8 +43,7 @@
           classes de milieux de vie dans le biome tropical de la Nouvelle-Calédonie (very dry, dry, moist, wet
           and rain). La combinaison avec la couverture forestière aboutit à définir arbitrairement 5 classes
           de forêt (forêt très sèche, forêt sèche, forêt humide, forêt très humide et forêt toujours humide).
-          Les forêts de la province Nord sont majoritairement distribuées dans les milieux humide et très
-          humides tandis que les milieux de vie extrêmes (toujours humide et très sec) sont rares.</p>
+        </p>
       </div>
     </div>
   </div>
@@ -98,7 +72,7 @@
     <div class="row">
       <div class="col-lg-12 mx-auto">
         <h4>SDM</h4>
-        <p class="text-justify">"Les SDM (Species Distribution Models) représentent une projection spatiale des
+        <p class="text-justify">Les SDM (Species Distribution Models) représentent une projection spatiale des
           relations
           plante-environnement. Concrètement ce modèle est construit à partir des occurences de l'espèce pour
           lesquelles on connait les variables environnementales (e.g. pluviométrie, température, pente,
@@ -110,7 +84,7 @@
         <p class="text-justify"> trop souvent les SDM sont associés à des cartes de distribution potentielle, ce qui
           constitue un raccourci inexact.Ce n'est pas parce que le modèle prédit que l'habitat est favorable
           que l'espèce est réellement présente. D'autres paramètres influencent la présence des espèces dont
-          la dispersion qui peut permettre ou non à l'espèce de coloniser les milieux favorables."</p>
+          la dispersion qui peut permettre ou non à l'espèce de coloniser les milieux favorables.</p>
       </div>
     </div>
   </div>
@@ -146,6 +120,45 @@
     </div>
   </div>
 </section>
+<section id="dbh">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 mx-auto">
+        <h4>DBH</h4>
+        <p class="text-justify">Diameter at breast height, le DBH est une méthode standard pour mesurer le diamètre d'un
+          arbre à la hauteur de la poitrine d'un humain, généralement fixé à 1,30 m du sol. Cette mesure décalée depuis
+          le sol permet notamment de comparer les diamètres des arbres entre-eux en évitant de donner une importance
+          particulière à l'empattement du tronc. Dans la pratique, c'est la circonférence de l'arbre qui est mesurée à
+          une hauteur moyenne de la poitrine en évitant, autant que possible les excroissances du tronc (e.g. bourrelet,
+          contreforts, racines-échasses,...). Cette mesure permet de comparer les arbres d'une même espèce entre-eux en
+          considérant que ce diamètre est une approximation de l'âge relatif, c'est-à-dire que le diamètre est
+          proportionnel à l'âge de l'arbre en partant du postulat que le diamètre de l'arbre augmente au fur et à mesure
+          de son ontogénie.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="woodDensity">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 mx-auto">
+        <h4>Wood density</h4>
+        <p class="text-justify"></p>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="strates">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 mx-auto">
+        <h4>Strates</h4>
+        <p class="text-justify"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
 
 
 
