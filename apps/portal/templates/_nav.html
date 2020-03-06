@@ -24,13 +24,15 @@
           <a class="nav-link" href="{% url 'methodologie' %}" id="navbarDropdownMenuLink" aria-haspopup="true"
             aria-expanded="false">Méthodologie</a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <li><a class="dropdown-item" href="{% url 'methodologie' %}#NC-PIPPN">Réseau NC-PIPPN</a></li>
-            <li><a class="dropdown-item" href="{% url 'methodologie' %}#plot">Parcelle</a></li>
+            <li><a class="dropdown-item" href="{% url 'methodologie' %}#coverForest">Couverture forestière</a></li>
             <li><a class="dropdown-item" href="{% url 'methodologie' %}#holdridge">Holdridge</a></li>
             <li><a class="dropdown-item" href="{% url 'methodologie' %}#env">Enveloppe Environnementale</a></li>
             <li><a class="dropdown-item" href="{% url 'methodologie' %}#sdm">SDM</a></li>
             <li><a class="dropdown-item" href="{% url 'methodologie' %}#ssdm">S-SDM</a></li>
             <li><a class="dropdown-item" href="{% url 'methodologie' %}#richess">Richesse</a></li>
+            <li><a class="dropdown-item" href="{% url 'methodologie' %}#DBH">DBH</a></li>
+            <li><a class="dropdown-item" href="{% url 'methodologie' %}#woodDensity">Wood density</a></li>
+            <li><a class="dropdown-item" href="{% url 'methodologie' %}#strates">Strates</a></li>
           </ul>
         </li>
 
@@ -48,9 +50,8 @@
           <a class="nav-link" href="{% url 'plot:presentation' %}" aria-haspopup="true"
             aria-expanded="false">Parcelles</a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <li><a class="dropdown-item" href="">Généralités</a></li>
-            <li><a class="dropdown-item" href="">Partie1</a></li>
-            <li><a class="dropdown-item" href="">Partie2</a></li>
+            <li><a class="dropdown-item" href="{% url 'plot:presentation' %}#NC-PIPPN">Réseau NC-PIPPN</a></li>
+            <li><a class="dropdown-item" href="{% url 'plot:presentation' %}#plot">Parcelle</a></li>
           </ul>
         </li>
 
