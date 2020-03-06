@@ -16,8 +16,10 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Person',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('fisrt_name', models.CharField(blank=True, max_length=50, null=True)),
+                ('id', models.AutoField(auto_created=True,
+                                        primary_key=True, serialize=False, verbose_name='ID')),
+                ('fisrt_name', models.CharField(
+                    blank=True, max_length=50, null=True)),
                 ('last_name', models.CharField(blank=True, max_length=50, null=True)),
                 ('image', models.ImageField(blank=True, null=True, upload_to=None)),
             ],
@@ -29,10 +31,12 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Ressource',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(auto_created=True,
+                                        primary_key=True, serialize=False, verbose_name='ID')),
                 ('support', models.CharField(max_length=50)),
                 ('who', models.CharField(blank=True, max_length=50, null=True)),
-                ('description', models.CharField(blank=True, max_length=50, null=True)),
+                ('description', models.CharField(
+                    blank=True, max_length=50, null=True)),
                 ('year', models.IntegerField(blank=True, null=True)),
                 ('link', models.URLField(blank=True, null=True)),
             ],
@@ -44,20 +48,23 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Acivity',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(auto_created=True,
+                                        primary_key=True, serialize=False, verbose_name='ID')),
                 ('contrat', models.CharField(max_length=50)),
                 ('first_year', models.IntegerField(blank=True, null=True)),
                 ('first_month', models.IntegerField(blank=True, null=True)),
                 ('last_year', models.IntegerField(blank=True, null=True)),
                 ('last_month', models.IntegerField(blank=True, null=True)),
                 ('title', models.CharField(blank=True, max_length=150, null=True)),
-                ('description', models.CharField(blank=True, max_length=250, null=True)),
+                ('description', models.CharField(
+                    blank=True, max_length=250, null=True)),
                 ('link', models.URLField(blank=True, null=True)),
-                ('person', models.ForeignKey(on_delete=django.db.models.deletion.DO_NOTHING, related_name='activities', to='portal.Person')),
+                ('person', models.ForeignKey(on_delete=django.db.models.deletion.DO_NOTHING,
+                                             related_name='activities', to='portal.Person')),
             ],
             options={
                 'verbose_name': 'acivity',
-                'verbose_name_plural': 'acivities',
+                'verbose_name_plural': 'activities',
             },
         ),
     ]

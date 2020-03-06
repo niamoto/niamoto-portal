@@ -142,4 +142,33 @@ span[data-descr]:hover::after {
 .fa-portait {
   opacity: 50%;
 }
+
+.ressources tr {
+  text-decoration: none;
+  font-size: .75em;
+  color: black;
+}
+
+.ressources th,
+td {
+  padding: 6px 10px;
+  text-align: left;
+  border: 1px solid black;
+}
+
+.ressources a {
+  color: black;
+  text-decoration: none;
+}
+
+.ressources tbody tr:hover a {
+  color: #355771;
+}
+
+.ressources tbody tr:hover {
+  color: #355771;
+  background-color: rgba(0, 0, 0, 0.05);
+  -webkit-box-shadow: 0 0 5px grey inset;
+          box-shadow: 0 0 5px grey inset;
+}
 /*# sourceMappingURL=ressources.css.map */

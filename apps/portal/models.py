@@ -16,10 +16,10 @@ class Ressource(models.Model):
 
     SUPPORT = (
         ('publication', 'publication'),
-        ('bool', 'livre'),
+        ('book', 'livre'),
         ('report', 'rapport'),
         ('article', 'article'),
-        ('communication', 'communication'),
+        ('conference', 'conférence'),
         ('film', 'film'),
         ('radio', 'radio')
     )
@@ -28,8 +28,11 @@ class Ressource(models.Model):
         max_length=50, choices=SUPPORT, default='publication')
     who = models.CharField(null=True, blank=True, max_length=400)
     description = models.CharField(null=True, blank=True, max_length=400)
+    journal = models.CharField(null=True, blank=True, max_length=250)
+    issue = models.CharField(null=True, blank=True, max_length=4)
+    pages = models.CharField(null=True, blank=True, max_length=12)
     year = models.IntegerField(
-        null=True, blank=True, choices=year_choicies(2013), default=current_year())
+        null=True, blank=True, choices=year_choicies(2012), default=current_year())
     link = models.URLField(null=True, blank=True, max_length=200)
 
     class Meta:
@@ -99,7 +102,7 @@ class Activity(models.Model):
         """Meta definition for acivity."""
 
         verbose_name = 'acivity'
-        verbose_name_plural = 'acivities'
+        verbose_name_plural = 'activities'
 
     def __str__(self):
         """Unicode representation of acivity."""

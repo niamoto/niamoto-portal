@@ -24,7 +24,7 @@ class RessouresView(TemplateView):
     template_name = 'ressources.html'
 
     def get_context_data(self, **kwargs):
-        ressources = Ressource.objects.all
+        ressources = Ressource.objects.all().order_by('-year')
         persons = Person.objects.all().order_by('?')
         activities = Activity.objects.all
         return {

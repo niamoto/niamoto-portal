@@ -77,15 +77,36 @@
       <h4>Publication</h4>
 
       {%if ressources%}
-      <div class="row">
-        {%for ressource in ressources%}
+      <div class="row ressources">
+        <table>
+          <thead>
+            <tr>
+              <th>Année</th>
+              <th>Auteur et titre du document</th>
+            </tr>
+          </thead>
+          <tbody>
+            {%for ressource in ressources%}
 
-        <div class=col-2>{{ressource.support}}</div>
-        <div class=col-10><i> <a href="{{ressource.link}}">{{ressource.year|default:""}} {{ressource.who|default:""}}
-              {{ressource.description|default:""}} </a></i>
-        </div>
 
-        {%endfor%}
+
+            {% if ressource.support == "publication" %}
+            <tr class="col-12 {{ressource.support}}">
+
+              <td>{{ressource.year|default:""}}</td>
+              <td><a {% if ressource.link %} href="{{ressource.link|default:""}}"
+                  {% endif %}>{{ressource.who|default:""}}{% if ressource.who %}, {% endif %}
+                  <strong>{{ressource.description|default:""}}</strong>{% if ressource.description %}, {% endif %}
+                  <em>{{ressource.journal|default:""}}</em>{% if ressource.journal %}, {% endif %}
+                  {{ressource.issue|default:""}}{% if ressource.issue %}, {% endif %}
+                  {{ressource.pages|default:""}}
+                </a></td>
+            </tr>
+            {%endif%}
+
+            {%endfor%}
+          </tbody>
+        </table>
         {%endif%}
       </div>
     </div>
