@@ -17,8 +17,10 @@ body {
     @extend %graphStroke;
   }
 
-  .xGrid .tick line {
-    opacity: 0.7;
+  .xGrid .tick line,
+  .xGridRight .tick line,
+  .xGridLeft .tick line {
+    opacity: 0.5;
     stroke-dasharray: 3, 3;
     stroke: #c79d1f;
   }
@@ -36,6 +38,16 @@ body {
   @include graph;
 }
 
+#ratio_forests {
+  @include graph;
+
+  .yGrid .tick line {
+    opacity: 0.5;
+    stroke-dasharray: 3, 3;
+    stroke: #c79d1f;
+  }
+}
+
 .card .mapCaledonie {
   padding: 0;
 }
@@ -43,7 +55,6 @@ body {
 .card .mapCaledonie .graph {
   height: 100%;
 }
-
 
 #left_panel {
   height: 780px;

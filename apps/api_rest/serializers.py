@@ -31,7 +31,7 @@ class PlotsSerializer(gis_serializers.GeoFeatureModelSerializer):
         geo_field = 'location'
         fields = ('id', 'label', 'shannon', 'pielou', 'simpson', 'basal_area',
                   'h_mean', 'wood_density', 'biomasse', 'count_species',
-                  'species_level','location')
+                  'species_level', 'location')
 
 
 class PlotSerializer(gis_serializers.GeoFeatureModelSerializer):
@@ -71,7 +71,7 @@ class ShapesSerializer(serializers.ModelSerializer):
     class Meta:
         model = mdlShape.Shape
 
-        fields = ('id','type_shape', 'label')
+        fields = ('id', 'type_shape', 'label')
 
 
 class ShapeSerializer(gis_serializers.GeoFeatureModelSerializer):
@@ -86,10 +86,11 @@ class ShapeSerializer(gis_serializers.GeoFeatureModelSerializer):
         model = mdlShape.Shape
 
         geo_field = 'location'
-        fields = ('label', 'location', 'elevation', 'land_area', 'um_area', 
-            'forest_area', 'forest_um_area', 'forest_perimeter', 'nb_patchs',
-            'nb_patchs_in', 'forest_in', 'r_in_median', 'nb_occurence',
-            'nb_families', 'nb_species', 'n_unique_species', 'frequencies')
+        fields = ('label', 'location', 'elevation', 'land_area', 'land_um_area',
+                  'forest_area', 'forest_um_area', 'forest_perimeter', 'nb_patchs',
+                  'nb_patchs_in', 'forest_in', 'r_in_median', 'nb_occurence',
+                  'nb_families', 'nb_species', 'n_unique_species', 'frequencies')
+
 
 class ShapeLocationSerializer(gis_serializers.GeoFeatureModelSerializer):
     """to output shape location
@@ -119,7 +120,7 @@ class taxonFrequencySerializer(serializers.ModelSerializer):
 
 class taxonPhenology(serializers.ModelSerializer):
     """to output phenology
-    
+
     Arguments:
         serializers {[type]} -- [description]
     """
@@ -129,6 +130,7 @@ class taxonPhenology(serializers.ModelSerializer):
 
         fields = '__all__'
 
+
 class taxonsSerializer(serializers.ModelSerializer):
     """to output all the taxons
 
@@ -137,7 +139,7 @@ class taxonsSerializer(serializers.ModelSerializer):
     """
 
     # children = serializers.ListSerializer(child=RecursiveField()
-                                        #   )
+    #   )
 
     class Meta:
         model = mdlTaxon.Taxon
@@ -166,11 +168,10 @@ class taxonSerializer(serializers.ModelSerializer):
     Arguments:
         serializers {[type]} -- [description]
     """
-    frequencies = taxonFrequencySerializer(many = True, read_only = True)
-    phenology = taxonPhenology(many = True, read_only = True)
+    frequencies = taxonFrequencySerializer(many=True, read_only=True)
+    phenology = taxonPhenology(many=True, read_only=True)
 
     class Meta:
         model = mdlTaxon.Taxon
 
         fields = '__all__'
-

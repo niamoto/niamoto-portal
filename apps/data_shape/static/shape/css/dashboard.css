@@ -2,24 +2,44 @@ body {
   padding: 50px 0 0 0;
 }
 
-#forets .tick line, #forets .domaine, #forets_um .tick line, #forets_um .domaine, #holdridge_forest .tick line, #holdridge_forest .domaine {
+#forets .tick line, #forets .domaine, #forets_um .tick line, #forets_um .domaine, #holdridge_forest .tick line, #holdridge_forest .domaine, #ratio_forests .tick line, #ratio_forests .domaine {
   stroke: #688BA5;
 }
 
-#forets .xGrid .tick line {
-  opacity: 0.7;
+#forets .xGrid .tick line,
+#forets .xGridRight .tick line,
+#forets .xGridLeft .tick line {
+  opacity: 0.5;
   stroke-dasharray: 3, 3;
   stroke: #c79d1f;
 }
 
-#forets_um .xGrid .tick line {
-  opacity: 0.7;
+#forets_um .xGrid .tick line,
+#forets_um .xGridRight .tick line,
+#forets_um .xGridLeft .tick line {
+  opacity: 0.5;
   stroke-dasharray: 3, 3;
   stroke: #c79d1f;
 }
 
-#holdridge_forest .xGrid .tick line {
-  opacity: 0.7;
+#holdridge_forest .xGrid .tick line,
+#holdridge_forest .xGridRight .tick line,
+#holdridge_forest .xGridLeft .tick line {
+  opacity: 0.5;
+  stroke-dasharray: 3, 3;
+  stroke: #c79d1f;
+}
+
+#ratio_forests .xGrid .tick line,
+#ratio_forests .xGridRight .tick line,
+#ratio_forests .xGridLeft .tick line {
+  opacity: 0.5;
+  stroke-dasharray: 3, 3;
+  stroke: #c79d1f;
+}
+
+#ratio_forests .yGrid .tick line {
+  opacity: 0.5;
   stroke-dasharray: 3, 3;
   stroke: #c79d1f;
 }
