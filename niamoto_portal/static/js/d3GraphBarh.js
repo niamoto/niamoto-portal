@@ -109,7 +109,7 @@ export class GraphBarh {
 
   update(response) {
     var stack = d3.stack()
-      .keys(['forest', 'outForest'])
+      .keys(['data1', 'data2'])
       .order(d3.stackOrderNone)
       .offset(d3.stackOffsetNone)
     var data = stack(response)
