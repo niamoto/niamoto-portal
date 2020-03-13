@@ -11,7 +11,7 @@ const shapeList = restUrls.shapeList
 const shapeLocation = restUrls.shapeLocation
 
 // make layer background
-const wmsUrlNC = 'http://carto.gouv.nc/arcgis/services/fond_imagerie/' +
+const wmsUrlNC = 'https://carto.gouv.nc/public/services/fond_relief/' +
   'MapServer/WMSServer'
 const layerBackground = new ol.layer.Tile({
   source: new ol.source.TileWMS({
@@ -50,6 +50,53 @@ const map = new ol.Map({
 })
 map.addLayer(layerBackground)
 map.addLayer(layerShape)
+
+// make layer background
+const wmsUrlProvince = 'https://carto.gouv.nc/public/services/aires_coutumieres/' +
+  'MapServer/WMSServer'
+const layerBackgroundProvince = new ol.layer.Tile({
+  source: new ol.source.TileWMS({
+    url: wmsUrlProvince,
+    params: {
+      LAYERS: '0',
+      TILED: true,
+      FORMAT: 'image/png'
+    },
+    serverType: 'mapserver'
+  })
+})
+
+// make layer Shape
+const featuresProvince = new ol.Collection()
+const sourceProvince = new ol.source.Vector({
+  features: featuresProvince
+})
+const layerShapeProvince = new ol.layer.Vector({
+  source: sourceProvince
+})
+
+// view for map center new caledonia
+const viewProvince = new ol.View({
+  projection: 'EPSG:4326',
+  center: new ol.proj.transform([164.859, -20.583],
+    'EPSG:4326',
+    'EPSG:4326'),
+  zoom: 7.4,
+  minZoom: 7.4,
+  maxZoom: 7.4
+})
+
+// make map
+const mapProvince = new ol.Map({
+  target: 'mapProvince',
+  view: viewProvince,
+  controls: ol.control.defaults({
+    attribution: false,
+    zoom: false
+  })
+})
+mapProvince.addLayer(layerBackgroundProvince)
+mapProvince.addLayer(layerShapeProvince)
 
 function buildShapeList() {
   /* TODO
@@ -115,6 +162,27 @@ function updateData(shape) {
   })
 }
 
+function InitLayerShapeProvince() {
+  /* function update the layer
+    clear the source
+    update the new source
+    center map on the new source
+  */
+  $.ajax({
+    type: 'GET',
+    url: shapeList + '1/',
+    success: function (response) {
+      sourceProvince.clear()
+      sourceProvince.addFeature(new ol.format.GeoJSON().readFeature(response))
+      const feature = sourceProvince.getFeatures()[0]
+      const polygon = feature.getGeometry()
+      viewProvince.fit(polygon, {
+        padding: [5, 5, 5, 5]
+      })
+    }
+  })
+}
+
 function updateLayerShape(data) {
   /* function update the layer
     clear the source
@@ -128,6 +196,13 @@ function updateLayerShape(data) {
   view.fit(polygon, {
     padding: [5, 5, 5, 5]
   })
+  sourceProvince.clear()
+  sourceProvince.addFeature(new ol.format.GeoJSON().readFeature(data))
+  const featureProvince = sourceProvince.getFeatures()[0]
+  const polygonProvince = featureProvince.getGeometry()
+  // view.fit(polygonProvince, {
+  //   padding: [5, 5, 5, 5]
+  // })
 }
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -135,6 +210,7 @@ document.addEventListener('DOMContentLoaded', function () {
     preloader.hidePreloader()
   })
   buildShapeList()
+  // InitLayerShapeProvince()
   d3GraphBarh.initGraphBarhs()
   d3radarChart.initRadarChart()
   d3GraphOneBarv.initGraphBarvs()

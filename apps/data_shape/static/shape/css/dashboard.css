@@ -44,11 +44,13 @@ body {
   stroke: #c79d1f;
 }
 
-.card .mapCaledonie {
+.card .mapCaledonie,
+.card .mapProvince {
   padding: 0;
 }
 
-.card .mapCaledonie .graph {
+.card .mapCaledonie .graph,
+.card .mapProvince .graph {
   height: 100%;
 }
 
