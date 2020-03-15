@@ -89,7 +89,8 @@ class ShapeSerializer(gis_serializers.GeoFeatureModelSerializer):
         fields = ('label', 'location', 'elevation', 'land_area', 'land_um_area',
                   'forest_area', 'forest_um_area', 'forest_perimeter', 'nb_patchs',
                   'nb_patchs_in', 'forest_in', 'r_in_median', 'nb_occurence',
-                  'nb_families', 'nb_species', 'n_unique_species', 'frequencies')
+                  'nb_families', 'nb_species', 'n_unique_species', 'um_geom',
+                  'frequencies')
 
 
 class ShapeLocationSerializer(gis_serializers.GeoFeatureModelSerializer):

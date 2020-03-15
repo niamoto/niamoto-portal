@@ -34,6 +34,25 @@ const layerShape = new ol.layer.Vector({
   source: source
 })
 
+// make layer Shape Forest
+const featuresForest = new ol.Collection()
+const sourceForest = new ol.source.Vector({
+  features: featuresForest
+})
+const layerShapeForest = new ol.layer.Vector({
+  source: sourceForest,
+  style: new ol.style.Style({
+    fill: new ol.style.Fill({
+      color: '#548235',
+      opacity: 0.7
+    }),
+    stroke: new ol.style.Stroke({
+      color: '#548235',
+      width: 1
+    })
+  })
+})
+
 // view for map center new caledonia
 const view = new ol.View({
   projection: 'EPSG:4326',
@@ -50,6 +69,7 @@ const map = new ol.Map({
 })
 map.addLayer(layerBackground)
 map.addLayer(layerShape)
+map.addLayer(layerShapeForest)
 
 // make layer background
 const wmsUrlProvince = 'https://carto.gouv.nc/public/services/aires_coutumieres/' +
@@ -72,7 +92,17 @@ const sourceProvince = new ol.source.Vector({
   features: featuresProvince
 })
 const layerShapeProvince = new ol.layer.Vector({
-  source: sourceProvince
+  source: sourceProvince,
+  style: new ol.style.Style({
+    fill: new ol.style.Fill({
+      color: 'grey',
+      opacity: 0.7
+    }),
+    stroke: new ol.style.Stroke({
+      color: 'grey',
+      width: 1
+    })
+  })
 })
 
 // view for map center new caledonia
@@ -190,7 +220,9 @@ function updateLayerShape(data) {
     center map on the new source
   */
   source.clear()
+  sourceForest.clear()
   source.addFeature(new ol.format.GeoJSON().readFeature(data))
+  sourceForest.addFeature(new ol.format.GeoJSON().readFeature(data.properties.um_geom))
   const feature = source.getFeatures()[0]
   const polygon = feature.getGeometry()
   view.fit(polygon, {
@@ -198,11 +230,6 @@ function updateLayerShape(data) {
   })
   sourceProvince.clear()
   sourceProvince.addFeature(new ol.format.GeoJSON().readFeature(data))
-  const featureProvince = sourceProvince.getFeatures()[0]
-  const polygonProvince = featureProvince.getGeometry()
-  // view.fit(polygonProvince, {
-  //   padding: [5, 5, 5, 5]
-  // })
 }
 
 document.addEventListener('DOMContentLoaded', function () {
