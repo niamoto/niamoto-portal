@@ -42,7 +42,24 @@
   {% if graph_list %}
 
   {% for graph in graph_list %}
+  {% if graph.model == 'specifications'%}
+  <div id="{{graph.name}}" class="w-{{graph.height}} p-3">
+    <div class="card">
+      <div class="card-header">{{graph.title|capfirst}}</div>
 
+      <div id="general_informations" class="card-body {{graph.model}}">
+        <h5 class="card-title"></h5>
+        <div class="card-text">Commune: <span id='commune'></span></div>
+        <div class="card-text">Surface: <span id='landArea'></span> ha</div>
+        <div class="card-text">Surface de forêt: <span id='forestArea'></span> ha</div>
+        <div class="card-text"><span id='nb_families'></span> famille(s)</div>
+        <div class="card-text"><span id='nb_species'></span> espèce(s)</span></div>
+        <div class="card-text"><span id='nb_occurence'></span> occurence(s)</span></div>
+
+      </div>
+    </div>
+  </div>
+  {% else %}
   <div id="{{graph.name}}" class="w-{{graph.height}} p-3">
     <div class="card">
       <div class="card-header">{{graph.title|capfirst}}</div>
@@ -54,6 +71,7 @@
 
     </div>
   </div>
+  {% endif %}
 
   {% endfor %}
   {% else %}

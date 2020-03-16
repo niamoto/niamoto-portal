@@ -186,6 +186,7 @@ function updateData(shape) {
     url: shapeList + shape.id + '/',
     success: function (response) {
       $('#shape_select').trigger('shapeSelected', response)
+      updateGeneralInformations(response)
       updateLayerShape(response)
       preloader.hidePreloader()
     }
@@ -211,6 +212,16 @@ function InitLayerShapeProvince() {
       })
     }
   })
+}
+
+function updateGeneralInformations(data) {
+  console.log(data)
+  $('#commune').text(data.properties.label)
+  $('#landArea').text(data.properties.land_area)
+  $('#forestArea').text(data.properties.forest_area)
+  $('#nb_families').text(data.properties.nb_families)
+  $('#nb_species').text(data.properties.nb_species)
+  $('#nb_occurence').text(data.properties.nb_occurence)
 }
 
 function updateLayerShape(data) {
