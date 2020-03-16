@@ -215,7 +215,6 @@ function InitLayerShapeProvince() {
 }
 
 function updateGeneralInformations(data) {
-  console.log(data)
   $('#commune').text(data.properties.label)
   $('#landArea').text(data.properties.land_area)
   $('#forestArea').text(data.properties.forest_area)
