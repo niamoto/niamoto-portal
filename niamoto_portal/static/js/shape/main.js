@@ -216,11 +216,11 @@ function InitLayerShapeProvince() {
 
 function updateGeneralInformations(data) {
   $('#commune').text(data.properties.label)
-  $('#landArea').text(data.properties.land_area)
-  $('#forestArea').text(data.properties.forest_area)
-  $('#nb_families').text(data.properties.nb_families)
-  $('#nb_species').text(data.properties.nb_species)
-  $('#nb_occurence').text(data.properties.nb_occurence)
+  $('#landArea').text('Surface ' + data.properties.land_area + ' ha')
+  $('#forestArea').text('Surface de forêt' + data.properties.forest_area + ' ha')
+  $('#nb_families').text(data.properties.nb_families + ' famille' + plurial(data.properties.nb_families))
+  $('#nb_species').text(data.properties.nb_species + ' espèce' + plurial(data.properties.nb_species))
+  $('#nb_occurence').text(data.properties.nb_occurence + ' occurence' + plurial(data.properties.nb_occurence))
 }
 
 function updateLayerShape(data) {
@@ -232,7 +232,9 @@ function updateLayerShape(data) {
   source.clear()
   sourceForest.clear()
   source.addFeature(new ol.format.GeoJSON().readFeature(data))
-  sourceForest.addFeature(new ol.format.GeoJSON().readFeature(data.properties.um_geom))
+  if (data.properties.um_geom !== null) {
+    sourceForest.addFeature(new ol.format.GeoJSON().readFeature(data.properties.um_geom))
+  }
   const feature = source.getFeatures()[0]
   const polygon = feature.getGeometry()
   view.fit(polygon, {
@@ -240,6 +242,14 @@ function updateLayerShape(data) {
   })
   sourceProvince.clear()
   sourceProvince.addFeature(new ol.format.GeoJSON().readFeature(data))
+}
+
+function plurial(data) {
+  if (data > 1) {
+    return 's'
+  } else {
+    return ''
+  }
 }
 
 document.addEventListener('DOMContentLoaded', function () {
