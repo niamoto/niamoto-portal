@@ -95,11 +95,11 @@ const layerShapeProvince = new ol.layer.Vector({
   source: sourceProvince,
   style: new ol.style.Style({
     fill: new ol.style.Fill({
-      color: 'grey',
+      color: '#688BA5',
       opacity: 0.7
     }),
     stroke: new ol.style.Stroke({
-      color: 'grey',
+      color: '#688BA5',
       width: 1
     })
   })
