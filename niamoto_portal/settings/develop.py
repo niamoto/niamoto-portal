@@ -11,7 +11,7 @@ DATABASES = {
         'NAME':     'amapiac',
         'USER':     'amapiac',
         'PASSWORD': 'amapiac',
-        'HOST':     'niamoto.ird.nc',
+        'HOST':     '127.0.0.1',
         'PORT':     '',
     }
 }
