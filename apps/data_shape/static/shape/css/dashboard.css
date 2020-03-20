@@ -30,6 +30,12 @@ body {
   stroke: #c79d1f;
 }
 
+#holdridge_forest .yGrid .tick line {
+  opacity: 0.5;
+  stroke-dasharray: 3, 3;
+  stroke: #c79d1f;
+}
+
 #ratio_forests .xGrid .tick line,
 #ratio_forests .xGridRight .tick line,
 #ratio_forests .xGridLeft .tick line {

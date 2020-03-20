@@ -72,15 +72,15 @@ export function initGraphBarhs(data) {
   )
 
   // Holdridge forest
-  const holdridgeForest = initGraphBarh(
-    '#holdridge_forest',
-    'Répartition(%)',
-    '',
-    ['forêt', 'hors-forêt'],
-    '',
-    100,
-    0.24
-  )
+  // const holdridgeForest = initGraphBarh(
+  //   '#holdridge_forest',
+  //   'Répartition(%)',
+  //   '',
+  //   ['forêt', 'hors-forêt'],
+  //   '',
+  //   100,
+  //   0.24
+  // )
 
   //   distributionOccGauge.render()
 
@@ -111,8 +111,8 @@ export function initGraphBarhs(data) {
     const landUm = dataFilter(data, 'land_um_elevation')
     const forest = dataFilter(data, 'forest_elevation')
     const forestUm = dataFilter(data, 'forest_um_elevation')
-    const holdridgeforest = dataFilter(data, 'holdridge_forest')
-    const holdridgeOutforest = dataFilter(data, 'holdridge_outforest')
+    // const holdridgeforest = dataFilter(data, 'holdridge_forest')
+    // const holdridgeOutforest = dataFilter(data, 'holdridge_outforest')
     const ratioForestNUM = dataFilter(data, 'ratio_forest_num_elevation')
     const ratioForestUM = dataFilter(data, 'ratio_forest_um_elevation')
     const forestData = land.map(function (d, i) {
@@ -131,14 +131,14 @@ export function initGraphBarhs(data) {
       }
       return result
     })
-    const holdridgeForestData = holdridgeOutforest.map(function (d, i) {
-      var result = {
-        class_name: d.class_name,
-        data1: holdridgeforest[i].class_value * 100,
-        data2: (d.class_value) * 100
-      }
-      return result
-    })
+    // const holdridgeForestData = holdridgeOutforest.map(function (d, i) {
+    //   var result = {
+    //     class_name: d.class_name,
+    //     data1: holdridgeforest[i].class_value * 100,
+    //     data2: (d.class_value) * 100
+    //   }
+    //   return result
+    // })
 
     const ratioForestData = ratioForestNUM.map(function (d, i) {
       var result = {
@@ -151,6 +151,6 @@ export function initGraphBarhs(data) {
     forests.update(forestData.reverse())
     forestsUm.update(forestUmData.reverse())
     ratioForest.update(ratioForestData.reverse())
-    holdridgeForest.update(holdridgeForestData.reverse())
+    // holdridgeForest.update(holdridgeForestData.reverse())
   };
 };

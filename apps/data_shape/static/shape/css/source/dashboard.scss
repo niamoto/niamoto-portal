@@ -36,6 +36,12 @@ body {
 
 #holdridge_forest {
   @include graph;
+
+  .yGrid .tick line {
+    opacity: 0.5;
+    stroke-dasharray: 3, 3;
+    stroke: #c79d1f;
+  }
 }
 
 #ratio_forests {
@@ -46,6 +52,8 @@ body {
     stroke-dasharray: 3, 3;
     stroke: #c79d1f;
   }
+
+
 }
 
 .card .mapCaledonie,
