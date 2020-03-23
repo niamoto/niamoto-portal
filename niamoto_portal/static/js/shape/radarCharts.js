@@ -65,7 +65,7 @@ $('#shape_select').on('shapeSelected', function (event, data) {
 })
 
 function updateData(data) {
-  data = dataFilter(data, 'holdridge')
+  data = dataFilter(data, 'holdridge_land')
   const holdridgeData = [data.map(function (d) {
     var result = {
       axis: d.class_name,

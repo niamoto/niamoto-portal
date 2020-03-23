@@ -60,13 +60,13 @@ export function initGraphBarhs(data) {
       return result
     }
 
-    const holdridgeforest = dataFilter(data, 'holdridge_forest')
-    const holdridgeOutforest = dataFilter(data, 'holdridge_outforest')
+    const holdridgeForest = dataFilter(data, 'holdridge_forest')
+    const holdridgeForestOut = dataFilter(data, 'holdridge_forest_out')
 
-    const holdridgeForestData = holdridgeOutforest.map(function (d, i) {
+    const holdridgeForestData = holdridgeForestOut.map(function (d, i) {
       var result = {
         class_name: d.class_name,
-        data1: holdridgeforest[i].class_value * 100,
+        data1: holdridgeForest[i].class_value * 100,
         data2: (d.class_value) * 100
       }
       return result
