@@ -6,6 +6,7 @@ import * as d3radarChart from './radarCharts'
 import * as d3GraphOneBarv from './d3GraphOneBarvs'
 import * as d3GraphBarv from './d3GraphBarhvs'
 import * as d3GraphDonut from './d3GraphDonuts'
+import * as d3GraphStakedArea from './d3GraphStakedAreas'
 import * as d3 from 'd3'
 // var d3_gauges = require('./d3_gauges');
 
@@ -265,4 +266,5 @@ document.addEventListener('DOMContentLoaded', function () {
   d3GraphOneBarv.initGraphBarvs()
   d3GraphBarv.initGraphBarhs()
   d3GraphDonut.initGraphDonuts()
+  d3GraphStakedArea.initGraphStakedAreas()
 })
