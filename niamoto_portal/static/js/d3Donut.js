@@ -191,7 +191,6 @@ export class GraphDonut {
 
     texts.enter().append('text')
       .text(function (d) {
-        console.log(d.data.key)
         return d.data.key
       })
       .attr('class', 'label')
@@ -209,7 +208,6 @@ export class GraphDonut {
           pos = outerArc2.centroid(d)
           var midangle = d.startAngle + (d.endAngle - d.startAngle) / 2
           pos[0] = radius * 0.99 * (midangle < Math.PI ? 1 : -1)
-          console.log(pos)
         }
         return 'translate(' + pos + ')'
       })
