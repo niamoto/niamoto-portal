@@ -14,9 +14,9 @@ export function initGraphDonuts(data) {
     width: $('#cover_forest_type').width(),
     height: $('#cover_forest_type').height(),
     container: '#cover_forest_type',
-    value: ['forêt coeur', 'forêt mature', 'forêt secondaire'],
-    legend: ['forêt coeur', 'forêt mature', 'forêt secondaire'],
-    color: ['#2b8313', '#78ac01', '#ceec72']
+    value: ['forêt secondaire', 'forêt mature', 'forêt coeur'],
+    legend: ['forêt secondaire', 'forêt mature', 'forêt coeur'],
+    color: ['#ceec72', '#78ac01', '#2b8313']
   })
 
   // Update Data for trigger
@@ -50,6 +50,6 @@ export function initGraphDonuts(data) {
       }
       return result
     })
-    coverForestsType.update(coverForestTypeData)
+    coverForestsType.update(coverForestTypeData.reverse())
   };
 };
