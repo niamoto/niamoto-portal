@@ -59,7 +59,7 @@ export function initGraphBarvs(data) {
     height: $('#substrat').height(),
     container: '#substrat',
     value: ['NUM', 'UM'],
-    legend: ['non Utramafique (NUM)', 'Ultramafique (UM)'],
+    legend: ['Ultramafique (UM)', 'non Utramafique (NUM)'],
     color: ['#e1a553', '#a97742'],
     typeLegend: 2
   })
@@ -135,6 +135,6 @@ export function initGraphBarvs(data) {
       }
       return result
     })
-    substrat.update(substratData)
+    substrat.update(substratData.reverse())
   };
 };
