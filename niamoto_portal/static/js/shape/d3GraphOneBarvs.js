@@ -53,6 +53,17 @@ export function initGraphBarvs(data) {
     yTickValue: ['70', '80', '90', '100']
   })
 
+  // forets type
+  const substrat = new d3GraphBarv.GraphOneBarV({
+    width: $('#substrat').width(),
+    height: $('#substrat').height(),
+    container: '#substrat',
+    value: ['NUM', 'UM'],
+    legend: ['non Utramafique (NUM)', 'Ultramafique (UM)'],
+    color: ['#e1a553', '#a97742'],
+    typeLegend: 2
+  })
+
   // Update Data for trigger
   $('#shape_select').on('shapeSelected', function (event, data) {
     updateData(data.properties.frequencies)
@@ -115,5 +126,15 @@ export function initGraphBarvs(data) {
       return result
     })
     coverForestsAdmin.update(coverForestAdminData)
+
+    let substratData = dataFilter(data, 'substrat')
+    substratData = substratData.map(function (d, i) {
+      var result = {
+        label: d.class_name,
+        value: d.class_value
+      }
+      return result
+    })
+    substrat.update(substratData)
   };
 };

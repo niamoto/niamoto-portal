@@ -31,6 +31,7 @@ export class GraphOneBarV {
      * @property {number} marginLeft - margin left svg default
      * @property {array} colorText - corlor text  inside rectangle
      * @property {array} yTickValue - tick value axis y
+     * * @property {array} typeLegend - select diffent type legend (1 or 2)
      */
 
     this.config = {
@@ -50,7 +51,8 @@ export class GraphOneBarV {
       yDomain: [0, 100],
       marginLeft: 0.15,
       colorText: ['#222', '#222', '#222'],
-      yTickValue: ['0', '25', '50', '75', '100']
+      yTickValue: ['0', '25', '50', '75', '100'],
+      typeLegend: 1
     }
 
     this.config = Object.assign(this.config, configuration)
@@ -107,24 +109,38 @@ export class GraphOneBarV {
       .attr('width', this.mwidth)
       .attr('height', this.mheight * 0.3)
 
-    svgLegend.append('g')
-      .attr('class', 'legend')
-      .attr('transform', 'translate(' + this.mwidth * 0.1 + ', ' + 0 + ')')
-    // .attr('dy', '.5em')
-    // .attr('dx', '.5em')
+    if (this.config.typeLengend === 1) {
+      svgLegend.append('g')
+        .attr('class', 'legend')
+        .attr('transform', 'translate(' + this.mwidth * 0.1 + ', ' + 0 + ')')
+      // .attr('dy', '.5em')
+      // .attr('dx', '.5em')
+    } else {
+      svgLegend.append('g')
+        .attr('class', 'legend')
+        .attr('transform', 'translate(' + this.mwidth * 0.1 + ', ' + 0 + ')')
+        .attr('dy', '.5em')
+        .attr('dx', '.5em')
+    }
 
     var colorScale = d3.scaleOrdinal()
       .domain(this.config.legend)
       .range(this.config.color)
 
     var legendColor = d3.legendColor()
-      // .shapePadding(50)
-      .scale(colorScale)
-      .shapeWidth(70)
-      .shapeHeight(7)
-      .orient('horizontal')
-      .labelAlign('start')
-      .labelWrap(30)
+    if (this.config.typeLengend === 1) {
+      legendColor.scale(colorScale)
+        .shapeWidth(70)
+        .shapeHeight(7)
+        .orient('horizontal')
+        .labelAlign('start')
+        .labelWrap(30)
+    } else {
+      legendColor.shapePadding(5)
+        .scale(colorScale)
+        .shapeWidth(10)
+        .shapeHeight(10)
+    }
 
     svgLegend.select('.legend')
       .call(legendColor)
