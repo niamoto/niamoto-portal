@@ -26,6 +26,7 @@ class Shape(models.Model):
     nb_families = models.IntegerField(null=True, blank=True)
     nb_species = models.IntegerField(null=True, blank=True)
     n_unique_species = models.IntegerField(null=True, blank=True)
+    fragment_meff_cbc = models.FloatField(null=True, blank=True)
     um_geom = models.MultiPolygonField(null=True, srid=4326, blank=True)
 
     def __str__(self):
@@ -67,7 +68,8 @@ class Graph(models.Model):
     title = models.CharField(max_length=30)
     model = models.CharField(max_length=30)
     sort = models.IntegerField()
-    height = models.CharField(max_length=3, choices=GRAPH_SIZES, default='25')
+    height = models.CharField(
+        max_length=3, choices=GRAPH_SIZES, default='25')
     show = models.BooleanField(default=True)
     profil = models.CharField(max_length=30, default='default')
 

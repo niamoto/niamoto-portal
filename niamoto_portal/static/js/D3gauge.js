@@ -62,46 +62,46 @@ export class Gauge {
 
     this.scale = d3.scaleLinear()
       .range([0, 1])
-      .domain([config.minValue, config.maxValue])
+      .domain([this.config.minValue, this.config.maxValue])
 
     var colorDomain = [
-      (config.maxValue - config.minValue) * config.lowThreshhold,
-      (config.maxValue - config.minValue) * config.lowMidThreshhold,
-      (config.maxValue - config.minValue) * config.highMidThreshhold,
-      (config.maxValue - config.minValue) * config.highThreshhold
+      (this.config.maxValue - this.config.minValue) * this.config.lowThreshhold,
+      (this.config.maxValue - this.config.minValue) * this.config.lowMidThreshhold,
+      (this.config.maxValue - this.config.minValue) * this.config.highMidThreshhold,
+      (this.config.maxValue - this.config.minValue) * this.config.highThreshhold
     ].map(this.scale)
     const colorRange = [
-      config.lowThreshholdColor,
-      config.lowMidThreshholdColor,
-      config.defaultColor,
-      config.highMidThreshholdColor,
-      config.highThreshholdColor
+      this.config.lowThreshholdColor,
+      this.config.lowMidThreshholdColor,
+      this.config.defaultColor,
+      this.config.highMidThreshholdColor,
+      this.config.highThreshholdColor
     ]
 
     this.colorScale = d3.scaleThreshold().domain(colorDomain).range(colorRange)
 
     this.ticks = [
-      config.minValue,
-      (config.maxValue - config.minValue) * config.lowThreshhold,
-      (config.maxValue - config.minValue) * config.lowMidThreshhold,
-      (config.maxValue - config.minValue) * config.highMidThreshhold,
-      (config.maxValue - config.minValue) * config.highThreshhold,
-      config.maxValue
+      this.config.minValue,
+      (this.config.maxValue - this.config.minValue) * this.config.lowThreshhold,
+      (this.config.maxValue - this.config.minValue) * this.config.lowMidThreshhold,
+      (this.config.maxValue - this.config.minValue) * this.config.highMidThreshhold,
+      (this.config.maxValue - this.config.minValue) * this.config.highThreshhold,
+      this.config.maxValue
     ]
 
     this.threshholds = [
-        config.minValue,
-        (config.maxValue - config.minValue) * config.lowThreshhold,
-        (config.maxValue - config.minValue) * config.lowMidThreshhold,
-        (config.maxValue - config.minValue) * config.highMidThreshhold,
-        (config.maxValue - config.minValue) * config.highThreshhold,
-        config.maxValue
+        this.config.minValue,
+        (this.config.maxValue - this.config.minValue) * this.config.lowThreshhold,
+        (this.config.maxValue - this.config.minValue) * this.config.lowMidThreshhold,
+        (this.config.maxValue - this.config.minValue) * this.config.highMidThreshhold,
+        (this.config.maxValue - this.config.minValue) * this.config.highThreshhold,
+        this.config.maxValue
       ]
       .map(d => this.scale(d))
 
     this.scale = d3.scaleLinear()
       .range([0, 1])
-      .domain([config.minValue, config.maxValue])
+      .domain([this.config.minValue, this.config.maxValue])
 
     this.arc = d3.arc()
       .innerRadius(this._radius() - this.arcWidth - this.arcPadding)
