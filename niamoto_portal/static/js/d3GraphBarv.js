@@ -2,11 +2,39 @@
 
 import * as d3 from 'd3'
 
+/**
+ * Represents a graph one bar.
+ * @constructor
+ * @param {object} configuration - configuration default constains member config.
+ */
+
 // todo diviser en 2 graphs
-export class GraphBarh {
+export class GraphBarv {
   constructor(configuration) {
-    // default configuration settings
-    var config = {
+    /**
+     * default configuration settings
+     * @type {object}
+     * @property {number} height - height svg.
+     * @property {number} with - with svg.
+     * @property {number} margin - margin svg.
+     * @property {number} minValue - minimum value y
+     * @property {number} maxValue - maximum value y
+     * @property {number} majorTicks - number of ticks
+     * @property {arrayr} color  - color for rectangle
+     * @property {number} transitionMs - time of transition ms
+     * @property {string} container - container name
+     * @property {string} title - title svg
+     * @property {string} xLabel - label axis x
+     * @property {string} yLabel - label axis y
+     * @property {array} value - values flux
+     * @property {array} legend - legend text
+     * @property {array} yDomain - mininimum and maximum value y
+     * @property {number} marginLeft - margin left svg default
+     * @property {array} colorText - corlor text  inside rectangle
+
+     */
+
+    this.config = {
       height: 200,
       width: 200,
       margin: 10,
@@ -27,38 +55,68 @@ export class GraphBarh {
       colorText: ['#000']
     }
 
-    this.config = Object.assign(config, configuration)
+    this.config = Object.assign(this.config, configuration)
 
+    /**
+     * default margin settings
+     * @type {object}
+     * @property {number} top
+     * @property {number} right
+     * @property {number} bottom
+     * @property {number} left
+     */
     this.margin = {
       top: this.config.height * 0.08,
       right: this.config.width * 0.03,
       bottom: this.config.height * 0.2,
       left: this.config.width * this.config.marginLeft
     }
-
+    /**
+     * height without margins
+     * @type {number}
+     */
     this.mheight = this.config.height - this.margin.top - this.margin.bottom
+    /**
+     * width without margins
+     * @type {number}
+     */
     this.mwidth = this.config.width - this.margin.left - this.margin.right
 
+    /**
+     * general svg
+     */
     this.svg = d3.select(this.config.container).append('svg')
       .attr('width', this.config.width)
       .attr('height', this.config.height)
-
+    /**
+     * show axis x
+     */
     this.xAxis = this.svg.append('g')
       .attr('class', 'xAxis')
       .attr('transform', 'translate(' + this.margin.left + ',' + (this.mheight + this.margin.top) + ')')
+    /**
+     * show grid y
+     */
     this.yGrid = this.svg.append('g')
       .attr('class', 'yGrid')
       .attr('transform', 'translate(' + this.margin.left + ',' + this.margin.top + ')')
-
+    /**
+     * show axis y
+     */
     this.yAxis = this.svg.append('g')
       .attr('class', 'yAxis')
       .attr('transform', 'translate(' + this.margin.left + ',' + this.margin.top + ')')
+    /**
+     *
+     */
     this.g = this.svg.append('g')
       .attr('transform', 'translate(' + this.margin.left + ',' + this.margin.top + ')')
     this.svgLabel = this.svg.append('g')
       .attr('class', 'label')
 
-    // Label Y
+    /**
+     * Config Label y
+     */
     this.svgLabel.append('text')
       .attr('class', 'yLabel')
       .attr('transform', 'rotate(-90)')
@@ -68,7 +126,9 @@ export class GraphBarh {
       .style('text-anchor', 'middle')
       .text(this.config.yLabel)
 
-    // Label X
+    /**
+     * Config Label x
+     */
     this.svgLabel.append('text')
       .attr('class', 'xLabel')
       .attr('y', this.config.height * 0.92)
@@ -77,8 +137,9 @@ export class GraphBarh {
       .style('text-anchor', 'middle')
       .text(this.config.xLabel)
 
-    // Legend
-
+    /**
+     *  Svg Legend
+     */
     const svgLegend = d3.select(this.config.container + 'Legend').append('svg')
       .attr('width', this.mwidth)
       .attr('height', this.mheight * 0.3)
@@ -99,14 +160,15 @@ export class GraphBarh {
       .shapeWidth(10)
       .shapeHeight(10)
 
+    /** Show Legend */
     svgLegend.select('.legend')
       .call(legendColor)
   }
 
-  render(newValue) {
-
-  }
-
+  /**
+   * update graph with new value
+   * @param {objet} response - json flux
+   */
   update(response) {
     var stack = d3.stack()
       .keys(['data1', 'data2'])

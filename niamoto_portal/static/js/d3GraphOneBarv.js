@@ -147,14 +147,10 @@ export class GraphOneBarV {
   }
 
   /**
-   * update graph
+   * update graph with new value
    * @param {objet} response - json flux
    */
   update(response) {
-    // var stack = d3.stack()
-    //   .keys(['forest', 'outForest'])
-    //   .order(d3.stackOrderNone)
-    //   .offset(d3.stackOffsetNone)
     var data = response
 
     // if (this.config.yDomain === '') {
@@ -211,11 +207,13 @@ export class GraphOneBarV {
       .select('.domain').remove()
 
     /**
+     * function used to calculate the position
+            from the top of the graph.
+           add the size of each previous value
      * @func
-     * fonction servant à calculer la position
-           à partir du haut du graph
-          il faut additionnner la taille de chaque chaque valeur précédente
      * @param {number} i - index data
+     * @returns {number} - un nombre correspondant à l'échelle
+     * @memberof GraphOneBarV
      */
     function definePosition(i) {
       if (i !== 0) {
@@ -229,11 +227,16 @@ export class GraphOneBarV {
       }
     }
 
+    /**
+     * function used to calculate the position of the text
+            from the top of the graph.
+           add the size of each previous value
+     * @func
+     * @param {number} i - index data
+     * @returns {number} - un nombre correspondant à l'échelle
+     * @memberof GraphOneBarV
+     */
     function definePositionText(i, domain) {
-      /* fonction servant à calculer la position
-           à partir du haut du graph
-          il faut additionnner la taille de chaque chaque valeur précédente
-        */
       let height = 0
       for (let y = i; y >= 0; y--) {
         if (y === i) {
@@ -245,11 +248,16 @@ export class GraphOneBarV {
       return yScale(100 - height)
     }
 
+    /**
+     * this function is used to calculate the height of each rectangle
+          For the last value, we subtract the min value of the domain.
+          Note that it is better that the list is ordered from the smallest to the largest
+     * @func
+     * @param {number} i - index data
+     * @returns {number} - a number corresponding to the scale
+     * @memberof GraphOneBarV
+     */
     function defineHeightRect(d, i, domain, scale = true) {
-      /* cette focntion sert à calculer la hauteur de chaque rectangle
-         Pour la dernier valeur, on retranche la valeur min du domaine.
-         A noter qu'il vaut mieux que la liste soit ordonnée du plus petit au plus grand
-        */
       let height = 0
       if (i === data.length - 1) {
         height = d.value - domain[0]
