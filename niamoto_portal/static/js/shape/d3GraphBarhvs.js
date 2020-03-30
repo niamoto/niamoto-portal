@@ -1,6 +1,6 @@
-import * as d3GraphBarh from '../d3GraphBarv'
+import * as d3GraphBarv from '../d3GraphBarv'
 
-export function initGraphBarhs(data) {
+export function initGraphBarvs(data) {
   function initMax(maxValue, initMaxValue) {
     if (maxValue === 0) {
       return initMaxValue
@@ -9,8 +9,8 @@ export function initGraphBarhs(data) {
     }
   }
 
-  function initGraphBarh(id, xLabel, yLabel, value, yDomain, maxValue = '', marginLeft = 0.15, legend) {
-    return new d3GraphBarh.GraphBarh({
+  function initGraphBarv(id, xLabel, yLabel, value, yDomain, maxValue = '', marginLeft = 0.15, legend) {
+    return new d3GraphBarv.GraphBarv({
       width: $(id).width(),
       height: $(id).height(),
       container: id,
@@ -26,7 +26,7 @@ export function initGraphBarhs(data) {
   }
 
   // Holdridge forest
-  const holdridgeForest = initGraphBarh(
+  const holdridgeForest = initGraphBarv(
     '#holdridge_forest',
     '',
     '',
