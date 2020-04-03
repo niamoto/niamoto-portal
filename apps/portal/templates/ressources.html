@@ -79,7 +79,7 @@
       {%if ressources%}
       <div class="row ressources">
         <table>
-          <thead>
+          <thead class="thead-dark">
             <tr>
               <th>Année</th>
               <th>Auteur et titre du document</th>
@@ -118,14 +118,15 @@
       <h4>Listes des arbres</h4>
 
       {%if trees%}
-      <div class="row listTree">
-        <table>
-          <thead>
+      <div class="row listTree col-12">
+        <table class="table table-striped">
+          <thead class="thead-dark">
             <tr>
-              <th>Famille</th>
-              <th>Nom</th>
-              <th>Statut</th>
-              <th>Liens</th>
+              <th scope="col">Famille</th>
+              <th scope="col">Genre</th>
+              <th scope="col">Nom</th>
+              <th scope="col">Statut</th>
+              <th scope="col" colspan="2">Liens</th>
             </tr>
           </thead>
           <tbody>
@@ -134,18 +135,24 @@
 
 
 
-            <tr class="col-12">
+            <tr>
 
               <td>{{tree.family_name|default:""}}</td>
+              <td>{{tree.genre_name|default:""}}</td>
               <td>{{tree.name|default:""}}</td>
-              <td>{{tree.statut|default:""}}</td>
-              <td>{%if tree.id_endemia %}
-                <a href="http://endemia.nc/flore/fiche{{tree.id_endemia}}">Endemia </a>
-                {%endif%}
-                {%if tree.id_florical %}
-                <a
-                  href="http://publish.plantnet-project.org/project/florical_fr/collection/florical/taxons/details/{{tree.id_florical}}">Florical</a>
-                {%endif%}</td>
+              <td {%if tree.statut == "Endémique"%} class="endemique" {%endif%}>
+                {{tree.statut|default:""}}
+              </td>
+              <td><span class="link">
+                  {%if tree.id_endemia %}
+                  <a href="http://endemia.nc/flore/fiche{{tree.id_endemia}}">Endemia </a>
+                  {%endif%}</span></td>
+              <td><span class="link">
+                  {%if tree.id_florical %}
+                  <a
+                    href="http://publish.plantnet-project.org/project/florical_fr/collection/florical/taxons/details/{{tree.id_florical}}">Florical</a>
+                  {%endif%}</span></td>
+
             </tr>
 
             {%endfor%}

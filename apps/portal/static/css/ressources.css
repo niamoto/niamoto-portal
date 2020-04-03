@@ -172,6 +172,10 @@ td {
           box-shadow: 0 0 5px grey inset;
 }
 
+.listTree thead {
+  border: black;
+}
+
 .listTree tr {
   text-decoration: none;
   font-size: .75em;
@@ -199,5 +203,19 @@ td {
   background-color: rgba(0, 0, 0, 0.05);
   -webkit-box-shadow: 0 0 5px grey inset;
           box-shadow: 0 0 5px grey inset;
+}
+
+.listTree .endemique {
+  background-color: #9ABFDB;
+}
+
+.listTree .link a {
+  font-size: 1.1em;
+  color: #688BA5;
+}
+
+.listTree .link :hover {
+  font-size: 1em;
+  font-weight: bold;
 }
 /*# sourceMappingURL=ressources.css.map */

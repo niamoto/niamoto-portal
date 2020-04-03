@@ -178,6 +178,10 @@ td {
 
 }
 
+.listTree thead {
+  border: black;
+}
+
 .listTree tr {
   text-decoration: none;
   font-size: .75em;
@@ -205,4 +209,18 @@ td {
   background-color: rgba($color: #000000, $alpha: 0.05);
   box-shadow: 0 0 5px grey inset;
 
+}
+
+.listTree .endemique {
+  background-color: $color-secondary-1-4;
+}
+
+.listTree .link a {
+  font-size: 1.1em;
+  color: $color-secondary-1-3
+}
+
+.listTree .link :hover {
+  font-size: 1em;
+  font-weight: bold;
 }
