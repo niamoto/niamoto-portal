@@ -27,7 +27,8 @@ class RessouresView(TemplateView):
         ressources = Ressource.objects.all().order_by('-year')
         persons = Person.objects.all().order_by('?')
         activities = Activity.objects.all
-        trees = Tree.objects.all
+        trees = Tree.objects.all().order_by(
+            'family_name', 'genre_name', 'name')
         return {
             'ressources': ressources,
             'persons': persons,

@@ -122,10 +122,11 @@ class Tree(models.Model):
     id_family = models.IntegerField(null=True, blank=True)
     id_infra = models.IntegerField(null=True, blank=True)
     family_name = models.CharField(null=True, blank=True, max_length=50)
+    genre_name = models.CharField(null=True, blank=True, max_length=50)
     species_name = models.CharField(null=True, blank=True, max_length=150)
     infraspecies_name = models.CharField(null=True, blank=True, max_length=150)
     name = models.CharField(null=True, blank=True, max_length=250)
-    statut = models.CharField(null=True, blank=True, max_length=1)
+    statut = models.CharField(null=True, blank=True, max_length=10)
 
     def __str__(self):
         return
