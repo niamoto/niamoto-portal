@@ -107,3 +107,28 @@ class Activity(models.Model):
     def __str__(self):
         """Unicode representation of acivity."""
         return self.contrat + ': ' + self.title
+
+
+class Tree(models.Model):
+    """Tree
+
+    Arguments:
+        models {[type]} -- [description]
+    """
+
+    id_species = models.IntegerField(null=True, blank=True)
+    id_endemia = models.IntegerField(null=True, blank=True)
+    id_florical = models.IntegerField(null=True, blank=True)
+    id_family = models.IntegerField(null=True, blank=True)
+    id_infra = models.IntegerField(null=True, blank=True)
+    family_name = models.CharField(null=True, blank=True, max_length=50)
+    species_name = models.CharField(null=True, blank=True, max_length=150)
+    infraspecies_name = models.CharField(null=True, blank=True, max_length=150)
+    name = models.CharField(null=True, blank=True, max_length=250)
+    statut = models.CharField(null=True, blank=True, max_length=1)
+
+    def __str__(self):
+        return
+
+    def __unicode__(self):
+        return

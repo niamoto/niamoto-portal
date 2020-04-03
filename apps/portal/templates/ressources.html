@@ -112,6 +112,52 @@
     </div>
   </div>
 </section>
+<section id="listTree">
+  <div class="container">
+    <div class="row">
+      <h4>Listes des arbres</h4>
+
+      {%if trees%}
+      <div class="row listTree">
+        <table>
+          <thead>
+            <tr>
+              <th>Famille</th>
+              <th>Espèces</th>
+              <th>Nom</th>
+              <th>Statut</th>
+              <th>Liens</th>
+            </tr>
+          </thead>
+          <tbody>
+            {%for tree in trees%}
+
+
+
+
+            <tr class="col-12">
+
+              <td>{{tree.family_name|default:""}}</td>
+              <td>{{tree.species_name|default:""}}</td>
+              <td>{{tree.name|default:""}}</td>
+              <td>{{tree.statut|default:""}}</td>
+              <td>{%if tree.id_endemia %}
+                <a href="http://endemia.nc/flore/fiche{{tree.id_endemia}}">Endemia </a>
+                {%endif%}
+                {%if tree.id_florical %}
+                <a
+                  href="http://publish.plantnet-project.org/project/florical_fr/collection/florical/taxons/details/{{tree.id_florical}}">Florical</a>
+                {%endif%}</td>
+            </tr>
+
+            {%endfor%}
+          </tbody>
+        </table>
+        {%endif%}
+      </div>
+    </div>
+  </div>
+</section>
 {% endblock body %}
 
 {% block scripts %}

@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views.generic import TemplateView
 from django.http import HttpResponse
 from django.template import loader
-from .models import Ressource, Person, Activity
+from .models import Ressource, Person, Activity, Tree
 import random
 # Create your views here.
 
@@ -27,8 +27,10 @@ class RessouresView(TemplateView):
         ressources = Ressource.objects.all().order_by('-year')
         persons = Person.objects.all().order_by('?')
         activities = Activity.objects.all
+        trees = Tree.objects.all
         return {
             'ressources': ressources,
             'persons': persons,
             'activities': activities,
+            'trees': trees
         }
