@@ -205,17 +205,17 @@ td {
           box-shadow: 0 0 5px grey inset;
 }
 
-.listTree .endemique {
+.listTree .endemique:hover {
   background-color: #9ABFDB;
 }
 
-.listTree .link a {
-  font-size: 1.1em;
-  color: #688BA5;
+.listTree .autochtone:hover {
+  background-color: #94DACE;
 }
 
-.listTree .link :hover {
+.listTree .link a {
   font-size: 1em;
   font-weight: bold;
+  color: #688BA5;
 }
 /*# sourceMappingURL=ressources.css.map */

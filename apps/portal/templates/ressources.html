@@ -140,7 +140,8 @@
               <td>{{tree.family_name|default:""}}</td>
               <td>{{tree.genre_name|default:""}}</td>
               <td>{{tree.name|default:""}}</td>
-              <td {%if tree.statut == "Endémique"%} class="endemique" {%endif%}>
+              <td {%if tree.statut == "Endémique"%} class="endemique" {%endif%} {%if tree.statut == "Autochtone"%}
+                class="autochtone" {%endif%}>
                 {{tree.statut|default:""}}
               </td>
               <td><span class="link">

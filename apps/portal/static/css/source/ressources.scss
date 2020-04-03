@@ -211,16 +211,16 @@ td {
 
 }
 
-.listTree .endemique {
+.listTree .endemique:hover {
   background-color: $color-secondary-1-4;
 }
 
-.listTree .link a {
-  font-size: 1.1em;
-  color: $color-secondary-1-3
+.listTree .autochtone:hover {
+  background-color: $color-primary-4;
 }
 
-.listTree .link :hover {
+.listTree .link a {
   font-size: 1em;
   font-weight: bold;
+  color: $color-secondary-1-3
 }
