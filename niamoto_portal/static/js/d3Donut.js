@@ -144,7 +144,7 @@ export class GraphDonut {
         this._current = {
           endAngle: Math.PI,
           index: 0,
-          padAngle: 90,
+          padAngle: 0,
           startAngle: Math.PI,
           value: null
         }
@@ -199,7 +199,7 @@ export class GraphDonut {
       .attr('fill', '#222')
       .text(function (d) {
         if (d.value !== 0) {
-          return d3.format('.0%')(d.value / 100)
+          return d3.format('.1%')(d.value / 100)
         }
       })
       .attr('transform', function (d) {
@@ -228,7 +228,7 @@ export class GraphDonut {
     texts.transition().duration(500)
       .text(function (d) {
         if (d.value !== 0) {
-          return d3.format('.0%')(d.value / 100)
+          return d3.format('.1%')(d.value / 100)
         }
       })
       .attr('transform', function (d) {
