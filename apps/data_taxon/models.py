@@ -63,8 +63,8 @@ class Graph(models.Model):
         ('100', 'XLarge'),
     )
     label = models.CharField(max_length=30)
-    title = models.CharField(max_length=30)
-    model = models.CharField(max_length=30)
+    title = models.CharField(max_length=50)
+    model = models.CharField(max_length=50)
     sort = models.IntegerField()
     height = models.CharField(max_length=2, choices=GRAPH_SIZES, default='25')
     show = models.BooleanField(default=True)
