@@ -22,7 +22,7 @@ export function initGraphBarhs(data) {
       yDomain: yDomain,
       maxValue: maxValue,
       marginLeft: marginLeft,
-      color: ['#548235', '#f5e9d8']
+      color: ['#548235', '#ecdcad']
     })
   }
 
