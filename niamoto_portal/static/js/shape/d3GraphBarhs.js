@@ -47,7 +47,7 @@ export function initGraphBarhs(data) {
     '#forets',
     'Superfice(hectare)',
     'Alitude(m)',
-    ['forêt', 'hors-forêt'],
+    ['Forêt', 'Hors-forêt'],
     ['1700', '1500', '1300', '1100', '900', '700', '500', '300', '100']
   )
 
@@ -58,7 +58,7 @@ export function initGraphBarhs(data) {
     '#forets_um',
     'Superfice(hectare)',
     'Alitude(m)',
-    ['forêt', 'hors-forêt'],
+    ['Forêt', 'Hors-forêt'],
     ['1700', '1500', '1300', '1100', '900', '700', '500', '300', '100']
   )
 
@@ -67,7 +67,7 @@ export function initGraphBarhs(data) {
     '#ratio_forests',
     'Répartition(%)',
     'Alitude(m)',
-    ['forêt (UM)', 'forêt (NUM)'],
+    ['Forêt (UM)', 'Forêt (NUM)'],
     ['1700', '1500', '1300', '1100', '900', '700', '500', '300', '100']
   )
 
@@ -76,7 +76,7 @@ export function initGraphBarhs(data) {
   //   '#holdridge_forest',
   //   'Répartition(%)',
   //   '',
-  //   ['forêt', 'hors-forêt'],
+  //   ['Forêt', 'Hors-forêt'],
   //   '',
   //   100,
   //   0.24

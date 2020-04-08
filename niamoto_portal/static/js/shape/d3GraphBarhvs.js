@@ -30,7 +30,7 @@ export function initGraphBarvs(data) {
     '#holdridge_forest',
     '',
     '',
-    ['forêt', 'hors-forêt'],
+    ['Forêt', 'Hors-forêt'],
     [0, 100],
     100
   )

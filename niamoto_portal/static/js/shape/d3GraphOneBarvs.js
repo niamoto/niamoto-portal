@@ -9,7 +9,7 @@ export function initGraphBarvs(data) {
     }
   }
 
-  const value = ['forêt', 'hors-forêt']
+  const value = ['Forêt', 'Hors-forêt']
   const color = ['#548235', '##ecdcad']
 
   const coverForests = new d3GraphBarv.GraphOneBarV({

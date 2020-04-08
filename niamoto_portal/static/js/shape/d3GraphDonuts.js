@@ -15,7 +15,7 @@ export function initGraphDonuts(data) {
     height: $('#cover_forest_type').height(),
     container: '#cover_forest_type',
     value: ['forêt secondaire', 'forêt mature', 'forêt coeur'],
-    legend: ['forêt secondaire', 'forêt mature', 'forêt coeur'],
+    legend: ['Forêt secondaire', 'Forêt mature', 'Forêt coeur'],
     color: ['#ceec72', '#78ac01', '#2b8313']
   })
 

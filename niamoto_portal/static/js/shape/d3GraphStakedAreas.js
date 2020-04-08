@@ -31,7 +31,7 @@ export function initGraphStakedAreas(data) {
     '#forest_type_elevation',
     'Altitude(m)',
     '',
-    ['forêt secondaire', 'forêt mature', 'forêt coeur'],
+    ['Forêt secondaire', 'Forêt mature', 'Forêt coeur'],
     [0, 100],
     100
   )
