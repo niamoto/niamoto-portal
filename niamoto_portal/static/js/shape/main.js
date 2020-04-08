@@ -6,6 +6,7 @@ import * as d3radarChart from './radarCharts'
 import * as d3GraphOneBarv from './d3GraphOneBarvs'
 import * as d3GraphBarv from './d3GraphBarhvs'
 import * as d3GraphDonut from './d3GraphDonuts'
+import * as d3GraphTripleDonut from './d3TripleDonuts'
 import * as d3GraphStakedArea from './d3GraphStakedAreas'
 import * as d3Gauges from './d3Gauges'
 import * as d3 from 'd3'
@@ -265,8 +266,9 @@ document.addEventListener('DOMContentLoaded', function () {
   d3GraphBarh.initGraphBarhs()
   d3radarChart.initRadarChart()
   d3GraphOneBarv.initGraphBarvs()
-  d3GraphBarv.initGraphBarhs()
+  d3GraphBarv.initGraphBarvs()
   d3GraphDonut.initGraphDonuts()
+  d3GraphTripleDonut.initGraphDonuts()
   d3GraphStakedArea.initGraphStakedAreas()
   d3Gauges.initGauges(null)
 })
