@@ -142,6 +142,7 @@ export class GraphStakedArea {
     var yAxis = g => g
       .call(d3.axisLeft(yScale)
         .tickFormat(d => d + '%')
+        .tickSizeInner(-this.mwidth * 0.97)
         .tickPadding(10)
         .tickValues(this.config.yTickValue)
       )

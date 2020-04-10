@@ -9,7 +9,7 @@ export function initGraphStakedAreas(data) {
     }
   }
 
-  function initGraphStakedArea(id, xLabel, yLabel, value, yDomain, maxValue = '', marginLeft = 0.15, legend) {
+  function initGraphStakedArea(id, xLabel, yLabel, value, yDomain, maxValue = '', marginLeft = 0.15, legend, color, xDomain) {
     return new d3GraphstakedArea.GraphStakedArea({
       width: $(id).width(),
       height: $(id).height(),
@@ -22,7 +22,8 @@ export function initGraphStakedAreas(data) {
       maxValue: maxValue,
       marginLeft: marginLeft,
       legend: value,
-      color: ['#ceec72', '#78ac01', '#2b8313']
+      color: color,
+      xDomain: xDomain
     })
   }
 
@@ -33,7 +34,25 @@ export function initGraphStakedAreas(data) {
     '',
     ['Forêt secondaire', 'Forêt mature', 'Forêt coeur'],
     [0, 100],
-    100
+    100,
+    0.15,
+    '',
+    ['#ceec72', '#78ac01', '#2b8313'],
+    ['100', '300', '500', '700', '900', '1100', '1300', '1500', '1700']
+  )
+
+  const forestFragmentation = initGraphStakedArea(
+    '#forest_fragmentation',
+    '',
+    'Surface (ha)',
+    ['Aire Cumulée'],
+    [0, 100],
+    100,
+    0.15,
+    '',
+    ['#2b8313'],
+    ['10', '60', '125', '250', '375', '500', '1000', '1500', '2000', '27000']
+    // ['10', '20', '30', '40', '50', '70', '80', '90', '100', '125', '150', '175', '200', '225', '250', '275', '300', '325', '350', '375', '400', '425', '450', '475', '500', '600', '700', '800', '900', '1000', '1100', '1200', '1300', '1400', '1500', '1600', '1700', '1800', '1900', '2000', '7000', '12000', '22000', '27000', '32000']
   )
 
   //   distributionOccGauge.render()
@@ -64,6 +83,7 @@ export function initGraphStakedAreas(data) {
     const forestTypeElevationMature = dataFilter(data, 'ratio_forest_mature_elevation')
     const forestTypeElevationCore = dataFilter(data, 'ratio_forest_core_elevation')
     const forestTypeElevationSecondary = dataFilter(data, 'ratio_forest_second_elevation')
+    let forestFragmentationData = dataFilter(data, 'forest_fragmentation')
 
     const forestTypeElevationData = forestTypeElevationMature.map(function (d, i) {
       var result = {
@@ -76,5 +96,15 @@ export function initGraphStakedAreas(data) {
     })
 
     forestTypeElevation.update(forestTypeElevationData)
+
+    forestFragmentationData = forestFragmentationData.map(function (d, i) {
+      var result = {
+        class_name: d.class_name,
+        data1: d.class_value * 100
+      }
+      return result
+    })
+
+    forestFragmentation.update(forestFragmentationData)
   };
 };

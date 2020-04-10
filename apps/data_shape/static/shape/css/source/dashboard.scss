@@ -5,7 +5,9 @@ body {
 }
 
 %graphStroke {
-  stroke: $color-secondary-1-3;
+  opacity: 0.5;
+  stroke-dasharray: 3, 3;
+  stroke: #c79d1f;
 }
 
 @mixin graph {
@@ -31,6 +33,18 @@ body {
 }
 
 #forets_um {
+  @include graph;
+}
+
+#forest_fragmentation {
+  @include graph;
+}
+
+#forest_type_elevation {
+  @include graph;
+}
+
+#substrat {
   @include graph;
 }
 

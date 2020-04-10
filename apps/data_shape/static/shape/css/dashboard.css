@@ -2,8 +2,10 @@ body {
   padding: 50px 0 0 0;
 }
 
-#forets .tick line, #forets .domaine, #forets_um .tick line, #forets_um .domaine, #holdridge_forest .tick line, #holdridge_forest .domaine, #ratio_forests .tick line, #ratio_forests .domaine {
-  stroke: #688BA5;
+#forets .tick line, #forets .domaine, #forets_um .tick line, #forets_um .domaine, #forest_fragmentation .tick line, #forest_fragmentation .domaine, #forest_type_elevation .tick line, #forest_type_elevation .domaine, #substrat .tick line, #substrat .domaine, #holdridge_forest .tick line, #holdridge_forest .domaine, #ratio_forests .tick line, #ratio_forests .domaine {
+  opacity: 0.5;
+  stroke-dasharray: 3, 3;
+  stroke: #c79d1f;
 }
 
 #forets .xGrid .tick line,
@@ -17,6 +19,30 @@ body {
 #forets_um .xGrid .tick line,
 #forets_um .xGridRight .tick line,
 #forets_um .xGridLeft .tick line {
+  opacity: 0.5;
+  stroke-dasharray: 3, 3;
+  stroke: #c79d1f;
+}
+
+#forest_fragmentation .xGrid .tick line,
+#forest_fragmentation .xGridRight .tick line,
+#forest_fragmentation .xGridLeft .tick line {
+  opacity: 0.5;
+  stroke-dasharray: 3, 3;
+  stroke: #c79d1f;
+}
+
+#forest_type_elevation .xGrid .tick line,
+#forest_type_elevation .xGridRight .tick line,
+#forest_type_elevation .xGridLeft .tick line {
+  opacity: 0.5;
+  stroke-dasharray: 3, 3;
+  stroke: #c79d1f;
+}
+
+#substrat .xGrid .tick line,
+#substrat .xGridRight .tick line,
+#substrat .xGridLeft .tick line {
   opacity: 0.5;
   stroke-dasharray: 3, 3;
   stroke: #c79d1f;
