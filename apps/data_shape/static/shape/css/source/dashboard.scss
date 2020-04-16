@@ -21,11 +21,11 @@ body {
 
   .xGrid .tick line,
   .xGridRight .tick line,
-  .xGridLeft .tick line {
-    opacity: 0.5;
-    stroke-dasharray: 3, 3;
-    stroke: $stroke-1;
+  .xGridLeft .tick line,
+  .yGrid .tick line {
+    @extend %graphStroke;
   }
+
 }
 
 #forets {
@@ -50,22 +50,10 @@ body {
 
 #holdridge_forest {
   @include graph;
-
-  .yGrid .tick line {
-    opacity: 0.5;
-    stroke-dasharray: 3, 3;
-    stroke: $stroke-1;
-  }
 }
 
 #ratio_forests {
   @include graph;
-
-  .yGrid .tick line {
-    opacity: 0.5;
-    stroke-dasharray: 3, 3;
-    stroke: $stroke-1;
-  }
 }
 
 .card .mapCaledonie,
