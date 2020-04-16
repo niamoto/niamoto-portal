@@ -7,7 +7,7 @@ body {
 %graphStroke {
   opacity: 0.5;
   stroke-dasharray: 3, 3;
-  stroke: #c79d1f;
+  stroke: $stroke-1;
 }
 
 @mixin graph {
@@ -24,7 +24,7 @@ body {
   .xGridLeft .tick line {
     opacity: 0.5;
     stroke-dasharray: 3, 3;
-    stroke: #c79d1f;
+    stroke: $stroke-1;
   }
 }
 
@@ -54,7 +54,7 @@ body {
   .yGrid .tick line {
     opacity: 0.5;
     stroke-dasharray: 3, 3;
-    stroke: #c79d1f;
+    stroke: $stroke-1;
   }
 }
 
@@ -64,7 +64,7 @@ body {
   .yGrid .tick line {
     opacity: 0.5;
     stroke-dasharray: 3, 3;
-    stroke: #c79d1f;
+    stroke: $stroke-1;
   }
 }
 
