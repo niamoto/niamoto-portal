@@ -1,59 +1,8 @@
 @import "../../../../../../niamoto_portal/static/css/source/color";
+@import "../../../../../../niamoto_portal/static/css/source/graph";
 
 body {
   padding: 50px 0 0 0;
-}
-
-%graphStroke {
-  opacity: 0.5;
-  stroke-dasharray: 3, 3;
-  stroke: $stroke-1;
-}
-
-@mixin graph {
-  .tick line {
-    @extend %graphStroke;
-  }
-
-  .domaine {
-    @extend %graphStroke;
-  }
-
-  .xGrid .tick line,
-  .xGridRight .tick line,
-  .xGridLeft .tick line,
-  .yGrid .tick line {
-    @extend %graphStroke;
-  }
-
-}
-
-#forets {
-  @include graph;
-}
-
-#forets_um {
-  @include graph;
-}
-
-#forest_fragmentation {
-  @include graph;
-}
-
-#forest_type_elevation {
-  @include graph;
-}
-
-#substrat {
-  @include graph;
-}
-
-#holdridge_forest {
-  @include graph;
-}
-
-#ratio_forests {
-  @include graph;
 }
 
 .card .mapCaledonie,
@@ -64,6 +13,7 @@ body {
 .card .mapCaledonie .graph,
 .card .mapProvince .graph {
   height: 100%;
+  width: 100%;
 }
 
 #left_panel {
@@ -74,6 +24,6 @@ body {
   position: static;
 }
 
-@import "../../../../../../niamoto_portal/static/css/source/graph";
+
 @import "../../../../../../niamoto_portal/static/css/source/gauge";
 @import "../../../../../../niamoto_portal/static/css/source/radarChart";

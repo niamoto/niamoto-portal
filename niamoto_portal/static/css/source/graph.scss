@@ -1,7 +1,32 @@
 @import 'color';
 $color_title: $color-primary-3;
 
+%graphStroke {
+    opacity: 0.5;
+    stroke-dasharray: 3, 3;
+    stroke: $stroke-1;
+}
+
+@mixin config_grid_axe {
+    .tick line {
+        @extend %graphStroke;
+    }
+
+    .domaine {
+        @extend %graphStroke;
+    }
+
+    .xGrid .tick line,
+    .xGridRight .tick line,
+    .xGridLeft .tick line,
+    .yGrid .tick line {
+        @extend %graphStroke;
+    }
+
+}
+
 .graph {
+    @include config_grid_axe;
     width: 100%;
     height: 80%;
 }

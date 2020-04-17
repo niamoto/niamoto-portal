@@ -1,50 +1,10 @@
-body {
-  padding: 50px 0 0 0;
-}
-
-#forets .tick line, #forets .domaine, #forets .xGrid .tick line,
-#forets .xGridRight .tick line,
-#forets .xGridLeft .tick line,
-#forets .yGrid .tick line, #forets_um .tick line, #forets_um .domaine, #forets_um .xGrid .tick line,
-#forets_um .xGridRight .tick line,
-#forets_um .xGridLeft .tick line,
-#forets_um .yGrid .tick line, #forest_fragmentation .tick line, #forest_fragmentation .domaine, #forest_fragmentation .xGrid .tick line,
-#forest_fragmentation .xGridRight .tick line,
-#forest_fragmentation .xGridLeft .tick line,
-#forest_fragmentation .yGrid .tick line, #forest_type_elevation .tick line, #forest_type_elevation .domaine, #forest_type_elevation .xGrid .tick line,
-#forest_type_elevation .xGridRight .tick line,
-#forest_type_elevation .xGridLeft .tick line,
-#forest_type_elevation .yGrid .tick line, #substrat .tick line, #substrat .domaine, #substrat .xGrid .tick line,
-#substrat .xGridRight .tick line,
-#substrat .xGridLeft .tick line,
-#substrat .yGrid .tick line, #holdridge_forest .tick line, #holdridge_forest .domaine, #holdridge_forest .xGrid .tick line,
-#holdridge_forest .xGridRight .tick line,
-#holdridge_forest .xGridLeft .tick line,
-#holdridge_forest .yGrid .tick line, #ratio_forests .tick line, #ratio_forests .domaine, #ratio_forests .xGrid .tick line,
-#ratio_forests .xGridRight .tick line,
-#ratio_forests .xGridLeft .tick line,
-#ratio_forests .yGrid .tick line {
+.graph .tick line, .graph .domaine, .graph .xGrid .tick line,
+.graph .xGridRight .tick line,
+.graph .xGridLeft .tick line,
+.graph .yGrid .tick line {
   opacity: 0.5;
   stroke-dasharray: 3, 3;
   stroke: #c79d1f;
-}
-
-.card .mapCaledonie,
-.card .mapProvince {
-  padding: 0;
-}
-
-.card .mapCaledonie .graph,
-.card .mapProvince .graph {
-  height: 100%;
-}
-
-#left_panel {
-  height: 780px;
-}
-
-#left_panel_placeholder {
-  position: static;
 }
 
 .graph {
@@ -119,6 +79,29 @@ body {
   stroke: black;
   stroke-width: 1;
   stroke-opacity: .5;
+}
+
+body {
+  padding: 50px 0 0 0;
+}
+
+.card .mapCaledonie,
+.card .mapProvince {
+  padding: 0;
+}
+
+.card .mapCaledonie .graph,
+.card .mapProvince .graph {
+  height: 100%;
+  width: 100%;
+}
+
+#left_panel {
+  height: 780px;
+}
+
+#left_panel_placeholder {
+  position: static;
 }
 
 .land {
