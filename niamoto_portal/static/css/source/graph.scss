@@ -1,5 +1,5 @@
 @import 'color';
-$color_title: $color-primary-3;
+
 
 %graphStroke {
   opacity: 0.5;
@@ -52,7 +52,7 @@ $color_title: $color-primary-3;
 .card {
   height: 20em;
   -webkit-box-shadow: none !important;
-  box-shadow: 4px 3px 5px grey !important;
+  box-shadow: 4px 3px 5px $card_box-shadow !important;
 }
 
 .card-header {
@@ -112,7 +112,7 @@ $breakpoint in $grid-breakpoints {
 }
 
 .legend rect {
-  stroke: black;
+  stroke: $legend_stroke;
   stroke-width: 1;
   stroke-opacity: .5;
 }
