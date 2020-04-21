@@ -61,11 +61,28 @@
   </div>
   {% else %}
   <div id="{{graph.name}}" class="w-{{graph.height}} p-3">
-    <div class="card">
+    <div class="card card-{{graph.model}}">
       <div class="card-header">{{graph.title|capfirst}}</div>
-      <div class="card-body {{graph.model}}">
-        <div id="{{graph.model}}" class="d3_panel graph"></div>
-        <div id="{{graph.model}}Legend" class="d3_panel legend"></div>
+      <div class="card-body {{graph.model}} d-flex flex-wrap">
+        {% if graph.legend_locate == 'nolegend'%}
+        <div id="{{graph.model}}" class="d3_panel graph">
+        </div>
+        {% else %}
+        <!-- invert order graph and legend -->
+        {% if graph.legend_locate == 'left' or  graph.legend_locate == 'top'%}
+        <div id="{{graph.model}}Legend" class="d3_panel legend-{{graph.legend_locate}}">
+
+        </div>
+        <div id="{{graph.model}}" class="d3_panel graph graph-legend-{{graph.legend_locate}}">
+        </div>
+        {% else %}
+        <div id="{{graph.model}}" class="d3_panel graph graph-legend-{{graph.legend_locate}}">
+        </div>
+        <div id="{{graph.model}}Legend" class="d3_panel legend-{{graph.legend_locate}}">
+
+        </div>
+        {% endif %}
+        {% endif %}
       </div>
 
 

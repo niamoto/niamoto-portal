@@ -2,85 +2,117 @@
 $color_title: $color-primary-3;
 
 %graphStroke {
-    opacity: 0.5;
-    stroke-dasharray: 3, 3;
-    stroke: $stroke-1;
+  opacity: 0.5;
+  stroke-dasharray: 3, 3;
+  stroke: $stroke-1;
 }
 
 @mixin config_grid_axe {
-    .tick line {
-        @extend %graphStroke;
-    }
+  .tick line {
+    @extend %graphStroke;
+  }
 
-    .domaine {
-        @extend %graphStroke;
-    }
+  .domaine {
+    @extend %graphStroke;
+  }
 
-    .xGrid .tick line,
-    .xGridRight .tick line,
-    .xGridLeft .tick line,
-    .yGrid .tick line {
-        @extend %graphStroke;
-    }
+  .xGrid .tick line,
+  .xGridRight .tick line,
+  .xGridLeft .tick line,
+  .yGrid .tick line {
+    @extend %graphStroke;
+  }
 
 }
 
 .graph {
-    @include config_grid_axe;
-    width: 100%;
-    height: 80%;
+  @include config_grid_axe;
+  width: 100%;
+  height: 100%;
+}
+
+.graph-legend-bottom,
+.graph-legend-top {
+  @include config_grid_axe;
+
+  width: 100%;
+  height: 80%;
+
+}
+
+.graph-legend-right,
+.graph-legend-left {
+  @include config_grid_axe;
+
+  width: 70%;
+  height: 100%;
+
 }
 
 .card {
-    height: 20em;
-    -webkit-box-shadow: none !important;
-    box-shadow: 4px 3px 5px grey !important;
+  height: 20em;
+  -webkit-box-shadow: none !important;
+  box-shadow: 4px 3px 5px grey !important;
 }
 
 .card-header {
-    background-color: $color_title;
+  background-color: $color_title;
 }
 
 // Bootstrap 4 breakpoints & gutter
 $grid-breakpoints: (xs: 0,
-    sm: 576px,
-    md: 768px,
-    lg: 992px,
-    xl: 1200px) !default;
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px) !default;
 
 $grid-gutter-width: 2em !default;
 
 // number of cards per line for each breakpoint
 $cards-per-line: (xs: 1,
-    sm: 1,
-    md: 1,
-    lg: 2,
-    xl: 3);
+  sm: 1,
+  md: 1,
+  lg: 2,
+  xl: 3);
 
 @each $name,
 $breakpoint in $grid-breakpoints {
-    @media (min-width: $breakpoint) {
-        .card-deck .card {
-            flex: 0 0 calc(#{100/map-get($cards-per-line, $name)}% - #{$grid-gutter-width});
-            margin: .5em;
-        }
+  @media (min-width: $breakpoint) {
+    .card-deck .card {
+      flex: 0 0 calc(#{100/map-get($cards-per-line, $name)}% - #{$grid-gutter-width});
+      margin: .5em;
     }
+  }
 }
 
 @mixin label {
-    font-size: .8em;
+  font-size: .8em;
 }
 
+.legend-bottom,
+.legend-top {
+  width: 100%;
+  height: 20%;
+}
+
+.legend-right,
+.legend-left {
+  width: 30%;
+  height: 100%;
+}
+
+
+
 .legend .label {
-    @include label;
+  @include label;
 }
 
 .label {
-    @include label;
+  @include label;
 }
 
 .legend rect {
-    stroke: black;
-    stroke-width: 1;
-    stroke-opacity: .5;
+  stroke: black;
+  stroke-width: 1;
+  stroke-opacity: .5;
 }

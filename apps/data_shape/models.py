@@ -64,6 +64,13 @@ class Graph(models.Model):
         ('75', 'Large'),
         ('100', 'XLarge'),
     )
+    LEGEND_LOCATE = (
+        ('right', 'right'),
+        ('bottom', 'bottom'),
+        ('left', 'left'),
+        ('top', 'top'),
+        ('nolegend', 'nolegend')
+    )
     label = models.CharField(max_length=30)
     title = models.CharField(max_length=50)
     model = models.CharField(max_length=50)
@@ -72,6 +79,9 @@ class Graph(models.Model):
         max_length=3, choices=GRAPH_SIZES, default='25')
     show = models.BooleanField(default=True)
     profil = models.CharField(max_length=30, default='default')
+    legend_locate = models.CharField(
+        default='bottom', choices=LEGEND_LOCATE, max_length=10)
+    legend_type = models.IntegerField(default=1)
 
     def __str__(self):
         return self.label
