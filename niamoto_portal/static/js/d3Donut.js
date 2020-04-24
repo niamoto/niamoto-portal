@@ -1,6 +1,7 @@
 'use strict'
 
 import * as d3 from 'd3'
+import * as d3Legend from 'd3-svg-legend'
 
 export class GraphDonut {
   constructor(configuration) {
@@ -95,7 +96,7 @@ export class GraphDonut {
       .domain(this.config.legend)
       .range(this.config.color)
 
-    var legendColor = d3.legendColor()
+    var legendColor = d3Legend.legendColor()
       // .shapePadding(50)
       .scale(colorScale)
       .shapeWidth(70)

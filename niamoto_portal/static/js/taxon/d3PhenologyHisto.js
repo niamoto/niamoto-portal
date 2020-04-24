@@ -1,6 +1,7 @@
 import * as d3 from 'd3'
+import * as d3Legend from 'd3-svg-legend'
 
-export function initPhenologyHisto () {
+export function initPhenologyHisto() {
   const month = [
     'janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet',
     'aout', 'septembre', 'octobre', 'novembre', 'decembre'
@@ -94,7 +95,7 @@ export function initPhenologyHisto () {
     .domain(label)
     .range(color)
 
-  var legendColor = d3.legendColor()
+  var legendColor = d3Legend.legendColor()
     .shapePadding(5)
     .scale(colorScale)
     .shapeWidth(10)
@@ -108,7 +109,7 @@ export function initPhenologyHisto () {
     updateData(data)
   })
 
-  function updateData (taxon) {
+  function updateData(taxon) {
     var dataFleur = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     var dataFruit = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 

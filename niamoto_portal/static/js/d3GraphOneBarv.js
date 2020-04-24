@@ -1,6 +1,7 @@
 'use strict'
 
 import * as d3 from 'd3'
+import d3Legend from 'd3-svg-legend'
 
 /**
  * Represents a graph one bar.
@@ -127,7 +128,7 @@ export class GraphOneBarV {
       .domain(this.config.legend)
       .range(this.config.color)
 
-    var legendColor = d3.legendColor()
+    var legendColor = d3Legend.legendColor()
     if (this.config.typeLengend === 1) {
       legendColor.scale(colorScale)
         .shapeWidth(70)

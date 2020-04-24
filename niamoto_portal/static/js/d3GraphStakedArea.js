@@ -1,6 +1,7 @@
 'use strict'
 
 import * as d3 from 'd3'
+import d3Legend from 'd3-svg-legend'
 
 // todo diviser en 2 graphs
 export class GraphStakedArea {
@@ -95,7 +96,7 @@ export class GraphStakedArea {
       .domain(this.config.legend)
       .range(this.config.color)
 
-    var legendColor = d3.legendColor()
+    var legendColor = d3Legend.legendColor()
       // .shapePadding(50)
       .scale(colorScale)
       .shapeWidth(70)

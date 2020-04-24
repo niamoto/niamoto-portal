@@ -1,6 +1,7 @@
 'use strict'
 
 import * as d3 from 'd3'
+import * as d3Legend from 'd3-svg-legend'
 
 // todo diviser en 2 graphs
 export class GraphBarh {
@@ -93,7 +94,7 @@ export class GraphBarh {
       .domain(this.config.value)
       .range(this.config.color)
 
-    var legendColor = d3.legendColor()
+    var legendColor = d3Legend.legendColor()
       .shapePadding(5)
       .scale(colorScale)
       .shapeWidth(10)

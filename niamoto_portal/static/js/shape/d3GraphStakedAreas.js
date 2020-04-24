@@ -1,4 +1,7 @@
 import * as d3GraphstakedArea from '../d3GraphStakedArea'
+// import * as color from '../colors'
+import color from '../../css/source/nocompile/color_js.scss'
+
 
 export function initGraphStakedAreas(data) {
   function initMax(maxValue, initMaxValue) {
@@ -37,7 +40,7 @@ export function initGraphStakedAreas(data) {
     100,
     0.15,
     '',
-    ['#ceec72', '#78ac01', '#2b8313'],
+    [color.forest_secondary, color.forest_mature, color.forest_heart],
     ['100', '300', '500', '700', '900', '1100', '1300', '1500', '1700']
   )
 
@@ -50,7 +53,7 @@ export function initGraphStakedAreas(data) {
     100,
     0.15,
     '',
-    ['#2b8313'],
+    [color.forest_area_sum],
     ['10', '60', '125', '250', '375', '500', '1000', '1500', '2000', '27000']
     // ['10', '20', '30', '40', '50', '70', '80', '90', '100', '125', '150', '175', '200', '225', '250', '275', '300', '325', '350', '375', '400', '425', '450', '475', '500', '600', '700', '800', '900', '1000', '1100', '1200', '1300', '1400', '1500', '1600', '1700', '1800', '1900', '2000', '7000', '12000', '22000', '27000', '32000']
   )
@@ -106,5 +109,5 @@ export function initGraphStakedAreas(data) {
     })
 
     forestFragmentation.update(forestFragmentationData)
-  };
-};
+  }
+}
