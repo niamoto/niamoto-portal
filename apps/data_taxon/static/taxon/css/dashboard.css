@@ -130,7 +130,7 @@ body {
 }
 
 .legend rect {
-  stroke: black;
+  stroke: #000;
   stroke-width: 1;
   stroke-opacity: .5;
 }
