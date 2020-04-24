@@ -1,0 +1,15 @@
+@import '../color';
+
+:export {
+    forest: $forest;
+    forestUM: $forest_UM;
+    forestNUM: $forest_NUM;
+    forestOut: $forest_out;
+    landUM: $land_UM;
+    landNUM: $land_NUM;
+    city: $city;
+    forestAreaSum: $forest_area_sum;
+    forestSecondary: $forest_secondary;
+    forestMature: $forest_mature;
+    forestHeart: $forest_heart;
+}
