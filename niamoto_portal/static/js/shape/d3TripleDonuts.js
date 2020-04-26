@@ -1,4 +1,6 @@
 import * as d3GraphDonut from '../d3TripleDonuts'
+import color from '../../css/source/nocompile/color_js.scss'
+
 
 export function initGraphDonuts(data) {
   function initMax(maxValue, initMaxValue) {
@@ -16,7 +18,7 @@ export function initGraphDonuts(data) {
     container: '#covers_forest',
     value: ['Forêt', 'Commune', 'NUM', 'UM'],
     legend: ['Forêt', 'Commune', 'NUM', 'UM'],
-    color: ['#548235', '#ecdcad', '#a97742', '#e1a553']
+    color: [color.forest, color.forestOut, color.landNUM, color.landUM]
   })
 
   // Update Data for trigger
@@ -53,18 +55,16 @@ export function initGraphDonuts(data) {
     }
 
     const coverForestData = affectData(dataFilter(data, 'cover_forest'))
-
     const coverForestUmData = affectData(dataFilter(data, 'cover_forestum'))
-
     const coverForestNumData = affectData(dataFilter(data, 'cover_forestnum'))
 
     const coversForestData = {
       data1: coverForestData,
-      color1: ['#548235', '#ecdcad'],
+      color1: [color.forest, color.forestOut],
       data2: coverForestNumData,
-      color2: ['#548235', '#a97742'],
+      color2: [color.forest, color.landNUM],
       data3: coverForestUmData,
-      color3: ['#548235', '#e1a553']
+      color3: [color.forest, color.landUM]
     }
 
     coversForests.update(coversForestData)

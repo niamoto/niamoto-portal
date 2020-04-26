@@ -9,6 +9,7 @@ import * as d3GraphDonut from './d3GraphDonuts'
 import * as d3GraphTripleDonut from './d3TripleDonuts'
 import * as d3GraphStakedArea from './d3GraphStakedAreas'
 import * as d3Gauges from './d3Gauges'
+import color from '../../css/source/nocompile/color_js.scss'
 // import * as d3 from 'd3'
 // var d3_gauges = require('./d3_gauges');
 
@@ -48,11 +49,11 @@ const layerShapeForest = new ol.layer.Vector({
   source: sourceForest,
   style: new ol.style.Style({
     fill: new ol.style.Fill({
-      color: '#548235',
+      color: color.forest,
       opacity: 0.7
     }),
     stroke: new ol.style.Stroke({
-      color: '#548235',
+      color: color.forest,
       width: 1
     })
   })
@@ -100,11 +101,11 @@ const layerShapeProvince = new ol.layer.Vector({
   source: sourceProvince,
   style: new ol.style.Style({
     fill: new ol.style.Fill({
-      color: '#688BA5',
+      color: color.colorSecondary13,
       opacity: 0.7
     }),
     stroke: new ol.style.Stroke({
-      color: '#688BA5',
+      color: color.colorSecondary13,
       width: 1
     })
   })

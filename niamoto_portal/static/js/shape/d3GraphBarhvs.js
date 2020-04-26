@@ -1,4 +1,5 @@
 import * as d3GraphBarv from '../d3GraphBarv'
+import color from '../../css/source/nocompile/color_js.scss'
 
 export function initGraphBarvs(data) {
   function initMax(maxValue, initMaxValue) {
@@ -21,7 +22,7 @@ export function initGraphBarvs(data) {
       yDomain: yDomain,
       maxValue: maxValue,
       marginLeft: marginLeft,
-      color: ['#548235', '#ecdcad']
+      color: [color.forest, color.forestOut]
     })
   }
 

@@ -1,5 +1,6 @@
 import * as d3 from 'd3'
 import * as d3Legend from 'd3-svg-legend'
+import color from '../../css/source/nocompile/color_js.scss'
 
 export function initPhenologyHisto() {
   const month = [
@@ -8,7 +9,7 @@ export function initPhenologyHisto() {
   ]
 
   const label = ['Fleur', 'Fruit']
-  const color = ['#ffbb11', '#ee0000']
+  const colors = [color.phenologyFlower, color.phenologyFruit]
 
   var height = $('#phenologyHisto').height()
   var width = $('#phenologyHisto').width()
@@ -93,7 +94,7 @@ export function initPhenologyHisto() {
 
   var colorScale = d3.scaleOrdinal()
     .domain(label)
-    .range(color)
+    .range(colors)
 
   var legendColor = d3Legend.legendColor()
     .shapePadding(5)
@@ -197,7 +198,7 @@ export function initPhenologyHisto() {
       .attr('class', 'bar1')
       .attr('x', d => xScale(d.mois))
       .attr('y', d => yScale(d.fleur))
-      .style('fill', color[0])
+      .style('fill', colors[0])
       .attr('width', d => xScale.bandwidth() / 2)
       .attr('height', d => mheight - yScale(d.fleur))
 
@@ -205,7 +206,7 @@ export function initPhenologyHisto() {
       .attr('class', 'bar2')
       .attr('x', d => xScale(d.mois) + xScale.bandwidth() / 2)
       .attr('y', d => yScale(d.fruit))
-      .style('fill', color[1])
+      .style('fill', colors[1])
       .attr('width', d => xScale.bandwidth() / 2)
       .attr('height', d => mheight - yScale(d.fruit))
 

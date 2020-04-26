@@ -1,4 +1,5 @@
 import * as d3GraphDonut from '../d3Donut'
+import color from '../../css/source/nocompile/color_js.scss'
 
 export function initGraphDonuts(data) {
   function initMax(maxValue, initMaxValue) {
@@ -16,7 +17,7 @@ export function initGraphDonuts(data) {
     container: '#cover_forest_type',
     value: ['forêt secondaire', 'forêt mature', 'forêt coeur'],
     legend: ['Forêt secondaire', 'Forêt mature', 'Forêt coeur'],
-    color: ['#ceec72', '#78ac01', '#2b8313']
+    color: [color.forestSecondary, color.forestMature, color.forestHeart]
   })
 
   // Update Data for trigger

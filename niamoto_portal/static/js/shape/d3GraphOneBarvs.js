@@ -1,4 +1,5 @@
 import * as d3GraphBarv from '../d3GraphOneBarv'
+import color from '../../css/source/nocompile/color_js.scss'
 
 export function initGraphBarvs(data) {
   function initMax(maxValue, initMaxValue) {
@@ -10,7 +11,7 @@ export function initGraphBarvs(data) {
   }
 
   const value = ['Forêt', 'Hors-forêt']
-  const color = ['#548235', '##ecdcad']
+  const colors = [color.forest, color.forestOut]
 
   const coverForests = new d3GraphBarv.GraphOneBarV({
     width: $('#cover_forest').width(),
@@ -18,7 +19,7 @@ export function initGraphBarvs(data) {
     container: '#cover_forest',
     value: value,
     legend: value,
-    color: color
+    color: colors
   })
 
   // forets Um
@@ -28,7 +29,7 @@ export function initGraphBarvs(data) {
     container: '#cover_forest_um',
     value: value,
     legend: value,
-    color: color
+    color: colors
   })
 
   // forets Num
@@ -38,7 +39,7 @@ export function initGraphBarvs(data) {
     container: '#cover_forest_num',
     value: value,
     legend: value,
-    color: color
+    color: colors
   })
 
   // forets type
@@ -48,7 +49,7 @@ export function initGraphBarvs(data) {
     container: '#cover_forest_admin',
     value: ['concessions', 'réserves', 'forêts'],
     legend: ['concessions', 'réserves', 'forêts'],
-    color: ['#990000', '#0b6303', '#2b8313'],
+    color: [color.concession, color.reserve, color.forest],
     yDomain: [70, 100],
     yTickValue: ['70', '80', '90', '100']
   })
@@ -60,7 +61,7 @@ export function initGraphBarvs(data) {
     container: '#substrat',
     value: ['NUM', 'UM'],
     legend: ['Ultramafique (UM)', 'non Utramafique (NUM)'],
-    color: ['#e1a553', '#a97742'],
+    color: [color.landUM, color.landNUM],
     typeLegend: 2
   })
 

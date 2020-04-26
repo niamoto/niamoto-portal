@@ -1,5 +1,6 @@
 import * as d3GraphBarh from '../d3GraphBarh'
 import * as d3GraphPyramidh from '../d3GraphPyramidh'
+import color from '../../css/source/nocompile/color_js.scss'
 
 export function initGraphBarhs(data) {
   function initMax(maxValue, initMaxValue) {
@@ -22,7 +23,7 @@ export function initGraphBarhs(data) {
       yDomain: yDomain,
       maxValue: maxValue,
       marginLeft: marginLeft,
-      color: ['#548235', '#ecdcad']
+      color: [color.forest, color.forestOut]
     })
   }
 
@@ -38,7 +39,7 @@ export function initGraphBarhs(data) {
       yDomain: yDomain,
       maxValue: maxValue,
       marginLeft: marginLeft,
-      color: ['#84916B', '#548235']
+      color: [color.forestUM, color.forest]
     })
   }
 
