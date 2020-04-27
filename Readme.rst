@@ -24,3 +24,5 @@ Niamoto is funded by the COGEFOR projet in New Caledonia, which is a
 partnership between the North Province of New Caledonia, the New Caledonian
 Agronomic Institute (IAC) and the CIRAD. The AMAP joint research unit and the
 IRD are also implied in the project.
+
+@Tristan Mangeard
