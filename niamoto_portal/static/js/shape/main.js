@@ -71,7 +71,11 @@ const view = new ol.View({
 // make map
 const map = new ol.Map({
   target: 'mapCaledonie',
-  view: view
+  view: view,
+  controls: ol.control.defaults({
+    attribution: false,
+    zoom: false
+  })
 })
 map.addLayer(layerBackground)
 map.addLayer(layerShape)
