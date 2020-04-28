@@ -69,7 +69,9 @@ export function initGraphBarhs(data) {
     'Répartition(%)',
     'Alitude(m)',
     ['Forêt (UM)', 'Forêt (NUM)'],
-    ['1700', '1500', '1300', '1100', '900', '700', '500', '300', '100']
+    ['1700', '1500', '1300', '1100', '900', '700', '500', '300', '100'],
+    100,
+    .22
   )
 
   // Holdridge forest

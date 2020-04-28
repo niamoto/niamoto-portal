@@ -32,7 +32,7 @@ export class GraphPyramidh {
 
     this.margin = {
       top: this.config.height * 0.003,
-      right: this.config.width * 0.03,
+      right: this.config.width * 0.04,
       bottom: this.config.height * 0.2,
       left: this.config.width * this.config.marginLeft
     }

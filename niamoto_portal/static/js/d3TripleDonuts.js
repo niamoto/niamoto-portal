@@ -214,7 +214,7 @@ export class GraphDonut {
       .text(function (d) {
         return d.data.key
       })
-      .attr('class', 'label ' + parameters.name)
+      .attr('class', parameters.name)
       .attr('font-family', 'sans-serif')
       .attr('font-size', '.6em')
       .attr('fill', '#222')

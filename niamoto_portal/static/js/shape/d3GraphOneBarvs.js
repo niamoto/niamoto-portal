@@ -62,7 +62,8 @@ export function initGraphBarvs(data) {
     value: ['NUM', 'UM'],
     legend: ['Ultramafique (UM)', 'non Utramafique (NUM)'],
     color: [color.landUM, color.landNUM],
-    typeLegend: 2
+    typeLegend: 2,
+    marginLeft: .2
   })
 
   // Update Data for trigger

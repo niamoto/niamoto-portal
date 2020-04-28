@@ -68,8 +68,8 @@ export class GraphOneBarV {
      */
     this.margin = {
       top: this.config.height * 0.08,
-      right: this.config.width * 0.07,
-      bottom: this.config.height * 0.2,
+      right: this.config.width * 0.00,
+      bottom: this.config.height * 0.1,
       left: this.config.width * this.config.marginLeft
     }
     /**
@@ -107,7 +107,7 @@ export class GraphOneBarV {
     // Legend
 
     const svgLegend = d3.select(this.config.container + 'Legend').append('svg')
-      .attr('width', this.mwidth)
+      .attr('width', this.mwidth * 1.2)
       .attr('height', this.mheight * 0.3)
 
     if (this.config.typeLengend === 1) {
@@ -198,7 +198,7 @@ export class GraphOneBarV {
     var yAxis = g => g
       .call(d3.axisLeft(yScale)
         .tickFormat(d => d + '%')
-        .tickSizeInner(-this.mwidth * 0.6)
+        .tickSizeInner(-this.mwidth)
         .tickPadding(10)
         .tickValues(this.config.yTickValue)
       )
@@ -280,8 +280,8 @@ export class GraphOneBarV {
       // .style('fill', 'url(#linear-gradient')
       .style('fill', (d, i) => this.config.color[i])
       .style('opacity', '1')
-      .attr('width', this.mwidth * 0.3)
-      .attr('x', this.mwidth * 0.15)
+      .attr('width', this.mwidth * .5)
+      .attr('x', this.mwidth * 0.25)
       .attr('y', (d, i) => definePosition(i))
       .attr('height', (d, i) => defineHeightRect(d, i, this.config.yDomain))
       // .on('mouseover', handleMouseOver)
@@ -305,7 +305,7 @@ export class GraphOneBarV {
     texts.enter().append('text')
       .attr('class', 'label')
       .attr('text-anchor', 'middle')
-      .attr('x', 2 * this.mwidth * 0.15)
+      .attr('x', this.mwidth * 0.5)
       .attr('y', (d, i) => definePositionText(i, this.config.yDomain))
       .attr('dy', '.5em')
       .attr('dx', '.5em')

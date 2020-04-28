@@ -33,7 +33,8 @@ export function initGraphBarvs(data) {
     '',
     ['Forêt', 'Hors-forêt'],
     [0, 100],
-    100
+    100,
+    .16
   )
 
   //   distributionOccGauge.render()
