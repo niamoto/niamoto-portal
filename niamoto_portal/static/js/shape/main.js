@@ -75,7 +75,9 @@ const map = new ol.Map({
   controls: ol.control.defaults({
     attribution: false,
     zoom: false
-  })
+  }).extend([
+    new ol.control.ScaleLine()
+  ]),
 })
 map.addLayer(layerBackground)
 map.addLayer(layerShape)
@@ -133,7 +135,9 @@ const mapProvince = new ol.Map({
   controls: ol.control.defaults({
     attribution: false,
     zoom: false
-  })
+  }).extend([
+    new ol.control.ScaleLine()
+  ]),
 })
 mapProvince.addLayer(layerBackgroundProvince)
 mapProvince.addLayer(layerShapeProvince)
