@@ -78,6 +78,11 @@ const map = new ol.Map({
   }).extend([
     new ol.control.ScaleLine()
   ]),
+  interactions: ol.interaction.defaults({
+    mouseWheelZoom: false,
+    dragPan: false,
+    doubleClickZoom: false,
+  })
 })
 map.addLayer(layerBackground)
 map.addLayer(layerShape)
@@ -123,9 +128,7 @@ const viewProvince = new ol.View({
   center: new ol.proj.transform([164.859, -20.583],
     'EPSG:4326',
     'EPSG:4326'),
-  zoom: 7.4,
-  minZoom: 7.4,
-  maxZoom: 7.4
+  zoom: 7.4
 })
 
 // make map
@@ -138,9 +141,17 @@ const mapProvince = new ol.Map({
   }).extend([
     new ol.control.ScaleLine()
   ]),
+  interactions: ol.interaction.defaults({
+    mouseWheelZoom: false,
+    dragPan: false,
+    doubleClickZoom: false,
+  })
 })
 mapProvince.addLayer(layerBackgroundProvince)
 mapProvince.addLayer(layerShapeProvince)
+
+
+
 
 function buildShapeList() {
   /* TODO
@@ -254,8 +265,10 @@ function updateLayerShape(data) {
   view.fit(polygon, {
     padding: [5, 5, 5, 5]
   })
+
   sourceProvince.clear()
   sourceProvince.addFeature(new ol.format.GeoJSON().readFeature(data))
+  console.log(view.zoom);
 }
 
 function plurial(data) {
