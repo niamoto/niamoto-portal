@@ -3,8 +3,10 @@
 
 {% block styles %}
 {{block.super}}
+<link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.css">
 <link rel="stylesheet" type="text/css" href="{% static 'css/simplePage.min.css' %}" />
 <link rel="stylesheet" type="text/css" href="{% static 'css/ressources.min.css' %}" />
+
 {% endblock %}
 {% block page_header %}
 <div class="container p-2 display-4">
@@ -78,24 +80,22 @@
 
       {%if ressources%}
       <div class="row ressources">
-        <table>
+        <table id="table_support" class="bootstrap-table table-striped" data-toggle="table" data-search="true"
+          data-pagination="true">
           <thead class="thead-dark">
             <tr>
-              <th>Année</th>
-              <th>Auteur et titre du document</th>
+              <th data-sortable="true" data-field="annee">Année</th>
+              <th data-sortable="true" data-field="auteur">Auteur et titre du document</th>
             </tr>
           </thead>
           <tbody>
             {%for ressource in ressources%}
-
-
-
             {% if ressource.support == "publication" %}
             <tr class="col-12 {{ressource.support}}">
 
               <td>{{ressource.year|default:""}}</td>
-              <td><a {% if ressource.link %} href="{{ressource.link|default:""}}"
-                  {% endif %}>{{ressource.who|default:""}}{% if ressource.who %}, {% endif %}
+              <td>{{ressource.who|default:""}}{% if ressource.who %}, {% endif %}<a {% if ressource.link %}
+                  href="{{ressource.link|default:""}}" {% endif %}>
                   <strong>{{ressource.description|default:""}}</strong>{% if ressource.description %}, {% endif %}
                   <em>{{ressource.journal|default:""}}</em>{% if ressource.journal %}, {% endif %}
                   {{ressource.issue|default:""}}{% if ressource.issue %}, {% endif %}
@@ -119,24 +119,19 @@
 
       {%if trees%}
       <div class="row listTree col-12">
-        <table class="table table-striped">
+        <table id="table_tr" class="table table-striped" data-toggle="table" data-search="true" data-pagination="true">
           <thead class="thead-dark">
             <tr>
-              <th scope="col">Famille</th>
-              <th scope="col">Genre</th>
-              <th scope="col">Nom</th>
-              <th scope="col">Statut</th>
-              <th scope="col" colspan="2">Liens</th>
+              <th data-sortable="true" data-width="159" data-field="famille">Famille</th>
+              <th data-sortable="true" data-width="142" data-field="genre">Genre</th>
+              <th data-sortable="true" data-width="542" data-field="nom">Nom</th>
+              <th data-sortable="false" data-width="100" data-field="status">Statut</th>
+              <th data-sortable="false" data-width="166" data-field="liens">Liens</th>
             </tr>
           </thead>
           <tbody>
             {%for tree in trees%}
-
-
-
-
             <tr>
-
               <td>{{tree.family_name|default:""}}</td>
               <td>{{tree.genre_name|default:""}}</td>
               <td>{{tree.name|default:""}}</td>
@@ -147,8 +142,8 @@
               <td><span class="link">
                   {%if tree.id_endemia %}
                   <a href="http://endemia.nc/flore/fiche{{tree.id_endemia}}" target="_blank">Endemia </a>
-                  {%endif%}</span></td>
-              <td><span class="link">
+                  {%endif%}</span><span class="vertical-line"></span>
+                <span class="link">
                   {%if tree.id_florical %}
                   <a href="http://publish.plantnet-project.org/project/florical_fr/collection/florical/taxons/details/{{tree.id_florical}}"
                     target="_blank">Florical</a>
@@ -169,5 +164,7 @@
 {% block scripts %}
 {{ block.super }}
 
-<script src="{% static 'js/ressources.js' %}"></script>
+<script src="{% static 'js/ressources.min.js' %}"></script>
+<script src="https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.js"></script>
+<script src="https://unpkg.com/bootstrap-table@1.16.0/dist/locale/bootstrap-table-fr-FR.min.js"></script>
 {% endblock scripts %}
