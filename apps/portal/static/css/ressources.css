@@ -218,4 +218,10 @@ td {
   font-weight: bold;
   color: #355771;
 }
+
+.vertical-line {
+  border-left: 1px solid #000;
+  display: inline-block;
+  margin: 0 20px;
+}
 /*# sourceMappingURL=ressources.css.map */
