@@ -53,6 +53,8 @@ class Person(models.Model):
     last_name = models.CharField(null=True, blank=True, max_length=50)
     image = models.ImageField(null=True, blank=True, upload_to='persons',
                               height_field=None, width_field=None, max_length=None)
+    permanent = models.BooleanField(null=True, blank=True)
+    function = models.CharField(null=True, blank=True, max_length=50)
 
     class Meta:
         """Meta definition for Person"""

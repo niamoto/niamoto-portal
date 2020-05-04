@@ -10,7 +10,8 @@ class ActivityAdmin(admin.ModelAdmin):
 
 @admin.register(Person)
 class PersonAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('__str__', 'permanent', 'function', 'image')
+    list_editable = ('permanent', 'function')
 
 
 @admin.register(Ressource)
