@@ -101,6 +101,15 @@ flip card
   left: 12.5%;
 }
 
+h4::after {
+  content: "";
+  width: 60%;
+  height: 2px;
+  background-color: #9ABFDB;
+  display: block;
+  position: absolute;
+}
+
 .card:hover img {
   -webkit-filter: sepia(50%);
           filter: sepia(50%);

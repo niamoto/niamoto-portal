@@ -20,6 +20,11 @@
       <h4>Equipe</h4>
     </div>
   </div>
+  <div class="container">
+    <div class="row">
+      <h5>Permanent</h5>
+    </div>
+  </div>
   <div class="container-fluid">
     <div class="row">
 
@@ -28,6 +33,7 @@
         {% if persons %}
 
         {% for person in persons %}
+        {%if person.pernamen is True%}
         <div id={{person.id}}_person class="card card-flip">
           <div class="card-front">
 
@@ -62,10 +68,13 @@
           </div>
 
         </div>
+        {%else%}
+        <p>{{person.pernament}}</p>
+        {%endif%}
         {% endfor %}
 
         {% else %}
-        <p>Aucune personne.</p>
+        <p>Aucun personne.</p>
         {% endif %}
 
       </div>

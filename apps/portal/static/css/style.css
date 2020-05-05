@@ -86,6 +86,10 @@
   box-shadow: 0 3px 3px grey !important;
 }
 
+.dropdown-menu .dropdown-item::first-letter {
+  text-transform: capitalize;
+}
+
 .navbar-dark .navbar-nav .nav-link {
   text-shadow: #005522 1px 1px, #005522 -1px 1px, #005522 -1px -1px, #005522 1px -1px;
   text-shadow: 0px 0px 2px #646464;
