@@ -2,9 +2,9 @@
     "version": 3,
     "mappings": "AAGA,AAAA,IAAI,CAAC;EACD,OAAO,EAAE,UAAU;CACtB;;AAED,AAAA,UAAU,CAAC,GAAG,CAAC;EACX,KAAK,EAAE,IAAI;EACX,MAAM,EAAE,eAAe;CAC1B;;AAGD,AAAA,IAAI,CAAC,GAAG,CAAC;EACL,KAAK,EAAE,KAAK;EACZ,MAAM,EAAE,eAAe;CAC1B",
     "sources": [
-        "source/simplePage.scss",
+        "source/methodologie.scss",
         "../../../../niamoto_portal/static/css/source/color.scss"
     ],
     "names": [],
-    "file": "simplePage.css"
+    "file": "methodologie.css"
 }
