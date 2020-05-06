@@ -39,7 +39,7 @@ export function initGraphBarhs(data) {
       yDomain: yDomain,
       maxValue: maxValue,
       marginLeft: marginLeft,
-      color: [color.forestUM, color.forest]
+      color: [color.forestUM, color.forestNUM]
     })
   }
 
