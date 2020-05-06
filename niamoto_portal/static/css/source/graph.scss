@@ -1,6 +1,4 @@
 @import 'color';
-
-
 %graphStroke {
   opacity: 0.5;
   stroke-dasharray: 3, 3;
@@ -11,18 +9,15 @@
   .tick line {
     @extend %graphStroke;
   }
-
   .domaine {
     @extend %graphStroke;
   }
-
   .xGrid .tick line,
   .xGridRight .tick line,
   .xGridLeft .tick line,
   .yGrid .tick line {
     @extend %graphStroke;
   }
-
 }
 
 .graph {
@@ -34,19 +29,15 @@
 .graph-legend-bottom,
 .graph-legend-top {
   @include config_grid_axe;
-
   width: 100%;
   height: 80%;
-
 }
 
 .graph-legend-right,
 .graph-legend-left {
   @include config_grid_axe;
-
   width: 70%;
   height: 100%;
-
 }
 
 .card {
@@ -60,21 +51,10 @@
 }
 
 // Bootstrap 4 breakpoints & gutter
-$grid-breakpoints: (xs: 0,
-  sm: 576px,
-  md: 768px,
-  lg: 992px,
-  xl: 1200px) !default;
-
+$grid-breakpoints: (xs: 0, sm: 576px, md: 768px, lg: 992px, xl: 1200px) !default;
 $grid-gutter-width: 2em !default;
-
 // number of cards per line for each breakpoint
-$cards-per-line: (xs: 1,
-  sm: 1,
-  md: 1,
-  lg: 2,
-  xl: 3);
-
+$cards-per-line: (xs: 1, sm: 1, md: 1, lg: 2, xl: 3);
 @each $name,
 $breakpoint in $grid-breakpoints {
   @media (min-width: $breakpoint) {
@@ -100,8 +80,6 @@ $breakpoint in $grid-breakpoints {
   width: 30%;
   height: 100%;
 }
-
-
 
 .legend .label {
   @include label;

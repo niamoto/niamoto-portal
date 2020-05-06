@@ -16,12 +16,14 @@ class Ressource(models.Model):
 
     SUPPORT = (
         ('publication', 'publication'),
-        ('book', 'livre'),
-        ('report', 'rapport'),
+        ('ouvrage', 'livre'),
+        ('rapport', 'rapport'),
         ('article', 'article'),
-        ('conference', 'conférence'),
+        ('conférence', 'conférence'),
         ('film', 'film'),
-        ('radio', 'radio')
+        ('radio', 'radio'),
+        ('thèse', 'thèse'),
+        ('mémoire', 'mémoire')
     )
 
     support = models.CharField(
@@ -64,7 +66,7 @@ class Person(models.Model):
 
     def __str__(self):
         """Unicode representation of Person"""
-        return self.first_name + ' ' + self.last_name
+        return self.last_name + ' ' + self.first_name
 
 
 class Activity(models.Model):
@@ -85,6 +87,11 @@ class Activity(models.Model):
         (12, 'décembre')
     )
 
+    SUPPORT = (
+        ('thèse', 'thèse'),
+        ('mémoire', 'mémoire')
+    )
+
     person = models.ForeignKey(
         Person, related_name='activities', on_delete=models.DO_NOTHING)
     contrat = models.CharField(max_length=50)
@@ -96,6 +103,8 @@ class Activity(models.Model):
     last_month = models.IntegerField(null=True, blank=True, choices=MONTH)
     title = models.CharField(null=True, blank=True,
                              max_length=210, default='.')
+    support = models.CharField(
+        null=True, blank=True, max_length=50, choices=SUPPORT)
     comment = models.CharField(null=True, blank=True, max_length=100)
     description = models.CharField(null=True, blank=True, max_length=850)
     link = models.URLField(null=True, blank=True, max_length=200)

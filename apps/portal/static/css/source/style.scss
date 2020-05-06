@@ -1,6 +1,7 @@
 @import "../../../../../niamoto_portal/static/css/source/color";
 
 /*define variable*/
+
 $color_bg_select: #fbfbfb;
 $color_bg: #eee;
 $color_text_contour: #005522;
@@ -9,68 +10,65 @@ $color_nav_text: #ffffff;
 /*=-====Bootstrapthemes.co btco-hover-menu=====*/
 
 .row {
-  padding-top: 50px;
+    padding-top: 50px;
 }
 
 .bgimg {
-  background-attachment: fixed;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .bgimg-accueil {
-  @extend .bgimg;
-
-  background-image: url("../img/home_background.jpg");
-
-  min-height: 100%;
+    @extend .bgimg;
+    background-image: url("../img/home_background.jpg");
+    min-height: 100%;
 }
 
 #preloader {
-  position: absolute;
-  top: 40%;
-  left: 50%;
-  z-index: 10;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    z-index: 10;
 }
 
 .bg-bandeau-default {
-  background: linear-gradient(rgba(34, 34, 34, 0.7), 70%, rgba(200, 200, 200, 0)) !important;
+    background: linear-gradient(rgba(34, 34, 34, 0.7), 70%, rgba(200, 200, 200, 0)) !important;
 }
 
 .text-contour {
-  text-shadow: $color_text_contour 1px 1px, $color_text_contour -1px 1px, $color_text_contour -1px -1px,
-    $color_text_contour 1px -1px;
-  text-shadow: 0px 0px 2px rgba(100, 100, 100, 1);
+    text-shadow: $color_text_contour 1px 1px, $color_text_contour -1px 1px, $color_text_contour -1px -1px, $color_text_contour 1px -1px;
+    text-shadow: 0px 0px 2px rgba(100, 100, 100, 1);
 }
 
 .text_accueil {
-  // display: flex;
-  justify-content: center;
-  align-items: center;
-  // margin-top: 50px;
-  // display: inline-block;
-  padding: 15%;
-  width: 100%;
-  height: 950px;
-  vertical-align: middle;
-  text-align: center;
-  // line-height: 900px;
+    // display: flex;
+    justify-content: center;
+    align-items: center;
+    // margin-top: 50px;
+    // display: inline-block;
+    padding: 15%;
+    width: 100%;
+    height: 950px;
+    vertical-align: middle;
+    text-align: center;
+    // line-height: 900px;
 }
 
 .bg-accueil {
-  border-top: 1px;
-  border-bottom: 1px;
+    border-top: 1px;
+    border-bottom: 1px;
 }
 
 .navbar-light .navbar-nav .nav-link {
-  color: #000;
+    color: #000;
 }
 
 .btco-hover-menu a,
 .navbar>li>a {
-  text-transform: capitalize;
-  padding: 10px 15px;
+    text-transform: capitalize;
+    padding: 10px 15px;
 }
 
 .btco-hover-menu .active a,
@@ -81,134 +79,130 @@ $color_nav_text: #ffffff;
 .navbar>.show>a,
 .navbar>.show>a:focus,
 .navbar>.show>a:hover {
-  color: #000;
-  background: transparent;
-  outline: 0;
+    color: #000;
+    background: transparent;
+    outline: 0;
 }
+
 
 /*submenu style start from here*/
 
 .dropdown-menu {
-  padding: 5px 0 0 0px;
-  margin: 0 0 0;
-  border: 0px solid transition !important;
-  border: 0px solid rgba(0, 0, 0, 0.15);
-  border-radius: 0 3px 7px 7px;
-  -webkit-box-shadow: none !important;
-  box-shadow: 0 3px 3px grey !important;
+    padding: 5px 0 0 0px;
+    margin: 0 0 0;
+    border: 0px solid transition !important;
+    border: 0px solid rgba(0, 0, 0, 0.15);
+    border-radius: 0 3px 7px 7px;
+    -webkit-box-shadow: none !important;
+    box-shadow: 0 3px 3px grey !important;
 }
 
-.dropdown-menu .dropdown-item::first-letter {
-  text-transform: capitalize;
+.dropdown-menu .dropdown-item::first-letter,
+.nav-item::first-letter {
+    text-transform: capitalize;
 }
 
 .navbar-dark .navbar-nav .nav-link {
-  text-shadow: $color_text_contour 1px 1px, $color_text_contour -1px 1px, $color_text_contour -1px -1px,
-    $color_text_contour 1px -1px;
-  text-shadow: 0px 0px 2px rgba(100, 100, 100, 1);
-  color: rgba(255, 255, 255, 1);
+    text-shadow: $color_text_contour 1px 1px, $color_text_contour -1px 1px, $color_text_contour -1px -1px, $color_text_contour 1px -1px;
+    text-shadow: 0px 0px 2px rgba(100, 100, 100, 1);
+    color: rgba(255, 255, 255, 1);
 }
 
 .btco-hover-menu .collapse .dropdown:hover>a {
-  text-shadow: none;
-  color: black;
+    text-shadow: none;
+    color: black;
 }
 
+
 /*first level*/
+
 .btco-hover-menu .collapse ul>li:hover>a {
-  background: $color_bg_select;
+    background: $color_bg_select;
 }
 
 .btco-hover-menu .collapse ul ul>li:hover>a,
 .navbar .show .dropdown-menu>li>a:focus,
 .navbar .show .dropdown-menu>li>a:hover {
-  background: $color_bg;
+    background: $color_bg;
 }
 
 .btco-hover-menu .collapse ul ul ul,
 .btco-hover-menu .collapse ul ul ul.dropdown-menu {
-  background: $color_bg_select;
+    background: $color_bg_select;
 }
 
+
 /*Drop-down menu work on hover*/
+
 .btco-hover-menu {
-  background: none;
-  margin: 0;
-  padding: 0;
-  min-height: 20px;
+    background: none;
+    margin: 0;
+    padding: 0;
+    min-height: 20px;
 }
 
 @media only screen and (max-width: 991px) {
-  .btco-hover-menu .show>.dropdown-toggle::after {
-    transform: rotate(-90deg);
-  }
+    .btco-hover-menu .show>.dropdown-toggle::after {
+        transform: rotate(-90deg);
+    }
 }
 
 @media only screen and (min-width: 991px) {
-  .btco-hover-menu .collapse ul li {
-    position: relative;
-  }
-
-  .btco-hover-menu .collapse ul li:hover>ul {
-    display: block;
-  }
-
-  .btco-hover-menu .collapse ul ul {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    min-width: 250px;
-    display: none;
-  }
-
-  /*******/
-  .btco-hover-menu .collapse ul ul li {
-    position: relative;
-  }
-
-  .btco-hover-menu .collapse ul ul li:hover>ul {
-    display: block;
-  }
-
-  .btco-hover-menu .collapse ul ul ul {
-    position: absolute;
-    top: 0;
-    left: 100%;
-    min-width: 250px;
-    display: none;
-  }
-
-  /*******/
-  .btco-hover-menu .collapse ul ul ul li {
-    position: relative;
-  }
-
-  .btco-hover-menu .collapse ul ul ul li:hover ul {
-    display: block;
-  }
-
-  .btco-hover-menu .collapse ul ul ul ul {
-    position: absolute;
-    top: 0;
-    left: -100%;
-    min-width: 250px;
-    display: none;
-    z-index: 1;
-  }
+    .btco-hover-menu .collapse ul li {
+        position: relative;
+    }
+    .btco-hover-menu .collapse ul li:hover>ul {
+        display: block;
+    }
+    .btco-hover-menu .collapse ul ul {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        min-width: 250px;
+        display: none;
+    }
+    /*******/
+    .btco-hover-menu .collapse ul ul li {
+        position: relative;
+    }
+    .btco-hover-menu .collapse ul ul li:hover>ul {
+        display: block;
+    }
+    .btco-hover-menu .collapse ul ul ul {
+        position: absolute;
+        top: 0;
+        left: 100%;
+        min-width: 250px;
+        display: none;
+    }
+    /*******/
+    .btco-hover-menu .collapse ul ul ul li {
+        position: relative;
+    }
+    .btco-hover-menu .collapse ul ul ul li:hover ul {
+        display: block;
+    }
+    .btco-hover-menu .collapse ul ul ul ul {
+        position: absolute;
+        top: 0;
+        left: -100%;
+        min-width: 250px;
+        display: none;
+        z-index: 1;
+    }
 }
 
 .w3-animate-top {
-  animation: animatetop 0.4s;
+    animation: animatetop 0.4s;
 }
 
 @keyframes animatetop {
-  from {
-    top: -300px;
-    opacity: 0;
-  }
-
-  to {
-    top: 0;
-    opacity: 1;
-  }
+    from {
+        top: -300px;
+        opacity: 0;
+    }
+    to {
+        top: 0;
+        opacity: 1;
+    }
 }

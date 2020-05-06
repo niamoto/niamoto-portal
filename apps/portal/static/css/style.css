@@ -86,7 +86,8 @@
   box-shadow: 0 3px 3px grey !important;
 }
 
-.dropdown-menu .dropdown-item::first-letter {
+.dropdown-menu .dropdown-item::first-letter,
+.nav-item::first-letter {
   text-transform: capitalize;
 }
 

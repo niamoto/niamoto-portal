@@ -5,7 +5,9 @@ from .models import Ressource, Person, Activity
 
 @admin.register(Activity)
 class ActivityAdmin(admin.ModelAdmin):
-    list_display = ('person', 'contrat', 'title')
+    list_display = ('person', 'contrat', 'title', 'support',
+                    'link')
+    list_editable = ('title', 'support', 'link')
 
 
 @admin.register(Person)
