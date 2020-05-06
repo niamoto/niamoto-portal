@@ -1,16 +1,16 @@
 {% extends 'base.html' %}
-{% load staticfiles %} 
-{% block styles %} 
-  {{block.super}}
-  <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.css">
-  <link rel="stylesheet" type="text/css" href="{% static 'css/simplePage.min.css' %}" />
-  <link rel="stylesheet" type="text/css" href="{% static 'css/ressources.min.css' %}" />
+{% load staticfiles %}
+{% block styles %}
+{{block.super}}
+<link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.css">
+<link rel="stylesheet" type="text/css" href="{% static 'css/simplePage.min.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'css/ressources.min.css' %}" />
 {% endblock %}
 {% block page_header %}
-  <div class="container p-2 display-4">
-    Ressources
-  </div>
-{% endblock page_header%} 
+<div class="container p-2 display-4">
+  Ressources
+</div>
+{% endblock page_header%}
 {% block body %}
 
 <section id="equipe">
@@ -28,44 +28,44 @@
     <div class="row">
       <div class="cards">
         {% if persons %}
-          {% for person in persons %}
-            {%if person.permanent is True%}
-              <div id={{person.id}}_person class="card card-flip">
-                <div class="card-front">
-                  {%if person.image%}
-                    <img class="card-img-top center-block rounded-circle" src="../media/{{person.image}}">
-                  {%else%}
-                    <div class="portrait">
-                      <i class="fas fa-portrait fa-9x fa-border"></i>
-                    </div>
-                  {%endif%}
-                  <div class="card-body">
-                    <h5 class="card-title"> {{person.first_name|capfirst}} {{person.last_name|capfirst}} </h5>
-                    <p class="card-text text-center">{{person.function}}</p>
-                  </div>
-                </div>
-                <div class="card-back">
-                  <div class="card-block">
-                    <h5 class="card-title"> {{person.first_name|capfirst}} {{person.last_name|capfirst}} </h5>
-                    {% if activities%}
-                      {% for activity in activities%}
-                        {% if person.id == activity.person_id %}
-                          <p class="card-text">
-                            <a data-toggle="popover" data-title="{{activity.title}}"
-                              data-content="{{activity.description|default:''}}" data-trigger='hover' data-placement='auto'>
-                              {{activity.first_year|default:"..."}}-{{activity.first_month|default:""}}
-                              {{activity|truncatechars:75}}</a>
-                          </p>
-                        {%endif%}
-                      {%endfor%}
-                    {%endif%}
-                  </div>
-                </div>
-              </div>
+        {% for person in persons %}
+        {%if person.permanent is True%}
+        <div id={{person.id}}_person class="card card-flip">
+          <div class="card-front">
+            {%if person.image%}
+            <img class="card-img-top center-block rounded-circle" src="../media/{{person.image}}">
+            {%else%}
+            <div class="portrait">
+              <i class="fas fa-portrait fa-9x fa-border"></i>
+            </div>
             {%endif%}
-          {% endfor %}
+            <div class="card-body">
+              <h5 class="card-title"> {{person.first_name|capfirst}} {{person.last_name|capfirst}} </h5>
+              <p class="card-text text-center">{{person.function}}</p>
+            </div>
+          </div>
+          <div class="card-back">
+            <div class="card-block">
+              <h5 class="card-title"> {{person.first_name|capfirst}} {{person.last_name|capfirst}} </h5>
+              {% if activities%}
+              {% for activity in activities%}
+              {% if person.id == activity.person_id %}
+              <p class="card-text">
+                <a data-toggle="popover" data-title="{{activity.title}}"
+                  data-content="{{activity.description|default:''}}" data-trigger='hover' data-placement='auto'>
+                  {{activity.first_year|default:"..."}}-{{activity.first_month|default:""}}
+                  {{activity|truncatechars:75}}</a>
+              </p>
+              {%endif%}
+              {%endfor%}
+              {%endif%}
+            </div>
+          </div>
+        </div>
+        {%endif%}
+        {% endfor %}
         {% else %}
-          <p>Aucun personne.</p>
+        <p>Aucun personne.</p>
         {% endif %}
       </div>
     </div>
@@ -79,44 +79,44 @@
     <div class="row">
       <div class="cards">
         {% if persons %}
-          {% for person in persons %}
-            {%if person.permanent is False%}
-              <div id={{person.id}}_person class="card card-flip">
-                <div class="card-front">
-                  {%if person.image%}
-                    <img class="card-img-top center-block rounded-circle" src="../media/{{person.image}}">
-                  {%else%}
-                    <div class="portrait">
-                      <i class="fas fa-portrait fa-9x fa-border"></i>
-                    </div>
-                  {%endif%}
-                  <div class="card-body">
-                    <h5 class="card-title"> {{person.first_name|capfirst}} {{person.last_name|capfirst}} </h5>
-                    <p class="card-text text-center">{{person.function}}</p>
-                  </div>
-                </div>
-                <div class="card-back">
-                  <div class="card-block">
-                    <h5 class="card-title"> {{person.first_name|capfirst}} {{person.last_name|capfirst}} </h5>
-                    {% if activities%}
-                      {% for activity in activities%}
-                        {% if person.id == activity.person_id %}
-                          <p class="card-text">
-                            <a data-toggle="popover" data-title="{{activity.title}}"
-                              data-content="{{activity.description|default:''}}" data-trigger='hover' data-placement='auto'>
-                              {{activity.first_year|default:"..."}}-{{activity.first_month|default:""}}
-                              {{activity|truncatechars:75}}</a>
-                          </p>
-                        {%endif%}
-                      {%endfor%}
-                    {%endif%}
-                  </div>
-                </div>
-              </div>
+        {% for person in persons %}
+        {%if person.permanent is False%}
+        <div id={{person.id}}_person class="card card-flip">
+          <div class="card-front">
+            {%if person.image%}
+            <img class="card-img-top center-block rounded-circle" src="../media/{{person.image}}">
+            {%else%}
+            <div class="portrait">
+              <i class="fas fa-portrait fa-9x fa-border"></i>
+            </div>
             {%endif%}
-          {% endfor %}
+            <div class="card-body">
+              <h5 class="card-title"> {{person.first_name|capfirst}} {{person.last_name|capfirst}} </h5>
+              <p class="card-text text-center">{{person.function}}</p>
+            </div>
+          </div>
+          <div class="card-back">
+            <div class="card-block">
+              <h5 class="card-title"> {{person.first_name|capfirst}} {{person.last_name|capfirst}} </h5>
+              {% if activities%}
+              {% for activity in activities%}
+              {% if person.id == activity.person_id %}
+              <p class="card-text">
+                <a data-toggle="popover" data-title="{{activity.title}}"
+                  data-content="{{activity.description|default:''}}" data-trigger='hover' data-placement='auto'>
+                  {{activity.first_year|default:"..."}}-{{activity.first_month|default:""}}
+                  {{activity|truncatechars:75}}</a>
+              </p>
+              {%endif%}
+              {%endfor%}
+              {%endif%}
+            </div>
+          </div>
+        </div>
+        {%endif%}
+        {% endfor %}
         {% else %}
-          <p>Aucun personne.</p>
+        <p>Aucun personne.</p>
         {% endif %}
       </div>
     </div>
@@ -129,49 +129,49 @@
       <h4>Publications</h4>
 
       {%if ressources%}
-        <div class="row ressources">
-          <table id="table_support" class="bootstrap-table table-striped" data-toggle="table" data-search="true"
-            data-pagination="true" data-filter-control="true">
-            <thead class="thead-dark">
-              <tr>
-                <th data-sortable="true" data-field="annee" data-filter-control="select">Année</th>
-                <th data-sortable="true" data-field="support" data-filter-control="select">support</th>
-                <th data-sortable="true" data-field="auteur">Auteur et titre du document</th>
-              </tr>
-            </thead>
-            <tbody>
-              {%for ressource in ressources%}
-                {% if ressource.support == "article" or ressource.support == "ouvrage" or ressource.support == "rapport" or ressource.support == "thèse" or ressource.support == "mémoire" %}
-                  <tr class="col-12 {{ressource.support}}">
-                    <td>{{ressource.year|default:""}}</td>
-                    <td>{{ressource.support}}</td>
-                    <td>{{ressource.who|default:""}}
-                      {% if ressource.who %}, {% endif %} <strong>{{ressource.description|default:""}}</strong>
-                      {% if ressource.description %}, {% endif %} <em>{{ressource.journal|default:""}}</em>
-                      {% if ressource.journal %}, {% endif %} {{ressource.issue|default:""}}
-                      {% if ressource.issue %}, {% endif %} {{ressource.pages|default:""}}
-                      {% if ressource.link %} <a href="{{ressource.link|default:""}}">
-                        <i class="fa fa-download" aria-hidden="true"></i>
-                      </a>{% endif %}</td>
-                  </tr>
-                {%endif%}
-              {%endfor%}
-              {% for activity in activities%}
-                {% if activity.support == 'thèse' or activity.support == 'mémoire'%}
-                   <tr class="col-12 {{activity.support}}">
-                    <td>{{activity.last_year|default:""}}</td>
-                    <td>{{activity.support}}</td>
-                    <td>{{activity.person|default:""}}
-                      {% if activity.person %}, {% endif %} <strong>{{activity.title|default:""}}</strong>
-                      {% if activity.link %} <a href="{{activity.link|default:""}}">
-                        <i class="fa fa-download" aria-hidden="true"></i>
-                      </a>{% endif %}</td>
-                  </tr>
-                {% endif %}
-              {%endfor%}
-            </tbody>
-          </table>
-        </div>  
+      <div class="row ressources">
+        <table id="table_support" class="bootstrap-table table-striped" data-toggle="table" data-search="true"
+          data-pagination="true" data-filter-control="true">
+          <thead class="thead-dark">
+            <tr>
+              <th data-sortable="true" data-field="annee" data-filter-control="select">Année</th>
+              <th data-sortable="true" data-field="support" data-filter-control="select">support</th>
+              <th data-sortable="true" data-field="auteur">Auteur et titre du document</th>
+            </tr>
+          </thead>
+          <tbody>
+            {%for ressource in ressources%}
+            {% if ressource.support == "article" or ressource.support == "ouvrage" or ressource.support == "rapport" or ressource.support == "thèse" or ressource.support == "mémoire" %}
+            <tr class="col-12 {{ressource.support}}">
+              <td>{{ressource.year|default:""}}</td>
+              <td>{{ressource.support}}</td>
+              <td>{{ressource.who|default:""}}
+                {% if ressource.who %}, {% endif %} <strong>{{ressource.description|default:""}}</strong>
+                {% if ressource.description %}, {% endif %} <em>{{ressource.journal|default:""}}</em>
+                {% if ressource.journal %}, {% endif %} {{ressource.issue|default:""}}
+                {% if ressource.issue %}, {% endif %} {{ressource.pages|default:""}}
+                {% if ressource.link %} <a href="{{ressource.link|default:""}}">
+                  <i class="fa fa-download" aria-hidden="true"></i>
+                </a>{% endif %}</td>
+            </tr>
+            {%endif%}
+            {%endfor%}
+            {% for activity in activities%}
+            {% if activity.support == 'thèse' or activity.support == 'mémoire'%}
+            <tr class="col-12 {{activity.support}}">
+              <td>{{activity.last_year|default:""}}</td>
+              <td>{{activity.support}}</td>
+              <td>{{activity.person|default:""}}
+                {% if activity.person %}, {% endif %} <strong>{{activity.title|default:""}}</strong>
+                {% if activity.link %} <a href="{{activity.link|default:""}}">
+                  <i class="fa fa-download" aria-hidden="true"></i>
+                </a>{% endif %}</td>
+            </tr>
+            {% endif %}
+            {%endfor%}
+          </tbody>
+        </table>
+      </div>
       {%endif%}
     </div>
   </div>
@@ -183,39 +183,39 @@
       <h4>Production diverses</h4>
 
       {%if ressources%}
-        <div class="row ressources">
-          <table id="table_support" class="bootstrap-table table-striped" data-toggle="table" data-search="true"
-            data-pagination="true" data-filter-control="true">
-            <thead class="thead-dark">
-              <tr>
-                <th data-sortable="true" data-field="annee" data-filter-control="select">Année</th>
-                <th data-sortable="true" data-field="support" data-filter-control="select">support</th>
-                <th data-sortable="true" data-field="auteur" data-filter-control="select">Auteur et titre du document</th>
-              </tr>
-            </thead>
-            <tbody>
-              {%for ressource in ressources%}
-                {% if ressource.support == "conférence" or ressource.support == "film" or ressource.support == "radio"%}
-                  <tr class="col-12 {{ressource.support}}">
-                    <td>{{ressource.year|default:""}}</td>
-                    <td>{{ressource.support}}</td>
-                    <td>{{ressource.who|default:""}} {% if ressource.who %}, {% endif %}
-                      <strong>{{ressource.description|default:""}}</strong>
-                      {% if ressource.description %}, {% endif %}
-                      <em>{{ressource.journal|default:""}}</em>
-                      {% if ressource.journal %}, {% endif %}
-                      {{ressource.issue|default:""}}
-                      {% if ressource.issue %}, {% endif %}
-                      {{ressource.pages|default:""}}
-                      {% if ressource.link %}<a href="{{ressource.link|default:""}}">
-                      <i class="fa fa-download" aria-hidden="true"></i>
-                      </a>{% endif %}</td>
-                  </tr>
-                {%endif%}
-              {%endfor%}
-            </tbody>
-          </table>
-        </div>
+      <div class="row ressources">
+        <table id="table_support" class="bootstrap-table table-striped" data-toggle="table" data-search="true"
+          data-pagination="true" data-filter-control="true">
+          <thead class="thead-dark">
+            <tr>
+              <th data-sortable="true" data-field="annee" data-filter-control="select">Année</th>
+              <th data-sortable="true" data-field="support" data-filter-control="select">support</th>
+              <th data-sortable="true" data-field="auteur" data-filter-control="select">Auteur et titre du document</th>
+            </tr>
+          </thead>
+          <tbody>
+            {%for ressource in ressources%}
+            {% if ressource.support == "conférence" or ressource.support == "film" or ressource.support == "radio"%}
+            <tr class="col-12 {{ressource.support}}">
+              <td>{{ressource.year|default:""}}</td>
+              <td>{{ressource.support}}</td>
+              <td>{{ressource.who|default:""}} {% if ressource.who %}, {% endif %}
+                <strong>{{ressource.description|default:""}}</strong>
+                {% if ressource.description %}, {% endif %}
+                <em>{{ressource.journal|default:""}}</em>
+                {% if ressource.journal %}, {% endif %}
+                {{ressource.issue|default:""}}
+                {% if ressource.issue %}, {% endif %}
+                {{ressource.pages|default:""}}
+                {% if ressource.link %}<a href="{{ressource.link|default:""}}">
+                  <i class="fa fa-download" aria-hidden="true"></i>
+                </a>{% endif %}</td>
+            </tr>
+            {%endif%}
+            {%endfor%}
+          </tbody>
+        </table>
+      </div>
       {%endif%}
     </div>
   </div>
@@ -240,25 +240,24 @@
           </thead>
           <tbody>
             {%for tree in trees%}
-              <tr>
-                <td>{{tree.family_name|default:""}}</td>
-                <td>{{tree.genre_name|default:""}}</td>
-                <td>{{tree.name|default:""}}</td>
-                <td {%if tree.statut == "Endémique" %} class="endemique" {%endif%} 
-                {%if tree.statut == "Autochtone" %}
-                  class="autochtone" {%endif%}>
-                  {{tree.statut|default:""}}
-                </td>
-                <td><span class="link">
-                    {%if tree.id_endemia %}
-                    <a href="http://endemia.nc/flore/fiche{{tree.id_endemia}}" target="_blank">Endemia </a>
-                    {%endif%}</span><span class="vertical-line"></span>
-                  <span class="link">
-                    {%if tree.id_florical %}
-                    <a href="http://publish.plantnet-project.org/project/florical_fr/collection/florical/taxons/details/{{tree.id_florical}}"
-                      target="_blank">Florical</a>
-                    {%endif%}</span></td>
-              </tr>
+            <tr>
+              <td>{{tree.family_name|default:""}}</td>
+              <td>{{tree.genre_name|default:""}}</td>
+              <td>{{tree.name|default:""}}</td>
+              <td {%if tree.statut == "Endémique" %} class="endemique" {%endif%} {%if tree.statut == "Autochtone" %}
+                class="autochtone" {%endif%}>
+                {{tree.statut|default:""}}
+              </td>
+              <td><span class="link">
+                  {%if tree.id_endemia %}
+                  <a href="http://endemia.nc/flore/fiche{{tree.id_endemia}}" target="_blank">Endemia </a>
+                  {%endif%}</span><span class="vertical-line"></span>
+                <span class="link">
+                  {%if tree.id_florical %}
+                  <a href="http://publish.plantnet-project.org/project/florical_fr/collection/florical/taxons/details/{{tree.id_florical}}"
+                    target="_blank">Florical</a>
+                  {%endif%}</span></td>
+            </tr>
             {%endfor%}
           </tbody>
         </table>
@@ -267,11 +266,11 @@
     </div>
   </div>
 </section>
-{% endblock body %} 
-{% block scripts %} 
-  {{ block.super }}
+{% endblock body %}
+{% block scripts %}
+{{ block.super }}
 
-  <script src="{% static 'js/ressources.min.js' %}"></script>
-  <script src="https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.js"></script>
-  <script src="https://unpkg.com/bootstrap-table@1.16.0/dist/locale/bootstrap-table-fr-FR.min.js"></script>
+<script src="{% static 'js/ressources.min.js' %}"></script>
+<script src="https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.js"></script>
+<script src="https://unpkg.com/bootstrap-table@1.16.0/dist/locale/bootstrap-table-fr-FR.min.js"></script>
 {% endblock scripts %}
