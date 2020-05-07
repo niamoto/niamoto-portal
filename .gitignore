@@ -93,7 +93,7 @@ data
 *.ptx
 
 site_media
-niamoto_portal/staticfiles
+
 
 share
 
