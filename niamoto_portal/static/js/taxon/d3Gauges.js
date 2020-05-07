@@ -1,6 +1,6 @@
 import * as d3Gauge from '../D3gauge'
 
-export function initGauges (data) {
+export function initGauges(data) {
   var dbhMax = 150
   var dbhMin = 0
   var woodDensityMax = 1
@@ -11,7 +11,7 @@ export function initGauges (data) {
   var heightMin = 0
   var plotsCount = 20
 
-  function initMax (maxValue, initMaxValue) {
+  function initMax(maxValue, initMaxValue) {
     if (maxValue === 0) {
       return initMaxValue
     } else {
@@ -19,7 +19,7 @@ export function initGauges (data) {
     }
   }
 
-  function initGauge (id, unit, minValue, maxValue) {
+  function initGauge(id, unit, minValue, maxValue) {
     return new d3Gauge.Gauge({
       width: $(id).width(),
       height: $(id).height(),
@@ -36,7 +36,7 @@ export function initGauges (data) {
   dbhMaxGauge.render()
 
   // Count occurence
-  const distributionOccGauge = initGauge('#distributionOccGauge', "nombre d'occurence", 0, 20)
+  const distributionOccGauge = initGauge('#distributionOccGauge', "", 0, 20)
 
   distributionOccGauge.render()
 
@@ -70,7 +70,7 @@ export function initGauges (data) {
     updateData(data)
   })
 
-  function updateData (data) {
+  function updateData(data) {
     // distributionOccGauge.update(data.nbOccurrences, data.total_nbOccurrences)
     // dbhMaxGauge.update(data.dbh.max, dbhMax)
     // woodDensityGauge.update(data.woodDensity.max * 1000, woodDensityMax * 1000)

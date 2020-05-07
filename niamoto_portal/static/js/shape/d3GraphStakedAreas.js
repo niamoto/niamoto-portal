@@ -33,7 +33,7 @@ export function initGraphStakedAreas(data) {
   // Holdridge forest
   const forestTypeElevation = initGraphStakedArea(
     '#forest_type_elevation',
-    'Altitude(m)',
+    'Altitude (m)',
     '',
     ['Forêt secondaire', 'Forêt mature', 'Forêt coeur'],
     [0, 100],

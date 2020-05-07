@@ -46,8 +46,8 @@ export function initGraphBarhs(data) {
   // forets
   const forests = initGraphBarh(
     '#forets',
-    'Superfice(hectare)',
-    'Alitude(m)',
+    'Superfice (hectare)',
+    'Alitude (m)',
     ['Forêt', 'Hors-forêt'],
     ['1700', '1500', '1300', '1100', '900', '700', '500', '300', '100']
   )
@@ -57,8 +57,8 @@ export function initGraphBarhs(data) {
   // forets ultramafique
   const forestsUm = initGraphBarh(
     '#forets_um',
-    'Superfice(hectare)',
-    'Alitude(m)',
+    'Superfice (hectare)',
+    'Alitude (m)',
     ['Forêt', 'Hors-forêt'],
     ['1700', '1500', '1300', '1100', '900', '700', '500', '300', '100']
   )
@@ -66,8 +66,8 @@ export function initGraphBarhs(data) {
   // cover forest NUM UM
   const ratioForest = initGraphPyramidh(
     '#ratio_forests',
-    'Répartition(%)',
-    'Alitude(m)',
+    'Répartition (%)',
+    'Alitude (m)',
     ['Forêt (UM)', 'Forêt (NUM)'],
     ['1700', '1500', '1300', '1100', '900', '700', '500', '300', '100'],
     100,
