@@ -1,4 +1,11 @@
-{% extends 'base.html' %} {% block body %}
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block styles %}
+{{block.super}}
+<link rel="stylesheet" type="text/css" href="{% static 'css/home.min.css' %}" />
+{% endblock %}
+
+{% block body %}
 <div data-spy="scroll" data-target="#navbar-example2" data-offset="0">
   <section id="accueil" class="bgimg-accueil">
     <div class="text_accueil text-white text-contour">
@@ -21,18 +28,17 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-12 mx-auto">
-          <h2>Bienvenue sur niamoto</h2>
+          <h2 style="text-align: justify;">Bienvenue sur niamoto</h2>
           <p style="text-align: justify;">Bienvenue sur niamoto, site enti&egrave;rement d&eacute;di&eacute; &agrave; la
             for&ecirc;t de la province Nord. Ce site compile 10 ans de recherche sur les for&ecirc;ts de la province
-            Nord que nous vous invitons ici &agrave; explorer &agrave;
-            3 &eacute;chelles distinctes : individu, communaut&eacute;s, paysage.</p>
+            Nord que nous vous invitons ici &agrave; explorer &agrave; 3 &eacute;chelles distinctes :
+            individu&nbsp;(arbres), communaut&eacute;s&nbsp;(parcelles), paysage&nbsp;(for&ecirc;ts).</p>
           <p style="text-align: justify;">La for&ecirc;t est compos&eacute;e d'arbres que l'on peut &eacute;tudier
             &agrave; l'&eacute;chelle de l'individu (identification, hauteur, diam&egrave;tre, strate, densit&eacute; de
-            bois....). Ces arbres s'assemblent en communaut&eacute;s qui
-            varient dans le temps et dans l'espace et que l'on &eacute;tudie en r&eacute;alisant des parcelles
-            foresti&egrave;res. La somme de toutes ces communaut&eacute;s forme une for&ecirc;t que l'on peut
-            &eacute;tudier &agrave; l'&eacute;chelle du
-            paysage gr&acirc;ce &agrave; des outils de cartographie.</p>
+            bois....). Ces arbres s'assemblent en communaut&eacute;s qui varient dans le temps et dans l'espace et que
+            l'on &eacute;tudie en r&eacute;alisant des parcelles foresti&egrave;res. La somme de toutes ces
+            communaut&eacute;s forme une for&ecirc;t que l'on peut &eacute;tudier &agrave; l'&eacute;chelle du paysage
+            gr&acirc;ce &agrave; des outils de cartographie.</p>
           <!-- <h4>Introduction</h4>
           <p>La flore indigène de Nouvelle-Calédonie est un réservoir unique de la biodiversité mondiale. Elle abrite
             3641 taxons correspondant à 3409 espèces, 816 genres et 213 familles de plantes vasculaires. Le taux
@@ -113,23 +119,34 @@
   <section id="context">
     <div class="container">
       <div class="row">
-        <div class="col-lg-12 mx-auto">
+        <div class="col-lg-12 mx-auto context">
           <h2 style="text-align: justify;">Le contexte</h2>
-          <p style="text-align: justify;">La Nouvelle-Cal&eacute;donie est un territoire fran&ccedil;ais d'outre-mer
-            situ&eacute; &agrave; 17 000 km de la France. Il s'agit d'un archipel dans l'oc&eacute;an Pacifique un peu
-            au nord du Tropique du Capricorne. Sa superficie est de 18 575,5 km 2. Cet archipel est peupl&eacute; de
-            pr&egrave;s de 268 000 habitants. L'archipel n&eacute;o-cal&eacute;donien comprend une &icirc;le principale,
-            la Grande Terre d'environ 16 000 km2. Cette &icirc;le principale est entour&eacute;e de plusieurs ensembles
-            d'&icirc;les plus petites.</p>
-          <p style="text-align: justify;">&nbsp;<img src="../static/img/carte_pacifique.png" alt="carte du pacifique" />
-          </p>
-          <p style="text-align: justify;">Ses milieux naturels sont aussi singuliers que menac&eacute;s ce qui lui vaut
-            d'&ecirc;tre un des principaux hotspots de biodiversit&eacute;. On estime que les for&ecirc;ts de
-            Nouvelle-Cal&eacute;donie ont perdu en XXX ans XXX % de leur surface originelle entrainant dans leur
-            disparition des fonctions &eacute;cosyst&egrave;miques essentielles (ressources alimentaires et
-            &eacute;nerg&eacute;tique, habitat pour la faune, r&eacute;gulation de l'eau et du climat, patrimoine
-            culturel...). Et si on se donnait les moyens aujourd'hui d'inverser la tendance et de cheminer vers une
-            extension des milieux forestiers?</p>
+          <div class="row">
+            <p><img id="map_pacific" class="col rounded" src="../static/img/carte_pacifique.png"
+                alt="carte du pacifique" />
+            </p>
+            <p class="col" style="text-align: justify;">La Nouvelle-Cal&eacute;donie est un territoire fran&ccedil;ais
+              d'outre-mer
+              situ&eacute; &agrave; 17 000 km de la France. Il s'agit d'un archipel dans l'oc&eacute;an Pacifique un peu
+              au nord du Tropique du Capricorne. Sa superficie est de 18 575,5 km 2. Cet archipel est peupl&eacute; de
+              pr&egrave;s de 268 000 habitants. L'archipel n&eacute;o-cal&eacute;donien comprend une &icirc;le
+              principale,
+              la Grande Terre d'environ 16 000 km2. Cette &icirc;le principale est entour&eacute;e de plusieurs
+              ensembles
+              d'&icirc;les plus petites.</p>
+          </div>
+          <div class="row">
+
+            <p class="col" style="text-align: justify;">Ses milieux naturels sont aussi singuliers que menac&eacute;s ce
+              qui lui vaut
+              d'&ecirc;tre un des principaux hotspots de biodiversit&eacute;. On estime que les for&ecirc;ts de
+              Nouvelle-Cal&eacute;donie ont perdu en XXX ans XXX % de leur surface originelle entrainant dans leur
+              disparition des fonctions &eacute;cosyst&egrave;miques essentielles (ressources alimentaires et
+              &eacute;nerg&eacute;tique, habitat pour la faune, r&eacute;gulation de l'eau et du climat, patrimoine
+              culturel...). Et si on se donnait les moyens aujourd'hui d'inverser la tendance et de cheminer vers une
+              extension des milieux forestiers?</p>
+            <img id="edge" class="rounded col-5 " src="../static/img/lisieres.png" alt="lisières" />
+          </div>
         </div>
       </div>
   </section>
@@ -144,18 +161,46 @@
             plus de 75,5 % ce qui repr&eacute;sente 1 % des taxons end&eacute;miques du monde, dont 3 familles et 96
             genres end&eacute;miques. (Adapt&eacute; de florical janvier 2020).</p>
           <p style="text-align: justify;">Elle pr&eacute;sente de nombreuses singularit&eacute;s qui attisent la
-            curiosit&eacute; des botanistes du monde entier : 1. des familles sont sur-repr&eacute;sent&eacute;es
-            (Rubiaceae, Pittosporaceae, Cunoniaceae, Euphorbiaceae) tandis que d&rsquo;autres sont
-            sous-repr&eacute;sent&eacute;es (Fabaceae, Lamiaceae, Malvaceae, Ericaceae) en comparaison avec les flores
-            voisines notamment l&rsquo;Australie ou l&rsquo;Asie du Sud-est. 2. on y trouve une forte densit&eacute; de
-            familles ancestrales, appartenant au groupe des angiospermes basales telles que les Lauraceae, Proteaceae,
-            Winteraceae, Piperaceae, Annonaceae, Monimiaceae et tout particuli&egrave;rement <em><i>Amborella
-                trichopoda</i></em>, l&rsquo;esp&egrave;ce la plus basale de l&rsquo;arbre phylog&eacute;n&eacute;tique
-            actuel des plantes &agrave; fleurs. 3. Elle abrite une grande richesse de gymnospermes avec 43
-            esp&egrave;ces, soit 7 % des conif&egrave;res du monde, toutes end&eacute;miques, parmi lesquelles 18 des 44
-            esp&egrave;ces connues d&rsquo;Araucariaceae. Par ailleurs le territoire d&eacute;tient la seule
-            esp&egrave;ce de gymnosperme parasite, <em><i>Parasitaxus usta</i></em>.</p>
+            curiosit&eacute; des botanistes du monde entier :</p>
+          <ol>
+            <li style="text-align: justify;">Des familles sont sur-repr&eacute;sent&eacute;es (Rubiaceae,
+              Pittosporaceae, Cunoniaceae, Euphorbiaceae) tandis que d&rsquo;autres sont sous-repr&eacute;sent&eacute;es
+              (Fabaceae, Lamiaceae, Malvaceae, Ericaceae) en comparaison avec les flores voisines notamment
+              l&rsquo;Australie ou l&rsquo;Asie du Sud-est.</li>
+            <li style="text-align: justify;">On y trouve une forte densit&eacute; de familles ancestrales, appartenant
+              au groupe des angiospermes basales telles que les Lauraceae, Proteaceae, Winteraceae, Piperaceae,
+              Annonaceae, Monimiaceae et tout particuli&egrave;rement <em><i>Amborella trichopoda</i></em>,
+              l&rsquo;esp&egrave;ce la plus basale de l&rsquo;arbre phylog&eacute;n&eacute;tique actuel des plantes
+              &agrave; fleurs.</li>
+            <div id="flower" class="row">
+              <di class="mx-auto d-block" v>
+                <img id="Zygogynum_mackeei" src="../static/img/Zygogynum_mackeei.png" alt="Zygogynum mackeei"
+                  title="Zygogynum mackeei" />
+                <img src="../static/img/Amborella_trichopoda.png" title="Amborella trichopoda"
+                  alt="Amborella trichopoda" />
+                <img src="../static/img/Cryptocarya_barrabea.png" title="Cryptocarya barrabea"
+                  alt="Cryptocarya barrabea" />
+                <img src="../static/img/Hedycarya_rivularis.png" title="Hedycarya rivularis"
+                  alt="Hedycarya rivularis" />
+                <img id="Stenocarpus_trinervis" src="../static/img/Stenocarpus_trinervis.png"
+                  title="Stenocarpus trinervis" alt="Stenocarpus trinervis" />
+            </div>
         </div>
+
+        <li style="text-align: justify;">Elle abrite une grande richesse de gymnospermes avec 43 esp&egrave;ces,
+          soit 7 % des conif&egrave;res du monde, toutes end&eacute;miques, parmi lesquelles 18 des 44
+          esp&egrave;ces connues d&rsquo;Araucariaceae. Par ailleurs le territoire d&eacute;tient la seule
+          esp&egrave;ce de gymnosperme parasite, <em><i>Parasitaxus usta</i></em>.
+          <div class="row">
+            <div class="col">
+              <img id="Parasitaxus_usta" class="rounded" src="../static/img/Parasitaxus_usta.png" alt="Parasitaxus usta"
+                title="Parasitaxus usta" />
+            </div>
+          </div>
+        </li>
+        </ol>
+
       </div>
+    </div>
   </section>
   {% endblock body %}

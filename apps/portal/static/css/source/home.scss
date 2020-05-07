@@ -1,0 +1,60 @@
+@import "../../../../../niamoto_portal/static/css/source/color";
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+.bgimg {
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.bgimg-accueil {
+    @extend .bgimg;
+    background-image: url("../img/home_background.jpg");
+    min-height: 100%;
+}
+
+.image {
+    height: 250px;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+#map_pacific {
+    @extend .image
+}
+
+#edge {
+    @extend .image;
+
+
+}
+
+.context .row {
+    padding-top: 0;
+}
+
+#Parasitaxus_usta {
+    @extend .center;
+    width: auto;
+    margin-bottom: 50px;
+    text-align: center;
+}
+
+#flower {
+    padding-bottom: 50px;
+}
+
+#Stenocarpus_trinervis {
+    border-radius: 0 5px 5px 0;
+}
+
+#Zygogynum_mackeei {
+    border-radius: 5px 0 0 5px;
+}

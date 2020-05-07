@@ -1,0 +1,47 @@
+.center, #Parasitaxus_usta {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
+.bgimg, .bgimg-accueil {
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.bgimg-accueil {
+  background-image: url("../img/home_background.jpg");
+  min-height: 100%;
+}
+
+.image, #map_pacific, #edge {
+  height: 250px;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.context .row {
+  padding-top: 0;
+}
+
+#Parasitaxus_usta {
+  width: auto;
+  margin-bottom: 50px;
+  text-align: center;
+}
+
+#flower {
+  padding-bottom: 50px;
+}
+
+#Stenocarpus_trinervis {
+  border-radius: 0 5px 5px 0;
+}
+
+#Zygogynum_mackeei {
+  border-radius: 5px 0 0 5px;
+}
+/*# sourceMappingURL=home.css.map */

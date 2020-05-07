@@ -13,18 +13,7 @@ $color_nav_text: #ffffff;
     padding-top: 50px;
 }
 
-.bgimg {
-    background-attachment: fixed;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-}
 
-.bgimg-accueil {
-    @extend .bgimg;
-    background-image: url("../img/home_background.jpg");
-    min-height: 100%;
-}
 
 #preloader {
     position: absolute;
@@ -54,11 +43,6 @@ $color_nav_text: #ffffff;
     vertical-align: middle;
     text-align: center;
     // line-height: 900px;
-}
-
-.bg-accueil {
-    border-top: 1px;
-    border-bottom: 1px;
 }
 
 .navbar-light .navbar-nav .nav-link {
@@ -151,9 +135,11 @@ $color_nav_text: #ffffff;
     .btco-hover-menu .collapse ul li {
         position: relative;
     }
+
     .btco-hover-menu .collapse ul li:hover>ul {
         display: block;
     }
+
     .btco-hover-menu .collapse ul ul {
         position: absolute;
         top: 100%;
@@ -161,13 +147,16 @@ $color_nav_text: #ffffff;
         min-width: 250px;
         display: none;
     }
+
     /*******/
     .btco-hover-menu .collapse ul ul li {
         position: relative;
     }
+
     .btco-hover-menu .collapse ul ul li:hover>ul {
         display: block;
     }
+
     .btco-hover-menu .collapse ul ul ul {
         position: absolute;
         top: 0;
@@ -175,13 +164,16 @@ $color_nav_text: #ffffff;
         min-width: 250px;
         display: none;
     }
+
     /*******/
     .btco-hover-menu .collapse ul ul ul li {
         position: relative;
     }
+
     .btco-hover-menu .collapse ul ul ul li:hover ul {
         display: block;
     }
+
     .btco-hover-menu .collapse ul ul ul ul {
         position: absolute;
         top: 0;
@@ -201,6 +193,7 @@ $color_nav_text: #ffffff;
         top: -300px;
         opacity: 0;
     }
+
     to {
         top: 0;
         opacity: 1;
