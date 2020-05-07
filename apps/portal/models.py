@@ -57,6 +57,7 @@ class Person(models.Model):
                               height_field=None, width_field=None, max_length=None)
     permanent = models.BooleanField(null=True, blank=True)
     function = models.CharField(null=True, blank=True, max_length=50)
+    speciality = models.CharField(null=True, blank=True, max_length=400)
 
     class Meta:
         """Meta definition for Person"""

@@ -33,6 +33,10 @@
 /*
 flip card
 */
+.card-back .card-text {
+  margin: auto;
+}
+
 .card-flip > div {
   -webkit-backface-visibility: hidden;
           backface-visibility: hidden;

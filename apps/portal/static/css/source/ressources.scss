@@ -1,4 +1,5 @@
 @import "../../../../../niamoto_portal/static/css/source/color";
+
 .container-fluid {
   width: 90%;
 }
@@ -20,6 +21,7 @@
   height: 300px;
   border: 0;
   perspective: 1000px;
+
   img {
     width: 75%;
   }
@@ -29,6 +31,9 @@
 /*
 flip card
 */
+.card-back .card-text {
+  margin: auto;
+}
 
 .card-flip>div {
   backface-visibility: hidden;
@@ -218,9 +223,11 @@ td {
   color: $color-secondary-1-0;
   background-color: rgba($color: #000000, $alpha: 0.05);
   box-shadow: 0 0 5px grey inset;
+
   .endemique {
     background-color: $color-secondary-1-4;
   }
+
   .autochtone {
     background-color: $color-primary-4;
   }

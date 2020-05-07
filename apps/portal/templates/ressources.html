@@ -45,8 +45,9 @@
             </div>
           </div>
           <div class="card-back">
-            <div class="card-block">
-              <h5 class="card-title"> {{person.first_name|capfirst}} {{person.last_name|capfirst}} </h5>
+
+            <p class="card-text">{{person.speciality}}</p>
+              {% comment %} <h5 class="card-title"> {{person.first_name|capfirst}} {{person.last_name|capfirst}} </h5>
               {% if activities%}
               {% for activity in activities%}
               {% if person.id == activity.person_id %}
@@ -58,8 +59,8 @@
               </p>
               {%endif%}
               {%endfor%}
-              {%endif%}
-            </div>
+              {%endif%} {% endcomment %}
+     
           </div>
         </div>
         {%endif%}
@@ -96,8 +97,9 @@
             </div>
           </div>
           <div class="card-back">
-            <div class="card-block">
-              <h5 class="card-title"> {{person.first_name|capfirst}} {{person.last_name|capfirst}} </h5>
+              {% comment %} <h5 class="card-title"> {{person.first_name|capfirst}} {{person.last_name|capfirst}} </h5> {% endcomment %}
+              <p class="card-text">{{person.speciality}}</p>
+              {% comment %}   <h5 class="card-title"> {{person.first_name|capfirst}} {{person.last_name|capfirst}} </h5>
               {% if activities%}
               {% for activity in activities%}
               {% if person.id == activity.person_id %}
@@ -109,8 +111,7 @@
               </p>
               {%endif%}
               {%endfor%}
-              {%endif%}
-            </div>
+              {%endif%} {% endcomment %}
           </div>
         </div>
         {%endif%}
