@@ -71,9 +71,14 @@
           <a class="nav-link " href="{% url 'shape:presentation' %}" id=" navbarDropdownMenuLink" aria-haspopup="true"
             aria-expanded="false">Forêts</a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <li><a class="dropdown-item text-lowercase" href="">Généralités</a></li>
-            <li><a class="dropdown-item text-lowercase" href="">Partie1</a></li>
-            <li><a class="dropdown-item text-lowercase" href="">Partie2</a></li>
+            <li><a class="dropdown-item text-lowercase" href="{% url 'shape:presentation' %}#preambule">Préambule</a>
+            </li>
+            <li><a class="dropdown-item text-lowercase" href="{% url 'shape:presentation' %}#foret">La forêt de NC</a>
+            </li>
+            <li><a class="dropdown-item text-lowercase"
+                href="{% url 'shape:presentation' %}#cartographie">Cartographie</a></li>
+            <li><a class="dropdown-item text-lowercase" href="{% url 'shape:presentation' %}#il">Il l'a
+                dit</a></li>
           </ul>
         </li>
 
