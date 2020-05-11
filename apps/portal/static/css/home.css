@@ -5,6 +5,10 @@
   width: 50%;
 }
 
+.text_accueil {
+  background-color: rgba(0, 0, 0, 0.35);
+}
+
 .bgimg, .bgimg-accueil {
   background-attachment: fixed;
   background-position: center;
@@ -43,9 +47,5 @@
 
 #Zygogynum_mackeei {
   border-radius: 5px 0 0 5px;
-}
-
-.card-body {
-  margin: auto;
 }
 /*# sourceMappingURL=home.css.map */

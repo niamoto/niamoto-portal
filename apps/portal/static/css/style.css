@@ -4,18 +4,6 @@
   padding-top: 50px;
 }
 
-.bgimg, .bgimg-accueil {
-  background-attachment: fixed;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
-.bgimg-accueil {
-  background-image: url("../img/home_background.jpg");
-  min-height: 100%;
-}
-
 #preloader {
   position: absolute;
   top: 40%;
@@ -45,11 +33,6 @@
   height: 950px;
   vertical-align: middle;
   text-align: center;
-}
-
-.bg-accueil {
-  border-top: 1px;
-  border-bottom: 1px;
 }
 
 .navbar-light .navbar-nav .nav-link {
