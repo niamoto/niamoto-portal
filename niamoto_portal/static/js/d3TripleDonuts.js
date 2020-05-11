@@ -179,7 +179,7 @@ export class GraphDonut {
       })
       .attr('class', parameters.name)
       .attr('font-family', 'sans-serif')
-      .attr('font-size', '.5em')
+      .attr('font-size', '.6em')
       .attr('fill', '#222')
       .text(function (d, i) {
         if (d.value !== 0 && i !== 1) {
@@ -216,7 +216,7 @@ export class GraphDonut {
       })
       .attr('class', parameters.name)
       .attr('font-family', 'sans-serif')
-      .attr('font-size', '.6em')
+      .attr('font-size', '.8em')
       .attr('fill', '#222')
       .text(function (d, i) {
         if (d.value !== 0 && i !== 1) {

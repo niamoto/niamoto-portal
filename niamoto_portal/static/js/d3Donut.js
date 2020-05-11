@@ -27,7 +27,8 @@ export class GraphDonut {
       legend: '',
       yDomain: '',
       marginLeft: 0,
-      colorText: ['#000']
+      colorText: ['#000'],
+      typeLegend: 2
     }
 
     this.config = Object.assign(config, configuration)
@@ -97,13 +98,19 @@ export class GraphDonut {
       .range(this.config.color)
 
     var legendColor = d3Legend.legendColor()
-      // .shapePadding(50)
-      .scale(colorScale)
-      .shapeWidth(70)
-      .shapeHeight(7)
-      .orient('horizontal')
-      .labelAlign('start')
-      .labelWrap(30)
+    if (this.config.typeLengend === 1) {
+      legendColor.scale(colorScale)
+        .shapeWidth(70)
+        .shapeHeight(7)
+        .orient('horizontal')
+        .labelAlign('start')
+        .labelWrap(30)
+    } else {
+      legendColor.shapePadding(0)
+        .scale(colorScale)
+        .shapeWidth(10)
+        .shapeHeight(10)
+    }
 
     svgLegend.select('.legend')
       .call(legendColor)

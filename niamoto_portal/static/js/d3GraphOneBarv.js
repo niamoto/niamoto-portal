@@ -53,7 +53,7 @@ export class GraphOneBarV {
       marginLeft: 0.15,
       colorText: ['#222', '#222', '#222'],
       yTickValue: ['0', '25', '50', '75', '100'],
-      typeLegend: 1
+      typeLegend: 2
     }
 
     this.config = Object.assign(this.config, configuration)
@@ -137,7 +137,7 @@ export class GraphOneBarV {
         .labelAlign('start')
         .labelWrap(30)
     } else {
-      legendColor.shapePadding(5)
+      legendColor.shapePadding(0)
         .scale(colorScale)
         .shapeWidth(10)
         .shapeHeight(10)

@@ -12,7 +12,7 @@ export function initGraphStakedAreas(data) {
     }
   }
 
-  function initGraphStakedArea(id, xLabel, yLabel, value, yDomain, maxValue = '', marginLeft = 0.15, legend, color, xDomain) {
+  function initGraphStakedArea(id, xLabel, yLabel, value, yDomain, maxValue = '', marginLeft = 0.15, legend, color, xDomain, typeLegend = 1) {
     return new d3GraphstakedArea.GraphStakedArea({
       width: $(id).width(),
       height: $(id).height(),
@@ -26,7 +26,8 @@ export function initGraphStakedAreas(data) {
       marginLeft: marginLeft,
       legend: value,
       color: color,
-      xDomain: xDomain
+      xDomain: xDomain,
+      typeLegend: typeLegend
     })
   }
 

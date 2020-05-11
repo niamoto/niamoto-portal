@@ -27,7 +27,8 @@ export class GraphStakedArea {
       xDomain: ['100', '300', '500', '700', '900', '1100', '1300', '1500', '1700'],
       marginLeft: 0.15,
       colorText: ['#222'],
-      yTickValue: ['0', '25', '50', '75', '100']
+      yTickValue: ['0', '25', '50', '75', '100'],
+      typeLegend: 2
     }
 
     this.config = Object.assign(config, configuration)
@@ -97,13 +98,19 @@ export class GraphStakedArea {
       .range(this.config.color)
 
     var legendColor = d3Legend.legendColor()
-      // .shapePadding(50)
-      .scale(colorScale)
-      .shapeWidth(70)
-      .shapeHeight(7)
-      .orient('horizontal')
-      .labelAlign('start')
-      .labelWrap(30)
+    if (this.config.typeLengend === 1) {
+      legendColor.scale(colorScale)
+        .shapeWidth(70)
+        .shapeHeight(7)
+        .orient('horizontal')
+        .labelAlign('start')
+        .labelWrap(30)
+    } else {
+      legendColor.shapePadding(0)
+        .scale(colorScale)
+        .shapeWidth(10)
+        .shapeHeight(10)
+    }
 
     svgLegend.select('.legend')
       .call(legendColor)
