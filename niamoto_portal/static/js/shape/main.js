@@ -50,11 +50,7 @@ const layerShapeForest = new ol.layer.Vector({
   style: new ol.style.Style({
     fill: new ol.style.Fill({
       color: color.forest,
-      opacity: 0.7
-    }),
-    stroke: new ol.style.Stroke({
-      color: color.forest,
-      width: 1
+      opacity: .1
     })
   })
 })
