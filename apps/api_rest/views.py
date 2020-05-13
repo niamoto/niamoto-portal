@@ -59,15 +59,19 @@ class ShapesViewSet(viewsets.ReadOnlyModelViewSet):
 
     @method_decorator(cache_page(60*60*24*300))
     def retrieve(self, request, pk=None):
+        tolerance = 0.002
+        preserveTopology = True
+        if (pk == '1'):
+            tolerance = 0.02
         shape_queryset = mdlShape.Shape.objects.all()
         shape = get_object_or_404(shape_queryset, pk=pk)
         if shape.location.num_geom > 1:
             shape.location = shape.location.simplify(
-                0.002, preserve_topology=True)
+                tolerance, preserve_topology=preserveTopology)
         if hasattr(shape.um_geom, 'num_geom'):
             if shape.um_geom.num_geom > 1:
                 shape.um_geom = shape.um_geom.simplify(
-                    0.002, preserve_topology=True)
+                    tolerance, preserve_topology=preserveTopology)
         shape_data = serializers.ShapeSerializer(shape).data
 
         return Response(shape_data)
@@ -96,7 +100,7 @@ class ShapeLocationViewSet(viewsets.ReadOnlyModelViewSet):
         shape_queryset = mdlShape.Shape.objects.all()
         shape_result = get_object_or_404(shape_queryset, pk=pk)
         shape_result.location = shape_result.location.simplify(
-            0.002, preserve_topology=True)
+            0.02, preserve_topology=True)
         shape_data = serializers.ShapeLocationSerializer(shape_result).data
 
     # polygon = Polygon(shape_data)
