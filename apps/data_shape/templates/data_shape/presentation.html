@@ -3,7 +3,7 @@
 
 {% block styles %}
 {{block.super}}
-<link rel="stylesheet" type="text/css" href="{% static 'shape/css/dashboard.min.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'shape/css/presentation.min.css' %}" />
 {% endblock %}
 {% block page_header %}
 <div class="container p-2 display-4">
@@ -11,7 +11,7 @@
 </div>
 {% endblock page_header%}
 {% block body %}
-<section id="Preambule">
+<section id="preambule">
 	<div class="col-lg-2">
 		<button type="button" class="btn btn-light btn-lg"><a href="{% url 'shape:dashboard' %}">
 				Accéder aux données <span class="badge badge-secondary"><span class="fa fa-database"
@@ -22,7 +22,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-12 mx-auto">
-				<h2 style="text-align: justify;">Pr&eacute;ambule</h2>
+				<h2>Pr&eacute;ambule</h2>
 				<p style="text-align: justify;">Selon la FAO, les for&ecirc;ts sont des espaces recouverts &agrave; plus
 					de 10 % par des arbres et d&rsquo;une surface d&rsquo;au moins un demi hectare. Le concept de
 					for&ecirc;t repose en r&eacute;alit&eacute; sur une notion plus complexe, propre &agrave; la
@@ -50,7 +50,7 @@
 				<p style="text-align: justify;">Nous avons choisi de consid&eacute;rer la for&ecirc;t de
 					Nouvelle-Cal&eacute;donie comme une entit&eacute; unique que l&rsquo;on observe et que l&rsquo;on
 					&eacute;tudie dans sa dynamique spatiotemporelle. Les classements que l&rsquo;on trouvera ici sont
-					bas&eacute;s sur des donn&eacute;es climatiques (lien vers milieux de vie holdridge) et
+					bas&eacute;s sur des donn&eacute;es climatiques (lien vers milieux de vie holridge) et
 					g&eacute;ographiques (lien vers types de for&ecirc;t).</p>
 				<p style="text-align: justify;">Les travaux men&eacute;s sur la for&ecirc;t de la province Nord depuis
 					2010 ont fait l&rsquo;objet de nombreuses publications scientifiques consultables ici (lien) et ont
@@ -60,11 +60,100 @@
 	</div>
 </section>
 
-<section id="foret">
+<section id="learnForest">
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-12 mx-auto">
-				<h2 style="text-align: justify;">La for&ecirc;t de la province Nord</h2>
+				<h2>Cartographier la for&ecirc;t</h2>
+				<p style="text-align: justify;">La cartographie de la for&ecirc;t de la province Nord repose sur des
+					m&eacute;thodes automatis&eacute;es et manuelles entrecoup&eacute;es de plusieurs phases de
+					validation. Pour aboutir &agrave; une carte des formations arbor&eacute;es &agrave; tr&egrave;s
+					haute r&eacute;solution (1:3 000), notre travail s&rsquo;est appuy&eacute; sur les donn&eacute;es
+					cartographiques ant&eacute;rieures, en int&eacute;grant la cartographie des unit&eacute;s de
+					v&eacute;g&eacute;tation effectu&eacute;e par le CTFT (Cherrier, 1991), la carte d&rsquo;occupation
+					du sol r&eacute;alis&eacute;e par seuillage automatis&eacute; d&rsquo;images satellitaires Spot
+					(DTSI, 2009), la cartographie de la v&eacute;g&eacute;tation des milieux ultramafiques de la
+					Province Nord (Barri&egrave;re et al., 2007, 2008) ou encore la photo-interpr&eacute;tation
+					r&eacute;alis&eacute;e au 1:30 000&egrave;me &agrave; partir des orthophotos (DITTT - Province Nord)
+					et des emprises des images SPOT5 (DTSI) pour les zones non couvertes par les premi&egrave;res
+					(Dartis 2010).</p>
+				<p style="text-align: justify;">La compilation de ces sources de donn&eacute;es a permis de construire
+					un support cartographique &agrave; partir duquel nous avons entrepris la digitalisation par
+					photo-interpr&eacute;tation de chaque polygone &agrave; l&rsquo;&eacute;chelle de 1:3 000, le
+					contr&ocirc;le de la topologie, l&rsquo;uniformisation des fusions et de la fragmentation ou encore
+					la validation de notre production.</p>
+				<p style="text-align: justify;">La digitalisation s&rsquo;appuie sur l&rsquo;expertise &eacute;cologique
+					en faisant intervenir des concepts li&eacute;s &agrave; la probabilit&eacute; d&rsquo;une jeune
+					for&ecirc;t de s&rsquo;inscrire dans un processus de la succession foresti&egrave;re. En
+					r&eacute;sum&eacute;, nous consid&eacute;rons toutes les formations arbor&eacute;es comme des
+					for&ecirc;ts quelle que soit leur composition floristique, &agrave; l&rsquo;exception des formations
+					artificielles (plantations, savanes &amp; invasions biologiques).</p>
+				<p style="text-align: justify;">Vues depuis le ciel, les for&ecirc;ts prennent la forme
+					d&rsquo;ensembles de v&eacute;g&eacute;tation form&eacute;s d&rsquo;un couvert arbor&eacute; plus ou
+					moins continu et compos&eacute;s d&rsquo;un assemblage de couronnes d&rsquo;arbres contigu&euml;s.
+					Ces for&ecirc;ts pr&eacute;sentent un grain de canop&eacute;e irr&eacute;gulier qui refl&egrave;te
+					&agrave; la fois l&rsquo;h&eacute;t&eacute;rog&eacute;n&eacute;it&eacute; du m&eacute;lange
+					d&rsquo;arbres (constitu&eacute; d&rsquo;esp&egrave;ces diff&eacute;rentes ayant de petites,
+					moyennes ou grandes couronnes avec une gamme &eacute;tendue de tons de vert), et celle des
+					trou&eacute;es caus&eacute;es par la mort (volis) ou la chute (chablis) des arbres les plus
+					&acirc;g&eacute;s. Ce grain h&eacute;t&eacute;rog&egrave;ne s&rsquo;oppose nettement au grain plus
+					lisse et homog&egrave;ne des formations arbustives telles que les maquis et les savanes. Si ce grain
+					de for&ecirc;t est relativement simple &agrave; d&eacute;limiter, l&rsquo;expertise devient
+					d&eacute;licate d&egrave;s lors qu&rsquo;il convient de classer une formation arbor&eacute;e
+					compos&eacute;e d&rsquo;un m&eacute;lange entre un faci&egrave;s naturel d&eacute;grad&eacute; et
+					une formation artificielle entretenue par l&rsquo;homme telle que les savanes &agrave; niaoulis.
+					Dans ces cas, l&rsquo;expertise s&rsquo;appuie sur d&rsquo;autres crit&egrave;res tels que la
+					distance &agrave; la for&ecirc;t ou aux habitations. D&egrave;s que ces formations
+					s&rsquo;inscrivent dans une continuit&eacute; de for&ecirc;ts non-ambig&uuml;e, par exemple dans les
+					talwegs, elles sont incluses dans la digitalisation en les consid&eacute;rant comme des jeunes
+					for&ecirc;ts. Au contraire, celles qui sont isol&eacute;es dans le paysage, &agrave;
+					proximit&eacute; des habitations ou &eacute;loign&eacute;es des for&ecirc;ts naturelles sont exclues
+					de la digitalisation.</p>
+				<p style="text-align: justify;">La distance minimale entre tous les polygones pris deux par deux a
+					&eacute;t&eacute; fix&eacute;e &agrave; 10 m, ce qui signifie que les polygones forestiers
+					s&eacute;par&eacute;s par un &eacute;l&eacute;ment du paysage, qu&rsquo;il soit naturel ou
+					artificiel, d&rsquo;une distance inf&eacute;rieure &agrave; 10 m ont &eacute;t&eacute;
+					fusionn&eacute;s. Le calcul de la fragmentation repose ainsi sur cette distance minimale de 10 m.
+					&Agrave; l&rsquo;issue de la digitalisation, tous les polygones ayant une superficie
+					inf&eacute;rieure &agrave; 1 ha ont &eacute;t&eacute; v&eacute;rifi&eacute;s un par un afin de
+					s&rsquo;assurer que leur existence n&rsquo;&eacute;tait pas le r&eacute;sultat d&rsquo;une fusion ou
+					d&rsquo;un artefact de la digitalisation. Enfin la validation s&eacute;mantique a fait appel
+					&agrave; plusieurs jeux de donn&eacute;es ind&eacute;pendants dans lesquels nous disposons
+					d&rsquo;une information textuelle identifiant l&rsquo;habitat.</p>
+				<ul>
+					<li style="text-align: justify;"><span></span>Tout d&rsquo;abord 362 polygones, identifi&eacute;s
+						comme incertains sur la digitalisation ou dont le support photographique ne permettait pas
+						d&rsquo;effectuer une distinction pr&eacute;cise, ont &eacute;t&eacute; survol&eacute;s par
+						h&eacute;licopt&egrave;re et valid&eacute;s par deux op&eacute;rateurs ind&eacute;pendants.</li>
+					<li style="text-align: justify;"><span></span>Pr&egrave;s de 10 000 sp&eacute;cimens
+						d&rsquo;herbiers (i.e. 9 870 points) contenant dans la description de l&rsquo;&eacute;chantillon
+						le terme non-ambigu de &lsquo;for&ecirc;t humide&rsquo; ont &eacute;t&eacute; projet&eacute;s
+						sur la digitalisation. Parmi les 3026 points qui n&rsquo;interceptent pas les polygones de
+						for&ecirc;t, nous avons syst&eacute;matiquement v&eacute;rifi&eacute; les points
+						collect&eacute;s apr&egrave;s la date de 2009, date post&eacute;rieure &agrave;
+						l&rsquo;acquisition des orthophotos et &agrave; partir de laquelle tous les &eacute;chantillons
+						sont g&eacute;o-r&eacute;f&eacute;renc&eacute;s par des coordonn&eacute;es GPS. Cette
+						v&eacute;rification a conduit &agrave; modifier le contour de 170 polygones.</li>
+					<li style="text-align: justify;"><span></span>La distribution de 1 425 points d&rsquo;inventaires
+						r&eacute;alis&eacute;s depuis 2009, soit en maquis soit en for&ecirc;t humide, ont servi
+						respectivement de r&eacute;v&eacute;lateur n&eacute;gatif et positif. Trois points li&eacute;s
+						&agrave; la for&ecirc;t et cinq points li&eacute;s aux maquis ont permis de redessiner le
+						contour des polygones de for&ecirc;t. Enfin parmi un jeu de donn&eacute;es transmis par la
+						province Nord recensant 17 313 points d&rsquo;observations et une d&eacute;finition des habitats
+						(maquis, for&ecirc;t s&egrave;che, for&ecirc;t littoral &amp; for&ecirc;t humide), 165 points
+						polygones ont &eacute;t&eacute; redessin&eacute;s.</li>
+				</ul>
+				</ul>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section id="forestPN">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12 mx-auto">
+				<h2>La for&ecirc;t de la province Nord</h2>
 				<p style="text-align: justify;">La for&ecirc;t de la province Nord de Nouvelle-Cal&eacute;donie est une
 					for&ecirc;t humide qui poss&egrave;de des caract&eacute;ristiques
 					&laquo;&nbsp;classiques&nbsp;&raquo; des syst&egrave;mes insulaires tropicaux du Pacifique Sud
@@ -139,94 +228,6 @@
 							choses actuelles et pr&eacute;server ainsi la for&ecirc;t cal&eacute;donienne &raquo;
 							(</i></em>source : Congr&egrave;s de la Nouvelle-Cal&eacute;donie, Proc&egrave;s-verbaux de
 					s&eacute;ances. Huiti&egrave;me s&eacute;ance du vendredi 12 mai 1928. P. 220 et s.).</p>
-			</div>
-		</div>
-	</div>
-</section>
-
-<section id="cartographie">
-	<div class="container">
-		<div class="row">
-			<div class="col-lg-12 mx-auto">
-				<h2 style="text-align: justify;">Cartographie foresti&egrave;re (M&eacute;thodologie)</h2>
-				<p style="text-align: justify;">La carte de la for&ecirc;t repose sur des m&eacute;thodes
-					automatis&eacute;es et manuelles entrecoup&eacute;es de plusieurs phases de validation. Pour aboutir
-					&agrave; une carte des formations arbor&eacute;es &agrave; tr&egrave;s haute r&eacute;solution (1:3
-					000), notre travail s&rsquo;est appuy&eacute; sur les donn&eacute;es cartographiques
-					ant&eacute;rieures, en int&eacute;grant la cartographie des unit&eacute;s de
-					v&eacute;g&eacute;tation effectu&eacute;e par le CTFT (Cherrier, 1991), la carte d&rsquo;occupation
-					du sol r&eacute;alis&eacute;e par seuillage automatis&eacute; d&rsquo;images satellitaires Spot
-					(DTSI, 2009), la cartographie de la v&eacute;g&eacute;tation des milieux ultramafiques de la
-					Province Nord (Barri&egrave;re et al., 2007, 2008) ou encore la photointerpr&eacute;tation
-					r&eacute;alis&eacute;e au 1:30 000&egrave;me &agrave; partir des orthophotos (DITTT - Province Nord)
-					et des emprises des images SPOT5 (DTSI) pour les zones non couvertes par les premi&egrave;res
-					(Dartis 2010).</p>
-				<p style="text-align: justify;">La compilation de ces sources de donn&eacute;es a permis de construire
-					un support cartographique &agrave; partir duquel nous avons entrepris la digitalisation par
-					photo-interpr&eacute;tation de chaque polygone &agrave; l&rsquo;&eacute;chelle de 1:3 000, le
-					contr&ocirc;le de la topologie, l&rsquo;uniformisation des fusions et de la fragmentation ou encore
-					la validation de notre production.</p>
-				<p style="text-align: justify;">La digitalisation s&rsquo;appuie sur l&rsquo;expertise &eacute;cologique
-					en faisant intervenir des concepts li&eacute;s &agrave; la probabilit&eacute; d&rsquo;une jeune
-					for&ecirc;t de s&rsquo;inscrire dans un processus de la succession foresti&egrave;re. En
-					r&eacute;sum&eacute;, nous consid&eacute;rons toutes les formations arbor&eacute;es comme des
-					for&ecirc;ts quelle que soit leur composition floristique, &agrave; l&rsquo;exception des formations
-					artificielles (plantations, savanes &amp; invasions biologiques).</p>
-				<p style="text-align: justify;">Vues depuis le ciel, les for&ecirc;ts prennent la forme
-					d&rsquo;ensembles de v&eacute;g&eacute;tation form&eacute;s d&rsquo;un couvert arbor&eacute; plus ou
-					moins continu et compos&eacute;s d&rsquo;un assemblage de couronnes d&rsquo;arbres contigu&euml;s.
-					Ces for&ecirc;ts pr&eacute;sentent un grain de canop&eacute;e irr&eacute;gulier qui refl&egrave;te
-					&agrave; la fois l&rsquo;h&eacute;t&eacute;rog&eacute;n&eacute;it&eacute; du m&eacute;lange
-					d&rsquo;arbres (constitu&eacute; d&rsquo;esp&egrave;ces diff&eacute;rentes ayant de petites,
-					moyennes ou grandes couronnes avec une gamme &eacute;tendue de tons de vert), et celle des
-					trou&eacute;es caus&eacute;es par la mort (volis) ou la chute (chablis) des arbres les plus
-					&acirc;g&eacute;s. Ce grain h&eacute;t&eacute;rog&egrave;ne s&rsquo;oppose nettement au grain plus
-					lisse et homog&egrave;ne des formations arbustives telles que les maquis et les savanes. Si ce grain
-					de for&ecirc;t est relativement simple &agrave; d&eacute;limiter, l&rsquo;expertise devient
-					d&eacute;licate d&egrave;s lors qu&rsquo;il convient de classer une formation arbor&eacute;e
-					compos&eacute;e d&rsquo;un m&eacute;lange entre un faci&egrave;s naturel d&eacute;grad&eacute; et
-					une formation artificielle entretenue par l&rsquo;homme telle que les savanes &agrave; niaoulis.
-					Dans ces cas, l&rsquo;expertise s&rsquo;appuie sur d&rsquo;autres crit&egrave;res tels que la
-					distance &agrave; la for&ecirc;t ou aux habitations. D&egrave;s que ces formations
-					s&rsquo;inscrivent dans une continuit&eacute; de for&ecirc;ts non-ambig&uuml;e, par exemple dans les
-					talwegs, elles sont incluses dans la digitalisation en les consid&eacute;rant comme des jeunes
-					for&ecirc;ts. Au contraire, celles qui sont isol&eacute;es dans le paysage, &agrave;
-					proximit&eacute; des habitations ou &eacute;loign&eacute;es des for&ecirc;ts naturelles sont exclues
-					de la digitalisation.</p>
-				<p style="text-align: justify;">La distance minimale entre tous les polygones pris deux par deux a
-					&eacute;t&eacute; fix&eacute;e &agrave; 10 m, ce qui signifie que les polygones forestiers
-					s&eacute;par&eacute;s par un &eacute;l&eacute;ment du paysage, qu&rsquo;il soit naturel ou
-					artificiel, d&rsquo;une distance inf&eacute;rieure &agrave; 10 m ont &eacute;t&eacute;
-					fusionn&eacute;s. Le calcul de la fragmentation repose ainsi sur cette distance minimale de 10 m.
-					&Agrave; l&rsquo;issue de la digitalisation, tous les polygones ayant une superficie
-					inf&eacute;rieure &agrave; 1 ha ont &eacute;t&eacute; v&eacute;rifi&eacute;s un par un afin de
-					s&rsquo;assurer que leur existence n&rsquo;&eacute;tait pas le r&eacute;sultat d&rsquo;une fusion ou
-					d&rsquo;un artefact de la digitalisation. Enfin la validation s&eacute;mantique a fait appel
-					&agrave; plusieurs jeux de donn&eacute;es ind&eacute;pendants dans lesquels nous disposons
-					d&rsquo;une information textuelle identifiant l&rsquo;habitat.</p>
-				<ul>
-					<li style="text-align: justify;"><span></span>Tout d&rsquo;abord 362 polygones, identifi&eacute;s
-						comme incertains sur la digitalisation ou dont le support photographique ne permettait pas
-						d&rsquo;effectuer une distinction pr&eacute;cise, ont &eacute;t&eacute; survol&eacute;s par
-						h&eacute;licopt&egrave;re et valid&eacute;s par deux op&eacute;rateurs ind&eacute;pendants.</li>
-					<li style="text-align: justify;"><span></span>Pr&egrave;s de 10 000 sp&eacute;cimens
-						d&rsquo;herbiers (i.e. 9 870 points) contenant dans la description de l&rsquo;&eacute;chantillon
-						le terme non-ambigu de &lsquo;for&ecirc;t humide&rsquo; ont &eacute;t&eacute; projet&eacute;s
-						sur la digitalisation. Parmi les 3026 points qui n&rsquo;interceptent pas les polygones de
-						for&ecirc;t, nous avons syst&eacute;matiquement v&eacute;rifi&eacute; les points
-						collect&eacute;s apr&egrave;s la date de 2009, date post&eacute;rieure &agrave;
-						l&rsquo;acquisition des orthophotos et &agrave; partir de laquelle tous les &eacute;chantillons
-						sont g&eacute;o-r&eacute;f&eacute;renc&eacute;s par des coordonn&eacute;es GPS. Cette
-						v&eacute;rification a conduit &agrave; modifier le contour de 170 polygones.</li>
-					<li style="text-align: justify;"><span></span>La distribution de 1 425 points d&rsquo;inventaires
-						r&eacute;alis&eacute;s depuis 2009, soit en maquis soit en for&ecirc;t humide, ont servi
-						respectivement de r&eacute;v&eacute;lateur n&eacute;gatif et positif. Trois points li&eacute;s
-						&agrave; la for&ecirc;t et cinq points li&eacute;s aux maquis ont permis de redessiner le
-						contour des polygones de for&ecirc;t. Enfin parmi un jeu de donn&eacute;es transmis par la
-						province Nord recensant 17 313 points d&rsquo;observations et une d&eacute;finition des habitats
-						(maquis, for&ecirc;t s&egrave;che, for&ecirc;t littoral &amp; for&ecirc;t humide), 165 points
-						polygones ont &eacute;t&eacute; redessin&eacute;s.</li>
-				</ul>
 			</div>
 		</div>
 	</div>

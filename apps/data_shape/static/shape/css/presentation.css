@@ -1,0 +1,20 @@
+body {
+  padding: 50px 0 0 0;
+}
+
+.image {
+  margin: 10px;
+  border-radius: 5px;
+  margin-bottom: 50px;
+}
+
+.image_center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.next {
+  clear: both;
+}
+/*# sourceMappingURL=presentation.css.map */

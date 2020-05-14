@@ -1,0 +1,10 @@
+{
+    "version": 3,
+    "mappings": "AAGA,AAAA,IAAI,AAAC,CACH,OAAO,CAAE,UAAU,CACpB,AAED,AAAA,MAAM,AAAC,CACL,MAAM,CAAE,IAAI,CACZ,aAAa,CAAE,GAAG,CAClB,aAAa,CAAE,IAAI,CACpB,AAED,AAAA,aAAa,AAAC,CACZ,OAAO,CAAE,KAAK,CACd,WAAW,CAAE,IAAI,CACjB,YAAY,CAAE,IAChB,CAAC,AAED,AAAA,KAAK,AAAC,CACJ,KAAK,CAAE,IAAI,CACZ",
+    "sources": [
+        "source/presentation.scss",
+        "../../../../../niamoto_portal/static/css/source/color.scss"
+    ],
+    "names": [],
+    "file": "presentation.min.css"
+}
