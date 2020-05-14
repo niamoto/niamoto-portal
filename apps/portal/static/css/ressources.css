@@ -246,4 +246,13 @@ td {
   display: inline-block;
   margin: 0 20px;
 }
+
+.page-item.active .page-link {
+  background-color: #355771;
+  border-color: #355771;
+}
+
+.page-link:hover {
+  color: #355771;
+}
 /*# sourceMappingURL=ressources.css.map */

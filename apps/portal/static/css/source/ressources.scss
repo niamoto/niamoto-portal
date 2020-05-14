@@ -248,3 +248,12 @@ td {
   display: inline-block;
   margin: 0 20px;
 }
+
+.page-item.active .page-link {
+  background-color: $color-secondary-1-0;
+  border-color: $color-secondary-1-0;
+}
+
+.page-link:hover {
+  color: $color-secondary-1-0;
+}
