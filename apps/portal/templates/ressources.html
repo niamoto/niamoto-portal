@@ -32,7 +32,7 @@
         <div id={{person.id}}_person class="card card-flip">
           <div class="card-front">
             {%if person.image%}
-            <img class="card-img-top center-block rounded-circle" src="../static/img/persons/{{person.image}}">
+            <img class="card-img-top center-block rounded-circle" src="{% static 'img/persons/' %}{{person.image}}">
             {%else%}
             <div class="portrait">
               <i class="fas fa-portrait fa-9x fa-border"></i>
@@ -46,20 +46,20 @@
           <div class="card-back">
 
             <p class="card-text">{{person.speciality}}</p>
-              {% comment %} <h5 class="card-title"> {{person.first_name|capfirst}} {{person.last_name|capfirst}} </h5>
-              {% if activities%}
-              {% for activity in activities%}
-              {% if person.id == activity.person_id %}
-              <p class="card-text">
-                <a data-toggle="popover" data-title="{{activity.title}}"
-                  data-content="{{activity.description|default:''}}" data-trigger='hover' data-placement='auto'>
-                  {{activity.first_year|default:"..."}}-{{activity.first_month|default:""}}
-                  {{activity|truncatechars:75}}</a>
-              </p>
-              {%endif%}
-              {%endfor%}
-              {%endif%} {% endcomment %}
-     
+            {% comment %} <h5 class="card-title"> {{person.first_name|capfirst}} {{person.last_name|capfirst}} </h5>
+            {% if activities%}
+            {% for activity in activities%}
+            {% if person.id == activity.person_id %}
+            <p class="card-text">
+              <a data-toggle="popover" data-title="{{activity.title}}"
+                data-content="{{activity.description|default:''}}" data-trigger='hover' data-placement='auto'>
+                {{activity.first_year|default:"..."}}-{{activity.first_month|default:""}}
+                {{activity|truncatechars:75}}</a>
+            </p>
+            {%endif%}
+            {%endfor%}
+            {%endif%} {% endcomment %}
+
           </div>
         </div>
         {%endif%}
@@ -84,7 +84,7 @@
         <div id={{person.id}}_person class="card card-flip">
           <div class="card-front">
             {%if person.image%}
-            <img class="card-img-top center-block rounded-circle" src="../static/img/persons/{{person.image}}">
+            <img class="card-img-top center-block rounded-circle" src="{% static 'img/persons/' %}{{person.image}}">
             {%else%}
             <div class="portrait">
               <i class="fas fa-portrait fa-9x fa-border"></i>
@@ -96,21 +96,22 @@
             </div>
           </div>
           <div class="card-back">
-              {% comment %} <h5 class="card-title"> {{person.first_name|capfirst}} {{person.last_name|capfirst}} </h5> {% endcomment %}
-              <p class="card-text">{{person.speciality}}</p>
-              {% comment %}   <h5 class="card-title"> {{person.first_name|capfirst}} {{person.last_name|capfirst}} </h5>
-              {% if activities%}
-              {% for activity in activities%}
-              {% if person.id == activity.person_id %}
-              <p class="card-text">
-                <a data-toggle="popover" data-title="{{activity.title}}"
-                  data-content="{{activity.description|default:''}}" data-trigger='hover' data-placement='auto'>
-                  {{activity.first_year|default:"..."}}-{{activity.first_month|default:""}}
-                  {{activity|truncatechars:75}}</a>
-              </p>
-              {%endif%}
-              {%endfor%}
-              {%endif%} {% endcomment %}
+            {% comment %} <h5 class="card-title"> {{person.first_name|capfirst}} {{person.last_name|capfirst}} </h5>
+            {% endcomment %}
+            <p class="card-text">{{person.speciality}}</p>
+            {% comment %} <h5 class="card-title"> {{person.first_name|capfirst}} {{person.last_name|capfirst}} </h5>
+            {% if activities%}
+            {% for activity in activities%}
+            {% if person.id == activity.person_id %}
+            <p class="card-text">
+              <a data-toggle="popover" data-title="{{activity.title}}"
+                data-content="{{activity.description|default:''}}" data-trigger='hover' data-placement='auto'>
+                {{activity.first_year|default:"..."}}-{{activity.first_month|default:""}}
+                {{activity|truncatechars:75}}</a>
+            </p>
+            {%endif%}
+            {%endfor%}
+            {%endif%} {% endcomment %}
           </div>
         </div>
         {%endif%}
