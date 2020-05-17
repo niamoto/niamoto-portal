@@ -23,7 +23,7 @@ export function initGauges(data) {
   }
 
   // Fragmentation
-  const fragmentation = initGauge('#fragmentation', '', 0, fragmentationMax)
+  const fragmentation = initGauge('#fragmentation', 'km2', 0, fragmentationMax)
 
   fragmentation.render()
 
