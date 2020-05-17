@@ -28,6 +28,9 @@ body {
   position: static;
 }
 
+.ol-scale-line {
+  background-color: grey;
+}
 
 @import "../../../../../../niamoto_portal/static/css/source/gauge";
 @import "../../../../../../niamoto_portal/static/css/source/radarChart";

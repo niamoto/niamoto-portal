@@ -15,6 +15,10 @@ body {
   right: .5em;
 }
 
+.ol-scale-line {
+  background-color: grey;
+}
+
 .graph .tick line, .graph .domaine, .graph .xGrid .tick line,
 .graph .xGridRight .tick line,
 .graph .xGridLeft .tick line,
