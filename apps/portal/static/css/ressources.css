@@ -167,7 +167,7 @@ span[data-descr]:hover::after {
 
 .ressources tr {
   text-decoration: none;
-  font-size: .75em;
+  font-size: 0.75em;
   color: black;
 }
 
@@ -200,7 +200,7 @@ td {
 
 .listTree tr {
   text-decoration: none;
-  font-size: .75em;
+  font-size: 0.75em;
   color: black;
 }
 

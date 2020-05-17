@@ -31,7 +31,6 @@ body {
   }
 }
 
-
 /*
 flip card
 */
@@ -39,7 +38,7 @@ flip card
   margin: auto;
 }
 
-.card-flip>div {
+.card-flip > div {
   backface-visibility: hidden;
   transition: transform 300ms;
   transition-timing-function: linear;
@@ -171,7 +170,7 @@ span[data-descr]:hover::after {
 
 .ressources tr {
   text-decoration: none;
-  font-size: .75em;
+  font-size: 0.75em;
   color: black;
 }
 
@@ -203,7 +202,7 @@ td {
 
 .listTree tr {
   text-decoration: none;
-  font-size: .75em;
+  font-size: 0.75em;
   color: black;
 }
 
@@ -240,7 +239,7 @@ td {
 .listTree .link a {
   font-size: 1em;
   font-weight: bold;
-  color: $color-secondary-1-0
+  color: $color-secondary-1-0;
 }
 
 .vertical-line {
