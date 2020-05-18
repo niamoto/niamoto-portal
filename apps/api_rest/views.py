@@ -68,9 +68,9 @@ class ShapesViewSet(viewsets.ReadOnlyModelViewSet):
         if shape.location.num_geom > 1:
             shape.location = shape.location.simplify(
                 tolerance, preserve_topology=preserveTopology)
-        if hasattr(shape.um_geom, 'num_geom'):
-            if shape.um_geom.num_geom > 1:
-                shape.um_geom = shape.um_geom.simplify(
+        if hasattr(shape.forest_geom, 'num_geom'):
+            if shape.forest_geom.num_geom > 1:
+                shape.forest_geom = shape.forest_geom.simplify(
                     tolerance, preserve_topology=preserveTopology)
         shape_data = serializers.ShapeSerializer(shape).data
 

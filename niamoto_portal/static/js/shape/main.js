@@ -253,8 +253,8 @@ function updateLayerShape(data) {
   source.clear()
   sourceForest.clear()
   source.addFeature(new ol.format.GeoJSON().readFeature(data))
-  if (data.properties.um_geom !== null) {
-    sourceForest.addFeature(new ol.format.GeoJSON().readFeature(data.properties.um_geom))
+  if (data.properties.forest_geom !== null) {
+    sourceForest.addFeature(new ol.format.GeoJSON().readFeature(data.properties.forest_geom))
   }
   const feature = source.getFeatures()[0]
   const polygon = feature.getGeometry()

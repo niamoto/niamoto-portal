@@ -28,6 +28,7 @@ class Shape(models.Model):
     n_unique_species = models.IntegerField(null=True, blank=True)
     fragment_meff_cbc = models.FloatField(null=True, blank=True)
     um_geom = models.MultiPolygonField(null=True, srid=4326, blank=True)
+    forest_geom = models.MultiPolygonField(null=True, srid=4326, blank=True)
 
     def __str__(self):
         return self.label
