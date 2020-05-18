@@ -39,7 +39,7 @@ export function initGraphBarhs(data) {
       yDomain: yDomain,
       maxValue: maxValue,
       marginLeft: marginLeft,
-      color: [color.forestUM, color.forestNUM]
+      color: [color.forestUM, color.forestNUM, color.landUM, color.landNUM]
     })
   }
 
@@ -144,10 +144,24 @@ export function initGraphBarhs(data) {
     // })
 
     const ratioForestData = ratioForestNUM.map(function (d, i) {
+      let UM
+      let NUM
+      if (landUm[i].class_value === 0) {
+        UM = 0
+      } else {
+        UM = 100
+      }
+      if (land[i].class_value - landUm[i].class_value === 0) {
+        NUM = 0
+      } else {
+        NUM = 100
+      }
       var result = {
         class_name: d.class_name,
         data1: ratioForestUM[i].class_value * 100,
-        data2: ratioForestNUM[i].class_value * 100
+        data2: ratioForestNUM[i].class_value * 100,
+        data3: UM,
+        data4: NUM
       }
       return result
     })

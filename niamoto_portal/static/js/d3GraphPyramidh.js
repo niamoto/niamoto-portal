@@ -71,6 +71,12 @@ export class GraphPyramidh {
     this.yAxisRight = this.svg.append('g')
       .attr('class', 'yAxisRight')
       .attr('transform', 'translate(' + this.margin.left + ',' + this.margin.top + ')')
+    this.dataRightMax = this.svg.append('g')
+      .attr('transform', 'translate(' + (this.mwidthMiddle + this.margin.left) + ',' + this.margin.top + ')')
+      .attr('class', 'dataRight')
+    this.dataLeftMax = this.svg.append('g')
+      .attr('transform', 'translate(' + (this.mwidthMiddle + this.margin.left) + ',' + this.margin.top + ')scale(-1,1)')
+      .attr('class', 'dataLeft')
     this.dataRight = this.svg.append('g')
       .attr('transform', 'translate(' + (this.mwidthMiddle + this.margin.left) + ',' + this.margin.top + ')')
       .attr('class', 'dataRight')
@@ -228,6 +234,34 @@ export class GraphPyramidh {
       return yScale(ticks[1]) - yScale(ticks[0])
     }
 
+    const layerRightMax = this.dataRightMax
+      // .attr('transform', 'translate(' + (this.mwidthMiddle + this.margin.left) + ',' + this.margin.top + ')')
+      .attr('fill', this.config.color[3])
+      .attr('class', this.config.value[1] + 'Max')
+      .style('opacity', 0.5)
+
+    const rectsRightMax = layerRightMax.selectAll('rect')
+      .data(data)
+
+    rectsRightMax.enter()
+      .append('rect')
+      .attr('x', 0)
+      .attr('y', d => yScale(d.class_name))
+      .attr('width', d => xScaleRight(d.data4))
+      .attr('height', yScale.step())
+
+    rectsRightMax.transition()
+      .duration(500)
+      .attr('x', 0)
+      .attr('y', d => yScale(d.class_name))
+      .attr('width', d => xScaleRight(d.data4))
+      .attr('height', yScale.step())
+
+    rectsRightMax.exit()
+      .transition()
+      .duration(500)
+      .remove()
+
     const layerRight = this.dataRight
       // .attr('transform', 'translate(' + (this.mwidthMiddle + this.margin.left) + ',' + this.margin.top + ')')
       .attr('fill', this.config.color[1])
@@ -251,6 +285,34 @@ export class GraphPyramidh {
       .attr('height', yScale.step())
 
     rectsRight.exit()
+      .transition()
+      .duration(500)
+      .remove()
+
+    const layerLeftMax = this.dataLeftMax
+      // .attr('transform', 'translate(' + (this.mwidthMiddle + this.margin.leftMax) + ',' + this.margin.top + ')scale(-1,1)')
+      .attr('fill', this.config.color[2])
+      .attr('class', this.config.value[0] + 'Max')
+      .style('opacity', 0.5)
+
+    const rectsLeftMax = layerLeftMax.selectAll('rect')
+      .data(data)
+
+    rectsLeftMax.enter()
+      .append('rect')
+      .attr('x', 0)
+      .attr('y', d => yScale(d.class_name))
+      .attr('width', d => xScaleLeft(100 - d.data3))
+      .attr('height', yScale.step())
+
+    rectsLeftMax.transition()
+      .duration(500)
+      .attr('x', 0)
+      .attr('y', d => yScale(d.class_name))
+      .attr('width', d => xScaleLeft(100 - d.data3))
+      .attr('height', yScale.step())
+
+    rectsLeftMax.exit()
       .transition()
       .duration(500)
       .remove()
