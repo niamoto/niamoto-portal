@@ -1,4 +1,4 @@
-@import 'color';
+@import "color";
 
 %graphStroke {
   opacity: 0.5;
@@ -63,6 +63,8 @@
   height: 20em;
   -webkit-box-shadow: none !important;
   box-shadow: 4px 3px 5px $card_box-shadow !important;
+  border-color: $color-secondary-1-0;
+  border: 0;
 }
 
 .card-header {
@@ -70,23 +72,33 @@
 }
 
 // Bootstrap 4 breakpoints & gutter
-$grid-breakpoints: (xs: 0, sm: 576px, md: 768px, lg: 992px, xl: 1200px) !default;
+$grid-breakpoints: (xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+) !default;
 $grid-gutter-width: 2em !default;
 // number of cards per line for each breakpoint
-$cards-per-line: (xs: 1, sm: 1, md: 1, lg: 2, xl: 3);
+$cards-per-line: (xs: 1,
+  sm: 1,
+  md: 1,
+  lg: 2,
+  xl: 3,
+);
 
 @each $name,
 $breakpoint in $grid-breakpoints {
   @media (min-width: $breakpoint) {
     .card-deck .card {
-      flex: 0 0 calc(#{100/map-get($cards-per-line, $name)}% - #{$grid-gutter-width});
-      margin: .5em;
+      flex: 0 0 calc(#{100 / map-get($cards-per-line, $name)}% - #{$grid-gutter-width});
+      margin: 0.5em;
     }
   }
 }
 
 @mixin label {
-  font-size: .8em;
+  font-size: 0.8em;
 }
 
 .legend-bottom,
@@ -112,5 +124,5 @@ $breakpoint in $grid-breakpoints {
 .legend rect {
   stroke: $legend_stroke;
   stroke-width: 1;
-  stroke-opacity: .5;
+  stroke-opacity: 0.5;
 }
