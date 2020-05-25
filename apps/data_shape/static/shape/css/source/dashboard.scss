@@ -15,6 +15,44 @@ body {
   height: 80%;
 }
 
+.card .land_use {
+  .NUM {
+    fill: $land_NUM
+  }
+
+  .UM {
+    fill: $land_UM;
+  }
+
+  .Sec {
+    fill: $sec;
+  }
+
+  .Humide {
+    fill: $humide;
+  }
+
+  .Très.Humide {
+    fill: $tres_humide;
+  }
+
+  .Réserve {
+    fill: $reserve;
+  }
+
+  .PPE {
+    fill: $ppe;
+  }
+
+  .Concessions {
+    fill: $concession;
+  }
+
+  .Forêt {
+    fill: $forest;
+  }
+}
+
 .card #substrat {
   width: 50%;
   height: 100%;

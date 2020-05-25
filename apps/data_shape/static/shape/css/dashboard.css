@@ -1,3 +1,4 @@
+@charset "UTF-8";
 .graph .tick line, .graph .domaine, .graph .xGrid .tick line,
 .graph .xGridRight .tick line,
 .graph .xGridLeft .tick line,
@@ -153,6 +154,42 @@ body {
 .card #fragmentation {
   width: 100%;
   height: 80%;
+}
+
+.card .land_use .NUM {
+  fill: #a97742;
+}
+
+.card .land_use .UM {
+  fill: #e1a553;
+}
+
+.card .land_use .Sec {
+  fill: #c00000;
+}
+
+.card .land_use .Humide {
+  fill: #f1fc72;
+}
+
+.card .land_use .Très.Humide {
+  fill: #2e75b6;
+}
+
+.card .land_use .Réserve {
+  fill: #a9d18e;
+}
+
+.card .land_use .PPE {
+  fill: #00b0f0;
+}
+
+.card .land_use .Concessions {
+  fill: #e54b4b;
+}
+
+.card .land_use .Forêt {
+  fill: #548235;
 }
 
 .card #substrat {

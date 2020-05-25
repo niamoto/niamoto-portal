@@ -1,4 +1,5 @@
 import * as d3GraphBarv from '../d3GraphBarv'
+import * as d3GraphBarvMulti from '../d3GraphBarvMulti'
 import color from '../../css/source/nocompile/color_js.scss'
 
 export function initGraphBarvs(data) {
@@ -26,6 +27,22 @@ export function initGraphBarvs(data) {
     })
   }
 
+  function initGraphBarvMulti(id, xLabel, yLabel, value, yDomain, maxValue = '', marginLeft = 0.15, legend) {
+    return new d3GraphBarvMulti.GraphBarvMulti({
+      width: $(id).width(),
+      height: $(id).height(),
+      container: id,
+      title: '',
+      xLabel: xLabel,
+      yLabel: yLabel,
+      value: value,
+      yDomain: yDomain,
+      maxValue: maxValue,
+      marginLeft: marginLeft,
+      color: [color.forest, color.forestOut]
+    })
+  }
+
   // Holdridge forest
   const holdridgeForest = initGraphBarv(
     '#holdridge_forest',
@@ -35,6 +52,17 @@ export function initGraphBarvs(data) {
     [0, 100],
     100,
     .16
+  )
+
+  // land_use
+  const landUse = initGraphBarvMulti(
+    '#land_use',
+    '',
+    'Surface (ha)',
+    '',
+    '',
+    100,
+    .20
   )
 
   //   distributionOccGauge.render()
@@ -75,5 +103,21 @@ export function initGraphBarvs(data) {
     })
 
     holdridgeForest.update(holdridgeForestData.reverse())
+
+
+    const landuse = dataFilter(data, 'land_use')
+
+    const landUseData = landuse.map(function (d, i) {
+      const str = d.class_name
+      var result = {
+        class_name: str.substring(3, str.length),
+        data1: landuse[i].class_value,
+      }
+      return result
+    })
+    landUse.update(landUseData)
+
   };
+
+
 };
