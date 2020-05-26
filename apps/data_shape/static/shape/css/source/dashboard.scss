@@ -17,39 +17,48 @@ body {
 
 .card .land_use {
   .NUM {
-    fill: $land_NUM
+    fill: $land_NUM;
+    stroke: grey;
   }
 
   .UM {
     fill: $land_UM;
+    stroke: grey;
   }
 
   .Sec {
     fill: $sec;
+    stroke: grey;
   }
 
   .Humide {
     fill: $humide;
+    stroke: grey;
   }
 
   .Très.Humide {
     fill: $tres_humide;
+    stroke: grey;
   }
 
   .Réserve {
     fill: $reserve;
+    stroke: grey;
   }
 
   .PPE {
     fill: $ppe;
+    stroke: grey;
   }
 
   .Concessions {
     fill: $concession;
+    stroke: grey;
   }
 
   .Forêt {
     fill: $forest;
+    stroke: grey;
   }
 }
 

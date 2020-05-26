@@ -158,38 +158,47 @@ body {
 
 .card .land_use .NUM {
   fill: #a97742;
+  stroke: grey;
 }
 
 .card .land_use .UM {
   fill: #e1a553;
+  stroke: grey;
 }
 
 .card .land_use .Sec {
   fill: #c00000;
+  stroke: grey;
 }
 
 .card .land_use .Humide {
   fill: #f1fc72;
+  stroke: grey;
 }
 
 .card .land_use .Très.Humide {
   fill: #2e75b6;
+  stroke: grey;
 }
 
 .card .land_use .Réserve {
   fill: #a9d18e;
+  stroke: grey;
 }
 
 .card .land_use .PPE {
   fill: #00b0f0;
+  stroke: grey;
 }
 
 .card .land_use .Concessions {
   fill: #e54b4b;
+  stroke: grey;
 }
 
 .card .land_use .Forêt {
   fill: #548235;
+  stroke: grey;
 }
 
 .card #substrat {

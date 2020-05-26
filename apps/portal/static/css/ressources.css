@@ -255,4 +255,41 @@ td {
 .page-link:hover {
   color: #355771;
 }
+
+div.tab-content section {
+  scroll-margin-top: 100px;
+}
+
+div.tab-content section .row {
+  padding-top: 0;
+}
+
+section#production {
+  padding-top: 20px;
+}
+
+section#production menu {
+  padding: 0;
+}
+
+section#production .nav-item.nav-link.active {
+  background-color: #355771;
+  border-color: #355771;
+  color: white;
+}
+
+section#production .nav-item.nav-link {
+  color: black;
+}
+
+section#production .nav-item.nav-link:hover {
+  color: #355771;
+  background-color: #dce2e6;
+}
+
+section#production .nav-item.nav-link.active:hover {
+  background-color: #355771;
+  border-color: #355771;
+  color: white;
+}
 /*# sourceMappingURL=ressources.css.map */

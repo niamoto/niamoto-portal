@@ -74,6 +74,8 @@ body {
   height: 20em;
   -webkit-box-shadow: none !important;
   box-shadow: 4px 3px 5px #666 !important;
+  border-color: #355771;
+  border: 0;
 }
 
 .card-header {
@@ -85,7 +87,7 @@ body {
     -webkit-box-flex: 0;
         -ms-flex: 0 0 calc(100% - 2em);
             flex: 0 0 calc(100% - 2em);
-    margin: .5em;
+    margin: 0.5em;
   }
 }
 
@@ -94,7 +96,7 @@ body {
     -webkit-box-flex: 0;
         -ms-flex: 0 0 calc(100% - 2em);
             flex: 0 0 calc(100% - 2em);
-    margin: .5em;
+    margin: 0.5em;
   }
 }
 
@@ -103,7 +105,7 @@ body {
     -webkit-box-flex: 0;
         -ms-flex: 0 0 calc(100% - 2em);
             flex: 0 0 calc(100% - 2em);
-    margin: .5em;
+    margin: 0.5em;
   }
 }
 
@@ -112,7 +114,7 @@ body {
     -webkit-box-flex: 0;
         -ms-flex: 0 0 calc(50% - 2em);
             flex: 0 0 calc(50% - 2em);
-    margin: .5em;
+    margin: 0.5em;
   }
 }
 
@@ -121,7 +123,7 @@ body {
     -webkit-box-flex: 0;
         -ms-flex: 0 0 calc(33.33333% - 2em);
             flex: 0 0 calc(33.33333% - 2em);
-    margin: .5em;
+    margin: 0.5em;
   }
 }
 
@@ -138,17 +140,17 @@ body {
 }
 
 .legend .label {
-  font-size: .8em;
+  font-size: 0.8em;
 }
 
 .label {
-  font-size: .8em;
+  font-size: 0.8em;
 }
 
 .legend rect {
   stroke: #000;
   stroke-width: 1;
-  stroke-opacity: .5;
+  stroke-opacity: 0.5;
 }
 
 .land {

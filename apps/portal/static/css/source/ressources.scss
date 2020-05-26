@@ -38,7 +38,7 @@ flip card
   margin: auto;
 }
 
-.card-flip > div {
+.card-flip>div {
   backface-visibility: hidden;
   transition: transform 300ms;
   transition-timing-function: linear;
@@ -255,4 +255,49 @@ td {
 
 .page-link:hover {
   color: $color-secondary-1-0;
+}
+
+// div.tab-content section:not(:target) {
+//   // display: none;
+// }
+
+div.tab-content section {
+  // display: block;
+  scroll-margin-top: 100px;
+
+  .row {
+    padding-top: 0;
+  }
+}
+
+section#production {
+  padding-top: 20px;
+
+  menu {
+    padding: 0;
+  }
+
+  .nav-item.nav-link.active {
+    background-color: $color-secondary-1-0;
+    border-color: $color-secondary-1-0;
+    color: white;
+  }
+
+  .nav-item.nav-link {
+    color: black;
+  }
+
+  .nav-item.nav-link:hover {
+    color: $color-secondary-1-0;
+    background-color: rgb(220, 226, 230);
+
+  }
+
+  .nav-item.nav-link.active:hover {
+    background-color: $color-secondary-1-0;
+    border-color: $color-secondary-1-0;
+    color: white;
+
+  }
+
 }

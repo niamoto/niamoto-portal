@@ -124,103 +124,187 @@
   </div>
 </section>
 
-<section id="support">
-  <div class="container">
-    <div class="row">
-      <h4>Publications</h4>
-
-      {%if ressources%}
-      <div class="row ressources">
-        <table id="table_support" class="bootstrap-table table-striped" data-toggle="table" data-search="true"
-          data-pagination="true" data-filter-control="true">
-          <thead class="thead-dark">
-            <tr>
-              <th data-sortable="true" data-field="annee" data-filter-control="select">Année</th>
-              <th data-sortable="true" data-field="support" data-filter-control="select">support</th>
-              <th data-sortable="true" data-field="auteur">Auteur et titre du document</th>
-            </tr>
-          </thead>
-          <tbody>
-            {%for ressource in ressources%}
-            {% if ressource.support == "article" or ressource.support == "ouvrage" or ressource.support == "rapport" or ressource.support == "thèse" or ressource.support == "mémoire" %}
-            <tr class="col-12 {{ressource.support}}">
-              <td>{{ressource.year|default:""}}</td>
-              <td>{{ressource.support}}</td>
-              <td>{{ressource.who|default:""}}
-                {% if ressource.who %}, {% endif %} <strong>{{ressource.description|default:""}}</strong>
-                {% if ressource.description %}, {% endif %} <em>{{ressource.journal|default:""}}</em>
-                {% if ressource.journal %}, {% endif %} {{ressource.issue|default:""}}
-                {% if ressource.issue %}, {% endif %} {{ressource.pages|default:""}}
-                {% if ressource.link %} <a href="{{ressource.link|default:""}}">
-                  <i class="fa fa-download" aria-hidden="true"></i>
-                </a>{% endif %}</td>
-            </tr>
-            {%endif%}
-            {%endfor%}
-            {% for activity in activities%}
-            {% if activity.support == 'thèse' or activity.support == 'mémoire'%}
-            <tr class="col-12 {{activity.support}}">
-              <td>{{activity.last_year|default:""}}</td>
-              <td>{{activity.support}}</td>
-              <td>{{activity.person|default:""}}
-                {% if activity.person %}, {% endif %} <strong>{{activity.title|default:""}}</strong>
-                {% if activity.link %} <a href="{{activity.link|default:""}}">
-                  <i class="fa fa-download" aria-hidden="true"></i>
-                </a>{% endif %}</td>
-            </tr>
-            {% endif %}
-            {%endfor%}
-          </tbody>
-        </table>
-      </div>
-      {%endif%}
-    </div>
-  </div>
-</section>
-
 <section id="production">
   <div class="container">
     <div class="row">
-      <h4>Productions diverses</h4>
-
-      {%if ressources%}
-      <div class="row ressources">
-        <table id="table_support" class="bootstrap-table table-striped" data-toggle="table" data-search="true"
-          data-pagination="true" data-filter-control="true">
-          <thead class="thead-dark">
-            <tr>
-              <th data-sortable="true" data-field="annee" data-filter-control="select">Année</th>
-              <th data-sortable="true" data-field="support" data-filter-control="select">support</th>
-              <th data-sortable="true" data-field="auteur" data-filter-control="select">Auteur et titre du document</th>
-            </tr>
-          </thead>
-          <tbody>
-            {%for ressource in ressources%}
-            {% if ressource.support == "conférence" or ressource.support == "film" or ressource.support == "radio"%}
-            <tr class="col-12 {{ressource.support}}">
-              <td>{{ressource.year|default:""}}</td>
-              <td>{{ressource.support}}</td>
-              <td>{{ressource.who|default:""}} {% if ressource.who %}, {% endif %}
-                <strong>{{ressource.description|default:""}}</strong>
-                {% if ressource.description %}, {% endif %}
-                <em>{{ressource.journal|default:""}}</em>
-                {% if ressource.journal %}, {% endif %}
-                {{ressource.issue|default:""}}
-                {% if ressource.issue %}, {% endif %}
-                {{ressource.pages|default:""}}
-                {% if ressource.link %}<a href="{{ressource.link|default:""}}">
-                  <i class="fa fa-download" aria-hidden="true"></i>
-                </a>{% endif %}</td>
-            </tr>
-            {%endif%}
-            {%endfor%}
-          </tbody>
-        </table>
+      <h4>Production</h4>
+    </div>
+    <!-- <menu class="row">
+      <a href="#article">Article</a>
+      <a href="#academique">Académique</a>
+      <a href="#media">Média</a>
+      <a href="#Divers">Divers</a>
+    </menu> -->
+    <nav>
+      <div class="nav nav-tabs" id="nav-tab" role="tablist">
+        <a class="nav-item nav-link active" id="nav-article-tab" data-toggle="tab" href="#article">Article</a>
+        <a class="nav-item nav-link" id="nav-academic-tab" data-toggle="tab" href="#academic">Académique</a>
+        <a class="nav-item nav-link" id="nav-media-tab" data-toggle="tab" href="#media">Média</a>
+        <a class="nav-item nav-link" id="nav-other-tab" data-toggle="tab" href="#other">Divers</a>
       </div>
-      {%endif%}
+    </nav>
+
+
+    <div class="tab-content" id="nav-tabContent">
+      <section class="tab-pane show active" role="tabpanel" id="article">
+        <div class="container">
+          {%if ressources%}
+          <div class="row ressources">
+            <table id="table_support" class="bootstrap-table table-striped" data-toggle="table" data-search="true"
+              data-pagination="true" data-filter-control="true">
+              <thead class="thead-dark">
+                <tr>
+                  <th data-sortable="true" data-field="annee" data-filter-control="select">Année</th>
+                  <th data-sortable="true" data-field="support" data-filter-control="select">support</th>
+                  <th data-sortable="true" data-field="auteur">Auteur et titre du document</th>
+                </tr>
+              </thead>
+              <tbody>
+                {%for ressource in ressources%}
+                {% if ressource.support == "article" %}
+                <tr class="col-12 {{ressource.support}}">
+                  <td>{{ressource.year|default:""}}</td>
+                  <td>{{ressource.support}}</td>
+                  <td>{{ressource.who|default:""}}
+                    {% if ressource.who %}, {% endif %} <strong>{{ressource.description|default:""}}</strong>
+                    {% if ressource.description %}, {% endif %} <em>{{ressource.journal|default:""}}</em>
+                    {% if ressource.journal %}, {% endif %} {{ressource.issue|default:""}}
+                    {% if ressource.issue %}, {% endif %} {{ressource.pages|default:""}}
+                    {% if ressource.link %} <a href="{{ressource.link|default:""}}">
+                      <i class="fa fa-download" aria-hidden="true"></i>
+                    </a>{% endif %}</td>
+                </tr>
+                {%endif%}
+                {%endfor%}
+              </tbody>
+            </table>
+          </div>
+          {%endif%}
+        </div>
+      </section>
+
+
+      <section class="tab-pane" role="tabpanel" id="academic">
+        <div class="container">
+          {%if ressources%}
+          <div class="row ressources">
+            <table id="table_support" class="bootstrap-table table-striped" data-toggle="table" data-search="true"
+              data-pagination="true" data-filter-control="true">
+              <thead class="thead-dark">
+                <tr>
+                  <th data-sortable="true" data-field="annee" data-filter-control="select">Année</th>
+                  <th data-sortable="true" data-field="support" data-filter-control="select">support</th>
+                  <th data-sortable="true" data-field="auteur">Auteur et titre du document</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for activity in activities%}
+                {% if activity.support == 'thèse' or activity.support == 'mémoire'%}
+                <tr class="col-12 {{activity.support}}">
+                  <td>{{activity.last_year|default:""}}</td>
+                  <td>{{activity.support}}</td>
+                  <td>{{activity.person|default:""}}
+                    {% if activity.person %}, {% endif %} <strong>{{activity.title|default:""}}</strong>
+                    {% if activity.link %} <a href="{{activity.link|default:""}}">
+                      <i class="fa fa-download" aria-hidden="true"></i>
+                    </a>{% endif %}</td>
+                </tr>
+                {% endif %}
+                {%endfor%}
+              </tbody>
+            </table>
+          </div>
+          {%endif%}
+        </div>
+      </section>
+
+      <section class="tab-pane" role="tabpanel" id="media">
+        <div class="container">
+          {%if ressources%}
+          <div class="row ressources">
+            <table id="table_support" class="bootstrap-table table-striped" data-toggle="table" data-search="true"
+              data-pagination="true" data-filter-control="true">
+              <thead class="thead-dark">
+                <tr>
+                  <th data-sortable="true" data-field="annee" data-filter-control="select">Année</th>
+                  <th data-sortable="true" data-field="support" data-filter-control="select">support</th>
+                  <th data-sortable="true" data-field="auteur" data-filter-control="select">Auteur et titre du document
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {%for ressource in ressources%}
+                {% if ressource.support == "conférence" or ressource.support == "film" or ressource.support == "radio"%}
+                <tr class="col-12 {{ressource.support}}">
+                  <td>{{ressource.year|default:""}}</td>
+                  <td>{{ressource.support}}</td>
+                  <td>{{ressource.who|default:""}} {% if ressource.who %}, {% endif %}
+                    <strong>{{ressource.description|default:""}}</strong>
+                    {% if ressource.description %}, {% endif %}
+                    <em>{{ressource.journal|default:""}}</em>
+                    {% if ressource.journal %}, {% endif %}
+                    {{ressource.issue|default:""}}
+                    {% if ressource.issue %}, {% endif %}
+                    {{ressource.pages|default:""}}
+                    {% if ressource.link %}<a href="{{ressource.link|default:""}}">
+                      <i class="fa fa-download" aria-hidden="true"></i>
+                    </a>{% endif %}</td>
+                </tr>
+                {%endif%}
+                {%endfor%}
+              </tbody>
+            </table>
+          </div>
+          {%endif%}
+        </div>
+      </section>
+
+      <section class="tab-pane" role="tabpanel" id="other">
+        <div class="container">
+          {%if ressources%}
+          <div class="row ressources">
+            <table id="table_support" class="bootstrap-table table-striped" data-toggle="table" data-search="true"
+              data-pagination="true" data-filter-control="true">
+              <thead class="thead-dark">
+                <tr>
+                  <th data-sortable="true" data-field="annee" data-filter-control="select">Année</th>
+                  <th data-sortable="true" data-field="support" data-filter-control="select">support</th>
+                  <th data-sortable="true" data-field="auteur" data-filter-control="select">Auteur et titre du document
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {%for ressource in ressources%}
+                {% if ressource.support == "rapport" or ressource.support == "ouvrage" %}
+                <tr class="col-12 {{ressource.support}}">
+                  <td>{{ressource.year|default:""}}</td>
+                  <td>{{ressource.support}}</td>
+                  <td>{{ressource.who|default:""}} {% if ressource.who %}, {% endif %}
+                    <strong>{{ressource.description|default:""}}</strong>
+                    {% if ressource.description %}, {% endif %}
+                    <em>{{ressource.journal|default:""}}</em>
+                    {% if ressource.journal %}, {% endif %}
+                    {{ressource.issue|default:""}}
+                    {% if ressource.issue %}, {% endif %}
+                    {{ressource.pages|default:""}}
+                    {% if ressource.link %}<a href="{{ressource.link|default:""}}">
+                      <i class="fa fa-download" aria-hidden="true"></i>
+                    </a>{% endif %}</td>
+                </tr>
+                {%endif%}
+                {%endfor%}
+              </tbody>
+            </table>
+          </div>
+          {%endif%}
+        </div>
+      </section>
+
     </div>
   </div>
+
 </section>
+
 
 <section id="listTree">
   <div class="container">
