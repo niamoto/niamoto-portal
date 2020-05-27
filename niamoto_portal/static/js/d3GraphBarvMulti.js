@@ -190,7 +190,7 @@ export class GraphBarvMulti {
         // }
         // if (this.config.maxValue === '') {
         this.config.maxValue = d3.max(data, d => d3.max(d, d => d[1]))
-        this.config.yDomain = [0, this.config.maxValue]
+        this.config.yDomain = [0, this.config.maxValue * 1.15]
         // }
 
         var xScale = d3.scaleBand()
