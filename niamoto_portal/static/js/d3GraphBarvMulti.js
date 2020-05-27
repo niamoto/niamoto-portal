@@ -235,8 +235,6 @@ export class GraphBarvMulti {
 
         const axisGroup = this.svg.selectAll('.xAxis').call(xAxis)
 
-        console.log(response);
-        console.log(data);
         const layer = this.g.selectAll('g')
             .data(data)
             .join('g')

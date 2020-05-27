@@ -264,7 +264,6 @@ function updateLayerShape(data) {
 
   sourceProvince.clear()
   sourceProvince.addFeature(new ol.format.GeoJSON().readFeature(data))
-  console.log(view.zoom);
 }
 
 function plurial(data) {
