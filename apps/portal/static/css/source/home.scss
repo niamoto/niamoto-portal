@@ -30,6 +30,9 @@
     padding-right: 0;
 }
 
+section {
+    text-align: justify;
+}
 #map_pacific {
     @extend .image
 }

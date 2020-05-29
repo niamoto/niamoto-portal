@@ -27,6 +27,10 @@
   padding-right: 0;
 }
 
+section {
+  text-align: justify;
+}
+
 .context .row {
   padding-top: 0;
 }
