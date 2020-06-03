@@ -2,34 +2,46 @@ body {
   padding: 50px 0 0 0;
 }
 
-.image, #tree1, #tree2, #image {
+section {
+  text-align: justify;
+}
+
+.image, #learnPlot #tree1, #learnPlot #tree2, #learnPlot #image {
   margin: 10px;
   border-radius: 5px;
   margin-bottom: 50px;
 }
 
-.image_center, #image {
+.image_center, #learnPlot #image {
   display: block;
   margin-left: auto;
   margin-right: auto;
 }
 
-#tree1 {
+#learnPlot #tree1 {
   width: 350px;
   float: left;
 }
 
-#tree2 {
+#learnPlot #tree2 {
   width: 400px;
   float: right;
 }
 
-#image {
+#learnPlot #image {
   width: 600px;
 }
 
-.grp_img1 {
+#learnPlot figure {
+  text-align: center;
+}
+
+#learnPlot .grp_img1 {
   height: 300px;
+}
+
+#learnPlot #list_inventory {
+  margin-left: 350px;
 }
 
 .next {

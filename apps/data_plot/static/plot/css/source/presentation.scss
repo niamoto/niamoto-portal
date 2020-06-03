@@ -4,6 +4,10 @@ body {
     padding: 50px 0 0 0;
 }
 
+section {
+    text-align: justify;
+}
+
 .image {
     margin: 10px;
     border-radius: 5px;
@@ -16,27 +20,39 @@ body {
     margin-right: auto
 }
 
-#tree1 {
-    width: 350px;
-    float: left;
-    @extend .image
+#learnPlot {
+    #tree1 {
+        width: 350px;
+        float: left;
+        @extend .image
+    }
+
+    #tree2 {
+        width: 400px;
+        float: right;
+        @extend .image
+    }
+
+    #image {
+        width: 600px;
+        @extend .image;
+        @extend .image_center;
+    }
+
+    figure {
+        text-align: center;
+    }
+
+    .grp_img1 {
+        height: 300px;
+    }
+
+    #list_inventory {
+        margin-left: 350px;
+    }
 }
 
-#tree2 {
-    width: 400px;
-    float: right;
-    @extend .image
-}
 
-#image {
-    width: 600px;
-    @extend .image;
-    @extend .image_center;
-}
-
-.grp_img1 {
-    height: 300px;
-}
 
 
 .next {
