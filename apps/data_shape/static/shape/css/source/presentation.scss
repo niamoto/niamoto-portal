@@ -37,18 +37,9 @@ figure {
 
 #forestPN {
 
-  img {
-    margin-bottom: 0;
-  }
-
   .bullet {
-    margin-top: 100px;
-    -webkit-column-count: 3;
-    -moz-column-count: 3;
-    column-count: 3;
-    -webkit-column-gap: 3em;
-    -moz-column-gap: 3em;
-    column-gap: 3em;
 
+    clear: both;
   }
+
 }

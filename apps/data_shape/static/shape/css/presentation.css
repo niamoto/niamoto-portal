@@ -27,15 +27,7 @@ figure img {
   margin-right: 20px;
 }
 
-#forestPN img {
-  margin-bottom: 0;
-}
-
 #forestPN .bullet {
-  margin-top: 100px;
-  -webkit-column-count: 3;
-  column-count: 3;
-  -webkit-column-gap: 3em;
-  column-gap: 3em;
+  clear: both;
 }
 /*# sourceMappingURL=presentation.css.map */
