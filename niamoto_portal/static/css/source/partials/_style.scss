@@ -1,19 +1,66 @@
-@import "../../../../../niamoto_portal/static/css/source/color";
+body {
+    padding: 50px 0 0 0;
+}
 
-/*define variable*/
-
-$color_bg_select: #fbfbfb;
-$color_bg: #eee;
-$color_text_contour: #005522;
-$color_nav_text: #ffffff;
-
-/*=-====Bootstrapthemes.co btco-hover-menu=====*/
-
-.row {
+section {
+    text-align: justify;
     padding-top: 50px;
 }
 
+figure {
+    margin: 0;
+}
 
+h2 {
+    margin-bottom: 1rem;
+    ;
+}
+
+p a {
+    font-size: 1em;
+    // font-weight: bold;
+    color: $color-secondary-1-3;
+
+    :hover {
+        color: $color-secondary-1-2;
+    }
+}
+
+.row {
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+.image {
+    margin: 20px;
+    border-radius: 5px;
+    padding: 0;
+}
+
+.image_center {
+    @extend .image;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.image_float_top_left {
+    @extend .image;
+    float: left;
+    margin-left: 0;
+    margin-top: 0;
+}
+
+.image_float_top_right {
+    @extend .image;
+    float: right;
+    margin-right: 0;
+    margin-top: 0;
+}
+
+.next {
+    clear: both;
+}
 
 #preloader {
     position: absolute;
@@ -24,25 +71,6 @@ $color_nav_text: #ffffff;
 
 .bg-bandeau-default {
     background: linear-gradient(rgba(34, 34, 34, 0.7), 70%, rgba(200, 200, 200, 0)) !important;
-}
-
-.text-contour {
-    text-shadow: $color_text_contour 1px 1px, $color_text_contour -1px 1px, $color_text_contour -1px -1px, $color_text_contour 1px -1px;
-    text-shadow: 0px 0px 2px rgba(100, 100, 100, 1);
-}
-
-.text_accueil {
-    // display: flex;
-    justify-content: center;
-    align-items: center;
-    // margin-top: 50px;
-    // display: inline-block;
-    padding: 15%;
-    width: 100%;
-    height: 950px;
-    vertical-align: middle;
-    text-align: center;
-    // line-height: 900px;
 }
 
 .navbar-light .navbar-nav .nav-link {

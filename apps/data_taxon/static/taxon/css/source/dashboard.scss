@@ -1,21 +1,15 @@
-@import '../../../../../../niamoto_portal/static/css/source/color';
-
-
-body {
-  padding: 50px 0 0 0;
-}
-
-
+@import '../../../../../../niamoto_portal/static/css/source/partials/color';
+@import "../../../../../../niamoto_portal/static/css/source/partials/style";
 
 #left_panel {
-  height: 780px;
+    height: 780px;
 }
 
 #left_panel_placeholder {
-  position: static;
+    position: static;
 }
 
-@import "../../../../../../niamoto_portal/static/css/source/graph";
-@import "../../../../../../niamoto_portal/static/css/source/gauge";
-// @import "sub/treeview";
-@import "sub/bootstrap-treeview";
+@import "../../../../../../niamoto_portal/static/css/source/partials/graph";
+@import "../../../../../../niamoto_portal/static/css/source/partials/gauge";
+@import 'partials/treeview';
+@import 'partials/bootstrap-treeview';

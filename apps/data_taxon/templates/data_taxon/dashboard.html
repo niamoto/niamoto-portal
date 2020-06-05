@@ -1,34 +1,31 @@
-{% extends 'base.html' %}
+{% extends '_base.html'%}
+
 {% load staticfiles %}
 
 {% block styles %}
+
 {{block.super}}
-<!-- Latest compiled and minified CSS -->
+
 
 <link rel="stylesheet"
   href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.min.css">
-
 <link rel="stylesheet" type="text/css" href="{% static 'taxon/css/dashboard.min.css' %}" />
 {% endblock styles %}
 
 {% block page_header %}
-<div class="container display-4">
-  Tableaux de bord des arbres
-</div> {% endblock page_header %}
+
+<div class="container display-4">Tableaux de bord des arbres </div>
+{% endblock page_header %}
 
 {% block body %}
 
 <img id="preloader" src="{% static 'img/preloader.svg' %}">
-
 <div class="container-fluid">
   <div class="row">
     <div id="panel_left" class="col-sm-2 col-md-2">
       <div id="left_panel_placeholder">
-        <div class=" w-100">
-
-          <button type="button" class="btn btn-lg"><a href="{% url 'taxon:presentation' %}">
-              <span class="fas fa-search" aria-hidden="true"></span> En savoir plus
-            </a></bouton>
+        <div class=" w-100"><button type="button" class="btn btn-lg"><a href="{% url 'taxon:presentation' %}"><span
+                class="fas fa-search" aria-hidden="true"></span>En savoir plus </a></bouton>
         </div>
         <div class="w-100">
           <div class="">
@@ -37,12 +34,10 @@
         </div>
       </div>
     </div>
-
     <div class="col-sm-10 col-md-10 ">
       <div class="card-deck">
         <div id="Infos_gene" class="card">
           <div class="card-header">Informations générales</div>
-
           <div id="general_informations" class="card-body">
             <h5 class="card-title"><span id="tax_full_name"></span></h5>
             <div class="card-text">Rang taxonomique:<span id="tax_rank_value"></span></div>
@@ -54,35 +49,35 @@
         {% for graph in graph_list %}
 
         <div id="{{graph.name}}" class="card">
-          <div class="card-header">{{graph.title|capfirst}}</div>
+          <div class="card-header"> {{graph.title|capfirst}}
+
+          </div>
           <div class="card-body">
             <div id="{{graph.model}}" class="d3_panel graph"></div>
             <div id="{{graph.model}}Legend" class="d3_panel"></div>
           </div>
-
-
         </div>
-
         {% endfor %}
         {% else %}
+
         <p>Aucun graphe.</p>
         {% endif %}
+
       </div>
     </div>
   </div>
 </div>
-
 {% endblock body %}
 
 {% block scripts %}
-{{ block.super }}
+
+{{block.super}}
 
 
-<!-- Latest compiled and minified JavaScript -->
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-treeview/1.2.0/bootstrap-treeview.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.9.7/d3.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.25.6/d3-legend.min.js"></script>
-
 <script src="{% static 'taxon/js/main.min.js' %}"></script>
 {% endblock scripts %}

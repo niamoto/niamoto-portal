@@ -1,17 +1,16 @@
-@import '../../../../../niamoto_portal/static/css/source/color';
+@import '../../../../../niamoto_portal/static/css/source/partials/color';
+@import "../../../../../niamoto_portal/static/css/source/partials/style";
 
+#holdridge {
 
-body {
-    padding: 50px 0 0 0;
+    img {
+        @extend .image_float_top_left;
+    }
 }
 
-#holdridge img {
-    float: left;
-    margin: 0em 1em 1em 1em;
-}
 
-
-#env img {
-    float: right;
-    margin: 0em 1em 1em 1em;
+#env {
+    img {
+        @extend .image_float_top_left;
+    }
 }

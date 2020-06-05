@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends '_base.html' %}
 {% load staticfiles %}
 {% block styles %}
 {{block.super}}
@@ -15,7 +15,7 @@
 <section id="equipe">
   <div class="container">
     <div class="row">
-      <h4>Equipe</h4>
+      <h2>Equipe</h2>
     </div>
   </div>
   <div class="container">
@@ -127,7 +127,7 @@
 <section id="production">
   <div class="container">
     <div class="row">
-      <h4>Production</h4>
+      <h2>Production</h2>
     </div>
     <!-- <menu class="row">
       <a href="#article">Article</a>
@@ -146,7 +146,7 @@
 
 
     <div class="tab-content" id="nav-tabContent">
-      <section class="tab-pane show active" role="tabpanel" id="article">
+      <div class="tab-pane show active" role="tabpanel" id="article">
         <div class="container">
           {%if ressources%}
           <div class="row ressources">
@@ -181,10 +181,10 @@
           </div>
           {%endif%}
         </div>
-      </section>
+      </div>
 
 
-      <section class="tab-pane" role="tabpanel" id="academic">
+      <div class="tab-pane" role="tabpanel" id="academic">
         <div class="container">
           {%if ressources%}
           <div class="row ressources">
@@ -216,9 +216,9 @@
           </div>
           {%endif%}
         </div>
-      </section>
+      </div>
 
-      <section class="tab-pane" role="tabpanel" id="media">
+      <div class="tab-pane" role="tabpanel" id="media">
         <div class="container">
           {%if ressources%}
           <div class="row ressources">
@@ -257,9 +257,9 @@
           </div>
           {%endif%}
         </div>
-      </section>
+      </div>
 
-      <section class="tab-pane" role="tabpanel" id="other">
+      <div class="tab-pane" role="tabpanel" id="other">
         <div class="container">
           {%if ressources%}
           <div class="row ressources">
@@ -298,7 +298,7 @@
           </div>
           {%endif%}
         </div>
-      </section>
+      </div>
 
     </div>
   </div>
@@ -309,10 +309,10 @@
 <section id="listTree">
   <div class="container">
     <div class="row">
-      <h4>Liste des arbres</h4>
+      <h2>Liste des arbres</h2>
 
       {%if trees%}
-      <div class="row listTree col-12">
+      <div class="listTree col-12">
         <table id="table_tr" class="table table-striped" data-toggle="table" data-search="true" data-pagination="true">
           <thead class="thead-dark">
             <tr>

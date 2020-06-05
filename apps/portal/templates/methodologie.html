@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends '_base.html' %}
 {% load staticfiles %}
 
 {% block styles %}
@@ -15,8 +15,7 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-12 mx-auto">
-        <h4>Couverture forestière</h4>
-        <p class="text-justify"></p>
+        <h2>Couverture forestière</h2>
       </div>
     </div>
   </div>
@@ -26,10 +25,10 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-12 mx-auto">
-        <h4>Holdridge</h4>
-        <img src="{% static 'img/humidity_provinces.jpg' %}" class="rounded" alt="Leslie Holdridge">
+        <h2>Holdridge</h2>
+        <img src="{% static 'img/humidity_provinces.jpg' %}" alt="Leslie Holdridge">
 
-        <p class="text-justify">La classification des milieux de vie dite de Holdrige a été crée en 1947 par le
+        <p">La classification des milieux de vie dite de Holdrige a été crée en 1947 par le
           botaniste anglais
           Leslie Ransselaer Holdridge. classification internationale repose sur un ensemble de variables
           climatiques qui définissent l'ambiance bioclimatique d'une région ou d'un paysage, notamment la
@@ -37,13 +36,13 @@
           internationale est largement utilisée pour identifier les milieux dans lesquels évoluent les
           organismes et les habitats.</p>
 
-        <p class="text-justify">
-          En Nouvelle-Calédonie, la classification de Holdrige basée sur les données climatiques mondiales
-          (WorldClim) et la pluviométrie locale (Modèle Aurelhy, météo France) conduit à définir 5 grandes
-          classes de milieux de vie dans le biome tropical de la Nouvelle-Calédonie (very dry, dry, moist, wet
-          and rain). La combinaison avec la couverture forestière aboutit à définir arbitrairement 5 classes
-          de forêt (forêt très sèche, forêt sèche, forêt humide, forêt très humide et forêt toujours humide).
-        </p>
+          <p>
+            En Nouvelle-Calédonie, la classification de Holdrige basée sur les données climatiques mondiales
+            (WorldClim) et la pluviométrie locale (Modèle Aurelhy, météo France) conduit à définir 5 grandes
+            classes de milieux de vie dans le biome tropical de la Nouvelle-Calédonie (very dry, dry, moist, wet
+            and rain). La combinaison avec la couverture forestière aboutit à définir arbitrairement 5 classes
+            de forêt (forêt très sèche, forêt sèche, forêt humide, forêt très humide et forêt toujours humide).
+          </p>
       </div>
     </div>
   </div>
@@ -52,9 +51,9 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-12 mx-auto">
-        <h4>Enveloppe envionnementale</h4>
+        <h2>Enveloppe envionnementale</h2>
         <img src="{% static 'img/envEnviron.png' %}" class="img-thumbnail" alt="Enveloppement environnementale">
-        <p class="text-justify">L'enveloppe environnementale est une représentation à plat d'une distribution composée
+        <p>L'enveloppe environnementale est une représentation à plat d'une distribution composée
           de trois
           paramètres que sont la pluviométrie, l'altitude et la proportion d'habitat (ou d'occurence)
           disponible. Basée sur une représentation en graphe de chaleur, cette classification permet
@@ -71,8 +70,8 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-12 mx-auto">
-        <h4>SDM</h4>
-        <p class="text-justify">Les SDM (Species Distribution Models) représentent une projection spatiale des
+        <h2>SDM</h2>
+        <p>Les SDM (Species Distribution Models) représentent une projection spatiale des
           relations
           plante-environnement. Concrètement ce modèle est construit à partir des occurences de l'espèce pour
           lesquelles on connait les variables environnementales (e.g. pluviométrie, température, pente,
@@ -81,7 +80,7 @@
           suitability). La projection géographique de cette enveloppe offre alors une vision cartographique
           des secteurs dans laquelle l'espèce a une forte probabilité de trouver les conditions idoines pour
           se développer.</p>
-        <p class="text-justify"> trop souvent les SDM sont associés à des cartes de distribution potentielle, ce qui
+        <p> trop souvent les SDM sont associés à des cartes de distribution potentielle, ce qui
           constitue un raccourci inexact.Ce n'est pas parce que le modèle prédit que l'habitat est favorable
           que l'espèce est réellement présente. D'autres paramètres influencent la présence des espèces dont
           la dispersion qui peut permettre ou non à l'espèce de coloniser les milieux favorables.</p>
@@ -93,8 +92,8 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-12 mx-auto">
-        <h4>S-SDM</h4>
-        <p class="text-justify">Les S-SDM (Stacked Species Distribution Models) représentent la compilation des SDM pour
+        <h2>S-SDM</h2>
+        <p>Les S-SDM (Stacked Species Distribution Models) représentent la compilation des SDM pour
           une liste
           d'espèce sur une superficie. En d'autres termes et avec la même prudence que dans le cas des SDM,
           ils représentent la somme des probabilités de chacune des espèces. Ils permettent par exemple de
@@ -108,8 +107,8 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-12 mx-auto">
-        <h4>Richesse</h4>
-        <p class="text-justify">La richesse (ou diversité alpha) est une variable fréquemment utilisée pour évaluer et
+        <h2>Richesse</h2>
+        <p>La richesse (ou diversité alpha) est une variable fréquemment utilisée pour évaluer et
           comparer la
           diversité des communautés d'arbres. Elle représente par exemple le nombre d'espèces d'arbres que
           l'on rencontre sur une parcelle. La richesse évolue avec l'environnement. Si elle atteint des
@@ -124,8 +123,8 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-12 mx-auto">
-        <h4>DBH</h4>
-        <p class="text-justify">Diameter at breast height, le DBH est une méthode standard pour mesurer le diamètre d'un
+        <h2>DBH</h2>
+        <p>Diameter at breast height, le DBH est une méthode standard pour mesurer le diamètre d'un
           arbre à la hauteur de la poitrine d'un humain, généralement fixé à 1,30 m du sol. Cette mesure décalée depuis
           le sol permet notamment de comparer les diamètres des arbres entre-eux en évitant de donner une importance
           particulière à l'empattement du tronc. Dans la pratique, c'est la circonférence de l'arbre qui est mesurée à
@@ -142,8 +141,8 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-12 mx-auto">
-        <h4>Wood density</h4>
-        <p class="text-justify"></p>
+        <h2>Wood density</h2>
+        <p></p>
       </div>
     </div>
   </div>
@@ -152,8 +151,8 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-12 mx-auto">
-        <h4>Strates</h4>
-        <p class="text-justify"></p>
+        <h2>Strates</h2>
+        <p></p>
       </div>
     </div>
   </div>

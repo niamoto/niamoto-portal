@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends '_base.html' %}
 {% load staticfiles %}
 
 {% block styles %}
@@ -39,8 +39,8 @@
 
   {% for graph in graph_list %}
 
-  <div id="{{graph.name}}" class="size-25 p-3">
-    <div class="card">
+  <div id="{{graph.name}}" class="s-{{graph.height}} p-3">
+    <div class="card card-{{graph.model}}">
       <div class="card-header">{{graph.title|capfirst}}</div>
       <div class="card-body {{graph.model}}">
         <div id="{{graph.model}}" class="d3_panel graph"></div>

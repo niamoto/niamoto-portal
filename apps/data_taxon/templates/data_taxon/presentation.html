@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends '_base.html' %}
 {% load staticfiles %}
 
 {% block styles %}
@@ -14,9 +14,8 @@
 <section id="Intro">
   <div class="col-lg-2">
     <button type="button" class="btn btn-light btn-lg"><a href="{% url 'taxon:dashboard' %}">
-        Accéder aux données <span class="badge badge-secondary"><span class="fa fa-database"
-            aria-hidden="true"></span></span>
-      </a>
+        Accéder aux données <span class="badge badge-secondary"><span class="fa fa-database" aria-hidden="true">
+          </span></span></a>
       </bouton>
   </div>
   <section id="preambule">
@@ -24,32 +23,30 @@
       <div class="row">
         <div class="col-lg-12 mx-auto">
           <h2>Préambule</h2>
-          <p>
+
+          <p><b>L’arbre est apparu autour du dévonien (env. 360 millions d’années) et cette
+              forme
+              verticale serait le résultat de compétition entre les végétaux vis-à-vis de l’accès à la
+              lumière. </b>
+          </p>
           <figure>
             <img class="" id="tree" src="{% static 'taxon/img/tree.png' %}"></img>
           </figure>
-          <div class='text'>
-            <p><b>L’arbre est apparu autour du dévonien (env. 360 millions d’années) et cette
-                forme
-                verticale serait le résultat de compétition entre les végétaux vis-à-vis de l’accès à la
-                lumière. </b>
-            </p>
-            <p>
-              L’arbre est constitué d’un tronc et de branches capables de produire du bois, un mélange de
-              lignine, de cellulose et d’hémicellulose, c’est-à-dire à un composé chimique spécifique
-              nommé la
-              lignine. Si toutes les plantes, même les herbacées, produisent de la lignine pour assurer
-              leur
-              rigidité et permettre leur croissance en hauteur, seuls les arbres ont une croissance en
-              épaisseur grâce à la présence de méristèmes et de tissus secondaires.</br>
-              Dans ce travail, cette définition stricte de l’arbre est élargie à la notion de plante
-              arborescente qui regroupe toutes les plantes érigées, autoportantes, qui peuvent atteindre
-              une
-              hauteur de 5 m et un diamètre de 10 cm à 1.3 m de hauteur. Concrètement cette définition
-              conduit
-              à regrouper avec les arbres, les palmiers, les pandanus et les fougères arborescentes.
-            </p>
-          </div>
+          <p>
+            L’arbre est constitué d’un tronc et de branches capables de produire du bois, un mélange de
+            lignine, de cellulose et d’hémicellulose, c’est-à-dire à un composé chimique spécifique
+            nommé la
+            lignine. Si toutes les plantes, même les herbacées, produisent de la lignine pour assurer
+            leur
+            rigidité et permettre leur croissance en hauteur, seuls les arbres ont une croissance en
+            épaisseur grâce à la présence de méristèmes et de tissus secondaires.</p>
+          <p>Dans ce travail, cette définition stricte de l’arbre est élargie à la notion de plante
+            arborescente qui regroupe toutes les plantes érigées, autoportantes, qui peuvent atteindre
+            une
+            hauteur de 5 m et un diamètre de 10 cm à 1.3 m de hauteur. Concrètement cette définition
+            conduit
+            à regrouper avec les arbres, les palmiers, les pandanus et les fougères arborescentes.
+          </p>
 
   </section>
   <section id="learnTaxon">
@@ -57,51 +54,45 @@
       <div class="row">
         <div class="col-lg-12 mx-auto">
           <h2>Étudier les arbres</h2>
-
-          <div class='text'>
-            <p>L’étude des arbres est un vaste champ qui relève de disciplines diverses. Les informations
-              relevées peuvent concerner l’individu lui-même au travers de la mesure de différents organes
-              ou
-              sa localisation dans la forêt et plus largement vis-à-vis de l’environnement. La compilation
-              de
-              ces informations dans les bases de données et leur intégration dans des modèles d’analyses
-              permettent de mieux cerner l’auto-écologie des espèces et de fournir des portraits quant à
-              leur
-              place dans le fonctionnement de la forêt. Cette acquisition est perpétuelle et chaque
-              observation, même sur les espèces les plus communes, vient renforcer notre connaissance
-              générale
-              de ces organismes.</p>
-            <figure>
-              <img class="" id="tree_mesure" src="{% static 'taxon/img/tree_mesure.png' %}"></img>
-            </figure>
-
-            <p>Dans le projet Niamoto, nous capitalisons toutes ces données au fur et à mesure de nos
-              travaux en
-              forêt, notamment lors de la mise en place des parcelles. Le nom scientifique (Taxon)
-              constitue
-              la clef de toutes les études. La précision de l’identification est dont fondamentale
-              puisqu’elle
-              conduit à regrouper toutes les autres données collectées. Elle est réalisée par des
-              botanistes
-              experts de la flore de Nouvelle-Calédonie qui identifient directement l’arbre sur le terrain
-              ou
-              prélèvent un échantillon pour l’identifier ultérieurement au laboratoire en comparant aux
-              spécimens stockés dans l’herbier de la Nouvelle-Calédonie (NOU). Dans certains cas, des
-              morceaux
-              de feuilles sont desséchées lentement pour permettre de procéder à des analyses génétiques
-              ultérieures. Le nom scientifique est conforme au référentiel <span><a
-                  href="http://publish.plantnet-project.org/project/florical_fr"><u>Florical</u></a></span>
-              qui suit la classification taxonomique internationale, notamment l’<span><a
-                  href="http://www.mobot.org/MOBOT/research/APweb/"><u>APG IV</u></a></span> pour les
-              angiospermes.</p>
-
-          </div>
-          <p>
           <figure>
-            <div class="mx-auto d-block">
-              <img class="" id="density" src="{% static 'taxon/img/density.png' %}"></img>
-            </div>
+            <img class="" id="tree_mesure" src="{% static 'taxon/img/tree_mesure.png' %}"></img>
           </figure>
+          <figure>
+            <img class="" id="density" src="{% static 'taxon/img/density.png' %}"></img>
+          </figure>
+          <p>L’étude des arbres est un vaste champ qui relève de disciplines diverses. Les informations
+            relevées peuvent concerner l’individu lui-même au travers de la mesure de différents organes
+            ou
+            sa localisation dans la forêt et plus largement vis-à-vis de l’environnement. La compilation
+            de
+            ces informations dans les bases de données et leur intégration dans des modèles d’analyses
+            permettent de mieux cerner l’auto-écologie des espèces et de fournir des portraits quant à
+            leur
+            place dans le fonctionnement de la forêt. Cette acquisition est perpétuelle et chaque
+            observation, même sur les espèces les plus communes, vient renforcer notre connaissance
+            générale
+            de ces organismes.</p>
+
+
+          <p>Dans le projet Niamoto, nous capitalisons toutes ces données au fur et à mesure de nos
+            travaux en
+            forêt, notamment lors de la mise en place des parcelles. Le nom scientifique (Taxon)
+            constitue
+            la clef de toutes les études. La précision de l’identification est dont fondamentale
+            puisqu’elle
+            conduit à regrouper toutes les autres données collectées. Elle est réalisée par des
+            botanistes
+            experts de la flore de Nouvelle-Calédonie qui identifient directement l’arbre sur le terrain
+            ou
+            prélèvent un échantillon pour l’identifier ultérieurement au laboratoire en comparant aux
+            spécimens stockés dans l’herbier de la Nouvelle-Calédonie (NOU). Dans certains cas, des
+            morceaux
+            de feuilles sont desséchées lentement pour permettre de procéder à des analyses génétiques
+            ultérieures. Le nom scientifique est conforme au référentiel <a
+              href="http://publish.plantnet-project.org/project/florical_fr"><u>Florical</u></a>
+            qui suit la classification taxonomique internationale, notamment l’<a
+              href="http://www.mobot.org/MOBOT/research/APweb/"><u>APG IV</u></a> pour les
+            angiospermes.</p>
 
           <table class='table table-sm'>
             <thead>
@@ -140,7 +131,6 @@
               </tr>
             </tbody>
           </table>
-          </p>
         </div>
       </div>
     </div>
@@ -155,21 +145,20 @@
               <img class="" id="graph" src="{% static 'taxon/img/graph.png' %}"></img>
             </div>
           </figure>
-          <div class='text'>
-            <p><strong><b>Les arbres comptent actuellement 1208 taxons, soit environ
-                </b></strong><strong><b>1/3
-                  de la flore indigène de la Nouvelle-Calédonie</b></strong>, réparti dans 1146
-              espèces,
-              276 genres et 92 familles. Ces arbres sont des gymnospermes (38), des monocotylédones (29
-              palmiers et 13 pandanus), des fougères arborescentes (8), des angiospermes (1162) parmi
-              lesquelles 71 angiospermes basales. Ils sont pour la plupart endémiques (1 093 taxons, soit
-              plus
-              de 90 % de la flore des arbres) et parmi eux 220 appartiennent à des genres endémiques et 8
-              aux
-              familles endémiques de Nouvelle-Calédonie : Amborellaceae (1), Oncothecaceae (2) et
-              Phellinaceae
-              (5). </p>
-          </div>
+
+          <p><strong>Les arbres comptent actuellement 1208 taxons, soit environ 1/3
+              de la flore indigène de la Nouvelle-Calédonie</strong>, réparti dans 1146
+            espèces,
+            276 genres et 92 familles. Ces arbres sont des gymnospermes (38), des monocotylédones (29
+            palmiers et 13 pandanus), des fougères arborescentes (8), des angiospermes (1162) parmi
+            lesquelles 71 angiospermes basales. Ils sont pour la plupart endémiques (1 093 taxons, soit
+            plus
+            de 90 % de la flore des arbres) et parmi eux 220 appartiennent à des genres endémiques et 8
+            aux
+            familles endémiques de Nouvelle-Calédonie : Amborellaceae (1), Oncothecaceae (2) et
+            Phellinaceae
+            (5).
+
           </p>
           <div class='bullet'>
             <ul>
@@ -187,17 +176,17 @@
               <li>La hauteur moyenne mesurée sur 3566 arbres appartenant à 385 taxons est de
                 12.1
                 m [2.7-44.2 cm]. Une vingtaine de20 taxons peuvent dépasser la hauteur de 30 m (e.g.
-                <em><i><span>Semecarpus atra, Cunonia austrocaledonica, Apodytes clusiifolia, Kermadecia
-                      sinuata, Diospyros macrocarpa, Agathis moorei</span></i></em>) et seul le
+                <i>Semecarpus atra, Cunonia austrocaledonica, Apodytes clusiifolia, Kermadecia
+                  sinuata, Diospyros macrocarpa, Agathis moorei</i>) et seul le
                 genre
-                <em><i><span>Auraucaria</span></i></em> dépasse la hauteur de 40 m</li>
+                <i>Auraucaria</i> dépasse la hauteur de 40 m</li>
               <li>Le diamètre moyen (DBH&gt;10 cm) mesuré sur 48220 arbres appartenant à 999
                 taxons est de 18.8 cm [10-249.9 cm]. Une trentaine detaxons 1 m de diamètre (e.g.
-                <em><i><span>Geissois racemosa</span></i></em>, <em><i><span>Arillastrum
-                      gummiferum</span></i></em>, <em><i><span>Montrouziera
-                      cauliflora</span></i></em>, <em><i><span>Planchonella
-                      sphaerocarpa</span></i></em> ou encore <em><i><span>Agathis
-                      lanceolata</span></i></em>)</li>
+                <i>Geissois racemosa</i>, <i>Arillastrum
+                  gummiferum</i>, <i>Montrouziera
+                  cauliflora</i>, <i>Planchonella
+                  sphaerocarpa</i> ou encore <i>Agathis
+                  lanceolata</i>)</li>
               <li>La surface foliaire (LA) moyenne mesuré sur 672 arbres appartenant à 184
                 taxons
                 est de 63.9 cm<sup>2</sup>[31-1067 cm<sup>2</sup>]</li>

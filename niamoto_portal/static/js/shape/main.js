@@ -9,7 +9,7 @@ import * as d3GraphDonut from './d3GraphDonuts'
 import * as d3GraphTripleDonut from './d3TripleDonuts'
 import * as d3GraphStakedArea from './d3GraphStakedAreas'
 import * as d3Gauges from './d3Gauges'
-import color from '../../css/source/nocompile/color_js.scss'
+import color from '../../css/source/partials/_color_js.scss'
 // import * as d3 from 'd3'
 // var d3_gauges = require('./d3_gauges');
 

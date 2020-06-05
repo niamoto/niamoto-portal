@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends '_base.html' %}
 {% load staticfiles %}
 
 {% block styles %}
@@ -13,7 +13,7 @@
 {% block body %}
 <section id="preambule">
   <div class="col-lg-2">
-    <button type="button" class="btn btn-light btn-lg"><a href="{% url 'shape:dashboard' %}">
+    <button type="button" class="btn btn-light btn-lg"><a href="{% url 'plot:dashboard' %}">
         Accéder aux données <span class="badge badge-secondary"><span class="fa fa-database"
             aria-hidden="true"></span></span>
       </a>
@@ -39,11 +39,13 @@
     <div class="row">
       <div class="col-lg-12 mx-auto">
         <h2>Étudier les peuplements forestiers</h2>
-        <p>Le réseau NC-PIPPN (<em><i>New Caledonian Plant Inventories and Permanent Plot Network</i></em>) a été initié
+        <p>Le réseau NC-PIPPN (<i>New Caledonian Plant Inventories and Permanent Plot Network</i>) a été initié
           par l’IRD en 2005. Depuis cette date, il compile 452 inventaires forestiers établis dans les forêts de la
           Nouvelle-Calédonie par l’AMAP et divers autres
           institutions.</p>
-        <img id="tree1" class="rounded" src="{% static 'plot/img/tree1.png' %}"></img>
+        <figure>
+          <img id="tree1" src="{% static 'plot/img/tree1.png' %}"></img>
+        </figure>
         <p>Chaque inventaire est géo-référencé. Il représente une liste exhaustive d’individus-arbres sur une portion de
           forêt, en considérant:
         <ul id="list_inventory">
@@ -67,7 +69,7 @@
           <li>21 parcelles carrées de 100 x 100 m (DBH&gt;10 cm, aire = 1 ha)</li>
           <li>18 parcelles carrées multiples de 10 x 10 m (DBH&gt;5cm, aire = 0.01 à 0.05 ha)</li>
         </ul>
-        <p><em><i>Carte des parcelles</i></em></p>
+        <p><i>Carte des parcelles</i></p>
         <p>À ce jour, le réseau NC-PIPPN cumule près de 40 ha de forêts inventoriées, entre 10 et 1 300 m d’altitude,
           dans un intervalle de pluviométrie compris entre 1 et 4,5 m de pluie par an. Dans ce réseau, 222 parcelles ont
           été mises en place sur les substrats ultramafiques, pour une superficie cumulée de 16,5 ha. Il
@@ -88,7 +90,7 @@
           d’arbre par parcelle) à l’aide d’un laser. Depuis 2014 des traits fonctionnels supplémentaires sont relevés
           sur un échantillon représentatif d’individus-arbres : densité de bois (WD), surface foliaire (LA), surface
           foliaire spécifique (SLA), matière sèche foliaire et épaisseur de la feuille (LDMC).</p>
-        <figure><img id="image" class="rounded" src="{% static 'plot/img/image.png' %}"></img>
+        <figure><img id="image" src="{% static 'plot/img/image.png' %}"></img>
         </figure>
         <p>La mise en place d’une parcelle de 1 ha représente un effort important sur le terrain, il faut compter
           environ 7 jours de travail pour 5-7 personnes.</p>
@@ -132,7 +134,7 @@
           <li>La hauteur de la canopée varie entre 8 m (Sommet de l’Aoupinié et du Paoua) et 18 m
             (Calcaires de Koumac et Wekori).</li>
           <li>Le DBH median varie de 12 à 19 cm selon les parcelles tandis que le DBH maximal est de 2,5 m
-            (e.g. <em><i>Ficus obliqua</i></em>, Moraceae, parcelle de Ateou). Cependant 3/4 des individus-arbres ne
+            (e.g. <i>Ficus obliqua</i>, Moraceae, parcelle de Ateou). Cependant 3/4 des individus-arbres ne
             dépasse pas 21 cm de DBH ce qui représente une valeur très faible et qui qualifie les peuplements forestiers
             de la Nouvelle-Calédonie comme étant constitués d’une majorité de petites tiges.</li>
           <li>L’aire basale varie entre 19,25 m²/ha (Parcelle de Paeoua) et 74,81 m²/ha (Parcelle de

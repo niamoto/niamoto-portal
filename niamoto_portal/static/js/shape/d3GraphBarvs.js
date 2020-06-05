@@ -1,6 +1,6 @@
 import * as d3GraphBarv from '../d3GraphBarv'
 import * as d3GraphBarvMulti from '../d3GraphBarvMulti'
-import color from '../../css/source/nocompile/color_js.scss'
+import color from '../../css/source/partials/_color_js.scss'
 
 export function initGraphBarvs(data) {
   function initMax(maxValue, initMaxValue) {

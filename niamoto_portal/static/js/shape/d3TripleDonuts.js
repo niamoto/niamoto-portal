@@ -1,5 +1,5 @@
 import * as d3GraphDonut from '../d3TripleDonuts'
-import color from '../../css/source/nocompile/color_js.scss'
+import color from '../../css/source/partials/_color_js.scss'
 
 
 export function initGraphDonuts(data) {

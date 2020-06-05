@@ -1,23 +1,9 @@
-@import '../../../../../../niamoto_portal/static/css/source/color';
-
-
-body {
-  padding: 50px 0 0 0;
-}
+@import '../../../../../../niamoto_portal/static/css/source/partials/color';
+@import "../../../../../../niamoto_portal/static/css/source/partials/graph";
+@import "../../../../../../niamoto_portal/static/css/source/partials/style";
 
 .card .mapCaledonie {
   padding: 0;
-}
-
-.card .mapCaledonie .graph {
-  height: 100%;
-}
-
-
-
-.center {
-  top: .5em;
-  right: .5em;
 }
 
 .ol-scale-line {
@@ -25,5 +11,5 @@ body {
 }
 
 
-@import "../../../../../../niamoto_portal/static/css/source/graph";
-@import "../../../../../../niamoto_portal/static/css/source/gauge";
+
+@import "../../../../../../niamoto_portal/static/css/source/partials/gauge";

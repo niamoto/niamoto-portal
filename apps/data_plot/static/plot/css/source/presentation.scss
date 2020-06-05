@@ -1,41 +1,19 @@
-@import '../../../../../../niamoto_portal/static/css/source/color';
-
-body {
-    padding: 50px 0 0 0;
-}
-
-section {
-    text-align: justify;
-}
-
-.image {
-    margin: 10px;
-    border-radius: 5px;
-    margin-bottom: 50px;
-}
-
-.image_center {
-    display: block;
-    margin-left: auto;
-    margin-right: auto
-}
+@import '../../../../../../niamoto_portal/static/css/source/partials/color';
+@import "../../../../../../niamoto_portal/static/css/source/partials/style";
 
 #learnPlot {
     #tree1 {
         width: 350px;
-        float: left;
-        @extend .image
+        @extend .image_float_top_left;
     }
 
     #tree2 {
         width: 400px;
-        float: right;
-        @extend .image
+        @extend .image_float_top_right;
     }
 
     #image {
         width: 600px;
-        @extend .image;
         @extend .image_center;
     }
 
@@ -50,11 +28,4 @@ section {
     #list_inventory {
         margin-left: 350px;
     }
-}
-
-
-
-
-.next {
-    clear: both;
 }

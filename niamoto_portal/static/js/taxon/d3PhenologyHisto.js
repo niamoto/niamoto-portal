@@ -1,6 +1,6 @@
 import * as d3 from 'd3'
 import * as d3Legend from 'd3-svg-legend'
-import color from '../../css/source/nocompile/color_js.scss'
+import color from '../../css/source/partials/_color_js.scss'
 
 export function initPhenologyHisto() {
   const month = [

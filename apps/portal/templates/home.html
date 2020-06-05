@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends '_base.html' %}
 {% load staticfiles %}
 {% block styles %}
 {{block.super}}
@@ -7,8 +7,8 @@
 
 {% block body %}
 <div data-spy="scroll" data-target="#navbar-example2" data-offset="0">
-  <section id="accueil" class="bgimg-accueil">
-    <div class="text_accueil text-white text-contour">
+  <section id="home" class="bgimg-home">
+    <div class="text_home text-white text-contour">
       <div class="container">
         <div class="row">
           <div class="col-xs-12 col-md-12">
@@ -19,12 +19,12 @@
       <div class="container">
         <div class="row">
           <div class="col-xs-12 col-md-12">
-            <h1 class="display-4">Portail des forêts de la Province Nord</h1>
+            <h1 class="display-4">Portail des forêts de la Nouvelle Calédonie </hr> en Province Nord</h1>
           </div>
         </div>
       </div>
   </section>
-  <section id="Intro">
+  <section id="introduction">
     <div class="container">
       <div class="row">
         <div class="col-lg-12 mx-auto">
@@ -33,10 +33,12 @@
             est dédié à la forêt de la Nouvelle-Calédonie dont la composition, la structure et la distribution sont
             uniques au monde. Plus spécifiquement, il se focalise sur la forêt de la province Nord et représente le
             fruit d’un partenariat établi depuis près de 10 ans entre une collectivité, <span><a
-                href="https://www.province-nord.nc/"><u>la province Nord de Nouvelle-Calédonie</u></a></span> garant de
-            son environnement et une unité mixte de recherche, l’<span><a
-                href="http://amap.cirad.fr/fr/index.php"><u>UMR-Amap</u></a></span> (Cirad, Ird, Inrae, CNRS, et
-            Université de Montpellier) associée à l’<span><a href="http://www.iac.nc"><u>IAC</u></a></span>, dévouée à
+                href="https://www.province-nord.nc/" target="_blank"><u>la province Nord de
+                  Nouvelle-Calédonie</u></a></span> garant de
+            son environnement et une unité mixte de recherche, l’<span><a href="http://amap.cirad.fr/fr/index.php"
+                target="_blank"><u>UMR-Amap</u></a></span> (Cirad, Ird, Inrae, CNRS, et
+            Université de Montpellier) associée à l’<span><a href="http://www.iac.nc"
+                target="_blank"><u>IAC</u></a></span>, dévouée à
             l’étude de la biodiversité végétale.</p>
           <p>Au travers de cette plateforme, nous vous invitons à parcourir ces forêts exceptionnelles selon trois
             niveaux de leur organisation :</p>
@@ -60,7 +62,7 @@
       </div>
     </div>
   </section>
-  <section id="projet">
+  <section id="project">
     <div class="container">
       <div class="row">
         <div class="col-lg-12 mx-auto">
@@ -79,7 +81,7 @@
         </div>
       </div>
   </section>
-  <section id="objectif">
+  <section id="objective">
     <div class="container">
       <div class="row">
         <div class="col-lg-12 mx-auto">
@@ -101,55 +103,57 @@
   <section id="context">
     <div class="container">
       <div class="row">
-        <div class="col-lg-12 mx-auto context">
-          <h2 style="text-align: justify;">Le contexte</h2>
-          <div class="row">
-            <p><img id="map_pacific" class="col rounded" src="{% static 'img/carte_pacifique.png' %}"
-                alt="carte du pacifique" />
-            </p>
-            <p class="col">La Nouvelle-Calédonie est une collectivité française d'outre-mer. Il s'agit d'un archipel
-              constitué de près de 1900 îles et îlots répartis dans l'océan Pacifique, à une latitude inter-tropicale
-              (19-22°S), un peu au nord du Tropique du Capricorne. Sa superficie est de 18 576 km². Cet archipel est
-              peuplé de près de 271 000 habitants. L'archipel néo-calédonien comprend une île principale, la Grande
-              Terre d’une superficie d'environ 16 000 km² divisée administrativement en province Nord et province Sud. A
-              l’est les îles loyautés (Ouvéa, Lifou, Tiga et Maré) dont la superficie cumulée approche les 2 000 km² et
-              qui constitue la province des îles.
-            </p>
+        <div class="col-lg-12 mx-auto">
+          <h2>Le contexte</h2>
 
-            <p>La Nouvelle-Calédonie est un archipel ancien issue de la dislocation du super-continent Gondwana dans sa
-              partie orientale qui s’est détachée de l’actuelle Australie, il y a environ 100 millions d’années. La
-              dérive de continents et les épisodes tectoniques sous-marins ont entraîné ce bout de terre vers l’est
-              s’enfonçant progressivement avec la plaque Pacifique sous le manteau terrestre, jusqu’à une profondeur
-              gigantesque de 70 kms estimée par les géologues. Durant ce processus, la Grande-Terre a été recouverte, en
-              grande partie, par une nappe ophiolitique constituée des roches ultramafiques dont les sols dérivés
-              recouvrent aujourd’hui environ un tiers de la Grande Terre. Ce n’est que lors de sa ré-émersion, il y a
-              environ 37 millions d’années, que la flore a pu coloniser progressivement l’île par des événements de
-              dispersion à longue distance et à courte distance via l’existence d’archipels tremplins. Les mécanismes
-              géologiques et la datation du soulèvement des calcaires coralliens qui constituent le substrat majeur des
-              îles Loyautés ne sont pas encore bien connus. Toutefois la flore contemporaine de ces îles, qui présente
-              des spécificités propres au substrat calcaire, serait d’origine beaucoup plus récente que celle de la
-              Grande-Terre, entre 3 et 10 millions d’années.</p>
-            <p></p>
-            <p>Cette histoire ancienne et cet isolement ont contribué à façonner une flore originale qui s’est déployée
-              sur l’ensemble du territoire, épousant une grande diversité de conditions environnementales, constituée
-              par la combinaison d’un gradient d’altitude (0-1629 m), d’un gradient de pluviométrie (800-4800
-              mm<sup>-1</sup>), d’un relief escarpé, d’une diversité de substrat (ultramafique, calcaires,
-              volcano-sédimentaire) en encore d’un effet de Foehn prononcé qui scinde la Grande-Terre en deux, avec la
-              côte ouest plus chaude et sèche que la côte est. Aujourd’hui, cette flore unique au monde est fortement
-              menacée par les activités humaines telles que l’industrie nickélifère, les feux de brousse, l’exploitation
-              forestière, l’urbanisation et les invasions biologiques.</p>
-            <p></p>
-            <p>L’association d’une forte originalité floristique et d’un niveau élevé de menaces pesant sur la flore,
-              classe la Nouvelle-Calédonie parmi l’un des <span><a
-                  href="https://www.cepf.net/our-work/biodiversity-hotspots/new-caledonia"><u>36 points chauds de la
-                    biodiversité mondiale</u></a></span> et en fait une région prioritaire pour la conservation.</p>
-          </div>
+          <figure>
+            <img id="map_pacific" src="{% static 'img/carte_pacifique.png' %}" alt="carte du pacifique" />
+          </figure>
+          <p>La Nouvelle-Calédonie est une collectivité française d'outre-mer. Il s'agit d'un archipel
+            constitué de près de 1900 îles et îlots répartis dans l'océan Pacifique, à une latitude inter-tropicale
+            (19-22°S), un peu au nord du Tropique du Capricorne. Sa superficie est de 18 576 km². Cet archipel est
+            peuplé de près de 271 000 habitants. L'archipel néo-calédonien comprend une île principale, la Grande
+            Terre d’une superficie d'environ 16 000 km² divisée administrativement en province Nord et province Sud. A
+            l’est les îles loyautés (Ouvéa, Lifou, Tiga et Maré) dont la superficie cumulée approche les 2 000 km² et
+            qui constitue la province des îles.
+          </p>
+
+          <p class="next">La Nouvelle-Calédonie est un archipel ancien issue de la dislocation du super-continent
+            Gondwana dans sa
+            partie orientale qui s’est détachée de l’actuelle Australie, il y a environ 100 millions d’années. La
+            dérive de continents et les épisodes tectoniques sous-marins ont entraîné ce bout de terre vers l’est
+            s’enfonçant progressivement avec la plaque Pacifique sous le manteau terrestre, jusqu’à une profondeur
+            gigantesque de 70 kms estimée par les géologues. Durant ce processus, la Grande-Terre a été recouverte, en
+            grande partie, par une nappe ophiolitique constituée des roches ultramafiques dont les sols dérivés
+            recouvrent aujourd’hui environ un tiers de la Grande Terre. Ce n’est que lors de sa ré-émersion, il y a
+            environ 37 millions d’années, que la flore a pu coloniser progressivement l’île par des événements de
+            dispersion à longue distance et à courte distance via l’existence d’archipels tremplins. Les mécanismes
+            géologiques et la datation du soulèvement des calcaires coralliens qui constituent le substrat majeur des
+            îles Loyautés ne sont pas encore bien connus. Toutefois la flore contemporaine de ces îles, qui présente
+            des spécificités propres au substrat calcaire, serait d’origine beaucoup plus récente que celle de la
+            Grande-Terre, entre 3 et 10 millions d’années.</p>
+
+          <p>Cette histoire ancienne et cet isolement ont contribué à façonner une flore originale qui s’est déployée
+            sur l’ensemble du territoire, épousant une grande diversité de conditions environnementales, constituée
+            par la combinaison d’un gradient d’altitude (0-1629 m), d’un gradient de pluviométrie (800-4800
+            mm<sup>-1</sup>), d’un relief escarpé, d’une diversité de substrat (ultramafique, calcaires,
+            volcano-sédimentaire) en encore d’un effet de Foehn prononcé qui scinde la Grande-Terre en deux, avec la
+            côte ouest plus chaude et sèche que la côte est. Aujourd’hui, cette flore unique au monde est fortement
+            menacée par les activités humaines telles que l’industrie nickélifère, les feux de brousse, l’exploitation
+            forestière, l’urbanisation et les invasions biologiques.</p>
+
+          <p>L’association d’une forte originalité floristique et d’un niveau élevé de menaces pesant sur la flore,
+            classe la Nouvelle-Calédonie parmi l’un des <span><a
+                href="https://www.cepf.net/our-work/biodiversity-hotspots/new-caledonia" target="_blank"><u>36 points
+                  chauds de la
+                  biodiversité mondiale</u></a></span> et en fait une région prioritaire pour la conservation.</p>
         </div>
       </div>
   </section>
-  <section id="flore">
+  <section id="flora">
     <div class="container">
       <div class="row">
+
         <div class="col-lg-12 mx-auto">
           <h2>La flore</h2>
           <p>La flore indigène de Nouvelle-Calédonie est un réservoir unique de la biodiversité mondiale. Elle abrite
@@ -159,9 +163,9 @@
                 href="http://publish.plantnet-project.org/project/florical_fr"><u>Florical</u></a></span>, juin 2020).
           </p>
           <div id="table" class="row">
-            <div class="mx-auto d-block">
+            <figure class="mx-auto d-block">
               <img src="{% static 'img/home_tableau.png' %}" alt="">
-            </div>
+            </figure>
           </div>
           <p>Au niveau générique, cette flore a une forte affinité avec la flore australienne (&gt; 25 %),
             Indo-Malaisienne (&gt; 13 %) ou encore la flore de Nouvelle Guinée (17 %). Néanmoins, elle présente de

@@ -1,44 +1,16 @@
-@import "../../../../../../niamoto_portal/static/css/source/color";
-
-
-body {
-  padding: 50px 0 0 0;
-}
-
-section {
-  text-align: justify;
-}
-
-.image {
-  margin: 10px;
-  border-radius: 5px;
-  margin-bottom: 50px;
-}
-
-.image_center {
-  display: block;
-  margin-left: auto;
-  margin-right: auto
-}
-
-.next {
-  clear: both;
-}
+@import "../../../../../../niamoto_portal/static/css/source/partials/color";
+@import "../../../../../../niamoto_portal/static/css/source/partials/style";
 
 figure {
 
-
   img {
-    float: left;
-    @extend .image;
-    margin-right: 20px;
+    @extend .image_float_top_left;
   }
 }
 
 #forestPN {
 
   .bullet {
-
     clear: both;
   }
 

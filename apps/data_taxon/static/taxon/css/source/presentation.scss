@@ -1,71 +1,25 @@
-@import '../../../../../../niamoto_portal/static/css/source/color';
-
-
-body {
-  padding: 50px 0 0 0;
-}
-
-section {
-  text-align: justify;
-}
-
-.image {
-  margin: 10px;
-  border-radius: 5px;
-  margin-bottom: 50px;
-}
-
-.image_center {
-  display: block;
-  margin-left: auto;
-  margin-right: auto
-}
-
-
-
-
+@import '../../../../../../niamoto_portal/static/css/source/partials/color';
+@import "../../../../../../niamoto_portal/static/css/source/partials/style";
 
 #preambule {
-  .text {
-    -webkit-column-count: 2;
-    -moz-column-count: 2;
-    column-count: 2;
-    -webkit-column-gap: 3em;
-    -moz-column-gap: 3em;
-    column-gap: 3em;
-  }
-
   #tree {
-    width: 300px;
-    float: left;
-    @extend .image;
-    margin: 0 20px;
+    height: 300px;
+    @extend .image_float_top_left;
   }
 }
 
 #learnTaxon {
-  .text {
-    -webkit-column-count: 3;
-    -moz-column-count: 3;
-    column-count: 3;
-    -webkit-column-gap: 3em;
-    -moz-column-gap: 3em;
-    column-gap: 3em;
-    margin-bottom: 50px;
-  }
-
-  figure {
-    text-align: center;
-  }
-
   #tree_mesure {
-    width: 300px;
-    @extend .image;
+    width: 20%;
+    @extend .image_float_top_left;
+    margin-bottom: 0;
   }
 
   #density {
-    border-radius: 5px;
-    margin-bottom: 50px;
+    clear: both;
+    width: 20%;
+    @extend .image_float_top_left;
+    margin-top: 2px;
   }
 
   thead {
@@ -86,22 +40,12 @@ section {
 
 #taxon {
 
-  .bullet {
-    margin-top: 350px;
-    -webkit-column-count: 3;
-    -moz-column-count: 3;
-    column-count: 3;
-    -webkit-column-gap: 3em;
-    -moz-column-gap: 3em;
-    column-gap: 3em;
-
+  #graph {
+    @extend .image_float_top_left;
+    width: 33%;
   }
 
-
-
-  #graph {
-    @extend .image;
-    float: left;
-    margin-bottom: 0;
+  .bullet {
+    clear: both;
   }
 }

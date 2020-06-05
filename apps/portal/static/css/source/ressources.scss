@@ -1,8 +1,5 @@
-@import "../../../../../niamoto_portal/static/css/source/color";
-
-body {
-  padding: 50px 0 0 0;
-}
+@import "../../../../../niamoto_portal/static/css/source/partials/color";
+@import "../../../../../niamoto_portal/static/css/source/partials/style";
 
 .container-fluid {
   width: 90%;
@@ -271,7 +268,6 @@ div.tab-content section {
 }
 
 section#production {
-  padding-top: 20px;
 
   menu {
     padding: 0;

@@ -1,6 +1,6 @@
 import * as d3GraphBarh from '../d3GraphBarh'
 import * as d3GraphPyramidh from '../d3GraphPyramidh'
-import color from '../../css/source/nocompile/color_js.scss'
+import color from '../../css/source/partials/_color_js.scss'
 
 export function initGraphBarhs(data) {
   function initMax(maxValue, initMaxValue) {

@@ -1,9 +1,6 @@
-@import "../../../../../../niamoto_portal/static/css/source/color";
-@import "../../../../../../niamoto_portal/static/css/source/graph";
-
-body {
-  padding: 50px 0 0 0;
-}
+@import "../../../../../../niamoto_portal/static/css/source/partials/color";
+@import "../../../../../../niamoto_portal/static/css/source/partials/graph";
+@import "../../../../../../niamoto_portal/static/css/source/partials/style";
 
 .card .mapCaledonie,
 .card .mapProvince {
@@ -79,5 +76,5 @@ body {
   background-color: grey;
 }
 
-@import "../../../../../../niamoto_portal/static/css/source/gauge";
-@import "../../../../../../niamoto_portal/static/css/source/radarChart";
+@import "../../../../../../niamoto_portal/static/css/source/partials/gauge";
+@import "../../../../../../niamoto_portal/static/css/source/partials/radarChart";
