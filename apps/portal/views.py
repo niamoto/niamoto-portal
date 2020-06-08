@@ -15,6 +15,10 @@ def methodologie(request):
     return render(request, 'methodologie.html', {})
 
 
+def maintenance(request):
+    return render(request, 'maintenance.html', {})
+
+
 # def ressources(request):
 #     return render(request, 'ressources.html', {})
 
