@@ -1,10 +1,23 @@
 {% extends '_base.html' %}
-{% block body %}
-<section id="PageUnkown">
-  <div class="container">
-    <p>
-    <h1>Cette page n'exsite pas.</h1>
-    </p>
-</section>
+{% load staticfiles %}
+{% block styles %}
+{{block.super}}
+<link rel="stylesheet" type="text/css" href="{% static 'css/404.min.css' %}" />
+{% endblock %}
+{% block page_header %}
+<div class="container p-2 display-4">
+  Erreur
 </div>
+{% endblock page_header%}
+{% block body %}
+<section id="error">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 mx-auto">
+        <h2>Cette page n'existe pas.</h2>
+      </div>
+    </div>
+  </div>
+</section>
+
 {% endblock body %}

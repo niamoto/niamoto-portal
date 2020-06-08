@@ -1,0 +1,228 @@
+body {
+  padding: 50px 0 0 0;
+}
+
+section {
+  text-align: justify;
+  padding-top: 50px;
+}
+
+figure {
+  margin: 0;
+}
+
+h2 {
+  margin-bottom: 1rem;
+}
+
+p a {
+  font-size: 1em;
+  color: #688BA5;
+}
+
+p a :hover {
+  color: #193348;
+}
+
+.row {
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+
+.image, .image_center, .image_float_top_left, .image_float_top_right {
+  margin: 20px;
+  border-radius: 5px;
+  padding: 0;
+}
+
+.image_center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.image_float_top_left {
+  float: left;
+  margin-left: 0;
+  margin-top: 0;
+}
+
+.image_float_top_right {
+  float: right;
+  margin-right: 0;
+  margin-top: 0;
+}
+
+.next {
+  clear: both;
+}
+
+#preloader {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  z-index: 10;
+}
+
+.bg-bandeau-default {
+  background: -webkit-gradient(linear, left top, left bottom, from(rgba(34, 34, 34, 0.7)), color-stop(70%), to(rgba(200, 200, 200, 0))) !important;
+  background: linear-gradient(rgba(34, 34, 34, 0.7), 70%, rgba(200, 200, 200, 0)) !important;
+}
+
+.navbar-light .navbar-nav .nav-link {
+  color: #000;
+}
+
+.btco-hover-menu a,
+.navbar > li > a {
+  text-transform: capitalize;
+  padding: 10px 15px;
+}
+
+.btco-hover-menu .active a,
+.btco-hover-menu .active a:focus,
+.btco-hover-menu .active a:hover,
+.btco-hover-menu li a:hover,
+.btco-hover-menu li a:focus,
+.navbar > .show > a,
+.navbar > .show > a:focus,
+.navbar > .show > a:hover {
+  color: #000;
+  background: transparent;
+  outline: 0;
+}
+
+/*submenu style start from here*/
+.dropdown-menu {
+  padding: 5px 0 0 0px;
+  margin: 0 0 0;
+  border: 0px solid transition !important;
+  border: 0px solid rgba(0, 0, 0, 0.15);
+  border-radius: 0 3px 7px 7px;
+  -webkit-box-shadow: none !important;
+  box-shadow: 0 3px 3px grey !important;
+}
+
+.dropdown-menu .dropdown-item::first-letter,
+.nav-item::first-letter {
+  text-transform: capitalize;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+  text-shadow: #005522 1px 1px, #005522 -1px 1px, #005522 -1px -1px, #005522 1px -1px;
+  text-shadow: 0px 0px 2px #646464;
+  color: white;
+}
+
+.btco-hover-menu .collapse .dropdown:hover > a {
+  text-shadow: none;
+  color: black;
+}
+
+/*first level*/
+.btco-hover-menu .collapse ul > li:hover > a {
+  background: #fbfbfb;
+}
+
+.btco-hover-menu .collapse ul ul > li:hover > a,
+.navbar .show .dropdown-menu > li > a:focus,
+.navbar .show .dropdown-menu > li > a:hover {
+  background: #eee;
+}
+
+.btco-hover-menu .collapse ul ul ul,
+.btco-hover-menu .collapse ul ul ul.dropdown-menu {
+  background: #fbfbfb;
+}
+
+/*Drop-down menu work on hover*/
+.btco-hover-menu {
+  background: none;
+  margin: 0;
+  padding: 0;
+  min-height: 20px;
+}
+
+@media only screen and (max-width: 991px) {
+  .btco-hover-menu .show > .dropdown-toggle::after {
+    -webkit-transform: rotate(-90deg);
+            transform: rotate(-90deg);
+  }
+}
+
+@media only screen and (min-width: 991px) {
+  .btco-hover-menu .collapse ul li {
+    position: relative;
+  }
+  .btco-hover-menu .collapse ul li:hover > ul {
+    display: block;
+  }
+  .btco-hover-menu .collapse ul ul {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 250px;
+    display: none;
+  }
+  /*******/
+  .btco-hover-menu .collapse ul ul li {
+    position: relative;
+  }
+  .btco-hover-menu .collapse ul ul li:hover > ul {
+    display: block;
+  }
+  .btco-hover-menu .collapse ul ul ul {
+    position: absolute;
+    top: 0;
+    left: 100%;
+    min-width: 250px;
+    display: none;
+  }
+  /*******/
+  .btco-hover-menu .collapse ul ul ul li {
+    position: relative;
+  }
+  .btco-hover-menu .collapse ul ul ul li:hover ul {
+    display: block;
+  }
+  .btco-hover-menu .collapse ul ul ul ul {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    min-width: 250px;
+    display: none;
+    z-index: 1;
+  }
+}
+
+.w3-animate-top {
+  -webkit-animation: animatetop 0.4s;
+          animation: animatetop 0.4s;
+}
+
+@-webkit-keyframes animatetop {
+  from {
+    top: -300px;
+    opacity: 0;
+  }
+  to {
+    top: 0;
+    opacity: 1;
+  }
+}
+
+@keyframes animatetop {
+  from {
+    top: -300px;
+    opacity: 0;
+  }
+  to {
+    top: 0;
+    opacity: 1;
+  }
+}
+
+#error {
+  height: 600px;
+}
+/*# sourceMappingURL=404.css.map */
