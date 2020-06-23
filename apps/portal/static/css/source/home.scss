@@ -44,9 +44,10 @@ body {
   }
 }
 
-body {
-  background: url("../img/plant_background.png");
-}
+// body {
+  //   background: url("../img/plant_background.png") left repeat-y, url("../img/plant_background.png") right repeat-y;
+  //   background-size: 21%, 21%;
+  // }
 
 .row {
   background-color: white;
