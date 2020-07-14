@@ -191,11 +191,11 @@ function buildShapeList() {
       $('#shape_select').selectpicker({
         noneSelectedText: 'Selectionnez une emprise'
       })
-      $('#shape_select').selectpicker('val', null)
       $('#shape_select').change(function () {
         preloader.showPreloader()
         updateData(shapes[this.value])
       })
+      $('#shape_select').selectpicker('val', 1)
       preloader.hidePreloader()
     }
   })
