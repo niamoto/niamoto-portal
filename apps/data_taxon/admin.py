@@ -16,6 +16,6 @@ class GraphAdmin(admin.ModelAdmin):
 @admin.register(Taxon)
 class TaxonAdmin(admin.ModelAdmin):
     list_display = ('full_name', 'rank_name', 'parent',
-                    'id_endemia', 'id_rang', 'occ_count', 'plot_count')
+                    'id_endemia', 'id_rang')
     list_editable = ('rank_name', 'parent',
-                     'id_endemia', 'id_rang', 'occ_count', 'plot_count')
+                     'id_endemia', 'id_rang')

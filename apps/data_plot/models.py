@@ -40,7 +40,7 @@ class Frequency(models.Model):
     plot = models.ForeignKey(
         Plot, related_name='frequencies', on_delete=models.DO_NOTHING)
     class_object = models.CharField(max_length=30)
-    class_name = models.CharField(max_length=30)
+    class_name = models.CharField(max_length=100)
     class_value = models.FloatField()
     param1_str = models.CharField(max_length=30, null=True, blank=True)
     param2_str = models.CharField(max_length=30, null=True, blank=True)
