@@ -1,7 +1,7 @@
 import * as d3Gauge from '../D3gauge'
 
 export function initGauges(data) {
-  var fragmentationMax = 10
+  var fragmentationMax = 900
 
   function initMax(maxValue, initMaxValue) {
     if (maxValue === 0) {
