@@ -114,33 +114,3 @@ class Graph(models.Model):
 
     def __str__(self):
         return self.label
-
-
-class Phenology(models.Model):
-    """Model  Phenology taxon
-
-    Arguments:
-        models {Models -- [description]
-
-    Returns:
-        [type] -- [description]
-    """
-    taxon = models.ForeignKey(
-        Taxon, related_name='phenology', on_delete=models.CASCADE)
-    phenology = models.CharField(max_length=15)
-    january = models.IntegerField(null=True, blank=True)
-    february = models.IntegerField(null=True, blank=True)
-    march = models.IntegerField(null=True, blank=True)
-    april = models.IntegerField(null=True, blank=True)
-    may = models.IntegerField(null=True, blank=True)
-    june = models.IntegerField(null=True, blank=True)
-    july = models.IntegerField(null=True, blank=True)
-    august = models.IntegerField(null=True, blank=True)
-    september = models.IntegerField(null=True, blank=True)
-    october = models.IntegerField(null=True, blank=True)
-    november = models.IntegerField(null=True, blank=True)
-    december = models.IntegerField(null=True, blank=True)
-    year = models.IntegerField(null=True, blank=True)
-
-    def __str__(self):
-        return str(self.taxon) + ' ' + self.phenology

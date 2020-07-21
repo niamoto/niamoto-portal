@@ -119,20 +119,7 @@ class taxonFrequencySerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class taxonPhenology(serializers.ModelSerializer):
-    """to output phenology
-
-    Arguments:
-        serializers {[type]} -- [description]
-    """
-
-    class Meta:
-        model = mdlTaxon.Phenology
-
-        fields = '__all__'
-
-
-class taxonsSerializer(serializers.ModelSerializer):
+class TaxonsSerializer(serializers.ModelSerializer):
     """to output all the taxons
 
     Arguments:
@@ -148,7 +135,7 @@ class taxonsSerializer(serializers.ModelSerializer):
         fields = ('id', 'rank_name', 'parent_id')
 
 
-class taxonsTreeSerializer(serializers.ModelSerializer):
+class TaxonsTreeSerializer(serializers.ModelSerializer):
     """to output all the taxons
 
     Arguments:
@@ -163,14 +150,13 @@ class taxonsTreeSerializer(serializers.ModelSerializer):
         fields = ('id', 'rank_name', 'children')
 
 
-class taxonSerializer(serializers.ModelSerializer):
+class TaxonSerializer(serializers.ModelSerializer):
     """to output taxon properties
 
     Arguments:
         serializers {[type]} -- [description]
     """
     frequencies = taxonFrequencySerializer(many=True, read_only=True)
-    phenology = taxonPhenology(many=True, read_only=True)
 
     class Meta:
         model = mdlTaxon.Taxon

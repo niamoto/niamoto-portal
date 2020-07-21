@@ -126,13 +126,13 @@ class taxonsViewSet(viewsets.ReadOnlyModelViewSet):
     @method_decorator(cache_page(60*60*24*300))
     def list(self, request):
         queryset = mdlTaxon.Taxon.objects.all().order_by('rank_name')
-        serializer = serializers.taxonsSerializer(queryset, many=True)
+        serializer = serializers.TaxonsSerializer(queryset, many=True)
         return Response(serializer.data)
 
     def retrieve(self, request, pk=None):
         taxon_queryset = mdlTaxon.Taxon.objects.all()
         taxon = get_object_or_404(taxon_queryset, pk=pk)
-        taxon_data = serializers.taxonSerializer(taxon).data
+        taxon_data = serializers.TaxonSerializer(taxon).data
 
         return Response(taxon_data)
 
@@ -149,5 +149,5 @@ class taxonsTreeViewSet(viewsets.ReadOnlyModelViewSet):
     def list(self, request):
         queryset = mdlTaxon.Taxon.objects.filter(
             id_rang=10).order_by('rank_name')
-        serializer = serializers.taxonsTreeSerializer(queryset, many=True)
+        serializer = serializers.TaxonsTreeSerializer(queryset, many=True)
         return Response(serializer.data)
