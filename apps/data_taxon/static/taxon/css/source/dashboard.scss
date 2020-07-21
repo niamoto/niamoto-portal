@@ -1,5 +1,6 @@
-@import '../../../../../../niamoto_portal/static/css/source/partials/color';
+@import "../../../../../../niamoto_portal/static/css/source/partials/color";
 @import "../../../../../../niamoto_portal/static/css/source/partials/style";
+@import "../../../../../../niamoto_portal/static/css/source/partials/graph";
 
 #left_panel {
     height: 780px;
@@ -9,7 +10,6 @@
     position: static;
 }
 
-@import "../../../../../../niamoto_portal/static/css/source/partials/graph";
 @import "../../../../../../niamoto_portal/static/css/source/partials/gauge";
 @import 'partials/treeview';
 @import 'partials/bootstrap-treeview';

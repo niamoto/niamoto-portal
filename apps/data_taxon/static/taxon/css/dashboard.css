@@ -222,14 +222,6 @@ p a :hover {
   }
 }
 
-#left_panel {
-  height: 780px;
-}
-
-#left_panel_placeholder {
-  position: static;
-}
-
 .graph .tick line, .graph .domaine, .graph .xGrid .tick line,
 .graph .xGridRight .tick line,
 .graph .xGridLeft .tick line,
@@ -371,6 +363,14 @@ p a :hover {
   stroke: #000;
   stroke-width: 1;
   stroke-opacity: 0.5;
+}
+
+#left_panel {
+  height: 780px;
+}
+
+#left_panel_placeholder {
+  position: static;
 }
 
 .land {

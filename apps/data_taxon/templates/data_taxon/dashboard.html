@@ -35,49 +35,70 @@
       </div>
     </div>
     <div class="col-sm-10 col-md-10 ">
-      <div class="card-deck">
-        <div id="Infos_gene" class="card">
-          <div class="card-header">Informations générales</div>
-          <div id="general_informations" class="card-body">
-            <h5 class="card-title"><span id="tax_full_name"></span></h5>
-            <div class="card-text">Rang taxonomique:<span id="tax_rank_value"></span></div>
-            <div class="card-text">Fiche endemia.nc: <a id="tax_endemia_link_value"></a></div>
-          </div>
-        </div>
+      <div class="card-deck p-4">
         {% if graph_list %}
 
         {% for graph in graph_list %}
+        {% if graph.model == 'specifications'%}
+        <div id="{{graph.name}}" class="s-{{graph.height}} p-3">
+          <div class="card">
+            <div class="card-header">{{graph.title|capfirst}}</div>
 
-        <div id="{{graph.name}}" class="card">
-          <div class="card-header"> {{graph.title|capfirst}}
-
-          </div>
-          <div class="card-body">
-            <div id="{{graph.model}}" class="d3_panel graph"></div>
-            <div id="{{graph.model}}Legend" class="d3_panel"></div>
+            <div id="general_informations" class="card-body {{graph.model}}">
+              <h5 class="card-title"><span id="tax_full_name"></span></h5>
+              <div class="card-text"><span id="tax_rank"></span></div>
+              <div class="card-text"><a id="tax_endemia_link_value"></a></div>
+            </div>
           </div>
         </div>
-        {% endfor %}
         {% else %}
+        <div id="{{graph.name}}" class="s-{{graph.height}} p-3">
+          <div class="card card-{{graph.model}}">
+            <div class="card-header">{{graph.title|capfirst}}</div>
+            <div class="card-body {{graph.model}} d-flex flex-wrap">
+              {% if graph.legend_locate == 'nolegend'%}
+              <div id="{{graph.model}}" class="d3_panel graph">
+              </div>
+              {% else %}
+              <!-- invert order graph and legend -->
+              {% if graph.legend_locate == 'left' or  graph.legend_locate == 'top'%}
+              <div id="{{graph.model}}Legend" class="d3_panel legend-{{graph.legend_locate}}">
 
-        <p>Aucun graphe.</p>
+              </div>
+              <div id="{{graph.model}}" class="d3_panel graph graph-legend-{{graph.legend_locate}}">
+              </div>
+              {% else %}
+              <div id="{{graph.model}}" class="d3_panel graph graph-legend-{{graph.legend_locate}}">
+              </div>
+              <div id="{{graph.model}}Legend" class="d3_panel legend-{{graph.legend_locate}}">
+
+              </div>
+              {% endif %}
+              {% endif %}
+            </div>
+
+
+          </div>
+        </div>
         {% endif %}
 
+        {% endfor %}
+        {% else %}
+        <p>Aucun graphe.</p>
+        {% endif %}
       </div>
-    </div>
-  </div>
-</div>
-{% endblock body %}
 
-{% block scripts %}
 
-{{block.super}}
+      {% endblock body %}
+
+      {% block scripts %}
+      {{ block.super }}
 
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-treeview/1.2.0/bootstrap-treeview.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.9.7/d3.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.25.6/d3-legend.min.js"></script>
-<script src="{% static 'taxon/js/main.min.js' %}"></script>
-{% endblock scripts %}
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-treeview/1.2.0/bootstrap-treeview.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.9.7/d3.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.25.6/d3-legend.min.js"></script>
+      <script src="{% static 'taxon/js/main.min.js' %}"></script>
+      {% endblock scripts %}

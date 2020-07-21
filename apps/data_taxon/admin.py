@@ -7,8 +7,10 @@ from .models import Taxon, Frequency, Graph
 
 @admin.register(Graph)
 class GraphAdmin(admin.ModelAdmin):
-    list_display = ('label', 'show', 'sort', 'title', 'model', 'height')
-    list_editable = ('show', 'sort', 'title', 'model', 'height')
+    list_display = ('label', 'show', 'sort', 'title', 'model',
+                    'height', 'legend_locate', 'legend_type')
+    list_editable = ('show', 'sort', 'title', 'model',
+                     'height', 'legend_locate', 'legend_type')
 
 
 @admin.register(Taxon)
