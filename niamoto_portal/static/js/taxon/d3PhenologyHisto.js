@@ -208,7 +208,6 @@ export function initPhenologyHisto() {
       }
     }
 
-    console.log(data);
 
     // Fleur
     var rects = g.selectAll('.bar1').data(data)
