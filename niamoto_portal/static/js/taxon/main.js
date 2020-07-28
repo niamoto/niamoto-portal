@@ -2,6 +2,7 @@ import * as restUrls from '../restUrls'
 import * as d3Gauges from './d3Gauges'
 import * as d3PhenologyHisto from './d3PhenologyHisto.js'
 import * as d3GraphBarh from './d3GraphBarhs'
+import * as d3GraphOneBarv from './d3GraphOneBarv'
 import * as preloader from '../preloader'
 import {
   getTaxaTree
@@ -85,6 +86,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   d3PhenologyHisto.initPhenologyHisto()
   d3GraphBarh.init()
+  d3GraphOneBarv.init()
   // d3_map.initMap();
   // d3_families_donut.initFamiliesDonut("# families_donut ");
   // // d3_species_donut.initSpeciesDonut("#species_donut");
