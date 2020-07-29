@@ -2,6 +2,9 @@
 
 import * as d3 from 'd3'
 import * as d3Legend from 'd3-svg-legend'
+import {
+    stratify
+} from 'd3'
 
 /**
  * Represents a graph one bar.
@@ -34,7 +37,8 @@ export class GraphBarhSimple {
         yDomainShow: 1,
         yTextDomain: 0,
         yTextColorIn: '#fff',
-        yTextColorOut: '#111'
+        yTextColorOut: '#111',
+        tooltip: 0
     }
     constructor(configuration) {
         // default configuration settings
@@ -149,6 +153,10 @@ export class GraphBarhSimple {
             .call(legendColor)
     }
 
+
+
+
+
     /**
      * update graph with new value
      * @param {objet} response - json flux
@@ -156,14 +164,86 @@ export class GraphBarhSimple {
 
     update(response) {
 
+        /**
+         * calculate nomber pixel 
+         * @param {string} text 
+         */
+
+        function pixelLength(text) {
+            var canvas = document.createElement('canvas');
+            var ctx = canvas.getContext("2d");
+            ctx.font = "13px Arial";
+            return ctx.measureText(text).width;
+        }
+        /**
+         * return if text in rect 
+         * @param {string} text 
+         */
+        function textRectIn(text, value, maxValue) {
+            const strWidth = pixelLength(text)
+            const b1Width = xScale(value)
+            const b2Width = xScale(maxValue) - xScale(value)
+            if (strWidth > b2Width && b2Width < b1Width) {
+                return true
+            } else {
+                return false
+            }
+        }
+
+        /**
+         * return retrun text cut 
+         * @param {string} text 
+         */
+        function textCut(text, value, maxValue) {
+            const strWidth = pixelLength(text)
+            const b1Width = xScale(value)
+            const b2Width = xScale(maxValue) - xScale(value)
+
+            if (textTooLong(text, value, maxValue)) {
+                if (textRectIn(text, value, maxValue)) {
+                    return text.substr(0, Math.trunc(text.length * b1Width / strWidth * .75)) + '...'
+
+                } else {
+                    console.log(text.substr(0, Math.trunc(text.length * b2Width / strWidth * .75)))
+                    return text.substr(0, Math.trunc(text.length * b2Width / strWidth * .75)) + '...'
+                }
+            } else {
+                return text
+            }
+        }
+
+        function textTooLong(text, value, maxValue) {
+            const strWidth = pixelLength(text)
+            const b1Width = xScale(value)
+            const b2Width = xScale(maxValue) - xScale(value)
+            if (strWidth >= b1Width && strWidth >= b2Width) {
+                return true
+            } else {
+                return false
+            }
+        }
+
+        function positionText(text, value, maxValue) {
+            const strWidth = pixelLength(textCut(text, value, maxValue))
+            if (textRectIn(text, value, maxValue)) {
+                return xScale(value) - strWidth - 20
+            } else {
+                return xScale(value)
+            }
+        }
+
         var data = response
 
         if (this.config.yDomain === '') {
             this.config.yDomain = response.map(d => d.class_name)
         }
         if (this.config.maxValue === '') {
-            this.config.maxValue = d3.max(data, d => d3.max(d, d => d[1]))
+            this.config.maxValue = d3.max(data, d => d.value)
+            if (this.config.maxValue === 0) {
+                this.config.maxValue = 100
+            }
         }
+
 
         var yScale = d3.scaleBand()
             .domain(response.map(d => d.class_name))
@@ -188,6 +268,7 @@ export class GraphBarhSimple {
                 .ticks(6, '0f')
                 .tickSizeOuter(0)
             )
+
         var yAxis = g => g
             .call(d3.axisLeft(yScale)
                 .tickValues(this.config.yDomain)
@@ -211,6 +292,11 @@ export class GraphBarhSimple {
             this.svg.selectAll('.yAxis').selectAll(".tick text").remove();
             this.svg.selectAll('.yAxis').select(".domain").remove();
         }
+
+        var tooltip = d3.select(this.config.container).append("div")
+            .attr("id", "tooltip")
+            .attr("class", "tooltip")
+            .style("opacity", 0);
 
         const rects = this.g.selectAll('rect')
             .data(data)
@@ -239,29 +325,50 @@ export class GraphBarhSimple {
             .remove()
 
         if (this.config.yTextDomain === 1) {
+            const maxValue = this.config.maxValue
+            const tooltipShow = this.config.tooltip
+            const container = this.config.container
 
             texts.enter().append("text")
                 .attr("class", d => "label " + d.class_name)
-                .attr("x", function (d) {
-                    if (d.value > 60) {
-                        return xScale(d.value) * .5;
-                    } else {
-                        return xScale(d.value) + 10;
-                    }
-                })
+                .attr("x", d => positionText(d.class_name, d.value, maxValue))
                 .attr("y", d => yScale(d.class_name) + yScale.bandwidth() * .5)
                 .attr("dy", ".5em")
                 .attr("dx", ".5em")
                 .style("text-anchor", "start")
-                .text(d => d.class_name)
-                .attr("font-family", "sans-serif")
-                .attr("font-size", "20px")
+                .text(d => textCut(d.class_name, d.value, maxValue))
                 .attr("fill", function (d) {
-                    if (d.value > 60) {
+                    if (textRectIn(d.class_name, d.value, maxValue)) {
                         return 'white';
                     } else {
                         return 'black';
                     }
+                })
+                .on('mouseover', function (d) {
+                    if (tooltipShow === 1) {
+                        d3.select(this).style("opacity", "1.0");
+                        var html = "<p><strong>" + d.class_name + "</strong></p>";
+                        tooltip.transition()
+                            .duration(300)
+                            .style("opacity", .9);
+                        tooltip.html(html);
+                    }
+                })
+                .on('mouseout', function (d) {
+                    if (tooltipShow === 1) {
+                        d3.select(this).style("opacity", "0.8");
+                        tooltip.transition()
+                            .duration(300)
+                            .style("opacity", 0);
+                    }
+                })
+                .on('mousemove', function (d) {
+                    // if (tooltipShow === 1) {
+                    // var w = $(container).width();
+                    // var h = $(container).height();
+                    // tooltip.style("left", (d3.event.pageX - w / 2 - 15) + "px")
+                    //     .style("top", (d3.event.pageY - h - 25) + "px");
+                    // }
                 })
                 .transition()
                 .duration(500);
@@ -269,17 +376,11 @@ export class GraphBarhSimple {
             texts
                 .transition()
                 .duration(500)
-                .attr("x", function (d) {
-                    if (d.value > 60) {
-                        return xScale(d.value) * .5;
-                    } else {
-                        return xScale(d.value) + 10;
-                    }
-                })
+                .attr("x", d => positionText(d.class_name, d.value, maxValue))
                 .attr("y", d => yScale(d.class_name) + yScale.bandwidth() * .5)
-                .text(d => d.class_name)
+                .text(d => textCut(d.class_name, d.value, maxValue))
                 .attr("fill", function (d) {
-                    if (d.value > 60) {
+                    if (textRectIn(d.class_name, d.value, maxValue)) {
                         return 'white';
                     } else {
                         return 'black';
