@@ -204,7 +204,6 @@ export class GraphBarhSimple {
                     return text.substr(0, Math.trunc(text.length * b1Width / strWidth * .75)) + '...'
 
                 } else {
-                    console.log(text.substr(0, Math.trunc(text.length * b2Width / strWidth * .75)))
                     return text.substr(0, Math.trunc(text.length * b2Width / strWidth * .75)) + '...'
                 }
             } else {

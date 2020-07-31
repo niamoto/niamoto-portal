@@ -10,6 +10,29 @@ import d3Legend from 'd3-svg-legend'
 
 // todo diviser en 2 graphs
 export class GraphBarv {
+
+  config = {
+    height: 200,
+    width: 200,
+    margin: 10,
+    minValue: 0,
+    maxValue: '',
+    majorTicks: 5,
+    color: ['#444', '#aaa', '#eee'],
+    transitionMs: 1000,
+    displayUnit: 'Value',
+    container: '',
+    title: '',
+    xLabel: '',
+    yLabel: '',
+    value: '',
+    legend: '',
+    yDomain: [0, 100],
+    marginLeft: 0.15,
+    colorText: ['#000'],
+    typeLegend: 2
+  }
+
   constructor(configuration) {
     /**
      * default configuration settings
@@ -33,28 +56,6 @@ export class GraphBarv {
      * @property {array} colorText - corlor text  inside rectangle
 
      */
-
-    this.config = {
-      height: 200,
-      width: 200,
-      margin: 10,
-      minValue: 0,
-      maxValue: '',
-      majorTicks: 5,
-      color: ['#444', '#aaa', '#eee'],
-      transitionMs: 1000,
-      displayUnit: 'Value',
-      container: '',
-      title: '',
-      xLabel: '',
-      yLabel: '',
-      value: '',
-      legend: '',
-      yDomain: [0, 100],
-      marginLeft: 0.15,
-      colorText: ['#000'],
-      typeLegend: 2
-    }
 
     this.config = Object.assign(this.config, configuration)
 
@@ -189,9 +190,10 @@ export class GraphBarv {
     // if (this.config.xDomain === '') {
     //   this.config.xDomain = response.map(d => d.class_name)
     // }
-    // // if (this.config.maxValue === '') {
-    // this.config.maxValue = d3.max(data, d => d3.max(d, d => d[1]))
-    // // }
+    // if (this.config.maxValue === '') {
+    //   this.config.maxValue = d3.max(data, d => d3.max(d, d => d[1]))
+    // }
+
 
     var xScale = d3.scaleBand()
       .domain(response.map(d => d.class_name))
@@ -268,5 +270,9 @@ export class GraphBarv {
       .transition()
       .duration(500)
       .remove()
+
+
   }
+
+
 }

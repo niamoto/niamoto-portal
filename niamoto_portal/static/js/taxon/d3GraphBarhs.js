@@ -22,7 +22,7 @@ export function init(data) {
         yTextDomain: 1
     })
 
-    // strates
+    // topspecies
     var topSpecies = new d3GraphBarhSimple.GraphBarhSimple({
         width: $('#topSpecies').width(),
         height: $('#topSpecies').height(),
@@ -34,6 +34,18 @@ export function init(data) {
         marginLeft: 0.02,
         yTextDomain: 1,
         tooltip: 1
+    })
+
+    const elevations = new d3GraphBarhSimple.GraphBarhSimple({
+        width: $(elevationHisto).width(),
+        height: $(elevationHisto).height(),
+        container: '#elevationHisto',
+        value: ['elevation'],
+        yLabel: 'Altitude',
+        xLabel: 'Pourcentage (%)',
+        maxValue: 100,
+        marginLeft: 0.15,
+        color: [color.forest, color.forest, color.forest, color.forest, color.forest, color.forest, color.forest, color.forest, color.forest, color.forest, color.forest, color.forest, color.forest]
     })
 
 
@@ -55,6 +67,12 @@ export function init(data) {
         topSpecies.config.yDomain = ''
         topSpecies.config.maxValue = ''
         topSpecies.update(topSpecieData.reverse())
+
+
+        const elevation = d3Graph.dataFilter(data, 'elevation')
+        const elevationData = d3Graph.dataJson(elevation)
+        elevations.config.maxValue = ''
+        elevations.update(elevationData)
 
     };
 };

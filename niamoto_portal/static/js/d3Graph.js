@@ -35,3 +35,13 @@ export function dataJson(data, mutliple = 1) {
         return result
     })
 }
+
+export function dataTwoJson(data, mutliple = 1) {
+    return data.map(function (d, i) {
+        var result = {
+            class_name: d.class_name,
+            data1: d.class_value * mutliple
+        }
+        return result
+    })
+}
