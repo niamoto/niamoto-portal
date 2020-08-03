@@ -24,13 +24,15 @@ export function init(data) {
 
 
 
-    let distributionSubstratData = [{
-        label: 'UM',
-        value: data.occ_um_count * 100 / (data.occ_um_count + data.occ_count)
-      },
+    let distributionSubstratData = [
+
       {
         label: 'NUM',
-        value: data.occ_count * 100 / (data.occ_um_count + data.occ_count)
+        value: (data.occ_count - data.occ_um_count) * 100 / (data.occ_count)
+      },
+      {
+        label: 'UM',
+        value: data.occ_um_count * 100 / (data.occ_count)
       }
     ]
     distributionSubstrat.update(distributionSubstratData.reverse())
