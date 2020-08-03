@@ -176,6 +176,9 @@ function updateLayerTaxon(data) {
 function updateGeneralInformations(data) {
   $('#tax_endemia_link_value').attr('href', 'http://endemia.nc/flore/fiche' + data.id_endemia)
   $('#tax_endemia_link_value').text('Fiche Endemia')
+  $('#tax_florical_link_value').attr('href', 'http://publish.plantnet-project.org/project/florical_fr/collection/florical/taxons/details/' + data.id_florical)
+  $('#tax_florical_link_value').text('Fiche Florical')
+
   $('#tax_rank').text('Rang :' + data.rank_name)
   $('#tax_full_name').html(data.full_name)
 }
