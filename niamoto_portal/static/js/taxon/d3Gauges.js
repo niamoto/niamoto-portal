@@ -11,14 +11,6 @@ export function initGauges(data) {
   var heightMin = 0
   var plotsCount = 20
 
-  function initMax(maxValue, initMaxValue) {
-    if (maxValue === 0) {
-      return initMaxValue
-    } else {
-      return maxValue
-    }
-  }
-
   function initGauge(id, unit, minValue, maxValue) {
     return new d3Gauge.Gauge({
       width: $(id).width(),
@@ -72,10 +64,10 @@ export function initGauges(data) {
 
   function updateData(data) {
     // distributionOccGauge.update(data.nbOccurrences, data.total_nbOccurrences)
-    // dbhMaxGauge.update(data.dbh.max, dbhMax)
-    // woodDensityGauge.update(data.woodDensity.max * 1000, woodDensityMax * 1000)
+    dbhMaxGauge.update(data.dbh_max, dbhMax)
+    woodDensityGauge.update(data.wood_density_max * 1000, woodDensityMax * 1000)
     // rainfallMinGauge.update(data.rainfall.min, rainfallMax)
-    // heightMaxGauge.update(data.height.max, heightMax)
+    heightMaxGauge.update(data.height_max, heightMax)
     // distributionGeoGauge.update(data.plotsCount, plotsCount)
   };
 };

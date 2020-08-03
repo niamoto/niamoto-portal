@@ -4,6 +4,7 @@ import * as d3PhenologyHisto from './d3PhenologyHisto.js'
 import * as d3GraphBarh from './d3GraphBarhs'
 import * as d3GraphOneBarv from './d3GraphOneBarv'
 import * as d3GraphBarv from './d3GraphBarvs'
+import * as d3GraphDonut from './d3GraphDonuts'
 import * as preloader from '../preloader'
 import {
   getTaxaTree
@@ -222,6 +223,7 @@ document.addEventListener('DOMContentLoaded', function () {
   d3GraphBarh.init()
   d3GraphOneBarv.init()
   d3GraphBarv.init()
+  d3GraphDonut.init()
   // d3_families_donut.initFamiliesDonut("# families_donut ");
   // // d3_species_donut.initSpeciesDonut("#species_donut");
   // d3_species_barh.initSpeciesDonut("#species_donut");

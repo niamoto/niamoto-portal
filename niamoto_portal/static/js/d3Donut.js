@@ -4,34 +4,37 @@ import * as d3 from 'd3'
 import * as d3Legend from 'd3-svg-legend'
 
 export class GraphDonut {
-  constructor(configuration) {
-    // default configuration settings
-    var config = {
-      height: 200,
-      width: 200,
-      margin: 10,
-      minValue: 0,
-      maxValue: '',
-      majorTicks: 5,
-      color: [
-        '#5496c4', '#ffd24d', '#a29cc9', '#f96353', '#6cc6b7',
-        '#fcac4f', '#a0d643', '#f99fcd', '#b068b1', '#b3b3b3'
-      ],
-      transitionMs: 1000,
-      displayUnit: 'Value',
-      container: '',
-      title: '',
-      xLabel: '',
-      yLabel: '',
-      value: '',
-      legend: '',
-      yDomain: '',
-      marginLeft: 0,
-      colorText: ['#000'],
-      typeLegend: 2
-    }
 
-    this.config = Object.assign(config, configuration)
+  // default configuration settings
+  config = {
+    height: 200,
+    width: 200,
+    margin: 10,
+    minValue: 0,
+    maxValue: '',
+    majorTicks: 5,
+    color: [
+      '#5496c4', '#ffd24d', '#a29cc9', '#f96353', '#6cc6b7',
+      '#fcac4f', '#a0d643', '#f99fcd', '#b068b1', '#b3b3b3'
+    ],
+    transitionMs: 1000,
+    displayUnit: 'Value',
+    container: '',
+    title: '',
+    xLabel: '',
+    yLabel: '',
+    value: '',
+    legend: '',
+    yDomain: '',
+    marginLeft: 0,
+    colorText: ['#000'],
+    typeLegend: 2
+  }
+
+  constructor(configuration) {
+
+
+    this.config = Object.assign(this.config, configuration)
 
     this.margin = {
       top: this.config.height * 0.05,
