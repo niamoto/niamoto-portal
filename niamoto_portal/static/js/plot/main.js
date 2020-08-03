@@ -51,7 +51,7 @@ const view = new ol.View({
 })
 
 var CenterControl = /* @__PURE__ */ (function (Control) {
-  function CenterControl (optOptions) {
+  function CenterControl(optOptions) {
     var options = optOptions || {}
 
     var button = document.createElement('button')
@@ -59,6 +59,7 @@ var CenterControl = /* @__PURE__ */ (function (Control) {
 
     var element = document.createElement('div')
     element.className = 'center ol-unselectable ol-control'
+    element.style = 'top: .5em; right: .5em'
     element.appendChild(button)
 
     ol.control.Control.call(this, {
@@ -73,7 +74,7 @@ var CenterControl = /* @__PURE__ */ (function (Control) {
   CenterControl.prototype = Object.create(ol.control.Control && ol.control.Control.prototype)
   CenterControl.prototype.constructor = CenterControl
 
-  CenterControl.prototype.handleCenter = function handleCenter () {
+  CenterControl.prototype.handleCenter = function handleCenter() {
     this.getMap().setView(new ol.View({
       projection: 'EPSG:4326',
       center: new ol.proj.transform([165.875, -21.145],
@@ -135,7 +136,7 @@ map.on('pointermove', function (e) {
   }
 })
 
-function buildPlotList () {
+function buildPlotList() {
   var plots = {}
 
   $.ajax({
@@ -171,7 +172,7 @@ function buildPlotList () {
   })
 }
 
-function updateData (plot) {
+function updateData(plot) {
   $.ajax({
     type: 'GET',
     url: plotList + plot.id + '/',
