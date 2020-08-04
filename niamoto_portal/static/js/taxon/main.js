@@ -174,13 +174,64 @@ function updateLayerTaxon(data) {
 }
 
 function updateGeneralInformations(data) {
+  let rank = ''
+  let fleshyFruit = ''
+  $('#tax_full_name').html(data.full_name)
+  switch (data.id_rang) {
+    case 10:
+      rank = 'famille';
+      break;
+    case 14:
+      rank = 'genre';
+      break;
+    case 21:
+      rank = 'espèce';
+      break;
+    case 22:
+      rank = 'variété';
+      break;
+    case 23:
+      rank = 'sous-espèces';
+      break;
+  }
+  $('#tax_rank').text('Rang: ' + rank)
+  $('#tax_nb_occ').text("Nombre d'occurrences: " + data.occ_count)
   $('#tax_endemia_link_value').attr('href', 'http://endemia.nc/flore/fiche' + data.id_endemia)
   $('#tax_endemia_link_value').text('Fiche Endemia')
-  $('#tax_florical_link_value').attr('href', 'http://publish.plantnet-project.org/project/florical_fr/collection/florical/taxons/details/' + data.id_florical)
-  $('#tax_florical_link_value').text('Fiche Florical')
+  switch (data.id_rang) {
+    case 10:
+      break;
+    case 14:
+      break;
+    default:
+      $('#tax_florical_link_value').attr('href', 'http://publish.plantnet-project.org/project/florical_fr/collection/florical/taxons/details/' + data.id_florical)
+      $('#tax_florical_link_value').text('Fiche Florical')
+  }
+  if (data.leaf_type != null) {
+    $('#tax_leaf_type').text('Type de feuille: ' + data.leaf_type)
+  }
+  if (data.sexual_system != null) {
+    $('#tax_sexual_system').text('Reproduction: ' + data.sexual_system)
+  }
+  switch (data.fleshy_fruit) {
+    case 'Faux':
+      fleshyFruit = 'Non';
+      break;
+    case 'Vrai':
+      fleshyFruit = 'Oui';
+      break;
+    case 'Faux, Vrai':
+      fleshyFruit = 'Oui/Non';
+      break;
+  }
+  if (data.fleshy_fruit != null) {
+    $('#tax_sexual_system').text('Fruit charnu: ' + data.sexual_system)
+  }
+  if (data.dbh_median != null) {
+    $('#tax_dbh_median').text('dbh median: ' + data.dbh_median)
+  }
 
-  $('#tax_rank').text('Rang :' + data.rank_name)
-  $('#tax_full_name').html(data.full_name)
+
 }
 
 function makeNode(node) {

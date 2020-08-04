@@ -41,7 +41,7 @@ export function init(data) {
         height: $(elevationHisto).height(),
         container: '#elevationHisto',
         value: ['elevation'],
-        yLabel: 'Altitude',
+        yLabel: 'Altitude (m)',
         xLabel: 'Pourcentage (%)',
         maxValue: 100,
         marginLeft: 0.15,
@@ -53,7 +53,7 @@ export function init(data) {
         height: $(pluvioHisto).height(),
         container: '#pluvioHisto',
         value: ['pluvio'],
-        yLabel: 'Précipitation',
+        yLabel: 'Précipitation (mm)',
         xLabel: 'Pourcentage (%)',
         maxValue: 100,
         marginLeft: 0.15,
@@ -90,6 +90,12 @@ export function init(data) {
         const pluvioData = d3Graph.dataJson(pluvio)
         pluvios.config.maxValue = ''
         pluvios.update(pluvioData.reverse())
+        let pluvioRange = pluvio.filter(function (d, i) {
+            return d.class_value > 0
+        })
+        $('#tax_range_pluvio').text('Plage pluviométrique: ' + d3.min(pluvioRange, d => +d.class_name) + '-' + d3.max(pluvioRange, d => +d.class_name) + 'mm')
+
+
 
     };
 };

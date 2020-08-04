@@ -85,7 +85,7 @@ export function initPhenologyHisto() {
     .attr('x', 0 - (height / 2))
     .attr('dy', '1em')
     .style('text-anchor', 'middle')
-    .text('Fréquence')
+    .text('Fréquence (%)')
 
   // Legend
   svgLegend.append('g')
@@ -120,84 +120,6 @@ export function initPhenologyHisto() {
 
     const dataFleur = dataFilter(taxon.frequencies, 'pheno_fleur')
     const dataFruit = dataFilter(taxon.frequencies, 'pheno_fruit')
-
-    // var dataFleur = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-    // var dataFruit = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-
-    // switch (taxon.phenology.length) {
-    //   case 1:
-    //     if (taxon.phenology[0].phenology == 'fleur') {
-    //       dataFleur = [
-    //         taxon.phenology[0].january,
-    //         taxon.phenology[0].february,
-    //         taxon.phenology[0].march,
-    //         taxon.phenology[0].april,
-    //         taxon.phenology[0].may,
-    //         taxon.phenology[0].june,
-    //         taxon.phenology[0].july,
-    //         taxon.phenology[0].august,
-    //         taxon.phenology[0].september,
-    //         taxon.phenology[0].october,
-    //         taxon.phenology[0].november,
-    //         taxon.phenology[0].december
-    //       ]
-    //     } else {
-    //       dataFruit = [
-    //         taxon.phenology[0].january,
-    //         taxon.phenology[0].february,
-    //         taxon.phenology[0].march,
-    //         taxon.phenology[0].april,
-    //         taxon.phenology[0].may,
-    //         taxon.phenology[0].june,
-    //         taxon.phenology[0].july,
-    //         taxon.phenology[0].august,
-    //         taxon.phenology[0].september,
-    //         taxon.phenology[0].october,
-    //         taxon.phenology[0].november,
-    //         taxon.phenology[0].december
-    //       ]
-    //     };
-    //     break
-    //   case 2:
-    //     dataFruit = [
-    //       taxon.phenology[0].january,
-    //       taxon.phenology[0].february,
-    //       taxon.phenology[0].march,
-    //       taxon.phenology[0].april,
-    //       taxon.phenology[0].may,
-    //       taxon.phenology[0].june,
-    //       taxon.phenology[0].july,
-    //       taxon.phenology[0].august,
-    //       taxon.phenology[0].september,
-    //       taxon.phenology[0].october,
-    //       taxon.phenology[0].november,
-    //       taxon.phenology[0].december
-    //     ]
-    //     dataFleur = [
-    //       taxon.phenology[1].january,
-    //       taxon.phenology[1].february,
-    //       taxon.phenology[1].march,
-    //       taxon.phenology[1].april,
-    //       taxon.phenology[1].may,
-    //       taxon.phenology[1].june,
-    //       taxon.phenology[1].july,
-    //       taxon.phenology[1].august,
-    //       taxon.phenology[1].september,
-    //       taxon.phenology[1].october,
-    //       taxon.phenology[1].november,
-    //       taxon.phenology[1].december
-    //     ]
-    //     break
-    // }
-
-    // const phenoData = holdridgeforestOut.map(function (d, i) {
-    //   var result = {
-    //     class_name: d.class_name,
-    //     data1: holdridgeforest[i].class_value * 100,
-    //     data2: (d.class_value) * 100
-    //   }
-    //   return result
-    // })
 
     var data = []
     for (var i = 0; i < month.length; i++) {

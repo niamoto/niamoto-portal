@@ -11,7 +11,7 @@ export function init(data) {
         container: '#dbhHisto',
         value: ['dbh'],
         yDomain: [0, 100],
-        yLabel: 'Fréquence',
+        yLabel: 'Fréquence (%)',
         maxValue: 100,
         marginLeft: 0.15,
         color: [color.forest]

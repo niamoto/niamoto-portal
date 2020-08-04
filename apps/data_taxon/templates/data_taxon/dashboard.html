@@ -24,10 +24,10 @@
 <img id="preloader" src="{% static 'img/preloader.svg' %}">
 <div class="container-fluid">
   <div class="row">
-    <div id="panel_left" class="col-sm-2 col-md-2">
+    <div id="left_panel" class="col-sm-2 col-md-2">
       <div id="left_panel_placeholder">
         <div class=" w-100"><button type="button" class="btn btn-lg"><a href="{% url 'taxon:presentation' %}"><span
-                class="fas fa-search" aria-hidden="true"></span>En savoir plus </a></bouton>
+                class="fas fa-search" aria-hidden="true"></span> En savoir plus </a></bouton>
         </div>
         <div class="w-100">
           <div class="">
@@ -49,8 +49,14 @@
             <div id="general_informations" class="card-body {{graph.model}}">
               <h5 class="card-title"><span id="tax_full_name"></span></h5>
               <div class="card-text"><span id="tax_rank"></span></div>
-              <div class="card-text"><a id="tax_endemia_link_value"></a></div>
-              <div class="card-text"><a id="tax_florical_link_value"></a></div>
+              <div class="card-text"><span id="tax_dbh_median"></span></div>
+              <div class="card-text"><a id="tax_endemia_link_value" target="_blank"></a></div>
+              <div class="card-text"><a id="tax_florical_link_value" target="_blank" im></a></div>
+              <div class="card-text"><span id="tax_leaf_type"></span></div>
+              <div class="card-text"><span id="tax_sexual_system"></span></div>
+              <div class="card-text"><span id="tax_fleshy_fruit"></span></div>
+              <div class="card-text"><span id="tax_nb_occ"></span></div>
+              <div class="card-text"><span id="tax_range_pluvio"></span></div>
             </div>
           </div>
         </div>
