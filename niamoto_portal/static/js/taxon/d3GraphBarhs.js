@@ -48,6 +48,18 @@ export function init(data) {
         color: [color.forest, color.forest, color.forest, color.forest, color.forest, color.forest, color.forest, color.forest, color.forest, color.forest, color.forest, color.forest, color.forest]
     })
 
+    const pluvios = new d3GraphBarhSimple.GraphBarhSimple({
+        width: $(pluvioHisto).width(),
+        height: $(pluvioHisto).height(),
+        container: '#pluvioHisto',
+        value: ['pluvio'],
+        yLabel: 'Précipitation',
+        xLabel: 'Pourcentage (%)',
+        maxValue: 100,
+        marginLeft: 0.15,
+        color: [color.tres_humide, color.tres_humide, color.tres_humide, color.tres_humide, color.tres_humide, color.tres_humide, color.tres_humide, color.tres_humide, color.tres_humide, color.tres_humide, color.tres_humide, color.tres_humide, color.tres_humide]
+    })
+
 
     // Update Data for trigger
     $('#taxon_treeview').on('taxonSelected', function (event, data) {
@@ -73,6 +85,11 @@ export function init(data) {
         const elevationData = d3Graph.dataJson(elevation)
         elevations.config.maxValue = ''
         elevations.update(elevationData)
+
+        const pluvio = d3Graph.dataFilter(data, 'rainfall')
+        const pluvioData = d3Graph.dataJson(pluvio)
+        pluvios.config.maxValue = ''
+        pluvios.update(pluvioData.reverse())
 
     };
 };

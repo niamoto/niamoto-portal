@@ -12,7 +12,7 @@ export function init(data) {
     container: '#distributionSubstrat',
     value: ['UM', 'NUM'],
     legend: ['UM', 'NUM'],
-    color: [color.forestUM, color.forestNUM]
+    color: [color.landUM, color.landNUM]
   })
 
   // Update Data for trigger
