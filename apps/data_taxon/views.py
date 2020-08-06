@@ -37,10 +37,12 @@ class GeneralInfosViewSet(ViewSet):
     def retrieve(self, request, pk=None):
 
         response = {
-            'ncpippn_count_sum': list(Taxon.objects.filter(id_rang=10).aggregate(Sum('ncpippn_count')).values())[0],
+            'occ_count_sum': list(Taxon.objects.filter(id_rang=10).aggregate(Sum('occ_count')).values())[0],
             'ncpippn_count_max': list(Taxon.objects.filter(id_rang=10).aggregate(Max('ncpippn_count')).values())[0],
             'dbh_max':  list(Taxon.objects.all().aggregate(Max('dbh_max')).values())[0],
+            'dbh_min':  list(Taxon.objects.all().aggregate(Min('dbh_max')).values())[0],
             'height_max':  list(Taxon.objects.all().aggregate(Max('height_max')).values())[0],
+            'height_min':  list(Taxon.objects.all().aggregate(Min('height_max')).values())[0],
             'wood_density_max':  list(Taxon.objects.all().aggregate(Max('wood_density_max')).values())[0],
             'bark_thickness_max':  list(Taxon.objects.all().aggregate(Max('bark_thickness_max')).values())[0],
             'leaf_sla_max':  list(Taxon.objects.all().aggregate(Max('leaf_sla_max')).values())[0],
@@ -50,6 +52,9 @@ class GeneralInfosViewSet(ViewSet):
             'freq_max':  list(Taxon.objects.all().aggregate(Max('freq_max')).values())[0],
             'freq10_max':  list(Taxon.objects.all().aggregate(Max('freq10_max')).values())[0],
             'freq_plot1ha_max':  list(Taxon.objects.all().aggregate(Max('freq_plot1ha_max')).values())[0],
+            'freq_min':  list(Taxon.objects.all().aggregate(Min('freq_max')).values())[0],
+            'freq10_min':  list(Taxon.objects.all().aggregate(Min('freq10_max')).values())[0],
+            'freq_plot1ha_min':  list(Taxon.objects.all().aggregate(Min('freq_plot1ha_max')).values())[0],
 
         }
 

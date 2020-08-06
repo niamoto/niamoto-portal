@@ -3,27 +3,30 @@
 import * as d3 from 'd3'
 
 export class Gauge {
+
+  config = {
+    height: 200,
+    width: 200,
+    margin: 10,
+    minValue: 0,
+    maxValue: 10,
+    majorTicks: 5,
+    lowThreshhold: 0.2,
+    lowMidThreshhold: 0.4,
+    highMidThreshhold: 0.6,
+    highThreshhold: 0.8,
+    lowThreshholdColor: '#f02828',
+    lowMidThreshholdColor: '#fe6a00',
+    defaultColor: '#e8dd11',
+    highMidThreshholdColor: '#82e042',
+    highThreshholdColor: '#089f50',
+    container: '',
+    transitionMs: 500
+  }
+
+
   constructor(configuration) {
     // default configuration settings
-    this.config = {
-      height: 200,
-      width: 200,
-      margin: 10,
-      minValue: 0,
-      maxValue: 10,
-      majorTicks: 5,
-      lowThreshhold: 0.2,
-      lowMidThreshhold: 0.4,
-      highMidThreshhold: 0.6,
-      highThreshhold: 0.8,
-      lowThreshholdColor: '#f02828',
-      lowMidThreshholdColor: '#fe6a00',
-      defaultColor: '#e8dd11',
-      highMidThreshholdColor: '#82e042',
-      highThreshholdColor: '#089f50',
-      container: '',
-      transitionMs: 500
-    }
 
     this.config = Object.assign(this.config, configuration)
 
@@ -220,13 +223,12 @@ export class Gauge {
       })
   }
 
-  update(newValue, maxValue) {
+  update(newValue) {
     /**
      * TODO fun transition
      */
 
     var value = newValue
-    if (!maxValue) this.config.maxValue = maxValue
     if (!newValue) value = 0
 
     // update ticks

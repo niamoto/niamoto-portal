@@ -14,8 +14,6 @@ import color from '../../css/source/partials/_color_js.scss'
 // var TreeView = require('treeview')
 // var d3_gauges = require('./d3Gauges')
 
-const shapeList = restUrls.shapeList
-const shapeLocation = restUrls.shapeLocation
 
 // make layer background
 const wmsUrlNC = 'https://carto.gouv.nc/public/services/fond_relief/' +
@@ -123,16 +121,15 @@ map.addLayer(layerBackground)
 map.addLayer(layerShape)
 map.addLayer(layerPointTaxon)
 
-var taxonTreeList = restUrls.taxonTreeList
 
 function buildTaxonList() {
   var taxons = {}
 
   $.ajax({
     type: 'GET',
-    url: taxonTreeList,
+    url: restUrls.taxonTreeList,
     success: function (result) {
-      d3Gauges.initGauges(result)
+      // d3Gauges.initGauges(result)
       var tree = new TreeView(result, 'taxon_treeview', 'list-group-item')
       preloader.hidePreloader()
     }
@@ -271,13 +268,21 @@ document.addEventListener('DOMContentLoaded', function () {
     make_node: makeNode,
     make_leaf: makeLeaf
   })
-  d3Gauges.initGauges(null)
 
-  d3PhenologyHisto.initPhenologyHisto()
-  d3GraphBarh.init()
-  d3GraphOneBarv.init()
-  d3GraphBarv.init()
-  d3GraphDonut.init()
+  $.ajax({
+    type: 'GET',
+    url: restUrls.taxonGeneralInfos,
+    success: function (result) {
+      d3Gauges.initGauges(result)
+
+      d3PhenologyHisto.initPhenologyHisto()
+      d3GraphBarh.init()
+      d3GraphOneBarv.init()
+      d3GraphBarv.init()
+      d3GraphDonut.init()
+    }
+  })
+
   // d3_families_donut.initFamiliesDonut("# families_donut ");
   // // d3_species_donut.initSpeciesDonut("#species_donut");
   // d3_species_barh.initSpeciesDonut("#species_donut");
