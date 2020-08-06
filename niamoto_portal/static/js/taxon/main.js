@@ -55,7 +55,7 @@ const layerPointTaxon = new ol.layer.Vector({
 })
 
 // view for map center new caledonia
-const view = new ol.View({
+let view = new ol.View({
   projection: 'EPSG:4326',
   center: new ol.proj.transform([165.875, -21.145],
     'EPSG:4326',
@@ -88,13 +88,14 @@ var CenterControl = /* @__PURE__ */ (function (Control) {
   CenterControl.prototype.constructor = CenterControl
 
   CenterControl.prototype.handleCenter = function handleCenter() {
-    this.getMap().setView(new ol.View({
+    view = new ol.View({
       projection: 'EPSG:4326',
       center: new ol.proj.transform([165.875, -21.145],
         'EPSG:4326',
         'EPSG:4326'),
       zoom: 6
-    }))
+    })
+    this.getMap().setView(view)
   }
 
   return CenterControl
