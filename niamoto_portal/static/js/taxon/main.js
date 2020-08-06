@@ -197,8 +197,12 @@ function updateGeneralInformations(data) {
   $('#tax_endemia_link_value').text('Fiche Endemia')
   switch (data.id_rang) {
     case 10:
+      $('#tax_florical_link_value').attr('href', '')
+      $('#tax_florical_link_value').text('')
       break;
     case 14:
+      $('#tax_florical_link_value').attr('href', '')
+      $('#tax_florical_link_value').text('')
       break;
     default:
       $('#tax_florical_link_value').attr('href', 'http://publish.plantnet-project.org/project/florical_fr/collection/florical/taxons/details/' + data.id_florical)
