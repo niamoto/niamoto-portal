@@ -1,9 +1,8 @@
 import * as restUrls from '../restUrls'
 import * as d3Gauges from './d3Gauges'
-import * as d3PhenologyHisto from './d3PhenologyHisto.js'
+import * as d3GraphBarv from './d3GraphBarvs'
 import * as d3GraphBarh from './d3GraphBarhs'
 import * as d3GraphOneBarv from './d3GraphOneBarv'
-import * as d3GraphBarv from './d3GraphBarvs'
 import * as d3GraphDonut from './d3GraphDonuts'
 import * as preloader from '../preloader'
 import {
@@ -37,21 +36,6 @@ const source = new ol.source.Vector({
 })
 const layerShape = new ol.layer.Vector({
   source: source
-})
-
-// make layer Point Taxon
-const featuresTaxon = new ol.Collection()
-const sourceTaxon = new ol.source.Vector({
-  features: featuresTaxon
-})
-const layerPointTaxon = new ol.layer.Vector({
-  source: sourceTaxon,
-  style: new ol.style.Style({
-    fill: new ol.style.Fill({
-      color: color.forest,
-      opacity: .1
-    })
-  })
 })
 
 // view for map center new caledonia
@@ -88,21 +72,15 @@ var CenterControl = /* @__PURE__ */ (function (Control) {
   CenterControl.prototype.constructor = CenterControl
 
   CenterControl.prototype.handleCenter = function handleCenter() {
-    view = new ol.View({
-      projection: 'EPSG:4326',
-      center: new ol.proj.transform([165.875, -21.145],
-        'EPSG:4326',
-        'EPSG:4326'),
-      zoom: 6
-    })
-    this.getMap().setView(view)
+
+    initView()
   }
 
   return CenterControl
 }(ol.control.Control))
 
 // make map
-const map = new ol.Map({
+let map = new ol.Map({
   target: 'distributionMap',
   view: view,
   controls: ol.control.defaults({
@@ -118,9 +96,23 @@ const map = new ol.Map({
     doubleClickZoom: false,
   })
 })
+
+
+
+function initView() {
+  view = new ol.View({
+    projection: 'EPSG:4326',
+    center: new ol.proj.transform([165.875, -21.145],
+      'EPSG:4326',
+      'EPSG:4326'),
+    zoom: 6
+  })
+  map.setView(view)
+
+}
+
 map.addLayer(layerBackground)
 map.addLayer(layerShape)
-map.addLayer(layerPointTaxon)
 
 
 function buildTaxonList() {
@@ -157,18 +149,19 @@ function updateLayerTaxon(data) {
     center map on the new source
   */
   source.clear()
-  sourceTaxon.clear()
-  source.addFeature(new ol.format.GeoJSON().readFeature(data.geo_pts_pn))
+  // sourceTaxon.clear()
   if (data.geo_pts_pn !== null) {
-    sourceTaxon.addFeature(new ol.format.GeoJSON().readFeature(data.geo_pts_pn))
+    source.addFeature(new ol.format.GeoJSON().readFeature(data.geo_pts_pn))
+    // sourceTaxon.addFeature(new ol.format.GeoJSON().readFeature(data.geo_pts_pn))
+    const feature = source.getFeatures()[0]
+    const polygon = feature.getGeometry()
+    view.fit(polygon, {
+      padding: [10, 10, 10, 10]
+    })
+
+  } else {
+    initView()
   }
-  const feature = source.getFeatures()[0]
-  const polygon = feature.getGeometry()
-  view.fit(polygon, {
-    padding: [10, 10, 10, 10]
-  })
-
-
 }
 
 function updateGeneralInformations(data) {
@@ -262,12 +255,13 @@ document.addEventListener('DOMContentLoaded', function () {
       emptyIcon: 'fas',
       nodeIcon: '',
       selectedIcon: '',
-      selectedBackColor: '#688BA5',
+      selectedBackColor: color.colorSecondary13,
       onNodeSelected: function (event, node) {
         preloader.showPreloader()
         updateData(node)
       }
     })
+    $('#taxon_treeview').selectpicker('val', 1)
     preloader.hidePreloader()
   }, {
     make_node: makeNode,
@@ -280,7 +274,6 @@ document.addEventListener('DOMContentLoaded', function () {
     success: function (result) {
       d3Gauges.initGauges(result)
 
-      d3PhenologyHisto.initPhenologyHisto()
       d3GraphBarh.init()
       d3GraphOneBarv.init()
       d3GraphBarv.init()
