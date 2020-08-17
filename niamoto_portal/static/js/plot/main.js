@@ -1,6 +1,7 @@
 import * as restUrls from '../restUrls'
 import * as d3Gauges from './d3Gauges'
 import * as preloader from '../preloader'
+import * as d3graphBarvs from './d3GraphBarvs'
 // var d3_gauges = require('./d3_gauges');
 
 var plotList = restUrls.plotList
@@ -189,6 +190,7 @@ document.addEventListener('DOMContentLoaded', function () {
   })
 
   buildPlotList()
+  d3graphBarvs.init()
   // d3_map.initMap();
   // d3_families_donut.initFamiliesDonut("#families_donut");
   // // d3_species_donut.initSpeciesDonut("#species_donut");
