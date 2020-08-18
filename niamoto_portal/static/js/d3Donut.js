@@ -125,6 +125,8 @@ export class GraphDonut {
       .value(function (d) {
         return d.value
       })
+      .startAngle(-Math.PI / 2)
+      .endAngle(3 * Math.PI / 2)
 
     var radius = this.radius
 
