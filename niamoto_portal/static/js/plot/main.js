@@ -21,7 +21,7 @@ var highlightStyle = new ol.style.Style({
   })
 })
 
-const wmsUrlNC = 'http://carto.gouv.nc/arcgis/services/fond_imagerie/' +
+const wmsUrlNC = 'https://carto.gouv.nc/arcgis/services/fond_imagerie/' +
   'MapServer/WMSServer'
 const layerBackground = new ol.layer.Tile({
   source: new ol.source.TileWMS({
