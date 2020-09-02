@@ -28,6 +28,6 @@ export function init(data) {
         const stem = d3Graph.dataFilter(data, 'stems')
         const stemData = d3Graph.dataJson(stem)
 
-        stems.update(stemData.reverse())
+        stems.update(stemData)
     };
 };
