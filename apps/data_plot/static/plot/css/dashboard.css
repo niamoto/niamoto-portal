@@ -369,6 +369,14 @@ p a :hover {
   padding: 0;
 }
 
+#left_panel {
+  height: 780px;
+}
+
+#left_panel_placeholder {
+  position: static;
+}
+
 .ol-scale-line {
   background-color: grey;
 }
