@@ -67,6 +67,10 @@
   border: 0;
 }
 
+.card svg {
+  overflow: visible;
+}
+
 .card-header {
   background-color: $color_title;
 }

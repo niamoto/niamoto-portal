@@ -290,6 +290,10 @@ p a :hover {
   border: 0;
 }
 
+.card svg {
+  overflow: visible;
+}
+
 .card-header {
   background-color: #688BA5;
 }
