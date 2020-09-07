@@ -22,6 +22,20 @@ export function init(data) {
         yTextDomain: 1
     })
 
+     // speciesTop10
+     var speciesTop = new d3GraphBarhSimple.GraphBarhSimple({
+        width: $('#speciesTop10').width(),
+        height: $('#speciesTop10').height(),
+        container: '#speciesTop10',
+        xLabel: 'Pourcentage du peuplement (%)',
+        color: ["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9467bd", "#8c564b", "#e377c2", "#7f7f7f", "#bcbd22", "#17becf"],
+        maxValue: '',
+        yDomainShow: 0,
+        marginLeft: 0.02,
+        yTextDomain: 1,
+        tooltip: 1
+    })
+
     // Update Data for trigger
     $('#plot_select').on('plotSelected', function (event, data) {
         updateData(data.properties.frequencies)
@@ -32,7 +46,13 @@ export function init(data) {
         const strate = d3Graph.dataFilter(data, 'strates')
         const strateData = d3Graph.dataJson(strate)
         strates.config.maxValue = ''
-        strates.update(strateData)
+        strates.update(strateData.reverse())
+
+        const specieTop = d3Graph.dataFilter(data, 'speciesTop10')
+        const specieTopdata = d3Graph.dataJson(specieTop)
+        speciesTop.config.yDomain=''
+        speciesTop.config.maxValue=''
+        speciesTop.update(specieTopdata)
 
 
 

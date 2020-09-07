@@ -84,42 +84,49 @@ export class GraphDonut {
     //   .style('text-anchor', 'middle')
     //   .text(this.config.xLabel)
 
-    // Legend
+    this.svgLegend = d3.select(this.config.container + 'Legend').append('svg')
+    .attr('width', this.mwidth)
+    .attr('height', this.mheight * 0.3)
 
-    const svgLegend = d3.select(this.config.container + 'Legend').append('svg')
-      .attr('width', this.mwidth)
-      .attr('height', this.mheight * 0.3)
+    this.svgLegend.append('g')
+    .attr('class', 'legend')
+    .attr('transform', 'translate(' + this.mwidth * 0.1 + ', ' + 0 + ')')
+  // .attr('dy', '.5em')
+  // .attr('dx', '.5em')
 
-    svgLegend.append('g')
-      .attr('class', 'legend')
-      .attr('transform', 'translate(' + this.mwidth * 0.1 + ', ' + 0 + ')')
-    // .attr('dy', '.5em')
-    // .attr('dx', '.5em')
+    this.legende()
+  }
 
-    var colorScale = d3.scaleOrdinal()
-      .domain(this.config.legend)
-      .range(this.config.color)
+  legende(){
 
-    var legendColor = d3Legend.legendColor()
-    if (this.config.typeLengend === 1) {
-      legendColor.scale(colorScale)
-        .shapeWidth(70)
-        .shapeHeight(7)
-        .orient('horizontal')
-        .labelAlign('start')
-        .labelWrap(30)
-    } else {
-      legendColor.shapePadding(0)
-        .scale(colorScale)
-        .shapeWidth(10)
-        .shapeHeight(10)
-    }
+        // Legend
 
-    svgLegend.select('.legend')
-      .call(legendColor)
+
+  var colorScale = d3.scaleOrdinal()
+    .domain(this.config.legend)
+    .range(this.config.color)
+
+  var legendColor = d3Legend.legendColor()
+  if (this.config.typeLengend === 1) {
+    legendColor.scale(colorScale)
+      .shapeWidth(70)
+      .shapeHeight(7)
+      .orient('horizontal')
+      .labelAlign('start')
+      .labelWrap(30)
+  } else {
+    legendColor.shapePadding(0)
+      .scale(colorScale)
+      .shapeWidth(10)
+      .shapeHeight(10)
+  }
+
+  this.svgLegend.select('.legend')
+    .call(legendColor)
   }
 
   update(response) {
+
     var pie = d3.pie()
       .sort(null)
       .value(function (d) {

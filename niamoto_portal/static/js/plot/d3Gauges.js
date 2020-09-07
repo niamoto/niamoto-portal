@@ -1,31 +1,25 @@
 import * as d3Gauge from '../D3gauge'
+import * as Graph from '../d3Graph'
 
-export function initGauges (data) {
+export function initGauges(data) {
   var basalAreaMax = 10
   var hMeanMax = 10
   var shannonMax = 10
   var pielouMax = 10
   var simpsonMax = 10
-  var woodDensityMax = 1
+  var woodDensityMax = 1.2
   var biomasseMax = 10
   var richessMax = 10
   var speciesLevelMax = 100
 
-  function initMax (maxValue, initMaxValue) {
-    if (maxValue === 0) {
-      return initMaxValue
-    } else {
-      return maxValue
-    }
-  }
-
-  function initGauge (id, unit, maxValue) {
+  function initGauge(id, unit, maxValue, labelDecimal = '0') {
     return new d3Gauge.Gauge({
       width: $(id).width(),
       height: $(id).height(),
       displayUnit: unit,
       container: id,
-      maxValue: maxValue
+      maxValue: maxValue,
+      labelDecimal: labelDecimal
     })
   }
 
@@ -34,7 +28,8 @@ export function initGauges (data) {
     .from(data
       .map(e => e.properties.basal_area)
       .values()))
-  basalAreaMax = initMax(basalArea, basalAreaMax)
+
+  basalAreaMax = Graph.initMax(basalArea, basalAreaMax)
 
   const basalAreaGauge = initGauge(
     '#basalAreaGauge',
@@ -48,7 +43,7 @@ export function initGauges (data) {
     .from(data
       .map(e => e.properties.h_mean)
       .values()))
-  hMeanMax = initMax(hMean, hMeanMax)
+  hMeanMax = Graph.initMax(hMean, hMeanMax)
 
   const hMeanGauge = initGauge('#hMeanGauge', 'm', hMeanMax)
 
@@ -59,9 +54,9 @@ export function initGauges (data) {
     .from(data
       .map(e => e.properties.shannon)
       .values()))
-  shannonMax = initMax(shannon, shannonMax)
+  shannonMax = Graph.initMax(shannon, shannonMax)
 
-  const shannonGauge = initGauge('#shannonGauge', 'SI', shannonMax)
+  const shannonGauge = initGauge('#shannonGauge', 'SI', shannonMax, '1')
 
   shannonGauge.render()
 
@@ -70,9 +65,9 @@ export function initGauges (data) {
     .from(data
       .map(e => e.properties.pielou)
       .values()))
-  pielouMax = initMax(pielou, pielouMax)
+  pielouMax = Graph.initMax(pielou, pielouMax)
 
-  const pielouGauge = initGauge('#pielouGauge', 'SI', pielouMax)
+  const pielouGauge = initGauge('#pielouGauge', 'SI', pielouMax, '2')
 
   pielouGauge.render()
 
@@ -81,9 +76,9 @@ export function initGauges (data) {
     .from(data
       .map(e => e.properties.simpson)
       .values()))
-  simpsonMax = initMax(simpson, simpsonMax)
+  simpsonMax = Graph.initMax(simpson, simpsonMax)
 
-  const simpsonGauge = initGauge('#simpsonGauge', 'SI', simpsonMax)
+  const simpsonGauge = initGauge('#simpsonGauge', 'SI', simpsonMax, '2')
 
   simpsonGauge.render()
 
@@ -92,9 +87,9 @@ export function initGauges (data) {
     .from(data
       .map(e => e.properties.wood_density)
       .values()))
-  woodDensityMax = initMax(woodDensity, woodDensityMax)
+  woodDensityMax = Graph.initMax(woodDensity, woodDensityMax)
 
-  const woodDensityGauge = initGauge('#woodDensityGauge', 'kg.m' + '-3'.sup(), woodDensityMax * 1000)
+  const woodDensityGauge = initGauge('#woodDensityGauge', 'g.cm' + '-3'.sup(), woodDensityMax, '3')
 
   woodDensityGauge.render()
 
@@ -103,7 +98,7 @@ export function initGauges (data) {
     .from(data
       .map(e => e.properties.biomasse)
       .values()))
-  biomasseMax = initMax(biomasse, biomasseMax)
+  biomasseMax = Graph.initMax(biomasse, biomasseMax)
 
   const biomasseGauge = initGauge('#biomasseGauge', 'SI', biomasseMax)
 
@@ -114,7 +109,7 @@ export function initGauges (data) {
     .from(data
       .map(e => e.properties.count_species)
       .values()))
-  richessMax = initMax(richess, richessMax)
+  richessMax = Graph.initMax(richess, richessMax)
 
   const richessGauge = initGauge('#richessGauge', 'nombre d espèces ', richessMax)
 
@@ -125,7 +120,7 @@ export function initGauges (data) {
   //   .from(data
   //     .map(e => e.properties.speciesLevel)
   //     .values()))
-  // speciesLevelMax = initMax(speciesLevel, speciesLevelMax)
+  // speciesLevelMax = Graph.initMax(speciesLevel, speciesLevelMax)
 
   const speciesLevelGauge = initGauge('#speciesLevelGauge', '%', speciesLevelMax)
 
@@ -136,13 +131,13 @@ export function initGauges (data) {
     updateData(data)
   })
 
-  function updateData (data) {
+  function updateData(data) {
     basalAreaGauge.update(data.properties.basal_area, basalAreaMax)
     hMeanGauge.update(data.properties.h_mean, hMeanMax)
     shannonGauge.update(data.properties.shannon, shannonMax)
     pielouGauge.update(data.properties.pielou, pielouMax)
     simpsonGauge.update(data.properties.simpson, simpsonMax)
-    woodDensityGauge.update(data.properties.wood_density * 1000, woodDensityMax * 1000)
+    woodDensityGauge.update(data.properties.wood_density, woodDensityMax)
     biomasseGauge.update(data.properties.biomasse, biomasseMax)
     richessGauge.update(data.properties.richess, richessMax)
     speciesLevelGauge.update(data.properties.species_level * speciesLevelMax, speciesLevelMax)

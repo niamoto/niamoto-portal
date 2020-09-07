@@ -21,7 +21,8 @@ export class Gauge {
     highMidThreshholdColor: '#82e042',
     highThreshholdColor: '#089f50',
     container: '',
-    transitionMs: 500
+    transitionMs: 500,
+    labelDecimal: '0'
   }
 
 
@@ -204,7 +205,7 @@ export class Gauge {
         var newAngle = this.minAngle + (this.scale(d) * this.angleRange)
         return `rotate(${newAngle}) translate(0, ${this.labelInset - this._radius()})`
       })
-      .text(d3.format('1.0f'))
+      .text(d3.format('1.' + this.config.labelDecimal + 'f'))
 
     // display panel - ticks
     lg.selectAll('line')

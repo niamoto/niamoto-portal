@@ -14,6 +14,14 @@ export function init(data) {
         color: [color.tree, color.ferns, color.lianas, color.palms]
     })
 
+    // familyTop10
+    const familyTops = new d3GraphDonut.GraphDonut({
+        width: $('#familyTop10').width(),
+        height: $('#familyTop10').height(),
+        container: '#familyTop10',
+        // color: ["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9467bd", "#8c564b", "#e377c2", "#7f7f7f", "#bcbd22", "#17becf"],
+    })
+
     // Update Data for trigger
     $('#plot_select').on('plotSelected', function (event, data) {
         updateData(data.properties.frequencies)
@@ -23,7 +31,13 @@ export function init(data) {
 
         const plantType = d3Graph.dataFilter(data, 'type_plant')
         const plantTypeData = d3Graph.dataJson(plantType);
-        plantTypes.update(plantTypeData)
+        plantTypes.update(plantTypeData.reverse())
+
+        const familyTop = d3Graph.dataFilter(data, 'familyTop10')
+        const familyTopData = d3Graph.dataJson(familyTop)
+        familyTops.config.legend = familyTopData.map(d=> d.class_name)
+        familyTops.legende()
+        familyTops.update(familyTopData.reverse())
 
     };
 };
