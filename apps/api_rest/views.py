@@ -15,6 +15,7 @@ import json
 import geojson
 from math import pi
 from django.contrib.gis.geos import GEOSGeometry
+from django.db.models.functions import Lower
 
 # Create your views here.
 
@@ -29,7 +30,7 @@ class PlotsViewSet(viewsets.ReadOnlyModelViewSet):
 
     @method_decorator(cache_page(60*60*24*300))
     def list(self, request):
-        queryset = mdlPlot.Plot.objects.all()
+        queryset = mdlPlot.Plot.objects.all().order_by(Lower('label').asc())
         serializer = serializers.PlotsSerializer(queryset, many=True)
         return Response(serializer.data)
 
