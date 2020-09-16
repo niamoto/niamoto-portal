@@ -345,7 +345,7 @@ export class GraphBarhSimple {
                 })
                 .on('mouseover', function (d) {
                     if (tooltipShow === 1) {
-                        d3.select(this).style("opacity", "1.0");
+                        d3.select(this).style("opacity", "0.8");
                         var html = "<p><strong>" + d.class_name + "</strong></p>";
                         tooltip.transition()
                             .duration(300)
@@ -355,7 +355,7 @@ export class GraphBarhSimple {
                 })
                 .on('mouseout', function (d) {
                     if (tooltipShow === 1) {
-                        d3.select(this).style("opacity", "0.8");
+                        d3.select(this).style("opacity", "1.0");
                         tooltip.transition()
                             .duration(300)
                             .style("opacity", 0);

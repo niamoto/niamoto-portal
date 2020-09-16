@@ -28,7 +28,8 @@ export class GraphDonut {
     yDomain: '',
     marginLeft: 0,
     colorText: ['#000'],
-    typeLegend: 2
+    typeLegend: 2,
+    toolTipShowLegend:0
   }
 
   constructor(configuration) {
@@ -95,6 +96,13 @@ export class GraphDonut {
   // .attr('dx', '.5em')
 
     this.legende()
+
+    this.tooltip = d3.select(this.config.container).append("div")
+    .attr("id", "tooltip")
+    .attr("class", "tooltip")
+    .style("opacity", 0);
+
+
   }
 
   legende(){
@@ -309,5 +317,7 @@ export class GraphDonut {
       .transition()
       .duration(500)
       .remove()
-  }
+
+ 
+    }
 };
