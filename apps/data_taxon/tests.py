@@ -3,7 +3,7 @@ from django.test import TestCase
 
 # Create your tests here.
 from django.urls import reverse
-from .models import Graph, Taxon, Phenology, Frequency
+from .models import Graph, Taxon, Frequency
 
 
 class PageTestCase(TestCase):
