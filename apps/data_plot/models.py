@@ -29,6 +29,13 @@ class Plot(models.Model):
     dbh_max = models.FloatField(null=True, blank=True)
     wood_density = models.FloatField(null=True, blank=True)
     biomasse = models.FloatField(null=True, blank=True)
+    longitude = models.FloatField(null=True, blank=True)
+    latitude = models.FloatField(null=True, blank=True)
+    holdridge = models.IntegerField(null=True, blank=True)
+    rainfall = models.IntegerField(null=True, blank=True)
+    um_substrat = models.BooleanField(null=True, blank=True)
+    town = models.CharField(max_length=50, null=True, blank=True)
+
 
     def __str__(self):
         return self.label
