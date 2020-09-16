@@ -49,14 +49,14 @@ class FrequencyTestCase(TestCase):
         self.assertEqual(str(frequency1), 'taxon1 100')
 
 
-class PhenologyTestCase(TestCase):
+# class PhenologyTestCase(TestCase):
 
-    def setUp(self):
-        Taxon.objects.create(full_name='taxon1', rank_name='family',
-                             id_rang=1)
-        taxon1 = Taxon.objects.get(full_name='taxon1')
-        Phenology.objects.create(taxon=taxon1, phenology='phenology1')
+#     def setUp(self):
+#         Taxon.objects.create(full_name='taxon1', rank_name='family',
+#                              id_rang=1)
+#         taxon1 = Taxon.objects.get(full_name='taxon1')
+#         Phenology.objects.create(taxon=taxon1, phenology='phenology1')
 
-    def test_Phenology_get_name(self):
-        phenology1 = Phenology.objects.get(phenology='phenology1')
-        self.assertEqual(str(phenology1), 'taxon1 phenology1')
+#     def test_Phenology_get_name(self):
+#         phenology1 = Phenology.objects.get(phenology='phenology1')
+#         self.assertEqual(str(phenology1), 'taxon1 phenology1')
