@@ -211,10 +211,10 @@ function updateGeneralInformations(data) {
 
   switch (data.properties.um_substrat){
     case true:
-      substrat='Substart ultramafique'
+      substrat='Substrat ultramafique'
       break;
     case false:
-      substrat='Substart non ultramafique'
+      substrat='Substrat non ultramafique'
       break;
   }
   $('#plot_um_substrat').text(substrat)
