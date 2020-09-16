@@ -180,10 +180,49 @@ function updateData(plot) {
     type: 'GET',
     url: plotList + plot.id + '/',
     success: function (response) {
+      updateGeneralInformations(response)
       $('#plot_select').trigger('plotSelected', response)
       preloader.hidePreloader()
     }
   })
+}
+
+function updateGeneralInformations(data) {
+  let holdridge = ''
+  let substrat = ''
+  $('#plot_commune').text('Commune: ' + data.properties.town)
+  if (data.properties.elevation){
+    $('#plot_elevation').text('Altitude: ' + data.properties.elevation)
+  }
+  $('#plot_geo').text('Géolocalisation: Lon ' + data.properties.longitude + ' Lat ' + data.properties.latitude)
+  $('#plot_rainfall').text('Précipitation : ' + data.properties.rainfall+' mm')
+  switch (data.properties.holdridge){
+    case 1:
+      holdridge='très humide';
+      break;
+    case 2:
+      holdridge='humide';
+      break;
+    case 3:
+      holdridge='sec';
+      break;
+  }
+  $('#plot_holdridge').text('Milieu : ' + holdridge)
+
+  switch (data.properties.um_substrat){
+    case true:
+      substrat='Oui'
+      break;
+    case false:
+      substrat='Non'
+      break;
+  }
+  $('#plot_um_substrat').text('Ultramafique : ' + substrat)
+  $('#plot_nb_families').text('Nombre de familles : ' + data.properties.count_families)
+  $('#plot_nb_species').text("Nombre d'espèces : " + data.properties.count_species)
+  console.log(data);
+
+
 }
 
 document.addEventListener('DOMContentLoaded', function () {

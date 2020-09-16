@@ -39,34 +39,58 @@
 
   {% for graph in graph_list %}
 
+  {% if graph.model == 'specifications'%}
   <div id="{{graph.name}}" class="s-{{graph.height}} p-3">
-    <div class="card card-{{graph.model}}">
+    <div class="card">
       <div class="card-header">{{graph.title|capfirst}}</div>
-      <div class="card-body {{graph.model}} d-flex flex-wrap">
-        {% if graph.legend_locate == 'nolegend'%}
-        <div id="{{graph.model}}" class="d3_panel graph">
-        </div>
-        {% else %}
-        <!-- invert order graph and legend -->
-        {% if graph.legend_locate == 'left' or  graph.legend_locate == 'top'%}
-        <div id="{{graph.model}}Legend" class="d3_panel legend-{{graph.legend_locate}}">
 
-        </div>
-        <div id="{{graph.model}}" class="d3_panel graph graph-legend-{{graph.legend_locate}}">
-        </div>
-        {% else %}
-        <div id="{{graph.model}}" class="d3_panel graph graph-legend-{{graph.legend_locate}}">
-        </div>
-        <div id="{{graph.model}}Legend" class="d3_panel legend-{{graph.legend_locate}}">
+      <div id="general_informations" class="card-body {{graph.model}}">
+        <h5 class="card-title"></h5>
+        <div class="card-text"><strong><span id='plot_commune'></span></strong></div>
+        <div class="card-text"><span id='plot_elevation'></span></div>
+        <div class="card-text"><span id='plot_geo'></span></div>
+        <div class="card-text"><span id='plot_rainfall'></span></div>
+        <div class="card-text"><span id='plot_holdridge'></span></div>
+        <div class="card-text"><span id='plot_um_substrat'></span></div>
+        <div class="card-text"><span id='plot_nb_families'></span></div>
+        <div class="card-text"><span id='plot_nb_species'></span></div>
+        
 
-        </div>
-        {% endif %}
-        {% endif %}
       </div>
-
-
     </div>
   </div>
+
+  {% else %}
+
+    <div id="{{graph.name}}" class="s-{{graph.height}} p-3">
+      <div class="card card-{{graph.model}}">
+        <div class="card-header">{{graph.title|capfirst}}</div>
+        <div class="card-body {{graph.model}} d-flex flex-wrap">
+          {% if graph.legend_locate == 'nolegend'%}
+          <div id="{{graph.model}}" class="d3_panel graph">
+          </div>
+          {% else %}
+          <!-- invert order graph and legend -->
+          {% if graph.legend_locate == 'left' or  graph.legend_locate == 'top'%}
+          <div id="{{graph.model}}Legend" class="d3_panel legend-{{graph.legend_locate}}">
+
+          </div>
+          <div id="{{graph.model}}" class="d3_panel graph graph-legend-{{graph.legend_locate}}">
+          </div>
+          {% else %}
+          <div id="{{graph.model}}" class="d3_panel graph graph-legend-{{graph.legend_locate}}">
+          </div>
+          <div id="{{graph.model}}Legend" class="d3_panel legend-{{graph.legend_locate}}">
+
+          </div>
+          {% endif %}
+          {% endif %}
+        </div>
+
+
+      </div>
+    </div>
+  {% endif %}
 
   {% endfor %}
   {% else %}
