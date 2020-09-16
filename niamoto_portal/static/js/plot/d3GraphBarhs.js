@@ -36,6 +36,20 @@ export function init(data) {
         tooltip: 1
     })
 
+    // familyTop10
+    var familyTops = new d3GraphBarhSimple.GraphBarhSimple({
+        width: $('#familyTop10').width(),
+        height: $('#familyTop10').height(),
+        container: '#familyTop10',
+        xLabel: 'Pourcentage du peuplement (%)',
+        color: ["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9467bd", "#8c564b", "#e377c2", "#7f7f7f", "#bcbd22", "#17becf"],
+        maxValue: '',
+        yDomainShow: 0,
+        marginLeft: 0.02,
+        yTextDomain: 1,
+        tooltip: 1
+    })
+
     // Update Data for trigger
     $('#plot_select').on('plotSelected', function (event, data) {
         updateData(data.properties.frequencies)
@@ -54,7 +68,11 @@ export function init(data) {
         speciesTop.config.maxValue=''
         speciesTop.update(specieTopdata)
 
-
+        const familyTop = d3Graph.dataFilter(data, 'top10_family')
+        const familyTopData = d3Graph.dataJson(familyTop)
+        familyTops.config.yDomain=''
+        familyTops.config.maxValue=''
+        familyTops.update(familyTopData)
 
 
     };
