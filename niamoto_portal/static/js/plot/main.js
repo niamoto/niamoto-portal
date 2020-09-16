@@ -192,37 +192,34 @@ function updateGeneralInformations(data) {
   let substrat = ''
   $('#plot_commune').text('Commune: ' + data.properties.town)
   if (data.properties.elevation){
-    $('#plot_elevation').text('Altitude: ' + data.properties.elevation)
+    $('#plot_elevation').text('Altitude: ' + data.properties.elevation +' m')
   }
-  $('#plot_geo').text('Géolocalisation: Lon ' + data.properties.longitude + ' Lat ' + data.properties.latitude)
-  $('#plot_rainfall').text('Précipitation : ' + data.properties.rainfall+' mm')
+  $('#plot_geo').text('Géolocalisation: ' + data.properties.longitude + ',' + data.properties.latitude)
+  $('#plot_rainfall').text('Précipitation : ' + data.properties.rainfall+' mm/an')
   switch (data.properties.holdridge){
     case 1:
-      holdridge='très humide';
+      holdridge='sec';
       break;
     case 2:
       holdridge='humide';
       break;
     case 3:
-      holdridge='sec';
+      holdridge='très humide';
       break;
   }
   $('#plot_holdridge').text('Milieu : ' + holdridge)
 
   switch (data.properties.um_substrat){
     case true:
-      substrat='Oui'
+      substrat='Substart ultramafique'
       break;
     case false:
-      substrat='Non'
+      substrat='Substart non ultramafique'
       break;
   }
-  $('#plot_um_substrat').text('Ultramafique : ' + substrat)
+  $('#plot_um_substrat').text(substrat)
   $('#plot_nb_families').text('Nombre de familles : ' + data.properties.count_families)
   $('#plot_nb_species').text("Nombre d'espèces : " + data.properties.count_species)
-  console.log(data);
-
-
 }
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -234,12 +231,4 @@ document.addEventListener('DOMContentLoaded', function () {
   d3graphBarvs.init()
   d3GraphDonuts.init()
   d3GraphBarhs.init()
-  // d3_map.initMap();
-  // d3_families_donut.initFamiliesDonut("#families_donut");
-  // // d3_species_donut.initSpeciesDonut("#species_donut");
-  // d3_species_barh.initSpeciesDonut("#species_donut");
-  // d3_diameters.initDiametersHistogram();
-  // d3_strates.initBarh();
-  // d3_stems.initStems();
-  // d3_type_plant.initTypePlantDonut("#type_plant_donut");
 })
