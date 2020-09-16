@@ -46,6 +46,7 @@ class Frequency(models.Model):
     param2_str = models.CharField(max_length=30, null=True, blank=True)
     param3_float = models.FloatField(null=True, blank=True)
     param4_float = models.FloatField(null=True, blank=True)
+    class_index = models.IntegerField(null=True, blank=True)
 
     def __str__(self):
         """Unicode representation of Frequency."""
