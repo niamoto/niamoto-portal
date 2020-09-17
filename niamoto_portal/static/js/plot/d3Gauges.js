@@ -12,13 +12,14 @@ export function initGauges(data) {
   var richessMax = 10
   var speciesLevelMax = 100
 
-  function initGauge(id, unit, maxValue, labelDecimal = '0') {
+  function initGauge(id, unit, maxValue, minValue = 0, labelDecimal = '0') {
     return new d3Gauge.Gauge({
       width: $(id).width(),
       height: $(id).height(),
       displayUnit: unit,
       container: id,
       maxValue: maxValue,
+      minValue: minValue,
       labelDecimal: labelDecimal
     })
   }
@@ -56,7 +57,7 @@ export function initGauges(data) {
       .values()))
   shannonMax = Graph.initMax(shannon, shannonMax)
 
-  const shannonGauge = initGauge('#shannonGauge', 'SI', shannonMax, '1')
+  const shannonGauge = initGauge('#shannonGauge', 'SI', shannonMax, 0, '1')
 
   shannonGauge.render()
 
@@ -67,7 +68,7 @@ export function initGauges(data) {
       .values()))
   pielouMax = Graph.initMax(pielou, pielouMax)
 
-  const pielouGauge = initGauge('#pielouGauge', 'SI', pielouMax, '2')
+  const pielouGauge = initGauge('#pielouGauge', 'SI', pielouMax, 0, '2')
 
   pielouGauge.render()
 
@@ -78,7 +79,7 @@ export function initGauges(data) {
       .values()))
   simpsonMax = Graph.initMax(simpson, simpsonMax)
 
-  const simpsonGauge = initGauge('#simpsonGauge', 'SI', simpsonMax, '2')
+  const simpsonGauge = initGauge('#simpsonGauge', 'SI', simpsonMax, 0, '2')
 
   simpsonGauge.render()
 
@@ -89,7 +90,7 @@ export function initGauges(data) {
       .values()))
   woodDensityMax = Graph.initMax(woodDensity, woodDensityMax)
 
-  const woodDensityGauge = initGauge('#woodDensityGauge', 'g.cm' + '-3'.sup(), woodDensityMax, '3')
+  const woodDensityGauge = initGauge('#woodDensityGauge', 'g.cm' + '-3'.sup(), woodDensityMax, 0, '3')
 
   woodDensityGauge.render()
 
@@ -115,14 +116,7 @@ export function initGauges(data) {
 
   richessGauge.render()
 
-  // speciesLevel
-  // var speciesLevel = Math.max(...Array
-  //   .from(data
-  //     .map(e => e.properties.speciesLevel)
-  //     .values()))
-  // speciesLevelMax = Graph.initMax(speciesLevel, speciesLevelMax)
-
-  const speciesLevelGauge = initGauge('#speciesLevelGauge', '%', speciesLevelMax)
+  const speciesLevelGauge = initGauge('#speciesLevelGauge', '%', speciesLevelMax, 75)
 
   speciesLevelGauge.render()
 
@@ -139,7 +133,7 @@ export function initGauges(data) {
     simpsonGauge.update(data.properties.simpson, simpsonMax)
     woodDensityGauge.update(data.properties.wood_density, woodDensityMax)
     biomasseGauge.update(data.properties.biomasse, biomasseMax)
-    richessGauge.update(data.properties.richess, richessMax)
+    richessGauge.update(data.properties.count_species, richessMax)
     speciesLevelGauge.update(data.properties.species_level * speciesLevelMax, speciesLevelMax)
   }
 }

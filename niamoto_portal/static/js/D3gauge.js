@@ -69,10 +69,10 @@ export class Gauge {
       .domain([this.config.minValue, this.config.maxValue])
 
     var colorDomain = [
-      (this.config.maxValue - this.config.minValue) * this.config.lowThreshhold,
-      (this.config.maxValue - this.config.minValue) * this.config.lowMidThreshhold,
-      (this.config.maxValue - this.config.minValue) * this.config.highMidThreshhold,
-      (this.config.maxValue - this.config.minValue) * this.config.highThreshhold
+      this.config.minValue + (this.config.maxValue - this.config.minValue) * this.config.lowThreshhold,
+      this.config.minValue + (this.config.maxValue - this.config.minValue) * this.config.lowMidThreshhold,
+      this.config.minValue + (this.config.maxValue - this.config.minValue) * this.config.highMidThreshhold,
+      this.config.minValue + (this.config.maxValue - this.config.minValue) * this.config.highThreshhold
     ].map(this.scale)
     const colorRange = [
       this.config.lowThreshholdColor,
@@ -86,19 +86,19 @@ export class Gauge {
 
     this.ticks = [
       this.config.minValue,
-      (this.config.maxValue - this.config.minValue) * this.config.lowThreshhold,
-      (this.config.maxValue - this.config.minValue) * this.config.lowMidThreshhold,
-      (this.config.maxValue - this.config.minValue) * this.config.highMidThreshhold,
-      (this.config.maxValue - this.config.minValue) * this.config.highThreshhold,
+      this.config.minValue + (this.config.maxValue - this.config.minValue) * this.config.lowThreshhold,
+      this.config.minValue + (this.config.maxValue - this.config.minValue) * this.config.lowMidThreshhold,
+      this.config.minValue + (this.config.maxValue - this.config.minValue) * this.config.highMidThreshhold,
+      this.config.minValue + (this.config.maxValue - this.config.minValue) * this.config.highThreshhold,
       this.config.maxValue
     ]
 
     this.threshholds = [
         this.config.minValue,
-        (this.config.maxValue - this.config.minValue) * this.config.lowThreshhold,
-        (this.config.maxValue - this.config.minValue) * this.config.lowMidThreshhold,
-        (this.config.maxValue - this.config.minValue) * this.config.highMidThreshhold,
-        (this.config.maxValue - this.config.minValue) * this.config.highThreshhold,
+        this.config.minValue + (this.config.maxValue - this.config.minValue) * this.config.lowThreshhold,
+        this.config.minValue + (this.config.maxValue - this.config.minValue) * this.config.lowMidThreshhold,
+        this.config.minValue + (this.config.maxValue - this.config.minValue) * this.config.highMidThreshhold,
+        this.config.minValue + (this.config.maxValue - this.config.minValue) * this.config.highThreshhold,
         this.config.maxValue
       ]
       .map(d => this.scale(d))
@@ -235,10 +235,10 @@ export class Gauge {
     // update ticks
     this.ticks = [
       this.config.minValue,
-      (this.config.maxValue - this.config.minValue) * this.config.lowThreshhold,
-      (this.config.maxValue - this.config.minValue) * this.config.lowMidThreshhold,
-      (this.config.maxValue - this.config.minValue) * this.config.highMidThreshhold,
-      (this.config.maxValue - this.config.minValue) * this.config.highThreshhold,
+      this.config.minValue + (this.config.maxValue - this.config.minValue) * this.config.lowThreshhold,
+      this.config.minValue + (this.config.maxValue - this.config.minValue) * this.config.lowMidThreshhold,
+      this.config.minValue + (this.config.maxValue - this.config.minValue) * this.config.highMidThreshhold,
+      this.config.minValue + (this.config.maxValue - this.config.minValue) * this.config.highThreshhold,
       this.config.maxValue
     ]
 
