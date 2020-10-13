@@ -11,7 +11,7 @@ export function initGraphDonuts(data) {
     container: '#cover_forest_type',
     value: ['forêt secondaire', 'forêt mature', 'forêt coeur'],
     legend: ['Forêt secondaire', 'Forêt mature', 'Forêt coeur'],
-    color: [color.forestSecondary, color.forestMature, color.forestHeart]
+    color: [color.forestSecondary, color.forestMature, color.forestCore]
   })
 
   // Update Data for trigger

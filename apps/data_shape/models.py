@@ -25,7 +25,7 @@ class Shape(models.Model):
     forest_perimeter = models.FloatField(null=True, blank=True)
     forest_secondary = models.FloatField(null=True, blank=True)
     forest_primary = models.FloatField(null=True, blank=True)
-    forest_heart = models.FloatField(null=True, blank=True)
+    forest_core = models.FloatField(null=True, blank=True)
     forest_inf_300 = models.FloatField(null=True, blank=True)
     forest_300_600 = models.FloatField(null=True, blank=True)
     forest_sup_600 = models.FloatField(null=True, blank=True)

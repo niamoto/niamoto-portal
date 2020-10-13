@@ -41,7 +41,7 @@ export function initGraphStakedAreas(data) {
     100,
     0.15,
     '',
-    [color.forestSecondary, color.forestMature, color.forestHeart],
+    [color.forestSecondary, color.forestMature, color.forestCore],
     ['100', '300', '500', '700', '900', '1100', '1300', '1500', '1700']
   )
 

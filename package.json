@@ -41,6 +41,7 @@
   },
   "dependencies": {
     "babelify": "^10.0.0",
+    "d3-scale-chromatic": "^2.0.0",
     "d3-svg-legend": "^2.25.6"
   }
 }

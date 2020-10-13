@@ -22,7 +22,8 @@ export class Gauge {
     highThreshholdColor: '#089f50',
     container: '',
     transitionMs: 500,
-    labelDecimal: '0'
+    labelDecimal: '0',
+    ticks: false
   }
 
 
@@ -208,20 +209,22 @@ export class Gauge {
       .text(d3.format('1.' + this.config.labelDecimal + 'f'))
 
     // display panel - ticks
-    lg.selectAll('line')
-      .data(this.ticks)
-      .enter()
-      .append('line')
-      .attr('class', 'tickline')
-      .attr('x1', 0)
-      .attr('y1', 0)
-      .attr('x2', 0)
-      .attr('y2', this.arcWidth + this.labelInset)
-      .attr('stroke-width', this.mwidth * 0.015)
-      .attr('transform', d => {
-        const newAngle = this.minAngle + (this.scale(d) * this.angleRange)
-        return `rotate(${newAngle}), translate(0, ${this.arcWidth - this.labelInset - this._radius()})`
-      })
+    if (this.config.ticks === true) {
+      lg.selectAll('line')
+        .data(this.ticks)
+        .enter()
+        .append('line')
+        .attr('class', 'tickline')
+        .attr('x1', 0)
+        .attr('y1', 0)
+        .attr('x2', 0)
+        .attr('y2', this.arcWidth + this.labelInset)
+        .attr('stroke-width', this.mwidth * 0.015)
+        .attr('transform', d => {
+          const newAngle = this.minAngle + (this.scale(d) * this.angleRange)
+          return `rotate(${newAngle}), translate(0, ${this.arcWidth - this.labelInset - this._radius()})`
+        })
+    }
   }
 
   update(newValue) {
