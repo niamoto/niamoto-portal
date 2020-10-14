@@ -1,14 +1,8 @@
 import * as d3GraphBarv from '../d3GraphOneBarv'
 import color from '../../css/source/partials/_color_js.scss'
+import * as d3Graph from '../d3Graph'
 
 export function initGraphBarvs(data) {
-  function initMax(maxValue, initMaxValue) {
-    if (maxValue === 0) {
-      return initMaxValue
-    } else {
-      return maxValue
-    }
-  }
 
   const value = ['Forêt', 'Hors-forêt']
   const colors = [color.forest, color.forestOut]
@@ -72,24 +66,8 @@ export function initGraphBarvs(data) {
   })
 
   function updateData(data) {
-    function dataFilter(data, field, precision = 0) {
-      const result = data
-        .filter(d => d.class_object === field)
-      // .map(d => {
-      //   class_name: d.class_name,
-      //   class_value: parseFloat(d.class_value.toFixed(precision))
-      // })
-      return result
-    }
 
-    function classFilter(data, field) {
-      const result = data
-        .filter(d => d.class_object === field)
-        .map(d => d.class_name)
-      return result
-    }
-
-    let coverForestData = dataFilter(data, 'cover_forest')
+    let coverForestData = d3Graph.dataFilter(data, 'cover_forest')
     coverForestData = coverForestData.map(function (d, i) {
       var result = {
         label: d.class_name,
@@ -99,7 +77,7 @@ export function initGraphBarvs(data) {
     })
     coverForests.update(coverForestData)
 
-    let coverForestUmData = dataFilter(data, 'cover_forestum')
+    let coverForestUmData = d3Graph.dataFilter(data, 'cover_forestum')
     coverForestUmData = coverForestUmData.map(function (d, i) {
       var result = {
         label: d.class_name,
@@ -109,7 +87,7 @@ export function initGraphBarvs(data) {
     })
     coverForestsUm.update(coverForestUmData)
 
-    let coverForestNumData = dataFilter(data, 'cover_forestnum')
+    let coverForestNumData = d3Graph.dataFilter(data, 'cover_forestnum')
     coverForestNumData = coverForestNumData.map(function (d, i) {
       var result = {
         label: d.class_name,
@@ -119,7 +97,7 @@ export function initGraphBarvs(data) {
     })
     coverForestsNum.update(coverForestNumData)
 
-    let coverForestAdminData = dataFilter(data, 'cover_forestadmin')
+    let coverForestAdminData = d3Graph.dataFilter(data, 'cover_forestadmin')
     coverForestAdminData = coverForestAdminData.map(function (d, i) {
       var result = {
         label: d.class_name,
@@ -129,7 +107,7 @@ export function initGraphBarvs(data) {
     })
     coverForestsAdmin.update(coverForestAdminData)
 
-    let substratData = dataFilter(data, 'substrat')
+    let substratData = d3Graph.dataFilter(data, 'substrat')
     substratData = substratData.map(function (d, i) {
       var result = {
         label: d.class_name,

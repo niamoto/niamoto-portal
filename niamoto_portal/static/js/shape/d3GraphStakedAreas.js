@@ -1,16 +1,9 @@
 import * as d3GraphstakedArea from '../d3GraphStakedArea'
-// import * as color from '../colors'
+import * as d3Graph from '../d3Graph'
 import color from '../../css/source/partials/_color_js.scss'
 
 
 export function initGraphStakedAreas(data) {
-  function initMax(maxValue, initMaxValue) {
-    if (maxValue === 0) {
-      return initMaxValue
-    } else {
-      return maxValue
-    }
-  }
 
   function initGraphStakedArea(id, xLabel, yLabel, value, yDomain, maxValue = '', marginLeft = 0.15, legend, color, xDomain, typeLegend = 1) {
     return new d3GraphstakedArea.GraphStakedArea({
@@ -67,27 +60,11 @@ export function initGraphStakedAreas(data) {
   })
 
   function updateData(data) {
-    function dataFilter(data, field, precision = 0) {
-      const result = data
-        .filter(d => d.class_object === field)
-      // .map(d => {
-      //   class_name: d.class_name,
-      //   class_value: parseFloat(d.class_value.toFixed(precision))
-      // })
-      return result
-    }
 
-    function classFilter(data, field) {
-      const result = data
-        .filter(d => d.class_object === field)
-        .map(d => d.class_name)
-      return result
-    }
-
-    const forestTypeElevationMature = dataFilter(data, 'ratio_forest_mature_elevation')
-    const forestTypeElevationCore = dataFilter(data, 'ratio_forest_core_elevation')
-    const forestTypeElevationSecondary = dataFilter(data, 'ratio_forest_second_elevation')
-    let forestFragmentationData = dataFilter(data, 'forest_fragmentation')
+    const forestTypeElevationMature = d3Graph.dataFilter(data, 'ratio_forest_mature_elevation')
+    const forestTypeElevationCore = d3Graph.dataFilter(data, 'ratio_forest_core_elevation')
+    const forestTypeElevationSecondary = d3Graph.dataFilter(data, 'ratio_forest_second_elevation')
+    let forestFragmentationData = d3Graph.dataFilter(data, 'forest_fragmentation')
 
     const forestTypeElevationData = forestTypeElevationMature.map(function (d, i) {
       var result = {

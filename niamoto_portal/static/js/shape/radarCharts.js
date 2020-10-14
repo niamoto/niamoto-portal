@@ -1,4 +1,5 @@
 import * as radarChart from '../radarChart'
+import * as d3Graph from '../d3Graph'
 
 const w = 210
 const h = 210

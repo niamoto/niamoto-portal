@@ -1,15 +1,9 @@
 import * as d3GraphBarh from '../d3GraphBarh'
 import * as d3GraphPyramidh from '../d3GraphPyramidh'
 import color from '../../css/source/partials/_color_js.scss'
+import * as d3Graph from '../d3Graph'
 
 export function initGraphBarhs(data) {
-  function initMax(maxValue, initMaxValue) {
-    if (maxValue === 0) {
-      return initMaxValue
-    } else {
-      return maxValue
-    }
-  }
 
   function initGraphBarh(id, xLabel, yLabel, value, yDomain, maxValue = '', marginLeft = 0.15, legend) {
     return new d3GraphBarh.GraphBarh({
@@ -74,17 +68,6 @@ export function initGraphBarhs(data) {
     .22
   )
 
-  // Holdridge forest
-  // const holdridgeForest = initGraphBarh(
-  //   '#holdridge_forest',
-  //   'Répartition(%)',
-  //   '',
-  //   ['Forêt', 'Hors-forêt'],
-  //   '',
-  //   100,
-  //   0.24
-  // )
-
   //   distributionOccGauge.render()
 
   // Update Data for trigger
@@ -93,31 +76,13 @@ export function initGraphBarhs(data) {
   })
 
   function updateData(data) {
-    function dataFilter(data, field, precision = 0) {
-      const result = data
-        .filter(d => d.class_object === field)
-      // .map(d => {
-      //   class_name: d.class_name,
-      //   class_value: parseFloat(d.class_value.toFixed(precision))
-      // })
-      return result
-    }
 
-    function classFilter(data, field) {
-      const result = data
-        .filter(d => d.class_object === field)
-        .map(d => d.class_name)
-      return result
-    }
-
-    const land = dataFilter(data, 'land_elevation')
-    const landUm = dataFilter(data, 'land_um_elevation')
-    const forest = dataFilter(data, 'forest_elevation')
-    const forestUm = dataFilter(data, 'forest_um_elevation')
-    // const holdridgeforest = dataFilter(data, 'holdridge_forest')
-    // const holdridgeOutforest = dataFilter(data, 'holdridge_outforest')
-    const ratioForestNUM = dataFilter(data, 'ratio_forest_num_elevation')
-    const ratioForestUM = dataFilter(data, 'ratio_forest_um_elevation')
+    const land = d3Graph.dataFilter(data, 'land_elevation')
+    const landUm = d3Graph.dataFilter(data, 'land_um_elevation')
+    const forest = d3Graph.dataFilter(data, 'forest_elevation')
+    const forestUm = d3Graph.dataFilter(data, 'forest_um_elevation')
+    const ratioForestNUM = d3Graph.dataFilter(data, 'ratio_forest_num_elevation')
+    const ratioForestUM = d3Graph.dataFilter(data, 'ratio_forest_um_elevation')
     const forestData = land.map(function (d, i) {
       var result = {
         class_name: d.class_name,
@@ -134,14 +99,6 @@ export function initGraphBarhs(data) {
       }
       return result
     })
-    // const holdridgeForestData = holdridgeOutforest.map(function (d, i) {
-    //   var result = {
-    //     class_name: d.class_name,
-    //     data1: holdridgeforest[i].class_value * 100,
-    //     data2: (d.class_value) * 100
-    //   }
-    //   return result
-    // })
 
     const ratioForestData = ratioForestNUM.map(function (d, i) {
       let UM
@@ -168,6 +125,5 @@ export function initGraphBarhs(data) {
     forests.update(forestData.reverse())
     forestsUm.update(forestUmData.reverse())
     ratioForest.update(ratioForestData.reverse())
-    // holdridgeForest.update(holdridgeForestData.reverse())
   };
 };

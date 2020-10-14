@@ -1,15 +1,9 @@
 import * as d3GraphBarv from '../d3GraphBarv'
 import * as d3GraphBarvMulti from '../d3GraphBarvMulti'
 import color from '../../css/source/partials/_color_js.scss'
+import * as d3Graph from '../d3Graph'
 
 export function initGraphBarvs(data) {
-  function initMax(maxValue, initMaxValue) {
-    if (maxValue === 0) {
-      return initMaxValue
-    } else {
-      return maxValue
-    }
-  }
 
   function initGraphBarv(id, xLabel, yLabel, value, yDomain, maxValue = '', marginLeft = 0.15, legend) {
     return new d3GraphBarv.GraphBarv({
@@ -73,25 +67,9 @@ export function initGraphBarvs(data) {
   })
 
   function updateData(data) {
-    function dataFilter(data, field, precision = 0) {
-      const result = data
-        .filter(d => d.class_object === field)
-      // .map(d => {
-      //   class_name: d.class_name,
-      //   class_value: parseFloat(d.class_value.toFixed(precision))
-      // })
-      return result
-    }
 
-    function classFilter(data, field) {
-      const result = data
-        .filter(d => d.class_object === field)
-        .map(d => d.class_name)
-      return result
-    }
-
-    const holdridgeforest = dataFilter(data, 'holdridge_forest')
-    const holdridgeforestOut = dataFilter(data, 'holdridge_forest_out')
+    const holdridgeforest = d3Graph.dataFilter(data, 'holdridge_forest')
+    const holdridgeforestOut = d3Graph.dataFilter(data, 'holdridge_forest_out')
 
     const holdridgeForestData = holdridgeforestOut.map(function (d, i) {
       var result = {
@@ -105,7 +83,7 @@ export function initGraphBarvs(data) {
     holdridgeForest.update(holdridgeForestData.reverse())
 
 
-    const landuse = dataFilter(data, 'land_use')
+    const landuse = d3Graph.dataFilter(data, 'land_use')
 
     const landUseData = landuse.map(function (d, i) {
       const str = d.class_name

@@ -1,15 +1,9 @@
 import * as d3GraphDonut from '../d3TripleDonuts'
 import color from '../../css/source/partials/_color_js.scss'
+import * as d3Graph from '../d3Graph'
 
 
 export function initGraphDonuts(data) {
-  function initMax(maxValue, initMaxValue) {
-    if (maxValue === 0) {
-      return initMaxValue
-    } else {
-      return maxValue
-    }
-  }
 
   // forets type
   const coversForests = new d3GraphDonut.GraphDonut({
@@ -27,36 +21,10 @@ export function initGraphDonuts(data) {
   })
 
   function updateData(data) {
-    function dataFilter(data, field, precision = 0) {
-      const result = data
-        .filter(d => d.class_object === field)
-      // .map(d => {
-      //   class_name: d.class_name,
-      //   class_value: parseFloat(d.class_value.toFixed(precision))
-      // })
-      return result
-    }
 
-    function classFilter(data, field) {
-      const result = data
-        .filter(d => d.class_object === field)
-        .map(d => d.class_name)
-      return result
-    }
-
-    function affectData(data) {
-      return data.map(function (d, i) {
-        var result = {
-          label: d.class_name,
-          value: d.class_value
-        }
-        return result
-      })
-    }
-
-    const coverForestData = affectData(dataFilter(data, 'cover_forest'))
-    const coverForestUmData = affectData(dataFilter(data, 'cover_forestum'))
-    const coverForestNumData = affectData(dataFilter(data, 'cover_forestnum'))
+    const coverForestData = d3Graph.dataJson(d3Graph.dataFilter(data, 'cover_forest'))
+    const coverForestUmData = d3Graph.dataJson(d3Graph.dataFilter(data, 'cover_forestum'))
+    const coverForestNumData = d3Graph.dataJson(d3Graph.dataFilter(data, 'cover_forestnum'))
 
     const coversForestData = {
       data1: coverForestData,
