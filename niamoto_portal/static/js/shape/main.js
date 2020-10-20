@@ -3,7 +3,6 @@ import * as d3Gauges from './d3Gauges'
 import * as preloader from '../preloader'
 import * as d3GraphBarh from './d3GraphBarhs'
 import * as d3radarChart from './radarCharts'
-import * as d3GraphOneBarv from './d3GraphOneBarvs'
 import * as d3GraphBarv from './d3GraphBarvs'
 import * as d3GraphDonut from './d3GraphDonuts'
 import * as d3GraphTripleDonut from './d3TripleDonuts'
@@ -281,7 +280,6 @@ document.addEventListener('DOMContentLoaded', function () {
   // InitLayerShapeProvince()
   d3GraphBarh.initGraphBarhs()
   d3radarChart.initRadarChart()
-  d3GraphOneBarv.initGraphBarvs()
   d3GraphBarv.initGraphBarvs()
   d3GraphDonut.initGraphDonuts()
   d3GraphTripleDonut.initGraphDonuts()
