@@ -2,7 +2,7 @@ import * as d3GraphDonut from '../d3Donut'
 import color from '../../css/source/partials/_color_js.scss'
 import * as d3Graph from '../d3Graph'
 
-export function initGraphDonuts(data) {
+export function init(data) {
 
   // forets type
   const coverForestsType = new d3GraphDonut.GraphDonut({
@@ -22,13 +22,7 @@ export function initGraphDonuts(data) {
   function updateData(data) {
 
     let coverForestTypeData = d3Graph.dataFilter(data, 'cover_foresttype')
-    coverForestTypeData = coverForestTypeData.map(function (d, i) {
-      var result = {
-        label: d.class_name,
-        value: d.class_value
-      }
-      return result
-    })
+    coverForestTypeData = d3Graph.dataJson(coverForestTypeData)
     coverForestsType.update(coverForestTypeData.reverse())
   };
 };

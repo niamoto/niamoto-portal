@@ -3,7 +3,7 @@ import color from '../../css/source/partials/_color_js.scss'
 import * as d3Graph from '../d3Graph'
 
 
-export function initGraphDonuts(data) {
+export function init(data) {
 
   // forets type
   const coversForests = new d3GraphDonut.GraphDonut({

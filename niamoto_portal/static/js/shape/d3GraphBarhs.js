@@ -3,73 +3,36 @@ import * as d3GraphPyramidh from '../d3GraphPyramidh'
 import color from '../../css/source/partials/_color_js.scss'
 import * as d3Graph from '../d3Graph'
 
-export function initGraphBarhs(data) {
-
-  function initGraphBarh(id, xLabel, yLabel, value, yDomain, maxValue = '', marginLeft = 0.15, legend) {
-    return new d3GraphBarh.GraphBarh({
-      width: $(id).width(),
-      height: $(id).height(),
-      container: id,
-      title: '',
-      xLabel: xLabel,
-      yLabel: yLabel,
-      value: value,
-      yDomain: yDomain,
-      maxValue: maxValue,
-      marginLeft: marginLeft,
-      color: [color.forest, color.forestOut]
-    })
-  }
-
-  function initGraphPyramidh(id, xLabel, yLabel, value, yDomain, maxValue = 100, marginLeft = 0.15, legend) {
-    return new d3GraphPyramidh.GraphPyramidh({
-      width: $(id).width(),
-      height: $(id).height(),
-      container: id,
-      title: '',
-      xLabel: xLabel,
-      yLabel: yLabel,
-      value: value,
-      yDomain: yDomain,
-      maxValue: maxValue,
-      marginLeft: marginLeft,
-      color: [color.forestUM, color.forestNUM, color.landUM, color.landNUM]
-    })
-  }
+export function init(data) {
 
   // forets
-  const forests = initGraphBarh(
-    '#forets',
-    'Superfice (hectare)',
-    'Alitude (m)',
-    ['Forêt', 'Hors-forêt'],
-    ['1700', '1500', '1300', '1100', '900', '700', '500', '300', '100']
-  )
+  const forests = new d3GraphBarh.GraphBarh({
+    width: $('#forests').width(),
+    height: $('#forests').height(),
+    container: '#forests',
+    xLabel: 'Superfice (hectare)',
+    yLabel: 'Alitude (m)',
+    value: ['Forêt', 'Hors-forêt'],
+    yDomain: ['1700', '1500', '1300', '1100', '900', '700', '500', '300', '100'],
+    color: [color.forest, color.forestOut]
+  })
+  
 
-  //   dbhMaxGauge.render()
-
-  // forets ultramafique
-  const forestsUm = initGraphBarh(
-    '#forets_um',
-    'Superfice (hectare)',
-    'Alitude (m)',
-    ['Forêt', 'Hors-forêt'],
-    ['1700', '1500', '1300', '1100', '900', '700', '500', '300', '100']
-  )
-
-  // cover forest NUM UM
-  const ratioForest = initGraphPyramidh(
-    '#ratio_forests',
-    'Répartition (%)',
-    'Alitude (m)',
-    ['Forêt (UM)', 'Forêt (NUM)'],
-    ['1700', '1500', '1300', '1100', '900', '700', '500', '300', '100'],
-    100,
-    .22
-  )
-
-  //   distributionOccGauge.render()
-
+    // cover forest NUM UM
+    const ratioForest = new d3GraphPyramidh.GraphPyramidh ({
+      width: $('#ratio_forests').width(),
+      height: $('#ratio_forests').height(),
+      container: '#ratio_forests',
+      xLabel: 'Répartition (%)',
+      yLabel: 'Alitude (m)',
+      value: ['Forêt (UM)', 'Forêt (NUM)'],
+      yDomain: ['1700', '1500', '1300', '1100', '900', '700', '500', '300', '100'],
+      maxValue: 100,
+      marginLeft: .22,
+      color: [color.forestUM, color.forestNUM, color.landUM, color.landNUM]
+    })
+    
+    
   // Update Data for trigger
   $('#shape_select').on('shapeSelected', function (event, data) {
     updateData(data.properties.frequencies)
@@ -88,14 +51,6 @@ export function initGraphBarhs(data) {
         class_name: d.class_name,
         data1: forest[i].class_value.toFixed(0),
         data2: (d.class_value - forest[i].class_value).toFixed(0)
-      }
-      return result
-    })
-    const forestUmData = landUm.map(function (d, i) {
-      var result = {
-        class_name: d.class_name,
-        data1: forestUm[i].class_value.toFixed(0),
-        data2: (d.class_value - forestUm[i].class_value).toFixed(0)
       }
       return result
     })
@@ -123,7 +78,6 @@ export function initGraphBarhs(data) {
       return result
     })
     forests.update(forestData.reverse())
-    forestsUm.update(forestUmData.reverse())
     ratioForest.update(ratioForestData.reverse())
   };
 };

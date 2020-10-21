@@ -12,10 +12,6 @@ export function initMax(maxValue, initMaxValue) {
 export function dataFilter(data, field, precision = 0) {
     const result = data
         .filter(d => d.class_object === field)
-    // .map(d => {
-    //   class_name: d.class_name,
-    //   class_value: parseFloat(d.class_value.toFixed(precision))
-    // })
     return result
 }
 

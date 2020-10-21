@@ -1,22 +1,18 @@
 import * as d3Gauge from '../D3gauge'
 
-export function initGauges(data) {
+export function init(data) {
   var fragmentationMax = 900
 
-  function initGauge(id, unit, minValue, maxValue) {
-    return new d3Gauge.Gauge({
-      width: $(id).width(),
-      height: $(id).height(),
-      displayUnit: unit,
-      container: id,
-      minValue: minValue,
-      maxValue: maxValue
-    })
-  }
-
   // Fragmentation
-  const fragmentation = initGauge('#fragmentation', 'Maille effective', 0, fragmentationMax)
-
+  let fragmentation = new d3Gauge.Gauge({
+    width: $('#fragmentation').width(),
+    height: $('#fragmentation').height(),
+    displayUnit: 'Maille effective',
+    container: '#fragmentation',
+    minValue: 0,
+    maxValue: fragmentationMax
+  })
+  
   fragmentation.render()
 
   $('#shape_select').on('shapeSelected', function (event, data) {

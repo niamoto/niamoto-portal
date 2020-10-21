@@ -3,64 +3,32 @@ import * as d3GraphBarvMulti from '../d3GraphBarvMulti'
 import color from '../../css/source/partials/_color_js.scss'
 import * as d3Graph from '../d3Graph'
 
-export function initGraphBarvs(data) {
-
-  function initGraphBarv(id, xLabel, yLabel, value, yDomain, maxValue = '', marginLeft = 0.15, legend) {
-    return new d3GraphBarv.GraphBarv({
-      width: $(id).width(),
-      height: $(id).height(),
-      container: id,
-      title: '',
-      xLabel: xLabel,
-      yLabel: yLabel,
-      value: value,
-      yDomain: yDomain,
-      maxValue: maxValue,
-      marginLeft: marginLeft,
-      color: [color.forest, color.forestOut]
-    })
-  }
-
-  function initGraphBarvMulti(id, xLabel, yLabel, value, yDomain, maxValue = '', marginLeft = 0.15, legend) {
-    return new d3GraphBarvMulti.GraphBarvMulti({
-      width: $(id).width(),
-      height: $(id).height(),
-      container: id,
-      title: '',
-      xLabel: xLabel,
-      yLabel: yLabel,
-      value: value,
-      yDomain: yDomain,
-      maxValue: maxValue,
-      marginLeft: marginLeft,
-      color: [color.forest, color.forestOut]
-    })
-  }
+export function init(data) {
 
   // Holdridge forest
-  const holdridgeForest = initGraphBarv(
-    '#holdridge_forest',
-    '',
-    '',
-    ['Forêt', 'Hors-forêt'],
-    [0, 100],
-    100,
-    .16
-  )
+  const holdridgeForest = new d3GraphBarv.GraphBarv({
+    width: $('#holdridge_forest').width(),
+    height: $('#holdridge_forest').height(),
+    container: '#holdridge_forest',
+    value: ['Forêt', 'Hors-forêt'],
+    yDomain: [0, 100],
+    maxValue: 100,
+    marginLeft: .16,
+    color: [color.forest, color.forestOut]
+  })
+  
 
   // land_use
-  const landUse = initGraphBarvMulti(
-    '#land_use',
-    '',
-    'Surface (ha)',
-    '',
-    '',
-    100,
-    .20
-  )
-
-  //   distributionOccGauge.render()
-
+  const landUse = new d3GraphBarvMulti.GraphBarvMulti({
+    width: $('#land_use').width(),
+    height: $('#land_use').height(),
+    container: '#land_use',
+    yLabel: 'Surface (ha)',
+    maxValue: 100,
+    marginLeft: .2,
+    color: [color.forest, color.forestOut]
+  })
+  
   // Update Data for trigger
   $('#shape_select').on('shapeSelected', function (event, data) {
     updateData(data.properties.frequencies)

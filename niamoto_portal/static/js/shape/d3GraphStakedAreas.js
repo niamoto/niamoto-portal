@@ -3,57 +3,41 @@ import * as d3Graph from '../d3Graph'
 import color from '../../css/source/partials/_color_js.scss'
 
 
-export function initGraphStakedAreas(data) {
+export function init(data) {
 
   function initGraphStakedArea(id, xLabel, yLabel, value, yDomain, maxValue = '', marginLeft = 0.15, legend, color, xDomain, typeLegend = 1) {
-    return new d3GraphstakedArea.GraphStakedArea({
-      width: $(id).width(),
-      height: $(id).height(),
-      container: id,
-      title: '',
-      xLabel: xLabel,
-      yLabel: yLabel,
-      value: value,
-      yDomain: yDomain,
-      maxValue: maxValue,
-      marginLeft: marginLeft,
-      legend: value,
-      color: color,
-      xDomain: xDomain,
-      typeLegend: typeLegend
-    })
+    return 
   }
 
   // Holdridge forest
-  const forestTypeElevation = initGraphStakedArea(
-    '#forest_type_elevation',
-    'Altitude (m)',
-    '',
-    ['Forêt secondaire', 'Forêt mature', 'Forêt coeur'],
-    [0, 100],
-    100,
-    0.15,
-    '',
-    [color.forestSecondary, color.forestMature, color.forestCore],
-    ['100', '300', '500', '700', '900', '1100', '1300', '1500', '1700']
-  )
-
-  const forestFragmentation = initGraphStakedArea(
-    '#forest_fragmentation',
-    '',
-    'Surface (ha)',
-    ['Aire Cumulée'],
-    [0, 100],
-    100,
-    0.15,
-    '',
-    [color.forest],
-    ['10', '60', '125', '250', '375', '500', '1000', '1500', '2000', '27000']
-    // ['10', '20', '30', '40', '50', '70', '80', '90', '100', '125', '150', '175', '200', '225', '250', '275', '300', '325', '350', '375', '400', '425', '450', '475', '500', '600', '700', '800', '900', '1000', '1100', '1200', '1300', '1400', '1500', '1600', '1700', '1800', '1900', '2000', '7000', '12000', '22000', '27000', '32000']
-  )
-
-  //   distributionOccGauge.render()
-
+  const forestTypeElevation = new d3GraphstakedArea.GraphStakedArea({
+    width: $('#forest_type_elevation').width(),
+    height: $('#forest_type_elevation').height(),
+    container: '#forest_type_elevation',
+    xLabel: 'Altitude (m)',
+    value: ['Forêt secondaire', 'Forêt mature', 'Forêt coeur'],
+    yDomain:[0, 100],
+    maxValue: 100,
+    legend: ['Forêt secondaire', 'Forêt mature', 'Forêt coeur'],
+    color: [color.forestSecondary, color.forestMature, color.forestCore],
+    xDomain: ['100', '300', '500', '700', '900', '1100', '1300', '1500', '1700'],
+    typeLegend: 1
+  })
+  
+  // forestFragmentation
+  const forestFragmentation = new d3GraphstakedArea.GraphStakedArea({
+    width: $('#forest_fragmentation').width(),
+    height: $('#forest_fragmentation').height(),
+    container: '#forest_fragmentation',
+    yLabel: 'Surface (ha)',
+    value: ['Aire Cumulée'],
+    maxValue: 100,
+    legend: ['Aire Cumulée'],
+    color: [color.forest],
+    xDomain: ['10', '60', '125', '250', '375', '500', '1000', '1500', '2000', '27000'],
+    typeLegend: 1
+  })
+  
   // Update Data for trigger
   $('#shape_select').on('shapeSelected', function (event, data) {
     updateData(data.properties.frequencies)

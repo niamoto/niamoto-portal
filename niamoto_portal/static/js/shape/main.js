@@ -2,7 +2,6 @@ import * as restUrls from '../restUrls'
 import * as d3Gauges from './d3Gauges'
 import * as preloader from '../preloader'
 import * as d3GraphBarh from './d3GraphBarhs'
-import * as d3radarChart from './radarCharts'
 import * as d3GraphBarv from './d3GraphBarvs'
 import * as d3GraphDonut from './d3GraphDonuts'
 import * as d3GraphTripleDonut from './d3TripleDonuts'
@@ -277,12 +276,10 @@ document.addEventListener('DOMContentLoaded', function () {
     preloader.hidePreloader()
   })
   buildShapeList()
-  // InitLayerShapeProvince()
-  d3GraphBarh.initGraphBarhs()
-  d3radarChart.initRadarChart()
-  d3GraphBarv.initGraphBarvs()
-  d3GraphDonut.initGraphDonuts()
-  d3GraphTripleDonut.initGraphDonuts()
-  d3GraphStakedArea.initGraphStakedAreas()
-  d3Gauges.initGauges(null)
+  d3GraphBarh.init()
+  d3GraphBarv.init()
+  d3GraphDonut.init()
+  d3GraphTripleDonut.init()
+  d3GraphStakedArea.init()
+  d3Gauges.init(null)
 })
