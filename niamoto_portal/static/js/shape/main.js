@@ -234,8 +234,8 @@ function InitLayerShapeProvince() {
 
 function updateGeneralInformations(data) {
   $('#commune').text(data.properties.label)
-  $('#landArea').text('Surface ' + data.properties.land_area + ' ha')
-  $('#forestArea').text('Surface de forêt ' + data.properties.forest_area + ' ha')
+  $('#landArea').text('Surface ' + Math.round(data.properties.land_area) + ' ha')
+  $('#forestArea').text('Surface de forêt ' + Math.round(data.properties.forest_area) + ' ha')
   $('#nb_families').text(data.properties.nb_families + ' famille' + plurial(data.properties.nb_families))
   $('#nb_species').text(data.properties.nb_species + ' espèce' + plurial(data.properties.nb_species))
   $('#nb_occurence').text(data.properties.nb_occurence + ' occurence' + plurial(data.properties.nb_occurence))
