@@ -203,9 +203,9 @@ function updateData(shape) {
     type: 'GET',
     url: shapeList + shape.id + '/',
     success: function (response) {
-      $('#shape_select').trigger('shapeSelected', response)
       updateGeneralInformations(response)
       updateLayerShape(response)
+      $('#shape_select').trigger('shapeSelected', response)
       preloader.hidePreloader()
     }
   })
@@ -250,8 +250,8 @@ function updateLayerShape(data) {
   source.clear()
   sourceForest.clear()
   source.addFeature(new ol.format.GeoJSON().readFeature(data))
-  if (data.properties.forest_geom !== null) {
-    sourceForest.addFeature(new ol.format.GeoJSON().readFeature(data.properties.forest_geom))
+  if (data.properties.geom_forest !== null) {
+    sourceForest.addFeature(new ol.format.GeoJSON().readFeature(data.properties.geom_forest))
   }
   const feature = source.getFeatures()[0]
   const polygon = feature.getGeometry()
