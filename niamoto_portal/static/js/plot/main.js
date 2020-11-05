@@ -194,8 +194,9 @@ function updateGeneralInformations(data) {
   if (data.properties.elevation){
     $('#plot_elevation').text('Altitude: ' + data.properties.elevation +' m')
   }
-  $('#plot_geo').text('Géolocalisation: ' + data.properties.longitude + ',' + data.properties.latitude)
-  $('#plot_rainfall').text('Précipitation : ' + data.properties.rainfall+' mm/an')
+  $('#plot_long').text('Longitude: ' + data.properties.longitude)
+  $('#plot_lat').text('Latitude: ' + data.properties.latitude)
+  $('#plot_rainfall').text('Précipitation annuelle moyenne: ' + data.properties.rainfall+' mm/an')
   switch (data.properties.holdridge){
     case 1:
       holdridge='sec';
@@ -220,6 +221,7 @@ function updateGeneralInformations(data) {
   $('#plot_um_substrat').text(substrat)
   $('#plot_nb_families').text('Nombre de familles : ' + data.properties.count_families)
   $('#plot_nb_species').text("Nombre d'espèces : " + data.properties.count_species)
+  $('#plot_nb_species').text("Taux d'identification : " + data.properties.species_level*100 + '%')
 }
 
 document.addEventListener('DOMContentLoaded', function () {

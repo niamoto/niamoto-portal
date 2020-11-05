@@ -281,11 +281,4 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   })
 
-  // d3_families_donut.initFamiliesDonut("# families_donut ");
-  // // d3_species_donut.initSpeciesDonut("#species_donut");
-  // d3_species_barh.initSpeciesDonut("#species_donut");
-  // d3_diameters.initDiametersHistogram();
-  // d3_strates.initBarh();
-  // d3_stems.initStems();
-  // d3_type_plant.initTypePlantDonut("#type_plant_donut");
 })
