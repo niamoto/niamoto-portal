@@ -93,7 +93,7 @@ export function init(data) {
         let pluvioRange = pluvio.filter(function (d, i) {
             return d.class_value > 0
         })
-        $('#tax_range_pluvio').text('Plage pluviométrique: ' + d3.min(pluvioRange, d => +d.class_name) + '-' + d3.max(pluvioRange, d => +d.class_name) + 'mm')
+        $('#tax_range_pluvio').text('Pluviométrie annuelle moyenne: ' + d3.min(pluvioRange, d => +d.class_name) + '-' + d3.max(pluvioRange, d => +d.class_name) + 'mm')
 
 
 

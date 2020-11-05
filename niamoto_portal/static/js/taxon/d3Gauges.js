@@ -17,14 +17,15 @@ export function initGauges(data) {
   const leafAreaMax = data.leaf_area_max
 
 
-  function initGauge(id, unit, minValue, maxValue) {
+  function initGauge(id, unit, minValue, maxValue, labelDecimal = '0') {
     return new d3Gauge.Gauge({
       width: $(id).width(),
       height: $(id).height(),
       displayUnit: unit,
       container: id,
       minValue: minValue,
-      maxValue: maxValue
+      maxValue: maxValue,
+      labelDecimal: labelDecimal
     })
   }
 
@@ -37,7 +38,7 @@ export function initGauges(data) {
   // distributionOccGauge.render()
 
   // wood density
-  const woodDensityGauge = initGauge('#woodDensityGauge', 'kg.m' + '-3'.sup(), 0, woodDensityMax * 1000)
+  const woodDensityGauge = initGauge('#woodDensityGauge', 'g.cm' + '-3'.sup(), 0, woodDensityMax, 3)
   woodDensityGauge.render()
 
   // rainfall min : aridity
@@ -49,7 +50,7 @@ export function initGauges(data) {
   heightMaxGauge.render()
 
   // distributionGeo
-  const distributionGeoGauge = initGauge('#distributionGeoGauge', 'Nombre de parcelles', 0, ncpippn_count_max)
+  const distributionGeoGauge = initGauge('#distributionGeoGauge', 'Nombre de parcelles (%)', 0, 100)
   distributionGeoGauge.render()
 
   // size pop
@@ -61,15 +62,15 @@ export function initGauges(data) {
   leafThickness.render()
 
   // leaf sla
-  const leafSla = initGauge('#leafSla', 'feuille SLA', 0, leafLdmcMax)
+  const leafSla = initGauge('#leafSla', 'm' + '2'.sup()+'.kg' + '-1'.sup(), 0, leafLdmcMax)
   leafSla.render()
 
   // leaf Area
-  const leafArea = initGauge('#leafArea', 'mm2', 0, leafAreaMax)
+  const leafArea = initGauge('#leafArea', 'mm' + '2'.sup(), 0, leafAreaMax)
   leafArea.render()
 
   // leaf ldmc
-  const leafLdmc = initGauge('#leafLdmc', '', 0, leafLdmcMax)
+  const leafLdmc = initGauge('#leafLdmc', 'mg/g', 0, 1000)
   leafLdmc.render()
 
   // Update Data for trigger
@@ -82,9 +83,9 @@ export function initGauges(data) {
   function updateData(data) {
     // distributionOccGauge.update(data.occ_count / occCount * 100)
     dbhMaxGauge.update(data.dbh_max)
-    woodDensityGauge.update(data.wood_density_max * 1000)
+    woodDensityGauge.update(data.wood_density_max)
     sizePopGauge.update(data.freq_max)
-    distributionGeoGauge.update(data.ncpippn_count)
+    distributionGeoGauge.update(data.ncpippn_count/ncpippn_count_max*100)
     // rainfallMinGauge.update(data.rainfall.min, rainfallMax)
     heightMaxGauge.update(data.height_max)
     // distributionGeoGauge.update(data.plotsCount, plotsCount)

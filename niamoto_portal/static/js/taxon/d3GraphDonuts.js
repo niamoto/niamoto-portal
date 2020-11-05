@@ -11,7 +11,7 @@ export function init(data) {
     height: $('#distributionSubstrat').height(),
     container: '#distributionSubstrat',
     value: ['UM', 'NUM'],
-    legend: ['UM', 'NUM'],
+    legend: ['Ultramafique (UM)', 'non-Ultramafique (NUM)'],
     color: [color.landUM, color.landNUM]
   })
 
