@@ -29,7 +29,7 @@ p a :hover {
   margin-bottom: 25px;
 }
 
-.image, .image_center, .image_float_top_left, #holdridge img, #env img, .image_float_top_right {
+.image, .image_center, .image_float_top_left, figure img, .image_float_top_right {
   margin: 20px;
   border-radius: 5px;
   padding: 0;
@@ -41,7 +41,7 @@ p a :hover {
   margin-right: auto;
 }
 
-.image_float_top_left, #holdridge img, #env img {
+.image_float_top_left, figure img {
   float: left;
   margin-left: 0;
   margin-top: 0;

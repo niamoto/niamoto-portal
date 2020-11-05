@@ -1,16 +1,10 @@
 @import '../../../../../niamoto_portal/static/css/source/partials/color';
 @import "../../../../../niamoto_portal/static/css/source/partials/style";
 
-#holdridge {
+figure {
 
     img {
-        @extend .image_float_top_left;
+      @extend .image_float_top_left;
     }
-}
+  }
 
-
-#env {
-    img {
-        @extend .image_float_top_left;
-    }
-}
