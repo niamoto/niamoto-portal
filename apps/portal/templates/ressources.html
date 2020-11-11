@@ -327,7 +327,7 @@
             {%for tree in trees%}
             <tr>
               <td>{{tree.family_name|default:""}}</td>
-              <td>{{tree.genre_name|default:""}}</td>
+              <td>{{tree.genus_name|default:""}}</td>
               <td>{{tree.name|default:""}}</td>
               <td {%if tree.statut == "Endémique" %} class="endemique" {%endif%} {%if tree.statut == "Autochtone" %}
                 class="autochtone" {%endif%}>
