@@ -307,6 +307,9 @@ flip card
 .card-flip:hover .card-back {
   -webkit-transform: rotateY(0deg);
           transform: rotateY(0deg);
+  margin-right: 2px;
+  margin-left: 2px;
+  text-align: left;
 }
 
 .card-block {
