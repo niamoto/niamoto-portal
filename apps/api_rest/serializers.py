@@ -30,7 +30,7 @@ class PlotsSerializer(gis_serializers.GeoFeatureModelSerializer):
 
         geo_field = 'location'
         fields = ('id', 'label', 'shannon', 'pielou', 'simpson', 'basal_area',
-                  'h_mean', 'wood_density', 'biomasse', 'count_species',
+                  'h_mean', 'wood_density_mean', 'biomass', 'count_species',
                   'species_level', 'location')
 
 
@@ -90,6 +90,7 @@ class ShapeSerializer(gis_serializers.GeoFeatureModelSerializer):
                   'forest_area', 'forest_um_area', 'forest_perimeter', 'nb_patchs',
                   'forest_in', 'nb_occurence',
                   'nb_families', 'nb_species', 'fragment_meff_cbc', 'geom_forest',
+                  'rainfall_min', 'rainfall_max', 'elevation_median', 'elevation_max',
                   'frequencies')
 
 
