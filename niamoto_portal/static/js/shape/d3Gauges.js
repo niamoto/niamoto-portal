@@ -7,10 +7,10 @@ export function init(data) {
   let fragmentation = new d3Gauge.Gauge({
     width: $('#fragmentation').width(),
     height: $('#fragmentation').height(),
-    displayUnit: 'Maille effective',
+    displayUnit: 'Taille effective de maillage (km' + '2'.sup()  + ')',
     container: '#fragmentation',
     minValue: 0,
-    maxValue: fragmentationMax
+    maxValue: 1000
   })
   
   fragmentation.render()

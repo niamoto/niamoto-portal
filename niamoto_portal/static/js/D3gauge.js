@@ -2,7 +2,37 @@
 
 import * as d3 from 'd3'
 
+/**
+ * Represents a graph gauge.
+ * @constructor
+ * @param {object} configuration - configuration default constains member config.
+ */
 export class Gauge {
+
+
+  /**
+   * default configuration settings
+   * @type {object}
+   * @property {number} height - height svg.
+   * @property {number} with - with svg.
+   * @property {number} margin - margin svg.
+   * @property {number} minValue - minimum value y
+   * @property {number} maxValue - maximum value y
+   * @property {number} majorTicks - number of ticks
+   * @property {array} color  - color for rectangle
+   * @property {number} transitionMs - time of transition ms
+   * @property {string} container - container name
+   * @property {float} lowThreshhold - ratio separate
+   * @property {float} lowMidThreshhold - ratio separate
+   * @property {float} highMidThreshhold - ratio separate
+   * @property {float} highThreshhold - ratio separate
+   * @property {color} lowThreshholdColor - color separate
+   * @property {color} lowMidThreshholdColor - color separate
+   * @property {color} highMidThreshholdColor - color separate
+   * @property {color} highThreshholdColor - color separate
+   * @property {number} labelDecimal - number of decimal places displayed
+   * @property {boolean} ticks - show ticks true/false
+   */
 
   config = {
     height: 200,
@@ -22,7 +52,7 @@ export class Gauge {
     highThreshholdColor: '#089f50',
     container: '',
     transitionMs: 500,
-    labelDecimal: '0',
+    labelDecimal: 0,
     ticks: false
   }
 
@@ -31,15 +61,29 @@ export class Gauge {
     // default configuration settings
 
     this.config = Object.assign(this.config, configuration)
-
+    /**
+     * default margin settings
+     * @type {object}
+     * @property {number} top
+     * @property {number} right
+     * @property {number} bottom
+     * @property {number} left
+     */
     this.margin = {
       top: this.config.height * 0.1,
       right: this.config.width * 0.05,
       bottom: this.config.height * -0.05,
       left: this.config.width * 0.05
     }
-
+    /**
+     * height without margins
+     * @type {number}
+     */
     this.mheight = this.config.height - this.margin.top - this.margin.bottom
+    /**
+     * width without margins
+     * @type {number}
+     */
     this.mwidth = this.config.height * 2 - this.margin.left - this.margin.right
 
     // define arc shape and position
@@ -60,10 +104,21 @@ export class Gauge {
       [pointerWidth, 0]
 
     ]
-
-    this.minAngle = -90,
-      this.maxAngle = 90,
-      this.angleRange = this.maxAngle - this.minAngle
+    /**
+     * start angle
+     * @type {number}
+     */
+    this.minAngle = -90
+    /**
+     * end angle
+     * @type {number}
+     */
+    this.maxAngle = 90
+    /**
+     * Angle Range
+     * @type {number}
+     */
+    this.angleRange = this.maxAngle - this.minAngle
 
     this.scale = d3.scaleLinear()
       .range([0, 1])
@@ -82,9 +137,15 @@ export class Gauge {
       this.config.highMidThreshholdColor,
       this.config.highThreshholdColor
     ]
-
+    /**
+     * color scale
+     * @type {array}
+     */
     this.colorScale = d3.scaleThreshold().domain(colorDomain).range(colorRange)
-
+    /**
+     * array of ticks
+     * @type {array}
+     */
     this.ticks = [
       this.config.minValue,
       this.config.minValue + (this.config.maxValue - this.config.minValue) * this.config.lowThreshhold,
@@ -93,7 +154,10 @@ export class Gauge {
       this.config.minValue + (this.config.maxValue - this.config.minValue) * this.config.highThreshhold,
       this.config.maxValue
     ]
-
+    /**
+     * color scale
+     * @type {array}
+     */
     this.threshholds = [
         this.config.minValue,
         this.config.minValue + (this.config.maxValue - this.config.minValue) * this.config.lowThreshhold,
@@ -103,11 +167,10 @@ export class Gauge {
         this.config.maxValue
       ]
       .map(d => this.scale(d))
-
-    this.scale = d3.scaleLinear()
-      .range([0, 1])
-      .domain([this.config.minValue, this.config.maxValue])
-
+/**
+     * define arc d3
+     * @type {object}
+     */
     this.arc = d3.arc()
       .innerRadius(this._radius() - this.arcWidth - this.arcPadding)
       .outerRadius(this._radius() - this.arcPadding)
@@ -117,15 +180,29 @@ export class Gauge {
       })
       .endAngle((d, i) => this._deg2rad(this.minAngle + this.threshholds[i] * this.angleRange))
   }
-
+/**
+ * @func
+ * @returns {number} - height radius/2
+ * @memberof Gauge
+ */
   _radius() {
     return (this.mwidth) * 0.5
   }
-
+/**
+ * calculate a number deg to radians
+ * @func
+ * @param {number} deg 
+ * @returns {number} - number in radians
+ * @memberof Gauge
+ */
   _deg2rad(deg) {
     return deg * Math.PI / 180
   }
-
+/**
+ * show gauge
+ * @method
+ * @param {number} newValue 
+ */
   render(newValue) {
     const svg = d3.select(this.config.container)
       .append('svg')
@@ -191,7 +268,10 @@ export class Gauge {
     this.pointer = pointer
     this.numberValue = numberValue
   }
-
+/**
+ * display label
+ * @method
+ */
   _displayLabel() {
     $(this.config.container + ' .gauge .label').empty()
 
@@ -226,7 +306,10 @@ export class Gauge {
         })
     }
   }
-
+/**
+ * update display
+ * @param {number} newValue 
+ */
   update(newValue) {
     /**
      * TODO fun transition

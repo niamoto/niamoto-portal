@@ -11,9 +11,11 @@ export function init(data) {
     height: $('#holdridge_forest').height(),
     container: '#holdridge_forest',
     value: ['Forêt', 'Hors-forêt'],
+    legend: ['Forêt', 'Hors-forêt'],
+    yLabel: 'Fréquence (%)',
     yDomain: [0, 100],
     maxValue: 100,
-    marginLeft: .16,
+    marginLeft: .23,
     color: [color.forest, color.forestOut]
   })
   
@@ -23,7 +25,7 @@ export function init(data) {
     width: $('#land_use').width(),
     height: $('#land_use').height(),
     container: '#land_use',
-    yLabel: 'Surface (ha)',
+    yLabel: 'Surperficie (ha)',
     maxValue: 100,
     marginLeft: .2,
     color: [color.forest, color.forestOut]

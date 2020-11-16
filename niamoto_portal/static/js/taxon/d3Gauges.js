@@ -53,10 +53,6 @@ export function initGauges(data) {
   const distributionGeoGauge = initGauge('#distributionGeoGauge', 'Nombre de parcelles (%)', 0, 100)
   distributionGeoGauge.render()
 
-  // size pop
-  const sizePopGauge = initGauge('#sizePopGauge', 'Fréquence sur chaque parcelle', 0, 100)
-  sizePopGauge.render()
-
   // leaf thickness
   const leafThickness = initGauge('#leafThickness', 'mm', 0, leafThicknessMax)
   leafThickness.render()
@@ -84,7 +80,6 @@ export function initGauges(data) {
     // distributionOccGauge.update(data.occ_count / occCount * 100)
     dbhMaxGauge.update(data.dbh_max)
     woodDensityGauge.update(data.wood_density_max)
-    sizePopGauge.update(data.freq_max)
     distributionGeoGauge.update(data.ncpippn_count/ncpippn_count_max*100)
     // rainfallMinGauge.update(data.rainfall.min, rainfallMax)
     heightMaxGauge.update(data.height_max)

@@ -1,0 +1,39 @@
+{
+    "source": {
+        "include": ["package.json"],
+        "includePattern": ".js$",
+        "excludePattern": "(node_modules/|docs)"
+    },
+ 
+    "plugins": ["plugins/markdown"],
+ 
+    "opts": {
+        "encoding": "utf8",
+        "readme": "./ReadmeJsdoc.md",
+        "destination": "docs/build/js/",
+        "recurse": true,
+        "verbose": true,
+        "template": "./node_modules/clean-jsdoc-theme",
+        "theme_opts":{
+            "theme": "light",
+            "title": "Graph doc",
+            "menu": [
+                {
+                  "title": "Website",
+                  "link": "https://niamoto.nc", 
+                  "target": "_blank",
+                  "class": "some-class",
+                  "id": "some-id"
+                },
+                {
+                  "title": "Github",
+                  "link": "https://github.com/niamoto-portal",
+                  "target": "_blank",
+                  "class": "some-class",
+                  "id": "some-id"
+                }
+              ]
+        }
+    }
+
+}

@@ -15,6 +15,7 @@ export function init(data) {
     height: $('#forest_type_elevation').height(),
     container: '#forest_type_elevation',
     xLabel: 'Altitude (m)',
+    yLabel: 'Fréquence (%)',
     value: ['Forêt secondaire', 'Forêt mature', 'Forêt coeur'],
     yDomain:[0, 100],
     maxValue: 100,
@@ -28,8 +29,9 @@ export function init(data) {
   const forestFragmentation = new d3GraphstakedArea.GraphStakedArea({
     width: $('#forest_fragmentation').width(),
     height: $('#forest_fragmentation').height(),
+    xLabel: 'Surperficie (ha)',
     container: '#forest_fragmentation',
-    yLabel: 'Surface (ha)',
+    yLabel: 'Fréquence (%)',
     value: ['Aire Cumulée'],
     maxValue: 100,
     legend: ['Aire Cumulée'],
@@ -69,7 +71,6 @@ export function init(data) {
       }
       return result
     })
-
     forestFragmentation.update(forestFragmentationData)
   }
 }

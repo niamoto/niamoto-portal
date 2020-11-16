@@ -18,6 +18,7 @@ export function init(data) {
         ],
         yDomain: [0, 100],
         value: ['fleur', 'fruit'],
+        legend: ['Fleur', 'Fruit'],
         yLabel: 'Fréquence (%)',
         color: {
             fleur: color.phenologyFlower,

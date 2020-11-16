@@ -8,7 +8,7 @@ export function initGauges(data) {
   var pielouMax = 10
   var simpsonMax = 10
   var woodDensityMax = 1.2
-  var biomasseMax = 10
+  var biomassMax = 100
   var richessMax = 10
   var speciesLevelMax = 100
 
@@ -84,26 +84,26 @@ export function initGauges(data) {
   simpsonGauge.render()
 
   // woodDensity
-  var woodDensity = Math.max(...Array
-    .from(data
-      .map(e => e.properties.wood_density)
-      .values()))
-  woodDensityMax = Graph.initMax(woodDensity, woodDensityMax)
+  // var woodDensity = Math.max(...Array
+  //   .from(data
+  //     .map(e => e.properties.wood_density_mean)
+  //     .values()))
+  // woodDensityMax = Graph.initMax(woodDensity, woodDensityMax)
 
   const woodDensityGauge = initGauge('#woodDensityGauge', 'g.cm' + '-3'.sup(), woodDensityMax, 0, '3')
 
   woodDensityGauge.render()
 
   // biomasse
-  var biomasse = Math.max(...Array
+  var biomass = Math.max(...Array
     .from(data
-      .map(e => e.properties.biomasse)
+      .map(e => e.properties.biomass)
       .values()))
-  biomasseMax = Graph.initMax(biomasse, biomasseMax)
+  biomassMax = Graph.initMax(biomass, biomassMax)
 
-  const biomasseGauge = initGauge('#biomasseGauge', 'SI', biomasseMax)
+  const biomassGauge = initGauge('#biomasseGauge', 'SI', biomassMax)
 
-  biomasseGauge.render()
+  biomassGauge.render()
 
   // richess
   var richess = Math.max(...Array
@@ -112,13 +112,9 @@ export function initGauges(data) {
       .values()))
   richessMax = Graph.initMax(richess, richessMax)
 
-  const richessGauge = initGauge('#richessGauge', 'nombre d espèces ', richessMax)
+  const richessGauge = initGauge('#richessGauge', "Nombre d'espèces/ha", 120)
 
   richessGauge.render()
-
-  const speciesLevelGauge = initGauge('#speciesLevelGauge', '%', speciesLevelMax, 75)
-
-  speciesLevelGauge.render()
 
   // Update Data for trigger
   $('#plot_select').on('plotSelected', function (event, data) {
@@ -131,9 +127,8 @@ export function initGauges(data) {
     shannonGauge.update(data.properties.shannon, shannonMax)
     pielouGauge.update(data.properties.pielou, pielouMax)
     simpsonGauge.update(data.properties.simpson, simpsonMax)
-    woodDensityGauge.update(data.properties.wood_density, woodDensityMax)
-    biomasseGauge.update(data.properties.biomasse, biomasseMax)
+    woodDensityGauge.update(data.properties.wood_density_mean, woodDensityMax)
+    biomassGauge.update(data.properties.biomass, biomassMax)
     richessGauge.update(data.properties.count_species, richessMax)
-    speciesLevelGauge.update(data.properties.species_level * speciesLevelMax, speciesLevelMax)
   }
 }

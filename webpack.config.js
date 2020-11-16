@@ -36,5 +36,6 @@ module.exports = {
       }]
     }]
   },
-  plugins: [new DashboardPlugin()]
+  plugins: [
+    new DashboardPlugin()]
 };

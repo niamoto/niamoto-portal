@@ -140,10 +140,6 @@ export class GraphPyramidh {
       .call(legendColor)
   }
 
-  render(newValue) {
-
-  }
-
   update(response) {
     var data = response
 

@@ -115,19 +115,19 @@ map.addLayer(layerBackground)
 map.addLayer(layerShape)
 
 
-function buildTaxonList() {
-  var taxons = {}
+// function buildTaxonList() {
+//   var taxons = {}
 
-  $.ajax({
-    type: 'GET',
-    url: restUrls.taxonTreeList,
-    success: function (result) {
-      // d3Gauges.initGauges(result)
-      var tree = new TreeView(result, 'taxon_treeview', 'list-group-item')
-      preloader.hidePreloader()
-    }
-  })
-}
+//   $.ajax({
+//     type: 'GET',
+//     url: restUrls.taxonTreeList,
+//     success: function (result) {
+//       // d3Gauges.initGauges(result)
+//       var tree = new TreeView(result, 'taxon_treeview', 'list-group-item')
+//       preloader.hidePreloader()
+//     }
+//   })
+// }
 
 function updateData(taxon) {
   $.ajax({

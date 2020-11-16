@@ -234,11 +234,14 @@ function InitLayerShapeProvince() {
 
 function updateGeneralInformations(data) {
   $('#commune').text(data.properties.label)
-  $('#landArea').text('Surface ' + Math.round(data.properties.land_area) + ' ha')
-  $('#forestArea').text('Surface de forêt ' + Math.round(data.properties.forest_area) + ' ha')
+  $('#landArea').text('Surperficie de l\'emprise: ' + Math.round(data.properties.land_area) + 'ha')
+  $('#forestArea').text('Surperficie de forêt: ' + Math.round(data.properties.forest_area) + 'ha')
   $('#nb_families').text(data.properties.nb_families + ' famille' + plurial(data.properties.nb_families))
   $('#nb_species').text(data.properties.nb_species + ' espèce' + plurial(data.properties.nb_species))
   $('#nb_occurence').text(data.properties.nb_occurence + ' occurence' + plurial(data.properties.nb_occurence))
+  $('#rainfall').text('Précipitation annuelle moyenne: ' + data.properties.rainfall_min + ' - ' + data.properties.rainfall_max + ' mm/an')
+  $('#elevation_med').text('Altitude médiane: ' + data.properties.elevation_median + 'm')
+  $('#elevation_max').text('Altitude maximale: ' + data.properties.elevation_max + 'm')
 }
 
 function updateLayerShape(data) {
