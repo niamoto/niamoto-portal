@@ -6,5 +6,9 @@ figure {
     img {
       @extend .image_float_top_left;
     }
+
+    #inventory, #stat, #geo  {
+      width: 500px;
+    }
   }
 

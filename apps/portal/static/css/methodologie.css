@@ -221,4 +221,8 @@ p a :hover {
     opacity: 1;
   }
 }
+
+figure #inventory, figure #stat, figure #geo {
+  width: 500px;
+}
 /*# sourceMappingURL=methodologie.css.map */
