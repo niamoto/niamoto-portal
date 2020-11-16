@@ -165,11 +165,12 @@
                 <tr class="col-12 {{ressource.support}}">
                   <td>{{ressource.year|default:""}}</td>
                   <td>{{ressource.support}}</td>
-                  <td>{{ressource.who|default:""}}
-                    {% if ressource.who %}, {% endif %} <strong>{{ressource.description|default:""}}</strong>
-                    {% if ressource.description %}, {% endif %} <em>{{ressource.journal|default:""}}</em>
-                    {% if ressource.journal %}, {% endif %} {{ressource.issue|default:""}}
-                    {% if ressource.issue %}, {% endif %} {{ressource.pages|default:""}}
+                  <td>{{ressource.who|default:""}}{% if ressource.who %},
+                    {% endif %}<strong>{{ressource.description|default:""}}</strong>{% if ressource.description %},
+                    {% endif %}
+                    <em>{{ressource.journal|default:""}}</em>{% if ressource.journal %}, {% endif %}
+                    {{ressource.issue|default:""}}{% if ressource.issue %}, {% endif %}
+                    {{ressource.pages|default:""}}
                     {% if ressource.link %} <a href="{{ressource.link|default:""}}">
                       <i class="fa fa-download" aria-hidden="true"></i>
                     </a>{% endif %}</td>
@@ -202,10 +203,10 @@
                 {% if activity.support == 'thèse' or activity.support == 'mémoire'%}
                 <tr class="col-12 {{activity.support}}">
                   <td>{{activity.last_year|default:""}}</td>
-                  <td>{{activity.support}}</td>
-                  <td>{{activity.person|default:""}}
-                    {% if activity.person %}, {% endif %} <strong>{{activity.title|default:""}}</strong>
-                    {% if activity.link %} <a href="{{activity.link|default:""}}">
+                  <td>{{activity.support|default:""}}</td>
+                  <td>{{activity.person|default:""}}{% if activity.person %}, {% endif %}
+                    <strong>{{activity.title|default:""}}</strong>{% if activity.link %} <a
+                      href="{{activity.link|default:""}}">
                       <i class="fa fa-download" aria-hidden="true"></i>
                     </a>{% endif %}</td>
                 </tr>
@@ -237,14 +238,11 @@
                 {% if ressource.support == "conférence" or ressource.support == "film" or ressource.support == "radio"%}
                 <tr class="col-12 {{ressource.support}}">
                   <td>{{ressource.year|default:""}}</td>
-                  <td>{{ressource.support}}</td>
-                  <td>{{ressource.who|default:""}} {% if ressource.who %}, {% endif %}
-                    <strong>{{ressource.description|default:""}}</strong>
-                    {% if ressource.description %}, {% endif %}
-                    <em>{{ressource.journal|default:""}}</em>
-                    {% if ressource.journal %}, {% endif %}
-                    {{ressource.issue|default:""}}
-                    {% if ressource.issue %}, {% endif %}
+                  <td>{{ressource.support|default:""}}</td>
+                  <td>{{ressource.who|default:""}}{% if ressource.who %}, {% endif %}
+                    <strong>{{ressource.description|default:""}}</strong>{% if ressource.description %}, {% endif %}
+                    <em>{{ressource.journal|default:""}}</em>{% if ressource.journal %}, {% endif %}
+                    {{ressource.issue|default:""}}{% if ressource.issue %}, {% endif %}
                     {{ressource.pages|default:""}}
                     {% if ressource.link %}<a href="{{ressource.link|default:""}}">
                       <i class="fa fa-download" aria-hidden="true"></i>
@@ -279,13 +277,10 @@
                 <tr class="col-12 {{ressource.support}}">
                   <td>{{ressource.year|default:""}}</td>
                   <td>{{ressource.support}}</td>
-                  <td>{{ressource.who|default:""}} {% if ressource.who %}, {% endif %}
-                    <strong>{{ressource.description|default:""}}</strong>
-                    {% if ressource.description %}, {% endif %}
-                    <em>{{ressource.journal|default:""}}</em>
-                    {% if ressource.journal %}, {% endif %}
-                    {{ressource.issue|default:""}}
-                    {% if ressource.issue %}, {% endif %}
+                  <td>{{ressource.who|default:""}}{% if ressource.who %}, {% endif %}
+                    <strong>{{ressource.description|default:""}}</strong>{% if ressource.description %}, {% endif %}
+                    <em>{{ressource.journal|default:""}}</em>{% if ressource.journal %}, {% endif %}
+                    {{ressource.issue|default:""}}{% if ressource.issue %}, {% endif %}
                     {{ressource.pages|default:""}}
                     {% if ressource.link %}<a href="{{ressource.link|default:""}}">
                       <i class="fa fa-download" aria-hidden="true"></i>
