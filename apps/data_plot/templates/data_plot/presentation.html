@@ -23,12 +23,14 @@
     <div class="row">
       <div class="col-lg-12 mx-auto">
         <h2>Préambule</h2>
-        <p>Une forêt est constituée d’individus arbres et un groupe d’individus appartenant à la même espèce forme une
-          population. Un peuplement est l'ensemble des populations, toutes espèces confondues, qui occupent le même
-          habitat.</p>
-        <p>L’étude des variations des peuplements forestiers dans le temps et dans l’espace permet de mieux comprendre
-          le fonctionnement de l’écosystème forestier. La méthode la plus couramment employée pour étudier ces
-          peuplements est la mise en place de parcelles d’inventaires forestiers.</p>
+        <p><b>Le peuplement est l'ensemble des populations des espèces appartenant souvent à un même groupe taxonomique,
+            qui présentent une écologie semblable et occupent le même habitat. En forêt, le peuplement d’arbres
+            représente l’ensemble des arbres toutes espèces confondues.</b></p>
+
+        <p>Dans la pratique, l’étude d’un peuplement d’arbres impose de définir une surface bornée qui matérialise une
+          fraction de la forêt. La méthode la plus couramment employée pour étudier ces peuplements consiste à faire un
+          inventaire forestier par échantillonnage systématique, c’est-à-dire de délimiter dans la forêt une parcelle
+          dans laquelle tous les arbres sont mesurés<i class="fab fa-swap-opacity .fad"></i></p>
       </div>
     </div>
   </div>
@@ -39,66 +41,63 @@
     <div class="row">
       <div class="col-lg-12 mx-auto">
         <h2>Étudier les peuplements forestiers</h2>
-        <p>Le réseau NC-PIPPN (<i>New Caledonian Plant Inventories and Permanent Plot Network</i>) a été initié
-          par l’IRD en 2005. Depuis cette date, il compile 452 inventaires forestiers établis dans les forêts de la
-          Nouvelle-Calédonie par l’AMAP et divers autres
-          institutions.</p>
+
+        <p>L’étude des peuplements forestiers a pour objectif de comprendre les relations et les associations entre les
+          différents individus au sein d’une même population ou entre différentes populations. En outre, cette étude
+          permet de comparer des échantillons de forêt provenant de milieux différents et d’évaluer leur différence au
+          regard de l’environnement. En Nouvelle-Calédonie, le réseau NC-PIPPN (<em><i>New Caledonian Plant Inventories
+              and Permanent Plot Network</i></em>), initié par l’IRD en 2005, compile depuis cette date, 452 inventaires
+          forestiers de taille et de forme différentes.</p>
         <figure>
-          <img id="tree1" src="{% static 'plot/img/tree1.png' %}"></img>
+          <img id="map" src="{% static 'plot/img/carte.png' %}"></img>
         </figure>
-        <p>Chaque inventaire est géo-référencé. Il représente une liste exhaustive d’individus-arbres sur une portion de
-          forêt, en considérant:
-        <ul id="list_inventory">
-          <li>une superficie fixe, matérialisée sous la forme de cercle ou de rectangle dans
-            laquelle tous les individus arbres sont recensés </li>
-          <li>un diamètre minimal (= DBH) mesuré à hauteur de
-            poitrine à partir duquel l’individu est comptabilisé dans l’inventaire.</li>
-        </ul>
-        </p>
-        <figure>
-          <img class="" id="tree2" src="{% static 'plot/img/tree2.png' %}"></img>
-        </figure>
-        <div class="next">
-          <p>Actuellement, il regroupe différents types de dispositifs, ou parcelles :</p>
-        </div>
+      </br>
+        <p>À ce jour, le réseau NC-PIPPN cumule près de 40 ha de forêts inventoriées, entre 10 et 1 300 m d’altitude,
+          dans un intervalle de pluviométrie compris entre 1 et 4,5 m de pluie par an. Dans ce réseau, 222 parcelles ont
+          été mises en place sur les substrats ultramafiques, pour une superficie cumulée de 16,5 ha. Il contient au
+          total 66 000 individus appartenant à 98 familles, 274 genres et 979 espèces distinctes.</p>
+        <p> </p>
+        <p>Chaque inventaire contient une liste exhaustive d’individus-arbres comptabilisé sur une portion de forêt, en
+          considérant deux variables:</p>
         <ul>
-          <li>230 parcelles carrées de 20 x 20 m (DBH&gt; 5 cm, aire = 0,04 ha)
-          </li>
+          <li><u>une superficie fixe</u>, matérialisée sous la forme de cercle ou de rectangle dans laquelle tous les
+            individus arbres sont recensés</li>
+          <li><u>un diamètre minimal </u>(= DBH) mesuré à hauteur de poitrine à partir duquel l’individu est
+            comptabilisé dans l’inventaire.</li>
+        </ul>
+        <p>Actuellement, il regroupe différents types de dispositifs, ou parcelles :</p>
+        <ul>
+          <li>230 parcelles carrées de 20 x 20 m (DBH&gt; 5 cm, aire = 0,04 ha)</li>
           <li>130 parcelles rondes de 20 m de diamètre (DBH&gt;10 cm, aire = 0,03 ha)</li>
           <li>53 parcelles rondes de rayon 11.28 m (DBH&gt;10 cm, aire = 0,04 ha)</li>
           <li>21 parcelles carrées de 100 x 100 m (DBH&gt;10 cm, aire = 1 ha)</li>
           <li>18 parcelles carrées multiples de 10 x 10 m (DBH&gt;5cm, aire = 0.01 à 0.05 ha)</li>
         </ul>
-        <p><i>Carte des parcelles</i></p>
-        <p>À ce jour, le réseau NC-PIPPN cumule près de 40 ha de forêts inventoriées, entre 10 et 1 300 m d’altitude,
-          dans un intervalle de pluviométrie compris entre 1 et 4,5 m de pluie par an. Dans ce réseau, 222 parcelles ont
-          été mises en place sur les substrats ultramafiques, pour une superficie cumulée de 16,5 ha. Il
-          contient au total 66 000 individus appartenant à 98 familles, 274 genres et 979 espèces
-          distinctes.</p>
-        <p>Ce réseau permet de capitaliser des données sur les arbres mais sa fonction première est d’étudier les
-          peuplements forestiers, de comprendre les associations entre les espèces ou leur abondance locale au regard
-          des conditions de l’environnement.</p>
-        <p>Dans chacune des parcelles d’inventaire, tous les arbres sont numérotés selon une série unique, leur diamètre
-          (DBH) est relevé et leur nom scientifique est identifié par les botanistes, soit
-          directement sur le terrain soit en comparaison avec les échantillons stockés dans l’herbier de Nouméa (NOU).
-          Le taux d’identification moyen au rang spécifique ou inférieur de toutes les parcelles du réseau NC-PIPPN est
-          de 95%.</p>
-        <p>Les informations relevées dans ces dispositifs varient en fonction des objectifs de chaque étude. Sur les
-          parcelles de 1 ha, chaque arbre est positionné en X, Y par rapport au coin de la parcelle et sa
-          position verticale est définie de manière qualitative selon 4 classes (sous-bois, sous-canopée, canopée et
-          émergent). Par ailleurs la hauteur d’un arbre est mesurée dans chaque sous-carré de 100 m² (e.g. 100 hauteurs
-          d’arbre par parcelle) à l’aide d’un laser. Depuis 2014 des traits fonctionnels supplémentaires sont relevés
-          sur un échantillon représentatif d’individus-arbres : densité de bois (WD), surface foliaire (LA), surface
-          foliaire spécifique (SLA), matière sèche foliaire et épaisseur de la feuille (LDMC).</p>
-        <figure><img id="image" src="{% static 'plot/img/image.png' %}"></img>
+      </br>
+        <figure>
+          <img id="tree1" src="{% static 'plot/img/tree1.png' %}"></img>
         </figure>
+        <p>Dans chacune des parcelles d’inventaire, tous les arbres sont numérotés selon une série unique, leur diamètre
+          (DBH) est relevé et leur nom scientifique est identifié par les botanistes, soit directement sur le terrain
+          soit en comparaison avec les échantillons stockés dans l’herbier de Nouméa (NOU). Le taux d’identification
+          moyen au rang spécifique ou inférieur de toutes les parcelles du réseau NC-PIPPN est de 95%.
+        </p>
+        
+        <p>Les informations relevées dans ces dispositifs varient en fonction des objectifs de chaque étude. Sur les
+          parcelles de 1 ha, chaque arbre est positionné en X, Y par rapport au coin de la parcelle et sa position
+          verticale est définie de manière qualitative selon 4 classes (sous-bois, sous-canopée, canopée et émergent).
+          Par ailleurs la hauteur d’un arbre est mesurée dans chaque sous-carré de 100 m² (e.g. 100 hauteurs d’arbre par
+          parcelle) à l’aide d’un laser. Depuis 2014 des traits fonctionnels supplémentaires sont relevés sur un
+          échantillon représentatif d’individus-arbres : densité de bois (WD), surface foliaire (LA), surface foliaire
+          spécifique (SLA), matière sèche foliaire et épaisseur de la feuille (LDMC).</p>
+        <p>La mise en place d’une parcelle de 1 ha représente un effort important sur le terrain, il faut compter
+          environ 7 jours de travail pour 5-7 personnes.</p>
+        </br>
         <p>La mise en place d’une parcelle de 1 ha représente un effort important sur le terrain, il faut compter
           environ 7 jours de travail pour 5-7 personnes.</p>
         <figure>
-          <img id="image1" class="grp_img1 rounded" src="{% static 'plot/img/image1.png' %}"></img>
-          <img id="image2" class="grp_img1 rounded" src="{% static 'plot/img/image2.png' %}"></img>
-          <img id="image3" class="grp_img1 rounded" src="{% static 'plot/img/image3.png' %}"></img>
-          <img id="image4" class="grp_img1 rounded" src="{% static 'plot/img/image4.png' %}"></img></figure>
+          <img id="compo" class="rounded" src="{% static 'plot/img/compo.png' %}"></img>
+        </figure>
       </div>
     </div>
   </div>
@@ -112,42 +111,40 @@
         <p>Le réseau de parcelle NC-PIPPN a permis d’obtenir de nombreuses informations sur les peuplements forestiers
           de la province Nord :</p>
         <ul>
-          <li>La densité moyenne d’individus-arbres est de 1 250 tiges/ha, évoluant entre 546 (calcaires de
-            Koumac) et 1 667 (Parcelle de l’Aoupinié). Ces valeurs de densités sont parmi les plus élevées au monde,
-            seulement atteintes localement en Australie tropicale.</li>
-          <li>La richesse spécifique (diversité alpha), c’est-à-dire le nombre d’espèces d’arbres à
-            l’hectare varie de 33 (calcaires de Koumac) à 111 (Parcelle du Mt Arago). Cette richesse à l’hectare est
-            faible comparativement aux forêts tropicales continentales qui peuvent dépasser 400-500 espèces d’arbres/ha.
-            La diversité (indice de shannon) s’échelonne entre 1,82 (Parcelle de Kouaoua) et 3,98 (Parcelle du Mt
-            Arago).</li>
-          <li>Le taux d’endémisme moyen des espèces d’arbres dans les parcelles est de 89 %, variant entre
-            81 % (Parcelle de Forêt Plate) et 98 % (Parcelle de l’Aoupinié), ce qui représente une valeur
-            moyenne supérieure aux autres forêts de la sous-région.</li>
-          <li>Le nombre de palmiers et de fougères arborescentes à l’hectare est très élevé, pour ce
-            qui est des individus comme des espèces, ce qui représente
-            une particularité des forêts de la Nouvelle-Calédonie. La densité de fougères arborescentes (0-113/ha) est
-            unique dans le Pacifique.</li>
-          <li>Sur les 617 espèces contenues dans les 21 parcelles de 1 ha, 122 (20 %) ne sont
-            connues que d’un individu (singleton) tandis que seulement 36 espèces (6 %) représentent 50 % de
-            la totalité des 24 473 arbres de ces parcelles. Par ailleurs et en moyenne, 1/4 des espèces ne compte qu’un
-            seul individu (singleton) par parcelle.</li>
-          <li>La hauteur de la canopée varie entre 8 m (Sommet de l’Aoupinié et du Paoua) et 18 m
-            (Calcaires de Koumac et Wekori).</li>
-          <li>Le DBH median varie de 12 à 19 cm selon les parcelles tandis que le DBH maximal est de 2,5 m
-            (e.g. <i>Ficus obliqua</i>, Moraceae, parcelle de Ateou). Cependant 3/4 des individus-arbres ne
-            dépassent pas 21 cm de DBH ce qui représente une valeur très faible et qui qualifie les peuplements
-            forestiers
-            de la Nouvelle-Calédonie comme étant constitués d’une majorité de petites tiges.</li>
-          <li>L’aire basale varie entre 19,25 m²/ha (Parcelle de Paeoua) et 74,81 m²/ha (Parcelle de
-            Ateou). La combinaison entre la densité de tige, la hauteur de la canopée et la densité du bois produit une
-            biomasse standard, comprise entre 200 et 450 t/ha ce qui s’inscrit dans la fourchette standard des valeurs
-            de biomasse enregistrées dans les forêts tropicales.</li>
+          <li>La densité moyenne d’individus-arbres est de 1 250 tiges/ha, évoluant entre 546 (calcaires de Koumac) et 1
+            667 (Parcelle de l’Aoupinié). Ces valeurs de densités sont parmi les plus élevées au monde, seulement
+            atteintes localement en Australie tropicale.</li>
+          <li>La richesse spécifique (diversité alpha), c’est-à-dire le nombre d’espèces d’arbres à l’hectare varie de
+            33 (calcaires de Koumac) à 111 (Parcelle du Mt Arago). Cette richesse à l’hectare est faible comparativement
+            aux forêts tropicales continentales qui peuvent dépasser 400-500 espèces d’arbres/ha. La diversité (indice
+            de shannon) s’échelonne entre 1,82 (Parcelle de Kouaoua) et 3,98 (Parcelle du Mt Arago).</li>
+          <li>Le taux d’endémisme moyen des espèces d’arbres dans les parcelles est de 89 %, variant entre 81 %
+            (Parcelle de Forêt Plate) et 98 % (Parcelle de l’Aoupinié), ce qui représente une valeur moyenne supérieure
+            aux autres forêts de la sous-région.</li>
+          <li>Le nombre de palmiers et de fougères arborescentes à l’hectare est très élevé, pour ce qui est des
+            individus comme des espèces, ce qui représente une particularité des forêts de la Nouvelle-Calédonie. La
+            densité de fougères arborescentes (0-113/ha) est unique dans le Pacifique.</li>
+          <li>Sur les 617 espèces contenues dans les 21 parcelles de 1 ha, 122 (20 %) ne sont connues que d’un individu
+            (singleton) tandis que seulement 36 espèces (6 %) représentent 50 % de la totalité des 24 473 arbres de ces
+            parcelles. Par ailleurs et en moyenne, 1/4 des espèces ne compte qu’un seul individu (singleton) par
+            parcelle.</li>
+          <li>La hauteur de la canopée varie entre 8 m (Sommet de l’Aoupinié et du Paoua) et 18 m (Calcaires de Koumac
+            et Wekori).</li>
+          <li>Le DBH median varie de 12 à 19 cm selon les parcelles tandis que le DBH maximal est de 2,5 m (e.g.
+            <em><i>Ficus obliqua</i></em>, Moraceae, parcelle de Ateou). Cependant 3/4 des individus-arbres ne dépassent
+            pas 21 cm de DBH ce qui représente une valeur très faible et qui qualifie les peuplements forestiers de la
+            Nouvelle-Calédonie comme étant constitués d’une majorité de petites tiges.</li>
+          <li>L’aire basale varie entre 19,25 m²/ha (Parcelle de Paeoua) et 74,81 m²/ha (Parcelle de Ateou). La
+            combinaison entre la densité de tige, la hauteur de la canopée et la densité du bois produit une biomasse
+            standard, comprise entre 200 et 450 t/ha ce qui s’inscrit dans la fourchette standard des valeurs de
+            biomasse enregistrées dans les forêts tropicales.</li>
+          <li>La dissimilarité floristique (diversité-beta) entre les parcelles est extrêmement élevée. Elle varie entre
+            56 % et 98 % ce qui signifie que les deux parcelles les plus similaires du réseau NC-PIPPN ont 44 %
+            d’espèces en commun. Par ailleurs, cette dissimilarité ne s’explique pas par la proximité géographique des
+            parcelles ce qui représente une propriété unique des forêts de la Nouvelle-Calédonie dans le Pacifique. Le
+            type de sol, l’altitude et les précipitations sont les principaux moteurs environnementaux de cette
+            dissimilarité.</li>
         </ul>
-        <p>La dissimilarité floristique (diversité-beta) entre les parcelles est extrêmement élevée. Elle varie entre 56
-          % et 98 % ce qui signifie que les deux parcelles les plus similaires du réseau NC-PIPPN ont 44 % d’espèces en
-          commun. Par ailleurs, cette dissimilarité ne s’explique pas par la proximité géographique des parcelles ce qui
-          représente une propriété unique des forêts de la Nouvelle-Calédonie dans le Pacifique. Le type de sol,
-          l’altitude et les précipitations sont les principaux moteurs environnementaux de cette dissimilarité.</p>
       </div>
     </div>
   </div>

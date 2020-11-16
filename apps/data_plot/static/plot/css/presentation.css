@@ -29,7 +29,7 @@ p a :hover {
   margin-bottom: 25px;
 }
 
-.image, .image_center, #learnPlot #image, .image_float_top_left, #learnPlot #tree1, .image_float_top_right, #learnPlot #tree2 {
+.image, .image_center, #learnPlot #image, .image_float_top_left, #learnPlot #tree1, .image_float_top_right {
   margin: 20px;
   border-radius: 5px;
   padding: 0;
@@ -47,7 +47,7 @@ p a :hover {
   margin-top: 0;
 }
 
-.image_float_top_right, #learnPlot #tree2 {
+.image_float_top_right {
   float: right;
   margin-right: 0;
   margin-top: 0;
@@ -223,11 +223,7 @@ p a :hover {
 }
 
 #learnPlot #tree1 {
-  width: 350px;
-}
-
-#learnPlot #tree2 {
-  width: 400px;
+  width: 250px;
 }
 
 #learnPlot #image {
@@ -238,8 +234,8 @@ p a :hover {
   text-align: center;
 }
 
-#learnPlot .grp_img1 {
-  height: 300px;
+#learnPlot #compo {
+  height: 500px;
 }
 
 #learnPlot #list_inventory {

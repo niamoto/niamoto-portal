@@ -3,13 +3,8 @@
 
 #learnPlot {
     #tree1 {
-        width: 350px;
+        width: 250px;
         @extend .image_float_top_left;
-    }
-
-    #tree2 {
-        width: 400px;
-        @extend .image_float_top_right;
     }
 
     #image {
@@ -21,8 +16,8 @@
         text-align: center;
     }
 
-    .grp_img1 {
-        height: 300px;
+    #compo {
+        height: 500px;
     }
 
     #list_inventory {
