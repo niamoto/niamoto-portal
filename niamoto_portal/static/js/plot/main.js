@@ -191,43 +191,47 @@ function updateGeneralInformations(data) {
   let holdridge = ''
   let substrat = ''
   $('#plot_commune').text('Commune: ' + data.properties.town)
-  if (data.properties.elevation){
-    $('#plot_elevation').text('Altitude: ' + data.properties.elevation +' m')
+  if (data.properties.elevation) {
+    $('#plot_elevation').text('Altitude: ' + data.properties.elevation + ' m')
   }
   $('#plot_long').text('Longitude: ' + data.properties.longitude)
   $('#plot_lat').text('Latitude: ' + data.properties.latitude)
-  $('#plot_rainfall').text('Précipitation annuelle moyenne: ' + data.properties.rainfall+' mm/an')
-  switch (data.properties.holdridge){
+  $('#plot_rainfall').text('Précipitation annuelle moyenne: ' + data.properties.rainfall + ' mm/an')
+  switch (data.properties.holdridge) {
     case 1:
-      holdridge='sec';
+      holdridge = 'sec';
       break;
     case 2:
-      holdridge='humide';
+      holdridge = 'humide';
       break;
     case 3:
-      holdridge='très humide';
+      holdridge = 'très humide';
       break;
   }
   $('#plot_holdridge').text('Milieu : ' + holdridge)
 
-  switch (data.properties.um_substrat){
+  switch (data.properties.um_substrat) {
     case true:
-      substrat='Substrat ultramafique'
+      substrat = 'Substrat ultramafique'
       break;
     case false:
-      substrat='Substrat non ultramafique'
+      substrat = 'Substrat non ultramafique'
       break;
   }
   $('#plot_um_substrat').text(substrat)
   $('#plot_nb_families').text('Nombre de familles : ' + data.properties.count_families)
   $('#plot_nb_species').text("Nombre d'espèces : " + data.properties.count_species)
-  $('#plot_nb_species').text("Taux d'identification : " + data.properties.species_level*100 + '%')
+  $('#plot_nb_species').text("Taux d'identification : " + data.properties.species_level * 100 + '%')
 }
 
 document.addEventListener('DOMContentLoaded', function () {
   $('#preloader').on('elementLoaded', function (event, data) {
     preloader.hidePreloader()
   })
+
+  $(document).ready(function () {
+    $('[data-toggle="popover"]').popover();
+  });
 
   buildPlotList()
   d3graphBarvs.init()

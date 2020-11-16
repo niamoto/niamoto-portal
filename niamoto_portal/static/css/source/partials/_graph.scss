@@ -75,6 +75,18 @@
   background-color: $color_title;
 }
 
+.card-header .row {
+  margin: 0;
+  .col-3 {
+    padding: 0;
+    text-align: right;
+
+    .fa-info-circle {
+      color: white;
+    }
+  }
+}
+
 // Bootstrap 4 breakpoints & gutter
 $grid-breakpoints: (xs: 0,
   sm: 576px,

@@ -56,7 +56,7 @@
         <div class="card-text"><span id='plot_nb_families'></span></div>
         <div class="card-text"><span id='plot_nb_species'></span></div>
         <div class="card-text"><span id='plot_ident'></span></div>
-        
+
 
       </div>
     </div>
@@ -64,34 +64,42 @@
 
   {% else %}
 
-    <div id="{{graph.name}}" class="s-{{graph.height}} p-3">
-      <div class="card card-{{graph.model}}">
-        <div class="card-header">{{graph.title|capfirst}}</div>
-        <div class="card-body {{graph.model}} d-flex flex-wrap">
-          {% if graph.legend_locate == 'nolegend'%}
-          <div id="{{graph.model}}" class="d3_panel graph">
-          </div>
-          {% else %}
-          <!-- invert order graph and legend -->
-          {% if graph.legend_locate == 'left' or  graph.legend_locate == 'top'%}
-          <div id="{{graph.model}}Legend" class="d3_panel legend-{{graph.legend_locate}}">
+  <div id="{{graph.name}}" class="s-{{graph.height}} p-3">
+    <div class="card card-{{graph.model}}">
+      <div class="card-header">
+        <div class='row'>
+          <div class='col-9'>{{graph.title|capfirst}}</div>
+          <div class='col-3'>
+            <a tabindex="0" role="button" data-trigger="focus" data-toggle="popover"  data-content="{{graph.information}}">
 
-          </div>
-          <div id="{{graph.model}}" class="d3_panel graph graph-legend-{{graph.legend_locate}}">
-          </div>
-          {% else %}
-          <div id="{{graph.model}}" class="d3_panel graph graph-legend-{{graph.legend_locate}}">
-          </div>
-          <div id="{{graph.model}}Legend" class="d3_panel legend-{{graph.legend_locate}}">
-
-          </div>
-          {% endif %}
-          {% endif %}
+              <span class="fas fa-info-circle fa-lg" aria-hidden="true"></span></a></div>
         </div>
-
-
       </div>
+      <div class="card-body {{graph.model}} d-flex flex-wrap">
+        {% if graph.legend_locate == 'nolegend'%}
+        <div id="{{graph.model}}" class="d3_panel graph">
+        </div>
+        {% else %}
+        <!-- invert order graph and legend -->
+        {% if graph.legend_locate == 'left' or  graph.legend_locate == 'top'%}
+        <div id="{{graph.model}}Legend" class="d3_panel legend-{{graph.legend_locate}}">
+
+        </div>
+        <div id="{{graph.model}}" class="d3_panel graph graph-legend-{{graph.legend_locate}}">
+        </div>
+        {% else %}
+        <div id="{{graph.model}}" class="d3_panel graph graph-legend-{{graph.legend_locate}}">
+        </div>
+        <div id="{{graph.model}}Legend" class="d3_panel legend-{{graph.legend_locate}}">
+
+        </div>
+        {% endif %}
+        {% endif %}
+      </div>
+
+
     </div>
+  </div>
   {% endif %}
 
   {% endfor %}

@@ -74,6 +74,19 @@
   background-color: #688BA5;
 }
 
+.card-header .row {
+  margin: 0;
+}
+
+.card-header .row .col-3 {
+  padding: 0;
+  text-align: right;
+}
+
+.card-header .row .col-3 .fa-info-circle {
+  color: white;
+}
+
 @media (min-width: 0) {
   .card-deck .card {
     -webkit-box-flex: 0;
