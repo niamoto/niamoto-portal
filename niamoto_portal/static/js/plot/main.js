@@ -90,23 +90,6 @@ var CenterControl = /* @__PURE__ */ (function (Control) {
   return CenterControl
 }(ol.control.Control))
 
-// const interaction = ol.interaction.defaults().extend([
-//   new ol.interaction.Select({
-//     style: new ol.style.Style({
-//       image: new ol.style.Circle({
-//         radius: 5,
-//         fill: new ol.style.Fill({
-//           color: 'rgba(255,90,90,0.7)'
-//         }),
-//         stroke: new ol.style.Stroke({
-//           color: 'rgba(255,50,50,1)',
-//           width: 2
-//         })
-//       })
-//     })
-//   })
-// ])
-
 // make map
 const map = new ol.Map({
   target: 'mapCaledonie',
@@ -122,7 +105,7 @@ map.addLayer(layerShape)
 
 var selected = null
 
-map.on('pointermove', function (e) {
+map.on('click', function (e) {
   if (selected !== null) {
     selected.setStyle(undefined)
     selected = null
@@ -136,6 +119,14 @@ map.on('pointermove', function (e) {
 
   if (selected) {
     $('#plot_select').selectpicker('val', selected.id_)
+  }
+})
+
+map.on('pointermove', function (event) {
+  if (map.hasFeatureAtPixel(event.pixel)) {
+    map.getViewport().style.cursor = 'pointer';
+  } else {
+    map.getViewport().style.cursor = 'inherit';
   }
 })
 
@@ -162,6 +153,7 @@ function buildPlotList() {
         select.add(option)
         source.addFeature(new ol.format.GeoJSON().readFeature(x))
       })
+
       $('#plot_select').selectpicker({
         noneSelectedText: 'Selectionnez une parcelle'
       })
@@ -182,6 +174,7 @@ function updateData(plot) {
     success: function (response) {
       updateGeneralInformations(response)
       $('#plot_select').trigger('plotSelected', response)
+
       preloader.hidePreloader()
     }
   })
