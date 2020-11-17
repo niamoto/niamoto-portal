@@ -115,20 +115,6 @@ map.addLayer(layerBackground)
 map.addLayer(layerShape)
 
 
-// function buildTaxonList() {
-//   var taxons = {}
-
-//   $.ajax({
-//     type: 'GET',
-//     url: restUrls.taxonTreeList,
-//     success: function (result) {
-//       // d3Gauges.initGauges(result)
-//       var tree = new TreeView(result, 'taxon_treeview', 'list-group-item')
-//       preloader.hidePreloader()
-//     }
-//   })
-// }
-
 function updateData(taxon) {
   $.ajax({
     type: 'GET',
@@ -245,6 +231,8 @@ document.addEventListener('DOMContentLoaded', function () {
   $('#preloader').on('elementLoaded', function (event, data) {
     preloader.hidePreloader()
   })
+  $('[data-toggle="popover"]').popover();
+
 
   // buildTaxonList()
   getTaxaTree(function (taxaTree) {
