@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Ressource, Person, Activity
+from .models import Ressource, Person, Activity, Faq
 
 
 @admin.register(Activity)
@@ -20,3 +20,8 @@ class PersonAdmin(admin.ModelAdmin):
 @admin.register(Ressource)
 class RessourceAdmin(admin.ModelAdmin):
     list_display = ('support', 'description')
+
+@admin.register(Faq)
+class FaqAdmin(admin.ModelAdmin):
+    list_display = ('id','question', 'ask')
+    list_editable = ('question', 'ask')

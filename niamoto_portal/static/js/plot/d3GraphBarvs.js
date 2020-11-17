@@ -13,7 +13,7 @@ export function init(data) {
         height: $('#stemsHisto').height(),
         container: '#stemsHisto',
         value: ['morte', 'vivante'],
-        legend: ['morte', 'vivante'],
+        legend: ['mort', 'vivant'],
         color: [color.stemDead, color.stemLiving]
     })
 

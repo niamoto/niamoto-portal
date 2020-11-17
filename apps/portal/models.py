@@ -142,3 +142,20 @@ class Tree(models.Model):
 
     def __unicode__(self):
         return
+
+
+class Faq(models.Model):
+    """FAQ
+
+    Arguments:
+        models {[type]} -- [description]
+    """
+
+    question = models.CharField(max_length=200, default="")
+    ask = models.CharField(max_length=1500, default="")
+
+    def __str__(self):
+        return 
+
+    def __unicode__(self):
+        return 

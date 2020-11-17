@@ -25,11 +25,11 @@ export function init(data) {
       container: '#ratio_forests',
       xLabel: 'Distribution (%)',
       yLabel: 'Alitude (m)',
-      value: ['Forêt (UM)', 'Forêt (NUM)'],
+      value: ['Forêt (UM)', 'Forêt (NUM)', 'Hors-forêt'],
       yDomain: ['1700', '1500', '1300', '1100', '900', '700', '500', '300', '100'],
       maxValue: 100,
       marginLeft: .22,
-      color: [color.forestUM, color.forestNUM, color.landUM, color.landNUM]
+      color: [color.forestUM, color.forestNUM, color.forestOut, color.forestOut]
     })
     
     
