@@ -2,17 +2,13 @@ from django.shortcuts import render
 from django.views.generic import TemplateView
 from django.http import HttpResponse
 from django.template import loader
-from .models import Ressource, Person, Activity, Tree
+from .models import Ressource, Person, Activity, Tree, Faq
 import random
 # Create your views here.
 
 
 def home(request):
     return render(request, 'home.html', {})
-
-
-def methodologie(request):
-    return render(request, 'methodologie.html', {})
 
 
 def maintenance(request):
@@ -39,3 +35,13 @@ class RessouresView(TemplateView):
             'activities': activities,
             'trees': trees
         }
+
+class MethologyView(TemplateView):
+    template_name= 'methodologie.html'
+
+    def get_context_data(self, **kwargs):
+        faqs = Faq.objects.all().order_by('id')
+        return {
+            'faqs': faqs
+        }
+    
