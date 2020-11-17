@@ -242,7 +242,7 @@ function updateGeneralInformations(data) {
   $('#rainfall').text('Précipitation annuelle moyenne: ' + data.properties.rainfall_min + ' - ' + data.properties.rainfall_max + ' mm/an')
   $('#elevation_med').text('Altitude médiane: ' + data.properties.elevation_median + ' m')
   $('#elevation_max').text('Altitude maximale: ' + data.properties.elevation_max + ' m')
-  $('#title_mapCaledonie').text(data.properties.label)
+  $('#title_mapCaledonie').text('La forêt de '+data.properties.label)
 }
 
 function updateLayerShape(data) {
