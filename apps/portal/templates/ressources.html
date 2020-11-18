@@ -171,7 +171,7 @@
                     <em>{{ressource.journal|default:""}}</em>{% if ressource.journal %}, {% endif %}
                     {{ressource.issue|default:""}}{% if ressource.issue %}, {% endif %}
                     {{ressource.pages|default:""}}
-                    {% if ressource.link %} <a href="{{ressource.link|default:""}}">
+                    {% if ressource.link %} <a href="{{ressource.link|default:""}}" target="_blank">
                       <i class="fa fa-download" aria-hidden="true"></i>
                     </a>{% endif %}</td>
                 </tr>
@@ -206,7 +206,7 @@
                   <td>{{activity.support|default:""}}</td>
                   <td>{{activity.person|default:""}}{% if activity.person %}, {% endif %}
                     <strong>{{activity.title|default:""}}</strong>{% if activity.link %} <a
-                      href="{{activity.link|default:""}}">
+                      href="{{activity.link|default:""}}" target="_blank">
                       <i class="fa fa-download" aria-hidden="true"></i>
                     </a>{% endif %}</td>
                 </tr>
@@ -244,7 +244,7 @@
                     <em>{{ressource.journal|default:""}}</em>{% if ressource.journal %}, {% endif %}
                     {{ressource.issue|default:""}}{% if ressource.issue %}, {% endif %}
                     {{ressource.pages|default:""}}
-                    {% if ressource.link %}<a href="{{ressource.link|default:""}}">
+                    {% if ressource.link %}<a href="{{ressource.link|default:""}}" target="_blank">
                       <i class="fa fa-download" aria-hidden="true"></i>
                     </a>{% endif %}</td>
                 </tr>
@@ -282,7 +282,7 @@
                     <em>{{ressource.journal|default:""}}</em>{% if ressource.journal %}, {% endif %}
                     {{ressource.issue|default:""}}{% if ressource.issue %}, {% endif %}
                     {{ressource.pages|default:""}}
-                    {% if ressource.link %}<a href="{{ressource.link|default:""}}">
+                    {% if ressource.link %}<a href="{{ressource.link|default:""}}" target="_blank">
                       <i class="fa fa-download" aria-hidden="true"></i>
                     </a>{% endif %}</td>
                 </tr>
