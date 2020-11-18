@@ -6,7 +6,7 @@ import color from '../../css/source/partials/_color_js.scss'
 export function init(data) {
 
   function initGraphStakedArea(id, xLabel, yLabel, value, yDomain, maxValue = '', marginLeft = 0.15, legend, color, xDomain, typeLegend = 1) {
-    return 
+    return
   }
 
   // Holdridge forest
@@ -17,14 +17,14 @@ export function init(data) {
     xLabel: 'Altitude (m)',
     yLabel: 'Fréquence (%)',
     value: ['Forêt secondaire', 'Forêt mature', 'Forêt coeur'],
-    yDomain:[0, 100],
+    yDomain: [0, 100],
     maxValue: 100,
     legend: ['Forêt secondaire', 'Forêt mature', 'Forêt coeur'],
     color: [color.forestSecondary, color.forestMature, color.forestCore],
     xDomain: ['100', '300', '500', '700', '900', '1100', '1300', '1500', '1700'],
     typeLegend: 1
   })
-  
+
   // forestFragmentation
   const forestFragmentation = new d3GraphstakedArea.GraphStakedArea({
     width: $('#forest_fragmentation').width(),
@@ -36,10 +36,10 @@ export function init(data) {
     maxValue: 100,
     legend: ['Aire Cumulée'],
     color: [color.forest],
-    xDomain: ['10', '60', '125', '250', '375', '500', '1000', '1500', '2000', '27000'],
+    xDomain: ['10', '60', '125', '250', '375', '500', '1000', '1500', '27000'],
     typeLegend: 1
   })
-  
+
   // Update Data for trigger
   $('#shape_select').on('shapeSelected', function (event, data) {
     updateData(data.properties.frequencies)
