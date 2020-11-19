@@ -5,13 +5,16 @@ window.onscroll = function () {
 
 function myFunction() {
   var navbar = document.getElementById('navbar')
+  var logos = document.getElementById('logos')
 
   if (document.body.scrollTop > 75 || document.documentElement.scrollTop > 75) {
-    navbar.className = 'navbar navbar-expand-md navbar-light bg-light  btco-hover-menu  fixed-top w3-animate-top'
+    navbar.className = 'navbar-expand-md navbar-light bg-light  btco-hover-menu  fixed-top w3-animate-top'
+    logos.style.visibility = "visible"
   } else {
     navbar.className = navbar.className.replace('w3-animate-top', '')
     navbar.className = navbar.className.replace('bg-light', 'bg-bandeau-default')
     navbar.className = navbar.className.replace('navbar-light', 'navbar-dark')
+    logos.style.visibility = "hidden"
   }
 }
 

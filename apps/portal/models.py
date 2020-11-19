@@ -159,3 +159,20 @@ class Faq(models.Model):
 
     def __unicode__(self):
         return 
+
+class SiteInfo(models.Model):
+    """SiteInfo
+    class permitting the storage of general site data
+
+    Args:
+        models ([type]): [description]
+    """
+    
+    dateUpdateData = models.DateField()
+
+
+    def __str__(self):
+        return 
+
+    def __unicode__(self):
+        return 

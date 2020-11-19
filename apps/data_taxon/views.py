@@ -7,6 +7,7 @@ from rest_framework.response import Response
 from django.http import HttpResponse
 from django.template import loader
 from .models import Graph, Taxon
+from ..portal.models import SiteInfo
 from django.db.models import Max, Min, Avg, Count, Sum
 # Create your views here.
 
@@ -19,14 +20,22 @@ class DashboardTaxonView(TemplateView):
 
     def get_context_data(self, **kwargs):
         graph_list = Graph.objects.filter(show=True).order_by('sort')
+        siteInfos = SiteInfo.objects.all()
         return {
             'graph_list': graph_list,
+            'siteinfos': siteInfos,
         }
 
 
 class PresentationTaxonView(TemplateView):
 
     template_name = 'data_taxon/presentation.html'
+
+    def get_context_data(self, **kwargs):
+        siteInfos = SiteInfo.objects.all()
+        return {
+            'siteinfos': siteInfos
+        }
 
 
 class GeneralInfosViewSet(ViewSet):

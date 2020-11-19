@@ -57,6 +57,16 @@ body {
   background-color: rgba($color: #000000, $alpha: 0);
 }
 
+#home .logos {
+  background-color: rgba(255,255,255, .66);
+  border-radius: 5px;
+  padding: 20px;
+  margin-top: 215px;
+  #iac {
+    margin-left: 350px;
+  }
+}
+
 #context {
   #map_pacific {
     height: 250px;

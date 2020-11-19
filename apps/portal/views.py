@@ -2,13 +2,18 @@ from django.shortcuts import render
 from django.views.generic import TemplateView
 from django.http import HttpResponse
 from django.template import loader
-from .models import Ressource, Person, Activity, Tree, Faq
+from .models import Ressource, Person, Activity, Tree, Faq, SiteInfo
 import random
 # Create your views here.
 
 
-def home(request):
-    return render(request, 'home.html', {})
+class HomeView(TemplateView):
+    template_name = "home.html"
+    def get_context_data(self, **kwargs):
+        siteInfos = SiteInfo.objects.all()
+        return {
+            'siteinfos': siteInfos
+        }
 
 
 def maintenance(request):
@@ -29,11 +34,13 @@ class RessouresView(TemplateView):
         activities = Activity.objects.all
         trees = Tree.objects.all().order_by(
             'family_name', 'genus_name', 'name')
+        siteInfos = SiteInfo.objects.all()
         return {
             'ressources': ressources,
             'persons': persons,
             'activities': activities,
-            'trees': trees
+            'trees': trees,
+            'siteinfos': siteInfos
         }
 
 class MethologyView(TemplateView):
@@ -41,7 +48,9 @@ class MethologyView(TemplateView):
 
     def get_context_data(self, **kwargs):
         faqs = Faq.objects.all().order_by('id')
+        siteInfos = SiteInfo.objects.all()
         return {
-            'faqs': faqs
+            'faqs': faqs,
+            'siteinfos': siteInfos
         }
     

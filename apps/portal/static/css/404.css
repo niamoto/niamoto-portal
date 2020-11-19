@@ -69,6 +69,41 @@ p a :hover {
   background: linear-gradient(rgba(34, 34, 34, 0.7), 70%, rgba(200, 200, 200, 0)) !important;
 }
 
+#mainNav {
+  margin-left: 0;
+  margin-right: 0;
+  height: 50px;
+}
+
+#mainNav #logos {
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: start;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: end;
+  visibility: hidden;
+}
+
+#mainNav #menu {
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: end;
+}
+
+#mainNav .logo {
+  padding: 0;
+  margin: 0;
+}
+
+#mainNav .logo img {
+  height: 40px;
+}
+
+#mainNav .logo #iac_50 {
+  margin-left: 30px;
+}
+
 .navbar-light .navbar-nav .nav-link {
   color: #000;
 }
@@ -220,6 +255,45 @@ p a :hover {
     top: 0;
     opacity: 1;
   }
+}
+
+footer {
+  background-color: #688BA5;
+  padding: 10px 10px 0 10px !important;
+}
+
+footer .row {
+  background-color: #688BA5 !important;
+}
+
+footer .logos {
+  border-radius: 5px;
+  padding: 10px;
+  margin: 0px;
+}
+
+footer .logos .logo {
+  background-color: rgba(255, 255, 255, 0.75);
+  border-radius: 5px;
+  padding: 5px;
+  margin: 5px;
+  -webkit-transition-duration: .2s;
+          transition-duration: .2s;
+}
+
+footer .logos .logo:hover {
+  background-color: #FFFFFF;
+}
+
+footer .copy {
+  font-size: 12px;
+  padding: 10px 10px 0 10px;
+  border-top: 1px solid #FFFFFF;
+  margin: 0;
+}
+
+footer .copy .fa-github {
+  color: #000;
 }
 
 #error {
