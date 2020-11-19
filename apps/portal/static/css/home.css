@@ -346,14 +346,21 @@ body {
 }
 
 #home .logos {
-  background-color: rgba(255, 255, 255, 0.66);
+  background-color: rgba(255, 255, 255, 0);
   border-radius: 5px;
   padding: 20px;
-  margin-top: 215px;
+  margin-top: 255px;
 }
 
-#home .logos #iac {
-  margin-left: 350px;
+#home .logos .d-flex {
+  background-color: white;
+  border-radius: 20px 20px 0 0;
+  padding: 0 5px 5px 0;
+}
+
+#home .logos img {
+  height: 75px;
+  padding: 5px;
 }
 
 #context #map_pacific {
