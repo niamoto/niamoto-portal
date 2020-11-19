@@ -333,6 +333,8 @@ flip card
 */
 .card-back .card-text {
   margin: auto;
+  overflow: visible;
+  padding: 5px;
 }
 
 .card-flip > div {
