@@ -98,12 +98,12 @@
           <div class="card-back">
             {% comment %} <h5 class="card-title"> {{person.first_name|capfirst}} {{person.last_name|capfirst}} </h5>
             {% endcomment %}
-            <p class="card-text">{{person.speciality}}</p>
+            <p class="card-text text-center">{{person.speciality}}</p>
             {% comment %} <h5 class="card-title"> {{person.first_name|capfirst}} {{person.last_name|capfirst}} </h5>
             {% if activities%}
             {% for activity in activities%}
             {% if person.id == activity.person_id %}
-            <p class="card-text">
+            <p class="card-text text-center">
               <a data-toggle="popover" data-title="{{activity.title}}"
                 data-content="{{activity.description|default:''}}" data-trigger='hover' data-placement='auto'>
                 {{activity.first_year|default:"..."}}-{{activity.first_month|default:""}}
