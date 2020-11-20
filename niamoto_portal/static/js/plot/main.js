@@ -41,7 +41,7 @@ const source = new ol.source.Vector({
   features: features
 })
 const layerShape = new ol.layer.Vector({
-  source: source
+  source: source,
 })
 
 // view for map center new caledonia
@@ -106,9 +106,14 @@ map.addLayer(layerShape)
 var selected = null
 
 map.on('click', function (e) {
+
   if (selected !== null) {
     selected.setStyle(undefined)
     selected = null
+  }
+  // case select list
+  if (e.coordinate_ !== null) {
+    e.pixel = map.getPixelFromCoordinate(e.coordinate)
   }
 
   map.forEachFeatureAtPixel(e.pixel, function (f) {
@@ -117,7 +122,8 @@ map.on('click', function (e) {
     return true
   })
 
-  if (selected) {
+  // case click map
+  if (e.coordinate_ === null) {
     $('#plot_select').selectpicker('val', selected.id_)
   }
 })
@@ -172,6 +178,10 @@ function updateData(plot) {
     type: 'GET',
     url: plotList + plot.id + '/',
     success: function (response) {
+      map.dispatchEvent({
+        type: 'click',
+        coordinate: response.geometry.coordinates
+      })
       updateGeneralInformations(response)
       $('#plot_select').trigger('plotSelected', response)
 
