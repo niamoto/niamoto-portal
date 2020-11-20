@@ -10,7 +10,7 @@ export function init(data) {
     height: $('#cover_forest_type').height(),
     container: '#cover_forest_type',
     value: ['forêt secondaire', 'forêt mature', 'forêt coeur'],
-    legend: ['Forêt secondaire', 'Forêt mature', 'Forêt coeur'],
+    legend: ['Forêt secondaire', 'Forêt mature', 'Forêt de coeur'],
     color: [color.forestSecondary, color.forestMature, color.forestCore]
   })
 

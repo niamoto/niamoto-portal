@@ -3,7 +3,7 @@ import * as Graph from '../d3Graph'
 
 export function initGauges(data) {
   var basalAreaMax = 10
-  var hMeanMax = 10
+  var hMeanMax = 25
   var shannonMax = 10
   var pielouMax = 10
   var simpsonMax = 10
@@ -34,18 +34,12 @@ export function initGauges(data) {
 
   const basalAreaGauge = initGauge(
     '#basalAreaGauge',
-    'm².ha<sup>-1</sup>',
+    'm²/ha',
     basalAreaMax)
 
   basalAreaGauge.render()
 
   // H mean
-  var hMean = Math.max(...Array
-    .from(data
-      .map(e => e.properties.h_mean)
-      .values()))
-  hMeanMax = Graph.initMax(hMean, hMeanMax)
-
   const hMeanGauge = initGauge('#hMeanGauge', 'm', hMeanMax)
 
   hMeanGauge.render()
@@ -57,7 +51,7 @@ export function initGauges(data) {
       .values()))
   shannonMax = Graph.initMax(shannon, shannonMax)
 
-  const shannonGauge = initGauge('#shannonGauge', 'SI', shannonMax, 0, '1')
+  const shannonGauge = initGauge('#shannonGauge', 'NA', shannonMax, 0, '1')
 
   shannonGauge.render()
 
@@ -68,7 +62,7 @@ export function initGauges(data) {
       .values()))
   pielouMax = Graph.initMax(pielou, pielouMax)
 
-  const pielouGauge = initGauge('#pielouGauge', 'SI', pielouMax, 0, '2')
+  const pielouGauge = initGauge('#pielouGauge', 'NA', pielouMax, 0, '2')
 
   pielouGauge.render()
 
@@ -79,17 +73,11 @@ export function initGauges(data) {
       .values()))
   simpsonMax = Graph.initMax(simpson, simpsonMax)
 
-  const simpsonGauge = initGauge('#simpsonGauge', 'SI', simpsonMax, 0, '2')
+  const simpsonGauge = initGauge('#simpsonGauge', 'NA', simpsonMax, 0, '2')
 
   simpsonGauge.render()
 
   // woodDensity
-  // var woodDensity = Math.max(...Array
-  //   .from(data
-  //     .map(e => e.properties.wood_density_mean)
-  //     .values()))
-  // woodDensityMax = Graph.initMax(woodDensity, woodDensityMax)
-
   const woodDensityGauge = initGauge('#woodDensityGauge', 'g.cm' + '-3'.sup(), woodDensityMax, 0, '3')
 
   woodDensityGauge.render()
@@ -101,7 +89,7 @@ export function initGauges(data) {
       .values()))
   biomassMax = Graph.initMax(biomass, biomassMax)
 
-  const biomassGauge = initGauge('#biomasseGauge', 'SI', biomassMax)
+  const biomassGauge = initGauge('#biomasseGauge', 'tonnes/ha', biomassMax)
 
   biomassGauge.render()
 

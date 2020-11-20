@@ -16,10 +16,10 @@ export function init(data) {
     container: '#forest_type_elevation',
     xLabel: 'Altitude (m)',
     yLabel: 'Fréquence (%)',
-    value: ['Forêt secondaire', 'Forêt mature', 'Forêt coeur'],
+    value: ['Forêt secondaire', 'Forêt mature', 'Forêt de coeur'],
     yDomain: [0, 100],
     maxValue: 100,
-    legend: ['Forêt secondaire', 'Forêt mature', 'Forêt coeur'],
+    legend: ['Forêt secondaire', 'Forêt mature', 'Forêt de coeur'],
     color: [color.forestSecondary, color.forestMature, color.forestCore],
     xDomain: ['100', '300', '500', '700', '900', '1100', '1300', '1500', '1700'],
     typeLegend: 1

@@ -1,9 +1,9 @@
 import * as d3Gauge from '../D3gauge'
 
 export function initGauges(data) {
-  const dbhMax = data.dbh_max
+  const dbhMax = 500
   const dbhMin = data.dbh_min
-  const woodDensityMax = data.wood_density_max
+  const woodDensityMax = 1.5
   const woodDensityMin = 0
   const rainfallMax = 4500
   const rainfallMin = 0
@@ -11,10 +11,10 @@ export function initGauges(data) {
   const heightMin = data.height_min
   const ncpippn_count_max = data.ncpippn_count_max
   const occCount = data.occ_count_sum
-  const leafThicknessMax = data.leaf_thickness_max
-  const leafSlaMax = data.leaf_sla_max
+  const leafThicknessMax = 1000
+  const leafSlaMax = 1000
   const leafLdmcMax = data.leaf_ldmc_max
-  const leafAreaMax = data.leaf_area_max
+  const leafAreaMax = 1500
 
 
   function initGauge(id, unit, minValue, maxValue, labelDecimal = '0') {
@@ -33,17 +33,9 @@ export function initGauges(data) {
   const dbhMaxGauge = initGauge('#dbhMaxGauge', 'cm', dbhMin, dbhMax)
   dbhMaxGauge.render()
 
-  // Count occurence
-  // const distributionOccGauge = initGauge('#distributionOccGauge', "", 0, 100)
-  // distributionOccGauge.render()
-
   // wood density
   const woodDensityGauge = initGauge('#woodDensityGauge', 'g.cm' + '-3'.sup(), 0, woodDensityMax, 3)
   woodDensityGauge.render()
-
-  // rainfall min : aridity
-  // const rainfallMinGauge = initGauge('#pluvioMinGauge', 'mm.an' + '-1'.sup(), 0, rainfallMax)
-  // rainfallMinGauge.render()
 
   // height max
   const heightMaxGauge = initGauge('#heightMaxGauge', 'm', heightMin, heightMax)
@@ -58,7 +50,7 @@ export function initGauges(data) {
   leafThickness.render()
 
   // leaf sla
-  const leafSla = initGauge('#leafSla', 'm' + '2'.sup()+'.kg' + '-1'.sup(), 0, leafLdmcMax)
+  const leafSla = initGauge('#leafSla', 'm' + '2'.sup()+'.kg' + '-1'.sup(), 0, leafSlaMax)
   leafSla.render()
 
   // leaf Area

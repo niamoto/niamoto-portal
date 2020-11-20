@@ -23,7 +23,7 @@ export function init(data) {
       width: $('#ratio_forests').width(),
       height: $('#ratio_forests').height(),
       container: '#ratio_forests',
-      xLabel: 'Distribution (%)',
+      xLabel: 'Couverture (%)',
       yLabel: 'Alitude (m)',
       value: ['Forêt (UM)', 'Forêt (NUM)', 'Hors-forêt'],
       yDomain: ['1700', '1500', '1300', '1100', '900', '700', '500', '300', '100'],
