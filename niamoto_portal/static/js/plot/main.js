@@ -224,7 +224,7 @@ function updateGeneralInformations(data) {
   $('#plot_um_substrat').text(substrat)
   $('#plot_nb_families').text('Nombre de familles : ' + data.properties.count_families)
   $('#plot_nb_species').text("Nombre d'espèces : " + data.properties.count_species)
-  $('#plot_nb_species').text("Taux d'identification : " + data.properties.species_level * 100 + ' %')
+  $('#plot_nb_species').text("Taux d'identification : " + (data.properties.species_level * 100).toFixed(1) + ' %')
 }
 
 document.addEventListener('DOMContentLoaded', function () {
