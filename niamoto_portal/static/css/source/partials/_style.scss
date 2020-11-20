@@ -16,6 +16,14 @@ h2 {
     ;
 }
 
+.display-1 {
+    font-size: 5vw;
+}
+
+.display-4 {
+    font-size: 3vw;
+}
+
 p a {
     font-size: 1em;
     // font-weight: bold;
@@ -274,7 +282,7 @@ footer {
         border-radius: 5px;
         padding: 10px;
         margin: 0px;
-        
+
 
         .logo {
             background-color: rgba(255, 255, 255, 0.75);
@@ -282,6 +290,7 @@ footer {
             padding: 5px;
             margin: 5px;
             transition-duration: .2s;
+
         }
 
         .logo:hover {
@@ -296,8 +305,9 @@ footer {
         padding: 10px 10px 0 10px;
         border-top: 1px solid #FFFFFF;
         margin: 0;
-        .fa-github{
+
+        .fa-github {
             color: #000;
         }
-      }
+    }
 }

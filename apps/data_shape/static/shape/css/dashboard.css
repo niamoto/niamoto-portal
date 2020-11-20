@@ -176,6 +176,14 @@ h2 {
   margin-bottom: 1rem;
 }
 
+.display-1 {
+  font-size: 5vw;
+}
+
+.display-4 {
+  font-size: 3vw;
+}
+
 p a {
   font-size: 1em;
   color: #688BA5;
