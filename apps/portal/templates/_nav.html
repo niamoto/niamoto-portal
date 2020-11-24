@@ -2,13 +2,13 @@
 <nav id="navbar" class="navbar-expand-md navbar-dark  btco-hover-menu bg-bandeau-default fixed-top">
   <div id="mainNav" class="d-flex">
 
-    <div class="p-2 navbar-brand">Niamoto</div>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
-      aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div id="menu" class="collapse navbar-collapse justify-content-md-center align-self-start" id="navbarNavDropdown">
+    
+
+    
+    <div class="collapse navbar-collapse justify-content-md-center align-self-start" id="navbarNavDropdown">
+      
       <ul class="navbar-nav">
+        <div class="p-2 navbar-brand">Niamoto</div>
         <li class="nav-item dropdown text-lowercase">
           <a class="nav-link " href="{% url 'home' %}" id="navbarDropdownMenuLink" aria-haspopup="true"
             aria-expanded="false">
@@ -97,30 +97,34 @@
           </ul>
         </li>
     </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+    aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
     <div id='logos' class="p-2 d-flex">
       <a class='logo' href="https://www.province-nord.nc/" target="_blank">
         <figure>
-          <img id=pn_50 src="{% static 'img/logo/pn_50.png' %}">
+          <img class="img-fluid" id=pn_50 src="{% static 'img/logo/pn_50.png' %}">
         </figure>
       </a>
       <a class='logo' href="http://amap.cirad.fr/" target="_blank">
         <figure>
-          <img id=amap_50 src="{% static 'img/logo/amap_50.png' %}">
+          <img class="img-fluid" id=amap_50 src="{% static 'img/logo/amap_50.png' %}">
         </figure>
       </a>
       <a class='logo' href="http://iac.nc/" target="_blank">
         <figure>
-          <img id=iac_50 src="{% static 'img/logo/iac_50.png' %}">
+          <img class="img-fluid" id=iac_50 src="{% static 'img/logo/iac_50.png' %}">
         </figure>
       </a>
       <a class='logo' href="https://nouvelle-caledonie.ird.fr/" target="_blank">
         <figure>
-          <img id=ird_50 src="{% static 'img/logo/ird_50.png' %}">
+          <img class="img-fluid" id=ird_50 src="{% static 'img/logo/ird_50.png' %}">
         </figure>
       </a>
       <a class='logo' href="https://cirad.fr/" target="_blank">
         <figure>
-          <img id=cirad_50 src="{% static 'img/logo/cirad_50.png' %}">
+          <img class="img-fluid" id=cirad_50 src="{% static 'img/logo/cirad_50.png' %}">
         </figure>
       </a>
     </div>

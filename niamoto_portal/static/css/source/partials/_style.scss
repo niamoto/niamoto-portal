@@ -92,10 +92,6 @@ p a {
         visibility: hidden;
     }
 
-    #menu {
-        justify-content: end;
-    }
-
     .logo {
         padding: 0;
         margin: 0;
@@ -115,6 +111,7 @@ p a {
 
 .navbar-light .navbar-nav .nav-link {
     color: #000;
+    background-color: #f5f5f5;
 }
 
 .btco-hover-menu a,

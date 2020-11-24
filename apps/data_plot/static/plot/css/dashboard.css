@@ -253,12 +253,6 @@ p a :hover {
   visibility: hidden;
 }
 
-#mainNav #menu {
-  -webkit-box-pack: end;
-      -ms-flex-pack: end;
-          justify-content: end;
-}
-
 #mainNav .logo {
   padding: 0;
   margin: 0;
@@ -274,6 +268,7 @@ p a :hover {
 
 .navbar-light .navbar-nav .nav-link {
   color: #000;
+  background-color: #f5f5f5;
 }
 
 .btco-hover-menu a,

@@ -195,7 +195,7 @@
               </thead>
               <tbody>
                 {% for activity in activities%}
-                {% if activity.support == 'thèse' or activity.support == 'mémoire'%}
+                {% if activity.support == 'thèse' or activity.support == 'mémoire' or activity.support == 'hdr'%}
                 <tr class="col-12 {{activity.support}}">
                   <td>{{activity.last_year|default:""}}</td>
                   <td>{{activity.support|default:""}}</td>

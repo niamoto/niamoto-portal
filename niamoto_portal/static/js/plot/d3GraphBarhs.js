@@ -3,7 +3,6 @@
 import * as d3GraphBarhSimple from '../d3GraphBarhSimple'
 import * as d3Graph from '../d3Graph'
 import color from '../../css/source/partials/_color_js.scss'
-import * as d3 from 'd3'
 
 export function init(data) {
 
