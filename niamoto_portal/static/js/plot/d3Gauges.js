@@ -34,7 +34,7 @@ export function initGauges(data) {
 
   const basalAreaGauge = initGauge(
     '#basalAreaGauge',
-    'm²/ha',
+    'm' + '2'.sup() +'.ha' + '-1'.sup(),
     basalAreaMax)
 
   basalAreaGauge.render()
@@ -89,7 +89,7 @@ export function initGauges(data) {
       .values()))
   biomassMax = Graph.initMax(biomass, biomassMax)
 
-  const biomassGauge = initGauge('#biomasseGauge', 'tonnes/ha', biomassMax)
+  const biomassGauge = initGauge('#biomasseGauge', 'tonnes.ha' + '-1'.sup(), biomassMax)
 
   biomassGauge.render()
 
