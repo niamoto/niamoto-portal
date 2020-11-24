@@ -3,7 +3,7 @@ import * as d3Gauge from '../D3gauge'
 export function initGauges(data) {
   const dbhMax = 500
   const dbhMin = data.dbh_min
-  const woodDensityMax = 1.5
+  const woodDensityMax = 1.2
   const woodDensityMin = 0
   const rainfallMax = 4500
   const rainfallMin = 0
@@ -11,9 +11,10 @@ export function initGauges(data) {
   const heightMin = data.height_min
   const ncpippn_count_max = data.ncpippn_count_max
   const occCount = data.occ_count_sum
-  const leafThicknessMax = 1000
-  const leafSlaMax = 1000
-  const leafLdmcMax = data.leaf_ldmc_max
+  const leafThicknessMax = 800
+  const barkThicknessMax = 80
+  const leafSlaMax = 50
+  const leafLdmcMax = 800
   const leafAreaMax = 1500
 
 
@@ -46,7 +47,7 @@ export function initGauges(data) {
   distributionGeoGauge.render()
 
   // leaf thickness
-  const leafThickness = initGauge('#leafThickness', 'mm', 0, leafThicknessMax)
+  const leafThickness = initGauge('#leafThickness', 'µm', 0, leafThicknessMax)
   leafThickness.render()
 
   // leaf sla
@@ -54,12 +55,16 @@ export function initGauges(data) {
   leafSla.render()
 
   // leaf Area
-  const leafArea = initGauge('#leafArea', 'mm' + '2'.sup(), 0, leafAreaMax)
+  const leafArea = initGauge('#leafArea', 'cm' + '2'.sup(), 0, leafAreaMax)
   leafArea.render()
 
   // leaf ldmc
-  const leafLdmc = initGauge('#leafLdmc', 'mg/g', 0, 1000)
+  const leafLdmc = initGauge('#leafLdmc', 'mg.g' + '-1'.sup(), 0, leafLdmcMax)
   leafLdmc.render()
+
+  // leaf ldmc
+  const barkThickness = initGauge('#barkThickness', 'mm' , 0, barkThicknessMax)
+  barkThickness.render()
 
   // Update Data for trigger
   $('#taxon_treeview').on('taxonSelected', function (event, data) {
@@ -80,6 +85,7 @@ export function initGauges(data) {
     leafLdmc.update(data.leaf_ldmc_avg)
     leafSla.update(data.leaf_sla_avg)
     leafThickness.update(data.leaf_thickness_avg)
+    barkThickness.update(data.bark_thickness_avg)
 
   };
 };
