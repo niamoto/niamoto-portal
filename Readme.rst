@@ -1,11 +1,11 @@
 NIAMOTO PORTAL
 ##############
 
-.. image:: https://travis-ci.com/CheckFly/niamoto-portal.svg?branch=develop
-    :target: https://travis-ci.com/CheckFly/niamoto-portal
+.. image:: https://travis-ci.com/niamoto/niamoto-portal.svg?branch=master
+    :target: https://travis-ci.com/niamoto/niamoto-portal
 
-.. image:: https://codecov.io/gh/CheckFly/niamoto-portal/branch/develop/graph/badge.svg?token=YN2GKjf5Fs
-    :target: https://codecov.io/gh/CheckFly/niamoto-portal
+.. image:: https://codecov.io/gh/niamoto/niamoto-portal/branch/develop/graph/badge.svg?token=YN2GKjf5Fs
+    :target: https://codecov.io/gh/niamoto/niamoto-portal
 
 .. image:: https://readthedocs.org/projects/niamoto-doc/badge/?version=latest
     :target: https://niamoto-doc.readthedocs.io/en/latest/?badge=latest

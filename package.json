@@ -12,14 +12,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/CheckFly/niamoto-portal.git"
+    "url": "git+https://github.com/niamoto/niamoto-portal.git"
   },
   "author": "Tristan Mangeard",
   "license": "GPL-3.0",
   "bugs": {
-    "url": "https://github.com/CheckFly/niamoto-portal/issues"
+    "url": "https://github.com/niamoto/niamoto-portal/issues"
   },
-  "homepage": "https://github.com/CheckFly/niamoto-portal#readme",
+  "homepage": "https://github.com/niamoto/niamoto-portal#readme",
   "devDependencies": {
     "@babel/core": "^7.12.3",
     "@babel/plugin-proposal-class-properties": "^7.12.1",
