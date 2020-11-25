@@ -30,12 +30,14 @@ class Ressource(models.Model):
         max_length=50, choices=SUPPORT, default='publication')
     who = models.CharField(null=True, blank=True, max_length=400)
     description = models.CharField(null=True, blank=True, max_length=400)
+    category = models.CharField(max_length=50, default='divers')
     journal = models.CharField(null=True, blank=True, max_length=250)
     issue = models.CharField(null=True, blank=True, max_length=4)
     pages = models.CharField(null=True, blank=True, max_length=12)
     year = models.IntegerField(
         null=True, blank=True, choices=year_choicies(2012), default=current_year())
     link = models.URLField(null=True, blank=True, max_length=200)
+
 
     class Meta:
         """Meta definition for Ressource."""

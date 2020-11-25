@@ -156,7 +156,7 @@
               </thead>
               <tbody>
                 {%for ressource in ressources%}
-                {% if ressource.support == "article" %}
+                {% if ressource.category == 'article'%}
                 <tr class="col-12 {{ressource.support}}">
                   <td>{{ressource.year|default:""}}</td>
                   <td>{{ressource.support}}</td>
@@ -194,13 +194,13 @@
                 </tr>
               </thead>
               <tbody>
-                {% for activity in activities%}
-                {% if activity.support == 'thèse' or activity.support == 'mémoire' or activity.support == 'hdr'%}
-                <tr class="col-12 {{activity.support}}">
-                  <td>{{activity.last_year|default:""}}</td>
-                  <td>{{activity.support|default:""}}</td>
-                  <td>{{activity.person|default:""}}{% if activity.person %}, {% endif %}
-                    <strong>{{activity.title|default:""}}</strong>{% if activity.link %} <a
+                {% for ressource in ressources%}
+                {% if ressource.category == 'académique'%}
+                <tr class="col-12 {{ressource.support}}">
+                  <td>{{ressource.year|default:""}}</td>
+                  <td>{{ressource.support|default:""}}</td>
+                  <td>{{ressource.who|default:""}}{% if ressource.who %}, {% endif %}
+                    <strong>{{ressource.description|default:""}}</strong>{% if ressource.link %} <a
                       href="{{activity.link|default:""}}" target="_blank">
                       <i class="fa fa-download" aria-hidden="true"></i>
                     </a>{% endif %}</td>
@@ -213,7 +213,7 @@
           {%endif%}
         </div>
       </div>
-
+    </tbody>
       <div class="tab-pane" role="tabpanel" id="media">
         <div class="container">
           {%if ressources%}
@@ -230,7 +230,7 @@
               </thead>
               <tbody>
                 {%for ressource in ressources%}
-                {% if ressource.support == "conférence" or ressource.support == "film" or ressource.support == "radio"%}
+                {% if ressource.category == 'media'%}
                 <tr class="col-12 {{ressource.support}}">
                   <td>{{ressource.year|default:""}}</td>
                   <td>{{ressource.support|default:""}}</td>
@@ -268,7 +268,7 @@
               </thead>
               <tbody>
                 {%for ressource in ressources%}
-                {% if ressource.support == "rapport" or ressource.support == "ouvrage" %}
+                {% if ressource.category == 'divers'%}
                 <tr class="col-12 {{ressource.support}}">
                   <td>{{ressource.year|default:""}}</td>
                   <td>{{ressource.support}}</td>
