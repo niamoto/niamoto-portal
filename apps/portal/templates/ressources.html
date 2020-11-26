@@ -201,7 +201,7 @@
                   <td>{{ressource.support|default:""}}</td>
                   <td>{{ressource.who|default:""}}{% if ressource.who %}, {% endif %}
                     <strong>{{ressource.description|default:""}}</strong>{% if ressource.link %} <a
-                      href="{{activity.link|default:""}}" target="_blank">
+                      href="{{ressource.link|default:""}}" target="_blank">
                       <i class="fa fa-download" aria-hidden="true"></i>
                     </a>{% endif %}</td>
                 </tr>
