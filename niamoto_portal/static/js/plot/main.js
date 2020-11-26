@@ -96,7 +96,7 @@ var CenterControl = /* @__PURE__ */ (function (Control) {
 // make map
 const map = new ol.Map({
   target: 'mapCaledonie',
-  view: view,
+  view: view,select,
   controls: ol.control.defaults({
     attribution: false,
   }).extend([
