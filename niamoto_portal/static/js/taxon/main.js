@@ -25,7 +25,9 @@ const layerBackground = new ol.layer.Tile({
       TILED: true,
       FORMAT: 'image/png'
     },
-    serverType: 'mapserver'
+    serverType: 'mapserver',
+    attributions: '© <a href="https://georep.nc/" target="_blank">Georep.nc</a> contributors',
+    attributionsCollapsible: false,
   })
 })
 
@@ -88,7 +90,10 @@ let map = new ol.Map({
     zoom: true
   }).extend([
     new ol.control.ScaleLine(),
-    new CenterControl()
+    new CenterControl(),
+    new ol.control.Attribution({
+      collapsible: false,
+    })
   ]),
   interactions: ol.interaction.defaults({
     mouseWheelZoom: true,
