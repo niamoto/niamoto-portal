@@ -31,7 +31,10 @@ const layerBackground = new ol.layer.Tile({
       TILED: true,
       FORMAT: 'image/png'
     },
-    serverType: 'mapserver'
+    serverType: 'mapserver',
+    attributions: '© <a href="https://georep.nc/" target="_blank">Georep.nc</a> contributors'
+    , 
+
   })
 })
 
@@ -94,8 +97,14 @@ var CenterControl = /* @__PURE__ */ (function (Control) {
 const map = new ol.Map({
   target: 'mapCaledonie',
   view: view,
-  controls: ol.control.defaults().extend([
-    new CenterControl()
+  controls: ol.control.defaults({
+    attribution: false,
+  }).extend([
+    new CenterControl(),
+    new ol.control.ScaleLine(),
+    new ol.control.Attribution({
+      collapsible: false,
+    })
   ])
   // interactions: interaction
 })

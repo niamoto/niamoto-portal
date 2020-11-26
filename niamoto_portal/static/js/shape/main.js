@@ -24,7 +24,8 @@ const layerBackground = new ol.layer.Tile({
       TILED: true,
       FORMAT: 'image/png'
     },
-    serverType: 'mapserver'
+    serverType: 'mapserver',
+    attributions: '© <a href="https://georep.nc/" target="_blank">Georep.nc</a> contributors',
   })
 })
 
@@ -69,7 +70,10 @@ const map = new ol.Map({
     attribution: false,
     zoom: false
   }).extend([
-    new ol.control.ScaleLine()
+    new ol.control.ScaleLine(),
+    new ol.control.Attribution({
+      collapsible: false,
+    })
   ]),
   interactions: ol.interaction.defaults({
     mouseWheelZoom: false,
@@ -92,7 +96,8 @@ const layerBackgroundProvince = new ol.layer.Tile({
       TILED: true,
       FORMAT: 'image/png'
     },
-    serverType: 'mapserver'
+    serverType: 'mapserver',
+    attributions: '© <a href="https://georep.nc/" target="_blank">Georep.nc</a> contributors',
   })
 })
 
@@ -132,7 +137,10 @@ const mapProvince = new ol.Map({
     attribution: false,
     zoom: false
   }).extend([
-    new ol.control.ScaleLine()
+    new ol.control.ScaleLine(),
+    new ol.control.Attribution({
+      collapsible: false,
+    })
   ]),
   interactions: ol.interaction.defaults({
     mouseWheelZoom: false,
@@ -242,7 +250,7 @@ function updateGeneralInformations(data) {
   $('#rainfall').text('Précipitation annuelle moyenne: ' + data.properties.rainfall_min + ' - ' + data.properties.rainfall_max + ' mm/an')
   $('#elevation_med').text('Altitude médiane: ' + data.properties.elevation_median + ' m')
   $('#elevation_max').text('Altitude maximale: ' + data.properties.elevation_max + ' m')
-  $('#title_mapCaledonie').text('La forêt de '+data.properties.label)
+  $('#title_mapCaledonie').text('La forêt de ' + data.properties.label)
 }
 
 function updateLayerShape(data) {

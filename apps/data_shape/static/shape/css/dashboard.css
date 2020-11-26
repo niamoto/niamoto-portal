@@ -61,7 +61,6 @@
 
 .card {
   height: 20em;
-  -webkit-box-shadow: none !important;
   box-shadow: 4px 3px 5px #666 !important;
   border-color: #355771;
   border: 0;
@@ -90,45 +89,35 @@
 
 @media (min-width: 0) {
   .card-deck .card {
-    -webkit-box-flex: 0;
-        -ms-flex: 0 0 calc(100% - 2em);
-            flex: 0 0 calc(100% - 2em);
+    flex: 0 0 calc(100% - 2em);
     margin: 0.5em;
   }
 }
 
 @media (min-width: 576px) {
   .card-deck .card {
-    -webkit-box-flex: 0;
-        -ms-flex: 0 0 calc(100% - 2em);
-            flex: 0 0 calc(100% - 2em);
+    flex: 0 0 calc(100% - 2em);
     margin: 0.5em;
   }
 }
 
 @media (min-width: 768px) {
   .card-deck .card {
-    -webkit-box-flex: 0;
-        -ms-flex: 0 0 calc(100% - 2em);
-            flex: 0 0 calc(100% - 2em);
+    flex: 0 0 calc(100% - 2em);
     margin: 0.5em;
   }
 }
 
 @media (min-width: 992px) {
   .card-deck .card {
-    -webkit-box-flex: 0;
-        -ms-flex: 0 0 calc(50% - 2em);
-            flex: 0 0 calc(50% - 2em);
+    flex: 0 0 calc(50% - 2em);
     margin: 0.5em;
   }
 }
 
 @media (min-width: 1200px) {
   .card-deck .card {
-    -webkit-box-flex: 0;
-        -ms-flex: 0 0 calc(33.33333% - 2em);
-            flex: 0 0 calc(33.33333% - 2em);
+    flex: 0 0 calc(33.33333% - 2em);
     margin: 0.5em;
   }
 }
@@ -234,7 +223,6 @@ p a :hover {
 }
 
 .bg-bandeau-default {
-  background: -webkit-gradient(linear, left top, left bottom, from(rgba(34, 34, 34, 0.7)), color-stop(70%), to(rgba(200, 200, 200, 0))) !important;
   background: linear-gradient(rgba(34, 34, 34, 0.7), 70%, rgba(200, 200, 200, 0)) !important;
 }
 
@@ -245,12 +233,8 @@ p a :hover {
 }
 
 #mainNav #logos {
-  -webkit-box-align: start;
-      -ms-flex-align: start;
-          align-items: start;
-  -webkit-box-pack: end;
-      -ms-flex-pack: end;
-          justify-content: end;
+  align-items: start;
+  justify-content: end;
   visibility: hidden;
 }
 
@@ -298,7 +282,6 @@ p a :hover {
   border: 0px solid transition !important;
   border: 0px solid rgba(0, 0, 0, 0.15);
   border-radius: 0 3px 7px 7px;
-  -webkit-box-shadow: none !important;
   box-shadow: 0 3px 3px grey !important;
 }
 
@@ -344,8 +327,7 @@ p a :hover {
 
 @media only screen and (max-width: 991px) {
   .btco-hover-menu .show > .dropdown-toggle::after {
-    -webkit-transform: rotate(-90deg);
-            transform: rotate(-90deg);
+    transform: rotate(-90deg);
   }
 }
 
@@ -395,19 +377,7 @@ p a :hover {
 }
 
 .w3-animate-top {
-  -webkit-animation: animatetop 0.4s;
-          animation: animatetop 0.4s;
-}
-
-@-webkit-keyframes animatetop {
-  from {
-    top: -300px;
-    opacity: 0;
-  }
-  to {
-    top: 0;
-    opacity: 1;
-  }
+  animation: animatetop 0.4s;
 }
 
 @keyframes animatetop {
@@ -441,8 +411,7 @@ footer .logos .logo {
   border-radius: 5px;
   padding: 5px;
   margin: 5px;
-  -webkit-transition-duration: .2s;
-          transition-duration: .2s;
+  transition-duration: .2s;
 }
 
 footer .logos .logo:hover {
@@ -532,6 +501,10 @@ footer .copy .fa-github {
   background-color: grey;
 }
 
+.ol-attribution {
+  font-size: 10px;
+}
+
 .land {
   fill: #f5f5f5;
   stroke: #afafaf;
@@ -551,14 +524,11 @@ path.slice {
   position: absolute;
   top: 50%;
   left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
 }
 
 .gauge-container {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
 }
 
@@ -592,8 +562,7 @@ path.slice {
   bottom: 3px;
   left: 50%;
   text-align: center;
-  -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
 }
 
 .number-unit {
