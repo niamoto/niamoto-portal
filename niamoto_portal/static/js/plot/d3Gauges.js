@@ -4,12 +4,12 @@ import * as Graph from '../d3Graph'
 export function initGauges(data) {
   var basalAreaMax = 10
   var hMeanMax = 25
-  var shannonMax = 10
-  var pielouMax = 10
-  var simpsonMax = 10
+  var shannonMax = 5
+  var pielouMax = 1
+  var simpsonMax = 1
   var woodDensityMax = 1.2
   var biomassMax = 100
-  var richessMax = 10
+  var richessMax = 130
   var speciesLevelMax = 100
 
   function initGauge(id, unit, maxValue, minValue = 0, labelDecimal = '0') {
@@ -45,33 +45,33 @@ export function initGauges(data) {
   hMeanGauge.render()
 
   // shannon
-  var shannon = Math.max(...Array
-    .from(data
-      .map(e => e.properties.shannon)
-      .values()))
-  shannonMax = Graph.initMax(shannon, shannonMax)
+  // var shannon = Math.max(...Array
+  //   .from(data
+  //     .map(e => e.properties.shannon)
+  //     .values()))
+  // shannonMax = Graph.initMax(shannon, shannonMax)
 
   const shannonGauge = initGauge('#shannonGauge', 'NA', shannonMax, 0, '1')
 
   shannonGauge.render()
 
   // pielou
-  var pielou = Math.max(...Array
-    .from(data
-      .map(e => e.properties.pielou)
-      .values()))
-  pielouMax = Graph.initMax(pielou, pielouMax)
+  // var pielou = Math.max(...Array
+  //   .from(data
+  //     .map(e => e.properties.pielou)
+  //     .values()))
+  // pielouMax = Graph.initMax(pielou, pielouMax)
 
   const pielouGauge = initGauge('#pielouGauge', 'NA', pielouMax, 0, '2')
 
   pielouGauge.render()
 
   // simpson
-  var simpson = Math.max(...Array
-    .from(data
-      .map(e => e.properties.simpson)
-      .values()))
-  simpsonMax = Graph.initMax(simpson, simpsonMax)
+  // var simpson = Math.max(...Array
+  //   .from(data
+  //     .map(e => e.properties.simpson)
+  //     .values()))
+  // simpsonMax = Graph.initMax(simpson, simpsonMax)
 
   const simpsonGauge = initGauge('#simpsonGauge', 'NA', simpsonMax, 0, '2')
 
@@ -94,13 +94,13 @@ export function initGauges(data) {
   biomassGauge.render()
 
   // richess
-  var richess = Math.max(...Array
-    .from(data
-      .map(e => e.properties.count_species)
-      .values()))
-  richessMax = Graph.initMax(richess, richessMax)
+  // var richess = Math.max(...Array
+  //   .from(data
+  //     .map(e => e.properties.count_species)
+  //     .values()))
+  // richessMax = Graph.initMax(richess, richessMax)
 
-  const richessGauge = initGauge('#richessGauge', "Nombre d'espèces/ha", 120)
+  const richessGauge = initGauge('#richessGauge', "Nombre d'espèces/ha", richessMax)
 
   richessGauge.render()
 
