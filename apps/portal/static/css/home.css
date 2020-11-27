@@ -55,12 +55,6 @@ p a :hover {
   margin-top: 0;
 }
 
-.image_float_top_left, #context #livre_pn {
-  float: left;
-  margin-left: 0;
-  margin-top: 0;
-}
-
 .image_float_top_right {
   float: right;
   margin-right: 0;
