@@ -262,7 +262,7 @@ export class GraphBarvMulti {
 
         const layer = this.g.selectAll('g')
             .data(data)
-            .enter().append('g')
+            .join('g')
 
         const rects = layer.selectAll('rect')
             .data(d => d)

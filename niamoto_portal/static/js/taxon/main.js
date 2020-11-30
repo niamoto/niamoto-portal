@@ -197,7 +197,7 @@ function updateGeneralInformations(data) {
     $('#tax_leaf_type').text('Type de feuille: ' + data.leaf_type)
   }
   if (data.sexual_system != null) {
-    $('#tax_sexual_system').text('Reproduction: ' + data.sexual_system)
+    $('#tax_sexual_system').text('Système sexuel: ' + data.sexual_system)
   }
   switch (data.fleshy_fruit) {
     case 'Faux':

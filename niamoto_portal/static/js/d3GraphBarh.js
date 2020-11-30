@@ -260,7 +260,7 @@ export class GraphBarh {
 
     const layer = this.g.selectAll('g')
       .data(data)
-      .enter().append('g')
+      .join('g')
       .attr('fill', (d, i) => this.config.color[i])
       .attr('class', (d, i) => this.config.value[i])
 

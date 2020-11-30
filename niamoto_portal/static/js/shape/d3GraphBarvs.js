@@ -64,7 +64,6 @@ export function init(data) {
       return result
     })
     landUse.update(landUseData)
-
   };
 
 
