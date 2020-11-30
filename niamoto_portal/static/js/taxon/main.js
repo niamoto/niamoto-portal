@@ -255,7 +255,7 @@ document.addEventListener('DOMContentLoaded', function () {
         updateData(node)
       }
     })
-    updateData({id:0})
+    updateData({id:1})
     preloader.hidePreloader()
   }, {
     make_node: makeNode,
