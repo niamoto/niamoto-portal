@@ -211,7 +211,7 @@ function updateGeneralInformations(data) {
       break;
   }
   if (data.fleshy_fruit != null) {
-    $('#tax_sexual_system').text('Fruit charnu: ' + data.sexual_system)
+    $('#tax_fleshy_fruit').text('Fruit charnu: ' + fleshyFruit)
   }
   if (data.dbh_median != null) {
     $('#tax_dbh_median').text('dbh median: ' + data.dbh_median)
