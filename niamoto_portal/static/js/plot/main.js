@@ -172,11 +172,12 @@ function buildPlotList() {
       $('#plot_select').selectpicker({
         noneSelectedText: 'Selectionnez une parcelle de 1 ha'
       })
-      $('#plot_select').selectpicker('val', null)
+      
       $('#plot_select').change(function () {
         preloader.showPreloader()
         updateData(plots[this.value])
       })
+      $('#plot_select').selectpicker('val', 229)
       preloader.hidePreloader()
     }
   })

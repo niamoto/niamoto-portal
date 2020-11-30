@@ -251,10 +251,11 @@ document.addEventListener('DOMContentLoaded', function () {
       selectedBackColor: color.colorSecondary13,
       onNodeSelected: function (event, node) {
         preloader.showPreloader()
+        console.log(node);
         updateData(node)
       }
     })
-    $('#taxon_treeview').selectpicker('val', 1)
+    updateData({id:0})
     preloader.hidePreloader()
   }, {
     make_node: makeNode,
