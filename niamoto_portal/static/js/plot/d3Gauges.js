@@ -8,7 +8,7 @@ export function initGauges(data) {
   var pielouMax = 1
   var simpsonMax = 1
   var woodDensityMax = 1.2
-  var biomassMax = 100
+  var biomassMax = 800
   var richessMax = 130
   var speciesLevelMax = 100
 
@@ -83,11 +83,11 @@ export function initGauges(data) {
   woodDensityGauge.render()
 
   // biomasse
-  var biomass = Math.max(...Array
-    .from(data
-      .map(e => e.properties.biomass)
-      .values()))
-  biomassMax = Graph.initMax(biomass, biomassMax)
+  // var biomass = Math.max(...Array
+  //   .from(data
+  //     .map(e => e.properties.biomass)
+  //     .values()))
+  // biomassMax = Graph.initMax(biomass, biomassMax)
 
   const biomassGauge = initGauge('#biomasseGauge', 'tonnes.ha' + '-1'.sup(), biomassMax)
 
