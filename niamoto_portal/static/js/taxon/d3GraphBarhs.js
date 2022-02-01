@@ -55,7 +55,7 @@ export function init(data) {
         value: ['pluvio'],
         yLabel: 'Précipitation (mm)',
         xLabel: 'Pourcentage (%)',
-        maxValue: 5000,
+        maxValue: 100,
         marginLeft: 0.15,
         color: [color.tres_humide, color.tres_humide, color.tres_humide, color.tres_humide, color.tres_humide, color.tres_humide, color.tres_humide, color.tres_humide, color.tres_humide, color.tres_humide, color.tres_humide, color.tres_humide, color.tres_humide]
     })
