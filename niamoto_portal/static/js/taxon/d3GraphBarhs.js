@@ -53,7 +53,7 @@ export function init(data) {
         height: $(pluvioHisto).height(),
         container: '#pluvioHisto',
         value: ['pluvio'],
-        yLabel: 'Précipitation de la pluie (mm)',
+        yLabel: 'Précipitation (mm)',
         xLabel: 'Pourcentage (%)',
         maxValue: 100,
         marginLeft: 0.15,
