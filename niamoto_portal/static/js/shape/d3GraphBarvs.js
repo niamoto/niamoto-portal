@@ -50,7 +50,7 @@ export function init(data) {
       return result
     })
 
-    holdridgeForest.update(holdridgeForestData.reverse())
+    //holdridgeForest.update(holdridgeForestData.reverse())
 
 
     const landuse = d3Graph.dataFilter(data, 'land_use')
