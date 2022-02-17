@@ -39,7 +39,7 @@ export function init(data) {
         value: ['dbh'],
         yDomain: [0, 100],
         yLabel: 'Fréquence (%)',
-        xLabel: 'Classe de diamètre (en cm)',
+        xLabel: 'Classe de diamètre (cm)',
         maxValue: 100,
         marginLeft: 0.15,
         color: {
