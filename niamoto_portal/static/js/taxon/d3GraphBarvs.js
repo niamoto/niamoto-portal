@@ -45,7 +45,8 @@ export function init(data) {
         color: {
             dbh: color.forest
         },
-        columns: ['class_name', 'dbh'],
+        //columns: ['class_name', 'dbh'],
+        columns: ['dbh','class_name'],
         rectRx: 2,
     })
 
