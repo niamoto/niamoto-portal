@@ -47,6 +47,7 @@
     "d3-scale-chromatic": "^2.0.0",
     "d3-svg-legend": "^2.25.6",
     "jsdoc": "^3.6.6",
+    "node-lessify": "^0.2.0",
     "sassr": "^0.1.2",
     "scssify2": "^2.1.0",
     "uniq": "^1.0.1",
@@ -55,6 +56,7 @@
   },
   "browserify": {
     "transform": [
+      "scssify",
       "babelify"
     ],
     "presets": [
