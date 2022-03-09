@@ -263,7 +263,7 @@ export class GraphBarvGroup {
 
     const layer = this.g.selectAll('g')
       .data(data)
-      .join('g')
+      .enter().append('g')
       .attr("transform", d => `translate(${xScale(d[this.config.columns[0]])},0)`)
 
     const rects = layer.selectAll('rect')
