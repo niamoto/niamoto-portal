@@ -86,7 +86,8 @@ map.addLayer(layerShape)
 map.addLayer(layerShapeForest)
 
 // make layer background
-const wmsUrlProvince = 'https://carto.gouv.nc/public/services/aires_coutumieres/' +
+//const wmsUrlProvince = 'https://carto.gouv.nc/public/services/aires_coutumieres/' +
+const wmsUrlNC = 'https://carto.gouv.nc/public/services/fond_relief/' +
   'MapServer/WMSServer'
 const layerBackgroundProvince = new ol.layer.Tile({
   source: new ol.source.TileWMS({
