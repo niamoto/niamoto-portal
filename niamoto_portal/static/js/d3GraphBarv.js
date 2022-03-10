@@ -248,7 +248,7 @@ export class GraphBarv {
 
     const layer = this.g.selectAll('g')
       .data(data)
-      .join('g')
+      .enter().append('g')
       .attr('fill', (d, i) => this.config.color[i])
       .attr('class', (d, i) => this.config.value[i])
 
