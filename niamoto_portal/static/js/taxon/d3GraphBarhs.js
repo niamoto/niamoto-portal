@@ -38,7 +38,7 @@ export function init(data) {
 
     const elevations = new d3GraphBarhSimple.GraphBarhSimple({
         width: $(elevationHisto).width(),
-        //height: $(elevationHisto).height(),
+        height: $(elevationHisto).height(),
         container: '#elevationHisto',
         value: ['elevation'],
         yLabel: 'Altitude (m)',
