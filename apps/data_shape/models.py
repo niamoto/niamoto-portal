@@ -55,6 +55,9 @@ class Frequency(models.Model):
         """Unicode representation of Frequency."""
         return str(self.shape) + ' ' + self.class_name
 
+    class Meta:
+        ordering = ['class_object', 'class_index']
+
 
 class Graph(models.Model):
     """
