@@ -84,12 +84,12 @@ export function init(data) {
         const elevation = d3Graph.dataFilter(data, 'elevation')
         const elevationData = d3Graph.dataJson(elevation)
         elevations.config.maxValue = ''
-        elevations.update(elevationData.reverse())
+        elevations.update(elevationData)
 
         const pluvio = d3Graph.dataFilter(data, 'rainfall')
         const pluvioData = d3Graph.dataJson(pluvio)
         pluvios.config.maxValue = ''
-        pluvios.update(pluvioData.reverse())
+        pluvios.update(pluvioData)
         let pluvioRange = pluvio.filter(function (d, i) {
             return d.class_value > 0
         })
