@@ -117,9 +117,6 @@ class taxonFrequencySerializer(serializers.ModelSerializer):
     """
     class Meta:
         model = mdlTaxon.Frequency
-        filter_backends = [filters.OrderingFilter]
-        ordering_fields = '__all__'
-        ordering = ['class_object', 'class_index']
         fields = '__all__'
 
 
@@ -164,5 +161,7 @@ class TaxonSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = mdlTaxon.Taxon
-
+        filter_backends = [filters.OrderingFilter]
+        ordering_fields = '__all__'
+        ordering = ['class_object', 'class_index']
         fields = '__all__'
