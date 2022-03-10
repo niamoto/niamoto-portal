@@ -44,6 +44,7 @@
     "d3-svg-legend": "^2.25.6",
     "jsdoc": "^3.6.6",
     "sass-loader": "^12.6.0",
+    "sass": "^1.49.9",
     "uniq": "^1.0.1",
     "webpack-cli": "^4.2.0",
     "webpack-dashboard": "^3.2.1"
