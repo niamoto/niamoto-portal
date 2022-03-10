@@ -1,3 +1,4 @@
+from rest_framework import filters
 from django.shortcuts import get_object_or_404
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
@@ -123,6 +124,10 @@ class taxonsViewSet(viewsets.ReadOnlyModelViewSet):
         viewsets {[type]} -- [description]
     """
     base_name = 'taxon'
+    filter_backends = [filters.OrderingFilter]
+    ordering_fields = '__all__'
+    ordering = ['class_object', 'class_index']
+
 
     @method_decorator(cache_page(60*60*24*300))
     def list(self, request):

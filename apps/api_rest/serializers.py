@@ -1,5 +1,4 @@
 from rest_framework import serializers
-from rest_framework import filters
 from rest_framework_gis import serializers as gis_serializers
 from rest_framework_recursive.fields import RecursiveField
 from apps.data_plot import models as mdlPlot
@@ -161,7 +160,4 @@ class TaxonSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = mdlTaxon.Taxon
-        filter_backends = [filters.OrderingFilter]
-        ordering_fields = '__all__'
-        ordering = ['class_object', 'class_index']
         fields = '__all__'
