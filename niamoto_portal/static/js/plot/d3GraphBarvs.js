@@ -44,7 +44,7 @@ export function init(data) {
         const stem = d3Graph.dataFilter(data, 'stems')
         const stemData = d3Graph.dataJson(stem)
 
-        stems.update(stemData.reverse())
+        stems.update(stemData)
 
         const dbh = d3Graph.dataFilter(data, 'dbh')
         const dbhData = dbh.map(function (d, i) {
@@ -55,7 +55,7 @@ export function init(data) {
             return result
         })
         dbhs.config.yDomain = [0, d3.max(dbhData, d => d.dbh)]
-        dbhs.update(dbhData.reverse())
+        dbhs.update(dbhData)
 
     };
 };

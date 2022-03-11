@@ -23,7 +23,7 @@ export function init(data) {
 
         const plantType = d3Graph.dataFilter(data, 'type_plant')
         const plantTypeData = d3Graph.dataJson(plantType);
-        plantTypes.update(plantTypeData) //.reverse())
+        plantTypes.update(plantTypeData)
 
     };
 };

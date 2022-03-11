@@ -59,7 +59,7 @@ export function init(data) {
         const strate = d3Graph.dataFilter(data, 'strates')
         const strateData = d3Graph.dataJson(strate)
         strates.config.maxValue = ''
-        strates.update(strateData.reverse())
+        strates.update(strateData)
 
         const specieTop = d3Graph.dataFilter(data, 'top10_species')
         const specieTopdata = d3Graph.dataJson(specieTop)
