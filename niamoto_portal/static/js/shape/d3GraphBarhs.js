@@ -13,7 +13,8 @@ export function init(data) {
     xLabel: 'Superfice (ha)',
     yLabel: 'Alitude (m)',
     value: ['Forêt', 'Hors-forêt'],
-    yDomain: ['1700', '1500', '1300', '1100', '900', '700', '500', '300', '100'],
+   // yDomain: ['1700', '1500', '1300', '1100', '900', '700', '500', '300', '100'],
+    yDomain: ['100', '300', '500', '700', '900', '1100', '1300', '1500', '1700'],
     color: [color.forest, color.forestOut]
   })
   
