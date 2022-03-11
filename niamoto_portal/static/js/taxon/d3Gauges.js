@@ -7,7 +7,7 @@ export function initGauges(data) {
   const woodDensityMin = 0
   const rainfallMax = 4500
   const rainfallMin = 0
-  const heightMax = data.height_max
+  const heightMax = 40 //data.height_max
   const heightMin = data.height_min
   const ncpippn_count_max = data.ncpippn_count_max
   const occCount = data.occ_count_sum
