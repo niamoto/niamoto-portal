@@ -92,7 +92,7 @@ export function init(data) {
             return result
         })
         dbhs.config.yDomain = [0, d3.max(dbhData, d => d.dbh)]
-        dbhs.update(dbhData.reverse())
+        dbhs.update(dbhData)
 
 
 
