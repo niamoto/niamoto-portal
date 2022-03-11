@@ -124,6 +124,7 @@ class taxonsViewSet(viewsets.ReadOnlyModelViewSet):
     """
     base_name = 'taxon'
 
+
     @method_decorator(cache_page(60*60*24*300))
     def list(self, request):
         queryset = mdlTaxon.Taxon.objects.all().order_by('rank_name')

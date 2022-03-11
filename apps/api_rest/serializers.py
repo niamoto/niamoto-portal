@@ -116,7 +116,6 @@ class taxonFrequencySerializer(serializers.ModelSerializer):
     """
     class Meta:
         model = mdlTaxon.Frequency
-
         fields = '__all__'
 
 
@@ -161,5 +160,4 @@ class TaxonSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = mdlTaxon.Taxon
-
         fields = '__all__'
