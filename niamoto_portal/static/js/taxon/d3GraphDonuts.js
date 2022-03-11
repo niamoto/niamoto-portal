@@ -35,6 +35,6 @@ export function init(data) {
         value: data.occ_um_count * 100 / (data.occ_count)
       }
     ]
-    distributionSubstrat.update(distributionSubstratData.reverse())
+    distributionSubstrat.update(distributionSubstratData)
   };
 };
