@@ -22,6 +22,6 @@ export function init(data) {
 
         let holdridgeData = d3Graph.dataFilter(data, 'holdridge')
         holdridgeData = d3Graph.dataJson(holdridgeData)
-        holdridges.update(holdridgeData.reverse())
+        holdridges.update(holdridgeData) //.reverse())
     }
 };
