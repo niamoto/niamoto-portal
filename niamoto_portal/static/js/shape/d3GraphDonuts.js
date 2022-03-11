@@ -23,6 +23,6 @@ export function init(data) {
 
     let coverForestTypeData = d3Graph.dataFilter(data, 'cover_foresttype')
     coverForestTypeData = d3Graph.dataJson(coverForestTypeData)
-    coverForestsType.update(coverForestTypeData.reverse())
+    coverForestsType.update(coverForestTypeData) //.reverse())
   };
 };
