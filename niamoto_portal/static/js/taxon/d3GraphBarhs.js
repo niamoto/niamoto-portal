@@ -75,10 +75,10 @@ export function init(data) {
         const topSpecieData = d3Graph.dataJson(topSpecie)
 
         strates.config.maxValue = ''
-        strates.update(strateData.reverse())
+        strates.update(strateData)
         topSpecies.config.yDomain = ''
         topSpecies.config.maxValue = ''
-        topSpecies.update(topSpecieData.reverse())
+        topSpecies.update(topSpecieData)
 
 
         const elevation = d3Graph.dataFilter(data, 'elevation')
