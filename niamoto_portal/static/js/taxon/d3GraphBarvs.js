@@ -75,12 +75,12 @@ export function init(data) {
             }
             phenologyData[i] = {
                 month: phenologys.config.xDomain[i],
-                fleur: phenoFleur[i].class_value * 100,
-                fruit: phenoFruit[i].class_value * 100
+                fleur: phenoFleur[i].class_value, // * 100,
+                fruit: phenoFruit[i].class_value //* 100
             }
         }
 
-        phenologys.config.yDomain = [0, valueMax * 100]
+        phenologys.config.yDomain = [0, valueMax] /// * 100]
         phenologys.update(phenologyData)
 
         const dbh = d3Graph.dataFilter(data, 'dbh')
