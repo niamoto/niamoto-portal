@@ -27,8 +27,8 @@ export function init(data) {
       xLabel: 'Couverture (%)',
       yLabel: 'Alitude (m)',
       value: ['Forêt (UM)', 'Forêt (NUM)', 'Hors-forêt'],
-      yDomain: ['1700', '1500', '1300', '1100', '900', '700', '500', '300', '100'],
-      //yDomain: ['100', '300', '500', '700', '900', '1100', '1300', '1500', '1700'],
+      //yDomain: ['1700', '1500', '1300', '1100', '900', '700', '500', '300', '100'],
+      yDomain: ['100', '300', '500', '700', '900', '1100', '1300', '1500', '1700'],
       maxValue: 100,
       marginLeft: .22,
       color: [color.forestUM, color.forestNUM, color.forestOut, color.forestOut]
