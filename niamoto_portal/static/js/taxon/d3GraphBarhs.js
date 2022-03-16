@@ -75,7 +75,7 @@ export function init(data) {
         const topSpecieData = d3Graph.dataJson(topSpecie)
 
         strates.config.maxValue = ''
-        strates.update(strateData)
+        strates.update(strateData.reverse())
         topSpecies.config.yDomain = ''
         topSpecies.config.maxValue = ''
         topSpecies.update(topSpecieData)
