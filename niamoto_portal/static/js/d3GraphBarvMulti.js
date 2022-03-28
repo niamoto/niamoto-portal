@@ -264,7 +264,7 @@ export class GraphBarvMulti {
             .data(data)
             .enter().append('g')
 
-        const rects = layer.selectAll('rect')
+        const rects = this.g.selectAll('g').selectAll('rect')
             .data(d => d)
 
         rects.enter()

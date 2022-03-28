@@ -252,7 +252,7 @@ export class GraphBarv {
       .attr('fill', (d, i) => this.config.color[i])
       .attr('class', (d, i) => this.config.value[i])
 
-    const rects = layer.selectAll('rect')
+    const rects = this.g.selectAll('g').selectAll('rect')
       .data(d => d)
 
     rects.enter()
