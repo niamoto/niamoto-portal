@@ -79,7 +79,7 @@ export function init(data) {
       }
       return result
     })
-    forests.update(forestData)
+    forests.update(forestData.reverse())
     ratioForest.update(ratioForestData)
   };
 };
