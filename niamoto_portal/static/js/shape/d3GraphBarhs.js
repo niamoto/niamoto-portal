@@ -80,6 +80,6 @@ export function init(data) {
       return result
     })
     forests.update(forestData.reverse())
-    ratioForest.update(ratioForestData)
+    ratioForest.update(ratioForestData.reverse())
   };
 };
