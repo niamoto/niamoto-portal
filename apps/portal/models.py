@@ -32,7 +32,7 @@ class Ressource(models.Model):
     description = models.CharField(null=True, blank=True, max_length=400)
     category = models.CharField(max_length=50, default='divers')
     journal = models.CharField(null=True, blank=True, max_length=250)
-    issue = models.CharField(null=True, blank=True, max_length=4)
+    issue = models.CharField(null=True, blank=True, max_length=20)
     pages = models.CharField(null=True, blank=True, max_length=12)
     year = models.IntegerField(
         null=True, blank=True, choices=year_choicies(2012), default=current_year())
