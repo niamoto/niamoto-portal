@@ -165,7 +165,7 @@ function buildShapeList() {
   $.ajax({
     type: 'GET',
     data: {
-      ordering: ('label')
+      ordering: ('name')
     },
     url: shapeList,
     success: function (result) {

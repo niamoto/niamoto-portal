@@ -151,7 +151,7 @@ function buildPlotList() {
   $.ajax({
     type: 'GET',
     data: {
-      ordering: 'name'
+      ordering: 'label'
     },
     url: plotList,
     success: function (result) {
